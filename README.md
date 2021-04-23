@@ -157,6 +157,8 @@ distribued under the 3-clause BSD license.
 [`code-conjure`]:                   https://hackage.haskell.org/package/code-conjure
 [Conjure the BitTorrent client]:    https://hackage.haskell.org/package/conjure
 
+[Cabal]:   https://www.haskell.org/cabal
+[Haskell]: https://www.haskell.org/
 [leancheck]:      https://hackage.haskell.org/package/leancheck
 [express]:        https://hackage.haskell.org/package/express
 [speculate]:      https://hackage.haskell.org/package/speculate
