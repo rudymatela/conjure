@@ -3,14 +3,10 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* cleanup repo for GitHub release
-
 * fill in the blanks on the README
 
 For release
 -----------
-
-* create standalone repo
 
 * release on GitHub
 
