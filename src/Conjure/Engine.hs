@@ -14,6 +14,8 @@ module Conjure.Engine
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
   , module Test.Speculate.Reason
+  , Args(..)
+  , args
   , conjure
   , conjureWith
   , conjpure
@@ -36,6 +38,8 @@ import System.IO
 import Conjure.Expr
 import Conjure.Conjurable
 
+-- | Arguments to be passed to 'conjureWith' or 'conjpureWith'.
+--   See 'args' for the defaults.
 data Args = Args
   { maxTests         :: Int  -- ^ defaults to 60
   , maxSize          :: Int  -- ^ defaults to 9, keep greater than maxEquationSize
@@ -43,6 +47,12 @@ data Args = Args
   , maxRecursionSize :: Int  -- ^ defaults to 60
   }
 
+-- | Default arguments to conjure.
+--
+-- * 60 tests
+-- * functions of up to 9 symbols
+-- * pruning with equations up to size 5
+-- * recursion up to 60 symbols.
 args :: Args
 args = Args
   { maxTests          =  60

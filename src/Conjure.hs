@@ -41,7 +41,20 @@
 -- > square x  =  x * x
 {-# LANGUAGE CPP #-}
 module Conjure
-  ( module Conjure.Engine
+  (
+-- * Basic use
+    conjure
+  , val
+  , value
+  , ifFor
+  , Expr
+
+-- * Advanced use
+  , conjpure
+  , Args(..)
+  , args
+  , conjureWith
+  , conjpureWith
   )
 where
 
