@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# haddock-i: list haddock's -i parameters.
+#
+# Copyright (c) 2015-2021 Rudy Matela.
+# Distributed under the 3-Clause BSD licence.
+#
+# $ haddock-i <package1> <package2> ... <packageN>
+#
+# will print -i parameters necessary for haddock to link to Haddock
+# documentation installed on your system, so you can:
+#
+# $ haddock-i base template-haskell | xargs haddock <files>
+err() {
+	echo "$@" > /dev/stderr
+}
+
+errxit() {
+	err "$@"
+	exit 1
+}
+
+iface-for() {
+	ghc-pkg field $1 haddock-interfaces | sort -rV | head -1 | sed "s/.*: //"
+}
+
+html-for() {
+	ghc-pkg field $1 haddock-html       | sort -rV | head -1 | sed "s/.*: //"
+}
+
+for pkg in "$@"
+do
+	iface=$(iface-for $pkg)
+	html=$(html-for $pkg)
+	[ -d "$html" -a -f "$iface" ] && echo "-i$html,$iface" || err "haddock-i: warning: could not find interface file for $pkg"
+done

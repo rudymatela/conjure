@@ -1,0 +1,16 @@
+second :: [Int] -> Int
+-- looking through 13460 candidates, 100% match, 47/47 assignments
+second xs  =  head (tail xs)
+
+third :: [Int] -> Int
+-- looking through 13460 candidates, 100% match, 34/34 assignments
+third xs  =  head (tail (tail xs))
+
+sum :: [Int] -> Int
+-- looking through 13460 candidates, 8% match, 5/60 assignments
+sum xs  =  if null (tail xs) then head xs else sum xs
+
+product :: [Int] -> Int
+-- looking through 13460 candidates, 81% match, 49/60 assignments
+product xs  =  if 0 == head xs then 0 else product (tail xs)
+
