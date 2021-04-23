@@ -6,8 +6,6 @@ A non-exhaustive list of things TO DO for Conjure.
 For release
 -----------
 
-* add travis file
-
 * add some tutorial Haddock
 
 * revert commit b3728ed75f7444adc342e8856c0fa9dac7565b2d
