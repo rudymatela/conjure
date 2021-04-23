@@ -31,9 +31,23 @@ class Typeable a => Conjurable a where
   argumentTiers :: a -> [ [[Expr]] ]
   argumentTiers _  =  []
 
+instance Conjurable ()
 instance Conjurable Int
+instance Conjurable Integer
 instance Conjurable Bool
-instance Conjurable a => Conjurable [a]
+instance Typeable a => Conjurable [a]
+instance (Typeable a, Typeable b) => Conjurable (a,b)
+instance Typeable a => Conjurable (Maybe a)
+instance (Typeable a, Typeable b) => Conjurable (Either a b)
+
+instance Conjurable Float
+instance Conjurable Double
+instance Conjurable Ordering
+
+instance (Typeable a, Typeable b, Typeable c) => Conjurable (a,b,c)
+instance (Typeable a, Typeable b, Typeable c, Typeable d) => Conjurable (a,b,c,d)
+instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e) => Conjurable (a,b,c,d,e)
+instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e, Typeable f) => Conjurable (a,b,c,d,e,f)
 
 instance (Listable a, Name a, Show a, Typeable a, Conjurable b) => Conjurable (a -> b) where
   argumentHoles f  =  hole (arg1 f) : argumentHoles (f undefined)
