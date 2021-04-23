@@ -10,9 +10,10 @@ For release
 
 * add travis file
 
-* add some tutorial Haddock, replicate on README
+* add some tutorial Haddock
 
-* release on Hackage
+* revert commit b3728ed75f7444adc342e8856c0fa9dac7565b2d
+  and release on Hackage
 
 
 For later
