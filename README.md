@@ -23,7 +23,7 @@ Checkout this repo and run `cabal v1-install`.
 Prerequisites are [express], [leancheck] and [speculate].
 They should be automatically resolved and installed by [Cabal].
 
-NOTE: the name of the package is __[`code-conjure`]__
+NOTE: the name of the Hackage package is __[`code-conjure`]__
 -- not to be confused with [Conjure the BitTorrent client].
 
 
