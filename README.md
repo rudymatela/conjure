@@ -139,7 +139,7 @@ Conjure, Copyright 2020  Rudy Matela,
 distribued under the 3-clause BSD license.
 
 
-[Conjure's Haddock documentation]: https://hackage.haskell.org/package/leancheck/docs/Test-LeanCheck.html
+[Conjure's Haddock documentation]: https://hackage.haskell.org/package/code-conjure/docs/Conjure.html
 
 [symbol `>`]: https://www.haskell.org/haddock/doc/html/ch03s08.html#idm140354810780208
 [Template Haskell]: https://wiki.haskell.org/Template_Haskell
