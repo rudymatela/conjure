@@ -21,8 +21,9 @@ extra-doc-files: README.md
                , TODO.md
                , doc/conjure.svg
 extra-source-files: .gitignore
---                , .travis.yml
+                  , .travis.yml
                   , Makefile
+                  , proto/*.hs
                   , bench/*.hs
                   , mk/All.hs
                   , mk/Toplibs.hs
@@ -31,7 +32,11 @@ extra-source-files: .gitignore
                   , mk/haddock-i
                   , mk/haskell.mk
                   , mk/install-on
---                , stack.yaml
+                  , stack.yaml
+                  , bench/runtime/zero/bench/*.runtime
+                  , bench/runtime/zero/proto/*.runtime
+                  , bench/runtime/zero/versions
+                  , bench/versions
                   , test/model/bench/*.out
                   , test/model/proto/*.out
                   , test/sdist
@@ -53,6 +58,7 @@ library
                  , Conjure.Engine
                  , Conjure.Expr
                  , Conjure.TypeBinding
+                 , Conjure.Utils
   other-extensions: TemplateHaskell, CPP
   build-depends: base >= 4 && < 5
                , leancheck >= 0.9.4

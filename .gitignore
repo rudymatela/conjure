@@ -3,6 +3,7 @@
 # temporary files
 *~
 *.swp
+mk/toplibs
 
 # Haskell stuff
 *.hi
