@@ -1,0 +1,9 @@
+resolver: lts-15.6 # or ghc-8.8.3
+
+packages:
+- .
+
+extra-deps:
+- leancheck-0.9.4
+- speculate-0.4.6
+- express-0.1.6
