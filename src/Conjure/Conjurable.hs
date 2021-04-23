@@ -6,7 +6,7 @@
 --
 -- This module is part of 'Conjure'.
 --
--- This defines the 'Conjurable' and 'Arguable' typeclasses
+-- This defines the 'Conjurable' typeclass
 -- and utilities involving it.
 --
 -- You are probably better off importing "Conjure".
