@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* fill in the blanks on the README
-
 For release
 -----------
 

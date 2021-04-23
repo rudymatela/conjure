@@ -3,6 +3,10 @@ version:             0.0.1
 synopsis:            conjure Haskell functions out of partial definitions
 description:
   Conjure is a tool that produces Haskell functions out of partial definitions.
+  .
+  This is currently an experimental tool in its early stages,
+  don't expect much from its current version.
+  It is just a piece of curiosity in its current state.
 
 homepage:            https://github.com/rudymatela/conjure#readme
 license:             BSD3
