@@ -28,6 +28,9 @@ install:
 
 	$ cabal install code-conjure --lib
 
+Prerequisites are [express], [leancheck] and [speculate].
+They should be automatically resolved and installed by [Cabal].
+
 NOTE: the name of the package is __[`code-conjure`]__
 -- not to be confused with [Conjure the BitTorrent client].
 
@@ -154,8 +157,11 @@ distribued under the 3-clause BSD license.
 [`code-conjure`]:                   https://hackage.haskell.org/package/code-conjure
 [Conjure the BitTorrent client]:    https://hackage.haskell.org/package/conjure
 
-[Barliman]:       https://github.com/webyrd/Barliman
+[leancheck]:      https://hackage.haskell.org/package/leancheck
+[express]:        https://hackage.haskell.org/package/express
+[speculate]:      https://hackage.haskell.org/package/speculate
 [MagicHaskeller]: https://hackage.haskell.org/package/MagicHaskeller
+[Barliman]:       https://github.com/webyrd/Barliman
 
 [build-status]:                     https://travis-ci.org/rudymatela/conjure.svg?branch=master
 [build-log]:                        https://travis-ci.org/rudymatela/conjure
