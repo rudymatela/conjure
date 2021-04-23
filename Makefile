@@ -18,7 +18,7 @@ all: mk/toplibs
 
 all-all: all $(EG) $(TESTS)
 
-test: $(patsubst %,%.run,$(TESTS)) diff-test
+test: $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
 .PHONY: bench
 bench: $(patsubst %,%.bench,$(EG))
