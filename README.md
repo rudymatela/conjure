@@ -140,7 +140,7 @@ Further reading
 ---------------
 
 For a detailed documentation of each function, see
-~[Conjure's Haddock documentation]~.  (TBA)
+[Conjure's Haddock documentation].
 
 
 Conjure, Copyright 2020  Rudy Matela,
