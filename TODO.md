@@ -3,31 +3,27 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* revert commit b3728ed75f7444adc342e8856c0fa9dac7565b2d and release on Hackage
 
-For release
------------
-
-* revert commit b3728ed75f7444adc342e8856c0fa9dac7565b2d
-  and release on Hackage
-
-
-For later
----------
-
-* reduce to unique candidateExprs through testing!  we should only enumerate what is needed
+* reduce to unique `candidateExprs` through testing.
+  We should only enumerate functions that were tested to be different.
+  We can limit the tests to the ones that are defined in the given function.
 
 * use FitSpec's notation of `"factorial n"` to name the variables
   instead of just `"factorial"`
 
-* Automatically include ifs?
+* Automatically include `if`s and `==`s.
+  Minor problem: typeclass folding is not possible for result values.
 
-	- problem, typeclass folding is not possible for result values.
+* Automatically include background functions based on the argument types.
+  The `Arguable` typeclass is a sketch of how to do that based on
+  the `Generalizable` typeclass from the Extrapolate library.
+  Though the implementation is quite crufty.
 
-* some food for thought:
+* use partially defined implementations?
 
-    -- think about using a partially implemented function to make it easy to find
-    food_for_thought :: ((Int -> Int) -> Int -> Int) -> (Int -> Int)
-    food_for_thought impl  =  f
+    partial :: ((Int -> Int) -> Int -> Int) -> (Int -> Int)
+    partial impl  =  f
       where
       f n  =  if n == 0
               then 1
@@ -35,5 +31,5 @@ For later
 
 
 This file is part of Conjure,
-Copyright 2021 Rudy Matela,
+(C) 2021 Rudy Matela,
 Distribued under the 3-Clause BSD license.
