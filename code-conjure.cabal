@@ -48,11 +48,11 @@ tested-with: GHC==8.10
 
 source-repository head
   type:            git
-  location:        https://github.com/rudymatela/extrapolate
+  location:        https://github.com/rudymatela/conjure
 
 source-repository this
   type:            git
-  location:        https://github.com/rudymatela/extrapolate
+  location:        https://github.com/rudymatela/conjure
   tag:             v0.0.3
 
 library
