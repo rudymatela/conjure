@@ -18,7 +18,15 @@ It is just a piece of curiosity in its current state.
 Installing
 ----------
 
-Checkout this repo and run `cabal v1-install`.
+To install the [latest Conjure version from Hackage], just run:
+
+	$ cabal update
+	$ cabal install code-conjure
+
+Starting from Cabal v3.0, you need to pass `--lib` as an argument to cabal
+install:
+
+	$ cabal install code-conjure --lib
 
 Prerequisites are [express], [leancheck] and [speculate].
 They should be automatically resolved and installed by [Cabal].
