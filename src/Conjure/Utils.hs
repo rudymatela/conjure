@@ -12,6 +12,7 @@ module Conjure.Utils
   ( module Data.List
   , module Data.Function
   , module Data.Maybe
+  , module Data.Monoid
   , module Data.Tuple
   , module Data.Typeable
 
@@ -38,6 +39,7 @@ where
 import Data.List
 import Data.Function
 import Data.Maybe
+import Data.Monoid
 import Data.Tuple
 import Data.Typeable
 
