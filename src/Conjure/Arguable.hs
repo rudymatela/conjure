@@ -10,6 +10,7 @@
 -- and utilities involving it.
 --
 -- You are probably better off importing "Conjure".
+{-# LANGUAGE CPP #-}
 module Conjure.Arguable
   ( Arguable (..)
   , instances
