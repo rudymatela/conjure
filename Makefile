@@ -5,10 +5,10 @@ HADDOCKFLAGS = --no-print-missing-docs \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo --optghc=-dynamic)
 
 EG = \
-  bench/arith \
-  bench/factorial \
-  bench/ints \
-  bench/bools \
+  eg/arith \
+  eg/factorial \
+  eg/ints \
+  eg/bools \
   proto/u-conjure
 
 TESTS = \

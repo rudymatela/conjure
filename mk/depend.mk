@@ -1,43 +1,43 @@
-bench/arith: \
-  bench/arith.hs \
+eg/arith: \
+  eg/arith.hs \
   mk/toplibs
-bench/arith.o: \
+eg/arith.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
-  bench/arith.hs
-bench/bools: \
-  bench/bools.hs \
+  eg/arith.hs
+eg/bools: \
+  eg/bools.hs \
   mk/toplibs
-bench/bools.o: \
+eg/bools.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
-  bench/bools.hs
-bench/factorial: \
-  bench/factorial.hs \
+  eg/bools.hs
+eg/factorial: \
+  eg/factorial.hs \
   mk/toplibs
-bench/factorial.o: \
+eg/factorial.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
-  bench/factorial.hs
-bench/ints: \
-  bench/ints.hs \
+  eg/factorial.hs
+eg/ints: \
+  eg/ints.hs \
   mk/toplibs
-bench/ints.o: \
+eg/ints.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
-  bench/ints.hs
+  eg/ints.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \

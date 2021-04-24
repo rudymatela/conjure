@@ -27,9 +27,9 @@ tags
 TAGS
 
 # benches, prototypes and test programs
-bench/arith
-bench/bools
-bench/factorial
-bench/ints
+eg/arith
+eg/bools
+eg/factorial
+eg/ints
 proto/u-conjure
 test/expr

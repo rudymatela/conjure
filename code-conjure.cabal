@@ -28,7 +28,7 @@ extra-source-files: .gitignore
                   , .travis.yml
                   , Makefile
                   , proto/*.hs
-                  , bench/*.hs
+                  , eg/*.hs
                   , mk/All.hs
                   , mk/Toplibs.hs
                   , mk/depend.mk
@@ -37,11 +37,11 @@ extra-source-files: .gitignore
                   , mk/haskell.mk
                   , mk/install-on
                   , stack.yaml
-                  , bench/runtime/zero/bench/*.runtime
-                  , bench/runtime/zero/proto/*.runtime
-                  , bench/runtime/zero/versions
-                  , bench/versions
-                  , test/model/bench/*.out
+                  , eg/runtime/zero/eg/*.runtime
+                  , eg/runtime/zero/proto/*.runtime
+                  , eg/runtime/zero/versions
+                  , eg/versions
+                  , test/model/eg/*.out
                   , test/model/proto/*.out
                   , test/sdist
 tested-with: GHC==8.10
