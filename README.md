@@ -140,6 +140,7 @@ distribued under the 3-clause BSD license.
 
 
 [Conjure's Haddock documentation]: https://hackage.haskell.org/package/code-conjure/docs/Conjure.html
+[fix]: https://hackage.haskell.org/package/base/docs/Data-Function.html#v:fix
 
 [symbol `>`]: https://www.haskell.org/haddock/doc/html/ch03s08.html#idm140354810780208
 [Template Haskell]: https://wiki.haskell.org/Template_Haskell
