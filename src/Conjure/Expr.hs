@@ -160,5 +160,15 @@ applicationOld ff es  =  appn ff
                     (e:_) -> appn (ff :$ holeAsTypeOf e)
     | otherwise  =  Just ff
 
+-- | Creates an if 'Expr' of the type of the given proxy.
+--
+-- > > ifFor (undefined :: Int)
+-- > if :: Bool -> Int -> Int -> Int
+--
+-- > > ifFor (undefined :: String)
+-- > if :: Bool -> [Char] -> [Char] -> [Char]
+--
+-- You need to provide this as part of your building blocks on the background
+-- if you want recursive functions to be considered and produced.
 ifFor :: Typeable a => a -> Expr
 ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)

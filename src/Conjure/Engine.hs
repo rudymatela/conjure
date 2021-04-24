@@ -61,9 +61,20 @@ args = Args
   , maxRecursionSize  =  60
   }
 
+-- | Like 'conjure' but in the pure world.
+--
+-- Returns a triple whose:
+--
+-- 1. first element is the number of candidates considered
+--
+-- 2. second element is the number of defined points in the given function
+--
+-- 3. third element is a list of implementations encoded as 'Expr's
+--    paired with the number of matching points.
 conjpure :: Conjurable f => String -> f -> [Expr] -> (Int,Int,[(Int,Expr)])
 conjpure =  conjpureWith args
 
+-- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> (Int,Int,[(Int,Expr)])
 conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy compareResult
   [ (ffxx .=. re, ffxx -==- e)
@@ -99,9 +110,40 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
   gs :: Expr -> [Expr]
   gs  =  take maxTests . grounds (tiersFor f)
 
+-- | Conjures an implementation of a partially defined function.
+--
+-- Takes a 'String' with the name of a function,
+-- a partially-defined function from a conjurable type,
+-- and a list of building blocks encoded as 'Expr's.
+--
+-- For example, given:
+--
+-- > square :: Int -> Int
+-- > square 0  =  0
+-- > square 1  =  1
+-- > square 2  =  4
+-- >
+-- > background :: [Expr]
+-- > background =
+-- >   [ val (0::Int)
+-- >   , val (1::Int)
+-- >   , value "+" ((+) :: Int -> Int -> Int)
+-- >   , value "*" ((*) :: Int -> Int -> Int)
+-- >   , value "==" ((==) :: Int -> Int -> Bool)
+-- > ]
+--
+-- The conjure function does the following:
+--
+-- > > conjure "square" square background
+-- > square :: Int -> Int
+-- > -- looking through 815 candidates, 100% match, 3/3 assignments
+-- > square x  =  x * x
+--
+-- The background is defined with 'val', 'value' and 'ifFor'.
 conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
 conjure  =  conjureWith args
 
+-- | Like 'conjure' but allows setting options through 'Args' and 'args'.
 conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
 conjureWith args nm f es  =  do
   print (var nm f)

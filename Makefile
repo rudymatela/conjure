@@ -25,6 +25,8 @@ bench: $(patsubst %,%.bench,$(EG))
 	@mkdir -p bench/runtime/$$HOSTNAME
 	./bench/versions | tee bench/runtime/$$HOSTNAME/versions
 
+ghci: src/Conjure.ghci
+
 %.bench: %
 	@mkdir -p bench/runtime/$$HOSTNAME/`dirname $<`
 	@printf "%-18s " $<
