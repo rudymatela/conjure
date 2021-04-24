@@ -314,9 +314,17 @@ instance ( Arguable a, Arguable b, Arguable c, Arguable d
                        . instances v . instances u . instances t
                 where (x,y,z,w,v,u,t) = xyzwvut
 
+#if __GLASGOW_HASKELL__ < 710
+-- No 8-tuples for you:
+-- On GHC 7.8, 8-tuples are not Typeable instances.  We could add a standalone
+-- deriving clause, but that may cause trouble if some other library does the
+-- same.  User should declare Generalizable 8-tuples manually when using GHC <=
+-- 7.8.
+#else
 instance ( Arguable a, Arguable b, Arguable c, Arguable d
          , Arguable e, Arguable f, Arguable g, Arguable h )
       => Arguable (a,b,c,d,e,f,g,h) where
   subInstances xyzwvuts = instances x . instances y . instances z . instances w
                         . instances v . instances u . instances t . instances s
     where (x,y,z,w,v,u,t,s) = xyzwvuts
+#endif
