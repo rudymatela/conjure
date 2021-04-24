@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* consider moving files out of `bench` and into `eg`
+
 * revert commit b3728ed75f7444adc342e8856c0fa9dac7565b2d and release on Hackage
 
 * reduce to unique `candidateExprs` through testing.

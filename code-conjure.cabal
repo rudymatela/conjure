@@ -1,3 +1,7 @@
+-- Cabal file for the Conjure program generation library.
+--
+-- Copyright (C) 2021 Rudy Matela
+-- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 name:                code-conjure
 version:             0.0.1
 synopsis:            conjure Haskell functions out of partial definitions
