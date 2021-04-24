@@ -43,7 +43,7 @@ clean: clean-hi-o clean-haddock
 	rm -f $(EG) $(TESTS)
 
 full-clean: clean clean-cabal clean-stack
-	rm -f tags TAGS
+	rm -f tags TAGS mk/toplibs
 
 %.run: %
 	./$<
