@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* revert commit b3728ed75f7444adc342e8856c0fa9dac7565b2d and release on Hackage
-
 * reduce to unique `candidateExprs` through testing.
   We should only enumerate functions that were tested to be different.
   We can limit the tests to the ones that are defined in the given function.
