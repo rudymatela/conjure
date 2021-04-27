@@ -26,6 +26,7 @@ extra-doc-files: README.md
                , doc/conjure.svg
 extra-source-files: .gitignore
                   , .travis.yml
+                  , .github/workflows/build.yml
                   , Makefile
                   , proto/*.hs
                   , eg/*.hs

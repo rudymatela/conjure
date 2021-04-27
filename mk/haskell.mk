@@ -21,6 +21,7 @@ GHCFLAGS ?=
 GHC ?= ghc
 GHCCMD = $(GHC) -i$(GHCIMPORTDIRS) $(GHCFLAGS)
 HADDOCK ?= haddock
+CABAL_INSTALL = $(shell cabal --version | grep -q "version [0-2]\." && echo 'cabal install' || echo 'cabal v1-install')
 
 # Hugs Parameters
 HUGSIMPORTDIRS ?= "/usr/lib/hugs/packages/*"
@@ -46,6 +47,7 @@ ALL_HSS ?= $(shell $(LIST_ALL_HSS))
 
 LIB_DEPS ?= base
 ALL_DEPS ?= $(LIB_DEPS)
+INSTALL_DEPS ?=
 
 PKGNAME = $(shell cat *.cabal | grep "^name:"    | sed -e "s/name: *//")
 
@@ -86,6 +88,9 @@ clean-hi-o:
 .PHONY: depend
 depend:
 	find $(ALL_HSS) | ./mk/ghcdeps -i$(GHCIMPORTDIRS) $(GHCFLAGS) > $(DEPMK)
+
+install-dependencies:
+	$(CABAL_INSTALL) $(INSTALL_DEPS)
 
 # haddock rules
 haddock: doc/index.html

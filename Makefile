@@ -3,6 +3,7 @@ GHCFLAGS = -O2 \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo -dynamic)
 HADDOCKFLAGS = \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo --optghc=-dynamic)
+INSTALL_DEPS = leancheck express speculate
 
 EG = \
   eg/arith \
@@ -38,6 +39,17 @@ update-diff-test: $(patsubst %,%.update-diff-test,$(EG))
 
 test-sdist:
 	./test/sdist
+
+test-via-cabal:
+	cabal configure --enable-tests --enable-benchmarks --ghc-options="$(GHCFLAGS) -O0"
+	cabal build
+	cabal test expr
+
+test-via-stack:
+	stack test leancheck:test:main --ghc-options="$(GHCFLAGS) -O0" --system-ghc --no-install-ghc --no-terminal
+
+hugs-test:
+	echo 'Unsupported'
 
 clean: clean-hi-o clean-haddock
 	rm -f $(EG) $(TESTS)

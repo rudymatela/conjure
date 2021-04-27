@@ -3,7 +3,7 @@
 # Copyright (C) 2021 Rudy Matela
 # Distributed under the 3-Clause BSD licence (see the file LICENSE).
 
-resolver: lts-15.6 # or ghc-8.8.3
+resolver: lts-17.9 # or ghc-8.10.4
 
 packages:
 - .
