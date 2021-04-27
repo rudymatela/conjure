@@ -12,8 +12,9 @@ length' [x,y]    =  2
 length' [x,y,z]  =  3
 
 reverse' :: [Int] -> [Int]
-reverse' [x]  =  [x]
-reverse' [x,y]  =  [y,x]
+reverse' []       =  []
+reverse' [x]      =  [x]
+reverse' [x,y]    =  [y,x]
 reverse' [x,y,z]  =  [z,y,x]
 
 sort' :: [Int] -> [Int]
