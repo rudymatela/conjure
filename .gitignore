@@ -31,5 +31,6 @@ eg/arith
 eg/bools
 eg/factorial
 eg/ints
+eg/list
 proto/u-conjure
 test/expr

@@ -38,6 +38,16 @@ eg/ints.o: \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
   eg/ints.hs
+eg/list: \
+  eg/list.hs \
+  mk/toplibs
+eg/list.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  eg/list.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \
