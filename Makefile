@@ -46,7 +46,7 @@ test-via-cabal:
 	cabal test expr
 
 test-via-stack:
-	stack test leancheck:test:main --ghc-options="$(GHCFLAGS) -O0" --system-ghc --no-install-ghc --no-terminal
+	stack test conjure:test:expr --ghc-options="$(GHCFLAGS) -O0" --system-ghc --no-install-ghc --no-terminal
 
 hugs-test:
 	echo 'Unsupported'
