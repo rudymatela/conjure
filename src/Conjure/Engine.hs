@@ -18,6 +18,7 @@ module Conjure.Engine
   , args
   , conjure
   , conjureWith
+  , conjureWithMaxSize
   , conjpure
   , conjpureWith
   , candidateExprs
@@ -51,6 +52,7 @@ data Args = Args
 --
 -- * 60 tests
 -- * functions of up to 9 symbols
+-- * maximum of 1 recursive call
 -- * pruning with equations up to size 5
 -- * recursion up to 60 symbols.
 args :: Args
@@ -140,7 +142,16 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
 conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
 conjure  =  conjureWith args
 
--- | Like 'conjure' but allows setting options through 'Args' and 'args'.
+-- | Like 'conjure' but allows setting the maximum size of considered expressions
+--   instead of the default value of 9.
+--
+-- > conjureWithMaxSize 10 "function" function [...]
+conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Expr] -> IO ()
+conjureWithMaxSize sz  =  conjureWith args{maxSize = sz}
+
+-- | Like 'conjure' but allows setting options through 'Args'/'args'.
+--
+-- > conjureWith args{maxSize = 11} "function" function [...]
 conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
 conjureWith args nm f es  =  do
   print (var nm f)

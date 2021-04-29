@@ -45,14 +45,18 @@ module Conjure
   , Expr
 
 -- * Advanced use
-  , conjpure
+  , conjureWithMaxSize
+  , conjureWith
   , Args(..)
   , args
-  , conjureWith
-  , conjpureWith
 
+-- * When using custom types
   , Conjurable (conjureEquality, conjureTiers)
   , reifyEquality, reifyTiers
+
+-- * Pure interfaces
+  , conjpure
+  , conjpureWith
   )
 where
 
