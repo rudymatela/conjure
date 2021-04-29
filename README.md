@@ -166,8 +166,8 @@ distribued under the 3-clause BSD license.
 [MagicHaskeller]: https://hackage.haskell.org/package/MagicHaskeller
 [Barliman]:       https://github.com/webyrd/Barliman
 
-[build-status]:                     https://travis-ci.org/rudymatela/conjure.svg?branch=master
-[build-log]:                        https://travis-ci.org/rudymatela/conjure
+[build-log]:    https://github.com/rudymatela/conjure/actions/workflows/build.yml
+[build-status]: https://github.com/rudymatela/conjure/actions/workflows/build.yml/badge.svg
 [hackage-version]:                  https://img.shields.io/hackage/v/code-conjure.svg
 [code-conjure-on-hackage]:          https://hackage.haskell.org/package/code-conjure
 [stackage-lts-badge]:               https://stackage.org/package/code-conjure/badge/lts
