@@ -153,18 +153,31 @@ instance ( Conjurable a, Listable a, Show a
       (x1,y1) == (x2,y2)  =  x1 ==. x2 && y1 .== y2
 
 
--- TODO: remove Eq restriction here and throughout
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         , Conjurable c, Listable c, Show c, Eq c
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
+         , Conjurable c, Listable c, Show c
          ) => Conjurable (a,b,c) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xyz =  conjureType x
                       .  conjureType y
                       .  conjureType z
                       where (x,y,z) = xyz
+  conjureEquality xyz  =  from
+                      <$> conjureEquality x
+                      <*> conjureEquality y
+                      <*> conjureEquality z
+    where
+    (x,y,z)  =  xyz
+    from e1 e2 e3  =  value "==" (==)
+      where
+      (==..)  =  evl e1 ==: x
+      (.==.)  =  evl e2 ==: y
+      (..==)  =  evl e3 ==: z
+      (x1,y1,z1) == (x2,y2,z2)  =  x1 ==.. x2
+                                && y1 ==.. y2
+                                && z1 ==.. z2
 
+-- TODO: remove Eq restriction here and throughout
 instance (Conjurable a, Listable a, Show a, Eq a) => Conjurable (Maybe a) where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers

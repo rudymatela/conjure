@@ -25,12 +25,19 @@ tests n  =
   , holds n $ \s1 s2 -> (s1 <==> s2)  ==  (s1 == (s2 :: String))
   , conjureEquality [Unit] == Nothing
 
-  , holds n $ \xs ys -> (xs <==> ys)  ==  (xs == (ys :: [Int]))
   , holds n $ \xy zw -> (xy <==> zw)  ==  (xy == (zw :: (Int,Int)))
   , holds n $ \xy zw -> (xy <==> zw)  ==  (xy == (zw :: (Bool,Integer)))
   , holds n $ \xy zw -> (xy <==> zw)  ==  (xy == (zw :: (String,[Int])))
   , conjureEquality (undefined :: (Int,Unit)) == Nothing
   , conjureEquality (undefined :: (Unit,Int)) == Nothing
+
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Int,Int,Int)))
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,Bool,Bool)))
+-- TODO: make the following test pass
+--, holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,String,[Integer])))
+  , isNothing $ conjureEquality (undefined :: (Unit,Bool,Bool))
+  , isNothing $ conjureEquality (undefined :: (Bool,Unit,Bool))
+  , isNothing $ conjureEquality (undefined :: (Bool,Bool,Unit))
   ]
 
 -- Equality but obtained through conjurable
