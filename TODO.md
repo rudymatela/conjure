@@ -3,19 +3,12 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Configurable number of recursive calls
-
-* Release
-
 * reduce to unique `candidateExprs` through testing.
   We should only enumerate functions that were tested to be different.
   We can limit the tests to the ones that are defined in the given function.
 
 * use FitSpec's notation of `"factorial n"` to name the variables
   instead of just `"factorial"`
-
-* Automatically include `if`s and `==`s.
-  Minor problem: typeclass folding is not possible for result values.
 
 * use partially defined implementations?
 
