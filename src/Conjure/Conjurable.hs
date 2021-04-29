@@ -98,10 +98,6 @@ instance Conjurable Int where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
-instance Conjurable Integer where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-
 instance Conjurable Bool where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
@@ -126,32 +122,6 @@ instance (Conjurable a, Listable a, Show a, Eq a) => Conjurable (Maybe a) where
   conjureTiers     =  reifyTiers
   conjureSubTypes xs  =  conjureType (fromJust xs)
 
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         ) => Conjurable (Either a b) where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-  conjureSubTypes xs  =  conjureType (fromLeft xs)
-                      .  conjureType (fromRight xs)
-
-instance Conjurable Float where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-
-instance Conjurable Double where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-
-instance Conjurable Ordering where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-
--- TODO: complete the following instances
-instance (Typeable a, Typeable b, Typeable c) => Conjurable (a,b,c)
-instance (Typeable a, Typeable b, Typeable c, Typeable d) => Conjurable (a,b,c,d)
-instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e) => Conjurable (a,b,c,d,e)
-instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e, Typeable f) => Conjurable (a,b,c,d,e,f)
-
 instance (Listable a, Name a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureSubTypes f  =   conjureType (argTy f) . conjureType (resTy f)
@@ -173,3 +143,117 @@ canonicalApplication nm f  =  foldApp (value nm f : canonicalArgumentVariables f
 
 canonicalVarApplication :: Conjurable f => String -> f -> Expr
 canonicalVarApplication nm f  =  foldApp (var nm f : canonicalArgumentVariables f)
+
+
+
+-- -- -- other Conjurable instances -- -- --
+
+
+-- Conjurable atomic types --
+
+instance Conjurable Integer where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Float where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Double where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Ordering where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+
+-- Conjurable tuples --
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         , Conjurable c, Listable c, Show c, Eq c
+         ) => Conjurable (a,b,c) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyz =  conjureType x
+                      .  conjureType y
+                      .  conjureType z
+                      where (x,y,z) = xyz
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         , Conjurable c, Listable c, Show c, Eq c
+         , Conjurable d, Listable d, Show d, Eq d
+         ) => Conjurable (a,b,c,d) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzw =  conjureType x
+                       .  conjureType y
+                       .  conjureType z
+                       .  conjureType w
+                       where (x,y,z,w) = xyzw
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         , Conjurable c, Listable c, Show c, Eq c
+         , Conjurable d, Listable d, Show d, Eq d
+         , Conjurable e, Listable e, Show e, Eq e
+         ) => Conjurable (a,b,c,d,e) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwv =  conjureType x
+                        .  conjureType y
+                        .  conjureType z
+                        .  conjureType w
+                        .  conjureType v
+                        where (x,y,z,w,v) = xyzwv
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         , Conjurable c, Listable c, Show c, Eq c
+         , Conjurable d, Listable d, Show d, Eq d
+         , Conjurable e, Listable e, Show e, Eq e
+         , Conjurable f, Listable f, Show f, Eq f
+         ) => Conjurable (a,b,c,d,e,f) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwvu =  conjureType x
+                         .  conjureType y
+                         .  conjureType z
+                         .  conjureType w
+                         .  conjureType v
+                         .  conjureType u
+                         where (x,y,z,w,v,u) = xyzwvu
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         , Conjurable c, Listable c, Show c, Eq c
+         , Conjurable d, Listable d, Show d, Eq d
+         , Conjurable e, Listable e, Show e, Eq e
+         , Conjurable f, Listable f, Show f, Eq f
+         , Conjurable g, Listable g, Show g, Eq g
+         ) => Conjurable (a,b,c,d,e,f,g) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwvut =  conjureType x
+                          .  conjureType y
+                          .  conjureType z
+                          .  conjureType w
+                          .  conjureType v
+                          .  conjureType u
+                          .  conjureType t
+                         where (x,y,z,w,v,u,t) = xyzwvut
+
+-- TODO: go up to 12-tuples
+
+
+-- Conjurable algebraic data types --
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         ) => Conjurable (Either a b) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xs  =  conjureType (fromLeft xs)
+                      .  conjureType (fromRight xs)
