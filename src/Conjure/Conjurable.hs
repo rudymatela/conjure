@@ -121,9 +121,14 @@ instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureTiers     =  reifyTiers
   conjureEquality xs  =  fromExpr <$> conjureEquality x
     where
-    fromExpr e  =  value "==" (listEq ((eval err e) -:> x))
     err  =  error "conjureEquality: evaluation error"
     x  =  head xs
+    fromExpr e  =  value "==" (mkListEq ((eval err e) -:> x))
+    mkListEq :: (a -> a -> Bool) -> [a] -> [a] -> Bool
+    mkListEq (==) []     []     = True
+    mkListEq (==) (x:xs) []     = False
+    mkListEq (==) []     (y:ys) = False
+    mkListEq (==) (x:xs) (y:ys) = x == y && listEq (==) xs ys
 
 -- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
