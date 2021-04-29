@@ -55,6 +55,14 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: Either Unit Bool)
   , isNothing $ conjureEquality (undefined :: Either Bool Unit)
   , isNothing $ conjureEquality (undefined :: Either Unit Unit)
+
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Int,Int,Int,Int)))
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,Bool,Bool,Bool)))
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Int,Bool,(),Char)))
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,String,[Integer],Bool)))
+  , isNothing $ conjureEquality (undefined :: (Unit,Bool,Bool,Bool))
+  , isNothing $ conjureEquality (undefined :: (Bool,Unit,Bool,Bool))
+  , isNothing $ conjureEquality (undefined :: (Bool,Bool,Unit,Bool))
   ]
 
 -- Equality but obtained through conjurable

@@ -300,19 +300,36 @@ instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Co
 
 -- Conjurable tuples --
 
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         , Conjurable c, Listable c, Show c, Eq c
-         , Conjurable d, Listable d, Show d, Eq d
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
+         , Conjurable c, Listable c, Show c
+         , Conjurable d, Listable d, Show d
          ) => Conjurable (a,b,c,d) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzw =  conjureType x
                        .  conjureType y
                        .  conjureType z
                        .  conjureType w
                        where (x,y,z,w) = xyzw
+  conjureEquality xyzw  =  from
+                       <$> conjureEquality x
+                       <*> conjureEquality y
+                       <*> conjureEquality z
+                       <*> conjureEquality w
+    where
+    (x,y,z,w)  =  xyzw
+    from e1 e2 e3 e4  =  value "==" (==)
+      where
+      (==...)  =  evl e1 ==: x
+      (.==..)  =  evl e2 ==: y
+      (..==.)  =  evl e3 ==: z
+      (...==)  =  evl e4 ==: w
+      (x1,y1,z1,w1) == (x2,y2,z2,w2)  =  x1 ==... x2
+                                      && y1 .==.. y2
+                                      && z1 ..==. z2
+                                      && w1 ...== w2
 
+-- TODO: remove Eq restriction below and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
          , Conjurable b, Listable b, Show b, Eq b
          , Conjurable c, Listable c, Show c, Eq c
