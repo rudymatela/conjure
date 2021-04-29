@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Automatically reify ifs and equality
-
 * Configurable number of recursive calls
 
 * Release
