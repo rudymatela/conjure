@@ -88,7 +88,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
   candidates  =  filter (\e -> typ e == typ ffxx)
               .  concat
               .  take maxSize
-              $  candidateExprs nm f maxEquationSize (===) [es]
+              $  candidateExprs nm f maxEquationSize (===) [es ++ conjureIfs f]
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
   rrff   =  var nm f

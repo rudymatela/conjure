@@ -27,7 +27,6 @@ background  =
   , value "isZero" ((==0) :: Int -> Bool)
   , val False
   , val True
-  , ifFor (undefined :: Int)
   ]
 
 

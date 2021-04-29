@@ -19,7 +19,6 @@ background =
   , value "null" (null :: [Bool] -> Bool)
   , value "head" (head :: [Bool] -> Bool)
   , value "tail" (tail :: [Bool] -> [Bool])
-  , ifFor (undefined :: Bool)
   ]
 
 -- target (for and):
