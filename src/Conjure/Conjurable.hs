@@ -191,7 +191,7 @@ instance ( Conjurable a, Listable a, Show a, Eq a
   conjureSubTypes xs  =  conjureType (fromLeft xs)
                       .  conjureType (fromRight xs)
 
-instance (Listable a, Name a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
+instance (Listable a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureSubTypes f  =   conjureType (argTy f) . conjureType (resTy f)
 
