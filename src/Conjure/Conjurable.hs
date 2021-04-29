@@ -39,8 +39,8 @@ type Reification  =  [Reification1] -> [Reification1]
 
 
 class Typeable a => Conjurable a where
-  argumentHoles :: a -> [Expr]
-  argumentHoles _  =  []
+  conjureArgumentHoles :: a -> [Expr]
+  conjureArgumentHoles _  =  []
 
   conjureEquality :: a -> Maybe Expr
   conjureEquality _  =  Nothing
@@ -142,7 +142,7 @@ instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e) => Conjura
 instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e, Typeable f) => Conjurable (a,b,c,d,e,f)
 
 instance (Listable a, Name a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
-  argumentHoles f  =  hole (argTy f) : argumentHoles (f undefined)
+  conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureSubTypes f  =   conjureType (argTy f) . conjureType (resTy f)
 
 argTy :: (a -> b) -> a
@@ -155,7 +155,7 @@ canonicalArgumentVariables :: Conjurable f => f -> [Expr]
 canonicalArgumentVariables  =  unfoldApp
                             .  mostGeneralCanonicalVariation
                             .  foldApp
-                            .  argumentHoles
+                            .  conjureArgumentHoles
 
 canonicalApplication :: Conjurable f => String -> f -> Expr
 canonicalApplication nm f  =  foldApp (value nm f : canonicalArgumentVariables f)
