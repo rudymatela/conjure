@@ -116,19 +116,24 @@ instance Conjurable Char where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
+-- bind equality to the given argument type
+(==:) :: (a -> a -> Bool) -> a -> (a -> a -> Bool)
+(==:)  =  const
+
 instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
   conjureEquality xs  =  fromExpr <$> conjureEquality x
     where
-    err  =  error "conjureEquality: evaluation error"
     x  =  head xs
-    fromExpr e  =  value "==" (mkListEq ((eval err e) -:> x))
-    mkListEq :: (a -> a -> Bool) -> [a] -> [a] -> Bool
-    mkListEq (==) []     []     = True
-    mkListEq (==) (x:xs) []     = False
-    mkListEq (==) []     (y:ys) = False
-    mkListEq (==) (x:xs) (y:ys) = x == y && listEq (==) xs ys
+    fromExpr e  =  value "==" (==)
+      where
+      (.==.)  =  eval err e ==: x
+      []     == []     = True
+      (x:xs) == []     = False
+      []     == (y:ys) = False
+      (x:xs) == (y:ys) = x .==. y && xs == ys
+      err  =  error "conjureEquality: evaluation error"
 
 -- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
