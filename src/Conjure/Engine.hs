@@ -41,10 +41,11 @@ import Conjure.Conjurable
 -- | Arguments to be passed to 'conjureWith' or 'conjpureWith'.
 --   See 'args' for the defaults.
 data Args = Args
-  { maxTests         :: Int  -- ^ defaults to 60
-  , maxSize          :: Int  -- ^ defaults to 9, keep greater than maxEquationSize
-  , maxEquationSize  :: Int  -- ^ defaults to 5, keep smaller than maxSize
-  , maxRecursionSize :: Int  -- ^ defaults to 60
+  { maxTests          :: Int  -- ^ defaults to 60
+  , maxSize           :: Int  -- ^ defaults to 9, keep greater than maxEquationSize
+  , maxRecursiveCalls :: Int  -- ^ defaults to 1
+  , maxEquationSize   :: Int  -- ^ defaults to 5, keep smaller than maxSize
+  , maxRecursionSize  :: Int  -- ^ defaults to 60
   }
 
 -- | Default arguments to conjure.
@@ -55,10 +56,11 @@ data Args = Args
 -- * recursion up to 60 symbols.
 args :: Args
 args = Args
-  { maxTests          =  60
-  , maxSize           =   9
-  , maxEquationSize   =   5
-  , maxRecursionSize  =  60
+  { maxTests           =  60
+  , maxSize            =   9
+  , maxRecursiveCalls  =   1
+  , maxEquationSize    =   5
+  , maxRecursionSize   =  60
   }
 
 -- | Like 'conjure' but in the pure world.
@@ -88,7 +90,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
   candidates  =  filter (\e -> typ e == typ ffxx)
               .  concat
               .  take maxSize
-              $  candidateExprs nm f maxEquationSize (===) [es ++ conjureIfs f]
+              $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) [es ++ conjureIfs f]
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
   rrff   =  var nm f
@@ -160,14 +162,15 @@ conjureWith args nm f es  =  do
 candidateExprs :: Conjurable f
                => String -> f
                -> Int
+               -> Int
                -> (Expr -> Expr -> Bool)
                -> [[Expr]]
                -> [[Expr]]
-candidateExprs nm f sz (===) ess  =  expressionsT $ [ef:exs] \/ ess
+candidateExprs nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
   thy  =  theoryFromAtoms (===) sz $ [nub (b_:map holeAsTypeOf exs)] \/ ess
-  expressionsT ds  =  filterT (\e -> count (== ef) (vars e) <= 1)
+  expressionsT ds  =  filterT (\e -> count (== ef) (vars e) <= mc)
                    $  filterT (isRootNormalE thy)
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
     where
