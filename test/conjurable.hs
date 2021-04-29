@@ -3,7 +3,8 @@
 
 import Test
 
-data Unit  =  Unit  deriving (Eq, Ord, Show, Read)
+-- An Unit type that is not an Eq instance
+data Unit  =  Unit  deriving Show
 
 instance Listable Unit where list = [Unit]
 instance Conjurable Unit where
@@ -38,6 +39,12 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Unit,Bool,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Unit))
+
+  , holds n $ \mx my -> (mx <==> my)  ==  (mx == (my :: Maybe ()))
+  , holds n $ \mx my -> (mx <==> my)  ==  (mx == (my :: Maybe Bool))
+  , holds n $ \mx my -> (mx <==> my)  ==  (mx == (my :: Maybe Int))
+  , holds n $ \mx my -> (mx <==> my)  ==  (mx == (my :: Maybe [Maybe Int]))
+  , isNothing $ conjureEquality (undefined :: Maybe Unit)
   ]
 
 -- Equality but obtained through conjurable

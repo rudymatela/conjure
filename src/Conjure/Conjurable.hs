@@ -177,12 +177,22 @@ instance ( Conjurable a, Listable a, Show a
                                 && y1 .==. y2
                                 && z1 ..== z2
 
--- TODO: remove Eq restriction here and throughout
-instance (Conjurable a, Listable a, Show a, Eq a) => Conjurable (Maybe a) where
-  conjureEquality  =  reifyEquality
+instance (Conjurable a, Listable a, Show a) => Conjurable (Maybe a) where
   conjureTiers     =  reifyTiers
-  conjureSubTypes xs  =  conjureType (fromJust xs)
+  conjureSubTypes mx  =  conjureType (fromJust mx)
+  conjureEquality mx  =  from <$> conjureEquality x
+    where
+    x  =  fromJust mx
+    from e  =  value "==" (==)
+      where
+      (.==.)  =  evl e ==: x
+      Nothing  == Nothing   =  True
+      Nothing  == (Just _)  =  False
+      (Just _) == Nothing   =  False
+      (Just x) == (Just y)  =  x .==. y
 
+
+-- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
          , Conjurable b, Listable b, Show b, Eq b
          ) => Conjurable (Either a b) where
