@@ -126,10 +126,10 @@ instance Conjurable Char where
 instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
-  conjureEquality xs  =  fromExpr <$> conjureEquality x
+  conjureEquality xs  =  from <$> conjureEquality x
     where
     x  =  head xs
-    fromExpr e  =  value "==" (==)
+    from e  =  value "==" (==)
       where
       (.==.)  =  evl e ==: x
       []     == []     = True
