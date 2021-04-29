@@ -174,8 +174,8 @@ instance ( Conjurable a, Listable a, Show a
       (.==.)  =  evl e2 ==: y
       (..==)  =  evl e3 ==: z
       (x1,y1,z1) == (x2,y2,z2)  =  x1 ==.. x2
-                                && y1 ==.. y2
-                                && z1 ==.. z2
+                                && y1 .==. y2
+                                && z1 ..== z2
 
 -- TODO: remove Eq restriction here and throughout
 instance (Conjurable a, Listable a, Show a, Eq a) => Conjurable (Maybe a) where

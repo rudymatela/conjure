@@ -33,8 +33,8 @@ tests n  =
 
   , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Int,Int,Int)))
   , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,Bool,Bool)))
--- TODO: make the following test pass
---, holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,String,[Integer])))
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Int,Bool,())))
+  , holds n $ \xyz wvu -> (xyz <==> wvu)  ==  (xyz == (wvu :: (Bool,String,[Integer])))
   , isNothing $ conjureEquality (undefined :: (Unit,Bool,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Unit))
