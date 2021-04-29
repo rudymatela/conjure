@@ -94,6 +94,18 @@ src/Conjure/TypeBinding.o: \
   src/Conjure/TypeBinding.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
+test/conjurable.o: \
+  test/Test.hs \
+  test/conjurable.hs \
+  src/Conjure/Utils.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs
+test/conjurable: \
+  test/Test.hs \
+  test/conjurable.hs \
+  mk/toplibs
 test/expr.o: \
   test/Test.hs \
   test/expr.hs \

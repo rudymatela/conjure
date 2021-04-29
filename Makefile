@@ -13,7 +13,8 @@ EG = \
   proto/u-conjure
 
 TESTS = \
-  test/expr
+  test/expr \
+  test/conjurable
 
 all: mk/toplibs
 

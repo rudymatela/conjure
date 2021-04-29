@@ -34,3 +34,4 @@ eg/ints
 eg/list
 proto/u-conjure
 test/expr
+test/conjurable

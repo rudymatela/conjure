@@ -9,6 +9,8 @@
 module Test
   ( module Conjure
   , module Conjure.Expr
+  , module Conjure.Conjurable
+  , module Test.LeanCheck
 
   , mainTest
   )
@@ -17,8 +19,11 @@ where
 import System.Exit (exitFailure)
 import System.Environment (getArgs)
 
+import Test.LeanCheck
+
 import Conjure
 import Conjure.Expr hiding (delete, insert)
+import Conjure.Conjurable
 
 reportTests :: [Bool] -> IO ()
 reportTests tests =
