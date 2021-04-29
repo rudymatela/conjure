@@ -119,9 +119,11 @@ instance Conjurable Char where
 instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
-  conjureEquality xs  =  (\e -> value "==" (listEq (evl e -:> x)))
-                     <$> conjureEquality x
-    where x = head xs
+  conjureEquality xs  =  fromExpr <$> conjureEquality x
+    where
+    fromExpr e  =  value "==" (listEq ((eval err e) -:> x))
+    err  =  error "conjureEquality: evaluation error"
+    x  =  head xs
 
 -- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
