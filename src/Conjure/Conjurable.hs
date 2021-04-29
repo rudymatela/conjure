@@ -28,6 +28,9 @@ import Test.LeanCheck.Utils
 import Conjure.Expr hiding (application)
 import Test.Speculate.Expr
 
+import Data.Ratio   -- for instance
+import Data.Complex -- for instance
+
 
 -- | Single reification of some functions over a type as 'Expr's.
 --
@@ -94,11 +97,19 @@ instance Conjurable () where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
+instance Conjurable Bool where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
 instance Conjurable Int where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
-instance Conjurable Bool where
+instance Conjurable Integer where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Char where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
@@ -117,10 +128,29 @@ instance ( Conjurable a, Listable a, Show a, Eq a
   conjureSubTypes xy  =  conjureType (fst xy)
                       .  conjureType (snd xy)
 
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         , Conjurable c, Listable c, Show c, Eq c
+         ) => Conjurable (a,b,c) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyz =  conjureType x
+                      .  conjureType y
+                      .  conjureType z
+                      where (x,y,z) = xyz
+
 instance (Conjurable a, Listable a, Show a, Eq a) => Conjurable (Maybe a) where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xs  =  conjureType (fromJust xs)
+
+instance ( Conjurable a, Listable a, Show a, Eq a
+         , Conjurable b, Listable b, Show b, Eq b
+         ) => Conjurable (Either a b) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xs  =  conjureType (fromLeft xs)
+                      .  conjureType (fromRight xs)
 
 instance (Listable a, Name a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
@@ -151,10 +181,6 @@ canonicalVarApplication nm f  =  foldApp (var nm f : canonicalArgumentVariables 
 
 -- Conjurable atomic types --
 
-instance Conjurable Integer where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-
 instance Conjurable Float where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
@@ -167,19 +193,18 @@ instance Conjurable Ordering where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
-
--- Conjurable tuples --
-
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         , Conjurable c, Listable c, Show c, Eq c
-         ) => Conjurable (a,b,c) where
+instance (Integral a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Ratio a) where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSubTypes xyz =  conjureType x
-                      .  conjureType y
-                      .  conjureType z
-                      where (x,y,z) = xyz
+  conjureSubTypes q  =  conjureType (numerator q)
+
+instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Complex a) where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+  conjureSubTypes x  =  conjureType (realPart x)
+
+
+-- Conjurable tuples --
 
 instance ( Conjurable a, Listable a, Show a, Eq a
          , Conjurable b, Listable b, Show b, Eq b
@@ -246,14 +271,3 @@ instance ( Conjurable a, Listable a, Show a, Eq a
                          where (x,y,z,w,v,u,t) = xyzwvut
 
 -- TODO: go up to 12-tuples
-
-
--- Conjurable algebraic data types --
-
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         ) => Conjurable (Either a b) where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-  conjureSubTypes xs  =  conjureType (fromLeft xs)
-                      .  conjureType (fromRight xs)
