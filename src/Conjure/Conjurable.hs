@@ -192,14 +192,26 @@ instance (Conjurable a, Listable a, Show a) => Conjurable (Maybe a) where
       (Just x) == (Just y)  =  x .==. y
 
 
--- TODO: remove Eq restriction here and throughout
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
          ) => Conjurable (Either a b) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSubTypes xs  =  conjureType (fromLeft xs)
-                      .  conjureType (fromRight xs)
+  conjureSubTypes elr  =  conjureType l . conjureType r
+    where
+    Left l   =  elr
+    Right r  =  elr
+  conjureEquality elr  =  from <$> conjureEquality l <*> conjureEquality r
+    where
+    Left l   =  elr
+    Right r  =  elr
+    from el er  =  value "==" (==)
+      where
+      (==.)  =  evl el ==: l
+      (.==)  =  evl er ==: r
+      (Left x)  == (Left y)   =  x ==. y
+      (Left _)  == (Right _)  =  False
+      (Right _) == (Left _)   =  False
+      (Right x) == (Right y)  =  x .== y
 
 instance (Listable a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)

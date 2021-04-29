@@ -45,6 +45,16 @@ tests n  =
   , holds n $ \mx my -> (mx <==> my)  ==  (mx == (my :: Maybe Int))
   , holds n $ \mx my -> (mx <==> my)  ==  (mx == (my :: Maybe [Maybe Int]))
   , isNothing $ conjureEquality (undefined :: Maybe Unit)
+
+  , holds n $ \ex ey -> (ex <==> ey)  ==  (ex == (ey :: Either () ()))
+  , holds n $ \ex ey -> (ex <==> ey)  ==  (ex == (ey :: Either Bool Bool))
+  , holds n $ \ex ey -> (ex <==> ey)  ==  (ex == (ey :: Either Int Int))
+  , holds n $ \ex ey -> (ex <==> ey)  ==  (ex == (ey :: Either Int Bool))
+  , holds n $ \ex ey -> (ex <==> ey)  ==  (ex == (ey :: Either Bool Int))
+  , holds n $ \ex ey -> (ex <==> ey)  ==  (ex == (ey :: Either [Int] String))
+  , isNothing $ conjureEquality (undefined :: Either Unit Bool)
+  , isNothing $ conjureEquality (undefined :: Either Bool Unit)
+  , isNothing $ conjureEquality (undefined :: Either Unit Unit)
   ]
 
 -- Equality but obtained through conjurable
