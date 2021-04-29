@@ -27,6 +27,7 @@ import Test.LeanCheck
 import Test.LeanCheck.Utils
 import Conjure.Expr hiding (application)
 import Test.Speculate.Expr
+import Data.Functor ((<$>))
 
 import Data.Int     -- for instances
 import Data.Word    -- for instances
@@ -118,10 +119,9 @@ instance Conjurable Char where
 instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
-  conjureEquality xs  =
-    case conjureEquality (head xs) of
-    Nothing -> Nothing
-    Just e  -> Just $ value "==" (listEq (evl e -:> head xs))
+  conjureEquality xs  =  (\e -> value "==" (listEq (evl e -:> x)))
+                     <$> conjureEquality x
+    where x = head xs
 
 -- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
