@@ -21,12 +21,11 @@ Installing
 To install the [latest Conjure version from Hackage], just run:
 
 	$ cabal update
-	$ cabal install code-conjure
+	$ cabal v1-install code-conjure
 
-Starting from Cabal v3.0, you need to pass `--lib` as an argument to cabal
-install:
-
-	$ cabal install code-conjure --lib
+If you are using Cabal v3.0 or later,
+[avoid using `cabal install`] for the time being
+and use `v1-install` instead.
 
 Prerequisites are [express], [leancheck] and [speculate].
 They should be automatically resolved and installed by [Cabal].
@@ -165,6 +164,9 @@ distribued under the 3-clause BSD license.
 [speculate]:      https://hackage.haskell.org/package/speculate
 [MagicHaskeller]: https://hackage.haskell.org/package/MagicHaskeller
 [Barliman]:       https://github.com/webyrd/Barliman
+
+[avoid using `cabal install`]:         https://github.com/haskell/cabal/issues/7373
+[latest Conjure version from Hackage]: https://hackage.haskell.org/package/code-conjure
 
 [build-log]:    https://github.com/rudymatela/conjure/actions/workflows/build.yml
 [build-status]: https://github.com/rudymatela/conjure/actions/workflows/build.yml/badge.svg
