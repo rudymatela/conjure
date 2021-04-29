@@ -32,9 +32,7 @@ main = do
   -- length xs  =  if null xs then 0 else 1 + length (tail xs)
   --               1  2    3       4      5 6 7       8    9
   conjureWith args {maxSize = 9} "length" length'
-    [ value "==" ((==) :: Int -> Int -> Bool)
-    , value "==" ((==) :: [Int] -> [Int] -> Bool)
-    , ifFor (undefined :: Int)
+    [ ifFor (undefined :: Int)
     , val (0 :: Int)
     , val (1 :: Int)
     , value "+" ((+) :: Int -> Int -> Int)
@@ -52,8 +50,6 @@ main = do
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])
     , value "null" (null :: [Int] -> Bool)
-    , value "==" ((==) :: Int -> Int -> Bool)
-    , value "==" ((==) :: [Int] -> [Int] -> Bool)
     ]
 
   -- sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
@@ -65,6 +61,4 @@ main = do
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])
     , value "null" (null :: [Int] -> Bool)
-    , value "==" ((==) :: Int -> Int -> Bool)
-    , value "==" ((==) :: [Int] -> [Int] -> Bool)
     ]

@@ -39,5 +39,4 @@ background =
   , val (1::Int)
   , value "+" ((+) :: Int -> Int -> Int)
   , value "*" ((*) :: Int -> Int -> Int)
-  , value "==" ((==) :: Int -> Int -> Bool)
   ]

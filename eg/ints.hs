@@ -32,8 +32,6 @@ background =
   , value "head" (head :: [Int] -> Int)
   , value "tail" (tail :: [Int] -> [Int])
   , ifFor (undefined :: Int)
-  , value "==" ((==) :: Int -> Int -> Bool)
-  , value "==" ((==) :: [Int] -> [Int] -> Bool)
   ]
 
 -- sum xs      =  if null xs then 0 else head xs + sum (tail xs)

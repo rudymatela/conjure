@@ -28,7 +28,6 @@ background  =
   , val False
   , val True
   , ifFor (undefined :: Int)
-  , value "==" ((==) :: Int -> Int -> Bool)
   ]
 
 
