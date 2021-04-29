@@ -15,6 +15,8 @@ module Conjure.Conjurable
   , Reification
   , Conjurable (..)
   , conjureType
+  , reifyTiers
+  , reifyEquality
   , canonicalApplication
   , canonicalVarApplication
   , conjureIfs
