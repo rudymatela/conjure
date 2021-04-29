@@ -142,7 +142,7 @@ For a detailed documentation of each function, see
 [Conjure's Haddock documentation].
 
 
-Conjure, Copyright 2020  Rudy Matela,
+Conjure, Copyright 2021  Rudy Matela,
 distribued under the 3-clause BSD license.
 
 
