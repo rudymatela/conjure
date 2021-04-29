@@ -18,6 +18,7 @@ module Conjure.Conjurable
   , canonicalApplication
   , canonicalVarApplication
   , conjureTiersFor
+  , conjureMkEquation
   )
 where
 
@@ -66,6 +67,12 @@ reifyTiers  =  Just . mkExprTiers
 
 mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
+
+conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
+conjureMkEquation f  =  mkEquation eqs
+    where
+    eqs  =  value "==" ((==) :: Bool -> Bool -> Bool)
+         :  [eq | (_,_,Just eq,_) <- conjureType f []]
 
 conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers

@@ -98,10 +98,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
   e1 ?=? e2  =  isTrueWhenDefined (e1 -==- e2)
 
   e1 .=. e2  =  countTrue         (e1 -==- e2)
-  (-==-)  =  mkEquation  eqs
-    where
-    eqs  =  value "==" ((==) :: Bool -> Bool -> Bool)
-         :  es
+  (-==-)  =  conjureMkEquation f
 
   isTrueWhenDefined  =  all (errorToTrue  . eval False) . gs
   isReallyTrue       =  all (errorToFalse . eval False) . gs
