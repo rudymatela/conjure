@@ -181,6 +181,10 @@ canonicalVarApplication nm f  =  foldApp (var nm f : canonicalArgumentVariables 
 
 -- Conjurable atomic types --
 
+instance Conjurable Word where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
 instance Conjurable Float where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
