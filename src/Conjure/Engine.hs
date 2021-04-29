@@ -108,7 +108,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
   countTrue        =  count (errorToFalse . eval False) . gs
 
   gs :: Expr -> [Expr]
-  gs  =  take maxTests . grounds (tiersFor f)
+  gs  =  take maxTests . grounds (conjureTiersFor f)
 
 -- | Conjures an implementation of a partially defined function.
 --

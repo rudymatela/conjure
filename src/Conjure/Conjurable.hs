@@ -18,6 +18,7 @@ module Conjure.Conjurable
   , canonicalApplication
   , canonicalVarApplication
   , unifiedArgumentTiers
+  , conjureTiersFor
   , tiersFor
   , mkExprTiers
   )
@@ -77,7 +78,7 @@ conjureTiersFor f e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]
   allTiers  =  mkExprTiers (undefined :: Bool)
-            :  argumentTiers f
+            :  [etiers | (_,_,_,Just etiers) <- conjureType f []]
   tf []  =  [[e]] -- no tiers found, keep variable
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
@@ -146,12 +147,16 @@ instance (Typeable a, Typeable b, Typeable c, Typeable d) => Conjurable (a,b,c,d
 instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e) => Conjurable (a,b,c,d,e)
 instance (Typeable a, Typeable b, Typeable c, Typeable d, Typeable e, Typeable f) => Conjurable (a,b,c,d,e,f)
 
-instance (Listable a, Name a, Show a, Typeable a, Conjurable b) => Conjurable (a -> b) where
-  argumentHoles f  =  hole (arg1 f) : argumentHoles (f undefined)
-  argumentTiers f  =  mkExprTiers (arg1 f) : argumentTiers (f undefined)
+instance (Listable a, Name a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
+  argumentHoles f  =  hole (argTy f) : argumentHoles (f undefined)
+  argumentTiers f  =  mkExprTiers (argTy f) : argumentTiers (f undefined)
+  conjureSubTypes f  =   conjureType (argTy f) . conjureType (resTy f)
 
-arg1 :: (a -> b) -> a
-arg1 _  =  undefined
+argTy :: (a -> b) -> a
+argTy _  =  undefined
+
+resTy :: (a -> b) -> b
+resTy _  =  undefined
 
 canonicalArgumentVariables :: Conjurable f => f -> [Expr]
 canonicalArgumentVariables  =  unfoldApp
