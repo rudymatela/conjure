@@ -334,14 +334,12 @@ instance ( Conjurable a, Listable a, Show a
                                       && z1 ..==. z2
                                       && w1 ...== w2
 
--- TODO: remove Eq restriction below and throughout
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         , Conjurable c, Listable c, Show c, Eq c
-         , Conjurable d, Listable d, Show d, Eq d
-         , Conjurable e, Listable e, Show e, Eq e
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
+         , Conjurable c, Listable c, Show c
+         , Conjurable d, Listable d, Show d
+         , Conjurable e, Listable e, Show e
          ) => Conjurable (a,b,c,d,e) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzwv =  conjureType x
                         .  conjureType y
@@ -349,15 +347,34 @@ instance ( Conjurable a, Listable a, Show a, Eq a
                         .  conjureType w
                         .  conjureType v
                         where (x,y,z,w,v) = xyzwv
+  conjureEquality xyzwv  =  from
+                        <$> conjureEquality x
+                        <*> conjureEquality y
+                        <*> conjureEquality z
+                        <*> conjureEquality w
+                        <*> conjureEquality v
+    where
+    (x,y,z,w,v)  =  xyzwv
+    from e1 e2 e3 e4 e5  =  value "==" (==)
+      where
+      (==....)  =  evl e1 ==: x
+      (.==...)  =  evl e2 ==: y
+      (..==..)  =  evl e3 ==: z
+      (...==.)  =  evl e4 ==: w
+      (....==)  =  evl e5 ==: v
+      (x1,y1,z1,w1,v1) == (x2,y2,z2,w2,v2)  =  x1 ==.... x2
+                                            && y1 .==... y2
+                                            && z1 ..==.. z2
+                                            && w1 ...==. w2
+                                            && v1 ....== v2
 
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         , Conjurable c, Listable c, Show c, Eq c
-         , Conjurable d, Listable d, Show d, Eq d
-         , Conjurable e, Listable e, Show e, Eq e
-         , Conjurable f, Listable f, Show f, Eq f
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
+         , Conjurable c, Listable c, Show c
+         , Conjurable d, Listable d, Show d
+         , Conjurable e, Listable e, Show e
+         , Conjurable f, Listable f, Show f
          ) => Conjurable (a,b,c,d,e,f) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzwvu =  conjureType x
                          .  conjureType y
@@ -366,16 +383,38 @@ instance ( Conjurable a, Listable a, Show a, Eq a
                          .  conjureType v
                          .  conjureType u
                          where (x,y,z,w,v,u) = xyzwvu
+  conjureEquality xyzwvu  =  from
+                         <$> conjureEquality x
+                         <*> conjureEquality y
+                         <*> conjureEquality z
+                         <*> conjureEquality w
+                         <*> conjureEquality v
+                         <*> conjureEquality u
+    where
+    (x,y,z,w,v,u)  =  xyzwvu
+    from e1 e2 e3 e4 e5 e6  =  value "==" (==)
+      where
+      (==.....)  =  evl e1 ==: x
+      (.==....)  =  evl e2 ==: y
+      (..==...)  =  evl e3 ==: z
+      (...==..)  =  evl e4 ==: w
+      (....==.)  =  evl e5 ==: v
+      (.....==)  =  evl e6 ==: u
+      (x1,y1,z1,w1,v1,u1) == (x2,y2,z2,w2,v2,u2)  =  x1 ==..... x2
+                                                  && y1 .==.... y2
+                                                  && z1 ..==... z2
+                                                  && w1 ...==.. w2
+                                                  && v1 ....==. v2
+                                                  && u1 .....== u2
 
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
-         , Conjurable c, Listable c, Show c, Eq c
-         , Conjurable d, Listable d, Show d, Eq d
-         , Conjurable e, Listable e, Show e, Eq e
-         , Conjurable f, Listable f, Show f, Eq f
-         , Conjurable g, Listable g, Show g, Eq g
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
+         , Conjurable c, Listable c, Show c
+         , Conjurable d, Listable d, Show d
+         , Conjurable e, Listable e, Show e
+         , Conjurable f, Listable f, Show f
+         , Conjurable g, Listable g, Show g
          ) => Conjurable (a,b,c,d,e,f,g) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzwvut =  conjureType x
                           .  conjureType y
@@ -385,5 +424,31 @@ instance ( Conjurable a, Listable a, Show a, Eq a
                           .  conjureType u
                           .  conjureType t
                          where (x,y,z,w,v,u,t) = xyzwvut
+  conjureEquality xyzwvut  =  from
+                          <$> conjureEquality x
+                          <*> conjureEquality y
+                          <*> conjureEquality z
+                          <*> conjureEquality w
+                          <*> conjureEquality v
+                          <*> conjureEquality u
+                          <*> conjureEquality t
+    where
+    (x,y,z,w,v,u,t)  =  xyzwvut
+    from e1 e2 e3 e4 e5 e6 e7  =  value "==" (==)
+      where
+      (==......)  =  evl e1 ==: x
+      (.==.....)  =  evl e2 ==: y
+      (..==....)  =  evl e3 ==: z
+      (...==...)  =  evl e4 ==: w
+      (....==..)  =  evl e5 ==: v
+      (.....==.)  =  evl e6 ==: u
+      (......==)  =  evl e7 ==: t
+      (x1,y1,z1,w1,v1,u1,t1) == (x2,y2,z2,w2,v2,u2,t2)  =  x1 ==...... x2
+                                                        && y1 .==..... y2
+                                                        && z1 ..==.... z2
+                                                        && w1 ...==... w2
+                                                        && v1 ....==.. v2
+                                                        && u1 .....==. u2
+                                                        && t1 ......== t2
 
 -- TODO: go up to 12-tuples
