@@ -49,13 +49,52 @@ type Reification1  =  (Expr, Expr, Maybe Expr, Maybe [[Expr]])
 type Reification  =  [Reification1] -> [Reification1]
 
 
+-- | Class of 'Conjurable' types.
+-- Functions are 'Conjurable'
+-- if all their arguments are 'Conjurable', 'Listable' and 'Show'able.
+--
+-- For atomic types that are 'Listable',
+-- instances are defined as:
+--
+-- > instance Conjurable Atomic where
+-- >   conjureTiers  =  reifyTiers
+--
+-- For atomic types that are both 'Listable' and 'Eq',
+-- instances are defined as:
+--
+-- > instance Conjurable Atomic where
+-- >   conjureTiers     =  reifyTiers
+-- >   conjureEquality  =  reifyEquality
+--
+-- For types with subtypes,
+-- instances are defined as:
+--
+-- > instance Conjurable Composite where
+-- >   conjureTiers     =  reifyTiers
+-- >   conjureEquality  =  reifyEquality
+-- >   conjureSubTypes x  =  conjureType y
+-- >                      .  conjureType z
+-- >                      .  conjureType w
+-- >     where
+-- >     (Composite ... y ... z ... w ...)  =  x
+--
+-- Above @x@, @y@, @z@ and @w@ are just proxies.
+-- The @Proxy@ type was avoided for backwards compatibility.
+--
+-- Please see the source code of "Conjure.Conjurable" for more examples.
+--
+-- (cf. 'reifyTiers', 'reifyEquality', 'conjureType')
 class Typeable a => Conjurable a where
   conjureArgumentHoles :: a -> [Expr]
   conjureArgumentHoles _  =  []
 
+  -- | Returns 'Just' the '==' function encoded as an 'Expr' when available
+  --   or 'Nothing' otherwise.
   conjureEquality :: a -> Maybe Expr
   conjureEquality _  =  Nothing
 
+  -- | Returns 'Just' 'tiers' of values encoded as 'Expr's when possible
+  --   or 'Nothing' otherwise.
   conjureTiers :: a -> Maybe [[Expr]]
   conjureTiers _  =  Nothing
 
@@ -78,9 +117,29 @@ conjureReification x  =  conjureType x [conjureReification1 bool]
   bool :: Bool
   bool  =  error "conjureReification: evaluated proxy boolean value (definitely a bug)"
 
+-- | Reifies equality to be used in a conjurable type.
+--
+-- This is to be used
+-- in the definition of 'conjureEquality'
+-- of 'Conjurable' typeclass instances:
+--
+-- > instance ... => Conjurable <Type> where
+-- >   ...
+-- >   conjureEquality  =  reifyEquality
+-- >   ...
 reifyEquality :: (Eq a, Typeable a) => a -> Maybe Expr
 reifyEquality  =  Just . head . reifyEq
 
+-- | Reifies equality to be used in a conjurable type.
+--
+-- This is to be used
+-- in the definition of 'conjureTiers'
+-- of 'Conjurable' typeclass instances:
+--
+-- > instance ... => Conjurable <Type> where
+-- >   ...
+-- >   conjureTiers  =  reifyTiers
+-- >   ...
 reifyTiers :: (Listable a, Show a, Typeable a) => a -> Maybe [[Expr]]
 reifyTiers  =  Just . mkExprTiers
 

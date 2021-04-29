@@ -50,7 +50,11 @@ module Conjure
   , args
   , conjureWith
   , conjpureWith
+
+  , Conjurable (conjureEquality, conjureTiers)
+  , reifyEquality, reifyTiers
   )
 where
 
 import Conjure.Engine
+import Conjure.Conjurable
