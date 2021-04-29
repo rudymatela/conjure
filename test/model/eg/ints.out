@@ -1,16 +1,16 @@
 second :: [Int] -> Int
--- looking through 12943 candidates, 100% match, 47/47 assignments
+-- looking through 12955 candidates, 100% match, 47/47 assignments
 second xs  =  head (tail xs)
 
 third :: [Int] -> Int
--- looking through 12943 candidates, 100% match, 34/34 assignments
+-- looking through 12955 candidates, 100% match, 34/34 assignments
 third xs  =  head (tail (tail xs))
 
 sum :: [Int] -> Int
--- looking through 12943 candidates, 8% match, 5/60 assignments
+-- looking through 12955 candidates, 8% match, 5/60 assignments
 sum xs  =  if null (tail xs) then head xs else sum xs
 
 product :: [Int] -> Int
--- looking through 12943 candidates, 36% match, 22/60 assignments
+-- looking through 12955 candidates, 36% match, 22/60 assignments
 product xs  =  0 * head (tail (tail (tail xs)))
 

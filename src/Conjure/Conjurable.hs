@@ -67,7 +67,16 @@ conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
   if hole x `elem` [h | (h,_,_,_) <- ms]
   then ms
-  else conjureSubTypes x $ (hole x, ifFor x, conjureEquality x, conjureTiers x) : ms
+  else conjureSubTypes x $ conjureReification1 x : ms
+
+conjureReification1 :: Conjurable a => a -> Reification1
+conjureReification1 x  =  (hole x, ifFor x, conjureEquality x, conjureTiers x)
+
+conjureReification :: Conjurable a => a -> [Reification1]
+conjureReification x  =  conjureType x [conjureReification1 bool]
+  where
+  bool :: Bool
+  bool  =  error "conjureReification: evaluated proxy boolean value (definitely a bug)"
 
 reifyEquality :: (Eq a, Typeable a) => a -> Maybe Expr
 reifyEquality  =  Just . head . reifyEq
@@ -79,20 +88,16 @@ mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
 conjureIfs :: Conjurable f => f -> [Expr]
-conjureIfs f  =  [eef | (_,eef,_,Just _) <- conjureType f []]
+conjureIfs f  =  [eef | (_,eef,_,Just _) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
-conjureMkEquation f  =  mkEquation eqs
-    where
-    eqs  =  value "==" ((==) :: Bool -> Bool -> Bool)
-         :  [eq | (_,_,Just eq,_) <- conjureType f []]
+conjureMkEquation f  =  mkEquation [eq | (_,_,Just eq,_) <- conjureReification f]
 
 conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]
-  allTiers  =  mkExprTiers (undefined :: Bool)
-            :  [etiers | (_,_,_,Just etiers) <- conjureType f []]
+  allTiers  =  [etiers | (_,_,_,Just etiers) <- conjureReification f]
   tf []  =  [[e]] -- no tiers found, keep variable
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
