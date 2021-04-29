@@ -67,11 +67,6 @@ proto/u-conjure.o: \
 proto/u-conjure: \
   proto/u-conjure.hs \
   mk/toplibs
-src/Conjure/Arguable.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/TypeBinding.hs \
-  src/Conjure/Expr.hs \
-  src/Conjure/Arguable.hs
 src/Conjure/Conjurable.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs \
@@ -90,8 +85,6 @@ src/Conjure.o: \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs
-src/Conjure/TypeBinding.o: \
-  src/Conjure/TypeBinding.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
 test/conjurable.o: \

@@ -57,11 +57,9 @@ source-repository this
 
 library
   exposed-modules: Conjure
-                 , Conjure.Arguable
                  , Conjure.Conjurable
                  , Conjure.Engine
                  , Conjure.Expr
-                 , Conjure.TypeBinding
                  , Conjure.Utils
   other-extensions: TemplateHaskell, CPP
   build-depends: base >= 4 && < 5
