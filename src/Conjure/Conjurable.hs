@@ -115,13 +115,15 @@ instance Conjurable Char where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
--- TODO: remove Eq restriction here and throughout
-instance (Conjurable a, Listable a, Show a, Eq a) => Conjurable [a] where
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
+instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureSubTypes xs  =  conjureType (head xs)
+  conjureTiers     =  reifyTiers
+  conjureEquality xs  =
+    case conjureEquality (head xs) of
+    Nothing -> Nothing
+    Just e  -> Just $ value "==" (listEq (evl e -:> head xs))
 
-
+-- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
          , Conjurable b, Listable b, Show b, Eq b
          ) => Conjurable (a,b) where
