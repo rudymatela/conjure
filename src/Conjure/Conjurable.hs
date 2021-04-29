@@ -28,6 +28,8 @@ import Test.LeanCheck.Utils
 import Conjure.Expr hiding (application)
 import Test.Speculate.Expr
 
+import Data.Int     -- for instances
+import Data.Word    -- for instances
 import Data.Ratio   -- for instance
 import Data.Complex -- for instance
 
@@ -178,10 +180,7 @@ canonicalVarApplication nm f  =  foldApp (var nm f : canonicalArgumentVariables 
 
 -- -- -- other Conjurable instances -- -- --
 
-
--- Conjurable atomic types --
-
-instance Conjurable Word where
+instance Conjurable Ordering where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
@@ -193,7 +192,39 @@ instance Conjurable Double where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
-instance Conjurable Ordering where
+instance Conjurable Int8 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Int16 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Int32 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Int64 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Word where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Word8 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Word16 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Word32 where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable Word64 where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
