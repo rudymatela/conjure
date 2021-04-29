@@ -28,6 +28,7 @@ import Test.LeanCheck.Utils
 import Conjure.Expr hiding (application)
 import Test.Speculate.Expr
 import Data.Functor ((<$>))
+import Control.Applicative ((<*>))
 
 import Data.Int     -- for instances
 import Data.Word    -- for instances
@@ -128,22 +129,29 @@ instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
     x  =  head xs
     fromExpr e  =  value "==" (==)
       where
-      (.==.)  =  eval err e ==: x
+      (.==.)  =  evl e ==: x
       []     == []     = True
       (x:xs) == []     = False
       []     == (y:ys) = False
       (x:xs) == (y:ys) = x .==. y && xs == ys
-      err  =  error "conjureEquality: evaluation error"
 
--- TODO: remove Eq restriction here and throughout
-instance ( Conjurable a, Listable a, Show a, Eq a
-         , Conjurable b, Listable b, Show b, Eq b
+instance ( Conjurable a, Listable a, Show a
+         , Conjurable b, Listable b, Show b
          ) => Conjurable (a,b) where
-  conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes xy  =  conjureType (fst xy)
                       .  conjureType (snd xy)
+  conjureEquality xy  =  from <$> conjureEquality x <*> conjureEquality y
+    where
+    (x,y)  =  xy
+    from e1 e2  =  value "==" (==)
+      where
+      (==.)  =  evl e1 ==: x
+      (.==)  =  evl e2 ==: y
+      (x1,y1) == (x2,y2)  =  x1 ==. x2 && y1 .== y2
 
+
+-- TODO: remove Eq restriction here and throughout
 instance ( Conjurable a, Listable a, Show a, Eq a
          , Conjurable b, Listable b, Show b, Eq b
          , Conjurable c, Listable c, Show c, Eq c

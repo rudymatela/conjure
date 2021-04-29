@@ -13,8 +13,13 @@ tests n  =
   , holds n $ \x y -> (x <==> y)  ==  (x == (y :: ()))
   , holds n $ \x y -> (x <==> y)  ==  (x == (y :: Int))
   , holds n $ \p q -> (p <==> q)  ==  (p == (q :: Bool))
+
   , holds n $ \xs ys -> (xs <==> ys)  ==  (xs == (ys :: [Int]))
   , holds n $ \s1 s2 -> (s1 <==> s2)  ==  (s1 == (s2 :: String))
+
+  , holds n $ \xy zw -> (xy <==> zw)  ==  (xy == (zw :: (Int,Int)))
+  , holds n $ \xy zw -> (xy <==> zw)  ==  (xy == (zw :: (Bool,Integer)))
+  , holds n $ \xy zw -> (xy <==> zw)  ==  (xy == (zw :: (String,[Int])))
   ]
 
 -- Equality but obtained through conjurable
