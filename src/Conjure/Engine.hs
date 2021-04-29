@@ -21,7 +21,6 @@ module Conjure.Engine
   , conjpure
   , conjpureWith
   , candidateExprs
-  , ifFor
   )
 where
 
@@ -128,7 +127,6 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
 -- >   , val (1::Int)
 -- >   , value "+" ((+) :: Int -> Int -> Int)
 -- >   , value "*" ((*) :: Int -> Int -> Int)
--- >   , value "==" ((==) :: Int -> Int -> Bool)
 -- > ]
 --
 -- The conjure function does the following:
@@ -138,7 +136,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
 -- > -- looking through 815 candidates, 100% match, 3/3 assignments
 -- > square x  =  x * x
 --
--- The background is defined with 'val', 'value' and 'ifFor'.
+-- The background is defined with 'val' and 'value'.
 conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
 conjure  =  conjureWith args
 

@@ -27,11 +27,7 @@
 -- >   , val (1::Int)
 -- >   , value "+" ((+) :: Int -> Int -> Int)
 -- >   , value "*" ((*) :: Int -> Int -> Int)
--- >   , value "==" ((==) :: Int -> Int -> Bool)
 -- > ]
---
--- Including equality '==' over the given type is a good rule of thumb to
--- improve performance.
 --
 -- Step 3: call conjure and see your generated function:
 --
@@ -46,7 +42,6 @@ module Conjure
     conjure
   , val
   , value
-  , ifFor
   , Expr
 
 -- * Advanced use

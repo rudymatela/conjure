@@ -52,7 +52,6 @@ and
 	  , val (1::Int)
 	  , value "+" ((+) :: Int -> Int -> Int)
 	  , value "*" ((*) :: Int -> Int -> Int)
-	  , value "==" ((==) :: Int -> Int -> Bool)
 	  ]
 
 running
@@ -95,8 +94,6 @@ and
 	  , value "isZero" ((==0) :: Int -> Bool)
 	  , val False
 	  , val True
-	  , ifFor (undefined :: Int)
-	  , value "==" ((==) :: Int -> Int -> Bool)
 	  ]
 
 running
@@ -106,7 +103,7 @@ running
 yields
 
 	factorial :: Int -> Int
-	-- looking through 9266 candidates, 100% match, 6/6 assignments
+	-- looking through 8576 candidates, 100% match, 6/6 assignments
 	factorial x  =  if isZero x then 1 else x * factorial (dec x)
 
 in about 3 seconds.
