@@ -3,6 +3,12 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Automatically reify ifs and equality
+
+* Configurable number of recursive calls
+
+* Release
+
 * reduce to unique `candidateExprs` through testing.
   We should only enumerate functions that were tested to be different.
   We can limit the tests to the ones that are defined in the given function.
@@ -12,11 +18,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Automatically include `if`s and `==`s.
   Minor problem: typeclass folding is not possible for result values.
-
-* Automatically include background functions based on the argument types.
-  The `Arguable` typeclass is a sketch of how to do that based on
-  the `Generalizable` typeclass from the Extrapolate library.
-  Though the implementation is quite crufty.
 
 * use partially defined implementations?
 
