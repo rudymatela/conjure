@@ -95,7 +95,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
                  [nub $ [val False, val True] ++ es ++ conjureIfs f]
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
-  rrff   =  var nm f
+  (rrff:_)   =  unfoldApp vffxx
 
   (===), (?=?) :: Expr -> Expr -> Bool
   e1 === e2  =  isReallyTrue      (e1 -==- e2)
@@ -158,7 +158,7 @@ conjureWithMaxSize sz  =  conjureWith args
 -- > conjureWith args{maxSize = 11} "function" function [...]
 conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
 conjureWith args nm f es  =  do
-  print (var nm f)
+  print (var (head $ words nm) f)
   putStr $ "-- looking through " ++ show ncs ++ " candidates"
   hFlush stdout
   case rs of

@@ -3,9 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* use FitSpec's notation of `"factorial n"` to name the variables
-  instead of just `"factorial"`
-
 * reduce to unique `candidateExprs` through testing.
   We should only enumerate functions that were tested to be different.
   We can limit the tests to the ones that are defined in the given function.

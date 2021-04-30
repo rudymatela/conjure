@@ -14,7 +14,7 @@ factorial 5  =  120
 
 
 main :: IO ()
-main  =  conjure "factorial" factorial background
+main  =  conjure "factorial n" factorial background
 
 
 background :: [Expr]
@@ -29,15 +29,15 @@ background  =
 
 
 -- the actual factorial function:
--- factorial x  =  if x == 0 then 1 else x * factorial (x - 1)
+-- factorial n  =  if n == 0 then 1 else n * factorial (n - 1)
 --                 1  2 3  4      5      6 7 8         9 10 11 symbols
 --
 -- OR
 --
--- factorial x  =  if x == 0 then 1 else x * factorial (dec x)
+-- factorial n  =  if n == 0 then 1 else n * factorial (dec n)
 --                 1  2 3  4      5      6 7 8          9  10 symbols
 --
 -- OR
 --
--- factorial x  =  if (isZero x) then 1 else (x * factorial (dec x))
+-- factorial n  =  if (isZero n) then 1 else (n * factorial (dec n))
 --                 1   2      3       4       5 6 7          8   9 symbols
