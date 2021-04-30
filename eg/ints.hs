@@ -35,9 +35,7 @@ main = do
 
 background :: [Expr]
 background =
-  [ val False
-  , val True
-  , val (0 :: Int)
+  [ val (0 :: Int)
   , val (1 :: Int)
   , value "+" ((+) :: Int -> Int -> Int)
   , value "*" ((*) :: Int -> Int -> Int)

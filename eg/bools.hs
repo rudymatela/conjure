@@ -25,9 +25,7 @@ main = do
 
 background :: [Expr]
 background =
-  [ val False
-  , val True
-  , value "not" not
+  [ value "not" not
   , value "||" (||)
   , value "&&" (&&)
   , value "null" (null :: [Bool] -> Bool)

@@ -25,8 +25,6 @@ background  =
   , value "*" ((*) :: Int -> Int -> Int)
   , value "dec" (subtract 1 :: Int -> Int)
   , value "isZero" ((==0) :: Int -> Bool)
-  , val False
-  , val True
   ]
 
 
