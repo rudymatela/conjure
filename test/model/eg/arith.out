@@ -1,16 +1,16 @@
 double :: Int -> Int
--- looking through 815 candidates, 100% match, 4/4 assignments
+-- looking through 524 candidates, 100% match, 4/4 assignments
 double x  =  x + x
 
 add :: Int -> Int -> Int
--- looking through 28024 candidates, 100% match, 4/4 assignments
+-- looking through 14862 candidates, 100% match, 4/4 assignments
 add x y  =  x + y
 
 square :: Int -> Int
--- looking through 815 candidates, 100% match, 3/3 assignments
+-- looking through 524 candidates, 100% match, 3/3 assignments
 square x  =  x * x
 
 tnpo :: Int -> Int
--- looking through 815 candidates, 100% match, 3/3 assignments
+-- looking through 524 candidates, 100% match, 3/3 assignments
 tnpo x  =  x + (x + (x + 1))
 
