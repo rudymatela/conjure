@@ -113,10 +113,13 @@ conjureReification1 :: Conjurable a => a -> Reification1
 conjureReification1 x  =  (hole x, ifFor x, conjureEquality x, conjureTiers x)
 
 conjureReification :: Conjurable a => a -> [Reification1]
-conjureReification x  =  conjureType x [conjureReification1 bool]
+conjureReification x  =  nubOn (\(eh,_,_,_) -> eh)
+                      $  conjureType x [conjureReification1 bool]
   where
   bool :: Bool
   bool  =  error "conjureReification: evaluated proxy boolean value (definitely a bug)"
+-- The use of nubOn above is O(n^2).
+-- So long as there is not a huge number of subtypes of a, so we're fine.
 
 -- | Reifies equality to be used in a conjurable type.
 --
@@ -148,10 +151,10 @@ mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
 conjureHoles :: Conjurable f => f -> [Expr]
-conjureHoles f  =  nub [eh | (eh,_,_,Just _) <- conjureReification f]
+conjureHoles f  =  [eh | (eh,_,_,Just _) <- conjureReification f]
 
 conjureIfs :: Conjurable f => f -> [Expr]
-conjureIfs f  =  nub [eef | (_,eef,_,Just _) <- conjureReification f]
+conjureIfs f  =  [eef | (_,eef,_,Just _) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,_,Just eq,_) <- conjureReification f]

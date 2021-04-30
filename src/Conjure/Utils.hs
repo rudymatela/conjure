@@ -17,6 +17,7 @@ module Conjure.Utils
   , module Data.Typeable
 
   , count
+  , nubOn
   )
 where
 
@@ -29,3 +30,6 @@ import Data.Typeable
 
 count :: (a -> Bool) -> [a] -> Int
 count p  =  length . filter p
+
+nubOn :: Eq b => (a -> b) -> [a] -> [a]
+nubOn f  =  nubBy ((==) `on` f)
