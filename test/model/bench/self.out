@@ -1,0 +1,16 @@
+(?) :: Int -> Int -> Int
+-- looking through 52 candidates, 100% match, 60/60 assignments
+x ? y  =  x + y
+
+(?) :: Int -> Int -> Int
+-- looking through 52 candidates, 100% match, 60/60 assignments
+x ? y  =  x * y
+
+i :: Int -> Int
+-- looking through 24 candidates, 100% match, 60/60 assignments
+i x  =  x + 1
+
+d :: Int -> Int
+-- looking through 24 candidates
+cannot conjure
+

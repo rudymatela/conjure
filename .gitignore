@@ -32,6 +32,7 @@ eg/bools
 eg/factorial
 eg/ints
 eg/list
+bench/self
 proto/u-conjure
 test/expr
 test/conjurable

@@ -1,3 +1,13 @@
+bench/self: \
+  bench/self.hs \
+  mk/toplibs
+bench/self.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  bench/self.hs
 eg/arith: \
   eg/arith.hs \
   mk/toplibs

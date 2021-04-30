@@ -10,6 +10,7 @@ EG = \
   eg/factorial \
   eg/ints \
   eg/bools \
+  bench/self \
   proto/u-conjure
 
 TESTS = \
