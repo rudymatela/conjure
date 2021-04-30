@@ -1,9 +1,9 @@
 and :: [Bool] -> Bool
--- looking through 1203 candidates, 100% match, 14/14 assignments
+-- looking through 1207 candidates, 100% match, 14/14 assignments
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
--- looking through 1203 candidates, 78% match, 11/14 assignments
+-- looking through 1207 candidates, 78% match, 11/14 assignments
 or ps  =  head ps || or (tail ps)
 
 and :: [Bool] -> Bool

@@ -28,7 +28,6 @@ where
 import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
 import qualified Data.Ratio
-import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 import Test.Speculate hiding ((===), Args(..), args)
 import Test.Speculate.Reason
@@ -184,16 +183,11 @@ candidateExprs nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
   thy  =  theoryFromAtoms (===) sz $ [conjureHoles f] \/ ess
-  expressionsT ds  =  discardLaterT (.===.)
-                   $  filterT (\e -> count (== ef) (vars e) <= mc)
+  expressionsT ds  =  filterT (\e -> count (== ef) (vars e) <= mc)
                    $  filterT (isRootNormalE thy)
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
     where
     es = expressionsT ds
-
-  -- are e1 and e2 both non-recursive and equal
-  e1 .===. e2 | any (== ef) (vars e1) || any (== ef) (vars e2)  =  False
-              | otherwise                                       =  e1 === e2
 
 lhs, rhs :: Expr -> Expr
 lhs (((Value "==" _) :$ e) :$ _)  =  e
