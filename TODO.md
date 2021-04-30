@@ -3,7 +3,19 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* use partially defined implementations?
+* refactor `conjureTiersFor` to use `conjureMaybeTiersFor`
+
+* implement `conjureHasTiers` and use it on `conjureMkEquation`;
+  this will make it easy to backport unique candidateExprs from the erased
+  commit back into the tool: just `discardLaterT (===)`.
+  Will this impact performance a bit?  I don't think so.
+
+
+### for later
+
+* allow conjuring from tests instead of partial definitions?
+
+* allow conjuring from partially defined implementations?
 
     partial :: ((Int -> Int) -> Int -> Int) -> (Int -> Int)
     partial impl  =  f
