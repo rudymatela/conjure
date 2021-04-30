@@ -294,17 +294,11 @@ argTy _  =  undefined
 resTy :: (a -> b) -> b
 resTy _  =  undefined
 
-canonicalArgumentVariables :: Conjurable f => f -> [Expr]
-canonicalArgumentVariables  =  unfoldApp
-                            .  mostGeneralCanonicalVariation
-                            .  foldApp
-                            .  conjureArgumentHoles
-
 canonicalApplication :: Conjurable f => String -> f -> Expr
-canonicalApplication nm f  =  foldApp (value nm f : canonicalArgumentVariables f)
+canonicalApplication nm f  =  mostGeneralCanonicalVariation $ foldApp (value nm f : conjureArgumentHoles f)
 
 canonicalVarApplication :: Conjurable f => String -> f -> Expr
-canonicalVarApplication nm f  =  foldApp (var nm f : canonicalArgumentVariables f)
+canonicalVarApplication nm f  =  mostGeneralCanonicalVariation $ foldApp (var nm f : conjureArgumentHoles f)
 
 
 
