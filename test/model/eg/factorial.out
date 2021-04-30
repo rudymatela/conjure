@@ -1,4 +1,4 @@
 factorial :: Int -> Int
--- looking through 8576 candidates, 100% match, 6/6 assignments
-factorial n  =  if isZero n then 1 else n * factorial (dec n)
+-- looking through 26054 candidates, 100% match, 6/6 assignments
+factorial n  =  if n == 0 then 1 else n * factorial (dec n)
 

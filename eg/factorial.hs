@@ -14,7 +14,7 @@ factorial 5  =  120
 
 
 main :: IO ()
-main  =  conjure "factorial n" factorial background
+main  =  conjureWithMaxSize 10 "factorial n" factorial background
 
 
 background :: [Expr]
@@ -24,7 +24,7 @@ background  =
   , value "+" ((+) :: Int -> Int -> Int)
   , value "*" ((*) :: Int -> Int -> Int)
   , value "dec" (subtract 1 :: Int -> Int)
-  , value "isZero" ((==0) :: Int -> Bool)
+  , value "==" ((==) :: Int -> Int -> Bool)
   ]
 
 
