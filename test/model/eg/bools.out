@@ -1,8 +1,16 @@
 and :: [Bool] -> Bool
--- looking through 1207 candidates, 100% match, 60/60 assignments
+-- looking through 1207 candidates, 100% match, 14/14 assignments
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
--- looking through 1207 candidates, 90% match, 54/60 assignments
+-- looking through 1207 candidates, 78% match, 11/14 assignments
 or ps  =  head ps || or (tail ps)
+
+and :: [Bool] -> Bool
+-- looking through 19 candidates, 100% match, 14/14 assignments
+and ps  =  foldr (&&) True ps
+
+or :: [Bool] -> Bool
+-- looking through 19 candidates, 100% match, 14/14 assignments
+or ps  =  foldr (||) False ps
 
