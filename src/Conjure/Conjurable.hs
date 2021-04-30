@@ -295,10 +295,16 @@ resTy :: (a -> b) -> b
 resTy _  =  undefined
 
 canonicalApplication :: Conjurable f => String -> f -> Expr
-canonicalApplication nm f  =  mostGeneralCanonicalVariation $ foldApp (value nm f : conjureArgumentHoles f)
+canonicalApplication nm f  =  mostGeneralCanonicalVariation . foldApp
+                           $  value nf f : zipWith varAsTypeOf nas (conjureArgumentHoles f)
+  where
+  (nf:nas)  =  words nm ++ repeat ""
 
 canonicalVarApplication :: Conjurable f => String -> f -> Expr
-canonicalVarApplication nm f  =  mostGeneralCanonicalVariation $ foldApp (var nm f : conjureArgumentHoles f)
+canonicalVarApplication nm f  =  mostGeneralCanonicalVariation . foldApp
+                              $  var nf f : zipWith varAsTypeOf nas (conjureArgumentHoles f)
+  where
+  (nf:nas)  =  words nm ++ repeat ""
 
 
 
