@@ -151,7 +151,7 @@ conjureHoles :: Conjurable f => f -> [Expr]
 conjureHoles f  =  nub [eh | (eh,_,_,Just _) <- conjureReification f]
 
 conjureIfs :: Conjurable f => f -> [Expr]
-conjureIfs f  =  [eef | (_,eef,_,Just _) <- conjureReification f]
+conjureIfs f  =  nub [eef | (_,eef,_,Just _) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,_,Just eq,_) <- conjureReification f]
