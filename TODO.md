@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* update my sum example to use `sum'`
-
-* use Conjurable holes
-
 * use FitSpec's notation of `"factorial n"` to name the variables
   instead of just `"factorial"`
 

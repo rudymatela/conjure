@@ -181,7 +181,7 @@ candidateExprs :: Conjurable f
 candidateExprs nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
-  thy  =  theoryFromAtoms (===) sz $ [nub (b_:map holeAsTypeOf exs)] \/ ess
+  thy  =  theoryFromAtoms (===) sz $ [conjureHoles f] \/ ess
   expressionsT ds  =  filterT (\e -> count (== ef) (vars e) <= mc)
                    $  filterT (isRootNormalE thy)
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
