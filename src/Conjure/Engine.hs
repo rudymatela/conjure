@@ -147,10 +147,10 @@ conjure  =  conjureWith args
 --
 -- > conjureWithMaxSize 10 "function" function [...]
 conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Expr] -> IO ()
-conjureWithMaxSize sz  =  conjureWith as
-  where
-  as | maxEquationSize args <= sz  =  args{maxSize = sz}
-     | otherwise                   =  args{maxSize = sz, maxEquationSize = sz}
+conjureWithMaxSize sz  =  conjureWith args
+                       {  maxSize = sz
+                       ,  maxEquationSize = min sz (maxEquationSize args)
+                       }
 
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
 --
