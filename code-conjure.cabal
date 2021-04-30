@@ -27,8 +27,9 @@ extra-doc-files: README.md
 extra-source-files: .gitignore
                   , .github/workflows/build.yml
                   , Makefile
-                  , proto/*.hs
+                  , bench/*.hs
                   , eg/*.hs
+                  , proto/*.hs
                   , mk/All.hs
                   , mk/Toplibs.hs
                   , mk/depend.mk
@@ -37,10 +38,12 @@ extra-source-files: .gitignore
                   , mk/haskell.mk
                   , mk/install-on
                   , stack.yaml
+                  , bench/runtime/zero/bench/*.runtime
                   , bench/runtime/zero/eg/*.runtime
                   , bench/runtime/zero/proto/*.runtime
                   , bench/runtime/zero/versions
                   , bench/versions
+                  , test/model/bench/*.out
                   , test/model/eg/*.out
                   , test/model/proto/*.out
                   , test/sdist
