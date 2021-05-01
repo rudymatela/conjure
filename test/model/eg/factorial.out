@@ -1,4 +1,8 @@
 factorial :: Int -> Int
+-- looking through 80 candidates, 100% match, 6/6 assignments
+factorial n  =  product (enumFromTo 1 n)
+
+factorial :: Int -> Int
 -- looking through 26054 candidates, 100% match, 6/6 assignments
 factorial n  =  if n == 0 then 1 else n * factorial (dec n)
 

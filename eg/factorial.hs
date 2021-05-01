@@ -14,19 +14,23 @@ factorial 5  =  120
 
 
 main :: IO ()
-main  =  conjureWithMaxSize 10 "factorial n" factorial background
+main  =  do
+  -- using enumFromTo
+  conjure "factorial n" factorial
+    [ val (1::Int)
+    , value "enumFromTo" (enumFromTo :: Int -> Int -> [Int])
+    , value "product" (product :: [Int] -> Int)
+    ]
 
-
-background :: [Expr]
-background  =
-  [ val (0::Int)
-  , val (1::Int)
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
-  , value "dec" (subtract 1 :: Int -> Int)
-  , value "==" ((==) :: Int -> Int -> Bool)
-  ]
-
+  -- explicit recursion
+  conjureWithMaxSize 10 "factorial n" factorial
+    [ val (0::Int)
+    , val (1::Int)
+    , value "+" ((+) :: Int -> Int -> Int)
+    , value "*" ((*) :: Int -> Int -> Int)
+    , value "dec" (subtract 1 :: Int -> Int)
+    , value "==" ((==) :: Int -> Int -> Bool)
+    ]
 
 -- the actual factorial function:
 -- factorial n  =  if n == 0 then 1 else n * factorial (n - 1)
@@ -41,3 +45,26 @@ background  =
 --
 -- factorial n  =  if (isZero n) then 1 else (n * factorial (dec n))
 --                 1   2      3       4       5 6 7          8   9 symbols
+
+
+{-
+-- Paramorphism of Naturals encoded as integers
+para :: (Int -> b -> b) -> b -> Int -> b
+para (?) z  =  p
+  where
+  p n  |  n < 0  =  z  -- no negatives for you :-)
+  p 0  =  z
+  p n  =  n ? p (n-1)
+
+  The following works with a maxSize of 4, but not with a maxSize of 5.
+
+  It either found a function with an infinite loop or a very inneficient
+  function.  I will investigate later.
+
+  -- using a paramorphism
+  conjureWithMaxSize 5 "factorial n" factorial
+    [ val (1::Int)
+    , value "para" (para :: (Int->Int->Int) -> Int -> Int -> Int)
+    , value "*" ((*) :: Int -> Int -> Int)
+    ]
+-}
