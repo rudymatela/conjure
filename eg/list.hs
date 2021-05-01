@@ -60,3 +60,31 @@ main = do
     , value "tail" (tail :: [Int] -> [Int])
     , value "null" (null :: [Int] -> Bool)
     ]
+
+  -- now through folds
+  -- length xs  =  foldr (const (1 +)) 0 xs
+  conjure "length" length'
+    [ val (0 :: Int)
+    , val (1 :: Int)
+    , value "+" ((+) :: Int -> Int -> Int)
+    , value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    , value "const" (const :: (Int -> Int) -> Int -> (Int -> Int)) -- cheating?
+    ]
+
+  -- now through folds
+  --  reverse xs  =  foldr (\x xs -> xs ++ [x]) [] xs
+  -- no lambdas, can't find.  Maybe by the introduction of some combinators?
+  conjure "reverse" reverse'
+    [ val ([] :: [Int])
+    , value "unit" ((:[]) :: Int -> [Int])
+    , value "++" ((++) :: [Int] -> [Int] -> [Int])
+    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
+  -- now through folds
+  -- sort xs  =  foldr insert [] xs
+  conjure "sort" sort'
+    [ val ([] :: [Int])
+    , value "insert" (insert :: Int -> [Int] -> [Int])
+    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]

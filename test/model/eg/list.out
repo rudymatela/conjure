@@ -10,3 +10,15 @@ sort :: [Int] -> [Int]
 -- looking through 9968 candidates, 100% match, 30/30 assignments
 sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
 
+length :: [Int] -> Int
+-- looking through 697 candidates, 100% match, 38/38 assignments
+length xs  =  foldr (const (1 +)) 0 xs
+
+reverse :: [Int] -> [Int]
+-- looking through 36 candidates
+cannot conjure
+
+sort :: [Int] -> [Int]
+-- looking through 58 candidates, 100% match, 30/30 assignments
+sort xs  =  foldr insert [] xs
+
