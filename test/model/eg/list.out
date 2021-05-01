@@ -1,0 +1,12 @@
+length :: [Int] -> Int
+-- looking through 200 candidates, 100% match, 38/38 assignments
+length xs  =  if null xs then 0 else 1 + length (tail xs)
+
+reverse :: [Int] -> [Int]
+-- looking through 10324 candidates, 13% match, 5/38 assignments
+reverse xs  =  if null (tail xs) then xs else tail []
+
+sort :: [Int] -> [Int]
+-- looking through 9968 candidates, 100% match, 30/30 assignments
+sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
+
