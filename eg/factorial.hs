@@ -88,6 +88,4 @@ grow_fast  =  para (para (*)) 1  :: Integer -> Integer
 7148302174930174893017438921... 8000 digits!
 > growFast 6
 stack overflow
-
-
 -}
