@@ -56,10 +56,7 @@ para (?) z  =  p
   p 0  =  z
   p n  =  n ? p (n-1)
 
-  The following works with a maxSize of 4, but not with a maxSize of 5.
-
-  It either found a function with an infinite loop or a very inneficient
-  function.  I will investigate later.
+The following works with a maxSize of 4, but not with a maxSize of 5.
 
   -- using a paramorphism
   conjureWithMaxSize 5 "factorial n" factorial
@@ -67,4 +64,30 @@ para (?) z  =  p
     , value "para" (para :: (Int->Int->Int) -> Int -> Int -> Int)
     , value "*" ((*) :: Int -> Int -> Int)
     ]
+
+
+the factorial function is the following:
+
+fact  =  para (*) 1
+
+
+now consider the following grow_fast function:
+
+grow_fast  =  para (para (*)) 1  :: Integer -> Integer
+
+
+> growFast 1
+1
+> growFast 2
+2
+> growFast 3
+6
+> growFast 4
+2880
+> growFast 5
+7148302174930174893017438921... 8000 digits!
+> growFast 6
+stack overflow
+
+
 -}
