@@ -15,8 +15,8 @@ length :: [Int] -> Int
 length xs  =  foldr (const (1 +)) 0 xs
 
 reverse :: [Int] -> [Int]
--- looking through 36 candidates
-cannot conjure
+-- looking through 864 candidates, 100% match, 38/38 assignments
+reverse xs  =  foldr (flip (++) . unit) [] xs
 
 sort :: [Int] -> [Int]
 -- looking through 58 candidates, 100% match, 30/30 assignments

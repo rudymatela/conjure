@@ -71,14 +71,17 @@ main = do
     , value "const" (const :: (Int -> Int) -> Int -> (Int -> Int)) -- cheating?
     ]
 
-  -- now through folds
+  -- now through folds and some cheating
   --  reverse xs  =  foldr (\x xs -> xs ++ [x]) [] xs
-  -- no lambdas, can't find.  Maybe by the introduction of some combinators?
+  --  reverse xs  =  foldr (flip (++) . unit) [] xs
   conjure "reverse" reverse'
     [ val ([] :: [Int])
     , value "unit" ((:[]) :: Int -> [Int])
     , value "++" ((++) :: [Int] -> [Int] -> [Int])
-    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    , value "foldr" (foldr :: (Int->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
+    -- these last two are cheats:
+    , value "flip" (flip :: ([Int]->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
+    , value "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
     ]
 
   -- now through folds
