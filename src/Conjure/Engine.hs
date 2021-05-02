@@ -91,8 +91,7 @@ conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy com
   candidates  =  filter (\e -> typ e == typ ffxx)
               .  concat
               .  take maxSize
-              $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===)
-                 [nub $ [val False, val True] ++ es ++ conjureIfs f]
+              $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
   (rrff:_)   =  unfoldApp vffxx
@@ -177,9 +176,20 @@ candidateExprs :: Conjurable f
                -> Int
                -> Int
                -> (Expr -> Expr -> Bool)
+               -> [Expr]
                -> [[Expr]]
-               -> [[Expr]]
-candidateExprs nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
+candidateExprs nm f sz mc (===) es  =
+  candidateExprsT nm f sz mc (===)
+    [nub $ [val False, val True] ++ es ++ conjureIfs f]
+
+candidateExprsT :: Conjurable f
+                => String -> f
+                -> Int
+                -> Int
+                -> (Expr -> Expr -> Bool)
+                -> [[Expr]]
+                -> [[Expr]]
+candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
   thy  =  theoryFromAtoms (===) sz $ [conjureHoles f] \/ ess
