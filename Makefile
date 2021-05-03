@@ -11,6 +11,7 @@ EG = \
   eg/ints \
   eg/bools \
   eg/list \
+  eg/tapps \
   bench/self \
   proto/u-conjure
 

@@ -1,0 +1,12 @@
+third :: [Int] -> Int
+-- looking through 636 candidates, 100% match, 34/34 assignments
+third xs  =  head (tail (tail xs))
+
+product :: [Int] -> Int
+-- looking through 1538 candidates, 100% match, 37/37 assignments
+product xs  =  if null xs then 1 else head xs * product (tail xs)
+
+product :: [Int] -> Int
+-- looking through 15 candidates, 100% match, 37/37 assignments
+product xs  =  foldr (*) 1 xs
+
