@@ -1,16 +1,40 @@
 and :: [Bool] -> Bool
--- looking through 1207 candidates, 100% match, 14/14 assignments
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 16 candidates of size 5
+-- looking through 41 candidates of size 6
+-- looking through 103 candidates of size 7
+-- looking through 278 candidates of size 8
+-- looking through 752 candidates of size 9
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
--- looking through 1207 candidates, 78% match, 11/14 assignments
-or ps  =  head ps || or (tail ps)
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 16 candidates of size 5
+-- looking through 41 candidates of size 6
+-- looking through 103 candidates of size 7
+-- looking through 278 candidates of size 8
+-- looking through 752 candidates of size 9
+-- looking through 1963 candidates of size 10
+-- looking through 5427 candidates of size 11
+or ps  =  not (null ps || not (head ps || or (tail ps)))
 
 and :: [Bool] -> Bool
--- looking through 19 candidates, 100% match, 14/14 assignments
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 8 candidates of size 4
 and ps  =  foldr (&&) True ps
 
 or :: [Bool] -> Bool
--- looking through 19 candidates, 100% match, 14/14 assignments
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 8 candidates of size 4
 or ps  =  foldr (||) False ps
 

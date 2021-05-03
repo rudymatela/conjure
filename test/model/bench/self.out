@@ -1,16 +1,23 @@
 (?) :: Int -> Int -> Int
--- looking through 52 candidates, 100% match, 60/60 assignments
+-- looking through 4 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 48 candidates of size 3
 x ? y  =  x + y
 
 (?) :: Int -> Int -> Int
--- looking through 52 candidates, 100% match, 60/60 assignments
+-- looking through 4 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 48 candidates of size 3
 x ? y  =  x * y
 
 i :: Int -> Int
--- looking through 24 candidates, 100% match, 60/60 assignments
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 18 candidates of size 3
 i x  =  x + 1
 
 d :: Int -> Int
--- looking through 24 candidates
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 18 candidates of size 3
 cannot conjure
-

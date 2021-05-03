@@ -23,7 +23,7 @@ main  =  do
     ]
 
   -- explicit recursion
-  conjureWithMaxSize 10 "factorial n" factorial
+  conjure "factorial n" factorial
     [ val (0::Int)
     , val (1::Int)
     , value "+" ((+) :: Int -> Int -> Int)
@@ -59,7 +59,7 @@ para (?) z  =  p
 The following works with a maxSize of 4, but not with a maxSize of 5.
 
   -- using a paramorphism
-  conjureWithMaxSize 5 "factorial n" factorial
+  conjure "factorial n" factorial
     [ val (1::Int)
     , value "para" (para :: (Int->Int->Int) -> Int -> Int -> Int)
     , value "*" ((*) :: Int -> Int -> Int)

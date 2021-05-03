@@ -30,8 +30,8 @@ main = do
   conjure "sum"     (sum'     :: [Int] -> Int) background
   conjure "product" (product' :: [Int] -> Int) background
 
-  conjureWithMaxSize 4 "sum"     (sum'     :: [Int] -> Int) backgroundWithFold
-  conjureWithMaxSize 4 "product" (product' :: [Int] -> Int) backgroundWithFold
+  conjure "sum"     (sum'     :: [Int] -> Int) backgroundWithFold
+  conjure "product" (product' :: [Int] -> Int) backgroundWithFold
 
 background :: [Expr]
 background =

@@ -20,8 +20,8 @@ main = do
   conjure "or"  (or'  :: [Bool] -> Bool) background
 
   -- conjure can use fold as well
-  conjureWithMaxSize 4 "and" (and' :: [Bool] -> Bool) backgroundWithFold
-  conjureWithMaxSize 4 "or"  (or'  :: [Bool] -> Bool) backgroundWithFold
+  conjure "and" (and' :: [Bool] -> Bool) backgroundWithFold
+  conjure "or"  (or'  :: [Bool] -> Bool) backgroundWithFold
 
 background :: [Expr]
 background =

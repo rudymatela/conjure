@@ -21,9 +21,9 @@ product' [x,y,z]  =  x*y*z
 
 main :: IO ()
 main = do
-  conjure               "third"   third    primitives
-  conjureWithMaxSize 10 "product" product' primitives
-  conjureWithMaxSize 4  "product" product' primitivesWithFold
+  conjure "third"   third    primitives
+  conjure "product" product' primitives
+  conjure "product" product' primitivesWithFold
 
 primitives :: [Expr]
 primitives =

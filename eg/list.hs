@@ -42,7 +42,7 @@ main = do
   -- reverse xs  =  if null xs then [] else reverse (tail xs) ++ [head xs]
   --                1  2    3       4       5        6    7   8  9 10 11 12
   -- needs size 11 with unit
-  conjureWithMaxSize 9 "reverse" reverse'
+  conjure "reverse" reverse'
     [ val ([] :: [Int])
     , value "unit" ((:[]) :: Int -> [Int])
     , value "++" ((++) :: [Int] -> [Int] -> [Int])
@@ -53,7 +53,7 @@ main = do
 
   -- sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
   --             1  2    3       4       5       6    7    8     9    10
-  conjureWithMaxSize 10 "sort" sort'
+  conjure "sort" sort'
     [ val ([] :: [Int])
     , value "insert" (insert :: Int -> [Int] -> [Int])
     , value "head" (head :: [Int] -> Int)

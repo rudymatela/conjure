@@ -1,16 +1,28 @@
 double :: Int -> Int
--- looking through 815 candidates, 100% match, 4/4 assignments
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 5 candidates of size 3
 double x  =  x + x
 
 add :: Int -> Int -> Int
--- looking through 28024 candidates, 100% match, 4/4 assignments
+-- looking through 4 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 29 candidates of size 3
 add x y  =  x + y
 
 square :: Int -> Int
--- looking through 815 candidates, 100% match, 3/3 assignments
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 5 candidates of size 3
 square x  =  x * x
 
 tnpo :: Int -> Int
--- looking through 815 candidates, 100% match, 3/3 assignments
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 20 candidates of size 4
+-- looking through 13 candidates of size 5
+-- looking through 97 candidates of size 6
+-- looking through 42 candidates of size 7
 tnpo x  =  x + (x + (x + 1))
 

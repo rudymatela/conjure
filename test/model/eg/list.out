@@ -1,24 +1,65 @@
 length :: [Int] -> Int
--- looking through 200 candidates, 100% match, 38/38 assignments
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 5 candidates of size 5
+-- looking through 11 candidates of size 6
+-- looking through 22 candidates of size 7
+-- looking through 53 candidates of size 8
+-- looking through 101 candidates of size 9
 length xs  =  if null xs then 0 else 1 + length (tail xs)
 
 reverse :: [Int] -> [Int]
--- looking through 10324 candidates, 13% match, 5/38 assignments
-reverse xs  =  if null (tail xs) then xs else tail []
+-- looking through 2 candidates of size 1
+-- looking through 4 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 24 candidates of size 4
+-- looking through 65 candidates of size 5
+-- looking through 215 candidates of size 6
+-- looking through 673 candidates of size 7
+-- looking through 2178 candidates of size 8
+-- looking through 7154 candidates of size 9
+-- looking through 23801 candidates of size 10
+-- looking through 80160 candidates of size 11
+reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]
--- looking through 9968 candidates, 100% match, 30/30 assignments
-sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
+-- looking through 2 candidates of size 1
+-- looking through 4 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 12 candidates of size 4
+-- looking through 31 candidates of size 5
+-- looking through 98 candidates of size 6
+-- looking through 287 candidates of size 7
+-- looking through 792 candidates of size 8
+-- looking through 2220 candidates of size 9
+-- looking through 6516 candidates of size 10
+sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 
 length :: [Int] -> Int
--- looking through 697 candidates, 100% match, 38/38 assignments
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 4 candidates of size 5
+-- looking through 27 candidates of size 6
 length xs  =  foldr (const (1 +)) 0 xs
 
 reverse :: [Int] -> [Int]
--- looking through 864 candidates, 100% match, 38/38 assignments
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 5 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 25 candidates of size 6
+-- looking through 77 candidates of size 7
 reverse xs  =  foldr (flip (++) . unit) [] xs
 
 sort :: [Int] -> [Int]
--- looking through 58 candidates, 100% match, 30/30 assignments
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 2 candidates of size 4
 sort xs  =  foldr insert [] xs
 

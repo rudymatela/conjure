@@ -58,7 +58,7 @@ data Args = Args
 args :: Args
 args = Args
   { maxTests           =  60
-  , maxSize            =   9
+  , maxSize            =  12
   , maxRecursiveCalls  =   1
   , maxEquationSize    =   5
   , maxRecursionSize   =  60
@@ -66,49 +66,39 @@ args = Args
 
 -- | Like 'conjure' but in the pure world.
 --
--- Returns a triple whose:
---
--- 1. first element is the number of candidates considered
---
--- 2. second element is the number of defined points in the given function
---
--- 3. third element is a list of implementations encoded as 'Expr's
---    paired with the number of matching points.
-conjpure :: Conjurable f => String -> f -> [Expr] -> (Int,Int,[(Int,Expr)])
+-- Returns tiers of implementations paired with 'tiers' of candidate bodies.
+conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]])
 conjpure =  conjpureWith args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> (Int,Int,[(Int,Expr)])
-conjpureWith Args{..} nm f es  =  (length candidates,totalDefined,) $ sortBy compareResult
-  [ (ffxx .=. re, ffxx -==- e)
-  | e <- candidates
-  , apparentlyTerminates rrff e
-  , let re = recursexpr maxRecursionSize vffxx e
-  , ffxx ?=? re
-  ]
+conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]])
+conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT)
   where
-  totalDefined  =  ffxx .=. ffxx
-  candidates  =  filter (\e -> typ e == typ ffxx)
-              .  concat
-              .  take maxSize
-              $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
+  implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
+  implements e  =  apparentlyTerminates rrff e
+                && ffxx ?=? recursexpr maxRecursionSize vffxx e
+  candidatesT  =  filterT (\e -> typ e == typ ffxx)
+               .  take maxSize
+               $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
   (rrff:_)   =  unfoldApp vffxx
 
-  (===), (?=?) :: Expr -> Expr -> Bool
-  e1 === e2  =  isReallyTrue      (e1 -==- e2)
+  e1 === e2  =  isReallyTrue (e1 -==- e2)
   e1 ?=? e2  =  isTrueWhenDefined (e1 -==- e2)
-
-  e1 .=. e2  =  countTrue         (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
-  isTrueWhenDefined  =  all (errorToTrue  . eval False) . gs
-  isReallyTrue       =  all (errorToFalse . eval False) . gs
-  countTrue        =  count (errorToFalse . eval False) . gs
+  isTrueWhenDefined e  =  all (errorToFalse . eval False) $ map (e //-) dbss
+  isReallyTrue  =  all (errorToFalse . eval False) . gs
 
   gs :: Expr -> [Expr]
   gs  =  take maxTests . grounds (conjureTiersFor f)
+
+  bss, dbss :: [[(Expr,Expr)]]
+  bss  =  take maxTests $ groundBinds (conjureTiersFor f) ffxx
+  dbss  =  [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
+    where
+    e  =  ffxx -==- ffxx
 
 -- | Conjures an implementation of a partially defined function.
 --
@@ -158,17 +148,16 @@ conjureWithMaxSize sz  =  conjureWith args
 conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
 conjureWith args nm f es  =  do
   print (var (head $ words nm) f)
-  putStr $ "-- looking through " ++ show ncs ++ " candidates"
-  hFlush stdout
-  case rs of
-    []    -> putStrLn $ "\ncannot conjure"
-    ((n,e):_) -> do putStrLn $ ", " ++ showMatch n
-                    putStrLn $ showEq e
---  nes -> putStrLn . unlines $ "":[showEq e ++ "  -- " ++ show n | (n,e) <- nes]
-  putStrLn ""
+  pr 1 rs
   where
-  (ncs,t,rs)  =  conjpureWith args nm f es
-  showMatch n  =  show (n % t) ++ "% match, " ++ show n ++ "/" ++ show t ++ " assignments"
+  pr n []  =  putStrLn $ "cannot conjure"
+  pr n ((is,es):rs)  =  do
+    putStrLn $ "-- looking through " ++ show (length es) ++ " candidates of size " ++ show n
+    case is of
+      []     ->  pr (n+1) rs
+      (i:_)  ->  do putStrLn $ showEq i
+                    putStrLn ""
+  rs  =  uncurry zip $ conjpureWith args nm f es
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 candidateExprs :: Conjurable f
