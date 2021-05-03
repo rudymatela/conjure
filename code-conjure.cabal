@@ -47,7 +47,15 @@ extra-source-files: .gitignore
                   , test/model/eg/*.out
                   , test/model/proto/*.out
                   , test/sdist
-tested-with: GHC==8.10
+tested-with: GHC==9.0
+           , GHC==8.10
+           , GHC==8.8
+           , GHC==8.6
+           , GHC==8.4
+           , GHC==8.2
+           , GHC==8.0
+           , GHC==7.10
+           , GHC==7.8
 
 source-repository head
   type:            git
