@@ -34,3 +34,12 @@ primitives =
 
 primitivesWithFold :: [Expr]
 primitivesWithFold  =  value "foldr" (foldr @[] @Int @Int) : primitives
+
+-- Some notes:
+--
+-- This works down to GHC 7.8 even though at the time (base 4.7.0.2) null and
+-- foldr were bound to the list type.
+--
+-- base for GHC 7.8:  https://hackage.haskell.org/package/base-4.7.0.2/docs/Prelude.html#v:null
+-- base for GHC 7.10: https://hackage.haskell.org/package/base-4.8.0.0/docs/Prelude.html#v:null
+-- working run:       https://github.com/rudymatela/conjure/runs/2493232850
