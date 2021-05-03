@@ -28,13 +28,13 @@ tnpo 2  =  7
 
 main :: IO ()
 main = do
-  conjure "double" double background
-  conjure "add"    add    background
-  conjure "square" square background
-  conjure "tnpo"   tnpo   background
+  conjure "double" double primitives
+  conjure "add"    add    primitives
+  conjure "square" square primitives
+  conjure "tnpo"   tnpo   primitives
 
-background :: [Expr]
-background =
+primitives :: [Expr]
+primitives =
   [ val (0::Int)
   , val (1::Int)
   , value "+" ((+) :: Int -> Int -> Int)

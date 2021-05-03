@@ -25,16 +25,16 @@ product' [x,y,z]  =  x*y*z
 
 main :: IO ()
 main = do
-  conjure "second"  (second   :: [Int] -> Int) background
-  conjure "third"   (third    :: [Int] -> Int) background
-  conjure "sum"     (sum'     :: [Int] -> Int) background
-  conjure "product" (product' :: [Int] -> Int) background
+  conjure "second"  (second   :: [Int] -> Int) primitives
+  conjure "third"   (third    :: [Int] -> Int) primitives
+  conjure "sum"     (sum'     :: [Int] -> Int) primitives
+  conjure "product" (product' :: [Int] -> Int) primitives
 
-  conjure "sum"     (sum'     :: [Int] -> Int) backgroundWithFold
-  conjure "product" (product' :: [Int] -> Int) backgroundWithFold
+  conjure "sum"     (sum'     :: [Int] -> Int) primitivesWithFold
+  conjure "product" (product' :: [Int] -> Int) primitivesWithFold
 
-background :: [Expr]
-background =
+primitives :: [Expr]
+primitives =
   [ val (0 :: Int)
   , val (1 :: Int)
   , value "+" ((+) :: Int -> Int -> Int)
@@ -44,10 +44,10 @@ background =
   , value "tail" (tail :: [Int] -> [Int])
   ]
 
-backgroundWithFold :: [Expr]
-backgroundWithFold  =
+primitivesWithFold :: [Expr]
+primitivesWithFold  =
     value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-  : background
+  : primitives
 
 -- sum xs      =  if null xs then 0 else head xs + sum (tail xs)
 -- product xs  =  if null xs then 1 else head xs * product (tail xs)

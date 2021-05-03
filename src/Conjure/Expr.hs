@@ -168,7 +168,7 @@ applicationOld ff es  =  appn ff
 -- > > ifFor (undefined :: String)
 -- > if :: Bool -> [Char] -> [Char] -> [Char]
 --
--- You need to provide this as part of your building blocks on the background
+-- You need to provide this as part of your building blocks on the primitives
 -- if you want recursive functions to be considered and produced.
 ifFor :: Typeable a => a -> Expr
 ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)

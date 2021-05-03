@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* rename background to primitives
-
 * refactor `conjureTiersFor` to use `conjureMaybeTiersFor`
 
 * implement `conjureHasTiers` and use it on `conjureMkEquation`;

@@ -46,8 +46,8 @@ Given
 
 and
 
-	background :: [Expr]
-	background =
+	primitives :: [Expr]
+	primitives  =
 	  [ val (0::Int)
 	  , val (1::Int)
 	  , value "+" ((+) :: Int -> Int -> Int)
@@ -56,7 +56,7 @@ and
 
 running
 
-	> conjure "square" square background
+	> conjure "square" square primitives
 
 yields
 
@@ -84,8 +84,8 @@ Given
 
 and
 
-	background :: [Expr]
-	background  =
+	primitives :: [Expr]
+	primitives  =
 	  [ val (0::Int)
 	  , val (1::Int)
 	  , value "+" ((+) :: Int -> Int -> Int)
@@ -98,7 +98,7 @@ and
 
 running
 
-	> conjure "factorial" factorial background
+	> conjure "factorial" factorial primitives
 
 yields
 
@@ -114,7 +114,7 @@ It is also possible to generate:
 
     factorial x  =  if x == 0 then 1 else x * factorial x - 1
 
-in about 30s by changing the background and increasing the size limit.
+in about 30s by changing the primitives and increasing the size limit.
 
 
 Related work

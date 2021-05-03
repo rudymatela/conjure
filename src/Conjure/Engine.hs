@@ -113,8 +113,8 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT)
 -- > square 1  =  1
 -- > square 2  =  4
 -- >
--- > background :: [Expr]
--- > background =
+-- > primitives :: [Expr]
+-- > primitives =
 -- >   [ val (0::Int)
 -- >   , val (1::Int)
 -- >   , value "+" ((+) :: Int -> Int -> Int)
@@ -123,12 +123,12 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT)
 --
 -- The conjure function does the following:
 --
--- > > conjure "square" square background
+-- > > conjure "square" square primitives
 -- > square :: Int -> Int
 -- > -- looking through 815 candidates, 100% match, 3/3 assignments
 -- > square x  =  x * x
 --
--- The background is defined with 'val' and 'value'.
+-- The primitives list is defined with 'val' and 'value'.
 conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
 conjure  =  conjureWith args
 

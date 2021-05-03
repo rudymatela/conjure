@@ -21,8 +21,8 @@
 --
 -- Step 2: declare a list with the potential building blocks:
 --
--- > background :: [Expr]
--- > background =
+-- > primitives :: [Expr]
+-- > primitives =
 -- >   [ val (0::Int)
 -- >   , val (1::Int)
 -- >   , value "+" ((+) :: Int -> Int -> Int)
@@ -31,7 +31,7 @@
 --
 -- Step 3: call conjure and see your generated function:
 --
--- > > conjure "square" square background
+-- > > conjure "square" square primitives
 -- > square :: Int -> Int
 -- > -- looking through 815 candidates, 100% match, 3/3 assignments
 -- > square x  =  x * x

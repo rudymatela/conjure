@@ -16,15 +16,15 @@ or' [p,q,r]  =  p || q || r
 
 main :: IO ()
 main = do
-  conjure "and" (and' :: [Bool] -> Bool) background
-  conjure "or"  (or'  :: [Bool] -> Bool) background
+  conjure "and" (and' :: [Bool] -> Bool) primitives
+  conjure "or"  (or'  :: [Bool] -> Bool) primitives
 
   -- conjure can use fold as well
-  conjure "and" (and' :: [Bool] -> Bool) backgroundWithFold
-  conjure "or"  (or'  :: [Bool] -> Bool) backgroundWithFold
+  conjure "and" (and' :: [Bool] -> Bool) primitivesWithFold
+  conjure "or"  (or'  :: [Bool] -> Bool) primitivesWithFold
 
-background :: [Expr]
-background =
+primitives :: [Expr]
+primitives =
   [ value "not" not
   , value "||" (||)
   , value "&&" (&&)
@@ -33,10 +33,10 @@ background =
   , value "tail" (tail :: [Bool] -> [Bool])
   ]
 
-backgroundWithFold :: [Expr]
-backgroundWithFold  =
+primitivesWithFold :: [Expr]
+primitivesWithFold  =
     value "foldr" (foldr :: (Bool -> Bool -> Bool) -> Bool -> [Bool] -> Bool)
-  : background
+  : primitives
 
 -- target (for and):
 
