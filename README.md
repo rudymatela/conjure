@@ -121,9 +121,9 @@ See the `eg/factorial.hs` example.
 
 It is also possible to generate:
 
-    factorial x  =  if x == 0 then 1 else x * factorial x - 1
+    factorial n  =  if n == 0 then 1 else n * factorial (n - 1)
 
-in about 30s by changing the primitives and increasing the size limit.
+in about 90s by including `(-) :: Int -> Int -> Int` in the primitives.
 
 
 Related work
