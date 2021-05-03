@@ -1,4 +1,5 @@
 factorial :: Int -> Int
+-- testing 6 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -6,6 +7,7 @@ factorial :: Int -> Int
 factorial n  =  product (enumFromTo 1 n)
 
 factorial :: Int -> Int
+-- testing 6 combinations of argument values
 -- looking through 3 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 8 candidates of size 3

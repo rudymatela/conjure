@@ -66,14 +66,19 @@ args = Args
 
 -- | Like 'conjure' but in the pure world.
 --
--- Returns tiers of implementations paired with 'tiers' of candidate bodies.
-conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]])
+-- Returns a triple with:
+--
+-- 1. tiers of implementations
+-- 2. tiers of candidate bodies
+-- 3. a list of tests
+conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
 conjpure =  conjpureWith args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]])
-conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
+conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
   where
+  tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
   implements e  =  apparentlyTerminates rrff e
                 && ffxx ?=? recursexpr maxRecursionSize vffxx e
@@ -125,7 +130,10 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT)
 --
 -- > > conjure "square" square primitives
 -- > square :: Int -> Int
--- > -- looking through 815 candidates, 100% match, 3/3 assignments
+-- > -- testing 3 combinations of argument values
+-- > -- looking through 3 candidates of size 1
+-- > -- looking through 3 candidates of size 2
+-- > -- looking through 5 candidates of size 3
 -- > square x  =  x * x
 --
 -- The primitives list is defined with 'val' and 'value'.
@@ -148,6 +156,7 @@ conjureWithMaxSize sz  =  conjureWith args
 conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
 conjureWith args nm f es  =  do
   print (var (head $ words nm) f)
+  putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure"
@@ -157,7 +166,8 @@ conjureWith args nm f es  =  do
       []     ->  pr (n+1) rs
       (i:_)  ->  do putStrLn $ showEq i
                     putStrLn ""
-  rs  =  uncurry zip $ conjpureWith args nm f es
+  rs  =  zip iss css
+  (iss, css, ts)  =  conjpureWith args nm f es
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 candidateExprs :: Conjurable f

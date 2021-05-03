@@ -33,7 +33,10 @@
 --
 -- > > conjure "square" square primitives
 -- > square :: Int -> Int
--- > -- looking through 815 candidates, 100% match, 3/3 assignments
+-- > -- testing 3 combinations of argument values
+-- > -- looking through 3 candidates of size 1
+-- > -- looking through 3 candidates of size 2
+-- > -- looking through 5 candidates of size 3
 -- > square x  =  x * x
 {-# LANGUAGE CPP #-}
 module Conjure

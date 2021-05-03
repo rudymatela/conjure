@@ -47,12 +47,11 @@ Given
 and
 
 	primitives :: [Expr]
-	primitives  =
-	  [ val (0::Int)
-	  , val (1::Int)
-	  , value "+" ((+) :: Int -> Int -> Int)
-	  , value "*" ((*) :: Int -> Int -> Int)
-	  ]
+	primitives  =  [ val (0::Int)
+	               , val (1::Int)
+	               , value "+" ((+) :: Int -> Int -> Int)
+	               , value "*" ((*) :: Int -> Int -> Int)
+	               ]
 
 running
 
@@ -61,7 +60,10 @@ running
 yields
 
 	square :: Int -> Int
-	-- looking through 815 candidates, 100% match, 3/3 assignments
+	-- testing 3 combinations of argument values
+	-- looking through 3 candidates of size 1
+	-- looking through 3 candidates of size 2
+	-- looking through 5 candidates of size 3
 	square x  =  x * x
 
 in less than a second.
@@ -85,16 +87,13 @@ Given
 and
 
 	primitives :: [Expr]
-	primitives  =
-	  [ val (0::Int)
-	  , val (1::Int)
-	  , value "+" ((+) :: Int -> Int -> Int)
-	  , value "*" ((*) :: Int -> Int -> Int)
-	  , value "dec" (subtract 1 :: Int -> Int)
-	  , value "isZero" ((==0) :: Int -> Bool)
-	  , val False
-	  , val True
-	  ]
+	primitives  =  [ val (0::Int)
+	               , val (1::Int)
+	               , value "+" ((+) :: Int -> Int -> Int)
+	               , value "*" ((*) :: Int -> Int -> Int)
+	               , value "dec" (subtract 1 :: Int -> Int)
+	               , value "==" ((==) :: Int -> Int -> Bool)
+	               ]
 
 running
 
@@ -103,8 +102,18 @@ running
 yields
 
 	factorial :: Int -> Int
-	-- looking through 8576 candidates, 100% match, 6/6 assignments
-	factorial x  =  if isZero x then 1 else x * factorial (dec x)
+	-- testing 6 combinations of argument values
+	-- looking through 3 candidates of size 1
+	-- looking through 5 candidates of size 2
+	-- looking through 8 candidates of size 3
+	-- looking through 26 candidates of size 4
+	-- looking through 59 candidates of size 5
+	-- looking through 167 candidates of size 6
+	-- looking through 581 candidates of size 7
+	-- looking through 1654 candidates of size 8
+	-- looking through 5754 candidates of size 9
+	-- looking through 17797 candidates of size 10
+	factorial n  =  if n == 0 then 1 else n * factorial (dec n)
 
 in about 3 seconds.
 

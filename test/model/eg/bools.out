@@ -1,4 +1,5 @@
 and :: [Bool] -> Bool
+-- testing 14 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 6 candidates of size 3
@@ -11,6 +12,7 @@ and :: [Bool] -> Bool
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
+-- testing 14 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 6 candidates of size 3
@@ -25,6 +27,7 @@ or :: [Bool] -> Bool
 or ps  =  not (null ps || not (head ps || or (tail ps)))
 
 and :: [Bool] -> Bool
+-- testing 14 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 6 candidates of size 3
@@ -32,6 +35,7 @@ and :: [Bool] -> Bool
 and ps  =  foldr (&&) True ps
 
 or :: [Bool] -> Bool
+-- testing 14 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 6 candidates of size 3
