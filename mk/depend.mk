@@ -58,6 +58,16 @@ eg/list.o: \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
   eg/list.hs
+eg/tapps: \
+  eg/tapps.hs \
+  mk/toplibs
+eg/tapps.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  eg/tapps.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure.hs \
