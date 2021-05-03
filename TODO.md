@@ -3,6 +3,9 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* refactor `candidateExprs` and `conjpureWith`.
+  Move down conjuring of `(===)` from `conjpureWith` into `candidateExprs`.
+
 * refactor `conjureTiersFor` to use `conjureMaybeTiersFor`
 
 * implement `conjureHasTiers` and use it on `conjureMkEquation`;
