@@ -1,5 +1,5 @@
 length :: [Int] -> Int
--- testing 38 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -12,7 +12,7 @@ length :: [Int] -> Int
 length xs  =  if null xs then 0 else 1 + length (tail xs)
 
 reverse :: [Int] -> [Int]
--- testing 38 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3
@@ -27,7 +27,7 @@ reverse :: [Int] -> [Int]
 reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]
--- testing 30 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 6 candidates of size 3
@@ -41,7 +41,7 @@ sort :: [Int] -> [Int]
 sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 
 length :: [Int] -> Int
--- testing 38 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
@@ -51,7 +51,7 @@ length :: [Int] -> Int
 length xs  =  foldr (const (1 +)) 0 xs
 
 reverse :: [Int] -> [Int]
--- testing 38 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 1 candidates of size 3
@@ -62,7 +62,7 @@ reverse :: [Int] -> [Int]
 reverse xs  =  foldr (flip (++) . unit) [] xs
 
 sort :: [Int] -> [Int]
--- testing 30 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3

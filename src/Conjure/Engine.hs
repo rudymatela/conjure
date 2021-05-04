@@ -41,20 +41,22 @@ import Conjure.Conjurable
 -- | Arguments to be passed to 'conjureWith' or 'conjpureWith'.
 --   See 'args' for the defaults.
 data Args = Args
-  { maxTests          :: Int  -- ^ defaults to 60
-  , maxSize           :: Int  -- ^ defaults to 9, keep greater than maxEquationSize
-  , maxRecursiveCalls :: Int  -- ^ defaults to 1
-  , maxEquationSize   :: Int  -- ^ defaults to 5, keep smaller than maxSize
-  , maxRecursionSize  :: Int  -- ^ defaults to 60
+  { maxTests          :: Int  -- ^ maximum number of tests to each candidate
+  , maxSize           :: Int  -- ^ maximum size of candidate bodies
+  , maxRecursiveCalls :: Int  -- ^ maximum number of allowed recursive calls
+  , maxEquationSize   :: Int  -- ^ maximum size of equation operands
+  , maxRecursionSize  :: Int  -- ^ maximum size of a recursive expression expansion
+  , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
   }
 
 -- | Default arguments to conjure.
 --
 -- * 60 tests
--- * functions of up to 9 symbols
+-- * functions of up to 12 symbols
 -- * maximum of 1 recursive call
 -- * pruning with equations up to size 5
--- * recursion up to 60 symbols.
+-- * recursion up to 60 symbols
+-- * search for defined applications for up to 100000 combinations
 args :: Args
 args = Args
   { maxTests           =  60
@@ -62,6 +64,7 @@ args = Args
   , maxRecursiveCalls  =   1
   , maxEquationSize    =   5
   , maxRecursionSize   =  60
+  , maxSearchTests     =  100000
   }
 
 -- | Like 'conjure' but in the pure world.
@@ -100,8 +103,8 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
   gs  =  take maxTests . grounds (conjureTiersFor f)
 
   bss, dbss :: [[(Expr,Expr)]]
-  bss  =  take maxTests $ groundBinds (conjureTiersFor f) ffxx
-  dbss  =  [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
+  bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
+  dbss  =  take maxTests [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
     where
     e  =  ffxx -==- ffxx
 

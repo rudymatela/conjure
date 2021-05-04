@@ -1,5 +1,5 @@
 third :: [Int] -> Int
--- testing 34 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -7,7 +7,7 @@ third :: [Int] -> Int
 third xs  =  head (tail (tail xs))
 
 product :: [Int] -> Int
--- testing 37 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -21,7 +21,7 @@ product :: [Int] -> Int
 product xs  =  if null xs then 1 else head xs * product (tail xs)
 
 product :: [Int] -> Int
--- testing 37 combinations of argument values
+-- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
