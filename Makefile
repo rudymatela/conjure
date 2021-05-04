@@ -12,6 +12,7 @@ EG = \
   eg/bools \
   eg/list \
   eg/tapps \
+  bench/ill-hit \
   bench/self \
   proto/u-conjure
 

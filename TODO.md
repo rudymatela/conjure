@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* report number of "hit" assignments, add ill example as a bench
-
 * refactor `candidateExprs` and `conjpureWith`.
   Move down conjuring of `(===)` from `conjpureWith` into `candidateExprs`.
 

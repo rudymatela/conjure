@@ -1,3 +1,8 @@
+bench/ill-hit: \
+  bench/ill-hit.hs \
+  mk/toplibs
+bench/ill-hit.o: \
+  bench/ill-hit.hs
 bench/self: \
   bench/self.hs \
   mk/toplibs

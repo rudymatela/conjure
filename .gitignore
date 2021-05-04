@@ -34,6 +34,7 @@ eg/ints
 eg/list
 eg/tapps
 bench/self
+bench/ill-hit
 proto/u-conjure
 test/expr
 test/conjurable
