@@ -22,12 +22,14 @@ module Conjure.Conjurable
   , conjureHoles
   , conjureIfs
   , conjureTiersFor
+  , conjureAreEqual
   , conjureMkEquation
   )
 where
 
 import Test.LeanCheck
 import Test.LeanCheck.Utils
+import Test.LeanCheck.Error (errorToFalse)
 import Conjure.Expr hiding (application)
 import Test.Speculate.Expr
 import Data.Functor ((<$>))
@@ -158,6 +160,14 @@ conjureIfs f  =  [eef | (_,eef,_,Just _) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,_,Just eq,_) <- conjureReification f]
+
+conjureAreEqual :: Conjurable f => f -> Int -> Expr -> Expr -> Bool
+conjureAreEqual f maxTests  =  (===)
+  where
+  (-==-)  =  conjureMkEquation f
+  e1 === e2  =  isTrue $ e1 -==- e2
+  isTrue  =  all (errorToFalse . eval False) . gs
+  gs  =  take maxTests . grounds (conjureTiersFor f)
 
 conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers

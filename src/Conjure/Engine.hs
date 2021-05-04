@@ -92,15 +92,11 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
   vffxx  =  canonicalVarApplication nm f
   (rrff:_)   =  unfoldApp vffxx
 
-  e1 === e2  =  isReallyTrue (e1 -==- e2)
+  (===)  =  conjureAreEqual f maxTests
   e1 ?=? e2  =  isTrueWhenDefined (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
   isTrueWhenDefined e  =  all (errorToFalse . eval False) $ map (e //-) dbss
-  isReallyTrue  =  all (errorToFalse . eval False) . gs
-
-  gs :: Expr -> [Expr]
-  gs  =  take maxTests . grounds (conjureTiersFor f)
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
