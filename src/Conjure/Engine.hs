@@ -29,6 +29,7 @@ import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
 import qualified Data.Ratio
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
+import Test.LeanCheck.Tiers
 import Test.Speculate hiding ((===), Args(..), args)
 import Test.Speculate.Reason
 import Test.Speculate.Engine
@@ -191,7 +192,10 @@ candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
   thy  =  theoryFromAtoms (===) sz $ [conjureHoles f] \/ ess
-  expressionsT ds  =  filterT (\e -> count (== ef) (vars e) <= mc)
+  nubET  =  id -- no nub, good enough results
+  -- nubET  =  discardLaterT (===) -- huge computational cost
+  expressionsT ds  =  nubET
+                   $  filterT (\e -> count (== ef) (vars e) <= mc)
                    $  filterT (isRootNormalE thy)
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
     where
