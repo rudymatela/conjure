@@ -15,9 +15,9 @@ product :: [Int] -> Int
 -- looking through 13 candidates of size 5
 -- looking through 26 candidates of size 6
 -- looking through 63 candidates of size 7
--- looking through 154 candidates of size 8
--- looking through 368 candidates of size 9
--- looking through 902 candidates of size 10
+-- looking through 152 candidates of size 8
+-- looking through 358 candidates of size 9
+-- looking through 860 candidates of size 10
 product xs  =  if null xs then 1 else head xs * product (tail xs)
 
 product :: [Int] -> Int

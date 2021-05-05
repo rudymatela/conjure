@@ -159,7 +159,9 @@ conjureHoles :: Conjurable f => f -> [Expr]
 conjureHoles f  =  [eh | (eh,_,_,Just _) <- conjureReification f]
 
 conjureIfs :: Conjurable f => f -> [Expr]
-conjureIfs f  =  [eef | (_,eef,_,Just _) <- conjureReification f]
+conjureIfs f  =  [eef | (_,eef,_,Just _) <- nubConjureType f []]
+-- this does not include if for bools automatically
+-- differently from conjureHoles, conjureMkEquation and conjureTiersFor
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,_,Just eq,_) <- conjureReification f]
