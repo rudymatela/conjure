@@ -27,6 +27,11 @@ sort' [x,y,z]
   | x <= y && y <= z  =  [x,y,z]
   | z <= y && y <= x  =  [z,y,x]
 
+(+++) :: [Int] -> [Int] -> [Int]
+[x]     +++ [y]      =  [x,y]
+[x,y]   +++ [z,w]    =  [x,y,z,w]
+[x,y,z] +++ [w,v,u]  =  [x,y,z,w,v,u]
+
 main :: IO ()
 main = do
   -- length xs  =  if null xs then 0 else 1 + length (tail xs)
@@ -61,7 +66,17 @@ main = do
     , value "null" (null :: [Int] -> Bool)
     ]
 
-  -- now through folds
+  -- xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
+  --              1  2    3       4       5    6 7  8   9  10 11
+  conjure "++" (+++)
+    [ val ([] :: [Int])
+    , value ":" ((:) :: Int -> [Int] -> [Int])
+    , value "head" (head :: [Int] -> Int)
+    , value "tail" (tail :: [Int] -> [Int])
+    , value "null" (null :: [Int] -> Bool)
+    ]
+
+  -- now through fold
   -- length xs  =  foldr (const (1 +)) 0 xs
   conjure "length" length'
     [ val (0 :: Int)
@@ -71,7 +86,7 @@ main = do
     , value "const" (const :: (Int -> Int) -> Int -> (Int -> Int)) -- cheating?
     ]
 
-  -- now through folds and some cheating
+  -- now through fold and some cheating
   --  reverse xs  =  foldr (\x xs -> xs ++ [x]) [] xs
   --  reverse xs  =  foldr (flip (++) . unit) [] xs
   conjure "reverse" reverse'
@@ -84,10 +99,18 @@ main = do
     , value "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
     ]
 
-  -- now through folds
+  -- now through fold
   -- sort xs  =  foldr insert [] xs
   conjure "sort" sort'
     [ val ([] :: [Int])
     , value "insert" (insert :: Int -> [Int] -> [Int])
+    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
+  -- now through fold
+  -- xs ++ ys  =  foldr (:) ys xs
+  conjure "++" (+++)
+    [ val ([] :: [Int])
+    , value ":" ((:) :: Int -> [Int] -> [Int])
     , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]

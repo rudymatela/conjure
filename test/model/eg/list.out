@@ -40,6 +40,21 @@ sort :: [Int] -> [Int]
 -- looking through 6352/13661 candidates of size 10
 sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 
+(++) :: [Int] -> [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- looking through 3/10 candidates of size 1
+-- looking through 3/11 candidates of size 2
+-- looking through 12/28 candidates of size 3
+-- looking through 39/81 candidates of size 4
+-- looking through 83/212 candidates of size 5
+-- looking through 290/623 candidates of size 6
+-- looking through 1013/2039 candidates of size 7
+-- looking through 3482/6732 candidates of size 8
+-- looking through 11207/22507 candidates of size 9
+-- looking through 36383/74650 candidates of size 10
+-- looking through 124785/250463 candidates of size 11
+xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
+
 length :: [Int] -> Int
 -- testing 60 combinations of argument values
 -- looking through 2/9 candidates of size 1
@@ -68,4 +83,12 @@ sort :: [Int] -> [Int]
 -- looking through 0/2 candidates of size 3
 -- looking through 2/4 candidates of size 4
 sort xs  =  foldr insert [] xs
+
+(++) :: [Int] -> [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- looking through 3/8 candidates of size 1
+-- looking through 0/4 candidates of size 2
+-- looking through 9/12 candidates of size 3
+-- looking through 4/4 candidates of size 4
+xs ++ ys  =  foldr (:) ys xs
 
