@@ -111,12 +111,15 @@ conjureType x ms  =
   then ms
   else conjureSubTypes x $ conjureReification1 x : ms
 
+-- | like 'conjureType' but without type repetitions
+nubConjureType :: Conjurable a => a -> Reification
+nubConjureType x  =  nubOn (\(eh,_,_,_) -> eh) . conjureType x
+
 conjureReification1 :: Conjurable a => a -> Reification1
 conjureReification1 x  =  (hole x, ifFor x, conjureEquality x, conjureTiers x)
 
 conjureReification :: Conjurable a => a -> [Reification1]
-conjureReification x  =  nubOn (\(eh,_,_,_) -> eh)
-                      $  conjureType x [conjureReification1 bool]
+conjureReification x  =  nubConjureType x [conjureReification1 bool]
   where
   bool :: Bool
   bool  =  error "conjureReification: evaluated proxy boolean value (definitely a bug)"
