@@ -25,7 +25,9 @@ main = do
 
 primitives :: [Expr]
 primitives =
-  [ value "not" not
+  [ val False
+  , val True
+  , value "not" not
   , value "||" (||)
   , value "&&" (&&)
   , value "null" (null :: [Bool] -> Bool)

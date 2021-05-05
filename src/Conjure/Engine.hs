@@ -179,7 +179,7 @@ candidateExprs :: Conjurable f
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =
   candidateExprsT nm f sz mc (===)
-    [nub $ [val False, val True] ++ es ++ conjureIfs f]
+    [nub $ es ++ conjureIfs f]
 
 candidateExprsT :: Conjurable f
                 => String -> f
@@ -191,7 +191,8 @@ candidateExprsT :: Conjurable f
 candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
-  thy  =  theoryFromAtoms (===) sz $ [conjureHoles f] \/ ess
+  falseAndTrue  =  [val False, val True]
+  thy  =  theoryFromAtoms (===) sz $ [conjureHoles f ++ falseAndTrue] \/ filterT (`notElem` falseAndTrue) ess
   nubET  =  id -- no nub, good enough results
   -- nubET  =  discardLaterT (===) -- huge computational cost
   expressionsT ds  =  nubET
