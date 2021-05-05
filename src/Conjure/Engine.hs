@@ -73,22 +73,23 @@ args = Args
 -- Returns a triple with:
 --
 -- 1. tiers of implementations
--- 2. tiers of candidate bodies
--- 3. a list of tests
-conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
+-- 2. tiers of candidate bodies (right type)
+-- 3. tiers of candidate expressions (any type)
+-- 4. a list of tests
+conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [[Expr]], [Expr])
 conjpure =  conjpureWith args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
-conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [[Expr]], [Expr])
+conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT, tests)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
   implements e  =  apparentlyTerminates rrff e
                 && ffxx ?=? recursexpr maxRecursionSize vffxx e
-  candidatesT  =  filterT (\e -> typ e == typ ffxx)
-               .  take maxSize
-               $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
+  candidatesT  =  filterT (\e -> typ e == typ ffxx) allCandidatesT
+  allCandidatesT  =  take maxSize
+                  $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
   (rrff:_)   =  unfoldApp vffxx
@@ -160,14 +161,16 @@ conjureWith args nm f es  =  do
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure"
-  pr n ((is,es):rs)  =  do
-    putStrLn $ "-- looking through " ++ show (length es) ++ " candidates of size " ++ show n
+  pr n ((is,cs,es):rs)  =  do
+    putStrLn $ "-- looking through "
+            ++ show (length cs) ++ "/" ++ show (length es)
+            ++ " candidates of size " ++ show n
     case is of
       []     ->  pr (n+1) rs
       (i:_)  ->  do putStrLn $ showEq i
                     putStrLn ""
-  rs  =  zip iss css
-  (iss, css, ts)  =  conjpureWith args nm f es
+  rs  =  zip3 iss css ess
+  (iss, css, ess, ts)  =  conjpureWith args nm f es
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 candidateExprs :: Conjurable f

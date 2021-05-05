@@ -1,32 +1,32 @@
 double :: Int -> Int
 -- testing 4 combinations of argument values
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 3/7 candidates of size 1
+-- looking through 3/9 candidates of size 2
+-- looking through 5/11 candidates of size 3
 double x  =  x + x
 
 add :: Int -> Int -> Int
 -- testing 4 combinations of argument values
--- looking through 4 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 29 candidates of size 3
+-- looking through 4/8 candidates of size 1
+-- looking through 0/12 candidates of size 2
+-- looking through 29/29 candidates of size 3
 add x y  =  x + y
 
 square :: Int -> Int
 -- testing 3 combinations of argument values
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 3/7 candidates of size 1
+-- looking through 3/9 candidates of size 2
+-- looking through 5/11 candidates of size 3
 square x  =  x * x
 
 tnpo :: Int -> Int
 -- testing 3 combinations of argument values
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 20 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 97 candidates of size 6
--- looking through 42 candidates of size 7
+-- looking through 3/7 candidates of size 1
+-- looking through 3/9 candidates of size 2
+-- looking through 5/11 candidates of size 3
+-- looking through 20/30 candidates of size 4
+-- looking through 13/53 candidates of size 5
+-- looking through 97/123 candidates of size 6
+-- looking through 42/236 candidates of size 7
 tnpo x  =  x + (x + (x + 1))
 
