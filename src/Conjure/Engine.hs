@@ -211,3 +211,11 @@ compareResult (n1,e1) (n2,e2)  =  n2 `compare` n1
 
 (%) :: Int -> Int -> Int
 x % y  =  x * 100 `div` y
+
+-- Debug: application that always works
+(*$$*) :: Expr -> Expr -> Maybe Expr
+e1 *$$* e2  =  Just $ e1 :$ e2
+
+-- Debug: application that works for the correct kinds
+(>$$<) :: Expr -> Expr -> Maybe Expr
+e1 >$$< e2  =  undefined
