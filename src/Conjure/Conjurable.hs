@@ -114,6 +114,8 @@ conjureType x ms  =
 -- | like 'conjureType' but without type repetitions
 nubConjureType :: Conjurable a => a -> Reification
 nubConjureType x  =  nubOn (\(eh,_,_,_) -> eh) . conjureType x
+-- The use of nubOn above is O(n^2).
+-- So long as there is not a huge number of subtypes of a, so we're fine.
 
 conjureReification1 :: Conjurable a => a -> Reification1
 conjureReification1 x  =  (hole x, ifFor x, conjureEquality x, conjureTiers x)
@@ -123,8 +125,6 @@ conjureReification x  =  nubConjureType x [conjureReification1 bool]
   where
   bool :: Bool
   bool  =  error "conjureReification: evaluated proxy boolean value (definitely a bug)"
--- The use of nubOn above is O(n^2).
--- So long as there is not a huge number of subtypes of a, so we're fine.
 
 -- | Reifies equality to be used in a conjurable type.
 --
