@@ -178,8 +178,7 @@ candidateExprs :: Conjurable f
                -> [Expr]
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =
-  candidateExprsT nm f sz mc (===)
-    [nub $ es ++ conjureIfs f]
+  candidateExprsT nm f sz mc (===) [nub $ es ++ conjureIfs f]
 
 candidateExprsT :: Conjurable f
                 => String -> f
