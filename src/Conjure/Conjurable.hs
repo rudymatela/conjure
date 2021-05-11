@@ -299,9 +299,9 @@ instance ( Conjurable a, Listable a, Show a
       (Right _) == (Left _)   =  False
       (Right x) == (Right y)  =  x .== y
 
-instance (Listable a, Show a, Conjurable a, Conjurable b) => Conjurable (a -> b) where
+instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
-  conjureSubTypes f  =   conjureType (argTy f) . conjureType (resTy f)
+  conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
 
 argTy :: (a -> b) -> a
 argTy _  =  undefined
