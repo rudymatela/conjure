@@ -4,18 +4,34 @@ TODO for Conjure
 A non-exhaustive list of things TO DO for Conjure.
 
 
+* top-down generation of candidate expressions
+
+* generate functions with top-level case patterns:
+
+        len []  =  0
+        len (x:xs)  =  1 + len xs
+
+* only allow recursion on deconstructed arguments:
+
+        foo (x:xs)  =  ... len xs ...
+
+
 ### for later
 
-* allow conjuring from tests instead of partial definitions?
+* exclude magic numbers?  e.g.: `1+1`?
 
 * allow conjuring from partially defined implementations?
 
-    partial :: ((Int -> Int) -> Int -> Int) -> (Int -> Int)
-    partial impl  =  f
-      where
-      f n  =  if n == 0
-              then 1
-              else impl f n
+        partial :: ((Int -> Int) -> Int -> Int) -> (Int -> Int)
+        partial impl  =  f
+          where
+          f n  =  if n == 0
+                  then 1
+                  else impl f n
+
+* consider leveraging lazyness somehow?
+
+* consider leveraging polymorphism somehow?
 
 
 This file is part of Conjure,
