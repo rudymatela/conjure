@@ -23,6 +23,7 @@ cabal-version:       1.18
 
 extra-doc-files: README.md
                , TODO.md
+               , changelog.md
                , doc/conjure.svg
 extra-source-files: .gitignore
                   , .github/workflows/build.yml
