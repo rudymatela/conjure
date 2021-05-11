@@ -236,3 +236,12 @@ e1 >$$< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
 ktyp :: Expr -> TypeRep
 ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
 ktyp e  =  typ e
+
+mkFun1 :: Eq a => [(a,b)] -> a -> b
+mkFun1 bs  =  \x -> fromMaybe undefined $ lookup x bs
+
+mkFun2 :: (Eq a, Eq b) => [((a,b),c)] -> a -> b -> c
+mkFun2 bs  =  \x y -> fromMaybe undefined $ lookup (x,y) bs
+
+mkFun3 :: (Eq a, Eq b, Eq c) => [((a,b,c),d)] -> a -> b -> c -> d
+mkFun3 bs  =  \x y z -> fromMaybe undefined $ lookup (x,y,z) bs
