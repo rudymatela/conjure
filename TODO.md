@@ -15,6 +15,8 @@ A non-exhaustive list of things TO DO for Conjure.
 
         foo (x:xs)  =  ... len xs ...
 
+  this will require generation of functions with top-level case patterns.
+
 
 ### for later
 
