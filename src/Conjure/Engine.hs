@@ -156,28 +156,6 @@ conjureWithMaxSize sz  =  conjureWith args
                        ,  maxEquationSize = min sz (maxEquationSize args)
                        }
 
-conjure1With :: (Eq a, Show a, Conjurable a, Conjurable b)
-             => Args -> String -> [(a,b)] -> [Expr] -> IO ()
-conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
-  where
-  ts = [[val x] | (x,_) <- bs]
-
-conjure2With :: ( Conjurable a, Eq a, Show a
-                , Conjurable b, Eq b, Show b
-                , Conjurable c
-                ) => Args -> String -> [((a,b),c)] -> [Expr] -> IO ()
-conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
-  where
-  ts = [[val x, val y] | ((x,y),_) <- bs]
-
-conjure3With :: ( Conjurable a, Eq a, Show a
-                , Conjurable b, Eq b, Show b
-                , Conjurable c, Eq c, Show c
-                , Conjurable d
-                ) => Args -> String -> [((a,b,c),d)] -> [Expr] -> IO ()
-conjure3With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun3 bs)
-  where
-  ts = [[val x, val y, val z] | ((x,y,z),_) <- bs]
 
 
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
@@ -260,12 +238,3 @@ e1 >$$< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
 ktyp :: Expr -> TypeRep
 ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
 ktyp e  =  typ e
-
-mkFun1 :: Eq a => [(a,b)] -> a -> b
-mkFun1 bs  =  \x -> fromMaybe undefined $ lookup x bs
-
-mkFun2 :: (Eq a, Eq b) => [((a,b),c)] -> a -> b -> c
-mkFun2 bs  =  \x y -> fromMaybe undefined $ lookup (x,y) bs
-
-mkFun3 :: (Eq a, Eq b, Eq c) => [((a,b,c),d)] -> a -> b -> c -> d
-mkFun3 bs  =  \x y z -> fromMaybe undefined $ lookup (x,y,z) bs

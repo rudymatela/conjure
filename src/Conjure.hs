@@ -53,6 +53,15 @@ module Conjure
   , Args(..)
   , args
 
+-- * Conjuring from specification
+  , conjure1
+  , conjure2
+  , conjure3
+  , conjure1With
+  , conjure2With
+  , conjure3With
+  , (-=)
+
 -- * When using custom types
   , Conjurable (conjureEquality, conjureTiers)
   , reifyEquality, reifyTiers
@@ -64,4 +73,5 @@ module Conjure
 where
 
 import Conjure.Engine
+import Conjure.Spec
 import Conjure.Conjurable
