@@ -21,12 +21,12 @@ tests :: Int -> [Bool]
 tests n  =
   [ True
 
-  , canonicalApplication "not"   not  ==  not' pp
-  , canonicalApplication "not q" not  ==  not' qq
-  , canonicalApplication "negate"   (negate :: Int -> Int)  ==  negate' xx
-  , canonicalApplication "negate i" (negate :: Int -> Int)  ==  negate' ii
-  , canonicalApplication "+"     ((+) :: Int -> Int -> Int)  ==  xx -+- yy
-  , canonicalApplication "+ i j" ((+) :: Int -> Int -> Int)  ==  ii -+- jj
+  , conjureApplication "not"   not  ==  not' pp
+  , conjureApplication "not q" not  ==  not' qq
+  , conjureApplication "negate"   (negate :: Int -> Int)  ==  negate' xx
+  , conjureApplication "negate i" (negate :: Int -> Int)  ==  negate' ii
+  , conjureApplication "+"     ((+) :: Int -> Int -> Int)  ==  xx -+- yy
+  , conjureApplication "+ i j" ((+) :: Int -> Int -> Int)  ==  ii -+- jj
 
   , holds n $ \x y -> (x <==> y)  ==  (x == (y :: ()))
   , holds n $ \x y -> (x <==> y)  ==  (x == (y :: Int))

@@ -92,8 +92,8 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
   candidatesT  =  filterT (\e -> typ e == typ ffxx) allCandidatesT
   allCandidatesT  =  take maxSize
                   $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
-  ffxx   =  canonicalApplication nm f
-  vffxx  =  canonicalVarApplication nm f
+  ffxx   =  conjureApplication nm f
+  vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
 
   (===)  =  conjureAreEqual f maxTests
@@ -199,7 +199,7 @@ candidateExprsT :: Conjurable f
                 -> [[Expr]]
 candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
   where
-  (ef:exs)  =  unfoldApp $ canonicalVarApplication nm f
+  (ef:exs)  =  unfoldApp $ conjureVarApplication nm f
   falseAndTrue  =  [val False, val True]
   thy  =  theoryFromAtoms (===) sz $ [conjureHoles f ++ falseAndTrue] \/ filterT (`notElem` falseAndTrue) ess
   nubET  =  id -- no nub, good enough results

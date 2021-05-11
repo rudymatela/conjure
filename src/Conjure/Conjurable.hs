@@ -17,8 +17,8 @@ module Conjure.Conjurable
   , conjureType
   , reifyTiers
   , reifyEquality
-  , canonicalApplication
-  , canonicalVarApplication
+  , conjureApplication
+  , conjureVarApplication
   , conjureHoles
   , conjureIfs
   , conjureTiersFor
@@ -309,15 +309,15 @@ argTy _  =  undefined
 resTy :: (a -> b) -> b
 resTy _  =  undefined
 
-canonicalApplication :: Conjurable f => String -> f -> Expr
-canonicalApplication  =  canonicalWhatApplication value
+conjureApplication :: Conjurable f => String -> f -> Expr
+conjureApplication  =  conjureWhatApplication value
 
-canonicalVarApplication :: Conjurable f => String -> f -> Expr
-canonicalVarApplication  =  canonicalWhatApplication var
+conjureVarApplication :: Conjurable f => String -> f -> Expr
+conjureVarApplication  =  conjureWhatApplication var
 
-canonicalWhatApplication :: Conjurable f => (String -> f -> Expr) -> String -> f -> Expr
-canonicalWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
-                                    $  what nf f : zipWith varAsTypeOf nas (conjureArgumentHoles f)
+conjureWhatApplication :: Conjurable f => (String -> f -> Expr) -> String -> f -> Expr
+conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
+                                  $  what nf f : zipWith varAsTypeOf nas (conjureArgumentHoles f)
   where
   (nf:nas)  =  words nm ++ repeat ""
 
