@@ -54,9 +54,15 @@ module Conjure
   , args
 
 -- * Conjuring from specification
-  , Spec1, conjure1, conjure1With
-  , Spec2, conjure2, conjure2With
-  , Spec3, conjure3, conjure3With
+  , Spec1
+  , Spec2
+  , Spec3
+  , conjure1
+  , conjure2
+  , conjure3
+  , conjure1With
+  , conjure2With
+  , conjure3With
   , (-=)
 
 -- * When using custom types
