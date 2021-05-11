@@ -156,6 +156,30 @@ conjureWithMaxSize sz  =  conjureWith args
                        ,  maxEquationSize = min sz (maxEquationSize args)
                        }
 
+conjure1With :: (Eq a, Show a, Conjurable a, Conjurable b)
+             => Args -> String -> [(a,b)] -> [Expr] -> IO ()
+conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
+  where
+  ts = [[val x] | (x,_) <- bs]
+
+conjure2With :: ( Conjurable a, Eq a, Show a
+                , Conjurable b, Eq b, Show b
+                , Conjurable c
+                ) => Args -> String -> [((a,b),c)] -> [Expr] -> IO ()
+conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
+  where
+  ts = [[val x, val y] | ((x,y),_) <- bs]
+
+conjure3With :: ( Conjurable a, Eq a, Show a
+                , Conjurable b, Eq b, Show b
+                , Conjurable c, Eq c, Show c
+                , Conjurable d
+                ) => Args -> String -> [((a,b,c),d)] -> [Expr] -> IO ()
+conjure3With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun3 bs)
+  where
+  ts = [[val x, val y, val z] | ((x,y,z),_) <- bs]
+
+
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
 --
 -- > conjureWith args{maxSize = 11} "function" function [...]
