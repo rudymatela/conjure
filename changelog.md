@@ -5,7 +5,8 @@ Changelog for (Code) Conjure
 upcoming
 --------
 
-* add `conjure1`, `conjure2`, `conjure3` and related function
+* allow conjuring from specifications in addition to partial definitions
+  (`conjure1`, `conjure2`, `conjure3` and related functions)
 * improve examples
 * improve criteria for automatic primitive inclusion:
 	- only include `if :: ... -> Bool` if there are `Bool` primitives
