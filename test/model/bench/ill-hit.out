@@ -12,3 +12,17 @@ sum :: [Int] -> Int
 -- looking through 860/1835 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
+sum :: [Int] -> Int
+-- testing 6 combinations of argument values
+-- looking through 2/11 candidates of size 1
+-- looking through 2/8 candidates of size 2
+-- looking through 3/11 candidates of size 3
+-- looking through 5/18 candidates of size 4
+-- looking through 13/33 candidates of size 5
+-- looking through 26/68 candidates of size 6
+-- looking through 63/143 candidates of size 7
+-- looking through 152/336 candidates of size 8
+-- looking through 358/783 candidates of size 9
+-- looking through 860/1835 candidates of size 10
+sum xs  =  if null xs then 0 else head xs + sum (tail xs)
+
