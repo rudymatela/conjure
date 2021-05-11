@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.2.4
+------
 
 * allow conjuring from specifications in addition to partial definitions
   (`conjure1`, `conjure2`, `conjure3` and related functions)
