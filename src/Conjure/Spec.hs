@@ -27,14 +27,69 @@ import Conjure.Conjurable
 import Conjure.Utils
 
 
+-- | A partial specification of a function with one argument:
+--
+-- > sumSpec :: Spec1 [Int] Int
+-- > sumSpec  =
+-- >   [ []      -= 0
+-- >   , [1,2]   -= 3
+-- >   , [3,4,5] -= 12
+-- >   ]
+--
+-- To be passed as one of the arguments to 'conjure1'.
 type Spec1 a b     = [(a,b)]
+
+-- | A partial specification of a function with two arguments:
+--
+-- > appSpec :: Spec2 [Int] [Int] [Int]
+-- > appSpec  =
+-- >   [ (,) []      [0,1]   -= [0,1]
+-- >   , (,) [2,3]   []      -= [2,3]
+-- >   , (,) [4,5,6] [7,8,9] -= [4,5,6,7,8,9]
+-- >   ]
+--
+-- To be passed as one of the arguments to 'conjure2'.
 type Spec2 a b c   = [((a,b),c)]
+
+-- | A partial specification of a function with three arguments.
+--
+-- To be passed as one of the arguments to 'conjure3'
 type Spec3 a b c d = [((a,b,c),d)]
 
 (-=) :: a -> b -> (a,b)
 (-=)  =  (,)
 
 
+-- | Conjures a function from a specification.
+--
+-- Given:
+--
+-- > sumSpec :: Spec1 [Int] Int
+-- > sumSpec  =
+-- >   [ []      -= 0
+-- >   , [1,2]   -= 3
+-- >   , [3,4,5] -= 12
+-- >   ]
+--
+-- > sumPrimitives :: [Expr]
+-- > sumPrimitives  =
+-- >   [ value "null" (null :: [Int] -> Bool)
+-- >   , val (0::Int)
+-- >   , value "+"    ((+) :: Int -> Int -> Int)
+-- >   , value "head" (head :: [Int] -> Int)
+-- >   , value "tail" (tail :: [Int] -> [Int])
+-- >   ]
+--
+-- Then:
+--
+-- > > conjure1 "sum" sumSpec sumPrimitives
+-- > sum :: [Int] -> Int
+-- > -- testing 3 combinations of argument values
+-- > -- ...
+-- > -- looking through 189/465 candidates of size 10
+-- > xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
+--
+-- (cf. 'Spec1', 'conjure1With')
 conjure1 :: (Eq a, Show a, Conjurable a, Conjurable b)
          => String -> Spec1 a b -> [Expr] -> IO ()
 conjure1  =  conjure1With args
