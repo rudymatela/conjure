@@ -16,6 +16,9 @@ module Conjure.Spec
   , conjure2With
   , conjure3With
   , (-=)
+  , Spec1
+  , Spec2
+  , Spec3
   )
 where
 
@@ -24,19 +27,23 @@ import Conjure.Conjurable
 import Conjure.Utils
 
 
+type Spec1 a b     = [(a,b)]
+type Spec2 a b c   = [((a,b),c)]
+type Spec3 a b c d = [((a,b,c),d)]
+
 (-=) :: a -> b -> (a,b)
 (-=)  =  (,)
 
 
 conjure1 :: (Eq a, Show a, Conjurable a, Conjurable b)
-         => String -> [(a,b)] -> [Expr] -> IO ()
+         => String -> Spec1 a b -> [Expr] -> IO ()
 conjure1  =  conjure1With args
 
 
 conjure2 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c
-            ) => String -> [((a,b),c)] -> [Expr] -> IO ()
+            ) => String -> Spec2 a b c -> [Expr] -> IO ()
 conjure2  =  conjure2With args
 
 
@@ -44,12 +51,12 @@ conjure3 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c, Eq c, Show c
             , Conjurable d
-            ) => String -> [((a,b,c),d)] -> [Expr] -> IO ()
+            ) => String -> Spec3 a b c d -> [Expr] -> IO ()
 conjure3  =  conjure3With args
 
 
 conjure1With :: (Eq a, Show a, Conjurable a, Conjurable b)
-             => Args -> String -> [(a,b)] -> [Expr] -> IO ()
+             => Args -> String -> Spec1 a b -> [Expr] -> IO ()
 conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
   where
   ts = [[val x] | (x,_) <- bs]
@@ -58,7 +65,7 @@ conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
 conjure2With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c
-                ) => Args -> String -> [((a,b),c)] -> [Expr] -> IO ()
+                ) => Args -> String -> Spec2 a b c -> [Expr] -> IO ()
 conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
   where
   ts = [[val x, val y] | ((x,y),_) <- bs]
@@ -68,7 +75,7 @@ conjure3With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c, Eq c, Show c
                 , Conjurable d
-                ) => Args -> String -> [((a,b,c),d)] -> [Expr] -> IO ()
+                ) => Args -> String -> Spec3 a b c d -> [Expr] -> IO ()
 conjure3With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun3 bs)
   where
   ts = [[val x, val y, val z] | ((x,y,z),_) <- bs]

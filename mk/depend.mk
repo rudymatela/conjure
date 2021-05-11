@@ -75,6 +75,17 @@ eg/list.o: \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
   eg/list.hs
+eg/spec: \
+  eg/spec.hs \
+  mk/toplibs
+eg/spec.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  eg/spec.hs
 eg/tapps: \
   eg/tapps.hs \
   mk/toplibs

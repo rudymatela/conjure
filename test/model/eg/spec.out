@@ -1,0 +1,29 @@
+sum :: [Int] -> Int
+-- testing 3 combinations of argument values
+-- looking through 1/9 candidates of size 1
+-- looking through 2/5 candidates of size 2
+-- looking through 2/8 candidates of size 3
+-- looking through 2/10 candidates of size 4
+-- looking through 5/16 candidates of size 5
+-- looking through 10/29 candidates of size 6
+-- looking through 23/56 candidates of size 7
+-- looking through 46/114 candidates of size 8
+-- looking through 92/228 candidates of size 9
+-- looking through 189/465 candidates of size 10
+sum xs  =  if null xs then 0 else head xs + sum (tail xs)
+
+(++) :: [Int] -> [Int] -> [Int]
+-- testing 3 combinations of argument values
+-- looking through 2/9 candidates of size 1
+-- looking through 2/8 candidates of size 2
+-- looking through 6/18 candidates of size 3
+-- looking through 18/42 candidates of size 4
+-- looking through 38/102 candidates of size 5
+-- looking through 110/262 candidates of size 6
+-- looking through 334/746 candidates of size 7
+-- looking through 1018/2170 candidates of size 8
+-- looking through 2966/6442 candidates of size 9
+-- looking through 8662/19142 candidates of size 10
+-- looking through 26166/57090 candidates of size 11
+xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
+

@@ -33,6 +33,7 @@ eg/factorial
 eg/ints
 eg/list
 eg/tapps
+eg/spec
 bench/self
 bench/ill-hit
 proto/u-conjure
