@@ -9,16 +9,16 @@
 -- from tests or partial definitions.
 -- (a.k.a.: functional inductive programming)
 module Conjure.Spec
-  ( conjure1
+  ( Spec1
+  , Spec2
+  , Spec3
+  , (-=)
+  , conjure1
   , conjure2
   , conjure3
   , conjure1With
   , conjure2With
   , conjure3With
-  , (-=)
-  , Spec1
-  , Spec2
-  , Spec3
   )
 where
 
@@ -39,6 +39,7 @@ import Conjure.Utils
 -- To be passed as one of the arguments to 'conjure1'.
 type Spec1 a b     = [(a,b)]
 
+
 -- | A partial specification of a function with two arguments:
 --
 -- > appSpec :: Spec2 [Int] [Int] [Int]
@@ -51,16 +52,22 @@ type Spec1 a b     = [(a,b)]
 -- To be passed as one of the arguments to 'conjure2'.
 type Spec2 a b c   = [((a,b),c)]
 
+
 -- | A partial specification of a function with three arguments.
 --
 -- To be passed as one of the arguments to 'conjure3'
 type Spec3 a b c d = [((a,b,c),d)]
 
+
+-- | To be used when constructing specifications:
+--   'Spec1',
+--   'Spec2' and
+--   'Spec3'.
 (-=) :: a -> b -> (a,b)
 (-=)  =  (,)
 
 
--- | Conjures a function from a specification.
+-- | Conjures a one argument function from a specification.
 --
 -- Given:
 --
@@ -95,6 +102,35 @@ conjure1 :: (Eq a, Show a, Conjurable a, Conjurable b)
 conjure1  =  conjure1With args
 
 
+-- | Conjures a two argument function from a specification.
+--
+-- Given:
+--
+-- > appSpec :: Spec2 [Int] [Int] [Int]
+-- > appSpec  =
+-- >   [ (,) []      [0,1]   -= [0,1]
+-- >   , (,) [2,3]   []      -= [2,3]
+-- >   , (,) [4,5,6] [7,8,9] -= [4,5,6,7,8,9]
+-- >   ]
+--
+-- > appPrimitives :: [Expr]
+-- > appPrimitives =
+-- >   [ value "null" (null :: [Int] -> Bool)
+-- >   , value ":"    ((:) :: Int -> [Int] -> [Int])
+-- >   , value "head" (head :: [Int] -> Int)
+-- >   , value "tail" (tail :: [Int] -> [Int])
+-- >   ]
+--
+-- Then:
+--
+-- > > conjure2 "++" appSpec appPrimitives
+-- > (++) :: [Int] -> [Int] -> [Int]
+-- > -- testing 3 combinations of argument values
+-- > -- ...
+-- > -- looking through 26166/57090 candidates of size 11
+-- > xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
+--
+-- (cf. 'Spec2', 'conjure2With')
 conjure2 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c
@@ -102,6 +138,9 @@ conjure2 :: ( Conjurable a, Eq a, Show a
 conjure2  =  conjure2With args
 
 
+-- | Conjures a three argument function from a specification.
+--
+-- (cf. 'Spec3', 'conjure3With')
 conjure3 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c, Eq c, Show c
@@ -110,6 +149,7 @@ conjure3 :: ( Conjurable a, Eq a, Show a
 conjure3  =  conjure3With args
 
 
+-- | Like 'conjure1' but allows setting options through 'Args'/'args'.
 conjure1With :: (Eq a, Show a, Conjurable a, Conjurable b)
              => Args -> String -> Spec1 a b -> [Expr] -> IO ()
 conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
@@ -117,6 +157,7 @@ conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
   ts = [[val x] | (x,_) <- bs]
 
 
+-- | Like 'conjure2' but allows setting options through 'Args'/'args'.
 conjure2With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c
@@ -126,6 +167,7 @@ conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
   ts = [[val x, val y] | ((x,y),_) <- bs]
 
 
+-- | Like 'conjure3' but allows setting options through 'Args'/'args'.
 conjure3With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c, Eq c, Show c

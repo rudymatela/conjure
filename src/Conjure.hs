@@ -53,17 +53,17 @@ module Conjure
   , Args(..)
   , args
 
--- * Conjuring from specification
+-- * Conjuring from a specification
   , Spec1
   , Spec2
   , Spec3
+  , (-=)
   , conjure1
   , conjure2
   , conjure3
   , conjure1With
   , conjure2With
   , conjure3With
-  , (-=)
 
 -- * When using custom types
   , Conjurable (conjureEquality, conjureTiers)
