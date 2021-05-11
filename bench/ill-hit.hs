@@ -17,6 +17,16 @@ sum' [1,2,3,4]  =  10
 main :: IO ()
 main  =  do
   conjure "sum" (sum' :: [Int] -> Int) primitives
+  conjureWith as "sum" (sum' :: [Int] -> Int) primitives
+
+as :: Args
+as  =  args
+    {  forceTests = map (map val)
+                  [ [[1,2::Int]]
+                  , [[3,4,5::Int]]
+                  , [[1,2,3,4]]
+                  ]
+    }
 
 primitives :: [Expr]
 primitives =

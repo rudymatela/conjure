@@ -48,6 +48,7 @@ data Args = Args
   , maxEquationSize   :: Int  -- ^ maximum size of equation operands
   , maxRecursionSize  :: Int  -- ^ maximum size of a recursive expression expansion
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
+  , forceTests :: [[Expr]]  -- ^ force tests
   }
 
 -- | Default arguments to conjure.
@@ -66,6 +67,7 @@ args = Args
   , maxEquationSize    =   5
   , maxRecursionSize   =  60
   , maxSearchTests     =  100000
+  , forceTests         =  []
   }
 
 -- | Like 'conjure' but in the pure world.
@@ -92,7 +94,7 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
                   $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
   ffxx   =  canonicalApplication nm f
   vffxx  =  canonicalVarApplication nm f
-  (rrff:_)   =  unfoldApp vffxx
+  (rrff:xxs)  =  unfoldApp vffxx
 
   (===)  =  conjureAreEqual f maxTests
   e1 ?=? e2  =  isTrueWhenDefined (e1 -==- e2)
@@ -102,7 +104,10 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
-  dbss  =  take maxTests [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
+  fbss  =  [zip xxs vs | vs <- forceTests, isWellTyped $ foldApp (rrff:vs)]
+  dbss  =  take maxTests
+        $  ([bs | bs <- bss, errorToFalse . eval False $ e //- bs] \\ fbss)
+        ++ fbss
     where
     e  =  ffxx -==- ffxx
 
