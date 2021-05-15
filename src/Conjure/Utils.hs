@@ -18,6 +18,7 @@ module Conjure.Utils
 
   , count
   , nubOn
+  , iterateUntil
   )
 where
 
@@ -33,3 +34,10 @@ count p  =  length . filter p
 
 nubOn :: Eq b => (a -> b) -> [a] -> [a]
 nubOn f  =  nubBy ((==) `on` f)
+
+iterateUntil :: (a -> a -> Bool) -> (a -> a) -> a -> a
+iterateUntil (?) f x
+  | x ? fx  =  x
+  | otherwise  =  iterateUntil (?) f fx
+  where
+  fx  =  f x
