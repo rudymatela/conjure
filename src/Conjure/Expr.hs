@@ -11,6 +11,7 @@ module Conjure.Expr
   ( module Data.Express
   , module Data.Express.Fixtures
 
+  , (>$$<)
   , funToVar
   , recursexpr
   , apparentlyTerminates
@@ -174,13 +175,17 @@ applicationOld ff es  =  appn ff
 ifFor :: Typeable a => a -> Expr
 ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 
+-- | Application cross-product between lists of Exprs
+(>$$<) :: [Expr] -> [Expr] -> [Expr]
+exs >$$< eys  =  catMaybes [ex $$ ey | ex <- exs, ey <- eys]
+
 primitiveHoles :: [Expr] -> [Expr]
 primitiveHoles prims  =  sort $ ph hs
   where
   hs  =  nub $ map holeAsTypeOf prims
   ph  =  iterateUntil (==) ps
   ps es  =  nub $ es ++ sq es
-  sq es  =  nub $ map holeAsTypeOf $ catMaybes [e1 $$ e2 | e1 <- es, e2 <- es]
+  sq es  =  nub $ map holeAsTypeOf $ es >$$< es
 -- FIXME: the function above is quite inefficient.
 --        Should run fast for a small number of types,
 --        but if this number increases runtime may start

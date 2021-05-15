@@ -35,6 +35,38 @@ tests n  =
   , apparentlyTerminates ffE (if' pp (ff xx) zero) == False
   , apparentlyTerminates ffE (if' (odd' (ff xx)) zero zero) == False
 
+  , [false, true, zero, one] >$$< [notE, andE, orE, plus, times] == []
+  , [notE, andE, orE, plus, times] >$$< [false, true, zero, one]
+    == [ not' false
+       , not' true
+       , andE :$ false
+       , andE :$ true
+       , orE :$ false
+       , orE :$ true
+       , plus :$ zero
+       , plus :$ one
+       , times :$ zero
+       , times :$ one
+       ]
+  , [notE, andE, orE, plus, times] >$$< [false, true, zero, one] >$$< [false, true, zero, one]
+    == [ false -&&- false
+       , false -&&- true
+       , true -&&- false
+       , true -&&- true
+       , false -||- false
+       , false -||- true
+       , true -||- false
+       , true -||- true
+       , zero -+- zero
+       , zero -+- one
+       , one -+- zero
+       , one -+- one
+       , zero -*- zero
+       , zero -*- one
+       , one -*- zero
+       , one -*- one
+       ]
+
   , primitiveHoles [false, true]  ==  [b_]
   , primitiveHoles [zero, one]  ==  [i_]
   , primitiveHoles [false, zero]  ==  [b_, i_]
@@ -62,14 +94,14 @@ tests n  =
       , hole (undefined :: Int -> Int -> Int)
       ]
 
-  , primitiveHoles [false, true, andE, orE, zero, one, plus, times]  ==
-      [ hole (undefined :: Bool)
-      , hole (undefined :: Int)
-      , hole (undefined :: Bool -> Bool)
-      , hole (undefined :: Int -> Int)
-      , hole (undefined :: Bool -> Bool -> Bool)
-      , hole (undefined :: Int -> Int -> Int)
-      ]
+  , primitiveHoles [false, true, andE, orE, zero, one, plus, times]
+    == [ hole (undefined :: Bool)
+       , hole (undefined :: Int)
+       , hole (undefined :: Bool -> Bool)
+       , hole (undefined :: Int -> Int)
+       , hole (undefined :: Bool -> Bool -> Bool)
+       , hole (undefined :: Int -> Int -> Int)
+       ]
 
   , holds n $ \es -> all (`elem` primitiveHoles es) (map holeAsTypeOf es)
   , fails n $ \es -> primitiveHoles es == map holeAsTypeOf es
