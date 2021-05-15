@@ -18,6 +18,7 @@ module Conjure.Expr
   , applicationOld
   , compareSimplicity
   , ifFor
+  , primitiveHoles
 
   , module Conjure.Utils
   )
@@ -172,3 +173,15 @@ applicationOld ff es  =  appn ff
 -- if you want recursive functions to be considered and produced.
 ifFor :: Typeable a => a -> Expr
 ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
+
+primitiveHoles :: [Expr] -> [Expr]
+primitiveHoles prims  =  sort $ ph hs
+  where
+  hs  =  nub $ map holeAsTypeOf prims
+  ph  =  iterateUntil (==) ps
+  ps es  =  nub $ es ++ sq es
+  sq es  =  nub $ map holeAsTypeOf $ catMaybes [e1 $$ e2 | e1 <- es, e2 <- es]
+-- FIXME: the function above is quite inefficient.
+--        Should run fast for a small number of types,
+--        but if this number increases runtime may start
+--        to become significant.

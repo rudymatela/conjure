@@ -147,6 +147,7 @@ src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
 test/conjurable.o: \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   test/conjurable.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
@@ -156,10 +157,12 @@ test/conjurable.o: \
   src/Conjure/Conjurable.hs
 test/conjurable: \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   test/conjurable.hs \
   mk/toplibs
 test/expr.o: \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   test/expr.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
@@ -169,10 +172,14 @@ test/expr.o: \
   src/Conjure/Conjurable.hs
 test/expr: \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   test/expr.hs \
   mk/toplibs
+test/Test/ListableExpr.o: \
+  test/Test/ListableExpr.hs
 test/Test.o: \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure.hs \
@@ -181,10 +188,12 @@ test/Test.o: \
   src/Conjure/Conjurable.hs
 test/Test: \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   mk/toplibs
 test/utils.o: \
   test/utils.hs \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure.hs \
@@ -194,4 +203,5 @@ test/utils.o: \
 test/utils: \
   test/utils.hs \
   test/Test.hs \
+  test/Test/ListableExpr.hs \
   mk/toplibs

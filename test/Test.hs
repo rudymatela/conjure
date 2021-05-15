@@ -20,6 +20,7 @@ import System.Exit (exitFailure)
 import System.Environment (getArgs)
 
 import Test.LeanCheck
+import Test.ListableExpr
 
 import Conjure
 import Conjure.Expr hiding (delete, insert)
