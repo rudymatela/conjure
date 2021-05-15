@@ -39,3 +39,4 @@ bench/ill-hit
 proto/u-conjure
 test/expr
 test/conjurable
+test/utils

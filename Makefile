@@ -19,7 +19,8 @@ EG = \
 
 TESTS = \
   test/expr \
-  test/conjurable
+  test/conjurable \
+  test/utils
 
 all: mk/toplibs
 

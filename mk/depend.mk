@@ -182,3 +182,16 @@ test/Test.o: \
 test/Test: \
   test/Test.hs \
   mk/toplibs
+test/utils.o: \
+  test/utils.hs \
+  test/Test.hs \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs
+test/utils: \
+  test/utils.hs \
+  test/Test.hs \
+  mk/toplibs
