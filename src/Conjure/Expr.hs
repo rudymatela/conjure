@@ -20,6 +20,7 @@ module Conjure.Expr
   , compareSimplicity
   , ifFor
   , primitiveHoles
+  , primitiveApplications
 
   , module Conjure.Utils
   )
@@ -190,3 +191,11 @@ primitiveHoles prims  =  sort $ ph hs
 --        Should run fast for a small number of types,
 --        but if this number increases runtime may start
 --        to become significant.
+
+primitiveApplications :: [Expr] -> [Expr]
+primitiveApplications prims  =  concat
+                             .  takeWhile (not . null)
+                             .  iterate (>$$< hs)
+                             $  prims
+  where
+  hs  =  primitiveHoles prims
