@@ -194,7 +194,4 @@ primitiveHoles prims  =  sort $ ph hs
 
 primitiveApplications :: [Expr] -> [[Expr]]
 primitiveApplications prims  =  takeWhile (not . null)
-                             .  iterate (>$$< hs)
-                             $  prims
-  where
-  hs  =  primitiveHoles prims
+                             $  iterate (>$$< primitiveHoles prims) prims
