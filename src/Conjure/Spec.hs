@@ -97,7 +97,7 @@ type Spec3 a b c d = [((a,b,c),d)]
 -- > xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 --
 -- (cf. 'Spec1', 'conjure1With')
-conjure1 :: (Eq a, Show a, Conjurable a, Conjurable b)
+conjure1 :: (Eq a, Eq b, Show a, Conjurable a, Conjurable b)
          => String -> Spec1 a b -> [Expr] -> IO ()
 conjure1  =  conjure1With args
 
@@ -133,7 +133,7 @@ conjure1  =  conjure1With args
 -- (cf. 'Spec2', 'conjure2With')
 conjure2 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
-            , Conjurable c
+            , Conjurable c, Eq c
             ) => String -> Spec2 a b c -> [Expr] -> IO ()
 conjure2  =  conjure2With args
 
@@ -144,7 +144,7 @@ conjure2  =  conjure2With args
 conjure3 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c, Eq c, Show c
-            , Conjurable d
+            , Conjurable d, Eq d
             ) => String -> Spec3 a b c d -> [Expr] -> IO ()
 conjure3  =  conjure3With args
 
