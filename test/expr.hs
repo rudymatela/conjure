@@ -106,22 +106,25 @@ tests n  =
   , holds n $ \es -> all (`elem` primitiveHoles es) (map holeAsTypeOf es)
   , fails n $ \es -> primitiveHoles es == map holeAsTypeOf es
 
-  , map show (primitiveApplications [false, true, andE, orE, zero, one, plus, times])
-    == [ "False :: Bool"
-       , "True :: Bool"
-       , "(&&) :: Bool -> Bool -> Bool"
-       , "(||) :: Bool -> Bool -> Bool"
-       , "0 :: Int"
-       , "1 :: Int"
-       , "(+) :: Int -> Int -> Int"
-       , "(*) :: Int -> Int -> Int"
-       , "(_ &&) :: Bool -> Bool"
-       , "(_ ||) :: Bool -> Bool"
-       , "(_ +) :: Int -> Int"
-       , "(_ *) :: Int -> Int"
-       , "_ && _ :: Bool"
-       , "_ || _ :: Bool"
-       , "_ + _ :: Int"
-       , "_ * _ :: Int"
+  , map (map show) (primitiveApplications [false, true, andE, orE, zero, one, plus, times])
+    == [ [ "False :: Bool"
+         , "True :: Bool"
+         , "(&&) :: Bool -> Bool -> Bool"
+         , "(||) :: Bool -> Bool -> Bool"
+         , "0 :: Int"
+         , "1 :: Int"
+         , "(+) :: Int -> Int -> Int"
+         , "(*) :: Int -> Int -> Int"
+         ]
+       , [ "(_ &&) :: Bool -> Bool"
+         , "(_ ||) :: Bool -> Bool"
+         , "(_ +) :: Int -> Int"
+         , "(_ *) :: Int -> Int"
+         ]
+       , [ "_ && _ :: Bool"
+         , "_ || _ :: Bool"
+         , "_ + _ :: Int"
+         , "_ * _ :: Int"
+         ]
        ]
   ]

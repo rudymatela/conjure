@@ -192,9 +192,8 @@ primitiveHoles prims  =  sort $ ph hs
 --        but if this number increases runtime may start
 --        to become significant.
 
-primitiveApplications :: [Expr] -> [Expr]
-primitiveApplications prims  =  concat
-                             .  takeWhile (not . null)
+primitiveApplications :: [Expr] -> [[Expr]]
+primitiveApplications prims  =  takeWhile (not . null)
                              .  iterate (>$$< hs)
                              $  prims
   where
