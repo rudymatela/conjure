@@ -153,7 +153,10 @@ tests n  =
   , holds n $ \(SameTypeE e1 e2) -> let e3 = fillBFS e1 e2
                                     in e3 == e1
                                     || length (holes e3) == length (holes e1) - 1 + length (holes e2)
-  ]
 
-hasHole :: Expr -> Bool
-hasHole  =  any isHole . values
+  , boupCandidates i_ [zero, one, plus] =$ map sort . take 12 $=
+    townCandidates i_ [zero, one, plus]
+
+  , holds n $ \e es -> not (any hasHole es)
+                   ==> boupCandidates e es =$ map sort . take 12 $= townCandidates e es
+  ]

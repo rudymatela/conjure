@@ -11,6 +11,7 @@ module Test
   , module Conjure.Expr
   , module Conjure.Conjurable
   , module Test.LeanCheck
+  , module Test.LeanCheck.Utils
   , module Test.ListableExpr
   , module Conjure.Candidates
 
@@ -22,6 +23,7 @@ import System.Exit (exitFailure)
 import System.Environment (getArgs)
 
 import Test.LeanCheck
+import Test.LeanCheck.Utils
 import Test.ListableExpr
 import Conjure.Candidates
 

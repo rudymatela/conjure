@@ -11,6 +11,7 @@ module Conjure.Expr
   ( module Data.Express
   , module Data.Express.Fixtures
 
+  , hasHole
   , (>$$<)
   , funToVar
   , recursexpr
@@ -226,3 +227,6 @@ fillBFS e e'  =  fst (f e)
     (ex', mx)  =  f ex
   f e | isHole e && typ e == typ e'  =  (e', Just 0)
       | otherwise                    =  (e, Nothing)
+
+hasHole :: Expr -> Bool
+hasHole  =  any isHole . values

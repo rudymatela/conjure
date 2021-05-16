@@ -10,6 +10,7 @@
 module Conjure.Candidates
   ( boupCandidates
   , townCandidates
+  , dropTrail
   )
 where
 
@@ -17,10 +18,19 @@ import Conjure.Expr
 import Test.LeanCheck
 
 boupCandidates :: Expr -> [Expr] -> [[Expr]]
-boupCandidates appn primitives  =  undefined
+boupCandidates appn primitives  =  dropTrail $ filterT (\e -> typ e == typ appn) boup
+  where
+  boup :: [[Expr]]
+  boup = expressionsT [primitives]
+
+  expressionsT ds  =  ds \/ (delay $ productMaybeWith ($$) es es)
+    where
+    es = expressionsT ds
 
 townCandidates :: Expr -> [Expr] -> [[Expr]]
-townCandidates appn primitives  =  town [[holeAsTypeOf appn]]
+townCandidates appn primitives  =  normalizeT
+                                $  filterT (not . hasHole)
+                                $  town [[holeAsTypeOf appn]]
   where
   town :: [[Expr]] -> [[Expr]]
   town ((e:es):ess)  =  [[e]] \/ town (expand e \/ (es:ess))
@@ -42,3 +52,16 @@ townCandidates appn primitives  =  town [[holeAsTypeOf appn]]
   expressionsT ds  =  ds \/ (delay $ productMaybeWith ($$) es es)
     where
     es = expressionsT ds
+
+-- like normalizeT, but considers 6 empty tiers as an infinite trail of tiers
+-- this should only be used on testing
+dropTrail :: [[a]] -> [[a]]
+dropTrail []  =  []
+dropTrail [[]]  =  []
+dropTrail [[],[]]  =  []
+dropTrail [[],[],[]]  =  []
+dropTrail [[],[],[],[]]  =  []
+dropTrail [[],[],[],[],[]]  =  []
+dropTrail [[],[],[],[],[],[]]  =  []
+dropTrail ([]:[]:[]:[]:[]:[]:_)  =   []
+dropTrail (xs:xss)  =  xs:dropTrail xss
