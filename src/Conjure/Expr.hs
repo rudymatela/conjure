@@ -21,6 +21,9 @@ module Conjure.Expr
   , ifFor
   , primitiveHoles
   , primitiveApplications
+  , valuesBFS
+  , holesBFS
+  , fillBFS
 
   , module Conjure.Utils
   )
@@ -195,3 +198,31 @@ primitiveHoles prims  =  sort $ ph hs
 primitiveApplications :: [Expr] -> [[Expr]]
 primitiveApplications prims  =  takeWhile (not . null)
                              $  iterate (>$$< primitiveHoles prims) prims
+
+-- lists terminal values in BFS order
+valuesBFS :: Expr -> [Expr]
+valuesBFS  =  concat . bfs
+  where
+  bfs :: Expr -> [[Expr]]
+  bfs (ef :$ ex)  =  [] : mzip (bfs ef) (bfs ex)
+  bfs e  =  [[e]]
+
+-- lists holes in BFS order
+holesBFS :: Expr -> [Expr]
+holesBFS  =  filter isHole . valuesBFS
+
+fillBFS :: Expr -> Expr -> Expr
+fillBFS e e'  =  fst (f e)
+  where
+  f :: Expr -> (Expr,Maybe Int)
+  f (ef :$ ex)  =  case (mf, mx) of
+    (Nothing, Nothing)             -> (ef :$ ex, Nothing)
+    (Just lf, Nothing)             -> (ef' :$ ex, Just $ lf+1)
+    (Nothing, Just lx)             -> (ef :$ ex', Just $ lx+1)
+    (Just lf, Just lx) | lf <= lx  -> (ef' :$ ex, Just $ lf+1)
+                       | otherwise -> (ef :$ ex', Just $ lx+1)
+    where
+    (ef', mf)  =  f ef
+    (ex', mx)  =  f ex
+  f e | isHole e && typ e == typ e'  =  (e', Just 0)
+      | otherwise                    =  (e, Nothing)

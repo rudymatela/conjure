@@ -11,6 +11,7 @@ module Test
   , module Conjure.Expr
   , module Conjure.Conjurable
   , module Test.LeanCheck
+  , module Test.ListableExpr
 
   , mainTest
   )

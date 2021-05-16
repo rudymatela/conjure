@@ -127,4 +127,33 @@ tests n  =
          , "_ * _ :: Int"
          ]
        ]
+
+  , holds n $ \e -> sort (valuesBFS e) == sort (values e)
+  , holds n $ \e -> holesBFS e == filter isHole (valuesBFS e)
+  , valuesBFS false == [false]
+  , valuesBFS true  == [true]
+  , valuesBFS zero  == [zero]
+  , valuesBFS one   == [one]
+  , valuesBFS (not' false) == [notE, false]
+  , valuesBFS (not' true)  == [notE, true]
+  , valuesBFS (not' $ not' true) == [notE, notE, true]
+  , valuesBFS (false -&&- true) == [true, andE, false]
+  , valuesBFS (true -||- false) == [false, orE, true]
+  , valuesBFS (one -*- two -+- three -*- xx)
+    == [plus, xx, two, times, three, times, one]
+    -- (((+) (((*) 1) 2)) (((*) 3) x))
+
+  , fillBFS (b_ -&&- b_) false == (b_ -&&- false)
+  , fillBFS (b_ -&&- b_) (b_ -&&- b_) == (b_ -&&- (b_ -&&- b_))
+  , fillBFS (b_ -&&- (b_ -&&- b_)) false == (false -&&- (b_ -&&- b_))
+  , fillBFS (b_ -&&- (b_ -&&- b_)) (b_ -&&- b_) == ((b_ -&&- b_) -&&- (b_ -&&- b_))
+  , fillBFS ((b_ -&&- b_) -&&- (b_ -&&- b_)) false == ((b_ -&&- b_) -&&- (b_ -&&- false))
+  , fillBFS true false == true
+
+  , holds n $ \(SameTypeE e1 e2) -> let e3 = fillBFS e1 e2
+                                    in e3 == e1
+                                    || length (holes e3) == length (holes e1) - 1 + length (holes e2)
   ]
+
+hasHole :: Expr -> Bool
+hasHole  =  any isHole . values
