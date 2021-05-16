@@ -19,6 +19,7 @@ module Conjure.Utils
   , count
   , nubOn
   , iterateUntil
+  , mzip
   )
 where
 
@@ -42,3 +43,9 @@ iterateUntil (?) f  =  iu
        | otherwise  =  iu fx
     where
     fx  =  f x
+
+mzip :: Monoid a => [a] -> [a] -> [a]
+mzip [] []  =  []
+mzip [] ys  =  ys
+mzip xs []  =  xs
+mzip (x:xs) (y:ys)  =  x <> y : mzip xs ys

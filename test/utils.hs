@@ -12,4 +12,10 @@ tests n  =
 
   , holds n $ \x -> iterateUntil (==) (`quot` (2 :: Int)) x == 0
   , holds n $ \xs -> iterateUntil (==) (drop 1) xs == ([]::[Bool])
+
+  , holds n $ \xs ys -> length xs == length ys
+                    ==> zipWith (<>) xs ys == mzip xs (ys :: [[Int]])
+
+  , holds n $ \xs ys -> length xs >= length ys
+                    ==> zipWith (<>) xs (ys <> repeat mempty) == mzip xs (ys :: [[Int]])
   ]
