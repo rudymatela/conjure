@@ -20,12 +20,12 @@ boupCandidates :: Expr -> [Expr] -> [[Expr]]
 boupCandidates appn primitives  =  undefined
 
 townCandidates :: Expr -> [Expr] -> [[Expr]]
-townCandidates appn primitives  =  tod [[holeAsTypeOf appn]]
+townCandidates appn primitives  =  town [[holeAsTypeOf appn]]
   where
-  tod :: [[Expr]] -> [[Expr]]
-  tod ((e:es):ess)  =  [[e]] \/ tod (expand e \/ (es:ess))
-  tod ([]:ess)  =  []:tod ess
-  tod []  =  []
+  town :: [[Expr]] -> [[Expr]]
+  town ((e:es):ess)  =  [[e]] \/ town (expand e \/ (es:ess))
+  town ([]:ess)  =  []:town ess
+  town []  =  []
 
   papps :: [[Expr]]
   papps  =  primitiveApplications primitives
