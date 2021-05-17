@@ -20,6 +20,7 @@
 import Data.List
 import Data.Maybe
 import Data.Express
+import Data.Typeable
 import Test.LeanCheck.Error
 
 square :: Int -> Int
@@ -47,13 +48,22 @@ second [x,y]  =  y
 second [x,y,z]  =  y
 second [x,y,z,w]  =  y
 
+reverse' :: [Int] -> [Int]
+reverse' []  =  []
+reverse' [x]  =  [x]
+reverse' [x,y]  =  [y,x]
+reverse' [x,y,z]  =  [z,y,x]
+reverse' [x,y,z,w]  =  [w,z,y,x]
+reverse' [x,y,z,w,v]  =  [v,w,z,y,x]
+reverse' [x,y,z,w,v,u]  =  [u,v,w,z,y,x]
+
 main :: IO ()
 main  =  do
-  value "square" (square :: Int -> Int) `conjureFrom` intBackground
-  value "add" (add :: Int -> Int -> Int) `conjureFrom` intBackground
-  value "fact" (fact :: Int -> Int) `conjureFrom` intBackground
+  conjure "square" square intBackground
+  conjure "add"    add    intBackground
+  conjure "fact"   fact   intBackground
 
-  value "==>" (==>) `conjureFrom`
+  conjure "==>" (==>)
     [ val False
     , val True
     , value "not" not
@@ -61,8 +71,8 @@ main  =  do
     , value "||" (||)
     ]
 
-  value "second" (second :: [Int] -> Int) `conjureFrom` listBackground
-  value "reverse" (reverse :: [Int] -> [Int]) `conjureFrom` listBackground
+  conjure "second"  second   listBackground
+  conjure "reverse" reverse' listBackground
   where
   intBackground :: [Expr]
   intBackground  =
@@ -85,6 +95,8 @@ main  =  do
     , value "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
+conjure :: Typeable f => String -> f -> [Expr] -> IO ()
+conjure nm f primitives  =  value nm f `conjureFrom` primitives
 
 conjureFrom :: Expr -> [Expr] -> IO ()
 ff `conjureFrom` es  =  do
