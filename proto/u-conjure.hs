@@ -120,20 +120,19 @@ ff `conjureFrom` es  =  do
          , isDefined e
          ]
   ffxx  =  mostGeneralCanonicalVariation
-        .  fromJust
         $  application ff es
   (_:xxs)  =  unfoldApp ffxx
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 
-application :: Expr -> [Expr] -> Maybe Expr
+application :: Expr -> [Expr] -> Expr
 application ff es  =  appn ff
   where
   appn ff
     | isFun ff   =  case [e | Just (_ :$ e) <- (map (ff $$)) es] of
-                    [] -> Nothing  -- could not find type representative in es
+                    [] -> error "application: could not find type representative"
                     (e:_) -> appn (ff :$ holeAsTypeOf e)
-    | otherwise  =  Just ff
+    | otherwise  =  ff
 
 
 candidateExprsFrom :: [Expr] -> [Expr]
