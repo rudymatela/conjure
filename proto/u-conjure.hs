@@ -116,7 +116,7 @@ conjpure nm f primitives  =  (ff,rs)
   where
   ff  =  value nm f
   rs  =  [ ffxx -==- e
-         | e <- candidateExprsFrom $ xxs ++ filter isGround primitives
+         | e <- candidateExprsFrom $ xxs ++ primitives
          , isWellTyped (ffxx -==- e)
          , isTrue (ffxx -==- e)
          , isDefined e
@@ -124,6 +124,7 @@ conjpure nm f primitives  =  (ff,rs)
   ffxx  =  mostGeneralCanonicalVariation
         $  application ff primitives
   (_:xxs)  =  unfoldApp ffxx
+  bss  =  definedBinds ffxx
 
 
 definedBinds :: Expr -> [[(Expr,Expr)]]
