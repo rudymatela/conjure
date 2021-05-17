@@ -107,6 +107,13 @@ conjure nm f primitives  =  do
     (e:_) -> putStrLn $ showEq e
   putStrLn ""
   where
+  (ff,rs)  =  conjpure nm f primitives
+  showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
+
+
+conjpure :: Typeable f => String -> f -> [Expr] -> (Expr,[Expr])
+conjpure nm f primitives  =  (ff,rs)
+  where
   ff  =  value nm f
   rrff  =  ('_':nm) `varAsTypeOf` ff
   rs  =  [ ffxx -==- e
@@ -118,7 +125,6 @@ conjure nm f primitives  =  do
   ffxx  =  mostGeneralCanonicalVariation
         $  application ff primitives
   (_:xxs)  =  unfoldApp ffxx
-  showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 
 application :: Expr -> [Expr] -> Expr
