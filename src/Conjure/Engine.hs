@@ -32,7 +32,7 @@ import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 
-import Test.Speculate.Reason (isRootNormalE, isNormal)
+import Test.Speculate.Reason (isRootNormalE)
 import Test.Speculate.Engine (theoryFromAtoms, groundBinds)
 
 import Conjure.Expr
@@ -203,12 +203,10 @@ candidateExprsT :: Conjurable f
                 -> [[Expr]]
                 -> [[Expr]]
 candidateExprsT nm f sz mc (===) ess  =
---candidateExprsTT keep $ [ef:exs] \/ ess
-  candidatesTD keep (holeAsTypeOf efxyzs) (concat $ [ef:exs] \/ ess)
+  candidateExprsTT keep $ [ef:exs] \/ ess
   where
-  efxyzs  =  conjureVarApplication nm f
-  (ef:exs)  =  unfoldApp efxyzs
-  keep e  =  isNormal thy e && count (== ef) (vars e) <= mc
+  (ef:exs)  =  unfoldApp $ conjureVarApplication nm f
+  keep e  =  isRootNormalE thy e && count (== ef) (vars e) <= mc
   thy  =  theoryFromAtoms (===) sz $ [conjureHoles f ++ falseAndTrue]
                                   \/ filterT (`notElem` falseAndTrue) ess
   falseAndTrue  =  [val False, val True]
@@ -221,25 +219,3 @@ candidateExprsTT keep  =  exprT
              $  ess \/ (delay $ productMaybeWith ($$) rss rss)
     where
     rss = exprT ess
-
-
-candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]
-candidatesTD keep h primitives  =  filterT (not . hasHole)
-                                $  town [[h]]
-  where
-  most = mostGeneralCanonicalVariation
-
-  town :: [[Expr]] -> [[Expr]]
-  town ((e:es):ess) | keep (most e)  =  [[e]] \/ town (expand e \/ (es:ess))
-                    | otherwise      =  town (es:ess)
-  town ([]:ess)  =  []:town ess
-  town []  =  []
-
-  expand :: Expr -> [[Expr]]
-  expand e  =  case holesBFS e of
-    [] -> []
-    (h:_) -> mapT (fillBFS e) (replacementsFor h)
-
-  replacementsFor :: Expr -> [[Expr]]
-  replacementsFor h  =  filterT (\e -> typ e == typ h)
-                     $  primitiveApplications primitives
