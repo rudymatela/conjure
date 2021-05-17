@@ -99,11 +99,7 @@ main  =  do
 
 
 conjure :: Typeable f => String -> f -> [Expr] -> IO ()
-conjure nm f primitives  =  value nm f `conjureFrom` primitives
-
-
-conjureFrom :: Expr -> [Expr] -> IO ()
-ff `conjureFrom` es  =  do
+conjure nm f primitives  =  do
   print ff  -- prints the type signature
   case rs of
     []    -> putStrLn $ "cannot conjure"
@@ -111,16 +107,16 @@ ff `conjureFrom` es  =  do
     (e:_) -> putStrLn $ showEq e
   putStrLn ""
   where
-  nm (Value s _)  =  s
-  rrff  =  ('_':nm ff) `varAsTypeOf` ff
+  ff  =  value nm f
+  rrff  =  ('_':nm) `varAsTypeOf` ff
   rs  =  [ ffxx -==- e
-         | e <- candidateExprsFrom $ [rrff] ++ xxs ++ filter isGround es
+         | e <- candidateExprsFrom $ [rrff] ++ xxs ++ filter isGround primitives
          , isWellTyped (ffxx -==- e)
          , isTrue (ffxx -==- e)
          , isDefined e
          ]
   ffxx  =  mostGeneralCanonicalVariation
-        $  application ff es
+        $  application ff primitives
   (_:xxs)  =  unfoldApp ffxx
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
