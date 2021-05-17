@@ -215,13 +215,6 @@ lhs, rhs :: Expr -> Expr
 lhs (((Value "==" _) :$ e) :$ _)  =  e
 rhs (((Value "==" _) :$ _) :$ e)  =  e
 
-compareResult :: (Int,Expr) -> (Int,Expr) -> Ordering
-compareResult (n1,e1) (n2,e2)  =  n2 `compare` n1
-                               <> e1 `compareSimplicity` e2
-
-(%) :: Int -> Int -> Int
-x % y  =  x * 100 `div` y
-
 -- Debug: application that always works
 ($$**) :: Expr -> Expr -> Maybe Expr
 e1 $$** e2  =  Just $ e1 :$ e2
