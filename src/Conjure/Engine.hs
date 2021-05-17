@@ -39,6 +39,53 @@ import Conjure.Expr
 import Conjure.Conjurable
 
 
+-- | Conjures an implementation of a partially defined function.
+--
+-- Takes a 'String' with the name of a function,
+-- a partially-defined function from a conjurable type,
+-- and a list of building blocks encoded as 'Expr's.
+--
+-- For example, given:
+--
+-- > square :: Int -> Int
+-- > square 0  =  0
+-- > square 1  =  1
+-- > square 2  =  4
+-- >
+-- > primitives :: [Expr]
+-- > primitives =
+-- >   [ val (0::Int)
+-- >   , val (1::Int)
+-- >   , value "+" ((+) :: Int -> Int -> Int)
+-- >   , value "*" ((*) :: Int -> Int -> Int)
+-- > ]
+--
+-- The conjure function does the following:
+--
+-- > > conjure "square" square primitives
+-- > square :: Int -> Int
+-- > -- testing 3 combinations of argument values
+-- > -- looking through 3 candidates of size 1
+-- > -- looking through 3 candidates of size 2
+-- > -- looking through 5 candidates of size 3
+-- > square x  =  x * x
+--
+-- The primitives list is defined with 'val' and 'value'.
+conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
+conjure  =  conjureWith args
+
+
+-- | Like 'conjure' but allows setting the maximum size of considered expressions
+--   instead of the default value of 12.
+--
+-- > conjureWithMaxSize 10 "function" function [...]
+conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Expr] -> IO ()
+conjureWithMaxSize sz  =  conjureWith args
+                       {  maxSize = sz
+                       ,  maxEquationSize = min sz (maxEquationSize args)
+                       }
+
+
 -- | Arguments to be passed to 'conjureWith' or 'conjpureWith'.
 --   See 'args' for the defaults.
 data Args = Args
@@ -70,6 +117,28 @@ args = Args
   , maxSearchTests     =  100000
   , forceTests         =  []
   }
+
+
+-- | Like 'conjure' but allows setting options through 'Args'/'args'.
+--
+-- > conjureWith args{maxSize = 11} "function" function [...]
+conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
+conjureWith args nm f es  =  do
+  print (var (head $ words nm) f)
+  putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
+  pr 1 rs
+  where
+  pr n []  =  putStrLn $ "cannot conjure"
+  pr n ((is,cs,es):rs)  =  do
+    putStrLn $ "-- looking through "
+            ++ show (length cs) ++ "/" ++ show (length es)
+            ++ " candidates of size " ++ show n
+    case is of
+      []     ->  pr (n+1) rs
+      (i:_)  ->  do putStrLn $ showEq i
+                    putStrLn ""
+  rs  =  zip3 iss css ess
+  (iss, css, ess, ts)  =  conjpureWith args nm f es
 
 
 -- | Like 'conjure' but in the pure world.
@@ -113,75 +182,6 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
         ++ fbss
     where
     e  =  ffxx -==- ffxx
-
-
--- | Conjures an implementation of a partially defined function.
---
--- Takes a 'String' with the name of a function,
--- a partially-defined function from a conjurable type,
--- and a list of building blocks encoded as 'Expr's.
---
--- For example, given:
---
--- > square :: Int -> Int
--- > square 0  =  0
--- > square 1  =  1
--- > square 2  =  4
--- >
--- > primitives :: [Expr]
--- > primitives =
--- >   [ val (0::Int)
--- >   , val (1::Int)
--- >   , value "+" ((+) :: Int -> Int -> Int)
--- >   , value "*" ((*) :: Int -> Int -> Int)
--- > ]
---
--- The conjure function does the following:
---
--- > > conjure "square" square primitives
--- > square :: Int -> Int
--- > -- testing 3 combinations of argument values
--- > -- looking through 3 candidates of size 1
--- > -- looking through 3 candidates of size 2
--- > -- looking through 5 candidates of size 3
--- > square x  =  x * x
---
--- The primitives list is defined with 'val' and 'value'.
-conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
-conjure  =  conjureWith args
-
-
--- | Like 'conjure' but allows setting the maximum size of considered expressions
---   instead of the default value of 9.
---
--- > conjureWithMaxSize 10 "function" function [...]
-conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Expr] -> IO ()
-conjureWithMaxSize sz  =  conjureWith args
-                       {  maxSize = sz
-                       ,  maxEquationSize = min sz (maxEquationSize args)
-                       }
-
-
--- | Like 'conjure' but allows setting options through 'Args'/'args'.
---
--- > conjureWith args{maxSize = 11} "function" function [...]
-conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
-conjureWith args nm f es  =  do
-  print (var (head $ words nm) f)
-  putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
-  pr 1 rs
-  where
-  pr n []  =  putStrLn $ "cannot conjure"
-  pr n ((is,cs,es):rs)  =  do
-    putStrLn $ "-- looking through "
-            ++ show (length cs) ++ "/" ++ show (length es)
-            ++ " candidates of size " ++ show n
-    case is of
-      []     ->  pr (n+1) rs
-      (i:_)  ->  do putStrLn $ showEq i
-                    putStrLn ""
-  rs  =  zip3 iss css ess
-  (iss, css, ess, ts)  =  conjpureWith args nm f es
 
 
 candidateExprs :: Conjurable f
