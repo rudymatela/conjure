@@ -38,6 +38,7 @@ import Test.Speculate.Engine (theoryFromAtoms, groundBinds)
 import Conjure.Expr
 import Conjure.Conjurable
 
+
 -- | Arguments to be passed to 'conjureWith' or 'conjpureWith'.
 --   See 'args' for the defaults.
 data Args = Args
@@ -49,6 +50,7 @@ data Args = Args
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
   , forceTests :: [[Expr]]  -- ^ force tests
   }
+
 
 -- | Default arguments to conjure.
 --
@@ -69,6 +71,7 @@ args = Args
   , forceTests         =  []
   }
 
+
 -- | Like 'conjure' but in the pure world.
 --
 -- Returns a triple with:
@@ -79,6 +82,7 @@ args = Args
 -- 4. a list of tests
 conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [[Expr]], [Expr])
 conjpure =  conjpureWith args
+
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [[Expr]], [Expr])
@@ -109,6 +113,7 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
         ++ fbss
     where
     e  =  ffxx -==- ffxx
+
 
 -- | Conjures an implementation of a partially defined function.
 --
@@ -145,6 +150,7 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
 conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
 conjure  =  conjureWith args
 
+
 -- | Like 'conjure' but allows setting the maximum size of considered expressions
 --   instead of the default value of 9.
 --
@@ -154,7 +160,6 @@ conjureWithMaxSize sz  =  conjureWith args
                        {  maxSize = sz
                        ,  maxEquationSize = min sz (maxEquationSize args)
                        }
-
 
 
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
@@ -178,6 +183,7 @@ conjureWith args nm f es  =  do
   rs  =  zip3 iss css ess
   (iss, css, ess, ts)  =  conjpureWith args nm f es
 
+
 candidateExprs :: Conjurable f
                => String -> f
                -> Int
@@ -187,6 +193,7 @@ candidateExprs :: Conjurable f
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =
   candidateExprsT nm f sz mc (===) [nub $ es ++ conjureIfs f]
+
 
 candidateExprsT :: Conjurable f
                 => String -> f
