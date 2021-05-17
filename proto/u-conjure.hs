@@ -112,14 +112,14 @@ conjure nm f primitives  =  do
 
 conjpure :: Typeable f => String -> f -> [Expr] -> [Expr]
 conjpure nm f primitives  =
-  [ ffxx -==- e
-  | e <- candidateExprsFrom $ xxs ++ primitives
-  , isTrue (ffxx -==- e)
+  [ appn -==- e
+  | e <- candidateExprsFrom $ exs ++ primitives
+  , isTrue (appn -==- e)
   ]
   where
-  ffxx  =  application nm f primitives
-  (ff:xxs)  =  unfoldApp ffxx
-  isTrue e  =  all (errorToFalse . eval False) . map (e //-) $ definedBinds ffxx
+  appn  =  application nm f primitives
+  (ef:exs)  =  unfoldApp appn
+  isTrue e  =  all (errorToFalse . eval False) . map (e //-) $ definedBinds appn
 
 
 definedBinds :: Expr -> [[(Expr,Expr)]]
