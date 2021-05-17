@@ -100,31 +100,27 @@ main  =  do
 
 conjure :: Typeable f => String -> f -> [Expr] -> IO ()
 conjure nm f primitives  =  do
-  print ff  -- prints the type signature
-  case rs of
+  print (value nm f) -- prints the type signature
+  case conjpure nm f primitives of
     []    -> putStrLn $ "cannot conjure"
 --  es    -> putStrLn $ unlines $ map showEq es  -- uncomment to show all found variations
     (e:_) -> putStrLn $ showEq e
   putStrLn ""
   where
-  (ff,rs)  =  conjpure nm f primitives
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 
-conjpure :: Typeable f => String -> f -> [Expr] -> (Expr,[Expr])
-conjpure nm f primitives  =  (ff,rs)
+conjpure :: Typeable f => String -> f -> [Expr] -> [Expr]
+conjpure nm f primitives  =
+  [ ffxx -==- e
+  | e <- candidateExprsFrom $ xxs ++ primitives
+  , isTrue (ffxx -==- e)
+  ]
   where
   ff  =  value nm f
-  rs  =  [ ffxx -==- e
-         | e <- candidateExprsFrom $ xxs ++ primitives
-         , isWellTyped (ffxx -==- e)
-         , isTrue (ffxx -==- e)
-         , isDefined e
-         ]
-  ffxx  =  mostGeneralCanonicalVariation
-        $  application ff primitives
+  ffxx  =  mostGeneralCanonicalVariation $ application ff primitives
   (_:xxs)  =  unfoldApp ffxx
-  bss  =  definedBinds ffxx
+  isTrue e  =  all (errorToFalse . eval False) . map (e //-) $ definedBinds ffxx
 
 
 definedBinds :: Expr -> [[(Expr,Expr)]]
