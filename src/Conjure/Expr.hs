@@ -25,6 +25,9 @@ module Conjure.Expr
   , valuesBFS
   , holesBFS
   , fillBFS
+  , showEq
+  , lhs
+  , rhs
 
   , module Conjure.Utils
   )
@@ -232,3 +235,10 @@ fillBFS e e'  =  fst (f e)
 hasHole :: Expr -> Bool
 hasHole  =  any isHole . values
 -- TODO: move hasHole into Express
+
+showEq :: Expr -> String
+showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
+
+lhs, rhs :: Expr -> Expr
+lhs (((Value "==" _) :$ e) :$ _)  =  e
+rhs (((Value "==" _) :$ _) :$ e)  =  e

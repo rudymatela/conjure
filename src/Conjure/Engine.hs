@@ -178,11 +178,6 @@ conjureWith args nm f es  =  do
                     putStrLn ""
   rs  =  zip3 iss css ess
   (iss, css, ess, ts)  =  conjpureWith args nm f es
-  showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
-
-lhs, rhs :: Expr -> Expr
-lhs (((Value "==" _) :$ e) :$ _)  =  e
-rhs (((Value "==" _) :$ _) :$ e)  =  e
 
 candidateExprs :: Conjurable f
                => String -> f
