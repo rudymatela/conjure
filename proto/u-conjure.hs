@@ -50,13 +50,8 @@ second [x,y,z]  =  y
 second [x,y,z,w]  =  y
 
 reverse' :: [Int] -> [Int]
-reverse' []  =  []
-reverse' [x]  =  [x]
 reverse' [x,y]  =  [y,x]
 reverse' [x,y,z]  =  [z,y,x]
-reverse' [x,y,z,w]  =  [w,z,y,x]
-reverse' [x,y,z,w,v]  =  [v,w,z,y,x]
-reverse' [x,y,z,w,v,u]  =  [u,v,w,z,y,x]
 
 
 main :: IO ()
