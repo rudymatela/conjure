@@ -223,6 +223,6 @@ e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
   t1  =  ktyp e1
   t2  =  ktyp e2
 
-ktyp :: Expr -> TypeRep
-ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
-ktyp e  =  typ e
+  ktyp :: Expr -> TypeRep
+  ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
+  ktyp e  =  typ e
