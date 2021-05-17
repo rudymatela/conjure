@@ -213,9 +213,9 @@ candidateExprsT nm f sz mc (===) ess  =
 
 
 candidateExprsTT :: (Expr -> Bool) -> [[Expr]] -> [[Expr]]
-candidateExprsTT keep  =  expressionsT
+candidateExprsTT keep  =  exprT
   where
-  expressionsT ds  =  filterT keep
-                   $  ds \/ (delay $ productMaybeWith ($$) es es)
+  exprT ess  =  filterT keep
+             $  ess \/ (delay $ productMaybeWith ($$) rss rss)
     where
-    es = expressionsT ds
+    rss = exprT ess
