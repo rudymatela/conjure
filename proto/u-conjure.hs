@@ -130,11 +130,10 @@ conjpure nm f primitives  =  (ff,rs)
 application :: Expr -> [Expr] -> Expr
 application ff es  =  appn ff
   where
-  appn ff
-    | isFun ff   =  case [e | Just (_ :$ e) <- (map (ff $$)) es] of
-                    [] -> error "application: could not find type representative"
-                    (e:_) -> appn (ff :$ holeAsTypeOf e)
-    | otherwise  =  ff
+  appn ff | isFun ff   =  case [e | Just (_ :$ e) <- (map (ff $$)) es] of
+                          [] -> error "application: could not find type representative"
+                          (e:_) -> appn (ff :$ holeAsTypeOf e)
+          | otherwise  =  ff
 
 
 candidateExprsFrom :: [Expr] -> [Expr]
