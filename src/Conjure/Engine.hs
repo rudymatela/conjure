@@ -27,14 +27,13 @@ where
 
 import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
-import qualified Data.Ratio
-import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
+
+import Test.LeanCheck
 import Test.LeanCheck.Tiers
-import Test.Speculate hiding ((===), Args(..), args)
-import Test.Speculate.Reason
-import Test.Speculate.Engine
-import Test.Speculate.Expr
-import System.IO
+import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
+
+import Test.Speculate.Reason (isRootNormalE)
+import Test.Speculate.Engine (theoryFromAtoms, groundBinds)
 
 import Conjure.Expr
 import Conjure.Conjurable
