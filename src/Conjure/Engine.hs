@@ -10,18 +10,18 @@
 -- (a.k.a.: functional inductive programming)
 {-# LANGUAGE CPP, RecordWildCards, TupleSections #-}
 module Conjure.Engine
-  ( module Data.Express
-  , module Data.Express.Fixtures
-  , module Test.Speculate.Engine
-  , module Test.Speculate.Reason
+  ( conjure
+  , conjureWithMaxSize
   , Args(..)
   , args
-  , conjure
   , conjureWith
-  , conjureWithMaxSize
   , conjpure
   , conjpureWith
   , candidateExprs
+  , module Data.Express
+  , module Data.Express.Fixtures
+  , module Test.Speculate.Engine
+  , module Test.Speculate.Reason
   )
 where
 
