@@ -1,5 +1,5 @@
 -- |
--- Module      : Conjure.Candidates
+-- Module      : TEst.Candidates
 -- Copyright   : (c) 2021 Rudy Matela
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
@@ -7,7 +7,7 @@
 -- Reference implementations of candidate generation.
 --
 -- Bottom-up and top-down
-module Conjure.Candidates
+module Test.Candidates
   ( boupCandidates
   , townCandidates
   , dropTrail

@@ -13,7 +13,7 @@ module Test
   , module Test.LeanCheck
   , module Test.LeanCheck.Utils
   , module Test.ListableExpr
-  , module Conjure.Candidates
+  , module Test.Candidates
 
   , mainTest
   )
@@ -25,7 +25,7 @@ import System.Environment (getArgs)
 import Test.LeanCheck
 import Test.LeanCheck.Utils
 import Test.ListableExpr
-import Conjure.Candidates
+import Test.Candidates
 
 import Conjure
 import Conjure.Expr hiding (delete, insert)
