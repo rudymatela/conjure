@@ -117,9 +117,8 @@ conjpure nm f primitives  =
   , isTrue (ffxx -==- e)
   ]
   where
-  ff  =  value nm f
-  ffxx  =  mostGeneralCanonicalVariation $ application ff primitives
-  (_:xxs)  =  unfoldApp ffxx
+  ffxx  =  mostGeneralCanonicalVariation $ application nm f primitives
+  (ff:xxs)  =  unfoldApp ffxx
   isTrue e  =  all (errorToFalse . eval False) . map (e //-) $ definedBinds ffxx
 
 
@@ -130,8 +129,8 @@ definedBinds ffxx  =  [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
   bss  =  take 360 $ groundBinds ffxx
 
 
-application :: Expr -> [Expr] -> Expr
-application ff es  =  appn ff
+application :: Typeable f => String -> f -> [Expr] -> Expr
+application nm f es  =  appn (value nm f)
   where
   appn ff | isFun ff   =  case [e | Just (_ :$ e) <- (map (ff $$)) es] of
                           [] -> error "application: could not find type representative"
