@@ -146,15 +146,6 @@ candidateExprsFrom  =  concat . take 6 . expressionsT
     es = expressionsT ds
 
 
-isTrue :: Expr -> Bool
-isTrue  =  all (errorToTrue . eval False) . take 60 . grounds
-
-
--- checks if a function is defined for at least one combination of argument values
-isDefined :: Expr -> Bool
-isDefined e  =  any (isJust . errorToNothing . eval False) . take 60 . grounds $ (e -==- e)
-
-
 (-==-) :: Expr -> Expr -> Expr
 ex -==- ey  =  headOr (val False) . map (:$ ey) $ mapMaybe ($$ ex)
   [ value "==" ((==) :: Int -> Int -> Bool)
@@ -170,10 +161,6 @@ ex -==- ey  =  headOr (val False) . map (:$ ey) $ mapMaybe ($$ ex)
 lhs, rhs :: Expr -> Expr
 lhs (((Value "==" _) :$ e) :$ _)  =  e
 rhs (((Value "==" _) :$ _) :$ e)  =  e
-
-
-grounds :: Expr -> [Expr]
-grounds e  =  map (e //-) $ groundBinds e
 
 
 groundBinds :: Expr -> [[(Expr,Expr)]]
