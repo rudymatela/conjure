@@ -203,7 +203,7 @@ candidateExprsT :: Conjurable f
                 -> [[Expr]]
                 -> [[Expr]]
 candidateExprsT nm f sz mc (===) ess  =
-  candidateExprsTT mc keep $ [ef:exs] \/ ess
+  candidateExprsTT keep $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ conjureVarApplication nm f
   keep e  =  isRootNormalE thy e && count (== ef) (vars e) <= mc
@@ -212,8 +212,8 @@ candidateExprsT nm f sz mc (===) ess  =
   falseAndTrue  =  [val False, val True]
 
 
-candidateExprsTT :: Int -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
-candidateExprsTT mc keep ess  =  expressionsT ess
+candidateExprsTT :: (Expr -> Bool) -> [[Expr]] -> [[Expr]]
+candidateExprsTT keep ess  =  expressionsT ess
   where
   expressionsT ds  =  filterT keep
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
