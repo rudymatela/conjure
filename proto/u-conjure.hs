@@ -126,6 +126,13 @@ conjpure nm f primitives  =  (ff,rs)
   (_:xxs)  =  unfoldApp ffxx
 
 
+definedBinds :: Expr -> [[(Expr,Expr)]]
+definedBinds ffxx  =  [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
+  where
+  e  =  ffxx -==- ffxx
+  bss  =  take 360 $ groundBinds ffxx
+
+
 application :: Expr -> [Expr] -> Expr
 application ff es  =  appn ff
   where
@@ -170,8 +177,11 @@ rhs (((Value "==" _) :$ _) :$ e)  =  e
 
 
 grounds :: Expr -> [Expr]
-grounds e  =  map (e //-)  .  concat
-           $  products [mapT ((,) v) (tiersFor v) | v <- nubVars e]
+grounds e  =  map (e //-) $ groundBinds e
+
+
+groundBinds :: Expr -> [[(Expr,Expr)]]
+groundBinds e  =  concat $ products [mapT ((,) v) (tiersFor v) | v <- nubVars e]
 
 
 tiersFor :: Expr -> [[Expr]]
