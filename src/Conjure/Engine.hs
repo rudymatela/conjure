@@ -180,6 +180,10 @@ conjureWith args nm f es  =  do
   (iss, css, ess, ts)  =  conjpureWith args nm f es
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
+lhs, rhs :: Expr -> Expr
+lhs (((Value "==" _) :$ e) :$ _)  =  e
+rhs (((Value "==" _) :$ _) :$ e)  =  e
+
 candidateExprs :: Conjurable f
                => String -> f
                -> Int
@@ -210,10 +214,6 @@ candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
     where
     es = expressionsT ds
-
-lhs, rhs :: Expr -> Expr
-lhs (((Value "==" _) :$ e) :$ _)  =  e
-rhs (((Value "==" _) :$ _) :$ e)  =  e
 
 -- Debug: application that always works
 ($$**) :: Expr -> Expr -> Maybe Expr
