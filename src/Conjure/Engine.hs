@@ -202,16 +202,19 @@ candidateExprsT :: Conjurable f
                 -> (Expr -> Expr -> Bool)
                 -> [[Expr]]
                 -> [[Expr]]
-candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
+candidateExprsT nm f sz mc (===) ess  =
+  candidateExprsTT mc keep $ [ef:exs] \/ ess
   where
   (ef:exs)  =  unfoldApp $ conjureVarApplication nm f
+  keep e  =  isRootNormalE thy e && count (== ef) (vars e) <= mc
+  thy  =  theoryFromAtoms (===) sz $ [conjureHoles f ++ falseAndTrue]
+                                  \/ filterT (`notElem` falseAndTrue) ess
   falseAndTrue  =  [val False, val True]
-  thy  =  theoryFromAtoms (===) sz $ [conjureHoles f ++ falseAndTrue] \/ filterT (`notElem` falseAndTrue) ess
-  nubET  =  id -- no nub, good enough results
-  -- nubET  =  discardLaterT (===) -- huge computational cost
-  expressionsT ds  =  nubET
-                   $  filterT (\e -> count (== ef) (vars e) <= mc)
-                   $  filterT (isRootNormalE thy)
+
+candidateExprsTT :: Int -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
+candidateExprsTT mc keep ess  =  expressionsT ess
+  where
+  expressionsT ds  =  filterT keep
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
     where
     es = expressionsT ds
