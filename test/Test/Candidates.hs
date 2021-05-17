@@ -37,16 +37,16 @@ townCandidates appn primitives  =  normalizeT
   town ([]:ess)  =  []:town ess
   town []  =  []
 
-  papps :: [[Expr]]
-  papps  =  primitiveApplications primitives
-
-  pappsFor :: Expr -> [[Expr]]
-  pappsFor h  =  filterT (\e -> typ e == typ h) papps
-
   expand :: Expr -> [[Expr]]
   expand e  =  case holesBFS e of
     [] -> []
     (h:_) -> mapT (fillBFS e) (pappsFor h)
+
+  pappsFor :: Expr -> [[Expr]]
+  pappsFor h  =  filterT (\e -> typ e == typ h) papps
+
+  papps :: [[Expr]]
+  papps  =  primitiveApplications primitives
 
 -- like normalizeT, but considers 6 empty tiers as an infinite trail of tiers
 -- this should only be used on testing
