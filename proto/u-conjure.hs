@@ -115,9 +115,8 @@ conjpure :: Typeable f => String -> f -> [Expr] -> (Expr,[Expr])
 conjpure nm f primitives  =  (ff,rs)
   where
   ff  =  value nm f
-  rrff  =  ('_':nm) `varAsTypeOf` ff
   rs  =  [ ffxx -==- e
-         | e <- candidateExprsFrom $ [rrff] ++ xxs ++ filter isGround primitives
+         | e <- candidateExprsFrom $ xxs ++ filter isGround primitives
          , isWellTyped (ffxx -==- e)
          , isTrue (ffxx -==- e)
          , isDefined e
