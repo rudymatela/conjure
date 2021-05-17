@@ -96,7 +96,7 @@ main  =  do
 conjure :: Typeable f => String -> f -> [Expr] -> IO ()
 conjure nm f primitives  =  do
   print (value nm f) -- prints the type signature
-  case conjpure nm f primitives of
+  case conjureImplementations nm f primitives of
     []    -> putStrLn $ "cannot conjure"
 --  es    -> putStrLn $ unlines $ map showEq es  -- uncomment to show all found variations
     (e:_) -> putStrLn $ showEq e
@@ -105,8 +105,8 @@ conjure nm f primitives  =  do
   showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
 
 
-conjpure :: Typeable f => String -> f -> [Expr] -> [Expr]
-conjpure nm f primitives  =
+conjureImplementations :: Typeable f => String -> f -> [Expr] -> [Expr]
+conjureImplementations nm f primitives  =
   [ appn -==- e
   | e <- candidateExprsFrom $ exs ++ primitives
   , isTrue (appn -==- e)
