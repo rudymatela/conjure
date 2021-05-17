@@ -28,6 +28,8 @@ module Conjure.Expr
   , showEq
   , lhs
   , rhs
+  , ($$**)
+  , ($$|<)
 
   , module Conjure.Utils
   )
@@ -36,6 +38,7 @@ where
 import Conjure.Utils
 
 import Data.Express
+import Data.Express.Utils.Typeable
 import Data.Express.Fixtures hiding ((-==-))
 
 -- | /O(n)/.
@@ -243,3 +246,20 @@ showEq e  =  "not an Eq: " ++ show e
 lhs, rhs :: Expr -> Expr
 lhs (((Value "==" _) :$ e) :$ _)  =  e
 rhs (((Value "==" _) :$ _) :$ e)  =  e
+
+-- Debug: application that always works
+($$**) :: Expr -> Expr -> Maybe Expr
+e1 $$** e2  =  Just $ e1 :$ e2
+
+-- Debug: application that works for the correct kinds
+($$|<) :: Expr -> Expr -> Maybe Expr
+e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
+               then Just $ e1 :$ e2
+               else Nothing
+  where
+  t1  =  ktyp e1
+  t2  =  ktyp e2
+
+  ktyp :: Expr -> TypeRep
+  ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
+  ktyp e  =  typ e

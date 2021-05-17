@@ -209,20 +209,3 @@ candidateExprsT nm f sz mc (===) ess  =  expressionsT $ [ef:exs] \/ ess
                    $  ds \/ (delay $ productMaybeWith ($$) es es)
     where
     es = expressionsT ds
-
--- Debug: application that always works
-($$**) :: Expr -> Expr -> Maybe Expr
-e1 $$** e2  =  Just $ e1 :$ e2
-
--- Debug: application that works for the correct kinds
-($$|<) :: Expr -> Expr -> Maybe Expr
-e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
-               then Just $ e1 :$ e2
-               else Nothing
-  where
-  t1  =  ktyp e1
-  t2  =  ktyp e2
-
-  ktyp :: Expr -> TypeRep
-  ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
-  ktyp e  =  typ e
