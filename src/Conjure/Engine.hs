@@ -211,6 +211,7 @@ candidateExprsT nm f sz mc (===) ess  =
                                   \/ filterT (`notElem` falseAndTrue) ess
   falseAndTrue  =  [val False, val True]
 
+
 candidateExprsTT :: Int -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
 candidateExprsTT mc keep ess  =  expressionsT ess
   where
