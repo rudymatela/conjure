@@ -237,7 +237,8 @@ hasHole  =  any isHole . values
 -- TODO: move hasHole into Express
 
 showEq :: Expr -> String
-showEq eq  =  showExpr (lhs eq) ++ "  =  " ++ showExpr (rhs eq)
+showEq (((Value "==" _) :$ lhs) :$ rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
+showEq e  =  "not an Eq: " ++ show e
 
 lhs, rhs :: Expr -> Expr
 lhs (((Value "==" _) :$ e) :$ _)  =  e
