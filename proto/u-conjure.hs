@@ -23,6 +23,7 @@ import Data.Express
 import Data.Typeable
 import Test.LeanCheck.Error
 
+
 square :: Int -> Int
 square 0  =  0
 square 1  =  1
@@ -56,6 +57,7 @@ reverse' [x,y,z]  =  [z,y,x]
 reverse' [x,y,z,w]  =  [w,z,y,x]
 reverse' [x,y,z,w,v]  =  [v,w,z,y,x]
 reverse' [x,y,z,w,v,u]  =  [u,v,w,z,y,x]
+
 
 main :: IO ()
 main  =  do
@@ -95,8 +97,10 @@ main  =  do
     , value "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
+
 conjure :: Typeable f => String -> f -> [Expr] -> IO ()
 conjure nm f primitives  =  value nm f `conjureFrom` primitives
+
 
 conjureFrom :: Expr -> [Expr] -> IO ()
 ff `conjureFrom` es  =  do
@@ -159,6 +163,7 @@ ex -==- ey  =  headOr (val False) . map (:$ ey) $ mapMaybe ($$ ex)
   where
   headOr x []     =  x
   headOr _ (x:_)  =  x
+
 
 lhs, rhs :: Expr -> Expr
 lhs (((Value "==" _) :$ e) :$ _)  =  e
