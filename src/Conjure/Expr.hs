@@ -11,7 +11,6 @@ module Conjure.Expr
   ( module Data.Express
   , module Data.Express.Fixtures
 
-  , hasHole
   , (>$$<)
   , funToVar
   , recursexpr
@@ -189,6 +188,7 @@ ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 -- | Application cross-product between lists of Exprs
 (>$$<) :: [Expr] -> [Expr] -> [Expr]
 exs >$$< eys  =  catMaybes [ex $$ ey | ex <- exs, ey <- eys]
+-- TODO: move >$$< into Data.Express?
 
 primitiveHoles :: [Expr] -> [Expr]
 primitiveHoles prims  =  sort $ ph hs
@@ -234,10 +234,6 @@ fillBFS e e'  =  fst (f e)
   f e | isHole e && typ e == typ e'  =  (e', Just 0)
       | otherwise                    =  (e, Nothing)
 -- TODO: move BFS functions into Express?
-
-hasHole :: Expr -> Bool
-hasHole  =  any isHole . values
--- TODO: move hasHole into Express
 
 showEq :: Expr -> String
 showEq (((Value "==" _) :$ lhs) :$ rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
