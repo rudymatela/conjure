@@ -37,39 +37,59 @@ add 0 1  =  1
 add 1 0  =  1
 add 1 1  =  2
 
-fact :: Int -> Int
-fact 0  =  1
-fact 1  =  1
-fact 2  =  2
-fact 3  =  6
-fact 4  =  24
+factorial :: Int -> Int
+factorial 0  =  1
+factorial 1  =  1
+factorial 2  =  2
+factorial 3  =  6
+factorial 4  =  24
 
 second :: [Int] -> Int
 second [x,y]  =  y
 second [x,y,z]  =  y
 second [x,y,z,w]  =  y
 
+-- reverse
 reverse' :: [Int] -> [Int]
 reverse' [x,y]  =  [y,x]
 reverse' [x,y,z]  =  [z,y,x]
 
+-- ++
+(+++) :: [Int] -> [Int] -> [Int]
+[x] +++ [y]  =  [x,y]
+[x,y] +++ [z,w]  =  [x,y,z,w]
+
 
 main :: IO ()
 main  =  do
-  conjure "square" square primitives
-  conjure "add"    add    primitives
-  conjure "fact"   fact   primitives
+  conjure "square"    square    primitives
+  conjure "add"       add       primitives
+  conjure "factorial" factorial primitives
 
-  conjure "==>" (==>)
-    [ val False
-    , val True
-    , value "not" not
-    , value "&&" (&&)
-    , value "||" (||)
+  conjure "factorial"   factorial
+    [ val (0 :: Int)
+    , val (1 :: Int)
+    , value "+" ((+) :: Int -> Int -> Int)
+    , value "*" ((*) :: Int -> Int -> Int)
+    , value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    , value "enumFromTo" (enumFromTo :: Int -> Int -> [Int])
     ]
 
   conjure "second"  second   listPrimitives
+  conjure "++"      (+++)    listPrimitives
   conjure "reverse" reverse' listPrimitives
+
+  -- even by using fold and some cheating,
+  -- this function is out of reach
+  --  reverse xs  =  foldr (\x xs -> xs ++ [x]) [] xs
+  --  reverse xs  =  foldr (flip (++) . unit) [] xs
+  conjure "reverse" reverse' $ listPrimitives ++
+    [ value "unit" ((:[]) :: Int -> [Int])
+    , value "++" ((++) :: [Int] -> [Int] -> [Int])
+    -- these last two are cheats:
+    , value "flip" (flip :: ([Int]->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
+    , value "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
+    ]
 
   where
 
@@ -92,7 +112,7 @@ main  =  do
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])
     , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "++" ((++) :: [Int] -> [Int] -> [Int])
+    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
 
@@ -137,7 +157,7 @@ application nm f es  =  mostGeneralCanonicalVariation $ appn (value nm f)
 
 
 candidateExprsFrom :: [Expr] -> [Expr]
-candidateExprsFrom  =  concat . take 6 . expressionsT
+candidateExprsFrom  =  concat . take 7 . expressionsT
   where
   expressionsT ds  =  [ds] \/ (delay $ productMaybeWith ($$) es es)
     where
