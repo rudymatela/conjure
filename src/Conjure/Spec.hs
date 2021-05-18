@@ -150,7 +150,7 @@ conjure3  =  conjure3With args
 
 
 -- | Like 'conjure1' but allows setting options through 'Args'/'args'.
-conjure1With :: (Eq a, Show a, Conjurable a, Conjurable b)
+conjure1With :: (Eq a, Eq b, Show a, Conjurable a, Conjurable b)
              => Args -> String -> Spec1 a b -> [Expr] -> IO ()
 conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
   where
@@ -160,7 +160,7 @@ conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
 -- | Like 'conjure2' but allows setting options through 'Args'/'args'.
 conjure2With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
-                , Conjurable c
+                , Conjurable c, Eq c
                 ) => Args -> String -> Spec2 a b c -> [Expr] -> IO ()
 conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
   where
@@ -171,7 +171,7 @@ conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
 conjure3With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c, Eq c, Show c
-                , Conjurable d
+                , Conjurable d, Eq d
                 ) => Args -> String -> Spec3 a b c d -> [Expr] -> IO ()
 conjure3With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun3 bs)
   where
