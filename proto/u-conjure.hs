@@ -56,9 +56,9 @@ reverse' [x,y,z]  =  [z,y,x]
 
 main :: IO ()
 main  =  do
-  conjure "square" square intBackground
-  conjure "add"    add    intBackground
-  conjure "fact"   fact   intBackground
+  conjure "square" square primitives
+  conjure "add"    add    primitives
+  conjure "fact"   fact   primitives
 
   conjure "==>" (==>)
     [ val False
@@ -68,11 +68,13 @@ main  =  do
     , value "||" (||)
     ]
 
-  conjure "second"  second   listBackground
-  conjure "reverse" reverse' listBackground
+  conjure "second"  second   listPrimitives
+  conjure "reverse" reverse' listPrimitives
+
   where
-  intBackground :: [Expr]
-  intBackground  =
+
+  primitives :: [Expr]
+  primitives =
     [ val (0 :: Int)
     , val (1 :: Int)
     , val (2 :: Int)
@@ -81,8 +83,9 @@ main  =  do
     , value "*" ((*) :: Int -> Int -> Int)
     , value "-" ((-) :: Int -> Int -> Int)
     ]
-  listBackground :: [Expr]
-  listBackground  =
+
+  listPrimitives :: [Expr]
+  listPrimitives =
     [ val (0 :: Int)
     , val (1 :: Int)
     , val ([] :: [Int])
