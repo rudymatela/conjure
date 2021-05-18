@@ -2,6 +2,14 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* require Express v0.1.10
+* code cleanup
+* improved testing
+
+
 v0.2.4
 ------
 
