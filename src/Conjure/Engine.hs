@@ -219,3 +219,25 @@ candidateExprsTT keep  =  exprT
              $  ess \/ (delay $ productMaybeWith ($$) rss rss)
     where
     rss = exprT ess
+
+
+candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]
+candidatesTD keep h primitives  =  filterT (not . hasHole)
+                                $  town [[h]]
+  where
+  most = mostGeneralCanonicalVariation
+
+  town :: [[Expr]] -> [[Expr]]
+  town ((e:es):ess) | keep (most e)  =  [[e]] \/ town (expand e \/ (es:ess))
+                    | otherwise      =  town (es:ess)
+  town ([]:ess)  =  []:town ess
+  town []  =  []
+
+  expand :: Expr -> [[Expr]]
+  expand e  =  case holesBFS e of
+    [] -> []
+    (h:_) -> mapT (fillBFS e) (replacementsFor h)
+
+  replacementsFor :: Expr -> [[Expr]]
+  replacementsFor h  =  filterT (\e -> typ e == typ h)
+                     $  primitiveApplications primitives
