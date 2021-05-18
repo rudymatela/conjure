@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.2.6
+------
 
 * require Express v0.1.10 due to `hasHole` being now exported there
 * require Eq result on `conjure1`, `conjure2` and `conjure3`
