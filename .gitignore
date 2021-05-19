@@ -36,6 +36,7 @@ eg/tapps
 eg/spec
 bench/self
 bench/ill-hit
+bench/take-drop
 proto/u-conjure
 test/expr
 test/conjurable

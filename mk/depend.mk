@@ -20,6 +20,17 @@ bench/self.o: \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
   bench/self.hs
+bench/take-drop: \
+  bench/take-drop.hs \
+  mk/toplibs
+bench/take-drop.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  bench/take-drop.hs
 eg/arith: \
   eg/arith.hs \
   mk/toplibs

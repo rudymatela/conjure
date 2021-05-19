@@ -1,0 +1,26 @@
+drop :: Int -> [A] -> [A]
+-- testing 60 combinations of argument values
+-- looking through 1/10 candidates of size 1
+-- looking through 1/8 candidates of size 2
+-- looking through 3/14 candidates of size 3
+-- looking through 7/26 candidates of size 4
+-- looking through 13/45 candidates of size 5
+-- looking through 23/84 candidates of size 6
+-- looking through 45/172 candidates of size 7
+-- looking through 111/376 candidates of size 8
+-- looking through 301/879 candidates of size 9
+-- looking through 789/2115 candidates of size 10
+cannot conjure
+take :: Int -> [A] -> [A]
+-- testing 60 combinations of argument values
+-- looking through 2/13 candidates of size 1
+-- looking through 2/11 candidates of size 2
+-- looking through 6/22 candidates of size 3
+-- looking through 18/51 candidates of size 4
+-- looking through 34/105 candidates of size 5
+-- looking through 94/244 candidates of size 6
+-- looking through 268/628 candidates of size 7
+-- looking through 792/1736 candidates of size 8
+-- looking through 2378/5054 candidates of size 9
+-- looking through 6912/14794 candidates of size 10
+cannot conjure

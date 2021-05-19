@@ -15,6 +15,7 @@ EG = \
   eg/tapps \
   bench/ill-hit \
   bench/self \
+  bench/take-drop \
   proto/u-conjure
 
 TESTS = \
