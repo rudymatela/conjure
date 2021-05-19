@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.2.8
+------
 
 * export the `A`, `B`, `C`, `D`, `E` and `F` helper types
 
