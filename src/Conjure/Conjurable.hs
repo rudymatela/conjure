@@ -106,6 +106,9 @@ class Typeable a => Conjurable a where
   conjureSubTypes :: a -> Reification
   conjureSubTypes _  =  id
 
+  conjureIf :: a -> Expr
+  conjureIf   =  ifFor
+
 
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
@@ -304,6 +307,7 @@ instance ( Conjurable a, Listable a, Show a
 instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
+  conjureIf f  =  conjureIf (f undefined)
 
 argTy :: (a -> b) -> a
 argTy _  =  undefined

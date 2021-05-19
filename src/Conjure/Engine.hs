@@ -25,6 +25,8 @@ module Conjure.Engine
   )
 where
 
+import Control.Monad (when)
+
 import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
 
@@ -130,6 +132,7 @@ conjureWith args nm f es  =  do
   where
   pr n []  =  putStrLn $ "cannot conjure"
   pr n ((is,cs,es):rs)  =  do
+    -- when (n==1) $ putStrLn $ unlines $ map show es
     putStrLn $ "-- looking through "
             ++ show (length cs) ++ "/" ++ show (length es)
             ++ " candidates of size " ++ show n
@@ -192,7 +195,7 @@ candidateExprs :: Conjurable f
                -> [Expr]
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =
-  candidateExprsT nm f sz mc (===) [nub $ es ++ conjureIfs f]
+  candidateExprsT nm f sz mc (===) [nub $ es ++ [conjureIf f]]
 
 
 candidateExprsT :: Conjurable f

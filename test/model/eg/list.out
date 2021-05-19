@@ -1,63 +1,63 @@
 length :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/9 candidates of size 1
+-- looking through 2/8 candidates of size 1
 -- looking through 1/5 candidates of size 2
--- looking through 2/7 candidates of size 3
--- looking through 3/12 candidates of size 4
--- looking through 5/17 candidates of size 5
--- looking through 11/30 candidates of size 6
--- looking through 22/57 candidates of size 7
--- looking through 51/119 candidates of size 8
--- looking through 95/240 candidates of size 9
+-- looking through 2/6 candidates of size 3
+-- looking through 3/10 candidates of size 4
+-- looking through 5/14 candidates of size 5
+-- looking through 11/24 candidates of size 6
+-- looking through 20/42 candidates of size 7
+-- looking through 45/81 candidates of size 8
+-- looking through 79/151 candidates of size 9
 length xs  =  if null xs then 0 else 1 + length (tail xs)
 
 reverse :: [Int] -> [Int]
 -- testing 60 combinations of argument values
--- looking through 2/10 candidates of size 1
+-- looking through 2/9 candidates of size 1
 -- looking through 4/9 candidates of size 2
--- looking through 9/23 candidates of size 3
--- looking through 24/56 candidates of size 4
--- looking through 65/153 candidates of size 5
--- looking through 215/466 candidates of size 6
--- looking through 673/1462 candidates of size 7
--- looking through 2176/4680 candidates of size 8
--- looking through 7126/15229 candidates of size 9
--- looking through 23619/50202 candidates of size 10
--- looking through 79162/167174 candidates of size 11
+-- looking through 9/22 candidates of size 3
+-- looking through 24/52 candidates of size 4
+-- looking through 65/145 candidates of size 5
+-- looking through 215/436 candidates of size 6
+-- looking through 673/1380 candidates of size 7
+-- looking through 2174/4406 candidates of size 8
+-- looking through 7100/14313 candidates of size 9
+-- looking through 23503/47186 candidates of size 10
+-- looking through 78714/157020 candidates of size 11
 reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]
 -- testing 60 combinations of argument values
--- looking through 2/9 candidates of size 1
+-- looking through 2/8 candidates of size 1
 -- looking through 4/7 candidates of size 2
--- looking through 6/18 candidates of size 3
--- looking through 12/38 candidates of size 4
--- looking through 31/81 candidates of size 5
--- looking through 98/207 candidates of size 6
--- looking through 287/576 candidates of size 7
--- looking through 790/1661 candidates of size 8
--- looking through 2192/4759 candidates of size 9
--- looking through 6352/13661 candidates of size 10
+-- looking through 6/17 candidates of size 3
+-- looking through 12/34 candidates of size 4
+-- looking through 31/73 candidates of size 5
+-- looking through 98/187 candidates of size 6
+-- looking through 287/530 candidates of size 7
+-- looking through 790/1527 candidates of size 8
+-- looking through 2188/4331 candidates of size 9
+-- looking through 6290/12371 candidates of size 10
 sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
--- looking through 3/10 candidates of size 1
+-- looking through 3/9 candidates of size 1
 -- looking through 3/11 candidates of size 2
--- looking through 12/28 candidates of size 3
--- looking through 39/81 candidates of size 4
--- looking through 83/212 candidates of size 5
--- looking through 290/623 candidates of size 6
--- looking through 1013/2039 candidates of size 7
--- looking through 3482/6732 candidates of size 8
--- looking through 11207/22507 candidates of size 9
--- looking through 36383/74650 candidates of size 10
--- looking through 124785/250463 candidates of size 11
+-- looking through 12/26 candidates of size 3
+-- looking through 39/78 candidates of size 4
+-- looking through 83/194 candidates of size 5
+-- looking through 290/578 candidates of size 6
+-- looking through 1013/1893 candidates of size 7
+-- looking through 3482/6235 candidates of size 8
+-- looking through 11171/20833 candidates of size 9
+-- looking through 36185/68539 candidates of size 10
+-- looking through 123417/229652 candidates of size 11
 xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 
 length :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/9 candidates of size 1
+-- looking through 2/8 candidates of size 1
 -- looking through 1/4 candidates of size 2
 -- looking through 1/6 candidates of size 3
 -- looking through 4/13 candidates of size 4
@@ -67,7 +67,7 @@ length xs  =  foldr (const (1 +)) 0 xs
 
 reverse :: [Int] -> [Int]
 -- testing 60 combinations of argument values
--- looking through 2/10 candidates of size 1
+-- looking through 2/9 candidates of size 1
 -- looking through 2/6 candidates of size 2
 -- looking through 1/8 candidates of size 3
 -- looking through 5/14 candidates of size 4
@@ -78,7 +78,7 @@ reverse xs  =  foldr (flip (++) . unit) [] xs
 
 sort :: [Int] -> [Int]
 -- testing 60 combinations of argument values
--- looking through 2/7 candidates of size 1
+-- looking through 2/6 candidates of size 1
 -- looking through 2/3 candidates of size 2
 -- looking through 0/2 candidates of size 3
 -- looking through 2/4 candidates of size 4
@@ -86,7 +86,7 @@ sort xs  =  foldr insert [] xs
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
--- looking through 3/8 candidates of size 1
+-- looking through 3/7 candidates of size 1
 -- looking through 0/4 candidates of size 2
 -- looking through 9/12 candidates of size 3
 -- looking through 4/4 candidates of size 4

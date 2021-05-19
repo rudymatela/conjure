@@ -1,44 +1,44 @@
 and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
--- looking through 2/12 candidates of size 1
--- looking through 3/12 candidates of size 2
--- looking through 6/25 candidates of size 3
--- looking through 6/48 candidates of size 4
--- looking through 16/84 candidates of size 5
--- looking through 41/185 candidates of size 6
--- looking through 103/447 candidates of size 7
--- looking through 278/1123 candidates of size 8
--- looking through 752/2982 candidates of size 9
+-- looking through 2/11 candidates of size 1
+-- looking through 3/10 candidates of size 2
+-- looking through 6/20 candidates of size 3
+-- looking through 6/37 candidates of size 4
+-- looking through 16/67 candidates of size 5
+-- looking through 41/146 candidates of size 6
+-- looking through 87/339 candidates of size 7
+-- looking through 214/780 candidates of size 8
+-- looking through 592/1961 candidates of size 9
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
--- looking through 2/12 candidates of size 1
--- looking through 3/12 candidates of size 2
--- looking through 6/25 candidates of size 3
--- looking through 6/48 candidates of size 4
--- looking through 16/84 candidates of size 5
--- looking through 41/185 candidates of size 6
--- looking through 103/447 candidates of size 7
--- looking through 278/1123 candidates of size 8
--- looking through 752/2982 candidates of size 9
--- looking through 1963/7993 candidates of size 10
--- looking through 5427/21497 candidates of size 11
+-- looking through 2/11 candidates of size 1
+-- looking through 3/10 candidates of size 2
+-- looking through 6/20 candidates of size 3
+-- looking through 6/37 candidates of size 4
+-- looking through 16/67 candidates of size 5
+-- looking through 41/146 candidates of size 6
+-- looking through 87/339 candidates of size 7
+-- looking through 214/780 candidates of size 8
+-- looking through 592/1961 candidates of size 9
+-- looking through 1503/5082 candidates of size 10
+-- looking through 3987/13201 candidates of size 11
 or ps  =  not (null ps || not (head ps || or (tail ps)))
 
 and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
--- looking through 2/13 candidates of size 1
--- looking through 3/14 candidates of size 2
--- looking through 6/31 candidates of size 3
--- looking through 8/63 candidates of size 4
+-- looking through 2/12 candidates of size 1
+-- looking through 3/12 candidates of size 2
+-- looking through 6/26 candidates of size 3
+-- looking through 8/52 candidates of size 4
 and ps  =  foldr (&&) True ps
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
--- looking through 2/13 candidates of size 1
--- looking through 3/14 candidates of size 2
--- looking through 6/31 candidates of size 3
--- looking through 8/63 candidates of size 4
+-- looking through 2/12 candidates of size 1
+-- looking through 3/12 candidates of size 2
+-- looking through 6/26 candidates of size 3
+-- looking through 8/52 candidates of size 4
 or ps  =  foldr (||) False ps
 
