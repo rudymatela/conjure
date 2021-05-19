@@ -72,6 +72,9 @@ module Conjure
 -- * Pure interfaces
   , conjpure
   , conjpureWith
+
+-- * Helper test types
+  , A, B, C, D, E, F
   )
 where
 

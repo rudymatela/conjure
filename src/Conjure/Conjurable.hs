@@ -24,6 +24,7 @@ module Conjure.Conjurable
   , conjureTiersFor
   , conjureAreEqual
   , conjureMkEquation
+  , A, B, C, D, E, F
   )
 where
 
@@ -382,6 +383,32 @@ instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Co
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes x  =  conjureType (realPart x)
+
+
+-- Conjurable helper types --
+instance Conjurable A where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable B where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable C where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable D where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable E where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+instance Conjurable F where
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
 
 
 -- Conjurable tuples --
