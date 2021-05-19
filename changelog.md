@@ -2,6 +2,12 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* only automatically include an `if` for the return type of the given function
+
+
 v0.2.8
 ------
 
