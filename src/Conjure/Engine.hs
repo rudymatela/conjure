@@ -195,33 +195,16 @@ candidateExprs :: Conjurable f
                -> [Expr]
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =
-  candidateExprsT nm f sz mc (===) [nub $ es ++ [conjureIf f]]
-
-
-candidateExprsT :: Conjurable f
-                => String -> f
-                -> Int
-                -> Int
-                -> (Expr -> Expr -> Bool)
-                -> [[Expr]]
-                -> [[Expr]]
-candidateExprsT nm f sz mc (===) ess  =
-  candidateExprsTT keep $ [ef:exs] \/ ess
+  enumerateApps keep $ nub $ (ef:exs) ++ es ++ ifs
   where
   (ef:exs)  =  unfoldApp $ conjureVarApplication nm f
   keep e  =  isRootNormalE thy e && count (== ef) (vars e) <= mc
-  thy  =  theoryFromAtoms (===) sz $ [conjureHoles f ++ falseAndTrue]
-                                  \/ filterT (`notElem` falseAndTrue) ess
+  thy  =  theoryFromAtoms (===) sz . (:[]) $ conjureHoles f
+                                          ++ falseAndTrue
+                                          ++ filter (`notElem` falseAndTrue) es
+                                          ++ ifs
   falseAndTrue  =  [val False, val True]
-
-
-candidateExprsTT :: (Expr -> Bool) -> [[Expr]] -> [[Expr]]
-candidateExprsTT keep  =  exprT
-  where
-  exprT ess  =  filterT keep
-             $  ess \/ (delay $ productMaybeWith ($$) rss rss)
-    where
-    rss = exprT ess
+  ifs  =  [conjureIf f]
 
 
 candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]

@@ -30,6 +30,8 @@ module Conjure.Expr
   , ($$**)
   , ($$|<)
 
+  , enumerateApps
+
   , module Conjure.Utils
   )
 where
@@ -39,6 +41,8 @@ import Conjure.Utils
 import Data.Express
 import Data.Express.Utils.Typeable
 import Data.Express.Fixtures hiding ((-==-))
+
+import Test.LeanCheck (filterT, (\/), delay, productMaybeWith)
 
 -- | /O(n)/.
 -- Compares the simplicity of two 'Expr's.
@@ -259,3 +263,15 @@ e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
   ktyp :: Expr -> TypeRep
   ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
   ktyp e  =  typ e
+
+
+-- -- Expression enumeration -- --
+
+
+enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateApps keep  =  exprT . (:[])
+  where
+  exprT ess  =  filterT keep
+             $  ess \/ (delay $ productMaybeWith ($$) rss rss)
+    where
+    rss = exprT ess
