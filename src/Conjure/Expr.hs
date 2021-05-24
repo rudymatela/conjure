@@ -278,7 +278,7 @@ possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
 -- -- Expression enumeration -- --
 
 enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateAppsFor  =  enumerateApps1For
+enumerateAppsFor  =  enumerateApps2For
 
 enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
 enumerateApps  =  enumerateApps1
