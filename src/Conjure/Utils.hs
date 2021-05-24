@@ -21,6 +21,7 @@ module Conjure.Utils
   , iterateUntil
   , mzip
   , groupOn
+  , sortOn
   )
 where
 
@@ -53,3 +54,8 @@ mzip (x:xs) (y:ys)  =  x <> y : mzip xs ys
 
 groupOn :: Eq b => (a -> b) -> [a] -> [[a]]
 groupOn f = groupBy ((==) `on` f)
+
+#if __GLASGOW_HASKELL__ < 710
+sortOn :: Ord b => (a -> b) -> [a] -> [a]
+sortOn f = sortBy (compare `on` f)
+#endif
