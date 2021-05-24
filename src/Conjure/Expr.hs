@@ -269,10 +269,13 @@ e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
 -- -- Expression enumeration -- --
 
 enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateAppsFor h keep  =  filterT (\e -> typ e == typ h) . enumerateApps keep
+enumerateAppsFor  =  enumerateApps1For
 
 enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
 enumerateApps  =  enumerateApps1
+
+enumerateApps1For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateApps1For h keep  =  filterT (\e -> typ e == typ h) . enumerateApps1 keep
 
 enumerateApps1 :: (Expr -> Bool) -> [Expr] -> [[Expr]]
 enumerateApps1 keep  =  exprT . (:[])
