@@ -195,7 +195,7 @@ candidateExprs :: Conjurable f
                -> [Expr]
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =
-  enumerateApps keep $ nub $ (ef:exs) ++ es ++ [conjureIf f]
+  enumerateAppsFor efxs keep $ nub $ (ef:exs) ++ es ++ [conjureIf f]
   where
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
