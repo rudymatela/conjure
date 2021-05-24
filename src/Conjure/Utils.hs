@@ -20,6 +20,7 @@ module Conjure.Utils
   , nubOn
   , iterateUntil
   , mzip
+  , groupOn
   )
 where
 
@@ -49,3 +50,6 @@ mzip [] []  =  []
 mzip [] ys  =  ys
 mzip xs []  =  xs
 mzip (x:xs) (y:ys)  =  x <> y : mzip xs ys
+
+groupOn :: Eq b => (a -> b) -> [a] -> [[a]]
+groupOn f = groupBy ((==) `on` f)
