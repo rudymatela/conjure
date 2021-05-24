@@ -44,7 +44,7 @@ import Data.Express
 import Data.Express.Utils.Typeable
 import Data.Express.Fixtures hiding ((-==-))
 
-import Test.LeanCheck (filterT, (\/), delay, productMaybeWith)
+import Test.LeanCheck (filterT, (\/), delay, productWith, productMaybeWith)
 
 -- | /O(n)/.
 -- Compares the simplicity of two 'Expr's.
@@ -310,3 +310,17 @@ enumerateApps2For h keep  =  map concat
       | otherwise  =  case [ef :$ ex | ef <- efs, ex <- exs, keep (ef :$ ex)] of
                       [] -> Nothing
                       es -> Just es
+
+enumerateApps3For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateApps3For h keep es  =  for h
+  where
+  hs :: [Expr]
+  hs  =  possibleHoles es
+  for :: Expr -> [[Expr]]
+  for h  =  [e | e <- es, typ h == typ e]
+         :  foldr (\/) [] [ filterT keep $ productWith (:$) (for hf) (for hx)
+                          | hf <- hs
+                          , hx <- hs
+                          , Just hfx <- [hf $$ hx]
+                          , typ h == typ hfx
+                          ]
