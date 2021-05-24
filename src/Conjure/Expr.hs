@@ -31,6 +31,7 @@ module Conjure.Expr
   , ($$|<)
 
   , enumerateApps
+  , enumerateAppsFor
 
   , module Conjure.Utils
   )
@@ -267,6 +268,8 @@ e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
 
 -- -- Expression enumeration -- --
 
+enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateAppsFor h keep  =  filterT (\e -> typ e == typ h) . enumerateApps keep
 
 enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
 enumerateApps  =  enumerateApps1
