@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.3.0
+------
 
 * only automatically include an `if` for the return type of the given function
 * add the `take-drop` benchmark
