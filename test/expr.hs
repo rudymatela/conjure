@@ -159,4 +159,33 @@ tests n  =
 
   , holds n $ \e es -> not (any hasHole es)
                    ==> boupCandidates e es =$ map sort . take 12 $= townCandidates e es
+
+  , possibleHoles [plus, times, zero, one]
+    == [ hole (undefined :: Int)
+       , hole (undefined :: Int -> Int)
+       , hole (undefined :: Int -> Int -> Int)
+       ]
+
+  , possibleHoles [andE, orE, false, true]
+    == [ hole (undefined :: Bool)
+       , hole (undefined :: Bool -> Bool)
+       , hole (undefined :: Bool -> Bool -> Bool)
+       ]
+
+  , possibleHoles [plus, times, zero, one, andE, orE, false, true]
+    == [ hole (undefined :: Bool)
+       , hole (undefined :: Int)
+       , hole (undefined :: Bool -> Bool)
+       , hole (undefined :: Int -> Int)
+       , hole (undefined :: Bool -> Bool -> Bool)
+       , hole (undefined :: Int -> Int -> Int)
+       ]
+
+  , possibleHoles [plus, times, zero, one, value "odd" (odd :: Int -> Bool)]
+    == [ hole (undefined :: Bool)
+       , hole (undefined :: Int)
+       , hole (undefined :: Int -> Bool)
+       , hole (undefined :: Int -> Int)
+       , hole (undefined :: Int -> Int -> Int)
+       ]
   ]

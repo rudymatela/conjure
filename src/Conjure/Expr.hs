@@ -29,6 +29,7 @@ module Conjure.Expr
   , rhs
   , ($$**)
   , ($$|<)
+  , possibleHoles
 
   , enumerateApps
   , enumerateAppsFor
@@ -264,6 +265,14 @@ e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
   ktyp :: Expr -> TypeRep
   ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
   ktyp e  =  typ e
+
+possibleHoles :: [Expr] -> [Expr]
+possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
+  where
+  ph hs  =  case nubSort [holeAsTypeOf hfx | hf <- hs, hx <- hs, Just hfx <- [hf $$ hx]] of
+            hs' | hs' == hs -> hs
+                | otherwise -> hs ++ ph hs'
+  nubSort  =  nub . sort -- TODO: this is O(n^2), make this O(n log n)
 
 
 -- -- Expression enumeration -- --
