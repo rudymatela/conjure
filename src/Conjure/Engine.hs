@@ -197,7 +197,8 @@ candidateExprs :: Conjurable f
 candidateExprs nm f sz mc (===) es  =
   enumerateApps keep $ nub $ (ef:exs) ++ es ++ [conjureIf f]
   where
-  (ef:exs)  =  unfoldApp $ conjureVarApplication nm f
+  efxs  =  conjureVarApplication nm f
+  (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e && count (== ef) (vars e) <= mc
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es ++ [conjureIf f]
