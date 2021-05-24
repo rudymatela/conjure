@@ -285,12 +285,19 @@ enumerateApps1 keep  =  exprT . (:[])
     where
     rss = exprT ess
 
-candidateApps2For :: Expr -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
-candidateApps2For h keep  =  map concat . filterT (\(e:_) -> typ e == typ h) . exprT . map (groupOn typ)
+enumerateApps2For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateApps2For h keep  =  map concat
+                          .  filterT (\(e:_) -> typ e == typ h)
+                          .  exprT
+                          .  map (groupOn typ . sortOn typ)
+                          .  (:[])
   where
   exprT :: [[[Expr]]] -> [[[Expr]]]
   exprT ess  =  ess \/ (delay $ productMaybeWith ($$**) rss rss)
     where
     rss = exprT ess
-    efs $$** exs | isJust (head efs $$ head exs)  =  Nothing
-                 | otherwise  =  Just [ef :$ ex | ef <- efs, ex <- exs, keep (ef :$ ex)]
+    efs $$** exs
+      | isNothing (head efs $$ head exs)  =  Nothing
+      | otherwise  =  case [ef :$ ex | ef <- efs, ex <- exs, keep (ef :$ ex)] of
+                      [] -> Nothing
+                      es -> Just es
