@@ -1,22 +1,22 @@
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
--- looking through 2/6 candidates of size 1
--- looking through 2/4 candidates of size 2
--- looking through 0/6 candidates of size 3
--- looking through 2/10 candidates of size 4
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 2 candidates of size 4
 factorial n  =  product (enumFromTo 1 n)
 
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
--- looking through 3/9 candidates of size 1
--- looking through 5/14 candidates of size 2
--- looking through 8/26 candidates of size 3
--- looking through 26/66 candidates of size 4
--- looking through 59/180 candidates of size 5
--- looking through 167/505 candidates of size 6
--- looking through 581/1521 candidates of size 7
--- looking through 1654/4809 candidates of size 8
--- looking through 5736/15120 candidates of size 9
--- looking through 17617/48943 candidates of size 10
+-- looking through 3 candidates of size 1
+-- looking through 5 candidates of size 2
+-- looking through 8 candidates of size 3
+-- looking through 26 candidates of size 4
+-- looking through 59 candidates of size 5
+-- looking through 167 candidates of size 6
+-- looking through 581 candidates of size 7
+-- looking through 1654 candidates of size 8
+-- looking through 5736 candidates of size 9
+-- looking through 17617 candidates of size 10
 factorial n  =  if n == 0 then 1 else n * factorial (dec n)
 

@@ -134,7 +134,7 @@ conjureWith args nm f es  =  do
   pr n ((is,cs,es):rs)  =  do
     -- when (n==1) $ putStrLn $ unlines $ map show es
     putStrLn $ "-- looking through "
-            ++ show (length cs) ++ "/" ++ show (length es)
+            ++ show (length cs)
             ++ " candidates of size " ++ show n
     case is of
       []     ->  pr (n+1) rs

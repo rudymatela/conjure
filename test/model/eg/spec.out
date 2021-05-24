@@ -1,29 +1,29 @@
 sum :: [Int] -> Int
 -- testing 3 combinations of argument values
--- looking through 1/8 candidates of size 1
--- looking through 2/5 candidates of size 2
--- looking through 2/7 candidates of size 3
--- looking through 2/8 candidates of size 4
--- looking through 5/13 candidates of size 5
--- looking through 10/23 candidates of size 6
--- looking through 19/39 candidates of size 7
--- looking through 34/68 candidates of size 8
--- looking through 64/123 candidates of size 9
--- looking through 129/237 candidates of size 10
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 5 candidates of size 5
+-- looking through 10 candidates of size 6
+-- looking through 19 candidates of size 7
+-- looking through 34 candidates of size 8
+-- looking through 64 candidates of size 9
+-- looking through 129 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
--- looking through 2/8 candidates of size 1
--- looking through 2/8 candidates of size 2
--- looking through 6/16 candidates of size 3
--- looking through 18/40 candidates of size 4
--- looking through 38/92 candidates of size 5
--- looking through 110/240 candidates of size 6
--- looking through 334/684 candidates of size 7
--- looking through 1018/1984 candidates of size 8
--- looking through 2958/5892 candidates of size 9
--- looking through 8614/17392 candidates of size 10
--- looking through 25910/51764 candidates of size 11
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 18 candidates of size 4
+-- looking through 38 candidates of size 5
+-- looking through 110 candidates of size 6
+-- looking through 334 candidates of size 7
+-- looking through 1018 candidates of size 8
+-- looking through 2958 candidates of size 9
+-- looking through 8614 candidates of size 10
+-- looking through 25910 candidates of size 11
 xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 

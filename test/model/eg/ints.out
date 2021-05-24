@@ -1,59 +1,59 @@
 second :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/10 candidates of size 1
--- looking through 2/8 candidates of size 2
--- looking through 3/10 candidates of size 3
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
 second xs  =  head (tail xs)
 
 third :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/10 candidates of size 1
--- looking through 2/8 candidates of size 2
--- looking through 3/10 candidates of size 3
--- looking through 5/16 candidates of size 4
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 5 candidates of size 4
 third xs  =  head (tail (tail xs))
 
 sum :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/10 candidates of size 1
--- looking through 2/8 candidates of size 2
--- looking through 3/10 candidates of size 3
--- looking through 5/16 candidates of size 4
--- looking through 13/30 candidates of size 5
--- looking through 26/62 candidates of size 6
--- looking through 59/126 candidates of size 7
--- looking through 140/286 candidates of size 8
--- looking through 326/660 candidates of size 9
--- looking through 776/1541 candidates of size 10
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 5 candidates of size 4
+-- looking through 13 candidates of size 5
+-- looking through 26 candidates of size 6
+-- looking through 59 candidates of size 7
+-- looking through 140 candidates of size 8
+-- looking through 326 candidates of size 9
+-- looking through 776 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 product :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/10 candidates of size 1
--- looking through 2/8 candidates of size 2
--- looking through 3/10 candidates of size 3
--- looking through 5/16 candidates of size 4
--- looking through 13/30 candidates of size 5
--- looking through 26/62 candidates of size 6
--- looking through 59/126 candidates of size 7
--- looking through 140/286 candidates of size 8
--- looking through 326/660 candidates of size 9
--- looking through 776/1541 candidates of size 10
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 5 candidates of size 4
+-- looking through 13 candidates of size 5
+-- looking through 26 candidates of size 6
+-- looking through 59 candidates of size 7
+-- looking through 140 candidates of size 8
+-- looking through 326 candidates of size 9
+-- looking through 776 candidates of size 10
 product xs  =  if null xs then 1 else head xs * product (tail xs)
 
 sum :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/11 candidates of size 1
--- looking through 2/10 candidates of size 2
--- looking through 3/14 candidates of size 3
--- looking through 8/24 candidates of size 4
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 8 candidates of size 4
 sum xs  =  foldr (+) 0 xs
 
 product :: [Int] -> Int
 -- testing 60 combinations of argument values
--- looking through 2/11 candidates of size 1
--- looking through 2/10 candidates of size 2
--- looking through 3/14 candidates of size 3
--- looking through 8/24 candidates of size 4
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 8 candidates of size 4
 product xs  =  foldr (*) 1 xs
 
