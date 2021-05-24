@@ -6,6 +6,8 @@ upcoming
 --------
 
 * only automatically include an `if` for the return type of the given function
+* add the `take-drop` benchmark
+* make bottom-up enumeration more type directed
 
 
 v0.2.8
