@@ -21,7 +21,9 @@ module Conjure.Utils
   , iterateUntil
   , mzip
   , groupOn
+#if __GLASGOW_HASKELL__ < 710
   , sortOn
+#endif
   )
 where
 
