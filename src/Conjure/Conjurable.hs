@@ -33,6 +33,7 @@ import Test.LeanCheck
 import Test.LeanCheck.Utils
 import Test.LeanCheck.Error (errorToFalse)
 import Conjure.Expr hiding (application)
+import Conjure.Constructors
 import Test.Speculate.Expr
 import Data.Functor ((<$>))
 import Control.Applicative ((<*>))

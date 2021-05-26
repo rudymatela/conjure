@@ -7,6 +7,7 @@ bench/ill-hit.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   bench/ill-hit.hs
 bench/self: \
@@ -18,6 +19,7 @@ bench/self.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   bench/self.hs
 bench/take-drop: \
@@ -29,6 +31,7 @@ bench/take-drop.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   bench/take-drop.hs
 eg/arith: \
@@ -40,6 +43,7 @@ eg/arith.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/arith.hs
 eg/bools: \
@@ -51,6 +55,7 @@ eg/bools.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/bools.hs
 eg/factorial: \
@@ -62,6 +67,7 @@ eg/factorial.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/factorial.hs
 eg/ints: \
@@ -73,6 +79,7 @@ eg/ints.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/ints.hs
 eg/list: \
@@ -84,6 +91,7 @@ eg/list.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/list.hs
 eg/spec: \
@@ -95,6 +103,7 @@ eg/spec.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/spec.hs
 eg/tapps: \
@@ -106,6 +115,7 @@ eg/tapps.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/tapps.hs
 mk/All.o: \
@@ -114,6 +124,7 @@ mk/All.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   mk/All.hs
 mk/Toplibs.o: \
@@ -122,6 +133,7 @@ mk/Toplibs.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   mk/Toplibs.hs
 proto/u-conjure.o: \
@@ -132,11 +144,15 @@ proto/u-conjure: \
 src/Conjure/Conjurable.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
+src/Conjure/Constructors.o: \
+  src/Conjure/Constructors.hs
 src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 src/Conjure/Expr.o: \
   src/Conjure/Utils.hs \
@@ -147,12 +163,14 @@ src/Conjure.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 src/Conjure/Spec.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
@@ -166,6 +184,7 @@ test/conjurable.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 test/conjurable: \
   test/Test.hs \
@@ -183,6 +202,7 @@ test/expr.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 test/expr: \
   test/Test.hs \
@@ -205,6 +225,7 @@ test/Test.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 test/Test: \
   test/Test.hs \
@@ -221,6 +242,7 @@ test/utils.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 test/utils: \
   test/utils.hs \
