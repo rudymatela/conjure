@@ -21,7 +21,7 @@ import Data.Express
 import Data.Express.Express
 import Data.Typeable (Typeable)
 
-class Typeable a => Constructors a where
+class Express a => Constructors a where
   constructors :: a -> [Expr]
 
 instance Constructors () where
@@ -44,36 +44,31 @@ instance Constructors Integer where
 instance Constructors Char where
   constructors _  =  []
 
-instance (Typeable a, Show a) => Constructors [a] where
+instance Express a => Constructors [a] where
   constructors xs  =  [ val ([] -: xs)
                       , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
                       ]
     where
     x  =  head xs
 
-instance ( Typeable a, Show a
-         , Typeable b, Show b
-         ) => Constructors (a,b) where
+instance (Express a, Express b) => Constructors (a,b) where
   constructors xy  =  [value "," ((,) ->>: xy) :$ hole x :$ hole y]
     where
     (x,y) = (undefined,undefined) -: xy
 
-instance ( Typeable a, Show a
-         , Typeable b, Show b
-         , Typeable c, Show c
-         ) => Constructors (a,b,c) where
+instance (Express a, Express b, Express c) => Constructors (a,b,c) where
   constructors xyz  =  [value ",," ((,,) ->>>: xyz) :$ hole x :$ hole y :$ hole z]
     where
     (x,y,z) = (undefined,undefined,undefined) -: xyz
 
-instance Typeable a => Constructors (Maybe a) where
+instance Express a => Constructors (Maybe a) where
   constructors mx  =  [ value "Nothing" (Nothing -: mx)
                       , value "Just" (Just ->: mx) :$ hole x
                       ]
     where
     x  =  Just undefined -: mx
 
-instance (Typeable a, Typeable b) => Constructors (Either a b) where
+instance (Express a, Express b) => Constructors (Either a b) where
   constructors exy  =  [ value "Left" (Left ->: exy) :$ hole x
                        , value "Right" (Right ->: exy) :$ hole y
                        ]
