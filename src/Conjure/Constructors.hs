@@ -32,7 +32,7 @@ instance Constructors Bool where
 
 constructorsNum :: (Show a, Num a, Typeable a) => a -> [Expr]
 constructorsNum x  =  [ val (0 -: x)
-                      , value "inc" ((+1) ->: x)
+                      , value "inc" ((+1) ->: x) :$ hole x
                       ]
 
 instance Constructors Int where
@@ -46,26 +46,37 @@ instance Constructors Char where
 
 instance (Typeable a, Show a) => Constructors [a] where
   constructors xs  =  [ val ([] -: xs)
-                      , value ":" ((:) ->>: xs)
+                      , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
                       ]
+    where
+    x  =  head xs
 
 instance ( Typeable a, Show a
          , Typeable b, Show b
          ) => Constructors (a,b) where
-  constructors xy  =  [value "," ((,) ->>: xy)]
+  constructors xy  =  [value "," ((,) ->>: xy) :$ hole x :$ hole y]
+    where
+    (x,y) = (undefined,undefined) -: xy
 
 instance ( Typeable a, Show a
          , Typeable b, Show b
          , Typeable c, Show c
          ) => Constructors (a,b,c) where
-  constructors xyz  =  [value ",," ((,,) ->>>: xyz)]
+  constructors xyz  =  [value ",," ((,,) ->>>: xyz) :$ hole x :$ hole y :$ hole z]
+    where
+    (x,y,z) = (undefined,undefined,undefined) -: xyz
 
 instance Typeable a => Constructors (Maybe a) where
   constructors mx  =  [ value "Nothing" (Nothing -: mx)
-                      , value "Just" (Just ->: mx)
+                      , value "Just" (Just ->: mx) :$ hole x
                       ]
+    where
+    x  =  Just undefined -: mx
 
 instance (Typeable a, Typeable b) => Constructors (Either a b) where
-  constructors exy  =  [ value "Left" (Left ->: exy)
-                       , value "Right" (Right ->: exy)
+  constructors exy  =  [ value "Left" (Left ->: exy) :$ hole x
+                       , value "Right" (Right ->: exy) :$ hole y
                        ]
+    where
+    x  =  Left undefined -: exy
+    y  =  Right undefined -: exy
