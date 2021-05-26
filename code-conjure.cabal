@@ -79,7 +79,7 @@ library
                , leancheck >= 0.9.6
                , template-haskell
                , speculate >= 0.4.6
-               , express >= 0.1.10
+               , express >= 0.1.12
   hs-source-dirs:      src
   default-language:    Haskell2010
 

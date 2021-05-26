@@ -29,12 +29,13 @@ import Control.Monad (when)
 
 import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
+import qualified Data.Express.Triexpr as T
 
 import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 
-import Test.Speculate.Reason (isRootNormalE)
+import Test.Speculate.Reason (Thy, rules, equations, canReduceTo)
 import Test.Speculate.Engine (theoryFromAtoms, groundBinds)
 
 import Conjure.Expr
@@ -224,3 +225,18 @@ candidatesTD keep h primitives  =  filterT (not . hasHole)
   replacementsFor :: Expr -> [[Expr]]
   replacementsFor h  =  filterT (\e -> typ e == typ h)
                      $  primitiveApplications primitives
+
+
+--- normality checks ---
+
+isRootNormal :: Thy -> Expr -> Bool
+isRootNormal thy e  =  null $ T.lookup e trie
+  where
+  trie  =  T.fromList (rules thy)
+
+isRootNormalE :: Thy -> Expr -> Bool
+isRootNormalE thy e  =  isRootNormal thy e
+                    &&  null (filter (e ->-) [e2 //- bs | (_,bs,e2) <- T.lookup e trie])
+  where
+  trie  =  T.fromList $ equations thy ++ map swap (equations thy)
+  (->-)  =  canReduceTo thy
