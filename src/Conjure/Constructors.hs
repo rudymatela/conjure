@@ -30,7 +30,7 @@ instance Constructors () where
 instance Constructors Bool where
   constructors _  =  [val False, val True]
 
-constructorsNum :: (Show a, Num a, Typeable a) => a -> [Expr]
+constructorsNum :: (Num a, Express a) => a -> [Expr]
 constructorsNum x  =  [ val (0 -: x)
                       , value "inc" ((+1) ->: x) :$ hole x
                       ]
