@@ -18,4 +18,12 @@ tests n  =
 
   , holds n $ \xs ys -> length xs >= length ys
                     ==> zipWith (<>) xs (ys <> repeat mempty) == mzip xs (ys :: [[Int]])
+
+  , isDeconstructor n ([]::[Int]) tail
+  , isDeconstructor n (0::Int) (\x -> x-1)
   ]
+
+isDeconstructor :: (Eq a, Ord a, Listable a, Show a) => Int -> a -> (a -> a) -> Bool
+isDeconstructor m z f  =  holds m $
+  \x -> x > z ==> length (take m $ takeWhile (> z) (iterate f x)) < m
+-- TODO: takeWhileNext (/=) in addition to takeWhile
