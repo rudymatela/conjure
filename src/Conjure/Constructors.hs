@@ -45,6 +45,9 @@ fxprExample  =  Fxpr
   (=-) = (,)
   infixr 0 =-
 
+fvaluate :: Fxpr -> Maybe a
+fvaluate  =  error "TODO: write me"
+
 class Express a => Constructors a where
   constructors :: a -> [Expr]
 
