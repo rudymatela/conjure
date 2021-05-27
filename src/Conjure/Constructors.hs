@@ -14,12 +14,33 @@
 {-# Language DeriveDataTypeable, StandaloneDeriving #-} -- for GHC < 7.10
 module Conjure.Constructors
   ( Constructors (..)
+  , Fxpr (..)
+  , fxprExample
   )
 where
 
 import Data.Express
 import Data.Express.Express
+import Data.Express.Fixtures
 import Data.Typeable (Typeable)
+
+data Fxpr =  Fxpr [(Expr,Expr)]  deriving (Eq, Ord)
+
+instance Show Fxpr where
+  show (Fxpr [])  =  "# empty definition #\n"
+  show (Fxpr bs)  =
+    unlines $ show f:[showExpr pat ++ "  =  " ++ showExpr exp | (pat,exp) <- bs]
+    where
+    (f:exs)  =  unfoldApp . fst $ head bs
+
+fxprExample :: Fxpr
+fxprExample  =  Fxpr
+  [ sum' nil           =-  zero
+  , sum' (xx -:- xxs)  =-  xx -+- sum' xxs
+  ]
+  where
+  (=-) = (,)
+  infixr 0 =-
 
 class Express a => Constructors a where
   constructors :: a -> [Expr]
