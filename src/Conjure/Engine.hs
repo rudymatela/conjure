@@ -200,9 +200,22 @@ candidateExprs nm f sz mc (===) es  =
   where
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
-  keep e  =  isRootNormalE thy e && count (== ef) (vars e) <= mc
+  keep e  =  isRootNormalE thy e
+          && count (== ef) (vars e) <= mc
+          && not (isInvalidRootRecursion efxs e)
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es ++ [conjureIf f]
+
+isInvalidRootRecursion :: Expr -> Expr -> Bool
+isInvalidRootRecursion efxs0 efxs1
+    | typ efxs0 /= typ efxs1         =  False  -- not a recursion
+    | ef0 /= ef1                     =  False  -- not a recursion
+    | efxs0 == efxs1                 =  True   -- invalid (infinite loop)
+    | ef0 `elem` values (fold exs1)  =  True   -- invalid (likely infinite loop)
+    | otherwise                      =  False  -- not invalid (valid)
+  where
+  (ef0:_)     =  unfoldApp efxs0
+  (ef1:exs1)  =  unfoldApp efxs1
 
 -- | Example:
 --

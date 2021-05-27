@@ -2,32 +2,32 @@ drop :: Int -> [A] -> [A]
 -- testing 60 combinations of argument values
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 7 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 23 candidates of size 6
--- looking through 45 candidates of size 7
--- looking through 111 candidates of size 8
--- looking through 301 candidates of size 9
--- looking through 789 candidates of size 10
--- looking through 1919 candidates of size 11
--- looking through 4539 candidates of size 12
--- looking through 10873 candidates of size 13
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 12 candidates of size 5
+-- looking through 22 candidates of size 6
+-- looking through 42 candidates of size 7
+-- looking through 96 candidates of size 8
+-- looking through 256 candidates of size 9
+-- looking through 686 candidates of size 10
+-- looking through 1702 candidates of size 11
+-- looking through 4048 candidates of size 12
+-- looking through 9636 candidates of size 13
 drop x y  =  if null y || x == 0 then y else drop (dec x) (tail y)
 
 take :: Int -> [A] -> [A]
 -- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 18 candidates of size 4
--- looking through 34 candidates of size 5
--- looking through 94 candidates of size 6
--- looking through 268 candidates of size 7
--- looking through 792 candidates of size 8
--- looking through 2378 candidates of size 9
--- looking through 6912 candidates of size 10
--- looking through 20324 candidates of size 11
--- looking through 61034 candidates of size 12
--- looking through 184544 candidates of size 13
+-- looking through 5 candidates of size 3
+-- looking through 17 candidates of size 4
+-- looking through 33 candidates of size 5
+-- looking through 89 candidates of size 6
+-- looking through 253 candidates of size 7
+-- looking through 739 candidates of size 8
+-- looking through 2227 candidates of size 9
+-- looking through 6509 candidates of size 10
+-- looking through 19109 candidates of size 11
+-- looking through 57251 candidates of size 12
+-- looking through 172899 candidates of size 13
 cannot conjure

@@ -1,42 +1,42 @@
 sum :: [Int] -> Int
 -- testing 4 combinations of argument values
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 5 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 59 candidates of size 7
--- looking through 140 candidates of size 8
--- looking through 326 candidates of size 9
--- looking through 776 candidates of size 10
+-- looking through 3 candidates of size 4
+-- looking through 9 candidates of size 5
+-- looking through 15 candidates of size 6
+-- looking through 40 candidates of size 7
+-- looking through 78 candidates of size 8
+-- looking through 191 candidates of size 9
+-- looking through 424 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 sum :: [Int] -> Int
 -- testing 6 combinations of argument values
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 5 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 59 candidates of size 7
--- looking through 140 candidates of size 8
--- looking through 326 candidates of size 9
--- looking through 776 candidates of size 10
+-- looking through 3 candidates of size 4
+-- looking through 9 candidates of size 5
+-- looking through 15 candidates of size 6
+-- looking through 40 candidates of size 7
+-- looking through 78 candidates of size 8
+-- looking through 191 candidates of size 9
+-- looking through 424 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 sum :: [Int] -> Int
 -- testing 6 combinations of argument values
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 5 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 59 candidates of size 7
--- looking through 140 candidates of size 8
--- looking through 326 candidates of size 9
--- looking through 776 candidates of size 10
+-- looking through 3 candidates of size 4
+-- looking through 9 candidates of size 5
+-- looking through 15 candidates of size 6
+-- looking through 40 candidates of size 7
+-- looking through 78 candidates of size 8
+-- looking through 191 candidates of size 9
+-- looking through 424 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
