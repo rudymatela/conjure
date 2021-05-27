@@ -55,6 +55,7 @@ instance (Express a, Fxpress b) => Fxpress (a -> b) where
                    | (p:ps,exp) <- cs
                    , bs <- maybeToList (match (expr x) p)
                    ]
+-- TODO: add exception above for "Num" values.
 
 
 class Express a => Constructors a where
