@@ -6,10 +6,10 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 4
 -- looking through 3 candidates of size 5
 -- looking through 6 candidates of size 6
--- looking through 13 candidates of size 7
--- looking through 23 candidates of size 8
--- looking through 41 candidates of size 9
--- looking through 79 candidates of size 10
+-- looking through 14 candidates of size 7
+-- looking through 25 candidates of size 8
+-- looking through 44 candidates of size 9
+-- looking through 86 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 (++) :: [Int] -> [Int] -> [Int]
@@ -21,9 +21,9 @@ sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 -- looking through 37 candidates of size 5
 -- looking through 105 candidates of size 6
 -- looking through 315 candidates of size 7
--- looking through 961 candidates of size 8
--- looking through 2817 candidates of size 9
--- looking through 8217 candidates of size 10
--- looking through 24671 candidates of size 11
+-- looking through 970 candidates of size 8
+-- looking through 2931 candidates of size 9
+-- looking through 8968 candidates of size 10
+-- looking through 28029 candidates of size 11
 xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 

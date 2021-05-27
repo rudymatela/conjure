@@ -6,9 +6,9 @@ length :: [Int] -> Int
 -- looking through 1 candidates of size 4
 -- looking through 5 candidates of size 5
 -- looking through 4 candidates of size 6
--- looking through 16 candidates of size 7
--- looking through 19 candidates of size 8
--- looking through 57 candidates of size 9
+-- looking through 17 candidates of size 7
+-- looking through 21 candidates of size 8
+-- looking through 61 candidates of size 9
 length xs  =  if null xs then 0 else 1 + length (tail xs)
 
 reverse :: [Int] -> [Int]
@@ -17,13 +17,13 @@ reverse :: [Int] -> [Int]
 -- looking through 3 candidates of size 2
 -- looking through 8 candidates of size 3
 -- looking through 20 candidates of size 4
--- looking through 55 candidates of size 5
--- looking through 178 candidates of size 6
--- looking through 558 candidates of size 7
--- looking through 1802 candidates of size 8
--- looking through 5863 candidates of size 9
--- looking through 19373 candidates of size 10
--- looking through 64683 candidates of size 11
+-- looking through 56 candidates of size 5
+-- looking through 185 candidates of size 6
+-- looking through 597 candidates of size 7
+-- looking through 2002 candidates of size 8
+-- looking through 6777 candidates of size 9
+-- looking through 23399 candidates of size 10
+-- looking through 81655 candidates of size 11
 reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]
@@ -33,11 +33,11 @@ sort :: [Int] -> [Int]
 -- looking through 5 candidates of size 3
 -- looking through 11 candidates of size 4
 -- looking through 26 candidates of size 5
--- looking through 80 candidates of size 6
--- looking through 232 candidates of size 7
--- looking through 648 candidates of size 8
--- looking through 1799 candidates of size 9
--- looking through 5148 candidates of size 10
+-- looking through 81 candidates of size 6
+-- looking through 239 candidates of size 7
+-- looking through 706 candidates of size 8
+-- looking through 2037 candidates of size 9
+-- looking through 6043 candidates of size 10
 sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 
 (++) :: [Int] -> [Int] -> [Int]
@@ -49,10 +49,10 @@ sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 -- looking through 82 candidates of size 5
 -- looking through 283 candidates of size 6
 -- looking through 982 candidates of size 7
--- looking through 3379 candidates of size 8
--- looking through 10900 candidates of size 9
--- looking through 35331 candidates of size 10
--- looking through 120334 candidates of size 11
+-- looking through 3443 candidates of size 8
+-- looking through 11786 candidates of size 9
+-- looking through 41190 candidates of size 10
+-- looking through 146606 candidates of size 11
 xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 
 length :: [Int] -> Int
@@ -71,9 +71,9 @@ reverse :: [Int] -> [Int]
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 1 candidates of size 5
+-- looking through 2 candidates of size 5
 -- looking through 14 candidates of size 6
--- looking through 29 candidates of size 7
+-- looking through 34 candidates of size 7
 reverse xs  =  foldr (flip (++) . unit) [] xs
 
 sort :: [Int] -> [Int]

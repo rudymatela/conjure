@@ -114,7 +114,7 @@ args :: Args
 args = Args
   { maxTests           =  60
   , maxSize            =  12
-  , maxRecursiveCalls  =   1
+  , maxRecursiveCalls  =   2
   , maxEquationSize    =   5
   , maxRecursionSize   =  60
   , maxSearchTests     =  100000
