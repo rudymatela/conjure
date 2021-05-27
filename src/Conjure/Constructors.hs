@@ -51,8 +51,8 @@ instance Fxpress a => Fxpress (Maybe a)
 instance (Fxpress a, Fxpress b) => Fxpress (Either a b)
 
 instance (Express a, Fxpress b) => Fxpress (a -> b) where
-  fvl cs x  =  fvl [ (ps,(exp //- bs))
-                   | ((p:ps),exp) <- cs
+  fvl cs x  =  fvl [ (ps,exp //- bs)
+                   | (p:ps,exp) <- cs
                    , bs <- maybeToList (match (expr x) p)
                    ]
 
