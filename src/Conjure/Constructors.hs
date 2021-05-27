@@ -17,9 +17,11 @@ module Conjure.Constructors
   , Fxpr (..)
   , Fxpress (..)
   , fxprExample
+  , fxprExample2
   )
 where
 
+import Conjure.Utils
 import Data.Express
 import Data.Express.Express
 import Data.Express.Fixtures
@@ -46,7 +48,21 @@ fxprExample  =  Fxpr
   (=-) = (,)
   infixr 0 =-
 
-class Fxpress a where
+fxprExample2 :: [([Expr],Expr)]
+fxprExample2  =
+  [ [nil]           =-  zero
+  , [(xx -:- xxs)]  =-  xx -+- sum' xxs
+  ]
+  where
+  (=-) = (,)
+  infixr 0 =-
+
+class Typeable a => Fxpress a where
+  fvl :: [([Expr],Expr)] -> a
+  fvl (([],e):_)  =  evl e
+  fvl _           =  error "fvl: incomplete pattern match"
+
+  -- TODO: remove, this will likely be uneeded
   fxpr :: a -> Expr -> Expr
   fxpr _  =  id
 
@@ -66,8 +82,7 @@ instance (Express a, Fxpress b) => Fxpress (a -> b) where
     argTy :: (a -> b) -> a
     argTy _  =  undefined
 
-fvaluate :: Fxpr -> [Expr] -> Maybe a
-fvaluate  =  error "TODO: write me"
+  fvl cs x  =  fvl [(ps,(exp //- bs)) | ((p:ps),exp) <- cs, bs <- maybeToList (match (expr x) p)]
 
 
 class Express a => Constructors a where
