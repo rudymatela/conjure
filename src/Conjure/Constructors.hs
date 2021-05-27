@@ -15,6 +15,7 @@
 module Conjure.Constructors
   ( Constructors (..)
   , Fxpr (..)
+  , Fxpress (..)
   , fxprExample
   )
 where
@@ -45,8 +46,29 @@ fxprExample  =  Fxpr
   (=-) = (,)
   infixr 0 =-
 
-fvaluate :: Fxpr -> Maybe a
+class Fxpress a where
+  fxpr :: a -> Expr -> Expr
+  fxpr _  =  id
+
+instance Fxpress ()
+instance Fxpress Int
+instance Fxpress Bool
+instance Fxpress Char
+instance Fxpress a => Fxpress [a]
+instance Fxpress a => Fxpress (Maybe a)
+instance (Fxpress a, Fxpress b) => Fxpress (Either a b)
+
+instance (Express a, Fxpress b) => Fxpress (a -> b) where
+  fxpr f e | typ (hole x) == typ e  =  expr (eval x e)
+           | otherwise              =  fxpr (f x) e
+    where
+    x  =  argTy f
+    argTy :: (a -> b) -> a
+    argTy _  =  undefined
+
+fvaluate :: Fxpr -> [Expr] -> Maybe a
 fvaluate  =  error "TODO: write me"
+
 
 class Express a => Constructors a where
   constructors :: a -> [Expr]
