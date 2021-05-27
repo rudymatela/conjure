@@ -24,6 +24,7 @@ module Conjure.Utils
 #if __GLASGOW_HASKELL__ < 710
   , sortOn
 #endif
+  , takeUntil
   )
 where
 
@@ -61,3 +62,6 @@ groupOn f = groupBy ((==) `on` f)
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
 sortOn f = sortBy (compare `on` f)
 #endif
+
+takeUntil :: (a -> Bool) -> [a] -> [a]
+takeUntil p  =  takeWhile (not . p)
