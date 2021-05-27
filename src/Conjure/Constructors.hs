@@ -33,6 +33,9 @@ instance Show Fxpr where
     where
     (f:exs)  =  unfoldApp . fst $ head bs
 
+okExpr :: Expr -> Bool
+okExpr  =  error "TODO: write me"
+
 fxprExample :: Fxpr
 fxprExample  =  Fxpr
   [ sum' nil           =-  zero
