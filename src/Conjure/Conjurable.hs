@@ -26,6 +26,7 @@ module Conjure.Conjurable
   , conjureAreEqual
   , conjureMkEquation
   , A, B, C, D, E, F
+  , conjureIsDeconstructor
   )
 where
 
@@ -189,6 +190,17 @@ conjureTiersFor f e  =  tf allTiers
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
+
+conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Expr -> Bool
+conjureIsDeconstructor f maxTests  =  isDeconstructor
+  where
+  isDeconstructor z d  =  count reachz xs >= m `div` 2
+    where
+    reachz x  =  x === z || length (take m $ takeUntil (=== z) (iterate (d :$) x)) < m
+    xs  =  take maxTests $ grounds (conjureTiersFor f) (holeAsTypeOf z)
+    m  =  length xs
+    (-==-)  =  conjureMkEquation f
+    e1 === e2  =  errorToFalse . eval False $ e1 -==- e2
 
 
 instance Conjurable () where

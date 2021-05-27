@@ -204,6 +204,35 @@ candidateExprs nm f sz mc (===) es  =
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es ++ [conjureIf f]
 
+-- | Example:
+--
+-- > > deconstructors "and" and
+-- > >   [ val False
+-- > >   , val True
+-- > >   , val ([]::[Bool])
+-- > >   , value "head" (head :: [Bool] -> Bool)
+-- > >   , value "tail" (tail :: [Bool] -> [Bool])
+-- > >   , value "drop1" (drop 1 :: [Bool] -> [Bool])
+-- > >   ]
+-- > [tail :: [Bool] -> [Bool]]
+--
+-- In this case, inc is a deconstructor as it converges for more than half the
+-- values:
+--
+-- > > deconstructors "negate" (negate :: Int -> Int) [val (0 :: Int), value "dec" (subtract 1 :: Int -> Int), value "inc" ((+1) :: Int -> Int)]
+-- > [dec :: Int -> Int,inc :: Int -> Int]
+deconstructors :: Conjurable f => String -> f -> Int -> [Expr] -> [Expr]
+deconstructors nm f maxTests es  =
+  [ dec
+  | dec <- es
+  , v <- take 1 [v | v <- vs, mtyp (dec :$ v) == mtyp v]
+  , z <- take 1 [z | z <- es, isWellTyped (dec :$ z) && isDeconstructor z dec]
+  ]
+  where
+  efxs  =  conjureVarApplication nm f
+  (_:vs)  =  unfoldApp efxs
+  isDeconstructor  =  conjureIsDeconstructor f maxTests
+
 
 candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]
 candidatesTD keep h primitives  =  filterT (not . hasHole)
