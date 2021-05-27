@@ -14,9 +14,8 @@
 {-# Language DeriveDataTypeable, StandaloneDeriving #-} -- for GHC < 7.10
 module Conjure.Constructors
   ( Constructors (..)
-  , Fxpr (..)
+  , Fxpr
   , Fxpress (..)
-  , fxprExample
   , fxprExample2
   )
 where
@@ -27,28 +26,9 @@ import Data.Express.Express
 import Data.Express.Fixtures
 import Data.Typeable (Typeable)
 
-data Fxpr =  Fxpr [(Expr,Expr)]  deriving (Eq, Ord)
+type Fxpr  =  [([Expr],Expr)]
 
-instance Show Fxpr where
-  show (Fxpr [])  =  "# empty definition #\n"
-  show (Fxpr bs)  =
-    unlines $ show f:[showExpr pat ++ "  =  " ++ showExpr exp | (pat,exp) <- bs]
-    where
-    (f:exs)  =  unfoldApp . fst $ head bs
-
-okExpr :: Expr -> Bool
-okExpr  =  error "TODO: write me"
-
-fxprExample :: Fxpr
-fxprExample  =  Fxpr
-  [ sum' nil           =-  zero
-  , sum' (xx -:- xxs)  =-  xx -+- sum' xxs
-  ]
-  where
-  (=-) = (,)
-  infixr 0 =-
-
-fxprExample2 :: [([Expr],Expr)]
+fxprExample2 :: Fxpr
 fxprExample2  =
   [ [nil]           =-  zero
   , [(xx -:- xxs)]  =-  xx -+- sum' xxs
@@ -58,13 +38,9 @@ fxprExample2  =
   infixr 0 =-
 
 class Typeable a => Fxpress a where
-  fvl :: [([Expr],Expr)] -> a
+  fvl :: Fxpr -> a
   fvl (([],e):_)  =  evl e
   fvl _           =  error "fvl: incomplete pattern match"
-
-  -- TODO: remove, this will likely be uneeded
-  fxpr :: a -> Expr -> Expr
-  fxpr _  =  id
 
 instance Fxpress ()
 instance Fxpress Int
@@ -75,14 +51,10 @@ instance Fxpress a => Fxpress (Maybe a)
 instance (Fxpress a, Fxpress b) => Fxpress (Either a b)
 
 instance (Express a, Fxpress b) => Fxpress (a -> b) where
-  fxpr f e | typ (hole x) == typ e  =  expr (eval x e)
-           | otherwise              =  fxpr (f x) e
-    where
-    x  =  argTy f
-    argTy :: (a -> b) -> a
-    argTy _  =  undefined
-
-  fvl cs x  =  fvl [(ps,(exp //- bs)) | ((p:ps),exp) <- cs, bs <- maybeToList (match (expr x) p)]
+  fvl cs x  =  fvl [ (ps,(exp //- bs))
+                   | ((p:ps),exp) <- cs
+                   , bs <- maybeToList (match (expr x) p)
+                   ]
 
 
 class Express a => Constructors a where
