@@ -70,6 +70,18 @@ eg/factorial.o: \
   src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/factorial.hs
+eg/fibonacci: \
+  eg/fibonacci.hs \
+  mk/toplibs
+eg/fibonacci.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
+  src/Conjure/Conjurable.hs \
+  eg/fibonacci.hs
 eg/ints: \
   eg/ints.hs \
   mk/toplibs
