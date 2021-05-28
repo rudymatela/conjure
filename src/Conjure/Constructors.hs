@@ -71,7 +71,7 @@ instance Constructors Bool where
   constructors _  =  [val False, val True]
 
 constructorsNum :: (Num a, Express a) => a -> [Expr]
-constructorsNum x  =  [ hole x -- <=0 val (0 -: x)
+constructorsNum x  =  [ hole x -- <= 0 -- val (0 -: x)
                       , value "inc" ((+1) ->: x) :$ hole x
                       ]
 
