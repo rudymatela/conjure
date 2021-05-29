@@ -258,6 +258,9 @@ deconstructors nm f maxTests es  =
   (_:vs)  =  unfoldApp efxs
   isDeconstructor  =  conjureIsDeconstructor f maxTests
 
+deconstructions :: Conjurable f => String -> f -> Int -> [Expr] -> [[(Expr,Expr)]]
+deconstructions  =  undefined
+
 
 candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]
 candidatesTD keep h primitives  =  filterT (not . hasHole)
