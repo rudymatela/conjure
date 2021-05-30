@@ -36,6 +36,7 @@ tests n  =
        , [2,3]
        , [3]
        ]
+  , deconstructions null tail ([] :: [Int]) == []
   , deconstructions (==0) (`div`2) 15
     == [15, 7, 3, 1]
 
@@ -64,4 +65,4 @@ isDeconstruction :: Listable a
                  -> (a -> Bool) -> (a -> a) -> Bool
 isDeconstruction m z d  =  count is (take m list) >= (m `div` 2)
   where
-  is x  =  not (z x) ==> length (take m $ deconstructions z d x) < m
+  is x  =  length (take m $ deconstructions z d x) < m
