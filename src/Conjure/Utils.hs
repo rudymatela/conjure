@@ -26,6 +26,7 @@ module Conjure.Utils
 #endif
   , takeUntil
   , takeNextWhile
+  , takeNextUntil
   )
 where
 
@@ -73,3 +74,8 @@ takeNextWhile (?)  =  t
   t (x:y:xs) | x ? y  =  x : t (y:xs)
              | otherwise  =  [x]
   t xs  =  xs
+
+takeNextUntil :: (a -> a -> Bool) -> [a] -> [a]
+takeNextUntil (?)  =  takeNextWhile (not .: (?))
+  where
+  (.:)  =  (.) . (.)

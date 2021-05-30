@@ -28,6 +28,8 @@ tests n  =
   , takeNextWhile (<) [0,1,2]  ==  [0,1,2]
   , takeNextWhile (<) [0,1,2,1,0]  ==  [0,1,2]
   , takeNextWhile (/=) [3,2,1,0,0,0] == [3,2,1,0]
+  , takeNextUntil (==) [3,2,1,0,0,0] == [3,2,1,0]
+  , takeNextUntil (>) [0,1,2,1,0] == [0,1,2]
 
   , isDeconstructor n ([]::[Int]) tail
   , isDeconstructor n (0::Int) (\x -> x-1)
