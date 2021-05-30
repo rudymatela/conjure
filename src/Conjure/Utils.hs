@@ -81,7 +81,6 @@ takeNextUntil (?)  =  takeNextWhile (not .: (?))
   where
   (.:)  =  (.) . (.)
 
-deconstructions :: Eq a => (a -> Bool) -> (a -> a) -> a -> [a]
-deconstructions z d x  =  takeNextUntil (==)
-                       .  takeUntil z
+deconstructions :: (a -> Bool) -> (a -> a) -> a -> [a]
+deconstructions z d x  =  takeUntil z
                        $  iterate d x

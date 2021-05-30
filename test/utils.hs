@@ -40,11 +40,14 @@ tests n  =
     == [15, 7, 3, 1]
 
   ,       isDeconstruction m (null :: [A] -> Bool) tail
-  ,       isDeconstruction m (null :: [A] -> Bool) id  -- WRONG!
+  , not $ isDeconstruction m (null :: [A] -> Bool) id
   ,       isDeconstruction m (null :: [A] -> Bool) (drop 1)
   ,       isDeconstruction m (null :: [A] -> Bool) (drop 2)
+  ,       isDeconstruction m (null :: [A] -> Bool) (drop 3)
   ,       isDeconstruction m (<0) (\x -> x-1 :: Int)
+  ,       isDeconstruction m (<0) (\x -> x-2 :: Int)
   ,       isDeconstruction m (==0) (\x -> x-1 :: Int)
+  , not $ isDeconstruction m (==0) (\x -> x-2 :: Int)
   ,       isDeconstruction m (==0) (\x -> x `div` 2 :: Int)
   ,       isDeconstruction m (==0) (\x -> x `quot` 2 :: Int)
   ]
@@ -56,10 +59,9 @@ tests n  =
 -- for Listable values.
 -- The deconstruction is considered valid if it converges
 -- for more than 50% of values.
-isDeconstruction :: (Eq a, Listable a)
+isDeconstruction :: Listable a
                  => Int
                  -> (a -> Bool) -> (a -> a) -> Bool
 isDeconstruction m z d  =  count is (take m list) >= (m `div` 2)
   where
-  is x  =  not (z x)
-       ==> length (take m $ deconstructions z d x) < m
+  is x  =  not (z x) ==> length (take m $ deconstructions z d x) < m
