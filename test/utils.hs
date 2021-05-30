@@ -42,7 +42,7 @@ tests n  =
   , isDeconstructor n (null :: [A] -> Bool) tail
   , isDeconstructor n (null :: [A] -> Bool) (drop 1)
   , isDeconstructor n (<0) (\x -> x-1 :: Int)
---, isDeconstructor n (==0) (\x -> x-1 :: Int)  -- TODO:
+  , isDeconstructor n (==0) (\x -> x-1 :: Int)
   , isDeconstructor n (==0) (\x -> x `div` 2 :: Int)
   , isDeconstructor n (==0) (\x -> x `quot` 2 :: Int)
   ]
@@ -51,7 +51,7 @@ tests n  =
 isDeconstructor :: (Eq a, Listable a, Show a)
                 => Int
                 -> (a -> Bool) -> (a -> a) -> Bool
-isDeconstructor m z d  =  holds m is
+isDeconstructor m z d  =  count is (take m list) >= (m `div` 2)
   where
   is x  =  not (z x)
        ==> length (take m $ deconstructions z d x) < m
