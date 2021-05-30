@@ -19,6 +19,9 @@ tests n  =
   , holds n $ \xs ys -> length xs >= length ys
                     ==> zipWith (<>) xs (ys <> repeat mempty) == mzip xs (ys :: [[Int]])
 
+  , takeUntil (== 5) [1..] == [1,2,3,4]
+  , takeUntil (> 4)  [1..] == [1,2,3,4]
+
   , isDeconstructor n ([]::[Int]) tail
   , isDeconstructor n (0::Int) (\x -> x-1)
   ]
