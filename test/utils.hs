@@ -32,7 +32,11 @@ tests n  =
   , takeNextUntil (>) [0,1,2,1,0] == [0,1,2]
 
   , isDeconstructor n (null :: [A] -> Bool) tail
-  , isDeconstructor n (==0) (\x -> x-1 :: A)
+  , isDeconstructor n (null :: [A] -> Bool) (drop 1)
+  , isDeconstructor n (<0) (\x -> x-1 :: Int)
+--, isDeconstructor n (==0) (\x -> x-1 :: Int)  -- TODO:
+  , isDeconstructor n (==0) (\x -> x `div` 2 :: Int)
+  , isDeconstructor n (==0) (\x -> x `quot` 2 :: Int)
   ]
 
 
