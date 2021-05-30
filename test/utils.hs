@@ -31,11 +31,15 @@ tests n  =
   , takeNextUntil (==) [3,2,1,0,0,0] == [3,2,1,0]
   , takeNextUntil (>) [0,1,2,1,0] == [0,1,2]
 
-  , isDeconstructor n ([]::[Int]) tail
-  , isDeconstructor n (0::Int) (\x -> x-1)
+  , isDeconstructor n (null :: [A] -> Bool) tail
+  , isDeconstructor n (==0) (\x -> x-1 :: A)
   ]
 
-isDeconstructor :: (Eq a, Ord a, Listable a, Show a) => Int -> a -> (a -> a) -> Bool
-isDeconstructor m z f  =  holds m $
-  \x -> x > z ==> length (take m $ takeWhile (> z) (iterate f x)) < m
--- TODO: takeWhileNext (/=) in addition to takeWhile
+
+isDeconstructor :: (Eq a, Listable a, Show a)
+                => Int
+                -> (a -> Bool) -> (a -> a) -> Bool
+isDeconstructor m z f  =  holds m is
+  where
+  is x  =  not (z x)
+       ==> length (take m . takeNextUntil (==) . takeUntil z $ iterate f x) < m
