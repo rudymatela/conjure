@@ -31,6 +31,14 @@ tests n  =
   , takeNextUntil (==) [3,2,1,0,0,0] == [3,2,1,0]
   , takeNextUntil (>) [0,1,2,1,0] == [0,1,2]
 
+  , deconstructions null tail [1,2,3 :: Int]
+    == [ [1,2,3]
+       , [2,3]
+       , [3]
+       ]
+  , deconstructions (==0) (`div`2) 15
+    == [15, 7, 3, 1]
+
   , isDeconstructor n (null :: [A] -> Bool) tail
   , isDeconstructor n (null :: [A] -> Bool) (drop 1)
   , isDeconstructor n (<0) (\x -> x-1 :: Int)
@@ -43,7 +51,7 @@ tests n  =
 isDeconstructor :: (Eq a, Listable a, Show a)
                 => Int
                 -> (a -> Bool) -> (a -> a) -> Bool
-isDeconstructor m z f  =  holds m is
+isDeconstructor m z d  =  holds m is
   where
   is x  =  not (z x)
-       ==> length (take m . takeNextUntil (==) . takeUntil z $ iterate f x) < m
+       ==> length (take m $ deconstructions z d x) < m

@@ -27,6 +27,7 @@ module Conjure.Utils
   , takeUntil
   , takeNextWhile
   , takeNextUntil
+  , deconstructions
   )
 where
 
@@ -79,3 +80,8 @@ takeNextUntil :: (a -> a -> Bool) -> [a] -> [a]
 takeNextUntil (?)  =  takeNextWhile (not .: (?))
   where
   (.:)  =  (.) . (.)
+
+deconstructions :: Eq a => (a -> Bool) -> (a -> a) -> a -> [a]
+deconstructions z d x  =  takeNextUntil (==)
+                       .  takeUntil z
+                       $  iterate d x
