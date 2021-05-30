@@ -39,13 +39,17 @@ tests n  =
   , deconstructions (==0) (`div`2) 15
     == [15, 7, 3, 1]
 
-  ,       isDeconstruction n (null :: [A] -> Bool) tail
-  ,       isDeconstruction n (null :: [A] -> Bool) (drop 1)
-  ,       isDeconstruction n (<0) (\x -> x-1 :: Int)
-  ,       isDeconstruction n (==0) (\x -> x-1 :: Int)
-  ,       isDeconstruction n (==0) (\x -> x `div` 2 :: Int)
-  ,       isDeconstruction n (==0) (\x -> x `quot` 2 :: Int)
+  ,       isDeconstruction m (null :: [A] -> Bool) tail
+  ,       isDeconstruction m (null :: [A] -> Bool) id  -- WRONG!
+  ,       isDeconstruction m (null :: [A] -> Bool) (drop 1)
+  ,       isDeconstruction m (null :: [A] -> Bool) (drop 2)
+  ,       isDeconstruction m (<0) (\x -> x-1 :: Int)
+  ,       isDeconstruction m (==0) (\x -> x-1 :: Int)
+  ,       isDeconstruction m (==0) (\x -> x `div` 2 :: Int)
+  ,       isDeconstruction m (==0) (\x -> x `quot` 2 :: Int)
   ]
+  where
+  m  =  n `div` 60
 
 
 -- Checks if the given pair of functions are a valid deconstruction
