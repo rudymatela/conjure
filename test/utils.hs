@@ -22,6 +22,13 @@ tests n  =
   , takeUntil (== 5) [1..] == [1,2,3,4]
   , takeUntil (> 4)  [1..] == [1,2,3,4]
 
+  , takeNextWhile (<) []  ==  ([]::[Int])
+  , takeNextWhile (<) [0]  ==  [0]
+  , takeNextWhile (<) [0,1]  ==  [0,1]
+  , takeNextWhile (<) [0,1,2]  ==  [0,1,2]
+  , takeNextWhile (<) [0,1,2,1,0]  ==  [0,1,2]
+  , takeNextWhile (/=) [3,2,1,0,0,0] == [3,2,1,0]
+
   , isDeconstructor n ([]::[Int]) tail
   , isDeconstructor n (0::Int) (\x -> x-1)
   ]

@@ -25,6 +25,7 @@ module Conjure.Utils
   , sortOn
 #endif
   , takeUntil
+  , takeNextWhile
   )
 where
 
@@ -65,3 +66,10 @@ sortOn f = sortBy (compare `on` f)
 
 takeUntil :: (a -> Bool) -> [a] -> [a]
 takeUntil p  =  takeWhile (not . p)
+
+takeNextWhile :: (a -> a -> Bool) -> [a] -> [a]
+takeNextWhile (?)  =  t
+  where
+  t (x:y:xs) | x ? y  =  x : t (y:xs)
+             | otherwise  =  [x]
+  t xs  =  xs
