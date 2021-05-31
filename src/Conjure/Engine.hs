@@ -195,17 +195,18 @@ candidateExprs :: Conjurable f
                -> (Expr -> Expr -> Bool)
                -> [Expr]
                -> [[Expr]]
-candidateExprs nm f sz mc (===) es  =  as \/ ts
+candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
   where
   ts  =  filterT keepIf
       $  mapT foldApp
       $  products [ [[conjureIf f]]
                   , delay $ filterT (`notElem` [val False, val True])
-                          $ for (hole (undefined :: Bool))
-                  , delay $ as
-                  , delay $ as ]
-  as  =  for efxs
-  for h  =  enumerateAppsFor h keep $ nub $ (ef:exs) ++ es
+                          $ forN (hole (undefined :: Bool))
+                  , delay $ rs
+                  , delay $ rs ]
+  rs  =  forR efxs
+  forN h  =  enumerateAppsFor h keep $ nub $ exs ++ es
+  forR h  =  enumerateAppsFor h keep $ nub $ (ef:exs) ++ es
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
