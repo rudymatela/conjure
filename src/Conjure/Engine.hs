@@ -240,10 +240,10 @@ isInvalidRootRecursion efxs0 efxs1
 
 -- | Example:
 --
--- > > deconstructors "and" and
+-- > > deconstructors "and" and 60
 -- > >   [ val False
 -- > >   , val True
--- > >   , val ([]::[Bool])
+-- > >   , value "null" (null::[Bool]->Bool)
 -- > >   , value "head" (head :: [Bool] -> Bool)
 -- > >   , value "tail" (tail :: [Bool] -> [Bool])
 -- > >   , value "drop1" (drop 1 :: [Bool] -> [Bool])
@@ -253,8 +253,14 @@ isInvalidRootRecursion efxs0 efxs1
 -- In this case, inc is a deconstructor as it converges for more than half the
 -- values:
 --
--- > > deconstructors "negate" (negate :: Int -> Int) [val (0 :: Int), value "dec" (subtract 1 :: Int -> Int), value "inc" ((+1) :: Int -> Int)]
--- > [dec :: Int -> Int,inc :: Int -> Int]
+-- > > deconstructors "negate" (negate :: Int -> Int) 60
+-- > >   [ value "eq0" ((==0) :: Int -> Bool)
+-- > >   , value "dec" (subtract 1 :: Int -> Int)
+-- > >   , value "inc" ((+1) :: Int -> Int)
+-- > >   ]
+-- > [ dec :: Int -> Int
+-- > , inc :: Int -> Int
+-- > ]
 deconstructors :: Conjurable f => String -> f -> Int -> [Expr] -> [Expr]
 deconstructors nm f maxTests es  =
   [ d
