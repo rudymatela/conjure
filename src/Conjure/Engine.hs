@@ -35,7 +35,7 @@ import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 
-import Test.Speculate.Reason (Thy, rules, equations, canReduceTo)
+import Test.Speculate.Reason (Thy, rules, equations, canReduceTo, printThy)
 import Test.Speculate.Engine (theoryFromAtoms, groundBinds)
 
 import Conjure.Expr
@@ -136,7 +136,7 @@ conjureWith args nm f es  =  do
     putStrLn $ "-- looking through "
             ++ show (length cs)
             ++ " candidates of size " ++ show n
-    -- when (n==1) $ putStrLn $ unlines $ map show es
+    -- when (n<=6) $ putStrLn $ unlines $ map show es
     case is of
       []     ->  pr (n+1) rs
       (i:_)  ->  do putStrLn $ showEq i

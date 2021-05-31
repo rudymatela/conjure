@@ -28,6 +28,7 @@ module Conjure.Utils
   , takeNextWhile
   , takeNextUntil
   , deconstructions
+  , idIO
   )
 where
 
@@ -37,6 +38,8 @@ import Data.Maybe
 import Data.Monoid
 import Data.Tuple
 import Data.Typeable
+
+import System.IO.Unsafe
 
 count :: (a -> Bool) -> [a] -> Int
 count p  =  length . filter p
@@ -84,3 +87,14 @@ takeNextUntil (?)  =  takeNextWhile (not .: (?))
 deconstructions :: (a -> Bool) -> (a -> a) -> a -> [a]
 deconstructions z d x  =  takeUntil z
                        $  iterate d x
+
+-- | __WARNING:__
+--   uses 'unsafePerformIO' and should only be used for debugging!
+--
+-- > > idIO print 10
+-- > 10
+-- > 10
+idIO :: (a -> IO ()) -> a -> a
+idIO action x  =  unsafePerformIO $ do
+  action x
+  return x
