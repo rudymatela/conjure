@@ -255,23 +255,26 @@ isInvalidRootRecursion efxs0 efxs1
 --
 -- > > deconstructors "negate" (negate :: Int -> Int) 60
 -- > >   [ value "eq0" ((==0) :: Int -> Bool)
+-- > >   , val (0 :: Int)
+-- > >   , value "==" ((==) :: Int -> Int -> Bool)
 -- > >   , value "dec" (subtract 1 :: Int -> Int)
 -- > >   , value "inc" ((+1) :: Int -> Int)
 -- > >   ]
--- > [ dec :: Int -> Int
--- > , inc :: Int -> Int
+-- > [ ((0 ==) :: Int -> Bool,dec :: Int -> Int)
+-- > , ((0 ==) :: Int -> Bool,inc :: Int -> Int)
 -- > ]
-deconstructors :: Conjurable f => String -> f -> Int -> [Expr] -> [Expr]
+deconstructors :: Conjurable f => String -> f -> Int -> [Expr] -> [(Expr, Expr)]
 deconstructors nm f maxTests es  =
-  [ d
+  [ (z, d)
   | d <- es
   , h <- take 1 [h | h <- hs, mtyp (d :$ h) == mtyp h]
-  , z <- take 1 [z | z <- es, mtyp (z :$ h) == mtyp b && isDeconstructor h z d]
+  , z <- take 1 [z | z <- es2, mtyp (z :$ h) == mtyp b && isDeconstructor h z d]
   ]
   where
   b  =  hole (undefined :: Bool)
   hs  =  nub $ conjureArgumentHoles f
   isDeconstructor  =  conjureIsDeconstructor f maxTests
+  es2  =  es ++ [e1 :$ e2 | e1 <- es, e2 <- es, isWellTyped (e1 :$ e2)]
 
 deconstructions :: Conjurable f => String -> f -> Int -> [Expr] -> [[(Expr,Expr)]]
 deconstructions  =  undefined
