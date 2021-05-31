@@ -30,6 +30,7 @@ module Conjure.Expr
   , ($$**)
   , ($$|<)
   , possibleHoles
+  , isDeconstructionE
 
   , enumerateApps
   , enumerateAppsFor
@@ -325,6 +326,7 @@ enumerateApps3For h keep es  =  for h
                           , typ h == typ hfx
                           ]
 
-isDeconstruction :: [Expr] -> Expr -> Expr -> Bool
---                  [a] -> (a -> Bool) -> (a -> a) -> Bool
-isDeconstruction  =  error "TODO: write me"
+-- Like 'isDeconstruction' but lifted over the 'Expr' type.
+isDeconstructionE :: [Expr] -> Expr -> Expr -> Bool
+--                   [a] -> (a -> Bool) -> (a -> a) -> Bool
+isDeconstructionE es ez ed  =  isDeconstruction es (eval False . (ez :$)) (ed :$)
