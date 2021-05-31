@@ -197,10 +197,10 @@ candidateExprs :: Conjurable f
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =  as \/ ts
   where
-  ts  =  filterT keep
-      $  mapT foldApp
+  ts  =  mapT foldApp
       $  products [ [[conjureIf f]]
-                  , delay $ for (hole (undefined :: Bool))
+                  , delay $ filterT (`notElem` [val False, val True])
+                          $ for (hole (undefined :: Bool))
                   , delay $ as
                   , delay $ as ]
   as  =  for efxs
@@ -211,7 +211,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
           && count (== ef) (vars e) <= mc
           && not (isInvalidRootRecursion efxs e)
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
-       $  conjureHoles f ++ [val False, val True] ++ es ++ [conjureIf f]
+       $  conjureHoles f ++ [val False, val True] ++ es
 
 isInvalidRootRecursion :: Expr -> Expr -> Bool
 isInvalidRootRecursion efxs0 efxs1

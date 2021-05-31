@@ -4,12 +4,12 @@ sum :: [Int] -> Int
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 9 candidates of size 5
--- looking through 15 candidates of size 6
--- looking through 38 candidates of size 7
--- looking through 68 candidates of size 8
--- looking through 139 candidates of size 9
--- looking through 254 candidates of size 10
+-- looking through 11 candidates of size 5
+-- looking through 17 candidates of size 6
+-- looking through 41 candidates of size 7
+-- looking through 71 candidates of size 8
+-- looking through 145 candidates of size 9
+-- looking through 262 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 sum :: [Int] -> Int
@@ -18,12 +18,12 @@ sum :: [Int] -> Int
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 9 candidates of size 5
--- looking through 15 candidates of size 6
--- looking through 38 candidates of size 7
--- looking through 68 candidates of size 8
--- looking through 139 candidates of size 9
--- looking through 254 candidates of size 10
+-- looking through 11 candidates of size 5
+-- looking through 17 candidates of size 6
+-- looking through 41 candidates of size 7
+-- looking through 71 candidates of size 8
+-- looking through 145 candidates of size 9
+-- looking through 262 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 sum :: [Int] -> Int
@@ -32,11 +32,11 @@ sum :: [Int] -> Int
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 9 candidates of size 5
--- looking through 15 candidates of size 6
--- looking through 38 candidates of size 7
--- looking through 68 candidates of size 8
--- looking through 139 candidates of size 9
--- looking through 254 candidates of size 10
+-- looking through 11 candidates of size 5
+-- looking through 17 candidates of size 6
+-- looking through 41 candidates of size 7
+-- looking through 71 candidates of size 8
+-- looking through 145 candidates of size 9
+-- looking through 262 candidates of size 10
 sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 

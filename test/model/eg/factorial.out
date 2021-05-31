@@ -13,10 +13,10 @@ factorial :: Int -> Int
 -- looking through 7 candidates of size 3
 -- looking through 22 candidates of size 4
 -- looking through 50 candidates of size 5
--- looking through 145 candidates of size 6
--- looking through 466 candidates of size 7
--- looking through 1263 candidates of size 8
--- looking through 3856 candidates of size 9
--- looking through 11131 candidates of size 10
+-- looking through 154 candidates of size 6
+-- looking through 499 candidates of size 7
+-- looking through 1419 candidates of size 8
+-- looking through 4431 candidates of size 9
+-- looking through 13854 candidates of size 10
 factorial n  =  if n == 0 then 1 else n * factorial (dec n)
 

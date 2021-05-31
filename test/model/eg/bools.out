@@ -4,11 +4,11 @@ and :: [Bool] -> Bool
 -- looking through 2 candidates of size 2
 -- looking through 5 candidates of size 3
 -- looking through 6 candidates of size 4
--- looking through 8 candidates of size 5
--- looking through 21 candidates of size 6
--- looking through 49 candidates of size 7
--- looking through 110 candidates of size 8
--- looking through 256 candidates of size 9
+-- looking through 16 candidates of size 5
+-- looking through 57 candidates of size 6
+-- looking through 161 candidates of size 7
+-- looking through 378 candidates of size 8
+-- looking through 840 candidates of size 9
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
@@ -17,14 +17,13 @@ or :: [Bool] -> Bool
 -- looking through 2 candidates of size 2
 -- looking through 5 candidates of size 3
 -- looking through 6 candidates of size 4
--- looking through 8 candidates of size 5
--- looking through 21 candidates of size 6
--- looking through 49 candidates of size 7
--- looking through 110 candidates of size 8
--- looking through 256 candidates of size 9
--- looking through 645 candidates of size 10
--- looking through 1515 candidates of size 11
-or ps  =  not (null ps || not (head ps || or (tail ps)))
+-- looking through 16 candidates of size 5
+-- looking through 57 candidates of size 6
+-- looking through 161 candidates of size 7
+-- looking through 378 candidates of size 8
+-- looking through 840 candidates of size 9
+-- looking through 1956 candidates of size 10
+or ps  =  if null ps then False else head ps || or (tail ps)
 
 and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
