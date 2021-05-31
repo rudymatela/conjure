@@ -214,6 +214,7 @@ candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
           && not (isInvalidRootRecursion efxs e)
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
+  ds  =  map snd $ deconstructors f 60 es
 
 isInvalidRootRecursion :: Expr -> Expr -> Bool
 isInvalidRootRecursion efxs0 efxs1
@@ -240,7 +241,7 @@ isInvalidRootRecursion efxs0 efxs1
 
 -- | Example:
 --
--- > > deconstructors "and" and 60
+-- > > deconstructors and 60
 -- > >   [ val False
 -- > >   , val True
 -- > >   , value "null" (null::[Bool]->Bool)
@@ -253,7 +254,7 @@ isInvalidRootRecursion efxs0 efxs1
 -- In this case, inc is a deconstructor as it converges for more than half the
 -- values:
 --
--- > > deconstructors "negate" (negate :: Int -> Int) 60
+-- > > deconstructors (negate :: Int -> Int) 60
 -- > >   [ value "eq0" ((==0) :: Int -> Bool)
 -- > >   , val (0 :: Int)
 -- > >   , value "==" ((==) :: Int -> Int -> Bool)
@@ -263,8 +264,8 @@ isInvalidRootRecursion efxs0 efxs1
 -- > [ ((0 ==) :: Int -> Bool,dec :: Int -> Int)
 -- > , ((0 ==) :: Int -> Bool,inc :: Int -> Int)
 -- > ]
-deconstructors :: Conjurable f => String -> f -> Int -> [Expr] -> [(Expr, Expr)]
-deconstructors nm f maxTests es  =
+deconstructors :: Conjurable f => f -> Int -> [Expr] -> [(Expr, Expr)]
+deconstructors f maxTests es  =
   [ (z, d)
   | d <- es
   , h <- take 1 [h | h <- hs, mtyp (d :$ h) == mtyp h]
@@ -275,9 +276,6 @@ deconstructors nm f maxTests es  =
   hs  =  nub $ conjureArgumentHoles f
   isDeconstructor  =  conjureIsDeconstructor f maxTests
   es2  =  es ++ [e1 :$ e2 | e1 <- es, e2 <- es, isWellTyped (e1 :$ e2)]
-
-deconstructions :: Conjurable f => String -> f -> Int -> [Expr] -> [[(Expr,Expr)]]
-deconstructions  =  undefined
 
 
 candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]
