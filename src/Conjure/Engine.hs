@@ -197,7 +197,8 @@ candidateExprs :: Conjurable f
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =  as \/ ts
   where
-  ts  =  mapT foldApp
+  ts  =  filterT keepIf
+      $  mapT foldApp
       $  products [ [[conjureIf f]]
                   , delay $ filterT (`notElem` [val False, val True])
                           $ for (hole (undefined :: Bool))
@@ -289,6 +290,26 @@ candidatesTD keep h primitives  =  filterT (not . hasHole)
   replacementsFor :: Expr -> [[Expr]]
   replacementsFor h  =  filterT (\e -> typ e == typ h)
                      $  primitiveApplications primitives
+
+
+-- hardcoded filtering rules
+
+keepIf :: Expr -> Bool
+keepIf (Value "if" _ :$ ep :$ ex :$ ey)
+  | ex == ey  =  False
+  | anormal ep  =  False
+  | otherwise  =  case binding ep of
+                  Just (v,e) -> v `notElem` values ex
+                  Nothing -> True
+  where
+  anormal (Value "==" _ :$ e1 :$ e2) | isVar e2 || isConst e1  =  True
+  anormal _                                                    =  False
+  binding :: Expr -> Maybe (Expr,Expr)
+  binding (Value "==" _ :$ e1 :$ e2) | isVar e1   =  Just (e1,e2)
+                                     | isVar e2   =  Just (e2,e1)
+  binding _                                       =  Nothing
+keepIf _  =  error "not an if"
+
 
 
 --- normality checks ---
