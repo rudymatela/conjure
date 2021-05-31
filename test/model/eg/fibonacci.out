@@ -6,8 +6,8 @@ fibonacci :: Int -> Int
 -- looking through 1 candidates of size 4
 -- looking through 11 candidates of size 5
 -- looking through 9 candidates of size 6
--- looking through 55 candidates of size 7
--- looking through 134 candidates of size 8
--- looking through 441 candidates of size 9
--- looking through 1168 candidates of size 10
+-- looking through 47 candidates of size 7
+-- looking through 102 candidates of size 8
+-- looking through 273 candidates of size 9
+-- looking through 676 candidates of size 10
 cannot conjure

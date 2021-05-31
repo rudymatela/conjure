@@ -211,33 +211,24 @@ candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
           && count (== ef) (vars e) <= mc
-          && not (isInvalidRootRecursion efxs e)
+          && not (isInvalidRootRecursion ds efxs e)
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
 
-isInvalidRootRecursion :: Expr -> Expr -> Bool
-isInvalidRootRecursion efxs0 efxs1
+isInvalidRootRecursion :: [Expr] -> Expr -> Expr -> Bool
+isInvalidRootRecursion ds efxs0 efxs1
     | typ efxs0 /= typ efxs1         =  False  -- not a recursion
     | ef0 /= ef1                     =  False  -- not a recursion
     | efxs0 == efxs1                 =  True   -- invalid (infinite loop)
     | ef0 `elem` values (fold exs1)  =  True   -- invalid (likely infinite loop)
---  | anyNotDec (concatMap consts exs1)  =  True  -- invalid
+    | anyNotDec (concatMap consts exs1)  =  True  -- invalid
     | otherwise                      =  False  -- not invalid (valid)
   where
   (ef0:_)     =  unfoldApp efxs0
   (ef1:exs1)  =  unfoldApp efxs1
-  -- provisional hardcoded deconstructors
   anyNotDec :: [Expr] -> Bool
-  anyNotDec  =  any (`notElem` hardecs)
-  hardecs  =
-    [ value "dec" (subtract 1 :: Int -> Int)
-    , value "dec" (subtract 1 :: A -> A)
-    , value "tail" (tail :: [Bool] -> [Bool])
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "tail" (tail :: [A] -> [A])
-    ]
-  -- uncommenting these halves the runtime for about half the benchmarks
+  anyNotDec  =  any (`notElem` ds)
 
 -- | Example:
 --
