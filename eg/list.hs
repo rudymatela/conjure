@@ -32,6 +32,11 @@ sort' [x,y,z]
 [x,y]   +++ [z,w]    =  [x,y,z,w]
 [x,y,z] +++ [w,v,u]  =  [x,y,z,w,v,u]
 
+(\/) :: [Int] -> [Int] -> [Int]
+[x] \/ [y]  =  [x,y]
+[x,y] \/ [z,w]  =  [x,z,y,w]
+[x,y,z] \/ [w,v,u]  =  [x,w,y,v,z,u]
+
 main :: IO ()
 main = do
   -- length xs  =  if null xs then 0 else 1 + length (tail xs)
@@ -113,4 +118,14 @@ main = do
     [ val ([] :: [Int])
     , value ":" ((:) :: Int -> [Int] -> [Int])
     , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
+  -- intercalate
+  -- xs \/ ys  =  if null xs then ys else head xs : (ys \/ tail xs)
+  conjure "\\/" (\/)
+    [ val ([] :: [Int])
+    , value ":" ((:) :: Int -> [Int] -> [Int])
+    , value "head" (head :: [Int] -> Int)
+    , value "tail" (tail :: [Int] -> [Int])
+    , value "null" (null :: [Int] -> Bool)
     ]

@@ -92,3 +92,18 @@ sort xs  =  foldr insert [] xs
 -- looking through 4 candidates of size 4
 xs ++ ys  =  foldr (:) ys xs
 
+(\/) :: [Int] -> [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 12 candidates of size 4
+-- looking through 33 candidates of size 5
+-- looking through 84 candidates of size 6
+-- looking through 282 candidates of size 7
+-- looking through 1005 candidates of size 8
+-- looking through 2953 candidates of size 9
+-- looking through 9145 candidates of size 10
+-- looking through 28298 candidates of size 11
+xs \/ ys  =  if null xs then xs else head xs:ys \/ tail xs
+
