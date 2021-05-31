@@ -8,7 +8,7 @@ and :: [Bool] -> Bool
 -- looking through 21 candidates of size 6
 -- looking through 49 candidates of size 7
 -- looking through 110 candidates of size 8
--- looking through 276 candidates of size 9
+-- looking through 256 candidates of size 9
 and ps  =  null ps || head ps && and (tail ps)
 
 or :: [Bool] -> Bool
@@ -21,9 +21,9 @@ or :: [Bool] -> Bool
 -- looking through 21 candidates of size 6
 -- looking through 49 candidates of size 7
 -- looking through 110 candidates of size 8
--- looking through 276 candidates of size 9
--- looking through 735 candidates of size 10
--- looking through 1861 candidates of size 11
+-- looking through 256 candidates of size 9
+-- looking through 645 candidates of size 10
+-- looking through 1515 candidates of size 11
 or ps  =  not (null ps || not (head ps || or (tail ps)))
 
 and :: [Bool] -> Bool
