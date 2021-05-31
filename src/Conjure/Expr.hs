@@ -326,4 +326,5 @@ enumerateApps3For h keep es  =  for h
                           ]
 
 isDeconstruction :: [Expr] -> Expr -> Expr -> Bool
+--                  [a] -> (a -> Bool) -> (a -> a) -> Bool
 isDeconstruction  =  error "TODO: write me"
