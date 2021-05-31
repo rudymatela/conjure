@@ -257,14 +257,14 @@ isInvalidRootRecursion efxs0 efxs1
 -- > [dec :: Int -> Int,inc :: Int -> Int]
 deconstructors :: Conjurable f => String -> f -> Int -> [Expr] -> [Expr]
 deconstructors nm f maxTests es  =
-  [ dec
-  | dec <- es
-  , v <- take 1 [v | v <- vs, mtyp (dec :$ v) == mtyp v]
-  , z <- take 1 [z | z <- es, isWellTyped (dec :$ z) && isDeconstructor z dec]
+  [ d
+  | d <- es
+  , h <- take 1 [h | h <- hs, mtyp (d :$ h) == mtyp h]
+  , z <- take 1 [z | z <- es, mtyp (z :$ h) == mtyp b && isDeconstructor h z d]
   ]
   where
-  efxs  =  conjureVarApplication nm f
-  (_:vs)  =  unfoldApp efxs
+  b  =  hole (undefined :: Bool)
+  hs  =  nub $ conjureArgumentHoles f
   isDeconstructor  =  conjureIsDeconstructor f maxTests
 
 deconstructions :: Conjurable f => String -> f -> Int -> [Expr] -> [[(Expr,Expr)]]
