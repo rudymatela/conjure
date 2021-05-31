@@ -10,4 +10,8 @@ fibonacci :: Int -> Int
 -- looking through 102 candidates of size 8
 -- looking through 273 candidates of size 9
 -- looking through 684 candidates of size 10
-cannot conjure
+-- looking through 1563 candidates of size 11
+-- looking through 4183 candidates of size 12
+-- looking through 8567 candidates of size 13
+fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
+

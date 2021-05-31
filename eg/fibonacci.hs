@@ -11,10 +11,12 @@ fibonacci 5  =  8
 fibonacci 6  =  13
 fibonacci 7  =  21
 
+as :: Args
+as  =  args{maxSize=13,maxRecursiveCalls=2,maxRecursionSize=360}
+
 main :: IO ()
 main  =  do
-  -- needs maxSize=13 and maxRecursiveCalls=2
-  conjureWith args{maxSize=10,maxRecursionSize=360} "fibonacci n" fibonacci
+  conjureWith as "fibonacci n" fibonacci
     [ val (1::Int)
     , value "+" ((+) :: Int -> Int -> Int)
     , value "dec" (subtract 1 :: Int -> Int)
