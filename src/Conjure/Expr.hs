@@ -329,4 +329,6 @@ enumerateApps3For h keep es  =  for h
 -- Like 'isDeconstruction' but lifted over the 'Expr' type.
 isDeconstructionE :: [Expr] -> Expr -> Expr -> Bool
 --                   [a] -> (a -> Bool) -> (a -> a) -> Bool
+isDeconstructionE [] _ _  =  error "isDeconstructionE: empty list of test values"
+isDeconstructionE es ez ed | all isIllTyped [f :$ e | e <- es, f <- [ez,ed]]  =  error "isDeconstructionE: types do not match"
 isDeconstructionE es ez ed  =  isDeconstruction es (eval False . (ez :$)) (ed :$)
