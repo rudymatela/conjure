@@ -206,29 +206,17 @@ candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
                   , delay $ rs ]
   rs  =  forR efxs
   forN h  =  enumerateAppsFor h keep [exs ++ es]
-  forR h  =  enumerateAppsFor h keep [ef:exs ++ es]
+  forR h  =  enumerateAppsFor h keep $ [exs ++ es] \/ recs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
           && count (== ef) (vars e) <= mc
-          && not (isInvalidRootRecursion ds efxs e)
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
-
-isInvalidRootRecursion :: [Expr] -> Expr -> Expr -> Bool
-isInvalidRootRecursion ds efxs0 efxs1
-    | typ efxs0 /= typ efxs1         =  False  -- not a recursion
-    | ef0 /= ef1                     =  False  -- not a recursion
-    | efxs0 == efxs1                 =  True   -- invalid (infinite loop)
-    | ef0 `elem` values (fold exs1)  =  True   -- invalid (likely infinite loop)
-    | anyNotDec (concatMap consts exs1)  =  True  -- invalid
-    | otherwise                      =  False  -- not invalid (valid)
-  where
-  (ef0:_)     =  unfoldApp efxs0
-  (ef1:exs1)  =  unfoldApp efxs1
-  anyNotDec :: [Expr] -> Bool
-  anyNotDec  =  any (`notElem` ds)
+  recs  =  discardT (efxs ==)
+        .  mapT (foldApp . (ef:))
+        $  products [delay $ enumerateAppsFor ex keep [exs ++ ds] | ex <- exs]
 
 -- | Example:
 --
