@@ -9,5 +9,5 @@ fibonacci :: Int -> Int
 -- looking through 47 candidates of size 7
 -- looking through 102 candidates of size 8
 -- looking through 273 candidates of size 9
--- looking through 676 candidates of size 10
+-- looking through 684 candidates of size 10
 cannot conjure

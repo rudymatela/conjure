@@ -207,7 +207,7 @@ candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
   rs  =  forR efxs
   forN h  =  enumerateAppsFor h keep [exs ++ es]
   forR h  =  enumerateAppsFor h keep $ [exs ++ es] \/ recs
-  forD h  =  enumerateAppsFor h keep [exs ++ ds]
+  forD h  =  enumerateAppsFor h (const True) [exs ++ ds]
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
@@ -217,7 +217,7 @@ candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
   ds  =  map snd $ deconstructors f 60 es
   recs  =  discardT (efxs ==)
         .  mapT (foldApp . (ef:))
-        $  products [delay $ forD ex | ex <- exs]
+        $  products [delay $ forD h | h <- conjureArgumentHoles f]
 
 -- | Example:
 --
