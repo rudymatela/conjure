@@ -278,7 +278,7 @@ possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
 
 -- -- Expression enumeration -- --
 
-enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateAppsFor :: Expr -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
 enumerateAppsFor  =  enumerateApps3For
 
 enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
@@ -312,19 +312,21 @@ enumerateApps2For h keep  =  map concat
                       [] -> Nothing
                       es -> Just es
 
-enumerateApps3For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateApps3For h keep es  =  for h
+enumerateApps3For :: Expr -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
+enumerateApps3For h keep ess  =  for h
   where
   hs :: [Expr]
-  hs  =  possibleHoles es
+  hs  =  possibleHoles . concat $ take 1 ess
   for :: Expr -> [[Expr]]
-  for h  =  [e | e <- es, typ h == typ e]
-         :  foldr (\/) [] [ filterT keep $ productWith (:$) (for hf) (for hx)
-                          | hf <- hs
-                          , hx <- hs
-                          , Just hfx <- [hf $$ hx]
-                          , typ h == typ hfx
-                          ]
+  for h  =  filterT (\e -> typ h == typ e) ess \/ delay apps
+    where
+    apps  =  foldr (\/) []
+          [  filterT keep $ productWith (:$) (for hf) (for hx)
+          |  hf <- hs
+          ,  hx <- hs
+          ,  Just hfx <- [hf $$ hx]
+          ,  typ h == typ hfx
+          ]
 
 -- Like 'isDeconstruction' but lifted over the 'Expr' type.
 isDeconstructionE :: [Expr] -> Expr -> Expr -> Bool

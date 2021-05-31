@@ -205,8 +205,8 @@ candidateExprs nm f sz mc (===) es  =  forN efxs \/ ts
                   , delay $ rs
                   , delay $ rs ]
   rs  =  forR efxs
-  forN h  =  enumerateAppsFor h keep $ nub $ exs ++ es
-  forR h  =  enumerateAppsFor h keep $ nub $ (ef:exs) ++ es
+  forN h  =  enumerateAppsFor h keep [nub $ exs ++ es]
+  forR h  =  enumerateAppsFor h keep [nub $ (ef:exs) ++ es]
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e

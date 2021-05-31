@@ -30,6 +30,7 @@ module Conjure.Utils
   , deconstructions
   , isDeconstruction
   , idIO
+  , mapHead
   )
 where
 
@@ -107,3 +108,6 @@ idIO :: (a -> IO ()) -> a -> a
 idIO action x  =  unsafePerformIO $ do
   action x
   return x
+
+mapHead :: (a -> a) -> [a] -> [a]
+mapHead f (x:xs)  =  f x : xs
