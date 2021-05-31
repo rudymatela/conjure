@@ -25,6 +25,9 @@ module Conjure.Utils
   , sortOn
 #endif
   , takeUntil
+  , takeNextWhile
+  , takeNextUntil
+  , deconstructions
   )
 where
 
@@ -65,3 +68,19 @@ sortOn f = sortBy (compare `on` f)
 
 takeUntil :: (a -> Bool) -> [a] -> [a]
 takeUntil p  =  takeWhile (not . p)
+
+takeNextWhile :: (a -> a -> Bool) -> [a] -> [a]
+takeNextWhile (?)  =  t
+  where
+  t (x:y:xs) | x ? y  =  x : t (y:xs)
+             | otherwise  =  [x]
+  t xs  =  xs
+
+takeNextUntil :: (a -> a -> Bool) -> [a] -> [a]
+takeNextUntil (?)  =  takeNextWhile (not .: (?))
+  where
+  (.:)  =  (.) . (.)
+
+deconstructions :: (a -> Bool) -> (a -> a) -> a -> [a]
+deconstructions z d x  =  takeUntil z
+                       $  iterate d x

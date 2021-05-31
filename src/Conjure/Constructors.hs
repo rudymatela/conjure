@@ -16,7 +16,10 @@ module Conjure.Constructors
   ( Constructors (..)
   , Fxpr
   , Fxpress (..)
-  , fxprExample2
+  , sumFxpr
+  , factFxpr
+  , nullFxpr
+  , isZeroFxpr
   )
 where
 
@@ -28,14 +31,37 @@ import Data.Typeable (Typeable)
 
 type Fxpr  =  [([Expr],Expr)]
 
-fxprExample2 :: Fxpr
-fxprExample2  =
+sumFxpr :: Fxpr
+sumFxpr  =
   [ [nil]           =-  zero
-  , [(xx -:- xxs)]  =-  xx -+- sum' xxs
+  , [(xx -:- xxs)]  =-  xx -+- (var "recurse" (undefined :: [Int] -> Int) :$ xxs)
   ]
   where
   (=-) = (,)
   infixr 0 =-
+
+factFxpr :: Fxpr
+factFxpr  =  undefined
+
+nullFxpr :: Fxpr
+nullFxpr  =
+  [ [nil]          =- false
+  , [(xx -:- xxs)] =- false
+  ]
+  where
+  (=-) = (,)
+  infixr 0 =-
+
+isZeroFxpr :: Fxpr
+isZeroFxpr  =
+  [ [zero]  =- true
+  , [inc xx] =- false
+  ]
+  where
+  inc = undefined -- TODO: define me
+  (=-) = (,)
+  infixr 0 =-
+
 
 class Typeable a => Fxpress a where
   fvl :: Fxpr -> a
@@ -55,7 +81,7 @@ instance (Constructors a, Fxpress b) => Fxpress (a -> b) where
                    | (p:ps,exp) <- cs
                    , bs <- maybeToList (match (expr1 x) p)
                    ]
--- TODO: add exception above for "Num" values.
+-- TODO: add support for recursion
 
 
 class Express a => Constructors a where

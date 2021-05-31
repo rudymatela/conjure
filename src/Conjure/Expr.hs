@@ -324,3 +324,6 @@ enumerateApps3For h keep es  =  for h
                           , Just hfx <- [hf $$ hx]
                           , typ h == typ hfx
                           ]
+
+isDeconstruction :: [Expr] -> Expr -> Expr -> Bool
+isDeconstruction  =  error "TODO: write me"
