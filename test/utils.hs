@@ -63,6 +63,12 @@ tests n  =
 isDeconstruction :: Listable a
                  => Int
                  -> (a -> Bool) -> (a -> a) -> Bool
-isDeconstruction m z d  =  count is (take m list) >= (m `div` 2)
+isDeconstruction m  =  isDeconstructionFor (take m list)
+
+-- | The deconstruction is considered valid if it converges
+--   for more than half of the given values.
+isDeconstructionFor :: [a] -> (a -> Bool) -> (a -> a) -> Bool
+isDeconstructionFor xs z d  =  count is xs >= l `div` 2
   where
-  is x  =  length (take m $ deconstructions z d x) < m
+  is x  =  length (take l $ deconstructions z d x) < l
+  l  =  length xs
