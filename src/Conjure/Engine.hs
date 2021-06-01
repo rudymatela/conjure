@@ -214,8 +214,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
   recs  =  discardT (efxs ==)
-        .  mapT (foldApp . (ef:))
-        $  products [delay $ forD h | h <- conjureArgumentHoles f]
+        $  foldAppProducts ef [forD h | h <- conjureArgumentHoles f]
 
 -- | Example:
 --
