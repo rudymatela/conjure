@@ -40,7 +40,9 @@ ghci: src/Conjure.ghci
 %.bench: %
 	@mkdir -p bench/runtime/$$HOSTNAME/`dirname $<`
 	@printf "%-18s " $<
-	@/usr/bin/time -f%e ./$< 2>&1 >/dev/null | tee bench/runtime/$$HOSTNAME/$<.runtime
+	@/usr/bin/time -f%e ./$< 2>&1 >/dev/null | \
+	python3 -c 'print("%.1f" % float(input()))' | \
+	tee bench/runtime/$$HOSTNAME/$<.runtime
 
 diff-test: $(patsubst %,%.diff-test,$(EG))
 
