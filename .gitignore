@@ -36,6 +36,7 @@ eg/list
 eg/tapps
 eg/spec
 bench/self
+bench/longshot
 bench/ill-hit
 bench/take-drop
 proto/u-conjure

@@ -1,0 +1,15 @@
+qsort :: [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 11 candidates of size 4
+-- looking through 28 candidates of size 5
+-- looking through 72 candidates of size 6
+-- looking through 207 candidates of size 7
+-- looking through 611 candidates of size 8
+-- looking through 1779 candidates of size 9
+-- looking through 5301 candidates of size 10
+-- looking through 16103 candidates of size 11
+-- looking through 49113 candidates of size 12
+cannot conjure

@@ -10,6 +10,18 @@ bench/ill-hit.o: \
   src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   bench/ill-hit.hs
+bench/longshot: \
+  bench/longshot.hs \
+  mk/toplibs
+bench/longshot.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
+  src/Conjure/Conjurable.hs \
+  bench/longshot.hs
 bench/self: \
   bench/self.hs \
   mk/toplibs
@@ -159,6 +171,7 @@ src/Conjure/Conjurable.o: \
   src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs
 src/Conjure/Constructors.o: \
+  src/Conjure/Utils.hs \
   src/Conjure/Constructors.hs
 src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \

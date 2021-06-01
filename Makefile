@@ -15,6 +15,7 @@ EG = \
   eg/spec \
   eg/tapps \
   bench/ill-hit \
+  bench/longshot \
   bench/self \
   bench/take-drop \
   proto/u-conjure
