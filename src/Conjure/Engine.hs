@@ -198,7 +198,7 @@ candidateExprs :: Conjurable f
 candidateExprs nm f sz mc (===) es  =  as \/ ts
   where
   ts  =  filterT keepIf
-      $  delayedProductsWith (foldApp . (conjureIf f:)) [cs, rs, rs]
+      $  foldAppProducts (conjureIf f) [cs, rs, rs]
   cs  =  filterT (`notElem` [val False, val True])
       $  forN (hole (undefined :: Bool))
   as  =  forN efxs
@@ -317,6 +317,11 @@ isRootNormalE thy e  =  isRootNormal thy e
 
 productsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 productsWith f  =  mapT f . products
+-- TODO: move to LeanCheck?
 
 delayedProductsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
+-- TODO: move to LeanCheck?
+
+foldAppProducts :: Expr -> [ [[Expr]] ] -> [[Expr]]
+foldAppProducts ef  =  delayedProductsWith (foldApp . (ef:))
