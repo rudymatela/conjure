@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.3.2
+------
 
 * significant runtime reduction in several benchmarks, e.g.:
 	- take is now reachable in about 5 seconds
