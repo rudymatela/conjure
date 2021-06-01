@@ -31,6 +31,8 @@ module Conjure.Expr
   , ($$|<)
   , possibleHoles
   , isDeconstructionE
+  , revaluate
+  , reval
 
   , enumerateApps
   , enumerateAppsFor
@@ -44,6 +46,7 @@ import Conjure.Utils
 import Data.Express
 import Data.Express.Utils.Typeable
 import Data.Express.Fixtures hiding ((-==-))
+import Data.Dynamic
 
 import Test.LeanCheck (filterT, (\/), delay, productWith, productMaybeWith)
 
@@ -334,3 +337,22 @@ isDeconstructionE :: [Expr] -> Expr -> Expr -> Bool
 isDeconstructionE [] _ _  =  error "isDeconstructionE: empty list of test values"
 isDeconstructionE es ez ed | all isIllTyped [f :$ e | e <- es, f <- [ez,ed]]  =  error "isDeconstructionE: types do not match"
 isDeconstructionE es ez ed  =  isDeconstruction es (eval False . (ez :$)) (ed :$)
+
+recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
+recursiveToDynamic (efxs, ebody)  =  re
+  where
+  (ef':exs')  =  unfoldApp efxs
+  re 0 _  =  error "recursiveToDynamic: recursion limit reached"
+  re n e  =  case unfoldApp e of
+    [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
+    [e] -> toDynamic e
+    (ef:exs) | ef == ef' -> re (n-1) $ e //- zip exs' exs
+             | otherwise -> foldl1 ($$) (map (re n) (ef:exs))
+  Just d1 $$ Just d2  =  dynApply d1 d2
+  _ $$ _              =  Nothing
+
+revaluate :: Typeable a => (Expr,Expr) -> Int -> Expr -> Maybe a
+revaluate dfn n e  =  recursiveToDynamic dfn n e >>= fromDynamic
+
+reval :: Typeable a => (Expr,Expr) -> Int -> a -> Expr -> a
+reval dfn n x e = fromMaybe x (revaluate dfn n e)
