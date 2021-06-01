@@ -30,4 +30,8 @@ take :: Int -> [A] -> [A]
 -- looking through 636 candidates of size 11
 -- looking through 1512 candidates of size 12
 -- looking through 3618 candidates of size 13
-cannot conjure
+-- looking through 8400 candidates of size 14
+-- looking through 19152 candidates of size 15
+-- looking through 43184 candidates of size 16
+take x y  =  if null y || x == 0 then [] else head y:take (dec x) (tail y)
+

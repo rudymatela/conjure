@@ -32,7 +32,7 @@ main = do
 
   -- take n xs = if n==0 || null xs then [] else head xs : take (dec n) (tail xs)
   -- needs size 16
-  conjureWithMaxSize 13 "take" (take' :: Int -> [A] -> [A])
+  conjureWithMaxSize 16 "take" (take' :: Int -> [A] -> [A])
     [ val (0 :: Int)
     , val ([] :: [A])
     , value "null" (null :: [A] -> Bool)
