@@ -213,7 +213,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
-  recs  =  discardT (efxs ==)
+  recs  =  filterT (efxs /=)
         $  foldAppProducts ef [forD h | h <- conjureArgumentHoles f]
 
 -- | Example:
