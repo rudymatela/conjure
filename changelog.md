@@ -2,6 +2,25 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* significant runtime reduction in several benchmarks, e.g.:
+	- take is now reachable in about 5 seconds
+* improved candidate generation:
+	- faster runtime
+	- fewer redundant/invalid candidates
+* limit recursive calls to use deconstructors
+	- test to find deconstructors automatically
+* improve recursion evaluation method (`revaluate` replaces `recursexpr`)
+* add fibonacci benchmark
+* minor:
+	- record runtimes with one decimal place instead of two
+	- add longshot benchmark
+	- add intercalate to the list benchmark
+	- add stub `Conjure.Constructors` module
+
+
 v0.3.0
 ------
 
