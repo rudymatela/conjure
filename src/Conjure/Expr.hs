@@ -6,7 +6,7 @@
 --
 -- This internal module reexports 'Data.Express' along with a few other
 -- utilities.
-{-# LANGUAGE CPP #-}
+{-# LANGUAGE CPP, TupleSections #-}
 module Conjure.Expr
   ( module Data.Express
   , module Data.Express.Fixtures
@@ -338,11 +338,11 @@ isDeconstructionE [] _ _  =  error "isDeconstructionE: empty list of test values
 isDeconstructionE es ez ed | all isIllTyped [f :$ e | e <- es, f <- [ez,ed]]  =  error "isDeconstructionE: types do not match"
 isDeconstructionE es ez ed  =  isDeconstruction es (eval False . (ez :$)) (ed :$)
 
-recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
-recursiveToDynamic (efxs, ebody)  =  re
+recursiveToDynamic :: (Expr,Expr) -> Int -> Int -> Expr -> Maybe Dynamic
+recursiveToDynamic (efxs, ebody) m n  =  fmap snd . re n
   where
   (ef':exs')  =  unfoldApp efxs
-  re :: Int -> Expr -> Maybe Dynamic
+  re :: Int -> Expr -> Maybe (Int, Dynamic)
   re 0 _  =  error "recursiveToDynamic: recursion limit reached"
   re n (Value "if" _ :$ ec :$ ex :$ ey)  =  case evaluate ec of
     Nothing    -> Nothing
@@ -350,14 +350,16 @@ recursiveToDynamic (efxs, ebody)  =  re
     Just False -> re n ey
   re n e  =  case unfoldApp e of
     [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
-    [e] -> toDynamic e
+    [e] -> (1,) <$> toDynamic e
     (ef:exs) | ef == ef' -> re (n-1) $ ebody //- zip exs' exs
              | otherwise -> foldl1 ($$) (map (re n) (ef:exs))
-  Just d1 $$ Just d2  =  dynApply d1 d2
-  _ $$ _              =  Nothing
+  Just (n1,d1) $$ Just (n2,d2)  =  if n1+n2 <= m
+                                   then (n1+n2,) <$> dynApply d1 d2
+                                   else Nothing
+  _ $$ _                        =  Nothing
 
-revaluate :: Typeable a => (Expr,Expr) -> Int -> Expr -> Maybe a
-revaluate dfn n e  =  recursiveToDynamic dfn n e >>= fromDynamic
+revaluate :: Typeable a => (Expr,Expr) -> Int -> Int -> Expr -> Maybe a
+revaluate dfn m n e  =  recursiveToDynamic dfn m n e >>= fromDynamic
 
-reval :: Typeable a => (Expr,Expr) -> Int -> a -> Expr -> a
-reval dfn n x e = fromMaybe x (revaluate dfn n e)
+reval :: Typeable a => (Expr,Expr) -> Int -> Int -> a -> Expr -> a
+reval dfn m n x e = fromMaybe x (revaluate dfn m n e)
