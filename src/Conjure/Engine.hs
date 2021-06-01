@@ -197,10 +197,8 @@ candidateExprs :: Conjurable f
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =  as \/ ts
   where
-  ts  =  delay . delay . delay  -- 3 apps
-      .  filterT keepIf
-      .  mapT foldApp
-      $  products [[[conjureIf f]], cs, rs, rs]
+  ts  =  filterT keepIf
+      $  delayedProductsWith (foldApp . (conjureIf f:)) [cs, rs, rs]
   cs  =  filterT (`notElem` [val False, val True])
       $  forN (hole (undefined :: Bool))
   as  =  forN efxs
@@ -296,7 +294,7 @@ keepIf (Value "if" _ :$ ep :$ ex :$ ey)
   binding (Value "==" _ :$ e1 :$ e2) | isVar e1   =  Just (e1,e2)
                                      | isVar e2   =  Just (e2,e1)
   binding _                                       =  Nothing
-keepIf _  =  error "not an if"
+keepIf _  =  error "Conjure.Engine.keepIf: not an if"
 
 
 
@@ -313,3 +311,12 @@ isRootNormalE thy e  =  isRootNormal thy e
   where
   trie  =  T.fromList $ equations thy ++ map swap (equations thy)
   (->-)  =  canReduceTo thy
+
+
+--- tiers utils ---
+
+productsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
+productsWith f  =  mapT f . products
+
+delayedProductsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
+delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
