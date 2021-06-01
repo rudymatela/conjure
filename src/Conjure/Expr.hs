@@ -344,10 +344,14 @@ recursiveToDynamic (efxs, ebody)  =  re
   (ef':exs')  =  unfoldApp efxs
   re :: Int -> Expr -> Maybe Dynamic
   re 0 _  =  error "recursiveToDynamic: recursion limit reached"
+  re n (Value "if" _ :$ ec :$ ex :$ ey)  =  case evaluate ec of
+    Nothing    -> Nothing
+    Just True  -> re n ex
+    Just False -> re n ey
   re n e  =  case unfoldApp e of
     [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
     [e] -> toDynamic e
-    (ef:exs) | ef == ef' -> re (n-1) $ e //- zip exs' exs
+    (ef:exs) | ef == ef' -> re (n-1) $ ebody //- zip exs' exs
              | otherwise -> foldl1 ($$) (map (re n) (ef:exs))
   Just d1 $$ Just d2  =  dynApply d1 d2
   _ $$ _              =  Nothing
