@@ -342,6 +342,7 @@ recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
 recursiveToDynamic (efxs, ebody)  =  re
   where
   (ef':exs')  =  unfoldApp efxs
+  re :: Int -> Expr -> Maybe Dynamic
   re 0 _  =  error "recursiveToDynamic: recursion limit reached"
   re n e  =  case unfoldApp e of
     [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
