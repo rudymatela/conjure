@@ -46,7 +46,9 @@ import Conjure.Utils
 import Data.Express
 import Data.Express.Utils.Typeable
 import Data.Express.Fixtures hiding ((-==-))
+
 import Data.Dynamic
+import Control.Applicative ((<$>)) -- for GHC <= 7.8
 
 import Test.LeanCheck (filterT, (\/), delay, productWith, productMaybeWith)
 
