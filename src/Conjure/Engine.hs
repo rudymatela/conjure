@@ -164,7 +164,7 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
   implements e  =  apparentlyTerminates rrff e
-                && ffxx ?=? recursexpr maxRecursionSize vffxx e
+                && requal (vffxx,e) ffxx e
   candidatesT  =  filterT (\e -> typ e == typ ffxx) allCandidatesT
   allCandidatesT  =  take maxSize
                   $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
@@ -173,10 +173,10 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
   (rrff:xxs)  =  unfoldApp vffxx
 
   (===)  =  conjureAreEqual f maxTests
-  e1 ?=? e2  =  isTrueWhenDefined (e1 -==- e2)
+  requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
-  isTrueWhenDefined e  =  all (errorToFalse . eval False) $ map (e //-) dbss
+  isTrueWhenDefined dfn e  =  all (errorToFalse . reval dfn maxTests maxRecursionSize False) $ map (e //-) dbss
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx

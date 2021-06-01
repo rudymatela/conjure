@@ -12,7 +12,7 @@ fibonacci 6  =  13
 fibonacci 7  =  21
 
 as :: Args
-as  =  args{maxSize=13,maxRecursiveCalls=2,maxRecursionSize=360}
+as  =  args{maxSize=13,maxRecursiveCalls=2}
 
 main :: IO ()
 main  =  do
