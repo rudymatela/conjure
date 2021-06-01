@@ -176,7 +176,7 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
   requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
-  isTrueWhenDefined dfn e  =  all (errorToFalse . reval dfn maxTests maxRecursionSize False) $ map (e //-) dbss
+  isTrueWhenDefined dfn e  =  all (errorToFalse . reval dfn maxRecursionSize False) $ map (e //-) dbss
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
