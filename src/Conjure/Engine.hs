@@ -198,14 +198,16 @@ candidateExprs :: Conjurable f
 candidateExprs nm f sz mc (===) es  =  as \/ ts
   where
   ts  =  filterT keepIf
-      $  foldAppProducts (conjureIf f) [cs, rs, rs]
+      $  foldAppProducts (conjureIf f) [cs, as, rs]
+      \/ foldAppProducts (conjureIf f) [cs, rs, as]
   cs  =  filterT (`notElem` [val False, val True])
       $  forN (hole (undefined :: Bool))
   as  =  forN efxs
   rs  =  forR efxs
   forN h  =  enumerateAppsFor h keep [exs ++ es]
-  forR h  =  enumerateAppsFor h keep $ [exs ++ es] \/ recs
   forD h  =  enumerateAppsFor h (const True) [exs ++ ds]
+  forR h  =  filterT (\e -> (ef `elem`) (vars e))
+          $  enumerateAppsFor h keep $ [exs ++ es] \/ recs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
