@@ -14,6 +14,13 @@ sort' [x,y,z]
   | x <= y && y <= z  =  [x,y,z]
   | z <= y && y <= x  =  [z,y,x]
 
+pow :: Int -> Int -> Int
+pow 2 0  =  1
+pow 2 1  =  2
+pow 2 2  =  4
+pow 2 3  =  8
+pow 3 2  =  9
+
 main :: IO ()
 main = do
   -- qsort
@@ -34,4 +41,17 @@ main = do
     , value "<" ((<) :: Int -> Int -> Bool)
     , value ">=" ((>=) :: Int -> Int -> Bool)
     , value "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    ]
+
+  -- pow b e  =  if e == 0 then 1 else b * pow b (dec e)
+  --             1  2  3 4      5      6 7 8   9  10 11
+  -- somehow this takes 30s to run, the two arguments
+  -- of the same type introduce the difficulty here.
+  conjureWithMaxSize 9 "pow" pow
+    [ val (0::Int)
+    , val (1::Int)
+    , value "+" ((+) :: Int -> Int -> Int)
+    , value "*" ((*) :: Int -> Int -> Int)
+    , value "dec" (subtract 1 :: Int -> Int)
+    , value "==" ((==) :: Int -> Int -> Bool)
     ]
