@@ -47,11 +47,23 @@ main = do
   --             1  2  3 4      5      6 7 8   9  10 11
   -- somehow this takes 30s to run, the two arguments
   -- of the same type introduce the difficulty here.
-  conjureWithMaxSize 9 "pow" pow
+  conjureWithMaxSize 8 "pow" pow
     [ val (0::Int)
     , val (1::Int)
     , value "+" ((+) :: Int -> Int -> Int)
     , value "*" ((*) :: Int -> Int -> Int)
     , value "dec" (subtract 1 :: Int -> Int)
+    , value "==" ((==) :: Int -> Int -> Bool)
+    ]
+
+  -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1
+  --             1  2  3 4      5      6   7  8     9 10 11 12  13   14 15 16 17  18    19     20
+  -- out of reach performance wise
+  conjureWithMaxSize 8 "pow" pow
+    [ val (0::Int)
+    , val (1::Int)
+    , value "+" ((+) :: Int -> Int -> Int)
+    , value "*" ((*) :: Int -> Int -> Int)
+    , value "halve" ((`div` 2) :: Int -> Int)
     , value "==" ((==) :: Int -> Int -> Bool)
     ]
