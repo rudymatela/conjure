@@ -4,6 +4,8 @@ TODO for Conjure
 A non-exhaustive list of things TO DO for Conjure.
 
 
+* allow recursion under `&&` and `||` in case of boolean-valued functions;
+
 * top-down generation of candidate expressions
 
 * generate functions with top-level case patterns:
@@ -20,6 +22,8 @@ A non-exhaustive list of things TO DO for Conjure.
 
 ### for later
 
+* allow recursion under any lazy functions (discover them by testing!)
+
 * exclude magic numbers?  e.g.: `1+1`?
 
 * allow conjuring from partially defined implementations?
@@ -32,6 +36,7 @@ A non-exhaustive list of things TO DO for Conjure.
                   else impl f n
 
 * consider leveraging lazyness somehow?
+  (related to allowing recursion under any lazy functions)
 
 * consider leveraging polymorphism somehow?
 
