@@ -3,12 +3,21 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 {-# LANGUAGE CPP #-}
+#if __GLASGOW_HASKELL__ == 708
+{-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
+import Data.Typeable (Typeable)
+#endif
+
 import Conjure
 import Test.LeanCheck
 
 data Tree  =  Leaf
            |  Node Tree Int Tree
   deriving (Eq, Ord, Show, Read)
+
+#if __GLASGOW_HASKELL__ == 708
+deriving instance Typeable Tree
+#endif
 
 unit :: Int -> Tree
 unit x  =  Node Leaf x Leaf
