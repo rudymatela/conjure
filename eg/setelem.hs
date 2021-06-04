@@ -16,11 +16,27 @@ main = do
   -- elem x xs  =  if null xs then False else elem x (tail xs) || x == head xs
   conjureWithMaxSize 13 "elem" (elem')
     [ val ([] :: [Int])
+    , val True
     , val False
     , value "||" (||)
+    , value "&&" (&&)
     , value ":" ((:) :: Int -> [Int] -> [Int])
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])
     , value "null" (null :: [Int] -> Bool)
     , value "==" ((==) :: Int -> Int -> Bool)
+    ]
+
+  -- set xs  =  if null xs then True else not (head xs `elem` tail xs) && set (tail xs)
+  conjureWithMaxSize 14 "set" (set')
+    [ val ([] :: [Int])
+    , val True
+    , val False
+    , value "||" (||)
+    , value "&&" (&&)
+    , value ":" ((:) :: Int -> [Int] -> [Int])
+    , value "head" (head :: [Int] -> Int)
+    , value "tail" (tail :: [Int] -> [Int])
+    , value "null" (null :: [Int] -> Bool)
+    , value "elem" (elem :: Int -> [Int] -> Bool)
     ]

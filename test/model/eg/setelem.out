@@ -1,17 +1,35 @@
 elem :: Int -> [Int] -> Bool
 -- testing 60 combinations of argument values
--- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 8 candidates of size 5
--- looking through 14 candidates of size 6
--- looking through 24 candidates of size 7
--- looking through 44 candidates of size 8
--- looking through 84 candidates of size 9
--- looking through 154 candidates of size 10
--- looking through 303 candidates of size 11
--- looking through 577 candidates of size 12
--- looking through 1129 candidates of size 13
+-- looking through 17 candidates of size 6
+-- looking through 35 candidates of size 7
+-- looking through 72 candidates of size 8
+-- looking through 148 candidates of size 9
+-- looking through 293 candidates of size 10
+-- looking through 693 candidates of size 11
+-- looking through 1516 candidates of size 12
+-- looking through 3464 candidates of size 13
 elem x xs  =  if null xs then False else elem x (tail xs) || x == head xs
+
+set :: [Int] -> Bool
+-- testing 60 combinations of argument values
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 18 candidates of size 6
+-- looking through 38 candidates of size 7
+-- looking through 89 candidates of size 8
+-- looking through 181 candidates of size 9
+-- looking through 418 candidates of size 10
+-- looking through 978 candidates of size 11
+-- looking through 2273 candidates of size 12
+-- looking through 5297 candidates of size 13
+-- looking through 12444 candidates of size 14
+set xs  =  if null xs || elem (head xs) (tail xs) then null xs else set (tail xs)
 
