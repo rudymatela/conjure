@@ -54,3 +54,19 @@ duplicates :: [Int] -> [Int]
 -- looking through 2234 candidates of size 12
 cannot conjure
 
+positionsFrom :: Int -> Int -> [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 6 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 22 candidates of size 5
+-- looking through 42 candidates of size 6
+-- looking through 86 candidates of size 7
+-- looking through 182 candidates of size 8
+-- looking through 418 candidates of size 9
+-- looking through 1038 candidates of size 10
+-- looking through 2682 candidates of size 11
+-- looking through 7066 candidates of size 12
+cannot conjure
+

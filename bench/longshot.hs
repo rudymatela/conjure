@@ -30,6 +30,15 @@ duplicates (x:xs)  =
   where
   d  =  duplicates xs
 
+positionsFrom :: Int -> Int -> [Int] -> [Int]
+positionsFrom n x  =  from n
+  where
+  from _ []  =  []
+  from n (y:ys)  =  if y == x
+                    then n : f
+                    else f
+    where
+    f  =  from (n+1) ys
 
 main :: IO ()
 main = do
@@ -96,4 +105,18 @@ main = do
     , value "tail" (tail :: [Int] -> [Int])
     , value "null" (null :: [Int] -> Bool)
     , value "elem" (elem :: Int -> [Int] -> Bool)
+    ]
+
+  conjure "positionsFrom" positionsFrom
+    [ val ([] :: [Int])
+    , val True
+    , val False
+    , value "not" not
+    , value "||" (||)
+    , value "&&" (&&)
+    , value ":" ((:) :: Int -> [Int] -> [Int])
+    , value "head" (head :: [Int] -> Int)
+    , value "tail" (tail :: [Int] -> [Int])
+    , value "null" (null :: [Int] -> Bool)
+    , value "==" ((==) :: Int -> Int -> Bool)
     ]
