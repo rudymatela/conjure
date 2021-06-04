@@ -15,3 +15,16 @@ fibonacci :: Int -> Int
 -- looking through 2377 candidates of size 13
 fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 
+fib01 :: Int -> Int -> Int -> Int
+-- testing 8 combinations of argument values
+-- looking through 4 candidates of size 1
+-- looking through 4 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 21 candidates of size 4
+-- looking through 43 candidates of size 5
+-- looking through 84 candidates of size 6
+-- looking through 192 candidates of size 7
+-- looking through 391 candidates of size 8
+-- looking through 3336 candidates of size 9
+-- looking through 19566 candidates of size 10
+cannot conjure
