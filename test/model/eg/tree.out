@@ -1,3 +1,29 @@
+leftmost :: Tree -> Int
+-- testing 60 combinations of argument values
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 16 candidates of size 6
+-- looking through 32 candidates of size 7
+-- looking through 68 candidates of size 8
+-- looking through 152 candidates of size 9
+leftmost x  =  if nil (left x) then valu x else leftmost (left x)
+
+rightmost :: Tree -> Int
+-- testing 60 combinations of argument values
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 16 candidates of size 6
+-- looking through 32 candidates of size 7
+-- looking through 68 candidates of size 8
+-- looking through 152 candidates of size 9
+rightmost x  =  if nil (right x) then valu x else rightmost (right x)
+
 size :: Tree -> Int
 -- testing 60 combinations of argument values
 -- looking through 2 candidates of size 1

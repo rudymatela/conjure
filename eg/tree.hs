@@ -22,6 +22,15 @@ left (Node l _ _)  =  l
 right :: Tree -> Tree
 right (Node _ _ r)  =  r
 
+valu :: Tree -> Int
+valu (Node _ x _)  =  x
+
+
+leftmost :: Tree -> Int
+leftmost (Node l x _)  =  if nil l then x else leftmost (left l)
+
+rightmost :: Tree -> Int
+rightmost (Node _ x r)  =  if nil r then x else rightmost (right r)
 
 height :: Tree -> Int
 height Leaf  =  -1
@@ -46,8 +55,21 @@ instance Conjurable Tree where
 
 main :: IO ()
 main = do
-  -- TODO: make it so that these are found
+  conjure "leftmost" leftmost
+    [ value "valu" valu
+    , value "nil" nil
+    , value "left" left
+    , value "right" right
+    ]
 
+  conjure "rightmost" rightmost
+    [ value "valu" valu
+    , value "nil" nil
+    , value "left" left
+    , value "right" right
+    ]
+
+  -- TODO: make it so that these are found
   conjure "size" size
     [ val (0 :: Int)
     , val (1 :: Int)
