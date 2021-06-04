@@ -2,6 +2,7 @@
 --
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
+{-# LANGUAGE CPP #-}
 import Conjure
 import Test.LeanCheck
 
@@ -44,9 +45,14 @@ mem :: Int -> Tree -> Bool
 mem _ Leaf  =  False
 mem y (Node l x r)  =  y == x || mem y l || mem y r
 
--- TODO: binary search tree functions:
--- * insert
--- * mem
+insert :: Int -> Tree -> Tree
+insert x Leaf  =  unit x
+insert x (Node l y r)  =  case compare x y of
+  LT -> Node (insert x l) y r
+  EQ -> Node l y r
+  GT -> Node l y (insert x r)
+
+-- TODO: mem alternative for binary search trees
 
 
 instance Listable Tree where
@@ -106,6 +112,20 @@ main = do
     , value "valu" valu
     ]
 
+  -- simply out of reach performance-wise (size 34)
+  conjureWith args{maxRecursiveCalls=2, maxSize=9} "insert" mem
+    [ val Leaf
+    , value "Node" Node
+    , value "left" left
+    , value "right" right
+    , value "valu" valu
+    , value "nil" nil
+    , value "unit" unit
+    , value "==" ((==) :: Int -> Int -> Bool)
+    , value "<" ((<) :: Int -> Int -> Bool)
+    , value ">" ((>) :: Int -> Int -> Bool)
+    ]
+
 
 sizeIf :: Tree -> Int
 sizeIf t  =  if nil t  -- 3
@@ -124,3 +144,12 @@ memIf y t  =  if nil t     -- 3
               then False   -- 4
               else y == valu t || memIf y (left t) || memIf y (right t)
               --   5  6   7  8  9  10  11   12  13 14  15  16   17   18
+
+insertIf :: Int -> Tree -> Tree
+insertIf x t  =  if nil t                 -- 3
+                 then unit x              -- 5
+                 else if x == valu t      -- 10
+                      then t              -- 11
+                      else if x < valu t  -- 16
+                           then Node (insert x (left t)) (valu t) (right t)  -- 25
+                           else Node (left t) (valu t) (insert x (right t))  -- 34
