@@ -45,6 +45,8 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * consider leveraging polymorphism somehow?
 
+* consider allowing lambdas that introduce free variables?
+
 
 This file is part of Conjure,
 (C) 2021 Rudy Matela,
