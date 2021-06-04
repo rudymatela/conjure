@@ -166,6 +166,18 @@ eg/tapps.o: \
   src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/tapps.hs
+eg/tree: \
+  eg/tree.hs \
+  mk/toplibs
+eg/tree.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
+  src/Conjure/Conjurable.hs \
+  eg/tree.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \

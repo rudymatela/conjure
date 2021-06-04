@@ -35,6 +35,7 @@ eg/fibonacci
 eg/ints
 eg/list
 eg/tapps
+eg/tree
 eg/setelem
 eg/spec
 bench/self
