@@ -20,7 +20,7 @@ module Test
 where
 
 import System.Exit (exitFailure)
-import System.Environment (getArgs)
+import System.Environment (getArgs, getProgName)
 
 import Test.LeanCheck
 import Test.LeanCheck.Utils
@@ -31,11 +31,11 @@ import Conjure
 import Conjure.Expr hiding (delete, insert)
 import Conjure.Conjurable
 
-reportTests :: [Bool] -> IO ()
-reportTests tests =
+reportTests :: String -> [Bool] -> IO ()
+reportTests s tests = do
   case elemIndices False tests of
-    [] -> putStrLn "Tests passed!"
-    is -> do putStrLn ("Failed tests:" ++ show is)
+    [] -> putStrLn $ s ++ ": tests passed"
+    is -> do putStrLn (s ++ ": failed tests: " ++ show is)
              exitFailure
 
 getMaxTestsFromArgs :: Int -> IO Int
@@ -47,8 +47,9 @@ getMaxTestsFromArgs n = do
 
 mainTest :: (Int -> [Bool]) -> Int -> IO ()
 mainTest tests n' = do
+  pn <- getProgName
   n <- getMaxTestsFromArgs n'
-  reportTests (tests n)
+  reportTests pn (tests n)
 
 printLines :: Show a => [a] -> IO ()
 printLines = putStrLn . unlines . map show
