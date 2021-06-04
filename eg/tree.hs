@@ -44,7 +44,9 @@ mem :: Int -> Tree -> Bool
 mem _ Leaf  =  False
 mem y (Node l x r)  =  y == x || mem y l || mem y r
 
--- TODO: elem and insert
+-- TODO: binary search tree functions:
+-- * insert
+-- * mem
 
 
 instance Listable Tree where
