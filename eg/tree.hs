@@ -37,7 +37,7 @@ height Leaf  =  -1
 height (Node l _ r)  =  1 + max (height l) (height r)
 
 size :: Tree -> Int
-size Leaf  =  1
+size Leaf  =  0
 size (Node l _ r)  =  size l + 1 + size r
 
 -- TODO: elem and insert
@@ -69,8 +69,7 @@ main = do
     , value "right" right
     ]
 
-  -- TODO: make it so that these are found
-  conjure "size" size
+  conjureWith args{maxRecursiveCalls=2, maxSize=13} "size" size
     [ val (0 :: Int)
     , val (1 :: Int)
     , value "+" ((+) :: Int -> Int -> Int)
@@ -79,7 +78,7 @@ main = do
     , value "right" right
     ]
 
-  conjureWithMaxSize 13 "height" height
+  conjureWith args{maxRecursiveCalls=2, maxSize=13} "height" height
     [ val (0 :: Int)
     , val (1 :: Int)
     , val (-1 :: Int)
