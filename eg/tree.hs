@@ -40,6 +40,10 @@ size :: Tree -> Int
 size Leaf  =  0
 size (Node l _ r)  =  size l + 1 + size r
 
+mem :: Int -> Tree -> Bool
+mem _ Leaf  =  False
+mem y (Node l x r)  =  y == x || mem y l || mem y r
+
 -- TODO: elem and insert
 
 
@@ -89,6 +93,17 @@ main = do
     , value "right" right
     ]
 
+  -- out of reach performance-wise
+  conjureWith args{maxRecursiveCalls=2, maxSize=12} "mem" mem
+    [ val False
+    , value "||" (||)
+    , value "==" ((==) :: Int -> Int -> Bool)
+    , value "nil" nil
+    , value "left" left
+    , value "right" right
+    , value "valu" valu
+    ]
+
 
 sizeIf :: Tree -> Int
 sizeIf t  =  if nil t  -- 3
@@ -101,3 +116,9 @@ heightIf t  =  if nil t  -- 3
                then -1   -- 4
                else 1 + max (height (left t)) (height (right t))
                --   5 6  7     8      9  10      11     12   13
+
+memIf :: Int -> Tree -> Bool
+memIf y t  =  if nil t     -- 3
+              then False   -- 4
+              else y == valu t || memIf y (left t) || memIf y (right t)
+              --   5  6   7  8  9  10  11   12  13 14  15  16   17   18

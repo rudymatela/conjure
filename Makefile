@@ -16,6 +16,7 @@ EG = \
   eg/setelem \
   eg/spec \
   eg/tapps \
+  eg/tree \
   bench/ill-hit \
   bench/longshot \
   bench/self \

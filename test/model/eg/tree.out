@@ -58,3 +58,19 @@ height :: Tree -> Int
 -- looking through 16380 candidates of size 13
 height x  =  if nil x then -1 else 1 + max (height (left x)) (height (right x))
 
+mem :: Int -> Tree -> Bool
+-- testing 60 combinations of argument values
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 12 candidates of size 5
+-- looking through 28 candidates of size 6
+-- looking through 60 candidates of size 7
+-- looking through 140 candidates of size 8
+-- looking through 316 candidates of size 9
+-- looking through 732 candidates of size 10
+-- looking through 1692 candidates of size 11
+-- looking through 3966 candidates of size 12
+cannot conjure
+
