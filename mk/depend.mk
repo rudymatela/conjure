@@ -70,6 +70,18 @@ eg/bools.o: \
   src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/bools.hs
+eg/count: \
+  eg/count.hs \
+  mk/toplibs
+eg/count.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
+  src/Conjure/Conjurable.hs \
+  eg/count.hs
 eg/factorial: \
   eg/factorial.hs \
   mk/toplibs

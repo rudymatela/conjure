@@ -1,0 +1,20 @@
+count :: A -> [A] -> Int
+-- testing 13 combinations of argument values
+-- looking through 2 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 3 candidates of size 5
+-- looking through 2 candidates of size 6
+-- looking through 13 candidates of size 7
+-- looking through 16 candidates of size 8
+-- looking through 53 candidates of size 9
+-- looking through 72 candidates of size 10
+-- looking through 208 candidates of size 11
+-- looking through 331 candidates of size 12
+-- looking through 887 candidates of size 13
+-- looking through 1577 candidates of size 14
+-- looking through 3934 candidates of size 15
+-- looking through 7412 candidates of size 16
+count x xs  =  if null xs then 0 else count x (tail xs) + (if x == head xs then 1 else 0)
+

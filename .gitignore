@@ -29,6 +29,7 @@ TAGS
 # benches, prototypes and test programs
 eg/arith
 eg/bools
+eg/count
 eg/factorial
 eg/fibonacci
 eg/ints
