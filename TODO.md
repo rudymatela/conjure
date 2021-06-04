@@ -38,6 +38,8 @@ A non-exhaustive list of things TO DO for Conjure.
                   then 1
                   else impl f n
 
+* consider discover orderings on arguments?
+
 * consider leveraging lazyness somehow?
   (related to allowing recursion under any lazy functions)
 
