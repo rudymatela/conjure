@@ -13,6 +13,7 @@ qsort :: [Int] -> [Int]
 -- looking through 16103 candidates of size 11
 -- looking through 49113 candidates of size 12
 cannot conjure
+
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- looking through 4 candidates of size 1
@@ -24,6 +25,7 @@ pow :: Int -> Int -> Int
 -- looking through 614 candidates of size 7
 -- looking through 1675 candidates of size 8
 cannot conjure
+
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- looking through 4 candidates of size 1
@@ -35,3 +37,20 @@ pow :: Int -> Int -> Int
 -- looking through 1122 candidates of size 7
 -- looking through 3727 candidates of size 8
 cannot conjure
+
+duplicates :: [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 10 candidates of size 5
+-- looking through 14 candidates of size 6
+-- looking through 30 candidates of size 7
+-- looking through 70 candidates of size 8
+-- looking through 154 candidates of size 9
+-- looking through 366 candidates of size 10
+-- looking through 914 candidates of size 11
+-- looking through 2234 candidates of size 12
+cannot conjure
+

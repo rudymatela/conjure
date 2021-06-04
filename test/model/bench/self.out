@@ -25,3 +25,4 @@ d :: Int -> Int
 -- looking through 0 candidates of size 2
 -- looking through 18 candidates of size 3
 cannot conjure
+

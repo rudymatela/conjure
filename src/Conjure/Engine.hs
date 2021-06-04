@@ -131,7 +131,7 @@ conjureWith args nm f es  =  do
   putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
   pr 1 rs
   where
-  pr n []  =  putStrLn $ "cannot conjure"
+  pr n []  =  putStrLn $ "cannot conjure\n"
   pr n ((is,cs,es):rs)  =  do
     putStrLn $ "-- looking through "
             ++ show (length cs)

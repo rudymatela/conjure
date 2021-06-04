@@ -21,6 +21,16 @@ pow 2 2  =  4
 pow 2 3  =  8
 pow 3 2  =  9
 
+duplicates :: [Int] -> [Int] -- Eq a => [a] -> [a]
+duplicates []  =  []
+duplicates (x:xs)  =
+  if x `elem` xs && not (x `elem` d)
+  then x : d
+  else d
+  where
+  d  =  duplicates xs
+
+
 main :: IO ()
 main = do
   -- qsort
@@ -66,4 +76,24 @@ main = do
     , value "*" ((*) :: Int -> Int -> Int)
     , value "halve" ((`div` 2) :: Int -> Int)
     , value "==" ((==) :: Int -> Int -> Bool)
+    ]
+
+  -- duplicates xs  =
+  --   if null xs                                                                   --  3
+  --   then []                                                                      --  4
+  --   else if head xs `elem` tail xs && not (head xs `elem` duplicates (tail xs))  -- 18
+  --        then head xs : duplicates (tail xs)                                     -- 24
+  --        else duplicates (tail xs)                                               -- 27
+  conjure "duplicates" duplicates
+    [ val ([] :: [Int])
+    , val True
+    , val False
+    , value "not" not
+    , value "||" (||)
+    , value "&&" (&&)
+    , value ":" ((:) :: Int -> [Int] -> [Int])
+    , value "head" (head :: [Int] -> Int)
+    , value "tail" (tail :: [Int] -> [Int])
+    , value "null" (null :: [Int] -> Bool)
+    , value "elem" (elem :: Int -> [Int] -> Bool)
     ]
