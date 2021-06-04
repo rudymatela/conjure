@@ -12,6 +12,7 @@ EG = \
   eg/ints \
   eg/bools \
   eg/list \
+  eg/setelem \
   eg/spec \
   eg/tapps \
   bench/ill-hit \

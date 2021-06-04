@@ -34,6 +34,7 @@ eg/fibonacci
 eg/ints
 eg/list
 eg/tapps
+eg/setelem
 eg/spec
 bench/self
 bench/longshot

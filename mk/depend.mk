@@ -118,6 +118,18 @@ eg/list.o: \
   src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
   eg/list.hs
+eg/setelem: \
+  eg/setelem.hs \
+  mk/toplibs
+eg/setelem.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Constructors.hs \
+  src/Conjure/Conjurable.hs \
+  eg/setelem.hs
 eg/spec: \
   eg/spec.hs \
   mk/toplibs

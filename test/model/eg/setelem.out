@@ -1,0 +1,17 @@
+elem :: Int -> [Int] -> Bool
+-- testing 60 combinations of argument values
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 14 candidates of size 6
+-- looking through 24 candidates of size 7
+-- looking through 44 candidates of size 8
+-- looking through 84 candidates of size 9
+-- looking through 154 candidates of size 10
+-- looking through 303 candidates of size 11
+-- looking through 577 candidates of size 12
+-- looking through 1129 candidates of size 13
+elem x xs  =  if null xs then False else elem x (tail xs) || x == head xs
+
