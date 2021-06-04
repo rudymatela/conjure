@@ -10,7 +10,6 @@
 -- and utilities involving it.
 --
 -- You are probably better off importing "Conjure".
-{-# Language DeriveDataTypeable, StandaloneDeriving #-} -- for GHC < 7.10
 module Conjure.Conjurable
   ( Reification1
   , Reification
@@ -420,13 +419,6 @@ instance Conjurable E where
 instance Conjurable F where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-
-deriving instance Typeable A -- for GHC < 7.10
-deriving instance Typeable B -- for GHC < 7.10
-deriving instance Typeable C -- for GHC < 7.10
-deriving instance Typeable D -- for GHC < 7.10
-deriving instance Typeable E -- for GHC < 7.10
-deriving instance Typeable F -- for GHC < 7.10
 
 
 -- Conjurable tuples --
