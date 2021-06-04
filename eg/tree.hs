@@ -41,6 +41,7 @@ size :: Tree -> Int
 size Leaf  =  0
 size (Node l _ r)  =  size l + 1 + size r
 
+-- this mem searches both sides of the tree
 mem :: Int -> Tree -> Bool
 mem _ Leaf  =  False
 mem y (Node l x r)  =  y == x || mem y l || mem y r
