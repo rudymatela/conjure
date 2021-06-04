@@ -50,7 +50,7 @@ ghci: src/Conjure.ghci
 
 diff-test: $(patsubst %,%.diff-test,$(EG))
 
-update-diff-test: $(patsubst %,%.update-diff-test,$(EG))
+out: $(patsubst %,%.out,$(EG))
 
 test-sdist:
 	./test/sdist
@@ -75,11 +75,11 @@ full-clean: clean clean-cabal clean-stack
 %.run: %
 	./$<
 
-%.diff-test: %
-	./$< | diff -rud test/model/$<.out -
+%.out: %
+	./$< >$<.out
 
-%.update-diff-test: %
-	./$< >           test/model/$<.out
+%.diff-test: %
+	./$< | diff -rud $<.out -
 
 # lists files missing copyright notices
 list-missing-copyright:

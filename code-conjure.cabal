@@ -29,8 +29,11 @@ extra-source-files: .gitignore
                   , .github/workflows/build.yml
                   , Makefile
                   , bench/*.hs
+                  , bench/*.out
                   , eg/*.hs
+                  , eg/*.out
                   , proto/*.hs
+                  , proto/*.out
                   , mk/All.hs
                   , mk/Toplibs.hs
                   , mk/depend.mk
@@ -44,9 +47,6 @@ extra-source-files: .gitignore
                   , bench/runtime/zero/proto/*.runtime
                   , bench/runtime/zero/versions
                   , bench/versions
-                  , test/model/bench/*.out
-                  , test/model/eg/*.out
-                  , test/model/proto/*.out
                   , test/sdist
 tested-with: GHC==9.0
            , GHC==8.10
