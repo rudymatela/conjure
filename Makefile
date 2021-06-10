@@ -67,7 +67,7 @@ hugs-test:
 	echo 'Unsupported'
 
 clean: clean-hi-o clean-haddock
-	rm -f $(EG) $(TESTS)
+	rm -f $(EG) $(TESTS) mk/toplibs
 
 full-clean: clean clean-cabal clean-stack
 	rm -f tags TAGS mk/toplibs
