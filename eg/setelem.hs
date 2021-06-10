@@ -18,6 +18,7 @@ main = do
     [ val ([] :: [Int])
     , val True
     , val False
+    , value "not" not
     , value "||" (||)
     , value "&&" (&&)
     , value ":" ((:) :: Int -> [Int] -> [Int])
@@ -32,6 +33,7 @@ main = do
     [ val ([] :: [Int])
     , val True
     , val False
+    , value "not" not
     , value "||" (||)
     , value "&&" (&&)
     , value ":" ((:) :: Int -> [Int] -> [Int])

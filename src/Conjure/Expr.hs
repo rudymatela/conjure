@@ -350,6 +350,14 @@ recursiveToDynamic (efxs, ebody) n  =  fmap snd . re n
     Nothing    -> Nothing
     Just True  -> re n ex
     Just False -> re n ey
+  re n (Value "||" _ :$ ep :$ eq)  =  case evaluate ep of
+    Nothing    -> Nothing
+    Just True  -> (n,) <$> toDynamic (val True)
+    Just False -> re n eq
+  re n (Value "&&" _ :$ ep :$ eq)  =  case evaluate ep of
+    Nothing    -> Nothing
+    Just True  -> re n eq
+    Just False -> (n,) <$> toDynamic (val False)
   re n e  =  case unfoldApp e of
     [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
     [e] -> (n,) <$> toDynamic e

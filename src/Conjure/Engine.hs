@@ -36,7 +36,7 @@ import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 
 import Test.Speculate.Reason (Thy, rules, equations, canReduceTo, printThy)
-import Test.Speculate.Engine (theoryFromAtoms, groundBinds)
+import Test.Speculate.Engine (theoryFromAtoms, groundBinds, boolTy)
 
 import Conjure.Expr
 import Conjure.Conjurable
@@ -197,9 +197,11 @@ candidateExprs :: Conjurable f
                -> [[Expr]]
 candidateExprs nm f sz mc (===) es  =  as \/ ts
   where
-  ts  =  filterT keepIf
-      $  foldAppProducts (conjureIf f) [cs, as, rs]
-      \/ foldAppProducts (conjureIf f) [cs, rs, as]
+  ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
+                           \/ foldAppProducts orE  [cs, rs]
+     | otherwise           =  filterT keepIf
+                           $  foldAppProducts (conjureIf f) [cs, as, rs]
+                           \/ foldAppProducts (conjureIf f) [cs, rs, as]
   cs  =  filterT (`notElem` [val False, val True])
       $  forN (hole (undefined :: Bool))
   as  =  forN efxs

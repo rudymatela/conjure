@@ -7,8 +7,6 @@ A non-exhaustive list of things TO DO for Conjure.
 * require descending arguments on a subset of arguments
   (allow a strict subset to be non-descending)
 
-* allow recursion under `&&` and `||` in case of boolean-valued functions;
-
 * top-down generation of candidate expressions
 
 * generate functions with top-level case patterns:
