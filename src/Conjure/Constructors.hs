@@ -27,12 +27,14 @@ import Conjure.Utils
 import Data.Express
 import Data.Express.Express
 import Data.Express.Fixtures
+import Data.Dynamic
 import Data.Typeable (Typeable)
 
-type Fxpr  =  [([Expr],Expr)]
+type Fxpr  =  (Expr, Cxpr)
+type Cxpr  =  [([Expr],Expr)]
 
 sumFxpr :: Fxpr
-sumFxpr  =
+sumFxpr  =  var "sum" (undefined :: [Int] -> Int) =-
   [ [nil]           =-  zero
   , [(xx -:- xxs)]  =-  xx -+- (var "recurse" (undefined :: [Int] -> Int) :$ xxs)
   ]
@@ -41,10 +43,10 @@ sumFxpr  =
   infixr 0 =-
 
 factFxpr :: Fxpr
-factFxpr  =  undefined
+factFxpr  =  error "TODO: write me"
 
 nullFxpr :: Fxpr
-nullFxpr  =
+nullFxpr  =  error "TODO" =-
   [ [nil]          =- false
   , [(xx -:- xxs)] =- false
   ]
@@ -53,7 +55,7 @@ nullFxpr  =
   infixr 0 =-
 
 isZeroFxpr :: Fxpr
-isZeroFxpr  =
+isZeroFxpr  =  error "TODO" =-
   [ [zero]  =- true
   , [inc xx] =- false
   ]
@@ -63,10 +65,17 @@ isZeroFxpr  =
   infixr 0 =-
 
 
+-- perhaps this will work better than fvl...
+fxprToDynamic :: Int -> Fxpr -> [Expr] -> Maybe Dynamic
+fxprToDynamic  =  undefined
+-- though I need to check how this will fit into conjpureWith
+
+
+-- I don't think this is implementable
 class Typeable a => Fxpress a where
-  fvl :: Fxpr -> a
-  fvl (([],e):_)  =  evl e
-  fvl _           =  error "fvl: incomplete pattern match"
+  fvl :: Fxpr -> Cxpr -> a
+  fvl fxpr (([],e):_)  =  evl e
+  fvl fxpr _           =  error "fvl: incomplete pattern match"
 
 instance Fxpress ()
 instance Fxpress Int
@@ -77,11 +86,10 @@ instance Fxpress a => Fxpress (Maybe a)
 instance (Fxpress a, Fxpress b) => Fxpress (Either a b)
 
 instance (Constructors a, Fxpress b) => Fxpress (a -> b) where
-  fvl cs x  =  fvl [ (ps,exp //- bs)
-                   | (p:ps,exp) <- cs
-                   , bs <- maybeToList (match (expr1 x) p)
-                   ]
--- TODO: add support for recursion
+  fvl fxpr cs x  =  fvl fxpr [ (ps,exp //- bs)
+                             | (p:ps,exp) <- cs
+                             , bs <- maybeToList (match (expr1 x) p)
+                             ]
 
 
 class Express a => Constructors a where
