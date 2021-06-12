@@ -3,22 +3,24 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* `conjpureWith` without evaluating `e`,
+  use the var application and let the recursion engine recurse
+  (for `fxprToDynamic`)
 
-* require descending arguments on a subset of arguments
-  (allow a strict subset to be non-descending)
+* rename Constructors to Cases and
+  drop handling of `n+1` patterns.
+  Numeric values will not be deconstructed.
 
-* top-down generation of candidate expressions
+* relax restriction on deconstructions.
+  only require a single (or subset) of arguments to be deconstructed.
+
+* use holes for recursions, code will probably become cleaner
+  (and possibly faster)
 
 * generate functions with top-level case patterns:
 
         len []  =  0
         len (x:xs)  =  1 + len xs
-
-* only allow recursion on deconstructed arguments:
-
-        foo (x:xs)  =  ... len xs ...
-
-  this will require generation of functions with top-level case patterns.
 
 
 ### for later

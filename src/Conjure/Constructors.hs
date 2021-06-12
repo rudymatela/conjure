@@ -15,7 +15,6 @@
 module Conjure.Constructors
   ( Constructors (..)
   , Fxpr
-  , Fxpress (..)
   , sumFxpr
   , factFxpr
   , nullFxpr
@@ -65,31 +64,10 @@ isZeroFxpr  =  error "TODO" =-
   infixr 0 =-
 
 
--- perhaps this will work better than fvl...
-fxprToDynamic :: Int -> Fxpr -> [Expr] -> Maybe Dynamic
+-- | Evaluates an 'Expr' using the given 'Fxpr' as definition
+--   when a recursive call is found.
+fxprToDynamic :: Int -> Fxpr -> Expr -> Maybe Dynamic
 fxprToDynamic  =  undefined
--- though I need to check how this will fit into conjpureWith
-
-
--- I don't think this is implementable
-class Typeable a => Fxpress a where
-  fvl :: Fxpr -> Cxpr -> a
-  fvl fxpr (([],e):_)  =  evl e
-  fvl fxpr _           =  error "fvl: incomplete pattern match"
-
-instance Fxpress ()
-instance Fxpress Int
-instance Fxpress Bool
-instance Fxpress Char
-instance Fxpress a => Fxpress [a]
-instance Fxpress a => Fxpress (Maybe a)
-instance (Fxpress a, Fxpress b) => Fxpress (Either a b)
-
-instance (Constructors a, Fxpress b) => Fxpress (a -> b) where
-  fvl fxpr cs x  =  fvl fxpr [ (ps,exp //- bs)
-                             | (p:ps,exp) <- cs
-                             , bs <- maybeToList (match (expr1 x) p)
-                             ]
 
 
 class Express a => Constructors a where
