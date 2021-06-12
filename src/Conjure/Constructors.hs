@@ -71,68 +71,41 @@ fxprToDynamic  =  undefined
 
 
 class Express a => Constructors a where
-  expr1 :: a -> Expr
   constructors :: a -> [Expr]
 
 instance Constructors () where
-  expr1  =  val
   constructors _  =  [val ()]
 
 instance Constructors Bool where
-  expr1  =  val
   constructors _  =  [val False, val True]
 
-constructorsNum :: (Num a, Express a) => a -> [Expr]
-constructorsNum x  =  [ hole x -- <= 0 -- val (0 -: x)
-                      , value "inc" ((+1) ->: x) :$ hole x
-                      ]
-
-expr1Num :: (Ord a, Num a, Express a) => a -> Expr
-expr1Num x
-  | x <= 0     =  val x
-  | otherwise  =  value "inc" ((+1) ->: x) :$ val (x-1)
-
 instance Constructors Int where
-  expr1  =  expr1Num
-  constructors  =  constructorsNum
+  constructors _  =  []
 
 instance Constructors Integer where
-  expr1  =  expr1Num
-  constructors  =  constructorsNum
+  constructors _  =  []
 
 instance Constructors Char where
-  expr1  =  val
   constructors _  =  []
 
 instance Express a => Constructors [a] where
-  expr1 xs  =  case xs of
-               [] -> val xs
-               (y:ys) -> value ":" ((:) ->>: xs) :$ val y :$ val ys
   constructors xs  =  [ val ([] -: xs)
                       , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
                       ]
     where
     x  =  head xs
 
-
 instance (Express a, Express b) => Constructors (a,b) where
-  expr1 (x,y)  =  value "," ((,) ->>: (x,y))
-               :$ val x :$ val y
   constructors xy  =  [value "," ((,) ->>: xy) :$ hole x :$ hole y]
     where
     (x,y) = (undefined,undefined) -: xy
 
 instance (Express a, Express b, Express c) => Constructors (a,b,c) where
-  expr1 (x,y,z)  =  value ",," ((,,) ->>>: (x,y,z))
-                 :$ val x :$ val y :$ val z
-
   constructors xyz  =  [value ",," ((,,) ->>>: xyz) :$ hole x :$ hole y :$ hole z]
     where
     (x,y,z) = (undefined,undefined,undefined) -: xyz
 
 instance Express a => Constructors (Maybe a) where
-  expr1 mx@Nothing   =  value "Nothing" (Nothing -: mx)
-  expr1 mx@(Just x)  =  value "Just"    (Just   ->: mx) :$ val x
   constructors mx  =  [ value "Nothing" (Nothing -: mx)
                       , value "Just" (Just ->: mx) :$ hole x
                       ]
@@ -141,8 +114,6 @@ instance Express a => Constructors (Maybe a) where
 
 
 instance (Express a, Express b) => Constructors (Either a b) where
-  expr1 lx@(Left x)   =  value "Left"  (Left  ->: lx) :$ val x
-  expr1 ry@(Right y)  =  value "Right" (Right ->: ry) :$ val y
   constructors exy  =  [ value "Left" (Left ->: exy) :$ hole x
                        , value "Right" (Right ->: exy) :$ hole y
                        ]
