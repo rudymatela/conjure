@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* rename Constructors to Cases and
-  drop handling of `n+1` patterns.
-  Numeric values will not be deconstructed.
-
 * relax restriction on deconstructions.
   only require a single (or subset) of arguments to be deconstructed.
 

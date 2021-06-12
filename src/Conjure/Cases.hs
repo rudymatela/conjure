@@ -80,10 +80,10 @@ instance Cases Bool where
   cases _  =  [val False, val True]
 
 instance Cases Int where
-  cases _  =  []
+  cases x  =  [val (0 -: x), hole x]
 
 instance Cases Integer where
-  cases _  =  []
+  cases x  =  [val (0 -: x), hole x]
 
 instance Cases Char where
   cases _  =  []
