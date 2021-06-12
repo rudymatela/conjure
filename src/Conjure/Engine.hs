@@ -219,6 +219,8 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   recs  =  filterT (deconstructs1 (`elem` ds))
         $  foldAppProducts ef [forD h | h <- conjureArgumentHoles f]
 
+-- TODO: forbid   xs ++ ys  =  ... tail ys ++ ys ...
+-- TODO: allow    xs ++ ys  =  ... x:xs ++ tail ys ...
 deconstructs1 :: (Expr -> Bool) -> Expr -> Bool
 deconstructs1 isDec e  =  any isDeconstruction exs
   where
