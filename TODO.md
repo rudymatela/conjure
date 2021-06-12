@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* `conjpureWith` without evaluating `e`,
-  use the var application and let the recursion engine recurse
-  (for `fxprToDynamic`)
-
 * rename Constructors to Cases and
   drop handling of `n+1` patterns.
   Numeric values will not be deconstructed.

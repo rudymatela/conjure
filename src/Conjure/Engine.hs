@@ -164,7 +164,7 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
   implements e  =  apparentlyTerminates rrff e
-                && requal (vffxx,e) ffxx e
+                && requal (vffxx,e) ffxx vffxx
   candidatesT  =  filterT (\e -> typ e == typ ffxx) allCandidatesT
   allCandidatesT  =  take maxSize
                   $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
