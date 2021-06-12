@@ -23,7 +23,7 @@ pow :: Int -> Int -> Int
 -- looking through 80 candidates of size 5
 -- looking through 172 candidates of size 6
 -- looking through 614 candidates of size 7
--- looking through 1675 candidates of size 8
+-- looking through 1623 candidates of size 8
 cannot conjure
 
 pow :: Int -> Int -> Int
@@ -35,7 +35,7 @@ pow :: Int -> Int -> Int
 -- looking through 111 candidates of size 5
 -- looking through 307 candidates of size 6
 -- looking through 1122 candidates of size 7
--- looking through 3727 candidates of size 8
+-- looking through 3675 candidates of size 8
 cannot conjure
 
 duplicates :: [Int] -> [Int]
@@ -63,10 +63,10 @@ positionsFrom :: Int -> Int -> [Int] -> [Int]
 -- looking through 22 candidates of size 5
 -- looking through 42 candidates of size 6
 -- looking through 86 candidates of size 7
--- looking through 182 candidates of size 8
--- looking through 418 candidates of size 9
--- looking through 1038 candidates of size 10
--- looking through 2682 candidates of size 11
--- looking through 7066 candidates of size 12
+-- looking through 170 candidates of size 8
+-- looking through 358 candidates of size 9
+-- looking through 778 candidates of size 10
+-- looking through 1806 candidates of size 11
+-- looking through 4330 candidates of size 12
 cannot conjure
 
