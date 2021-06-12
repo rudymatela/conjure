@@ -344,20 +344,26 @@ recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
 recursiveToDynamic (efxs, ebody) n  =  fmap snd . re n
   where
   (ef':exs')  =  unfoldApp efxs
+  rev :: Typeable a => Int -> Expr -> Maybe (Int, a)
+  rev n e  =  case re n e of
+              Nothing    -> Nothing
+              Just (n,d) -> case fromDynamic d of
+                            Nothing -> Nothing
+                            Just x  -> Just (n, x)
   re :: Int -> Expr -> Maybe (Int, Dynamic)
   re n _  | n <= 0  =  error "recursiveToDynamic: recursion limit reached"
-  re n (Value "if" _ :$ ec :$ ex :$ ey)  =  case evaluate ec of
+  re n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev n ec of
     Nothing    -> Nothing
-    Just True  -> re n ex
-    Just False -> re n ey
-  re n (Value "||" _ :$ ep :$ eq)  =  case evaluate ep of
+    Just (n,True)  -> re n ex
+    Just (n,False) -> re n ey
+  re n (Value "||" _ :$ ep :$ eq)  =  case rev n ep of
+    Nothing        -> Nothing
+    Just (n,True)  -> (n,) <$> toDynamic (val True)
+    Just (n,False) -> re n eq
+  re n (Value "&&" _ :$ ep :$ eq)  =  case rev n ep of
     Nothing    -> Nothing
-    Just True  -> (n,) <$> toDynamic (val True)
-    Just False -> re n eq
-  re n (Value "&&" _ :$ ep :$ eq)  =  case evaluate ep of
-    Nothing    -> Nothing
-    Just True  -> re n eq
-    Just False -> (n,) <$> toDynamic (val False)
+    Just (n,True)  -> re n eq
+    Just (n,False) -> (n,) <$> toDynamic (val False)
   re n e  =  case unfoldApp e of
     [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
     [e] -> (n,) <$> toDynamic e
