@@ -7,8 +7,8 @@ bench/ill-hit.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   bench/ill-hit.hs
 bench/longshot: \
   bench/longshot.hs \
@@ -19,8 +19,8 @@ bench/longshot.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   bench/longshot.hs
 bench/self: \
   bench/self.hs \
@@ -31,8 +31,8 @@ bench/self.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   bench/self.hs
 bench/take-drop: \
   bench/take-drop.hs \
@@ -43,8 +43,8 @@ bench/take-drop.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   bench/take-drop.hs
 eg/arith: \
   eg/arith.hs \
@@ -55,8 +55,8 @@ eg/arith.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/arith.hs
 eg/bools: \
   eg/bools.hs \
@@ -67,8 +67,8 @@ eg/bools.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/bools.hs
 eg/count: \
   eg/count.hs \
@@ -79,8 +79,8 @@ eg/count.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/count.hs
 eg/factorial: \
   eg/factorial.hs \
@@ -91,8 +91,8 @@ eg/factorial.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/factorial.hs
 eg/fibonacci: \
   eg/fibonacci.hs \
@@ -103,8 +103,8 @@ eg/fibonacci.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/fibonacci.hs
 eg/ints: \
   eg/ints.hs \
@@ -115,8 +115,8 @@ eg/ints.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/ints.hs
 eg/list: \
   eg/list.hs \
@@ -127,8 +127,8 @@ eg/list.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/list.hs
 eg/setelem: \
   eg/setelem.hs \
@@ -139,8 +139,8 @@ eg/setelem.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/setelem.hs
 eg/spec: \
   eg/spec.hs \
@@ -151,8 +151,8 @@ eg/spec.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/spec.hs
 eg/tapps: \
   eg/tapps.hs \
@@ -163,8 +163,8 @@ eg/tapps.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/tapps.hs
 eg/tree: \
   eg/tree.hs \
@@ -175,8 +175,8 @@ eg/tree.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   eg/tree.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
@@ -184,8 +184,8 @@ mk/All.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   mk/All.hs
 mk/Toplibs.o: \
   src/Conjure/Utils.hs \
@@ -193,28 +193,28 @@ mk/Toplibs.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
   src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
   mk/Toplibs.hs
 proto/u-conjure.o: \
   proto/u-conjure.hs
 proto/u-conjure: \
   proto/u-conjure.hs \
   mk/toplibs
+src/Conjure/Cases.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Cases.hs
 src/Conjure/Conjurable.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
-src/Conjure/Constructors.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/Constructors.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 src/Conjure/Expr.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs
@@ -224,15 +224,15 @@ src/Conjure.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 src/Conjure/Spec.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
 test/conjurable.o: \
@@ -245,8 +245,8 @@ test/conjurable.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 test/conjurable: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
@@ -263,8 +263,8 @@ test/expr.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 test/expr: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
@@ -286,8 +286,8 @@ test/Test.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 test/Test: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
@@ -303,8 +303,8 @@ test/utils.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
-  src/Conjure/Constructors.hs \
-  src/Conjure/Conjurable.hs
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
 test/utils: \
   test/utils.hs \
   test/Test.hs \

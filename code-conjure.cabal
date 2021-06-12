@@ -78,7 +78,7 @@ library
                  , Conjure.Expr
                  , Conjure.Spec
                  , Conjure.Utils
-                 , Conjure.Constructors
+                 , Conjure.Cases
   other-extensions: TemplateHaskell, CPP
   build-depends: base >= 4 && < 5
                , leancheck >= 0.9.10

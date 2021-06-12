@@ -1,19 +1,19 @@
 -- |
--- Module      : Conjure.Constructors
+-- Module      : Conjure.Cases
 -- Copyright   : (c) 2021 Rudy Matela
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
 -- This module is part of 'Conjure'.
 --
--- This module defines the 'Constructors' typeclass
+-- This module defines the 'Cases' typeclass
 -- that allows listing constructors of a type
 -- encoded as 'Expr's
 --
 -- You are probably better off importing "Conjure".
 {-# Language DeriveDataTypeable, StandaloneDeriving #-} -- for GHC < 7.10
-module Conjure.Constructors
-  ( Constructors (..)
+module Conjure.Cases
+  ( Cases (..)
   , Fxpr
   , sumFxpr
   , factFxpr
@@ -70,42 +70,42 @@ fxprToDynamic :: Int -> Fxpr -> Expr -> Maybe Dynamic
 fxprToDynamic  =  undefined
 
 
-class Express a => Constructors a where
+class Express a => Cases a where
   constructors :: a -> [Expr]
 
-instance Constructors () where
+instance Cases () where
   constructors _  =  [val ()]
 
-instance Constructors Bool where
+instance Cases Bool where
   constructors _  =  [val False, val True]
 
-instance Constructors Int where
+instance Cases Int where
   constructors _  =  []
 
-instance Constructors Integer where
+instance Cases Integer where
   constructors _  =  []
 
-instance Constructors Char where
+instance Cases Char where
   constructors _  =  []
 
-instance Express a => Constructors [a] where
+instance Express a => Cases [a] where
   constructors xs  =  [ val ([] -: xs)
                       , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
                       ]
     where
     x  =  head xs
 
-instance (Express a, Express b) => Constructors (a,b) where
+instance (Express a, Express b) => Cases (a,b) where
   constructors xy  =  [value "," ((,) ->>: xy) :$ hole x :$ hole y]
     where
     (x,y) = (undefined,undefined) -: xy
 
-instance (Express a, Express b, Express c) => Constructors (a,b,c) where
+instance (Express a, Express b, Express c) => Cases (a,b,c) where
   constructors xyz  =  [value ",," ((,,) ->>>: xyz) :$ hole x :$ hole y :$ hole z]
     where
     (x,y,z) = (undefined,undefined,undefined) -: xyz
 
-instance Express a => Constructors (Maybe a) where
+instance Express a => Cases (Maybe a) where
   constructors mx  =  [ value "Nothing" (Nothing -: mx)
                       , value "Just" (Just ->: mx) :$ hole x
                       ]
@@ -113,7 +113,7 @@ instance Express a => Constructors (Maybe a) where
     x  =  Just undefined -: mx
 
 
-instance (Express a, Express b) => Constructors (Either a b) where
+instance (Express a, Express b) => Cases (Either a b) where
   constructors exy  =  [ value "Left" (Left ->: exy) :$ hole x
                        , value "Right" (Right ->: exy) :$ hole y
                        ]
