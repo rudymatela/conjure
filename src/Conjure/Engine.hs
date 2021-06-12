@@ -132,7 +132,7 @@ conjureWith args nm f es  =  do
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure\n"
-  pr n ((is,cs,es):rs)  =  do
+  pr n ((is,cs):rs)  =  do
     putStrLn $ "-- looking through "
             ++ show (length cs)
             ++ " candidates of size " ++ show n
@@ -141,8 +141,8 @@ conjureWith args nm f es  =  do
       []     ->  pr (n+1) rs
       (i:_)  ->  do putStrLn $ showEq i
                     putStrLn ""
-  rs  =  zip3 iss css ess
-  (iss, css, ess, ts)  =  conjpureWith args nm f es
+  rs  =  zip iss css
+  (iss, css, ts)  =  conjpureWith args nm f es
 
 
 -- | Like 'conjure' but in the pure world.
@@ -153,21 +153,20 @@ conjureWith args nm f es  =  do
 -- 2. tiers of candidate bodies (right type)
 -- 3. tiers of candidate expressions (any type)
 -- 4. a list of tests
-conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [[Expr]], [Expr])
+conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
 conjpure =  conjpureWith args
 
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [[Expr]], [Expr])
-conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, allCandidatesT, tests)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
+conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
   implements e  =  apparentlyTerminates rrff e
                 && requal (vffxx,e) ffxx vffxx
-  candidatesT  =  filterT (\e -> typ e == typ ffxx) allCandidatesT
-  allCandidatesT  =  take maxSize
-                  $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
+  candidatesT  =  take maxSize
+               $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
