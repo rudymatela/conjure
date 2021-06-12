@@ -218,6 +218,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   ds  =  map snd $ deconstructors f 60 es
   recs  =  filterT (deconstructs1 (`elem` ds))
         $  foldAppProducts ef [forD h | h <- conjureArgumentHoles f]
+-- TODO: after fixing deconstructs1, replace forD above by forN
 
 -- TODO: forbid   xs ++ ys  =  ... tail ys ++ ys ...
 -- TODO: allow    xs ++ ys  =  ... x:xs ++ tail ys ...
