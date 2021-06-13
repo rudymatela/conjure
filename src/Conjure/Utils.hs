@@ -31,6 +31,7 @@ module Conjure.Utils
   , isDeconstruction
   , idIO
   , mapHead
+  , sets
   )
 where
 
@@ -111,3 +112,9 @@ idIO action x  =  unsafePerformIO $ do
 
 mapHead :: (a -> a) -> [a] -> [a]
 mapHead f (x:xs)  =  f x : xs
+
+sets :: [a] -> [[a]]
+sets []  =  [[]]
+sets (x:xs)  =  map (x:) ss ++ ss
+  where
+  ss  =  sets xs

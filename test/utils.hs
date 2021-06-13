@@ -51,6 +51,11 @@ tests n  =
   , not $ isDec m (==0) (\x -> x-2 :: Int)
   ,       isDec m (==0) (\x -> x `div` 2 :: Int)
   ,       isDec m (==0) (\x -> x `quot` 2 :: Int)
+
+  , sets []  ==  [[] :: [Int]]
+  , sets [1]  ==  [[1], [] :: [Int]]
+  , sets [1,2]  ==  [[1,2], [1], [2], [] :: [Int]]
+  , sets [1,2,3]  ==  [[1,2,3],[1,2],[1,3],[1],[2,3],[2],[3],[] :: [Int]]
   ]
   where
   m  =  n `div` 60
