@@ -234,11 +234,16 @@ deconstructs1 isDec e  =  any isDeconstruction exs
   isDeconstruction e  =  not (null cs) && all isDec cs
     where
     cs  =  consts e
+
+-- an improvements over deconstructs1
+--
 -- the following will need an extra Expr argument with the pattern:
 -- 1. enumerate sets of arguments  2^n - 1, 1 3 7 15 31, then for each set:
 -- 2. select the positions of these arguments
 -- 3. match them one by one with their variables (not the positions)
 -- 4. see wether they match! and all descend or are equal
+descends :: (Expr -> Bool) -> Expr -> Expr -> Bool
+descends isDec e' e  =  deconstructs1 isDec e
 
 -- | Example:
 --
