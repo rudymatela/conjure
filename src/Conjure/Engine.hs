@@ -216,34 +216,50 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
-  recs  =  filterT (deconstructs1 (`elem` ds))
+  recs  =  filterT (deconstructs1 (`elem` ds) efxs)
         $  foldAppProducts ef [forD h | h <- conjureArgumentHoles f]
--- TODO: after fixing deconstructs1, replace forD above by forN
+-- TODO: after limiting applications in revaluate, replace forD above by forN
 
--- TODO: forbid   xs ++ ys  =  ... tail ys ++ ys ...
--- TODO: forbid   xs ++ ys  =  ... x:xs ++ tail xs ...
--- TODO: allow    xs ++ ys  =  ... x:xs ++ tail ys ...
--- TODO: allow    xs \/ ys  =  ... (ys \/ tail xs) ...
--- TODO: forbid:
--- (xs ++ ys :: [Int],(if null xs then xs else (head xs:xs) ++ tail xs) :: [Int])
--- list: out of memory
-deconstructs1 :: (Expr -> Bool) -> Expr -> Bool
-deconstructs1 isDec e  =  any isDeconstruction exs
+deconstructs1 :: (Expr -> Bool) -> Expr -> Expr -> Bool
+deconstructs1 isDec _ e  =  any isDeconstruction exs
   where
   (ef:exs)  =  unfoldApp e
   isDeconstruction e  =  not (null cs) && all isDec cs
     where
     cs  =  consts e
 
--- an improvements over deconstructs1
+-- An improvements over deconstructs1
 --
--- the following will need an extra Expr argument with the pattern:
+-- forbid   @xs ++ ys  =  ... tail ys ++ ys ...@
+-- forbid   @xs ++ ys  =  ... x:xs ++ tail xs ...@
+-- allow    @xs ++ ys  =  ... x:xs ++ tail ys ...@
+-- allow    @xs \/ ys  =  ... (ys \/ tail xs) ...@
+--
+-- Steps:
+--
 -- 1. enumerate sets of arguments  2^n - 1, 1 3 7 15 31, then for each set:
 -- 2. select the positions of these arguments
 -- 3. match them one by one with their variables (not the positions)
 -- 4. see wether they match! and all descend or are equal
 descends :: (Expr -> Bool) -> Expr -> Expr -> Bool
-descends isDec e' e  =  deconstructs1 isDec e
+descends isDec e' e  =  any d1 ss
+  where
+  d1 exys  =  nubVars (foldApp exs) == nubVars (foldApp eys)
+           && all isNotConstruction eys
+           && any isDeconstruction eys
+    where
+    exs  =  map fst exys
+    eys  =  map snd exys
+  ss  =  init $ sets exys
+  exys  =  zip exs eys
+  (_:exs)  =  unfoldApp e'
+  (_:eys)  =  unfoldApp e
+  isDeconstruction e  =  not (null cs) && all isDec cs
+    where
+    cs  =  consts e
+  isNotConstruction e  =  all isDec cs
+    where
+    cs  =  consts e
 
 -- | Example:
 --
