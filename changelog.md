@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.3.4
+------
 
 * reallow recursions under `&&` and `||`
   (simplifies the generated `or`, `and`, `set` and `elem` functions)
