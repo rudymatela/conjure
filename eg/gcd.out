@@ -1,5 +1,5 @@
 gcd :: Int -> Int -> Int
--- testing 7 combinations of argument values
+-- testing 11 combinations of argument values
 -- looking through 3 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 9 candidates of size 3

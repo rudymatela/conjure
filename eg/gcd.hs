@@ -7,9 +7,13 @@ import Conjure
 gcd' :: Int -> Int -> Int
 gcd' 1 1  =  1
 gcd' 1 2  =  1
+gcd' 2 1  =  1
 gcd' 2 2  =  2
 gcd' 2 6  =  2
+gcd' 6 2  =  2
 gcd' 3 6  =  3
+gcd' 6 3  =  3
+gcd' 6 9  =  3
 gcd' 9 6  =  3
 gcd' 12 18  =  6
 
