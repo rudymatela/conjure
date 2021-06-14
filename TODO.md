@@ -3,8 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* relax restriction on deconstructions.
-  only require a single (or subset) of arguments to be deconstructed.
+* think about how can we allow gcd to be produced
 
 * use holes for recursions, code will probably become cleaner
   (and possibly faster)
