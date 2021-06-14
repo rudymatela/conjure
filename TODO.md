@@ -16,6 +16,10 @@ A non-exhaustive list of things TO DO for Conjure.
 
 ### for later
 
+* add machinery to reify `Int -> Int` from the `(Expr,Expr)` definition
+
+* allow specifying properties that need to be true
+
 * allow recursion under any lazy functions (discover them by testing!)
 
 * exclude magic numbers?  e.g.: `1+1`?
