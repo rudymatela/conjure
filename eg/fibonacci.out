@@ -26,8 +26,8 @@ fib01 :: Int -> Int -> Int -> Int
 -- looking through 192 candidates of size 7
 -- looking through 391 candidates of size 8
 -- looking through 840 candidates of size 9
--- looking through 15630 candidates of size 10
--- looking through 62575 candidates of size 11
--- looking through 302820 candidates of size 12
+-- looking through 9294 candidates of size 10
+-- looking through 37807 candidates of size 11
+-- looking through 166308 candidates of size 12
 fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
 

@@ -215,7 +215,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   thy  =  theoryFromAtoms (===) sz . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
-  recs  =  filterT (deconstructs1 (`elem` ds) efxs)
+  recs  =  filterT (descends (`elem` ds) efxs)
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
 
 deconstructs1 :: (Expr -> Bool) -> Expr -> Expr -> Bool

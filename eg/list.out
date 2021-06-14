@@ -49,10 +49,10 @@ sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 -- looking through 21 candidates of size 5
 -- looking through 30 candidates of size 6
 -- looking through 66 candidates of size 7
--- looking through 273 candidates of size 8
--- looking through 963 candidates of size 9
--- looking through 2673 candidates of size 10
--- looking through 7812 candidates of size 11
+-- looking through 225 candidates of size 8
+-- looking through 723 candidates of size 9
+-- looking through 1965 candidates of size 10
+-- looking through 5544 candidates of size 11
 xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 
 length :: [Int] -> Int
@@ -101,9 +101,9 @@ xs ++ ys  =  foldr (:) ys xs
 -- looking through 21 candidates of size 5
 -- looking through 30 candidates of size 6
 -- looking through 66 candidates of size 7
--- looking through 273 candidates of size 8
--- looking through 963 candidates of size 9
--- looking through 2673 candidates of size 10
--- looking through 7812 candidates of size 11
+-- looking through 225 candidates of size 8
+-- looking through 723 candidates of size 9
+-- looking through 1965 candidates of size 10
+-- looking through 5544 candidates of size 11
 xs \/ ys  =  if null xs then xs else head xs:ys \/ tail xs
 
