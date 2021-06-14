@@ -206,7 +206,6 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   as  =  forN efxs
   rs  =  forR efxs
   forN h  =  enumerateAppsFor h keep [exs ++ es]
-  forD h  =  enumerateAppsFor h (const True) [exs ++ ds]
   forR h  =  filterT (\e -> (ef `elem`) (vars e))
           $  enumerateAppsFor h keep $ [exs ++ es] \/ recs
   efxs  =  conjureVarApplication nm f
@@ -217,8 +216,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
   recs  =  filterT (deconstructs1 (`elem` ds) efxs)
-        $  foldAppProducts ef [forD h | h <- conjureArgumentHoles f]
--- TODO: after limiting applications in revaluate, replace forD above by forN
+        $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
 
 deconstructs1 :: (Expr -> Bool) -> Expr -> Expr -> Bool
 deconstructs1 isDec _ e  =  any isDeconstruction exs

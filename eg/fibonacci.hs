@@ -36,15 +36,12 @@ main  =  do
 -- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 --                 1  2 3  4      5      6          7   8  9        10  11   12  13
 
-  -- TODO: make so that Conjure is able to produce fib01.
-  --       the descending arguments change made it so that
-  --       fib01 is not discoverable anymore
   conjureWithMaxSize 12 "fib01" fib01
     [ val (0::Int)
     , value "+" ((+) :: Int -> Int -> Int)
     , value "dec" (subtract 1 :: Int -> Int)
     , value "<=" ((<=) :: Int -> Int -> Bool)
     ]
--- desired function:
+-- expected function:
 -- fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
 --                 1  2 3  4      5      6     7  8 9 10  11 12

@@ -9,10 +9,10 @@ fibonacci :: Int -> Int
 -- looking through 27 candidates of size 7
 -- looking through 20 candidates of size 8
 -- looking through 95 candidates of size 9
--- looking through 148 candidates of size 10
--- looking through 431 candidates of size 11
--- looking through 925 candidates of size 12
--- looking through 2377 candidates of size 13
+-- looking through 140 candidates of size 10
+-- looking through 407 candidates of size 11
+-- looking through 825 candidates of size 12
+-- looking through 2153 candidates of size 13
 fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 
 fib01 :: Int -> Int -> Int -> Int
@@ -26,8 +26,8 @@ fib01 :: Int -> Int -> Int -> Int
 -- looking through 192 candidates of size 7
 -- looking through 391 candidates of size 8
 -- looking through 840 candidates of size 9
--- looking through 9582 candidates of size 10
--- looking through 42703 candidates of size 11
--- looking through 177108 candidates of size 12
-cannot conjure
+-- looking through 15630 candidates of size 10
+-- looking through 62575 candidates of size 11
+-- looking through 302820 candidates of size 12
+fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
 

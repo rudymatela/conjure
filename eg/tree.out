@@ -67,11 +67,11 @@ mem :: Int -> Tree -> Bool
 -- looking through 12 candidates of size 5
 -- looking through 28 candidates of size 6
 -- looking through 64 candidates of size 7
--- looking through 152 candidates of size 8
--- looking through 352 candidates of size 9
--- looking through 822 candidates of size 10
--- looking through 1908 candidates of size 11
--- looking through 4448 candidates of size 12
+-- looking through 156 candidates of size 8
+-- looking through 376 candidates of size 9
+-- looking through 926 candidates of size 10
+-- looking through 2280 candidates of size 11
+-- looking through 5648 candidates of size 12
 cannot conjure
 
 insert :: Int -> Tree -> Bool
@@ -83,7 +83,7 @@ insert :: Int -> Tree -> Bool
 -- looking through 36 candidates of size 5
 -- looking through 90 candidates of size 6
 -- looking through 205 candidates of size 7
--- looking through 489 candidates of size 8
--- looking through 1135 candidates of size 9
+-- looking through 497 candidates of size 8
+-- looking through 1199 candidates of size 9
 cannot conjure
 

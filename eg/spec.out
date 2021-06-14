@@ -24,6 +24,6 @@ sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 -- looking through 110 candidates of size 8
 -- looking through 362 candidates of size 9
 -- looking through 926 candidates of size 10
--- looking through 2362 candidates of size 11
+-- looking through 2490 candidates of size 11
 xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 

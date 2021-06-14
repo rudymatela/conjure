@@ -65,8 +65,8 @@ positionsFrom :: Int -> Int -> [Int] -> [Int]
 -- looking through 86 candidates of size 7
 -- looking through 170 candidates of size 8
 -- looking through 358 candidates of size 9
--- looking through 778 candidates of size 10
--- looking through 1806 candidates of size 11
--- looking through 4330 candidates of size 12
+-- looking through 810 candidates of size 10
+-- looking through 2046 candidates of size 11
+-- looking through 5578 candidates of size 12
 cannot conjure
 
