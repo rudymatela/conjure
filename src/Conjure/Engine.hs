@@ -218,6 +218,25 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   recs  =  filterT (descends (`elem` ds) efxs)
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
 
+-- | Assures one of the arguments of the given recursive call
+--   is just made of deconstructions.
+--
+-- > > deconstructs1 ... (factorial' (dec' xx))
+-- > True
+--
+-- > > deconstructs1 ... (factorial' (xx -+- one))
+-- > False
+--
+-- > > deconstructs1 ... (xxs -++- yys)
+-- > False
+--
+-- > > deconstructs1 ... (xxs -++- tail' yys)
+-- > True
+--
+-- > > deconstructs1 ... (zero-:-xxs -++- tail' yys)
+-- > True
+--
+-- (cf. 'descends')
 deconstructs1 :: (Expr -> Bool) -> Expr -> Expr -> Bool
 deconstructs1 isDec _ e  =  any isDeconstruction exs
   where
