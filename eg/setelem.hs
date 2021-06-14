@@ -20,9 +20,9 @@ main = do
     [ val ([] :: [Int])
     , val True
     , val False
-    , value "not" not
     , value "||" (||)
     , value "&&" (&&)
+    , value "not" not
     , value ":" ((:) :: Int -> [Int] -> [Int])
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])
@@ -36,9 +36,9 @@ main = do
     [ val ([] :: [Int])
     , val True
     , val False
-    , value "not" not
     , value "&&" (&&)
     , value "||" (||)
+    , value "not" not
     , value ":" ((:) :: Int -> [Int] -> [Int])
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])

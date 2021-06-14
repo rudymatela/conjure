@@ -6,13 +6,13 @@ elem :: Int -> [Int] -> Bool
 -- looking through 8 candidates of size 4
 -- looking through 14 candidates of size 5
 -- looking through 25 candidates of size 6
--- looking through 57 candidates of size 7
--- looking through 137 candidates of size 8
--- looking through 320 candidates of size 9
--- looking through 720 candidates of size 10
--- looking through 1737 candidates of size 11
--- looking through 4204 candidates of size 12
--- looking through 10333 candidates of size 13
+-- looking through 60 candidates of size 7
+-- looking through 145 candidates of size 8
+-- looking through 332 candidates of size 9
+-- looking through 747 candidates of size 10
+-- looking through 1826 candidates of size 11
+-- looking through 4407 candidates of size 12
+-- looking through 10888 candidates of size 13
 elem x xs  =  not (null xs) && (elem x (tail xs) || x == head xs)
 
 set :: [Int] -> Bool
@@ -23,12 +23,12 @@ set :: [Int] -> Bool
 -- looking through 5 candidates of size 4
 -- looking through 11 candidates of size 5
 -- looking through 26 candidates of size 6
--- looking through 61 candidates of size 7
--- looking through 142 candidates of size 8
--- looking through 302 candidates of size 9
--- looking through 692 candidates of size 10
--- looking through 1651 candidates of size 11
--- looking through 3945 candidates of size 12
--- looking through 9309 candidates of size 13
+-- looking through 64 candidates of size 7
+-- looking through 145 candidates of size 8
+-- looking through 310 candidates of size 9
+-- looking through 717 candidates of size 10
+-- looking through 1734 candidates of size 11
+-- looking through 4135 candidates of size 12
+-- looking through 9734 candidates of size 13
 set xs  =  null xs || set (tail xs) && not (elem (head xs) (tail xs))
 
