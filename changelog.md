@@ -2,6 +2,18 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* reallow recursions under `&&` and `||`
+  (simplifies the generated `or`, `and`, `set` and `elem` functions)
+* only require deconstructions on a non-empty subset of arguments
+  (allows `fib01` to be produced)
+* limit number of terminal evaluations in `recursiveToDynamic`
+* fix bug in `recursiveToDynamic` (not counting some recursions)
+* add 4 new benchmarks: `count`, `gcd`, `tree` and `setelem`
+
+
 v0.3.2
 ------
 
