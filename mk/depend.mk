@@ -106,6 +106,18 @@ eg/fibonacci.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Cases.hs \
   eg/fibonacci.hs
+eg/gcd: \
+  eg/gcd.hs \
+  mk/toplibs
+eg/gcd.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
+  eg/gcd.hs
 eg/ints: \
   eg/ints.hs \
   mk/toplibs

@@ -12,6 +12,7 @@ EG = \
   eg/fibonacci \
   eg/ints \
   eg/bools \
+  eg/gcd \
   eg/list \
   eg/setelem \
   eg/spec \

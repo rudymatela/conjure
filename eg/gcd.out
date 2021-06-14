@@ -1,0 +1,16 @@
+gcd :: Int -> Int -> Int
+-- testing 7 combinations of argument values
+-- looking through 3 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 54 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 405 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 3402 candidates of size 9
+-- looking through 0 candidates of size 10
+-- looking through 30618 candidates of size 11
+-- looking through 0 candidates of size 12
+cannot conjure
+
