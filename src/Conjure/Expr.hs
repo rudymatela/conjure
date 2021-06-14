@@ -341,38 +341,42 @@ isDeconstructionE es ez ed | all isIllTyped [f :$ e | e <- es, f <- [ez,ed]]  = 
 isDeconstructionE es ez ed  =  isDeconstruction es (eval False . (ez :$)) (ed :$)
 
 recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
-recursiveToDynamic (efxs, ebody) n  =  fmap snd . re n
+recursiveToDynamic (efxs, ebody) n  =  fmap (\(_,_,d) -> d) . re (n * size ebody) n
   where
   (ef':exs')  =  unfoldApp efxs
-  rev :: Typeable a => Int -> Expr -> Maybe (Int, a)
-  rev n e  =  case re n e of
-              Nothing    -> Nothing
-              Just (n,d) -> case fromDynamic d of
-                            Nothing -> Nothing
-                            Just x  -> Just (n, x)
-  re :: Int -> Expr -> Maybe (Int, Dynamic)
-  re n _  | n <= 0  =  error "recursiveToDynamic: recursion limit reached"
-  re n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev n ec of
+
+  rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
+  rev m n e  =  case re m n e of
+                Nothing    -> Nothing
+                Just (m,n,d) -> case fromDynamic d of
+                                Nothing -> Nothing
+                                Just x  -> Just (m, n, x)
+
+  re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
+  re m n _  | n <= 0  =  error "recursiveToDynamic: recursion limit reached"
+  re m n _  | m <= 0  =  error "recursiveToDynamic: evaluation limit reached"
+  re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev m n ec of
     Nothing    -> Nothing
-    Just (n,True)  -> re n ex
-    Just (n,False) -> re n ey
-  re n (Value "||" _ :$ ep :$ eq)  =  case rev n ep of
+    Just (m,n,True)  -> re m n ex
+    Just (m,n,False) -> re m n ey
+  re m n (Value "||" _ :$ ep :$ eq)  =  case rev m n ep of
     Nothing        -> Nothing
-    Just (n,True)  -> (n,) <$> toDynamic (val True)
-    Just (n,False) -> re n eq
-  re n (Value "&&" _ :$ ep :$ eq)  =  case rev n ep of
+    Just (m,n,True)  -> (m,n,) <$> toDynamic (val True)
+    Just (m,n,False) -> re m n eq
+  re m n (Value "&&" _ :$ ep :$ eq)  =  case rev m n ep of
     Nothing    -> Nothing
-    Just (n,True)  -> re n eq
-    Just (n,False) -> (n,) <$> toDynamic (val False)
-  re n e  =  case unfoldApp e of
+    Just (m,n,True)  -> re m n eq
+    Just (m,n,False) -> (m,n,) <$> toDynamic (val False)
+  re m n e  =  case unfoldApp e of
     [] -> error "recursiveToDynamic: empty application unfold"  -- should never happen
-    [e] -> (n,) <$> toDynamic e
-    (ef:exs) | ef == ef' -> re (n-1) $ ebody //- zip exs' exs
-             | otherwise -> foldl ($$) (re n ef) exs
-  Just (n,d1) $$ e2  =  case re n e2 of
-                        Nothing -> Nothing
-                        Just (n', d2) -> (n',) <$> dynApply d1 d2
-  _ $$ _             =  Nothing
+    [e] -> (m-1,n,) <$> toDynamic e
+    (ef:exs) | ef == ef' -> re m (n-1) $ ebody //- zip exs' exs
+             | otherwise -> foldl ($$) (re m n ef) exs
+
+  Just (m,n,d1) $$ e2  =  case re m n e2 of
+                          Nothing -> Nothing
+                          Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
+  _ $$ _               =  Nothing
 
 revaluate :: Typeable a => (Expr,Expr) -> Int -> Expr -> Maybe a
 revaluate dfn n e  =  recursiveToDynamic dfn n e >>= fromDynamic
