@@ -218,8 +218,8 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   recs  =  filterT (descends (`elem` ds) efxs)
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
 
--- | Assures one of the arguments of the given recursive call
---   is just made of deconstructions.
+-- | Returns whether the given recursive call
+--   deconstructs one of its arguments.
 --
 -- > > deconstructs1 ... (factorial' (dec' xx))
 -- > True
@@ -236,7 +236,7 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
 -- > > deconstructs1 ... (zero-:-xxs -++- tail' yys)
 -- > True
 --
--- (cf. 'descends')
+-- 'deconstructs1' implies 'descends'.
 deconstructs1 :: (Expr -> Bool) -> Expr -> Expr -> Bool
 deconstructs1 isDec _ e  =  any isDeconstruction exs
   where
@@ -245,19 +245,32 @@ deconstructs1 isDec _ e  =  any isDeconstruction exs
     where
     cs  =  consts e
 
--- An improvements over deconstructs1
+-- | Returns whether a non-empty subset of arguments
+--   descends arguments by deconstruction.
 --
--- forbid   @xs ++ ys  =  ... tail ys ++ ys ...@
--- forbid   @xs ++ ys  =  ... x:xs ++ tail xs ...@
--- allow    @xs ++ ys  =  ... x:xs ++ tail ys ...@
--- allow    @xs \/ ys  =  ... (ys \/ tail xs) ...@
+-- > > descends isDec (xxs -++- yys) (xxs -++- tail' yys)
+-- > True
 --
--- Steps:
+-- > > descends isDec (xxs -++- yys) (xxs -++- yys)
+-- > False
 --
--- 1. enumerate sets of arguments  2^n - 1, 1 3 7 15 31, then for each set:
--- 2. select the positions of these arguments
--- 3. match them one by one with their variables (not the positions)
--- 4. see wether they match! and all descend or are equal
+-- > > descends isDec (xxs -++- yys) (head' xxs -:- tail xxs  -++-  head' yys -:- tail yys)
+-- > False
+
+-- > > descends isDec (xxs -\/- yys) (yys -\/- tail' xxs)
+-- > True
+--
+-- The following are not so obvious:
+--
+-- > > descends isDec (xxs -++- yys) (tail' yys -++- yys)
+-- > False
+--
+-- > > descends isDec (xxs -++- yys) (xx-:-xxs -++- tail' yys)
+-- > True
+--
+-- For all possible sets of arguments (2^n - 1 elements: 1 3 7 15 31),
+-- see if any projects the same variables while only using deconstructions
+-- and where there is at least a single deconstruction.
 descends :: (Expr -> Bool) -> Expr -> Expr -> Bool
 descends isDec e' e  =  any d1 ss
   where
