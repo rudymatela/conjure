@@ -30,6 +30,5 @@ set :: [Int] -> Bool
 -- looking through 1651 candidates of size 11
 -- looking through 3945 candidates of size 12
 -- looking through 9309 candidates of size 13
--- looking through 22246 candidates of size 14
-set xs  =  not (elem (head xs) (tail xs)) && (null (tail xs) || set (tail xs))
+set xs  =  null xs || set (tail xs) && not (elem (head xs) (tail xs))
 

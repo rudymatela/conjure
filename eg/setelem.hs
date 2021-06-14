@@ -7,13 +7,15 @@ elem' x [y,z]  =  x == y || x == z
 elem' x [y,z,w]  =  x == y || x == z || x == w
 
 set' :: [Int] -> Bool
+set' []  =  True
 set' [x]  =  True
 set' [x,y]  =  not (x == y)
 set' [x,y,z]  =  not (x == y || y == z || x == z)
 
 main :: IO ()
 main = do
-  -- elem x xs  =  if null xs then False else elem x (tail xs) || x == head xs
+  -- elem x xs  =  not (null xs) && (elem x (tail xs) || x == head xs)
+  --               1    2    3    4  5    6   7   8   9  10 11 12  13
   conjureWithMaxSize 13 "elem" (elem')
     [ val ([] :: [Int])
     , val True
@@ -28,14 +30,15 @@ main = do
     , value "==" ((==) :: Int -> Int -> Bool)
     ]
 
-  -- set xs  =  if null xs then True else not (head xs `elem` tail xs) && set (tail xs)
-  conjureWithMaxSize 14 "set" (set')
+  -- set xs  =  null xs || set (tail xs) && not (elem (head xs) (tail xs))
+  --            1    2  3  4    5    6    7  8    9    10   11   12   13
+  conjureWithMaxSize 13 "set" (set')
     [ val ([] :: [Int])
     , val True
     , val False
     , value "not" not
-    , value "||" (||)
     , value "&&" (&&)
+    , value "||" (||)
     , value ":" ((:) :: Int -> [Int] -> [Int])
     , value "head" (head :: [Int] -> Int)
     , value "tail" (tail :: [Int] -> [Int])
