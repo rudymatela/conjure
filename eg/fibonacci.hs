@@ -39,7 +39,7 @@ main  =  do
   -- TODO: make so that Conjure is able to produce fib01.
   --       the descending arguments change made it so that
   --       fib01 is not discoverable anymore
-  conjureWithMaxSize 10 "fib01" fib01
+  conjureWithMaxSize 12 "fib01" fib01
     [ val (0::Int)
     , value "+" ((+) :: Int -> Int -> Int)
     , value "dec" (subtract 1 :: Int -> Int)
