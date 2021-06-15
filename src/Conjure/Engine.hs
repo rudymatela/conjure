@@ -205,7 +205,7 @@ candidateExprs Args{..} nm f es  =  as \/ ts
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
           && count (== ef) (vars e) <= maxRecursiveCalls
-  ds  =  map snd $ deconstructors f 60 es
+  ds  =  map snd $ deconstructors f maxTests es
   recs  =  filterT (descends (`elem` ds) efxs)
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
