@@ -159,19 +159,18 @@ conjpure =  conjpureWith args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr])
-conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
+conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
   implements e  =  apparentlyTerminates rrff e
                 && requal (vffxx,e) ffxx vffxx
   candidatesT  =  take maxSize
-               $  candidateExprs nm f maxEquationSize maxRecursiveCalls (===) es
+               $  candidateExprs args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
 
-  (===)  =  conjureAreEqual f maxTests
   requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
@@ -187,14 +186,8 @@ conjpureWith Args{..} nm f es  =  (implementationsT, candidatesT, tests)
     e  =  ffxx -==- ffxx
 
 
-candidateExprs :: Conjurable f
-               => String -> f
-               -> Int
-               -> Int
-               -> (Expr -> Expr -> Bool)
-               -> [Expr]
-               -> [[Expr]]
-candidateExprs nm f sz mc (===) es  =  as \/ ts
+candidateExprs :: Conjurable f => Args -> String -> f -> [Expr] -> [[Expr]]
+candidateExprs Args{..} nm f es  =  as \/ ts
   where
   ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
                            \/ foldAppProducts orE  [cs, rs]
@@ -211,12 +204,13 @@ candidateExprs nm f sz mc (===) es  =  as \/ ts
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
-          && count (== ef) (vars e) <= mc
-  thy  =  theoryFromAtoms (===) sz . (:[]) . nub
+          && count (== ef) (vars e) <= maxRecursiveCalls
+  thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
   recs  =  filterT (descends (`elem` ds) efxs)
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
+  (===)  =  conjureAreEqual f maxTests
 
 -- | Returns whether the given recursive call
 --   deconstructs one of its arguments.
