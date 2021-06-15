@@ -205,11 +205,11 @@ candidateExprs Args{..} nm f es  =  as \/ ts
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
           && count (== ef) (vars e) <= maxRecursiveCalls
-  thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  conjureHoles f ++ [val False, val True] ++ es
   ds  =  map snd $ deconstructors f 60 es
   recs  =  filterT (descends (`elem` ds) efxs)
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
+  thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
+       $  conjureHoles f ++ [val False, val True] ++ es
   (===)  =  conjureAreEqual f maxTests
 
 -- | Returns whether the given recursive call
