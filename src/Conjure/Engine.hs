@@ -98,6 +98,7 @@ data Args = Args
   , maxEquationSize   :: Int  -- ^ maximum size of equation operands
   , maxRecursionSize  :: Int  -- ^ maximum size of a recursive expression expansion
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
+  , requireDescent    :: Bool -- ^ require recursive calls to deconstruct arguments
   , forceTests :: [[Expr]]  -- ^ force tests
   }
 
@@ -110,6 +111,7 @@ data Args = Args
 -- * pruning with equations up to size 5
 -- * recursion up to 60 symbols
 -- * search for defined applications for up to 100000 combinations
+-- * require recursive calls to deconstruct arguments
 args :: Args
 args = Args
   { maxTests           =  60
@@ -118,6 +120,7 @@ args = Args
   , maxEquationSize    =   5
   , maxRecursionSize   =  60
   , maxSearchTests     =  100000
+  , requireDescent     =  True
   , forceTests         =  []
   }
 
@@ -206,7 +209,9 @@ candidateExprs Args{..} nm f es  =  as \/ ts
   keep e  =  isRootNormalE thy e
           && count (== ef) (vars e) <= maxRecursiveCalls
   ds  =  map snd $ deconstructors f maxTests es
-  recs  =  filterT (descends (`elem` ds) efxs)
+  keepR | requireDescent  =  descends (`elem` ds) efxs
+        | otherwise       =  const True
+  recs  =  filterT keepR
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
