@@ -64,9 +64,6 @@ test-via-cabal:
 test-via-stack:
 	stack test code-conjure:test:expr --ghc-options="$(GHCFLAGS) -O0" --system-ghc --no-install-ghc --no-terminal
 
-hugs-test:
-	echo 'Unsupported'
-
 clean: clean-hi-o clean-haddock
 	rm -f $(EG) $(TESTS) mk/toplibs
 
