@@ -190,7 +190,7 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests)
 
 
 candidateExprs :: Conjurable f => Args -> String -> f -> [Expr] -> [[Expr]]
-candidateExprs Args{..} nm f es  =  as \/ ts
+candidateExprs Args{..} nm f es  =  as \/ concatMapT (`enumerateFillings` recs) ts
   where
   ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
                            \/ foldAppProducts orE  [cs, rs]
@@ -202,8 +202,9 @@ candidateExprs Args{..} nm f es  =  as \/ ts
   as  =  forN efxs
   rs  =  forR efxs
   forN h  =  enumerateAppsFor h keep [exs ++ es]
-  forR h  =  filterT (\e -> (ef `elem`) (vars e))
-          $  enumerateAppsFor h keep $ [exs ++ es] \/ recs
+  forR h  =  filterT (\e -> (eh `elem`) (holes e))
+          $  enumerateAppsFor h keep $ [exs ++ es ++ [eh]]
+  eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e

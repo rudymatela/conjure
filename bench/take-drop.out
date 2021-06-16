@@ -8,11 +8,11 @@ drop :: Int -> [A] -> [A]
 -- looking through 1 candidates of size 6
 -- looking through 1 candidates of size 7
 -- looking through 7 candidates of size 8
--- looking through 33 candidates of size 9
--- looking through 100 candidates of size 10
--- looking through 236 candidates of size 11
--- looking through 510 candidates of size 12
--- looking through 1069 candidates of size 13
+-- looking through 35 candidates of size 9
+-- looking through 109 candidates of size 10
+-- looking through 261 candidates of size 11
+-- looking through 567 candidates of size 12
+-- looking through 1183 candidates of size 13
 drop x xs  =  if null xs || x == 0 then xs else drop (dec x) (tail xs)
 
 take :: Int -> [A] -> [A]
@@ -25,13 +25,13 @@ take :: Int -> [A] -> [A]
 -- looking through 14 candidates of size 6
 -- looking through 26 candidates of size 7
 -- looking through 62 candidates of size 8
--- looking through 176 candidates of size 9
--- looking through 470 candidates of size 10
--- looking through 1190 candidates of size 11
--- looking through 3116 candidates of size 12
--- looking through 8020 candidates of size 13
--- looking through 19658 candidates of size 14
--- looking through 46906 candidates of size 15
--- looking through 109976 candidates of size 16
+-- looking through 182 candidates of size 9
+-- looking through 498 candidates of size 10
+-- looking through 1270 candidates of size 11
+-- looking through 3346 candidates of size 12
+-- looking through 8650 candidates of size 13
+-- looking through 21270 candidates of size 14
+-- looking through 51166 candidates of size 15
+-- looking through 121430 candidates of size 16
 take x xs  =  if null xs || x == 0 then [] else head xs:take (dec x) (tail xs)
 

@@ -34,11 +34,11 @@ size :: Tree -> Int
 -- looking through 0 candidates of size 6
 -- looking through 9 candidates of size 7
 -- looking through 32 candidates of size 8
--- looking through 109 candidates of size 9
--- looking through 304 candidates of size 10
--- looking through 817 candidates of size 11
--- looking through 2080 candidates of size 12
--- looking through 5165 candidates of size 13
+-- looking through 117 candidates of size 9
+-- looking through 336 candidates of size 10
+-- looking through 933 candidates of size 11
+-- looking through 2416 candidates of size 12
+-- looking through 6113 candidates of size 13
 size x  =  if nil x then 0 else 1 + (size (left x) + size (right x))
 
 height :: Tree -> Int
@@ -51,12 +51,12 @@ height :: Tree -> Int
 -- looking through 0 candidates of size 6
 -- looking through 21 candidates of size 7
 -- looking through 48 candidates of size 8
--- looking through 239 candidates of size 9
--- looking through 656 candidates of size 10
--- looking through 2149 candidates of size 11
--- looking through 5704 candidates of size 12
--- looking through 16380 candidates of size 13
-height x  =  if nil x then -1 else 1 + max (height (left x)) (height (right x))
+-- looking through 299 candidates of size 9
+-- looking through 896 candidates of size 10
+-- looking through 3113 candidates of size 11
+-- looking through 8528 candidates of size 12
+-- looking through 24896 candidates of size 13
+cannot conjure
 
 mem :: Int -> Tree -> Bool
 -- testing 60 combinations of argument values
@@ -69,9 +69,9 @@ mem :: Int -> Tree -> Bool
 -- looking through 64 candidates of size 7
 -- looking through 156 candidates of size 8
 -- looking through 376 candidates of size 9
--- looking through 926 candidates of size 10
--- looking through 2280 candidates of size 11
--- looking through 5648 candidates of size 12
+-- looking through 930 candidates of size 10
+-- looking through 2302 candidates of size 11
+-- looking through 5752 candidates of size 12
 cannot conjure
 
 insert :: Int -> Tree -> Bool

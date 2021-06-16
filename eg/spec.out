@@ -9,8 +9,8 @@ sum :: [Int] -> Int
 -- looking through 5 candidates of size 7
 -- looking through 10 candidates of size 8
 -- looking through 17 candidates of size 9
--- looking through 28 candidates of size 10
-sum xs  =  if null xs then 0 else head xs + sum (tail xs)
+-- looking through 30 candidates of size 10
+sum xs  =  if null xs then 0 else sum (tail xs) + head xs
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values

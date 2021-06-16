@@ -8,7 +8,7 @@ length :: [Int] -> Int
 -- looking through 0 candidates of size 6
 -- looking through 5 candidates of size 7
 -- looking through 8 candidates of size 8
--- looking through 19 candidates of size 9
+-- looking through 23 candidates of size 9
 length xs  =  if null xs then 0 else 1 + length (tail xs)
 
 reverse :: [Int] -> [Int]
@@ -23,7 +23,7 @@ reverse :: [Int] -> [Int]
 -- looking through 381 candidates of size 8
 -- looking through 1014 candidates of size 9
 -- looking through 2736 candidates of size 10
--- looking through 7447 candidates of size 11
+-- looking through 7451 candidates of size 11
 reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]

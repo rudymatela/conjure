@@ -10,8 +10,8 @@ qsort :: [Int] -> [Int]
 -- looking through 611 candidates of size 8
 -- looking through 1779 candidates of size 9
 -- looking through 5301 candidates of size 10
--- looking through 16103 candidates of size 11
--- looking through 49113 candidates of size 12
+-- looking through 16107 candidates of size 11
+-- looking through 49149 candidates of size 12
 cannot conjure
 
 pow :: Int -> Int -> Int
@@ -51,7 +51,7 @@ duplicates :: [Int] -> [Int]
 -- looking through 154 candidates of size 9
 -- looking through 366 candidates of size 10
 -- looking through 914 candidates of size 11
--- looking through 2234 candidates of size 12
+-- looking through 2238 candidates of size 12
 cannot conjure
 
 positionsFrom :: Int -> Int -> [Int] -> [Int]
@@ -66,7 +66,7 @@ positionsFrom :: Int -> Int -> [Int] -> [Int]
 -- looking through 170 candidates of size 8
 -- looking through 358 candidates of size 9
 -- looking through 810 candidates of size 10
--- looking through 2046 candidates of size 11
--- looking through 5578 candidates of size 12
+-- looking through 2070 candidates of size 11
+-- looking through 5706 candidates of size 12
 cannot conjure
 
