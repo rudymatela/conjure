@@ -139,7 +139,7 @@ conjureWith args nm f es  =  do
     putStrLn $ "-- looking through "
             ++ show (length cs)
             ++ " candidates of size " ++ show n
-    -- when (n<=7) $ putStrLn $ unlines $ map show es
+    -- when (n<=12) $ putStrLn $ unlines $ map show cs
     case is of
       []     ->  pr (n+1) rs
       (i:_)  ->  do putStrLn $ showEq i
