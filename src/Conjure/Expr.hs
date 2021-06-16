@@ -36,6 +36,7 @@ module Conjure.Expr
 
   , enumerateApps
   , enumerateAppsFor
+  , enumerateFillings
 
   , module Conjure.Utils
   )
@@ -50,7 +51,8 @@ import Data.Express.Fixtures hiding ((-==-))
 import Data.Dynamic
 import Control.Applicative ((<$>)) -- for GHC <= 7.8
 
-import Test.LeanCheck (filterT, (\/), delay, productWith, productMaybeWith)
+import Test.LeanCheck (mapT, filterT, (\/), delay, productWith, productMaybeWith)
+import Test.LeanCheck.Tiers (products)
 
 -- | /O(n)/.
 -- Compares the simplicity of two 'Expr's.
@@ -332,6 +334,11 @@ enumerateApps3For h keep ess  =  for h
           ,  Just hfx <- [hf $$ hx]
           ,  typ h == typ hfx
           ]
+
+enumerateFillings :: Expr -> [[Expr]] -> [[Expr]]
+enumerateFillings e  =  mapT (fill e)
+                     .  products
+                     .  replicate (length $ holes e)
 
 -- Like 'isDeconstruction' but lifted over the 'Expr' type.
 isDeconstructionE :: [Expr] -> Expr -> Expr -> Bool
