@@ -9,6 +9,8 @@ upcoming
   to allow generation of `gcd`
 * refactor recursion generation (replace a hole later)
 * change `conjpureWith` to take `Args`
+* rename two args fields to `maxBodyRecursions` and `maxEvalRecursions`
+  at this point, the old names were misnomers.
 
 
 v0.3.4
