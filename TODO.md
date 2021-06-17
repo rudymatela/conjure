@@ -3,11 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* think about how can we allow gcd to be produced
-
-* use holes for recursions, code will probably become cleaner
-  (and possibly faster)
-
 * generate functions with top-level case patterns:
 
         len []  =  0
