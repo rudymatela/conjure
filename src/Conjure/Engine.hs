@@ -94,9 +94,9 @@ conjureWithMaxSize sz  =  conjureWith args
 data Args = Args
   { maxTests          :: Int  -- ^ maximum number of tests to each candidate
   , maxSize           :: Int  -- ^ maximum size of candidate bodies
-  , maxRecursiveCalls :: Int  -- ^ maximum number of allowed recursive calls
+  , maxBodyRecursions :: Int  -- ^ maximum number of recursive calls in candidate bodies
+  , maxEvalRecursions :: Int  -- ^ maximum number of recursive evaluations when testing candidates
   , maxEquationSize   :: Int  -- ^ maximum size of equation operands
-  , maxRecursionSize  :: Int  -- ^ maximum size of a recursive expression expansion
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
   , requireDescent    :: Bool -- ^ require recursive calls to deconstruct arguments
   , forceTests :: [[Expr]]  -- ^ force tests
@@ -116,9 +116,9 @@ args :: Args
 args = Args
   { maxTests           =  60
   , maxSize            =  12
-  , maxRecursiveCalls  =   1
+  , maxBodyRecursions  =   1
+  , maxEvalRecursions  =  60
   , maxEquationSize    =   5
-  , maxRecursionSize   =  60
   , maxSearchTests     =  100000
   , requireDescent     =  True
   , forceTests         =  []
@@ -177,7 +177,7 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests)
   requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
-  isTrueWhenDefined dfn e  =  all (errorToFalse . reval dfn maxRecursionSize False) $ map (e //-) dbss
+  isTrueWhenDefined dfn e  =  all (errorToFalse . reval dfn maxEvalRecursions False) $ map (e //-) dbss
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
@@ -208,7 +208,7 @@ candidateExprs Args{..} nm f es  =  as \/ concatMapT (`enumerateFillings` recs) 
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep e  =  isRootNormalE thy e
-          && count (== ef) (vars e) <= maxRecursiveCalls
+          && count (== ef) (vars e) <= maxBodyRecursions
   ds  =  map snd $ deconstructors f maxTests es
   keepR | requireDescent  =  descends (`elem` ds) efxs
         | otherwise       =  const True

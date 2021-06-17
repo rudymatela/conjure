@@ -22,7 +22,7 @@ fib01 0 1 6  =  13
 fib01 0 1 7  =  21
 
 as :: Args
-as  =  args{maxSize=13,maxRecursiveCalls=2}
+as  =  args{maxSize=13,maxBodyRecursions=2}
 
 main :: IO ()
 main  =  do

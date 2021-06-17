@@ -91,7 +91,7 @@ main = do
     , value "right" right
     ]
 
-  conjureWith args{maxRecursiveCalls=2, maxSize=13} "size" size
+  conjureWith args{maxBodyRecursions=2, maxSize=13} "size" size
     [ val (0 :: Int)
     , val (1 :: Int)
     , value "+" ((+) :: Int -> Int -> Int)
@@ -100,7 +100,7 @@ main = do
     , value "right" right
     ]
 
-  conjureWith args{maxRecursiveCalls=2, maxSize=13} "height" height
+  conjureWith args{maxBodyRecursions=2, maxSize=13} "height" height
     [ val (0 :: Int)
     , val (1 :: Int)
     , val (-1 :: Int)
@@ -112,7 +112,7 @@ main = do
     ]
 
   -- out of reach performance-wise
-  conjureWith args{maxRecursiveCalls=2, maxSize=12} "mem" mem
+  conjureWith args{maxBodyRecursions=2, maxSize=12} "mem" mem
     [ val False
     , value "||" (||)
     , value "==" ((==) :: Int -> Int -> Bool)
@@ -123,7 +123,7 @@ main = do
     ]
 
   -- simply out of reach performance-wise (size 34)
-  conjureWith args{maxRecursiveCalls=2, maxSize=9} "insert" mem
+  conjureWith args{maxBodyRecursions=2, maxSize=9} "insert" mem
     [ val Leaf
     , value "Node" Node
     , value "left" left
