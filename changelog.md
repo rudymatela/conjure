@@ -2,6 +2,15 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* add switch for descending recursions
+  to allow generation of `gcd`
+* refactor recursion generation (replace a hole later)
+* change `conjpureWith` to take `Args`
+
+
 v0.3.4
 ------
 
