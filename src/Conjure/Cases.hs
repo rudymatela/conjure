@@ -11,7 +11,7 @@
 -- encoded as 'Expr's
 --
 -- You are probably better off importing "Conjure".
-{-# Language DeriveDataTypeable, StandaloneDeriving #-} -- for GHC < 7.10
+{-# LANGUAGE TupleSections #-}
 module Conjure.Cases
   ( Cases (..)
   , Fxpr
@@ -27,7 +27,6 @@ import Data.Express
 import Data.Express.Express
 import Data.Express.Fixtures
 import Data.Dynamic
-import Data.Typeable (Typeable)
 
 type Fxpr  =  (Expr, Cxpr)
 type Cxpr  =  [([Expr],Expr)]
@@ -67,7 +66,22 @@ isZeroFxpr  =  error "TODO" =-
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.
 fxprToDynamic :: Int -> Fxpr -> Expr -> Maybe Dynamic
-fxprToDynamic  =  undefined
+fxprToDynamic n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
+  where
+  re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
+  re m n _  | n <= 0  =  error "fxprToDynamic: recursion limit reached"
+  re m n _  | m <= 0  =  error "fxprToDynamic: evaluation limit reached"
+  re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  error "TODO: fxprToDynamic if"
+  re m n e  =  case unfoldApp e of
+    [] -> error "fxprToDynamic: empty application unfold"  -- should never happen
+    [e] -> (m-1,n,) <$> toDynamic e
+    (ef:exs) | ef == ef' -> re m (n-1) $ undefined //- zip undefined exs
+             | otherwise -> foldl ($$) (re m n ef) exs
+
+  Just (m,n,d1) $$ e2  =  case re m n e2 of
+                          Nothing -> Nothing
+                          Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
+  _ $$ _               =  Nothing
 
 
 class Express a => Cases a where
