@@ -18,7 +18,7 @@ main  =  do
   -- using enumFromTo
   conjure "factorial n" factorial
     [ val (1::Int)
-    , value "enumFromTo" (enumFromTo :: Int -> Int -> [Int])
+    , value ".." (enumFromTo :: Int -> Int -> [Int])
     , value "product" (product :: [Int] -> Int)
     ]
 
