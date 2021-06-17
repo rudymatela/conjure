@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.3.6
+------
 
 * add switch for descending recursions
   to allow generation of `gcd`
