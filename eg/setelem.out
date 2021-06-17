@@ -13,7 +13,7 @@ elem :: Int -> [Int] -> Bool
 -- looking through 1826 candidates of size 11
 -- looking through 4407 candidates of size 12
 -- looking through 10888 candidates of size 13
-elem x xs  =  not (null xs) && (elem x (tail xs) || x == head xs)
+elem x xs  =  not (null xs) && (head xs == x || elem x (tail xs))
 
 set :: [Int] -> Bool
 -- testing 60 combinations of argument values
@@ -30,5 +30,5 @@ set :: [Int] -> Bool
 -- looking through 1734 candidates of size 11
 -- looking through 4135 candidates of size 12
 -- looking through 9734 candidates of size 13
-set xs  =  null xs || set (tail xs) && not (elem (head xs) (tail xs))
+set xs  =  null xs || not (elem (head xs) (tail xs)) && set (tail xs)
 

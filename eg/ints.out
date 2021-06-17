@@ -25,7 +25,7 @@ sum :: [Int] -> Int
 -- looking through 27 candidates of size 8
 -- looking through 57 candidates of size 9
 -- looking through 119 candidates of size 10
-sum xs  =  if null xs then 0 else sum (tail xs) + head xs
+sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 product :: [Int] -> Int
 -- testing 60 combinations of argument values
@@ -39,7 +39,7 @@ product :: [Int] -> Int
 -- looking through 27 candidates of size 8
 -- looking through 57 candidates of size 9
 -- looking through 119 candidates of size 10
-product xs  =  if null xs then 1 else product (tail xs) * head xs
+product xs  =  if null xs then 1 else head xs * product (tail xs)
 
 sum :: [Int] -> Int
 -- testing 60 combinations of argument values

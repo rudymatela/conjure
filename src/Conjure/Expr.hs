@@ -328,7 +328,7 @@ enumerateApps3For h keep ess  =  for h
   for h  =  filterT (\e -> typ h == typ e) ess \/ delay apps
     where
     apps  =  foldr (\/) []
-          [  filterT keep $ productWith (:$) (for hf) (for hx)
+          [  filterT keep $ fliproductWith (:$) (for hf) (for hx)
           |  hf <- hs
           ,  hx <- hs
           ,  Just hfx <- [hf $$ hx]
@@ -390,3 +390,12 @@ revaluate dfn n e  =  recursiveToDynamic dfn n e >>= fromDynamic
 
 reval :: Typeable a => (Expr,Expr) -> Int -> a -> Expr -> a
 reval dfn n x e = fromMaybe x (revaluate dfn n e)
+
+-- | like 'productWith' but prefers enumerating from the second tiers first
+fliproductWith :: (a->b->c) -> [[a]] -> [[b]] -> [[c]]
+fliproductWith _ [] _  =  []
+fliproductWith _ _ []  =  []
+fliproductWith f xss (ys:yss)  =  map (** ys) xss
+                               \/ delay (productWith f xss yss)
+  where
+  xs ** ys  =  [x `f` y | x <- xs, y <- ys]
