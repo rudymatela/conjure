@@ -27,6 +27,7 @@ import Data.Express
 import Data.Express.Express
 import Data.Express.Fixtures
 import Data.Dynamic
+import Control.Applicative ((<$>)) -- for older GHCs
 
 type Fxpr  =  (Expr, Cxpr)
 type Cxpr  =  [([Expr],Expr)]
