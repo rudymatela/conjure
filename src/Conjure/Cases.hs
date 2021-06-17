@@ -65,8 +65,8 @@ isZeroFxpr  =  error "TODO" =-
 
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.
-fxprToDynamic :: Int -> Fxpr -> Expr -> Maybe Dynamic
-fxprToDynamic n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
+fxprToDynamic :: (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe Dynamic
+fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
   where
   re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   re m n _  | n <= 0  =  error "fxprToDynamic: recursion limit reached"
