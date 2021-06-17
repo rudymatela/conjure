@@ -107,9 +107,9 @@ data Args = Args
 --
 -- * 60 tests
 -- * functions of up to 12 symbols
--- * maximum of 1 recursive call
+-- * maximum of one recursive call allowed in candidate bodies
+-- * maximum evaluation of up to 60 recursions
 -- * pruning with equations up to size 5
--- * recursion up to 60 symbols
 -- * search for defined applications for up to 100000 combinations
 -- * require recursive calls to deconstruct arguments
 args :: Args
