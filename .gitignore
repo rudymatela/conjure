@@ -38,6 +38,7 @@ eg/list
 eg/tapps
 eg/tree
 eg/setelem
+eg/subset
 eg/spec
 bench/self
 bench/longshot

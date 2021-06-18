@@ -15,6 +15,7 @@ EG = \
   eg/gcd \
   eg/list \
   eg/setelem \
+  eg/subset \
   eg/spec \
   eg/tapps \
   eg/tree \

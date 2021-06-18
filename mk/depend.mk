@@ -166,6 +166,18 @@ eg/spec.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Cases.hs \
   eg/spec.hs
+eg/subset: \
+  eg/subset.hs \
+  mk/toplibs
+eg/subset.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
+  eg/subset.hs
 eg/tapps: \
   eg/tapps.hs \
   mk/toplibs
