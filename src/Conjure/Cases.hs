@@ -70,10 +70,29 @@ isZeroFxpr  =  error "TODO" =-
 fxprToDynamic :: (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe Dynamic
 fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
   where
+
+  rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
+  rev m n e  =  case re m n e of
+                Nothing    -> Nothing
+                Just (m,n,d) -> case fromDynamic d of
+                                Nothing -> Nothing
+                                Just x  -> Just (m, n, x)
+
   re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   re m n _  | n <= 0  =  error "fxprToDynamic: recursion limit reached"
   re m n _  | m <= 0  =  error "fxprToDynamic: evaluation limit reached"
-  re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  error "TODO: fxprToDynamic if"
+  re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev m n ec of
+    Nothing    -> Nothing
+    Just (m,n,True)  -> re m n ex
+    Just (m,n,False) -> re m n ey
+  re m n (Value "||" _ :$ ep :$ eq)  =  case rev m n ep of
+    Nothing        -> Nothing
+    Just (m,n,True)  -> (m,n,) <$> toDynamic (val True)
+    Just (m,n,False) -> re m n eq
+  re m n (Value "&&" _ :$ ep :$ eq)  =  case rev m n ep of
+    Nothing    -> Nothing
+    Just (m,n,True)  -> re m n eq
+    Just (m,n,False) -> (m,n,) <$> toDynamic (val False)
   re m n e  =  case unfoldApp e of
     [] -> error "fxprToDynamic: empty application unfold"  -- should never happen
     [e] -> (m-1,n,) <$> toDynamic e
