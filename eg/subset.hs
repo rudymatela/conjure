@@ -2,8 +2,20 @@
 --
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
+{-# LANGUAGE CPP #-}
 import Conjure
-import Data.List (sort, isSubsequenceOf)
+import Data.List (sort)
+
+#if __GLASGOW_HASKELL__ >= 710
+import Data.List (isSubsequenceOf)
+#else
+isSubsequenceOf :: Eq a => [a] -> [a] -> Bool
+isSubsequenceOf []    _  = True
+isSubsequenceOf (_:_) [] = False
+isSubsequenceOf (x:xs) (y:ys)
+  | x == y    =    xs  `isSubsequenceOf` ys
+  | otherwise = (x:xs) `isSubsequenceOf` ys
+#endif
 
 subset' :: [Int] -> [Int] -> Bool
 subset' [] [x]  =  True
