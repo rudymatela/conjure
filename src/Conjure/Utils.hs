@@ -32,6 +32,7 @@ module Conjure.Utils
   , idIO
   , mapHead
   , sets
+  , headOr
   )
 where
 
@@ -118,3 +119,7 @@ sets []  =  [[]]
 sets (x:xs)  =  map (x:) ss ++ ss
   where
   ss  =  sets xs
+
+headOr :: a -> [a] -> a
+headOr x []  =  x
+headOr _ (x:xs)  =  x

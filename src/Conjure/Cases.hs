@@ -76,7 +76,13 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
   re m n e  =  case unfoldApp e of
     [] -> error "fxprToDynamic: empty application unfold"  -- should never happen
     [e] -> (m-1,n,) <$> toDynamic e
-    (ef:exs) | ef == ef' -> re m (n-1) $ undefined //- zip undefined exs
+    (ef:exs) | ef == ef' -> headOr (error $ "fxprToDynamic: unhandled pattern " ++ show e)
+                          [ re m (n-1) $ undefined //- zip undefined exs
+                          | let e  =  foldApp (ef:map exprExpr exs)
+                          , (a',e') <- cx
+                          , e `isInstanceOf` foldApp (ef:a')
+                          -- TODO: complete me
+                          ]
              | otherwise -> foldl ($$) (re m n ef) exs
 
   Just (m,n,d1) $$ e2  =  case re m n e2 of
