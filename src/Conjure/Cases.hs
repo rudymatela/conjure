@@ -31,6 +31,7 @@ import Control.Applicative ((<$>)) -- for older GHCs
 
 type Fxpr  =  (Expr, Cxpr)
 type Cxpr  =  [([Expr],Expr)]
+-- consider changing back to [(Expr,Expr)] as it will be easier to match
 
 sumFxpr :: Fxpr
 sumFxpr  =  var "sum" (undefined :: [Int] -> Int) =-
@@ -77,11 +78,10 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
     [] -> error "fxprToDynamic: empty application unfold"  -- should never happen
     [e] -> (m-1,n,) <$> toDynamic e
     (ef:exs) | ef == ef' -> headOr (error $ "fxprToDynamic: unhandled pattern " ++ show e)
-                          [ re m (n-1) $ undefined //- zip undefined exs
+                          [ re m (n-1) $ e' //- bs
                           | let e  =  foldApp (ef:map exprExpr exs)
                           , (a',e') <- cx
-                          , e `isInstanceOf` foldApp (ef:a')
-                          -- TODO: complete me
+                          , Just bs <- [e `match` foldApp (ef:a')]
                           ]
              | otherwise -> foldl ($$) (re m n ef) exs
 
