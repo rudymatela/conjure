@@ -29,6 +29,7 @@ import Data.Express.Express
 import Data.Express.Fixtures
 import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
+import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
 
 type Fxpr  =  (Expr, Cxpr)
 type Cxpr  =  [([Expr],Expr)]
@@ -74,6 +75,14 @@ isZeroFxpr  =  error "TODO" =-
   infixr 0 =-
 
 
+-- | To be used when testing fxprToDynamic
+exprExprFor :: Express a => a -> Expr -> Expr
+exprExprFor x e  =  evl $ headOr err $ mapMaybe ($$ e)
+  [ value "expr" (expr -:> x)
+  ]
+  where
+  err  =  error "exprExprFor': unhandled type"
+
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.
 fxprToDynamic :: (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe Dynamic
@@ -117,6 +126,10 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
                           Nothing -> Nothing
                           Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
+-- provisional example:
+-- > > fromDynamic <$> fxprToDynamic (exprExprFor (undefined :: [Int])) 6 sumFxpr (var "sum" (undefined :: [Int] -> Int) :$ val [1,2,3,11::Int]) :: Maybe (Maybe Int)
+-- > Just (Just 17)
+
 
 
 class Express a => Cases a where
