@@ -19,6 +19,7 @@ module Conjure.Cases
   , factFxpr
   , nullFxpr
   , isZeroFxpr
+  , fxprToDynamic
   )
 where
 
@@ -34,16 +35,24 @@ type Cxpr  =  [([Expr],Expr)]
 -- consider changing back to [(Expr,Expr)] as it will be easier to match
 
 sumFxpr :: Fxpr
-sumFxpr  =  var "sum" (undefined :: [Int] -> Int) =-
+sumFxpr  =  sumE =-
   [ [nil]           =-  zero
-  , [(xx -:- xxs)]  =-  xx -+- (var "recurse" (undefined :: [Int] -> Int) :$ xxs)
+  , [(xx -:- xxs)]  =-  xx -+- (sumE :$ xxs)
   ]
   where
+  sumE  =  var "sum" (undefined :: [Int] -> Int)
   (=-) = (,)
   infixr 0 =-
 
 factFxpr :: Fxpr
-factFxpr  =  error "TODO: write me"
+factFxpr  =  factE =-
+  [ [zero]  =-  one
+  , [xx]    =-  xx -+- (factE :$ (xx -+- minusOne))
+  ]
+  where
+  factE  =  var "fact" (undefined :: Int -> Int)
+  (=-) = (,)
+  infixr 0 =-
 
 nullFxpr :: Fxpr
 nullFxpr  =  error "TODO" =-
