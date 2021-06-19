@@ -31,6 +31,14 @@ count' 0 [1,0,0]  =  2
 
 main :: IO ()
 main = do
+  -- count x xs  =  length (filter (== x) xs)
+  --                1       2       3  4  5
+  conjure "count" count'
+    [ value "length" (length :: [A] -> Int)
+    , value "filter" (filter :: (A -> Bool) -> [A] -> [A])
+    , value "==" ((==) :: A -> A -> Bool)
+    ]
+
   conjureWithMaxSize 16 "count" count'
     [ val (0 :: Int)
     , val (1 :: Int)

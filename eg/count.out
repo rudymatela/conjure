@@ -1,5 +1,14 @@
 count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 1 candidates of size 5
+count x xs  =  length (filter (x ==) xs)
+
+count :: A -> [A] -> Int
+-- testing 13 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
