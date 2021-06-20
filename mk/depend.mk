@@ -142,6 +142,18 @@ eg/list.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Cases.hs \
   eg/list.hs
+eg/replicate: \
+  eg/replicate.hs \
+  mk/toplibs
+eg/replicate.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
+  eg/replicate.hs
 eg/setelem: \
   eg/setelem.hs \
   mk/toplibs
