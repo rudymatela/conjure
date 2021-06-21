@@ -12,11 +12,29 @@ factorial 3  =  6
 factorial 4  =  24
 factorial 5  =  120
 
+count' :: Int -> [Int] -> Int
+count' 0 [0]  =  1
+count' 0 [1]  =  0
+count' 1 [0]  =  0
+count' 1 [1]  =  1
+count' 0 [0,0]  =  2
+count' 0 [0,1]  =  1
+count' 0 [1,2]  =  0
+count' 1 [0,0]  =  0
+count' 1 [0,1]  =  1
+count' 1 [1,2]  =  1
+count' 0 [0,0,0]  =  3
+count' 0 [0,0,1]  =  2
+count' 0 [1,0,0]  =  2
 
 main :: IO ()
 main  =  do
   putStrLn $ "running with " ++ show (length primitives) ++ " primitives"
   conjure "factorial n" factorial primitives
+--conjure "sum"     (sum     :: [Int] -> Int) primitives
+--conjure "product" (product :: [Int] -> Int) primitives
+--conjure "length"  (length  :: [Int] -> Int) primitives
+--conjure "count" count' (value "length" (length :: [Int] -> Int):primitives)
 
 primitives :: [Expr]
 primitives  =
@@ -36,6 +54,8 @@ primitives  =
   , value "==" ((==) :: Int -> Int -> Bool)
   , value "<=" ((<=) :: Int -> Int -> Bool)
   , value "<"  ((<) :: Int -> Int -> Bool)
+
+  , value "const" (const :: Int -> Int -> Int)
 
   , val ([] :: [Int])
   , value ":" ((:) :: Int -> [Int] -> [Int])

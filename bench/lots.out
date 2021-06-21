@@ -1,11 +1,11 @@
-running with 25 primitives
+running with 26 primitives
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 6 candidates of size 3
 -- looking through 18 candidates of size 4
--- looking through 61 candidates of size 5
--- looking through 243 candidates of size 6
+-- looking through 64 candidates of size 5
+-- looking through 272 candidates of size 6
 factorial n  =  foldr (*) 1 [1..n]
 
