@@ -76,6 +76,10 @@ module Conjure
 
 -- * Helper test types
   , A, B, C, D, E, F
+
+-- * Print the internal theory
+  , conjureTheory
+  , conjureTheoryWith
   )
 where
 

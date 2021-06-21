@@ -18,6 +18,8 @@ module Conjure.Engine
   , conjpure
   , conjpureWith
   , candidateExprs
+  , conjureTheory
+  , conjureTheoryWith
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -187,6 +189,16 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, 
         ++ fbss
     where
     e  =  ffxx -==- ffxx
+
+
+conjureTheory :: Conjurable f => String -> f -> [Expr] -> IO ()
+conjureTheory  =  conjureTheoryWith args
+
+
+conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
+conjureTheoryWith args nm f es  =  printThy thy
+  where
+  (_, _, _, thy)  =  conjpureWith args nm f es
 
 
 candidateExprs :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], Thy)
