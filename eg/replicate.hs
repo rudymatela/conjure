@@ -12,6 +12,7 @@ replicate' 2 c  =  [c,c]
 replicate' 3 c  =  [c,c,c]
 replicate' 4 c  =  [c,c,c,c]
 
+-- this function is one of the examples of MagicHaskeller
 replicates' :: String -> Int -> String
 replicates' [a]     1  =  [a]
 replicates' [a,b]   1  =  [a,b]
@@ -32,12 +33,14 @@ main = do
     , value ":" ((:) :: Char -> String -> String)
     ]
 
+  -- emulates how MagicHaskeller generates "replicates"
   conjureWith args{maxTests=360} "replicates" replicates'
     [ value "replicate" (replicate :: Int -> String -> [String])
     , value "transpose" (transpose :: [[Char]] -> [[Char]])
     , value "concat"    (concat :: [String] -> String)
     ]
 
+  -- alternative generation using recursion
   conjureWith args{maxTests=360, maxSize=13} "replicates" replicates'
     [ val ""
     , value "null" (null :: String -> Bool)
