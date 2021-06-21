@@ -216,6 +216,8 @@ candidateExprs Args{..} nm f es  =  as \/ concatMapT (`enumerateFillings` recs) 
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  conjureHoles f ++ [val False, val True] ++ es
+  -- TODO: conjureHoles from es above?  (without using f)
+  -- can't as I wouldn't have a way to list test values... (conjureTiers)
   (===)  =  conjureAreEqual f maxTests
 
 -- | Returns whether the given recursive call

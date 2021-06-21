@@ -45,6 +45,7 @@ bench/self
 bench/longshot
 bench/ill-hit
 bench/take-drop
+bench/lots
 proto/u-conjure
 test/expr
 test/conjurable
