@@ -3,6 +3,13 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* consider the effect of being able to conjureHoles and conjureTiers
+  from values in the background primitives:
+
+	- does it increase performance of `lots.hs`?
+	- does it decrease performance of `lots.hs`?
+	- should it?
+
 * generate functions with top-level case patterns:
 
         len []  =  0
