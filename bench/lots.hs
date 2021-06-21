@@ -26,19 +26,16 @@ primitives  =
   , value "||" (||)
   , value "not" not
 
-  , val ([] :: [Bool])
-  , value ":" ((:) :: Bool -> [Bool] -> [Bool])
-  , value "head" (head :: [Bool] -> Bool)
-  , value "tail" (tail :: [Bool] -> [Bool])
-  , value "null" (null :: [Bool] -> Bool)
-  , value "foldr" (foldr :: (Bool -> Bool -> Bool) -> Bool -> [Bool] -> Bool)
-
   , val (0::Int)
   , val (1::Int)
   , value "+" ((+) :: Int -> Int -> Int)
   , value "*" ((*) :: Int -> Int -> Int)
   , value "dec" (subtract 1 :: Int -> Int)
   , value "-" ((-) :: Int -> Int -> Int)
+
+  , value "==" ((==) :: Int -> Int -> Bool)
+  , value "<=" ((<=) :: Int -> Int -> Bool)
+  , value "<"  ((<) :: Int -> Int -> Bool)
 
   , val ([] :: [Int])
   , value ":" ((:) :: Int -> [Int] -> [Int])
@@ -50,10 +47,6 @@ primitives  =
   , value "map" (map :: (Int -> Int) -> [Int] -> [Int])
   , value "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
   , value ".." (enumFromTo :: Int -> Int -> [Int])
-
-  , value "==" ((==) :: Int -> Int -> Bool)
-  , value "<=" ((<=) :: Int -> Int -> Bool)
-  , value "<"  ((<) :: Int -> Int -> Bool)
 
   , value "++" ((++) :: [Int] -> [Int] -> [Int])
   , value "elem" (elem :: Int -> [Int] -> Bool)
