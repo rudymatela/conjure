@@ -15,6 +15,7 @@ factorial 5  =  120
 
 main :: IO ()
 main  =  do
+  putStrLn $ "running with " ++ show (length primitives) ++ " primitives"
   conjure "factorial n" factorial primitives
 
 primitives :: [Expr]
@@ -50,12 +51,7 @@ primitives  =
   , value "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
   , value ".." (enumFromTo :: Int -> Int -> [Int])
 
-  , value "even" (even :: Int -> Bool)
-  , value "odd" (odd :: Int -> Bool)
-  , value "length" (length :: [Int] -> Int)
-
   , value "==" ((==) :: Int -> Int -> Bool)
-  , value "/=" ((/=) :: Int -> Int -> Bool)
   , value "<=" ((<=) :: Int -> Int -> Bool)
   , value "<"  ((<) :: Int -> Int -> Bool)
 
