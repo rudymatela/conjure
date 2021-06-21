@@ -25,6 +25,9 @@ module Conjure.Conjurable
   , conjureMkEquation
   , A, B, C, D, E, F
   , conjureIsDeconstructor
+  , Prim (..)
+  , prim
+  , primitive
   )
 where
 
@@ -52,6 +55,18 @@ type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]])
 --
 -- Represented as a transformation of a list to a list.
 type Reification  =  [Reification1] -> [Reification1]
+
+
+-- | A primtive expression (paired with instance reification).
+type Prim  =  (Expr, Reification)
+
+
+prim :: (Conjurable a, Show a) => a -> Prim
+prim x  =  (val x, conjureType x)
+
+
+primitive :: (Conjurable a, Show a) => String -> a -> Prim
+primitive s x  =  (value s x, conjureType x)
 
 
 -- | Class of 'Conjurable' types.
