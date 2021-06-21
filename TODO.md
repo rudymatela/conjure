@@ -3,8 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* re-simplify the type of enumerateAppsFor
-  (use a simple list instead of a list of lists)
+* return Thy from candidateExprs?
 
 * consider the effect of being able to conjureHoles and conjureTiers
   from values in the background primitives:

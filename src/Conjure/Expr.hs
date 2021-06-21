@@ -285,7 +285,7 @@ possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
 
 -- -- Expression enumeration -- --
 
-enumerateAppsFor :: Expr -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
+enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
 enumerateAppsFor  =  enumerateApps3For
 
 enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
@@ -319,13 +319,13 @@ enumerateApps2For h keep  =  map concat
                       [] -> Nothing
                       es -> Just es
 
-enumerateApps3For :: Expr -> (Expr -> Bool) -> [[Expr]] -> [[Expr]]
-enumerateApps3For h keep ess  =  for h
+enumerateApps3For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
+enumerateApps3For h keep es  =  for h
   where
   hs :: [Expr]
-  hs  =  possibleHoles . concat $ take 1 ess
+  hs  =  possibleHoles es
   for :: Expr -> [[Expr]]
-  for h  =  filterT (\e -> typ h == typ e) ess \/ delay apps
+  for h  =  filter (\e -> typ h == typ e) es : apps
     where
     apps  =  foldr (\/) []
           [  filterT keep $ fliproductWith (:$) (for hf) (for hx)

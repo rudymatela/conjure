@@ -201,9 +201,9 @@ candidateExprs Args{..} nm f es  =  as \/ concatMapT (`enumerateFillings` recs) 
       $  forN (hole (undefined :: Bool))
   as  =  forN efxs
   rs  =  forR efxs
-  forN h  =  enumerateAppsFor h keep [exs ++ es]
+  forN h  =  enumerateAppsFor h keep $ exs ++ es
   forR h  =  filterT (\e -> (eh `elem`) (holes e))
-          $  enumerateAppsFor h keep $ [exs ++ es ++ [eh]]
+          $  enumerateAppsFor h keep $ exs ++ es ++ [eh]
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
