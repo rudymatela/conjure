@@ -56,4 +56,5 @@ primitives  =
   , value "<"  ((<) :: Int -> Int -> Bool)
 
   , value "++" ((++) :: [Int] -> [Int] -> [Int])
+  , value "elem" (elem :: Int -> [Int] -> Bool)
   ]

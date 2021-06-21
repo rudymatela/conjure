@@ -1,4 +1,4 @@
-running with 30 primitives
+running with 31 primitives
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
 -- looking through 3 candidates of size 1
