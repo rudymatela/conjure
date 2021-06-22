@@ -23,8 +23,11 @@ tests n  =
   , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,4::Int])  == 10
   ]
 
-sumV :: Expr
-sumV  =  var "sum" (undefined :: [Int] -> Int)
+sumV, factV, nullV, isZeroV :: Expr
+factV    =  var "fact" (undefined :: Int -> Int)
+sumV     =  var "sum" (undefined :: [Int] -> Int)
+isZeroV  =  var "isZero" (undefined :: Int -> Bool)
+nullV    =  var "null" (undefined :: [Int] -> Bool)
 
 -- in Conjure.Conjurable there should be a function
 -- called conjureExprExpr that conjures this for the required types.
@@ -39,19 +42,18 @@ exprExpr e  =  evl $ headOr err $ mapMaybe ($$ e)
   err  =  error "exprExpr: unhandled type"
 
 sumFxpr :: Fxpr
-sumFxpr  =  sumE =-
+sumFxpr  =  sumV =-
   [ [nil]           =-  zero
-  , [(xx -:- xxs)]  =-  xx -+- (sumE :$ xxs)
+  , [(xx -:- xxs)]  =-  xx -+- (sumV :$ xxs)
   ]
   where
-  sumE  =  var "sum" (undefined :: [Int] -> Int)
   (=-) = (,)
   infixr 0 =-
 
 factFxpr :: Fxpr
-factFxpr  =  factE =-
+factFxpr  =  factV =-
   [ [zero]  =-  one
-  , [xx]    =-  xx -+- (factE :$ (xx -+- minusOne))
+  , [xx]    =-  xx -+- (factV :$ (xx -+- minusOne))
   ]
   where
   factE  =  var "fact" (undefined :: Int -> Int)
@@ -59,7 +61,7 @@ factFxpr  =  factE =-
   infixr 0 =-
 
 nullFxpr :: Fxpr
-nullFxpr  =  error "TODO" =-
+nullFxpr  =  nullV =-
   [ [nil]          =- false
   , [(xx -:- xxs)] =- false
   ]
@@ -68,7 +70,7 @@ nullFxpr  =  error "TODO" =-
   infixr 0 =-
 
 isZeroFxpr :: Fxpr
-isZeroFxpr  =  error "TODO" =-
+isZeroFxpr  =  nullV =-
   [ [zero]  =- true
   , [inc xx] =- false
   ]
