@@ -134,21 +134,19 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
 
 class Express a => Cases a where
   cases :: a -> [Expr]
+  cases _  =  []
+
+-- Atomic types have no cases.
+-- It's out of the scope of this typeclass to handle these.
+instance Cases Int
+instance Cases Integer
+instance Cases Char
 
 instance Cases () where
   cases _  =  [val ()]
 
 instance Cases Bool where
   cases _  =  [val False, val True]
-
-instance Cases Int where
-  cases x  =  []
-
-instance Cases Integer where
-  cases x  =  []
-
-instance Cases Char where
-  cases _  =  []
 
 instance Express a => Cases [a] where
   cases xs  =  [ val ([] -: xs)
