@@ -27,20 +27,20 @@ as  =  args{maxSize=13,maxBodyRecursions=2}
 main :: IO ()
 main  =  do
   conjureWith as "fibonacci n" fibonacci
-    [ val (1::Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "dec" (subtract 1 :: Int -> Int)
-    , value "<=" ((<=) :: Int -> Int -> Bool)
+    [ pr (1::Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
     ]
 -- expected function:
 -- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 --                 1  2 3  4      5      6          7   8  9        10  11   12  13
 
   conjureWithMaxSize 12 "fib01" fib01
-    [ val (0::Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "dec" (subtract 1 :: Int -> Int)
-    , value "<=" ((<=) :: Int -> Int -> Bool)
+    [ pr (0::Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
     ]
 -- expected function:
 -- fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)

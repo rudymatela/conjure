@@ -46,11 +46,11 @@ Given
 
 and
 
-	primitives :: [Expr]
-	primitives  =  [ val (0::Int)
-	               , val (1::Int)
-	               , value "+" ((+) :: Int -> Int -> Int)
-	               , value "*" ((*) :: Int -> Int -> Int)
+	primitives :: [Prim]
+	primitives  =  [ pr (0::Int)
+	               , pr (1::Int)
+	               , prim "+" ((+) :: Int -> Int -> Int)
+	               , prim "*" ((*) :: Int -> Int -> Int)
 	               ]
 
 running
@@ -86,13 +86,13 @@ Given
 
 and
 
-	primitives :: [Expr]
-	primitives  =  [ val (0::Int)
-	               , val (1::Int)
-	               , value "+" ((+) :: Int -> Int -> Int)
-	               , value "*" ((*) :: Int -> Int -> Int)
-	               , value "dec" (subtract 1 :: Int -> Int)
-	               , value "==" ((==) :: Int -> Int -> Bool)
+	primitives :: [Prim]
+	primitives  =  [ pr (0::Int)
+	               , pr (1::Int)
+	               , prim "+" ((+) :: Int -> Int -> Int)
+	               , prim "*" ((*) :: Int -> Int -> Int)
+	               , prim "dec" (subtract 1 :: Int -> Int)
+	               , prim "==" ((==) :: Int -> Int -> Bool)
 	               ]
 
 running

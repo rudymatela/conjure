@@ -23,21 +23,21 @@ main = do
   conjure "and" (and' :: [Bool] -> Bool) primitivesWithFold
   conjure "or"  (or'  :: [Bool] -> Bool) primitivesWithFold
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives =
-  [ val False
-  , val True
-  , value "not" not
-  , value "||" (||)
-  , value "&&" (&&)
-  , value "null" (null :: [Bool] -> Bool)
-  , value "head" (head :: [Bool] -> Bool)
-  , value "tail" (tail :: [Bool] -> [Bool])
+  [ pr False
+  , pr True
+  , prim "not" not
+  , prim "||" (||)
+  , prim "&&" (&&)
+  , prim "null" (null :: [Bool] -> Bool)
+  , prim "head" (head :: [Bool] -> Bool)
+  , prim "tail" (tail :: [Bool] -> [Bool])
   ]
 
-primitivesWithFold :: [Expr]
+primitivesWithFold :: [Prim]
 primitivesWithFold  =
-    value "foldr" (foldr :: (Bool -> Bool -> Bool) -> Bool -> [Bool] -> Bool)
+    prim "foldr" (foldr :: (Bool -> Bool -> Bool) -> Bool -> [Bool] -> Bool)
   : primitives
 
 -- target (for and):

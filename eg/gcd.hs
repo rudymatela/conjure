@@ -19,9 +19,9 @@ gcd' 12 18  =  6
 
 main :: IO ()
 main = conjureWith args{requireDescent=False} "gcd a b" gcd'
-  [ val (0::Int)
-  , value "`mod`" (mod :: Int -> Int -> Int)
-  , value "==" ((==) :: Int -> Int -> Bool)
+  [ pr (0::Int)
+  , prim "`mod`" (mod :: Int -> Int -> Int)
+  , prim "==" ((==) :: Int -> Int -> Bool)
   ]
   -- desired function:
   -- gcd a b  =  if b == 0 then a else gcd b (a `mod` b)

@@ -15,13 +15,13 @@ sumSpec  =
 -- hoping for something like
 -- sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
-sumPrimitives :: [Expr]
+sumPrimitives :: [Prim]
 sumPrimitives  =
-  [ value "null" (null :: [Int] -> Bool)
-  , val (0::Int)
-  , value "+"    ((+) :: Int -> Int -> Int)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+  [ prim "null" (null :: [Int] -> Bool)
+  , pr (0::Int)
+  , prim "+"    ((+) :: Int -> Int -> Int)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
 
@@ -35,12 +35,12 @@ appSpec  =
 -- hoping for something like
 -- app xs ys = if null xs then ys else head xs : app (tail xs) ys
 
-appPrimitives :: [Expr]
+appPrimitives :: [Prim]
 appPrimitives =
-  [ value "null" (null :: [Int] -> Bool)
-  , value ":"    ((:) :: Int -> [Int] -> [Int])
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+  [ prim "null" (null :: [Int] -> Bool)
+  , prim ":"    ((:) :: Int -> [Int] -> [Int])
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
 

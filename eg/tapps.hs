@@ -25,41 +25,41 @@ main = do
   conjure "product" product' primitives
   conjure "product" product' primitivesWithFold
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives =
-  [ val (0 :: Int)
-  , val (1 :: Int)
+  [ pr (0 :: Int)
+  , pr (1 :: Int)
 #if __GLASGOW_HASKELL__ < 800
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
-  , value "null" (null :: [Int] -> Bool)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
 #else
-  , value "+" ((+) @Int)
-  , value "*" ((*) @Int)
+  , prim "+" ((+) @Int)
+  , prim "*" ((*) @Int)
 -- the following #if was added just for dramatic effect (see notes below)
 #if __GLASGOW_HASKELL__ < 710
-  , value "null" (null @Int)
+  , prim "null" (null @Int)
 #else
-  , value "null" (null @[] @Int)
+  , prim "null" (null @[] @Int)
 #endif
-  , value "head" (head @Int)
-  , value "tail" (tail @Int)
+  , prim "head" (head @Int)
+  , prim "tail" (tail @Int)
 #endif
   ]
 
-primitivesWithFold :: [Expr]
+primitivesWithFold :: [Prim]
 #if __GLASGOW_HASKELL__ < 800
 primitivesWithFold  =
-    value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
   : primitives
 #else
 -- the following #if was added just for dramatic effect (see notes below)
 #if __GLASGOW_HASKELL__ < 710
-primitivesWithFold  =  value "foldr" (foldr @Int @Int) : primitives
+primitivesWithFold  =  prim "foldr" (foldr @Int @Int) : primitives
 #else
-primitivesWithFold  =  value "foldr" (foldr @[] @Int @Int) : primitives
+primitivesWithFold  =  prim "foldr" (foldr @[] @Int @Int) : primitives
 #endif
 #endif
 

@@ -2,7 +2,7 @@
 --
 -- Based on an example sent by Colin Runciman
 --
--- Even though sum' is defined for 6 values,
+-- Even though sum' is defined for 6 prims,
 -- Conjure only ever hits 4 of them.
 import Conjure
 
@@ -25,10 +25,10 @@ sumSpec  =  [ [] -= 0
 
 main :: IO ()
 main  =  do
-  -- the following does not hit all 6 defined values, only 4
+  -- the following does not hit all 6 defined prims, only 4
   conjure "sum" (sum' :: [Int] -> Int) primitives
 
-  -- the following forces 3 argument values, totaling 6
+  -- the following forces 3 argument prims, totaling 6
   conjureWith as "sum" (sum' :: [Int] -> Int) primitives
 
   -- the following conjures from a spec
@@ -43,13 +43,13 @@ as  =  args
                   ]
     }
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives =
-  [ val (0 :: Int)
-  , val (1 :: Int)
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
-  , value "null" (null :: [Int] -> Bool)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+  [ pr (0 :: Int)
+  , pr (1 :: Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]

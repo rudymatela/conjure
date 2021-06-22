@@ -34,18 +34,18 @@ main = do
   -- count x xs  =  length (filter (== x) xs)
   --                1       2       3  4  5
   conjure "count" count'
-    [ value "length" (length :: [A] -> Int)
-    , value "filter" (filter :: (A -> Bool) -> [A] -> [A])
-    , value "==" ((==) :: A -> A -> Bool)
+    [ prim "length" (length :: [A] -> Int)
+    , prim "filter" (filter :: (A -> Bool) -> [A] -> [A])
+    , prim "==" ((==) :: A -> A -> Bool)
     ]
 
   conjureWithMaxSize 16 "count" count'
-    [ val (0 :: Int)
-    , val (1 :: Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "head" (head :: [A] -> A)
-    , value "tail" (tail :: [A] -> [A])
-    , value "null" (null :: [A] -> Bool)
-    , value "==" ((==) :: A -> A -> Bool)
-    , value "if" (\p x y -> if p then x else y :: Int)
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "head" (head :: [A] -> A)
+    , prim "tail" (tail :: [A] -> [A])
+    , prim "null" (null :: [A] -> Bool)
+    , prim "==" ((==) :: A -> A -> Bool)
+    , prim "if" (\p x y -> if p then x else y :: Int)
     ]

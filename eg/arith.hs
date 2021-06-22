@@ -33,10 +33,10 @@ main = do
   conjure "square" square primitives
   conjure "tnpo"   tnpo   primitives
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives =
-  [ val (0::Int)
-  , val (1::Int)
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
+  [ pr (0::Int)
+  , pr (1::Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
   ]

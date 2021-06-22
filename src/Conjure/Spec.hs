@@ -25,6 +25,7 @@ where
 import Conjure.Engine
 import Conjure.Conjurable
 import Conjure.Utils
+import Conjure.Prim
 
 
 -- | A partial specification of a function with one argument:
@@ -78,13 +79,13 @@ type Spec3 a b c d = [((a,b,c),d)]
 -- >   , [3,4,5] -= 12
 -- >   ]
 --
--- > sumPrimitives :: [Expr]
+-- > sumPrimitives :: [Prim]
 -- > sumPrimitives  =
--- >   [ value "null" (null :: [Int] -> Bool)
--- >   , val (0::Int)
--- >   , value "+"    ((+) :: Int -> Int -> Int)
--- >   , value "head" (head :: [Int] -> Int)
--- >   , value "tail" (tail :: [Int] -> [Int])
+-- >   [ prim "null" (null :: [Int] -> Bool)
+-- >   , pr (0::Int)
+-- >   , prim "+"    ((+) :: Int -> Int -> Int)
+-- >   , prim "head" (head :: [Int] -> Int)
+-- >   , prim "tail" (tail :: [Int] -> [Int])
 -- >   ]
 --
 -- Then:
@@ -98,7 +99,7 @@ type Spec3 a b c d = [((a,b,c),d)]
 --
 -- (cf. 'Spec1', 'conjure1With')
 conjure1 :: (Eq a, Eq b, Show a, Conjurable a, Conjurable b)
-         => String -> Spec1 a b -> [Expr] -> IO ()
+         => String -> Spec1 a b -> [Prim] -> IO ()
 conjure1  =  conjure1With args
 
 
@@ -115,10 +116,10 @@ conjure1  =  conjure1With args
 --
 -- > appPrimitives :: [Expr]
 -- > appPrimitives =
--- >   [ value "null" (null :: [Int] -> Bool)
--- >   , value ":"    ((:) :: Int -> [Int] -> [Int])
--- >   , value "head" (head :: [Int] -> Int)
--- >   , value "tail" (tail :: [Int] -> [Int])
+-- >   [ prim "null" (null :: [Int] -> Bool)
+-- >   , prim ":"    ((:) :: Int -> [Int] -> [Int])
+-- >   , prim "head" (head :: [Int] -> Int)
+-- >   , prim "tail" (tail :: [Int] -> [Int])
 -- >   ]
 --
 -- Then:
@@ -134,7 +135,7 @@ conjure1  =  conjure1With args
 conjure2 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c, Eq c
-            ) => String -> Spec2 a b c -> [Expr] -> IO ()
+            ) => String -> Spec2 a b c -> [Prim] -> IO ()
 conjure2  =  conjure2With args
 
 
@@ -145,13 +146,13 @@ conjure3 :: ( Conjurable a, Eq a, Show a
             , Conjurable b, Eq b, Show b
             , Conjurable c, Eq c, Show c
             , Conjurable d, Eq d
-            ) => String -> Spec3 a b c d -> [Expr] -> IO ()
+            ) => String -> Spec3 a b c d -> [Prim] -> IO ()
 conjure3  =  conjure3With args
 
 
 -- | Like 'conjure1' but allows setting options through 'Args'/'args'.
 conjure1With :: (Eq a, Eq b, Show a, Conjurable a, Conjurable b)
-             => Args -> String -> Spec1 a b -> [Expr] -> IO ()
+             => Args -> String -> Spec1 a b -> [Prim] -> IO ()
 conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
   where
   ts = [[val x] | (x,_) <- bs]
@@ -161,7 +162,7 @@ conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
 conjure2With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c, Eq c
-                ) => Args -> String -> Spec2 a b c -> [Expr] -> IO ()
+                ) => Args -> String -> Spec2 a b c -> [Prim] -> IO ()
 conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
   where
   ts = [[val x, val y] | ((x,y),_) <- bs]
@@ -172,7 +173,7 @@ conjure3With :: ( Conjurable a, Eq a, Show a
                 , Conjurable b, Eq b, Show b
                 , Conjurable c, Eq c, Show c
                 , Conjurable d, Eq d
-                ) => Args -> String -> Spec3 a b c d -> [Expr] -> IO ()
+                ) => Args -> String -> Spec3 a b c d -> [Prim] -> IO ()
 conjure3With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun3 bs)
   where
   ts = [[val x, val y, val z] | ((x,y,z),_) <- bs]

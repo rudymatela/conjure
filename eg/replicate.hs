@@ -26,29 +26,29 @@ replicates' [a,b,c] 3  =  [a,a,a,b,b,b,c,c,c]
 main :: IO ()
 main = do
   conjure "replicate" replicate'
-    [ val (0 :: Int)
-    , value "dec" (subtract 1 :: Int -> Int)
-    , value "==" ((==) :: Int -> Int -> Bool)
-    , val ""
-    , value ":" ((:) :: Char -> String -> String)
+    [ pr (0 :: Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , pr ""
+    , prim ":" ((:) :: Char -> String -> String)
     ]
 
   -- emulates how MagicHaskeller generates "replicates"
   conjureWith args{maxTests=360} "replicates" replicates'
-    [ value "replicate" (replicate :: Int -> String -> [String])
-    , value "transpose" (transpose :: [[Char]] -> [[Char]])
-    , value "concat"    (concat :: [String] -> String)
+    [ prim "replicate" (replicate :: Int -> String -> [String])
+    , prim "transpose" (transpose :: [[Char]] -> [[Char]])
+    , prim "concat"    (concat :: [String] -> String)
     ]
 
   -- alternative generation using recursion
   conjureWith args{maxTests=360, maxSize=13} "replicates" replicates'
-    [ val ""
-    , value "null" (null :: String -> Bool)
-    , value "head" (head :: String -> Char)
-    , value "tail" (tail :: String -> String)
-    , value ":" ((:) :: Char -> String -> String)
-    , value "++" ((++) :: String -> String -> String)
-    , value "replicate" (replicate :: Int -> Char -> String)
+    [ pr ""
+    , prim "null" (null :: String -> Bool)
+    , prim "head" (head :: String -> Char)
+    , prim "tail" (tail :: String -> String)
+    , prim ":" ((:) :: Char -> String -> String)
+    , prim "++" ((++) :: String -> String -> String)
+    , prim "replicate" (replicate :: Int -> Char -> String)
     ]
 
 replicates n []  =  []

@@ -78,62 +78,62 @@ instance Conjurable Tree where
 main :: IO ()
 main = do
   conjure "leftmost" leftmost
-    [ value "valu" valu
-    , value "nil" nil
-    , value "left" left
-    , value "right" right
+    [ prim "valu" valu
+    , prim "nil" nil
+    , prim "left" left
+    , prim "right" right
     ]
 
   conjure "rightmost" rightmost
-    [ value "valu" valu
-    , value "nil" nil
-    , value "left" left
-    , value "right" right
+    [ prim "valu" valu
+    , prim "nil" nil
+    , prim "left" left
+    , prim "right" right
     ]
 
   conjureWith args{maxBodyRecursions=2, maxSize=13} "size" size
-    [ val (0 :: Int)
-    , val (1 :: Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "nil" nil
-    , value "left" left
-    , value "right" right
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "nil" nil
+    , prim "left" left
+    , prim "right" right
     ]
 
   conjureWith args{maxBodyRecursions=2, maxSize=13} "height" height
-    [ val (0 :: Int)
-    , val (1 :: Int)
-    , val (-1 :: Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "max" (max :: Int -> Int -> Int)
-    , value "nil" nil
-    , value "left" left
-    , value "right" right
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , pr (-1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "max" (max :: Int -> Int -> Int)
+    , prim "nil" nil
+    , prim "left" left
+    , prim "right" right
     ]
 
   -- out of reach performance-wise
   conjureWith args{maxBodyRecursions=2, maxSize=12} "mem" mem
-    [ val False
-    , value "||" (||)
-    , value "==" ((==) :: Int -> Int -> Bool)
-    , value "nil" nil
-    , value "left" left
-    , value "right" right
-    , value "valu" valu
+    [ pr False
+    , prim "||" (||)
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prim "nil" nil
+    , prim "left" left
+    , prim "right" right
+    , prim "valu" valu
     ]
 
   -- simply out of reach performance-wise (size 34)
   conjureWith args{maxBodyRecursions=2, maxSize=9} "insert" mem
-    [ val Leaf
-    , value "Node" Node
-    , value "left" left
-    , value "right" right
-    , value "valu" valu
-    , value "nil" nil
-    , value "unit" unit
-    , value "==" ((==) :: Int -> Int -> Bool)
-    , value "<" ((<) :: Int -> Int -> Bool)
-    , value ">" ((>) :: Int -> Int -> Bool)
+    [ pr Leaf
+    , prim "Node" Node
+    , prim "left" left
+    , prim "right" right
+    , prim "valu" valu
+    , prim "nil" nil
+    , prim "unit" unit
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prim "<" ((<) :: Int -> Int -> Bool)
+    , prim ">" ((>) :: Int -> Int -> Bool)
     ]
 
 

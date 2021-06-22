@@ -33,20 +33,20 @@ main = do
   conjure "sum"     (sum'     :: [Int] -> Int) primitivesWithFold
   conjure "product" (product' :: [Int] -> Int) primitivesWithFold
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives =
-  [ val (0 :: Int)
-  , val (1 :: Int)
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
-  , value "null" (null :: [Int] -> Bool)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+  [ pr (0 :: Int)
+  , pr (1 :: Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
-primitivesWithFold :: [Expr]
+primitivesWithFold :: [Prim]
 primitivesWithFold  =
-    value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
   : primitives
 
 -- sum xs      =  if null xs then 0 else head xs + sum (tail xs)

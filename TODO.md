@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* reify instances from each Expr
-
 * generate functions with top-level case patterns:
 
         len []  =  0

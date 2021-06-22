@@ -51,15 +51,15 @@ main = do
   -- not only this is out of reach performance wise,
   -- but the needed recursive calls will not be enumerated
   conjure "qsort" sort'
-    [ val ([] :: [Int])
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
-    , value "++" ((++) :: [Int] -> [Int] -> [Int])
-    , value "<" ((<) :: Int -> Int -> Bool)
-    , value ">=" ((>=) :: Int -> Int -> Bool)
-    , value "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    , prim "<" ((<) :: Int -> Int -> Bool)
+    , prim ">=" ((>=) :: Int -> Int -> Bool)
+    , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     ]
 
   -- pow b e  =  if e == 0 then 1 else b * pow b (dec e)
@@ -67,24 +67,24 @@ main = do
   -- somehow this takes 30s to run, the two arguments
   -- of the same type introduce the difficulty here.
   conjureWithMaxSize 8 "pow" pow
-    [ val (0::Int)
-    , val (1::Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "*" ((*) :: Int -> Int -> Int)
-    , value "dec" (subtract 1 :: Int -> Int)
-    , value "==" ((==) :: Int -> Int -> Bool)
+    [ pr (0::Int)
+    , pr (1::Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1
   --             1  2  3 4      5      6   7  8     9 10 11 12  13   14 15 16 17  18    19     20
   -- out of reach performance wise
   conjureWithMaxSize 8 "pow" pow
-    [ val (0::Int)
-    , val (1::Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "*" ((*) :: Int -> Int -> Int)
-    , value "halve" ((`div` 2) :: Int -> Int)
-    , value "==" ((==) :: Int -> Int -> Bool)
+    [ pr (0::Int)
+    , pr (1::Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
+    , prim "halve" ((`div` 2) :: Int -> Int)
+    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- duplicates xs  =
@@ -94,29 +94,29 @@ main = do
   --        then head xs : duplicates (tail xs)                                     -- 24
   --        else duplicates (tail xs)                                               -- 27
   conjure "duplicates" duplicates
-    [ val ([] :: [Int])
-    , val True
-    , val False
-    , value "not" not
-    , value "||" (||)
-    , value "&&" (&&)
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
-    , value "elem" (elem :: Int -> [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , pr True
+    , pr False
+    , prim "not" not
+    , prim "||" (||)
+    , prim "&&" (&&)
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "elem" (elem :: Int -> [Int] -> Bool)
     ]
 
   conjure "positionsFrom" positionsFrom
-    [ val ([] :: [Int])
-    , val True
-    , val False
-    , value "not" not
-    , value "||" (||)
-    , value "&&" (&&)
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
-    , value "==" ((==) :: Int -> Int -> Bool)
+    [ pr ([] :: [Int])
+    , pr True
+    , pr False
+    , prim "not" not
+    , prim "||" (||)
+    , prim "&&" (&&)
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "==" ((==) :: Int -> Int -> Bool)
     ]

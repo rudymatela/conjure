@@ -34,40 +34,40 @@ main  =  do
 --conjure "sum"     (sum     :: [Int] -> Int) primitives
 --conjure "product" (product :: [Int] -> Int) primitives
 --conjure "length"  (length  :: [Int] -> Int) primitives
---conjure "count" count' (value "length" (length :: [Int] -> Int):primitives)
+--conjure "count" count' (prim "length" (length :: [Int] -> Int):primitives)
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives  =
-  [ val False
-  , val True
-  , value "&&" (&&)
-  , value "||" (||)
-  , value "not" not
+  [ pr False
+  , pr True
+  , prim "&&" (&&)
+  , prim "||" (||)
+  , prim "not" not
 
-  , val (0::Int)
-  , val (1::Int)
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
-  , value "dec" (subtract 1 :: Int -> Int)
-  , value "-" ((-) :: Int -> Int -> Int)
+  , pr (0::Int)
+  , pr (1::Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "dec" (subtract 1 :: Int -> Int)
+  , prim "-" ((-) :: Int -> Int -> Int)
 
-  , value "==" ((==) :: Int -> Int -> Bool)
-  , value "<=" ((<=) :: Int -> Int -> Bool)
-  , value "<"  ((<) :: Int -> Int -> Bool)
+  , prim "==" ((==) :: Int -> Int -> Bool)
+  , prim "<=" ((<=) :: Int -> Int -> Bool)
+  , prim "<"  ((<) :: Int -> Int -> Bool)
 
-  , value "const" (const :: Int -> Int -> Int)
+  , prim "const" (const :: Int -> Int -> Int)
 
-  , val ([] :: [Int])
-  , value ":" ((:) :: Int -> [Int] -> [Int])
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
-  , value "null" (null :: [Int] -> Bool)
-  , value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+  , pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
 
-  , value "map" (map :: (Int -> Int) -> [Int] -> [Int])
-  , value "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
-  , value ".." (enumFromTo :: Int -> Int -> [Int])
+  , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
+  , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+  , prim ".." (enumFromTo :: Int -> Int -> [Int])
 
-  , value "++" ((++) :: [Int] -> [Int] -> [Int])
-  , value "elem" (elem :: Int -> [Int] -> Bool)
+  , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+  , prim "elem" (elem :: Int -> [Int] -> Bool)
   ]

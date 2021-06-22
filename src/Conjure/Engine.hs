@@ -58,12 +58,12 @@ import Conjure.Prim
 -- > square 1  =  1
 -- > square 2  =  4
 -- >
--- > primitives :: [Expr]
+-- > primitives :: [Prim]
 -- > primitives =
--- >   [ val (0::Int)
--- >   , val (1::Int)
--- >   , value "+" ((+) :: Int -> Int -> Int)
--- >   , value "*" ((*) :: Int -> Int -> Int)
+-- >   [ pr (0::Int)
+-- >   , pr (1::Int)
+-- >   , prim "+" ((+) :: Int -> Int -> Int)
+-- >   , prim "*" ((*) :: Int -> Int -> Int)
 -- > ]
 --
 -- The conjure function does the following:
@@ -76,8 +76,8 @@ import Conjure.Prim
 -- > -- looking through 5 candidates of size 3
 -- > square x  =  x * x
 --
--- The primitives list is defined with 'val' and 'value'.
-conjure :: Conjurable f => String -> f -> [Expr] -> IO ()
+-- The primitives list is defined with 'pr' and 'prim'.
+conjure :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjure  =  conjureWith args
 
 
@@ -85,7 +85,7 @@ conjure  =  conjureWith args
 --   instead of the default value of 12.
 --
 -- > conjureWithMaxSize 10 "function" function [...]
-conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Expr] -> IO ()
+conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
 conjureWithMaxSize sz  =  conjureWith args
                        {  maxSize = sz
                        ,  maxEquationSize = min sz (maxEquationSize args)
@@ -131,7 +131,7 @@ args = Args
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
 --
 -- > conjureWith args{maxSize = 11} "function" function [...]
-conjureWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
+conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureWith args nm f es  =  do
   print (var (head $ words nm) f)
   putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
@@ -159,12 +159,12 @@ conjureWith args nm f es  =  do
 -- 2. tiers of candidate bodies (right type)
 -- 3. tiers of candidate expressions (any type)
 -- 4. a list of tests
-conjpure :: Conjurable f => String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr], Thy)
+conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Expr]], [[Expr]], [Expr], Thy)
 conjpure =  conjpureWith args
 
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], [[Expr]], [Expr], Thy)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], [[Expr]], [Expr], Thy)
 conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
@@ -192,19 +192,20 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, 
     e  =  ffxx -==- ffxx
 
 
-conjureTheory :: Conjurable f => String -> f -> [Expr] -> IO ()
+conjureTheory :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjureTheory  =  conjureTheoryWith args
 
 
-conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Expr] -> IO ()
+conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureTheoryWith args nm f es  =  printThy thy
   where
   (_, _, _, thy)  =  conjpureWith args nm f es
 
 
-candidateExprs :: Conjurable f => Args -> String -> f -> [Expr] -> ([[Expr]], Thy)
-candidateExprs Args{..} nm f es  =  (as \/ concatMapT (`enumerateFillings` recs) ts, thy)
+candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy)
+candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs) ts, thy)
   where
+  es  =  map fst ps
   ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
                            \/ foldAppProducts orE  [cs, rs]
      | otherwise           =  filterT keepIf
@@ -228,10 +229,8 @@ candidateExprs Args{..} nm f es  =  (as \/ concatMapT (`enumerateFillings` recs)
   recs  =  filterT keepR
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  conjureHoles f ++ [val False, val True] ++ es
-  -- TODO: conjureHoles from es above?  (without using f)
-  -- can't as I wouldn't have a way to list test values... (conjureTiers)
-  (===)  =  conjureAreEqual f maxTests
+       $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
+  (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
 -- | Returns whether the given recursive call
 --   deconstructs one of its arguments.

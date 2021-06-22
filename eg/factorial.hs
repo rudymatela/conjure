@@ -17,19 +17,19 @@ main :: IO ()
 main  =  do
   -- using enumFromTo
   conjure "factorial n" factorial
-    [ val (1::Int)
-    , value ".." (enumFromTo :: Int -> Int -> [Int])
-    , value "product" (product :: [Int] -> Int)
+    [ pr (1::Int)
+    , prim ".." (enumFromTo :: Int -> Int -> [Int])
+    , prim "product" (product :: [Int] -> Int)
     ]
 
   -- explicit recursion
   conjure "factorial n" factorial
-    [ val (0::Int)
-    , val (1::Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "*" ((*) :: Int -> Int -> Int)
-    , value "dec" (subtract 1 :: Int -> Int)
-    , value "==" ((==) :: Int -> Int -> Bool)
+    [ pr (0::Int)
+    , pr (1::Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
 -- the actual factorial function:
@@ -60,9 +60,9 @@ The following works with a maxSize of 4, but not with a maxSize of 5.
 
   -- using a paramorphism
   conjure "factorial n" factorial
-    [ val (1::Int)
-    , value "para" (para :: (Int->Int->Int) -> Int -> Int -> Int)
-    , value "*" ((*) :: Int -> Int -> Int)
+    [ pr (1::Int)
+    , prim "para" (para :: (Int->Int->Int) -> Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
     ]
 
 

@@ -44,17 +44,17 @@ main = do
   -- subset xs ys  =  null xs || elem (head xs) ys && subset (tail xs) ys
   --                  1    2  3  4     5    6   7  8  9       10   11  12
   conjure "subset" (subset')
-    [ val ([] :: [Int])
-    , value "&&" (&&)
-    , value "||" (||)
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
-    , value "elem" (elem :: Int -> [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , prim "&&" (&&)
+    , prim "||" (||)
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "elem" (elem :: Int -> [Int] -> Bool)
     ]
 
   -- subset xs ys  =  sort xs `isSubsequenceOf` sort ys
   conjureWith args{maxTests=360} "subset" (subset')
-    [ value "sort" (sort :: [Int] -> [Int])
-    , value "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
+    [ prim "sort" (sort :: [Int] -> [Int])
+    , prim "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
     ]

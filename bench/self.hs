@@ -12,13 +12,13 @@ main = do
   cj "d" ((subtract 1) :: Int -> Int) primitives
   where
   -- the monomorphism restriction strikes again
-  cj :: Conjurable f => String -> f -> [Expr] -> IO ()
+  cj :: Conjurable f => String -> f -> [Prim] -> IO ()
   cj  =  conjureWith args{maxSize=3,maxEquationSize=0}
 
-primitives :: [Expr]
+primitives :: [Prim]
 primitives =
-  [ val (0::Int)
-  , val (1::Int)
-  , value "+" ((+) :: Int -> Int -> Int)
-  , value "*" ((*) :: Int -> Int -> Int)
+  [ pr (0::Int)
+  , pr (1::Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
   ]

@@ -42,90 +42,90 @@ main = do
   -- length xs  =  if null xs then 0 else 1 + length (tail xs)
   --               1  2    3       4      5 6 7       8    9
   conjure "length" length'
-    [ val (0 :: Int)
-    , val (1 :: Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
     ]
 
   -- reverse xs  =  if null xs then [] else reverse (tail xs) ++ [head xs]
   --                1  2    3       4       5        6    7   8  9 10 11 12
   -- needs size 11 with unit
   conjure "reverse" reverse'
-    [ val ([] :: [Int])
-    , value "unit" ((:[]) :: Int -> [Int])
-    , value "++" ((++) :: [Int] -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , prim "unit" ((:[]) :: Int -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
     ]
 
   -- sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
   --             1  2    3       4       5       6    7    8     9    10
   conjure "sort" sort'
-    [ val ([] :: [Int])
-    , value "insert" (insert :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , prim "insert" (insert :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
     ]
 
   -- xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
   --              1  2    3       4       5    6 7  8   9  10 11
   conjure "++" (+++)
-    [ val ([] :: [Int])
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
     ]
 
   -- now through fold
   -- length xs  =  foldr (const (1 +)) 0 xs
   conjure "length" length'
-    [ val (0 :: Int)
-    , val (1 :: Int)
-    , value "+" ((+) :: Int -> Int -> Int)
-    , value "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-    , value "const" (const :: (Int -> Int) -> Int -> (Int -> Int)) -- cheating?
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    , prim "const" (const :: (Int -> Int) -> Int -> (Int -> Int)) -- cheating?
     ]
 
   -- now through fold and some cheating
   --  reverse xs  =  foldr (\x xs -> xs ++ [x]) [] xs
   --  reverse xs  =  foldr (flip (++) . unit) [] xs
   conjure "reverse" reverse'
-    [ val ([] :: [Int])
-    , value "unit" ((:[]) :: Int -> [Int])
-    , value "++" ((++) :: [Int] -> [Int] -> [Int])
-    , value "foldr" (foldr :: (Int->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
+    [ pr ([] :: [Int])
+    , prim "unit" ((:[]) :: Int -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    , prim "foldr" (foldr :: (Int->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
     -- these last two are cheats:
-    , value "flip" (flip :: ([Int]->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
-    , value "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
+    , prim "flip" (flip :: ([Int]->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
+    , prim "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
     ]
 
   -- now through fold
   -- sort xs  =  foldr insert [] xs
   conjure "sort" sort'
-    [ val ([] :: [Int])
-    , value "insert" (insert :: Int -> [Int] -> [Int])
-    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    [ pr ([] :: [Int])
+    , prim "insert" (insert :: Int -> [Int] -> [Int])
+    , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
   -- now through fold
   -- xs ++ ys  =  foldr (:) ys xs
   conjure "++" (+++)
-    [ val ([] :: [Int])
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
   -- intercalate
   -- xs \/ ys  =  if null xs then ys else head xs : (ys \/ tail xs)
   conjure "\\/" (\/)
-    [ val ([] :: [Int])
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
     ]

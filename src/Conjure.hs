@@ -21,12 +21,12 @@
 --
 -- Step 2: declare a list with the potential building blocks:
 --
--- > primitives :: [Expr]
+-- > primitives :: [Prim]
 -- > primitives =
--- >   [ val (0::Int)
--- >   , val (1::Int)
--- >   , value "+" ((+) :: Int -> Int -> Int)
--- >   , value "*" ((*) :: Int -> Int -> Int)
+-- >   [ pr (0::Int)
+-- >   , pr (1::Int)
+-- >   , prim "+" ((+) :: Int -> Int -> Int)
+-- >   , prim "*" ((*) :: Int -> Int -> Int)
 -- > ]
 --
 -- Step 3: call conjure and see your generated function:
@@ -43,15 +43,18 @@ module Conjure
   (
 -- * Basic use
     conjure
-  , val
-  , value
-  , Expr
+  , Prim
+  , pr
+  , prim
 
 -- * Advanced use
   , conjureWithMaxSize
   , conjureWith
   , Args(..)
   , args
+  , Expr
+  , val
+  , value
 
 -- * Conjuring from a specification
   , Spec1
@@ -86,3 +89,4 @@ where
 import Conjure.Engine
 import Conjure.Spec
 import Conjure.Conjurable
+import Conjure.Prim

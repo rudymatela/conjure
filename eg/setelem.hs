@@ -17,31 +17,31 @@ main = do
   -- elem x xs  =  not (null xs) && (elem x (tail xs) || x == head xs)
   --               1    2    3    4  5    6   7   8   9  10 11 12  13
   conjureWithMaxSize 13 "elem" (elem')
-    [ val ([] :: [Int])
-    , val True
-    , val False
-    , value "||" (||)
-    , value "&&" (&&)
-    , value "not" not
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
-    , value "==" ((==) :: Int -> Int -> Bool)
+    [ pr ([] :: [Int])
+    , pr True
+    , pr False
+    , prim "||" (||)
+    , prim "&&" (&&)
+    , prim "not" not
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- set xs  =  null xs || set (tail xs) && not (elem (head xs) (tail xs))
   --            1    2  3  4    5    6    7  8    9    10   11   12   13
   conjureWithMaxSize 13 "set" (set')
-    [ val ([] :: [Int])
-    , val True
-    , val False
-    , value "&&" (&&)
-    , value "||" (||)
-    , value "not" not
-    , value ":" ((:) :: Int -> [Int] -> [Int])
-    , value "head" (head :: [Int] -> Int)
-    , value "tail" (tail :: [Int] -> [Int])
-    , value "null" (null :: [Int] -> Bool)
-    , value "elem" (elem :: Int -> [Int] -> Bool)
+    [ pr ([] :: [Int])
+    , pr True
+    , pr False
+    , prim "&&" (&&)
+    , prim "||" (||)
+    , prim "not" not
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "elem" (elem :: Int -> [Int] -> Bool)
     ]
