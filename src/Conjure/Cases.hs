@@ -33,7 +33,11 @@ import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
 type Fxpr  =  (Expr, Cxpr)
 type Cxpr  =  [([Expr],Expr)]
 -- consider changing back to [(Expr,Expr)] as it will be easier to match
--- I wonder if I can encode a Cxpr into a simple Expr with some cleverness...
+
+-- I wonder if I can encode a Cxpr into a simple Expr with some cleverness:
+casE :: Expr -> [(Expr,Expr)] -> Expr
+casE  =  undefined
+-- I could use the same tricks of foldTuple...
 
 
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
