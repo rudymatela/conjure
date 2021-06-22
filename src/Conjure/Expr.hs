@@ -389,7 +389,7 @@ revaluate :: Typeable a => (Expr,Expr) -> Int -> Expr -> Maybe a
 revaluate dfn n e  =  recursiveToDynamic dfn n e >>= fromDynamic
 
 reval :: Typeable a => (Expr,Expr) -> Int -> a -> Expr -> a
-reval dfn n x e = fromMaybe x (revaluate dfn n e)
+reval dfn n x  =  fromMaybe x . revaluate dfn n
 
 -- | like 'productWith' but prefers enumerating from the second tiers first
 fliproductWith :: (a->b->c) -> [[a]] -> [[b]] -> [[c]]
