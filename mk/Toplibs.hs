@@ -2,3 +2,4 @@
 module Toplibs () where
 
 import Conjure ()
+import Test ()

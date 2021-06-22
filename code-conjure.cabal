@@ -72,6 +72,7 @@ library
                  , Conjure.Conjurable
                  , Conjure.Engine
                  , Conjure.Expr
+                 , Conjure.Prim
                  , Conjure.Spec
                  , Conjure.Utils
                  , Conjure.Cases
