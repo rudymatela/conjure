@@ -50,3 +50,4 @@ proto/u-conjure
 test/expr
 test/conjurable
 test/utils
+test/cases

@@ -28,6 +28,7 @@ EG = \
 TESTS = \
   test/expr \
   test/conjurable \
+  test/cases \
   test/utils
 
 all: mk/toplibs

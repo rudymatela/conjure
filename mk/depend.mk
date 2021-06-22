@@ -316,6 +316,25 @@ src/Conjure/Spec.o: \
   src/Conjure/Cases.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
+test/cases.o: \
+  test/Test.hs \
+  test/Test/ListableExpr.hs \
+  test/Test/Candidates.hs \
+  test/cases.hs \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs
+test/cases: \
+  test/Test.hs \
+  test/Test/ListableExpr.hs \
+  test/Test/Candidates.hs \
+  test/cases.hs \
+  mk/toplibs
 test/conjurable.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
