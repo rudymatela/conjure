@@ -11,8 +11,10 @@ tests :: Int -> [Bool]
 tests n  =
   [ True
 
-  , length (cases (undefined :: ()))     == 1
-  , length (cases (undefined :: Bool))   == 2
-  , length (cases (undefined :: [Int]))  == 2
-  , length (cases (undefined :: [Bool])) == 2
+  , length (cases (undefined :: ()))      == 1
+  , length (cases (undefined :: Bool))    == 2
+  , length (cases (undefined :: Int))     == 2
+  , length (cases (undefined :: Integer)) == 2
+  , length (cases (undefined :: [Int]))   == 2
+  , length (cases (undefined :: [Bool]))  == 2
   ]
