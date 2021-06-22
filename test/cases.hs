@@ -18,10 +18,22 @@ tests n  =
   , length (cases (undefined :: [Int]))   == 2
   , length (cases (undefined :: [Bool]))  == 2
 
-  , feval (exprExprFor (undefined :: [Int])) 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,11::Int]) == 17
-  , feval (exprExprFor (undefined :: [Int])) 6 sumFxpr (0::Int) (sumV :$ val [1,2,3::Int])    == 6
-  , feval (exprExprFor (undefined :: [Int])) 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,4::Int])  == 10
+  , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,11::Int]) == 17
+  , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3::Int])    == 6
+  , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,4::Int])  == 10
   ]
 
 sumV :: Expr
 sumV  =  var "sum" (undefined :: [Int] -> Int)
+
+-- in Conjure.Conjurable there should be a function
+-- called conjureExprExpr that conjures this for the required types.
+exprExpr :: Expr -> Expr
+exprExpr e  =  evl $ headOr err $ mapMaybe ($$ e)
+  [ value "expr" (expr :: Int -> Expr)
+  , value "expr" (expr :: [Int] -> Expr)
+  , value "expr" (expr :: Bool -> Expr)
+  , value "expr" (expr :: [Bool] -> Expr)
+  ]
+  where
+  err  =  error "exprExpr: unhandled type"

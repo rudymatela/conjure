@@ -19,7 +19,6 @@ module Conjure.Cases
   , factFxpr
   , nullFxpr
   , isZeroFxpr
-  , exprExprFor
   , fxprToDynamic
   , fevaluate
   , feval
@@ -37,6 +36,7 @@ import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
 type Fxpr  =  (Expr, Cxpr)
 type Cxpr  =  [([Expr],Expr)]
 -- consider changing back to [(Expr,Expr)] as it will be easier to match
+-- I wonder if I can encode a Cxpr into a simple Expr with some cleverness...
 
 sumFxpr :: Fxpr
 sumFxpr  =  sumE =-
@@ -76,15 +76,6 @@ isZeroFxpr  =  error "TODO" =-
   inc = undefined -- TODO: define me
   (=-) = (,)
   infixr 0 =-
-
-
--- | To be used when testing fxprToDynamic
-exprExprFor :: Express a => a -> Expr -> Expr
-exprExprFor x e  =  evl $ headOr err $ mapMaybe ($$ e)
-  [ value "expr" (expr -:> x)
-  ]
-  where
-  err  =  error "exprExprFor': unhandled type"
 
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.
