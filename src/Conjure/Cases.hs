@@ -18,6 +18,7 @@ module Conjure.Cases
   , fxprToDynamic
   , fevaluate
   , feval
+  , fevl
   )
 where
 
@@ -87,6 +88,9 @@ fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
 
 feval :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> a -> Expr -> a
 feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
+
+fevl :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> a
+fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
 
 class Express a => Cases a where
   cases :: a -> [Expr]

@@ -18,9 +18,9 @@ tests n  =
   , length (cases (undefined :: [Int]))   == 2
   , length (cases (undefined :: [Bool]))  == 2
 
-  , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,11::Int]) == 17
-  , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3::Int])    == 6
-  , feval exprExpr 6 sumFxpr (0::Int) (sumV :$ val [1,2,3,4::Int])  == 10
+  , fevl exprExpr 6 sumFxpr (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
+  , fevl exprExpr 6 sumFxpr (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
+  , fevl exprExpr 6 sumFxpr (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
   ]
 
 sumV, factV, nullV, isZeroV :: Expr
