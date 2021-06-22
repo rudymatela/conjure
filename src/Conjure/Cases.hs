@@ -19,6 +19,7 @@ module Conjure.Cases
   , factFxpr
   , nullFxpr
   , isZeroFxpr
+  , exprExprFor
   , fxprToDynamic
   , fevaluate
   , feval
