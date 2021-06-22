@@ -24,10 +24,10 @@ tests n  =
   ]
 
 sumV, factV, nullV, isZeroV :: Expr
-factV    =  var "fact" (undefined :: Int -> Int)
-sumV     =  var "sum" (undefined :: [Int] -> Int)
+factV    =  var "fact"   (undefined :: Int -> Int)
+sumV     =  var "sum"    (undefined :: [Int] -> Int)
 isZeroV  =  var "isZero" (undefined :: Int -> Bool)
-nullV    =  var "null" (undefined :: [Int] -> Bool)
+nullV    =  var "null"   (undefined :: [Int] -> Bool)
 
 -- in Conjure.Conjurable there should be a function
 -- called conjureExprExpr that conjures this for the required types.
