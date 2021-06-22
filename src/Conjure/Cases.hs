@@ -8,17 +8,13 @@
 --
 -- This module defines the 'Cases' typeclass
 -- that allows listing cases of a type
--- encoded as 'Expr's
+-- encoded as 'Expr's.
 --
 -- You are probably better off importing "Conjure".
 {-# LANGUAGE TupleSections #-}
 module Conjure.Cases
   ( Cases (..)
   , Fxpr
-  , sumFxpr
-  , factFxpr
-  , nullFxpr
-  , isZeroFxpr
   , fxprToDynamic
   , fevaluate
   , feval
@@ -38,44 +34,6 @@ type Cxpr  =  [([Expr],Expr)]
 -- consider changing back to [(Expr,Expr)] as it will be easier to match
 -- I wonder if I can encode a Cxpr into a simple Expr with some cleverness...
 
-sumFxpr :: Fxpr
-sumFxpr  =  sumE =-
-  [ [nil]           =-  zero
-  , [(xx -:- xxs)]  =-  xx -+- (sumE :$ xxs)
-  ]
-  where
-  sumE  =  var "sum" (undefined :: [Int] -> Int)
-  (=-) = (,)
-  infixr 0 =-
-
-factFxpr :: Fxpr
-factFxpr  =  factE =-
-  [ [zero]  =-  one
-  , [xx]    =-  xx -+- (factE :$ (xx -+- minusOne))
-  ]
-  where
-  factE  =  var "fact" (undefined :: Int -> Int)
-  (=-) = (,)
-  infixr 0 =-
-
-nullFxpr :: Fxpr
-nullFxpr  =  error "TODO" =-
-  [ [nil]          =- false
-  , [(xx -:- xxs)] =- false
-  ]
-  where
-  (=-) = (,)
-  infixr 0 =-
-
-isZeroFxpr :: Fxpr
-isZeroFxpr  =  error "TODO" =-
-  [ [zero]  =- true
-  , [inc xx] =- false
-  ]
-  where
-  inc = undefined -- TODO: define me
-  (=-) = (,)
-  infixr 0 =-
 
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.

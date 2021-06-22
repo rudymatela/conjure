@@ -37,3 +37,42 @@ exprExpr e  =  evl $ headOr err $ mapMaybe ($$ e)
   ]
   where
   err  =  error "exprExpr: unhandled type"
+
+sumFxpr :: Fxpr
+sumFxpr  =  sumE =-
+  [ [nil]           =-  zero
+  , [(xx -:- xxs)]  =-  xx -+- (sumE :$ xxs)
+  ]
+  where
+  sumE  =  var "sum" (undefined :: [Int] -> Int)
+  (=-) = (,)
+  infixr 0 =-
+
+factFxpr :: Fxpr
+factFxpr  =  factE =-
+  [ [zero]  =-  one
+  , [xx]    =-  xx -+- (factE :$ (xx -+- minusOne))
+  ]
+  where
+  factE  =  var "fact" (undefined :: Int -> Int)
+  (=-) = (,)
+  infixr 0 =-
+
+nullFxpr :: Fxpr
+nullFxpr  =  error "TODO" =-
+  [ [nil]          =- false
+  , [(xx -:- xxs)] =- false
+  ]
+  where
+  (=-) = (,)
+  infixr 0 =-
+
+isZeroFxpr :: Fxpr
+isZeroFxpr  =  error "TODO" =-
+  [ [zero]  =- true
+  , [inc xx] =- false
+  ]
+  where
+  inc = undefined -- TODO: define me
+  (=-) = (,)
+  infixr 0 =-
