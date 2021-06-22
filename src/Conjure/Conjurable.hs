@@ -27,7 +27,7 @@ module Conjure.Conjurable
   , conjureIsDeconstructor
   , Prim (..)
   , prim
-  , primitive
+  , pr
   )
 where
 
@@ -61,12 +61,19 @@ type Reification  =  [Reification1] -> [Reification1]
 type Prim  =  (Expr, Reification)
 
 
-prim :: (Conjurable a, Show a) => a -> Prim
-prim x  =  (val x, conjureType x)
+-- | Provides a primitive value to Conjure.
+--   To be used on 'Show' instances.
+--   (cf. 'prim')
+pr :: (Conjurable a, Show a) => a -> Prim
+pr x  =  (val x, conjureType x)
 
 
-primitive :: (Conjurable a, Show a) => String -> a -> Prim
-primitive s x  =  (value s x, conjureType x)
+-- | Provides a primitive value to Conjure.
+--   To be used on values that are not 'Show' instances
+--   such as functions.
+--   (cf. 'pr')
+prim :: Conjurable a => String -> a -> Prim
+prim s x  =  (value s x, conjureType x)
 
 
 -- | Class of 'Conjurable' types.
