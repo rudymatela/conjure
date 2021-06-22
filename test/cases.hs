@@ -3,6 +3,7 @@
 
 import Test
 import Conjure.Cases
+import Test.LeanCheck.Error (errorToLeft)
 
 main :: IO ()
 main  =  mainTest tests 5040
@@ -21,6 +22,17 @@ tests n  =
   , fvl sumFxpr (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
   , fvl sumFxpr (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
   , fvl sumFxpr (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
+
+  , fvl factFxpr (factV :$ val (0 :: Int)) == (1 :: Int)
+  , fvl factFxpr (factV :$ val (1 :: Int)) == (1 :: Int)
+  , fvl factFxpr (factV :$ val (2 :: Int)) == (2 :: Int)
+  , fvl factFxpr (factV :$ val (3 :: Int)) == (6 :: Int)
+  , fvl factFxpr (factV :$ val (4 :: Int)) == (24 :: Int)
+  , fvl factFxpr (factV :$ val (9 :: Int)) == (362880 :: Int)
+  , errorToLeft (fvl factFxpr (factV :$ val (10 :: Int)))
+    == Right (3628800 :: Int)
+  , errorToLeft (fvl factFxpr (factV :$ val (11 :: Int)) == (39916800 :: Int))
+    == Left "fxprToDynamic: recursion limit reached"
   ]
 
 fvl :: Typeable a => Fxpr -> Expr -> a
@@ -56,7 +68,7 @@ sumFxpr  =  sumV =-
 factFxpr :: Fxpr
 factFxpr  =  factV =-
   [ [zero]  =-  one
-  , [xx]    =-  xx -+- (factV :$ (xx -+- minusOne))
+  , [xx]    =-  xx -*- (factV :$ (xx -+- minusOne))
   ]
   where
   factE  =  var "fact" (undefined :: Int -> Int)
