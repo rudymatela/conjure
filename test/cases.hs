@@ -18,10 +18,13 @@ tests n  =
   , length (cases (undefined :: [Int]))   == 2
   , length (cases (undefined :: [Bool]))  == 2
 
-  , fevl exprExpr 6 sumFxpr (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
-  , fevl exprExpr 6 sumFxpr (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
-  , fevl exprExpr 6 sumFxpr (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
+  , fvl sumFxpr (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
+  , fvl sumFxpr (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
+  , fvl sumFxpr (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
   ]
+
+fvl :: Typeable a => Fxpr -> Expr -> a
+fvl  =  fevl exprExpr 12
 
 sumV, factV, nullV, isZeroV :: Expr
 factV    =  var "fact"   (undefined :: Int -> Int)
