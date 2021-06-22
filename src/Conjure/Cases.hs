@@ -20,6 +20,8 @@ module Conjure.Cases
   , nullFxpr
   , isZeroFxpr
   , fxprToDynamic
+  , fevaluate
+  , feval
   )
 where
 
@@ -130,7 +132,11 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
 -- > > fromDynamic <$> fxprToDynamic (exprExprFor (undefined :: [Int])) 6 sumFxpr (var "sum" (undefined :: [Int] -> Int) :$ val [1,2,3,11::Int]) :: Maybe (Maybe Int)
 -- > Just (Just 17)
 
+fevaluate :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe a
+fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
 
+feval :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> a -> Expr -> a
+feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
 
 class Express a => Cases a where
   cases :: a -> [Expr]
