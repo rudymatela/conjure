@@ -23,6 +23,10 @@ module Conjure.Conjurable
   , conjureTiersFor
   , conjureAreEqual
   , conjureMkEquation
+  , cjHoles
+  , cjTiersFor
+  , cjAreEqual
+  , cjMkEquation
   , A, B, C, D, E, F
   , conjureIsDeconstructor
   , Prim (..)
@@ -147,6 +151,10 @@ nubConjureType x  =  nubOn (\(eh,_,_) -> eh) . conjureType x
 conjureReification1 :: Conjurable a => a -> Reification1
 conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x)
 
+cjReification :: [Prim] -> [Reification1]
+cjReification ps  =  nubOn (\(eh,_,_) -> eh)
+                  $  foldr (.) id (map snd ps) [conjureReification1 bool]
+
 conjureReification :: Conjurable a => a -> [Reification1]
 conjureReification x  =  nubConjureType x [conjureReification1 bool]
   where
@@ -210,6 +218,32 @@ conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Expr -> Expr -> Bo
 conjureIsDeconstructor f maxTests  =  isDeconstructionE
                                    .  take maxTests
                                    .  grounds (conjureTiersFor f)
+
+-- conjuring from primitives --
+
+cjHoles :: [Prim] -> [Expr]
+cjHoles ps  =  [eh | (eh,_,Just _) <- cjReification ps]
+
+cjMkEquation :: [Prim] -> Expr -> Expr -> Expr
+cjMkEquation ps  =  mkEquation [eq | (_,Just eq,_) <- cjReification ps]
+
+cjAreEqual :: [Prim] -> Int -> Expr -> Expr -> Bool
+cjAreEqual ps maxTests  =  (===)
+  where
+  (-==-)  =  cjMkEquation ps
+  e1 === e2  =  isTrue $ e1 -==- e2
+  isTrue  =  all (errorToFalse . eval False) . gs
+  gs  =  take maxTests . grounds (cjTiersFor ps)
+
+cjTiersFor :: [Prim] -> Expr -> [[Expr]]
+cjTiersFor ps e  =  tf allTiers
+  where
+  allTiers :: [ [[Expr]] ]
+  allTiers  =  [etiers | (_,_,Just etiers) <- cjReification ps]
+  tf []  =  [[e]] -- no tiers found, keep variable
+  tf (etiers:etc)  =  case etiers of
+                      ((e':_):_) | typ e' == typ e -> etiers
+                      _                            -> tf etc
 
 instance Conjurable () where
   conjureEquality  =  reifyEquality
