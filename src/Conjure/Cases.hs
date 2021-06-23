@@ -83,9 +83,6 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
                           Nothing -> Nothing
                           Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
--- provisional example:
--- > > fromDynamic <$> fxprToDynamic (exprExprFor (undefined :: [Int])) 6 sumFxpr (var "sum" (undefined :: [Int] -> Int) :$ val [1,2,3,11::Int]) :: Maybe (Maybe Int)
--- > Just (Just 17)
 
 fevaluate :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe a
 fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
