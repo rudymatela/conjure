@@ -33,6 +33,13 @@ tests n  =
     == Right (3628800 :: Int)
   , errorToLeft (fvl factFxpr (factV :$ val (11 :: Int)) == (39916800 :: Int))
     == Left "fxprToDynamic: recursion limit reached"
+
+-- TODO: make these work
+--, fvl isZeroFxpr (isZeroV :$ val (0 :: Int)) == True
+--, fvl isZeroFxpr (isZeroV :$ val (1 :: Int)) == False
+
+  , fvl nullFxpr (nullV :$ val [0,1,2,3::Int]) == False
+  , fvl nullFxpr (nullV :$ val ([] :: [Int])) == False
   ]
 
 fvl :: Typeable a => Fxpr -> Expr -> a
@@ -71,7 +78,6 @@ factFxpr  =  factV =-
   , [xx]    =-  xx -*- (factV :$ (xx -+- minusOne))
   ]
   where
-  factE  =  var "fact" (undefined :: Int -> Int)
   (=-) = (,)
   infixr 0 =-
 
@@ -87,9 +93,8 @@ nullFxpr  =  nullV =-
 isZeroFxpr :: Fxpr
 isZeroFxpr  =  nullV =-
   [ [zero]  =- true
-  , [inc xx] =- false
+  , [xx]    =- false
   ]
   where
-  inc = undefined -- TODO: define me
   (=-) = (,)
   infixr 0 =-
