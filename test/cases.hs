@@ -64,36 +64,35 @@ exprExpr e  =  evl $ headOr err $ mapMaybe ($$ e)
 
 sumFxpr :: Fxpr
 sumFxpr  =
-  [ sumV :$ nil           =-  zero
-  , sumV :$ (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
+  [ sum' nil           =-  zero
+  , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
   ]
   where
-  (=-) = (,)
-  infixr 0 =-
+  sum' e  =  sumV :$ e
 
 factFxpr :: Fxpr
 factFxpr  =
-  [ factV :$ zero  =-  one
-  , factV :$ xx    =-  xx -*- (factV :$ (xx -+- minusOne))
+  [ fact' zero  =-  one
+  , fact' xx    =-  xx -*- (factV :$ (xx -+- minusOne))
   ]
   where
-  (=-) = (,)
-  infixr 0 =-
+  fact' e  =  factV :$ e
 
 nullFxpr :: Fxpr
 nullFxpr  =
-  [ nullV :$ nil          =- false
-  , nullV :$ (xx -:- xxs) =- false
+  [ null' nil           =-  false
+  , null' (xx -:- xxs)  =-  false
   ]
   where
-  (=-) = (,)
-  infixr 0 =-
+  null' e  =  nullV :$ e
 
 isZeroFxpr :: Fxpr
 isZeroFxpr  =
-  [ isZeroV :$ zero  =- true
-  , isZeroV :$ xx    =- false
+  [ isZero' zero  =-  true
+  , isZero' xx    =-  false
   ]
   where
-  (=-) = (,)
-  infixr 0 =-
+  isZero' e  =  isZeroV :$ e
+
+(=-) = (,)
+infixr 0 =-
