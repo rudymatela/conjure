@@ -30,8 +30,7 @@ import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
 import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
 
-type Fxpr  =  (Expr, Cxpr)
-type Cxpr  =  [([Expr],Expr)]
+type Fxpr  =  [(Expr,Expr)]
 -- consider changing back to [(Expr,Expr)] as it will be easier to match
 
 -- I wonder if I can encode a Cxpr into a simple Expr with some cleverness:
@@ -43,8 +42,9 @@ casE  =  undefined
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.
 fxprToDynamic :: (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe Dynamic
-fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
+fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
   where
+  (ef':_)  =  unfoldApp . fst $ head cx
 
   rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
   rev m n e  =  case re m n e of
@@ -75,7 +75,7 @@ fxprToDynamic exprExpr n (ef',cx)  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -
                           [ re m (n-1) $ e' //- bs
                           | let e  =  foldApp (ef:map exprExpr exs)
                           , (a',e') <- cx
-                          , Just bs <- [e `match` foldApp (ef:a')]
+                          , Just bs <- [e `match` a']
                           ]
              | otherwise -> foldl ($$) (re m n ef) exs
 
