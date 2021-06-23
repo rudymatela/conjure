@@ -63,36 +63,24 @@ exprExpr e  =  evl $ headOr err $ mapMaybe ($$ e)
   err  =  error "exprExpr: unhandled type"
 
 sumFxpr :: Fxpr
-sumFxpr  =
-  [ sum' nil           =-  zero
-  , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
-  ]
-  where
-  sum' e  =  sumV :$ e
+sumFxpr  =  [ sum' nil           =-  zero
+            , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
+            ]  where  sum' e  =  sumV :$ e
 
 factFxpr :: Fxpr
-factFxpr  =
-  [ fact' zero  =-  one
-  , fact' xx    =-  xx -*- (factV :$ (xx -+- minusOne))
-  ]
-  where
-  fact' e  =  factV :$ e
+factFxpr  =  [ fact' zero  =-  one
+             , fact' xx    =-  xx -*- (factV :$ (xx -+- minusOne))
+             ]  where  fact' e  =  factV :$ e
 
 nullFxpr :: Fxpr
-nullFxpr  =
-  [ null' nil           =-  false
-  , null' (xx -:- xxs)  =-  false
-  ]
-  where
-  null' e  =  nullV :$ e
+nullFxpr  =  [ null' nil           =-  false
+             , null' (xx -:- xxs)  =-  false
+             ]  where  null' e  =  nullV :$ e
 
 isZeroFxpr :: Fxpr
-isZeroFxpr  =
-  [ isZero' zero  =-  true
-  , isZero' xx    =-  false
-  ]
-  where
-  isZero' e  =  isZeroV :$ e
+isZeroFxpr  =  [ isZero' zero  =-  true
+               , isZero' xx    =-  false
+               ]  where  isZero' e  =  isZeroV :$ e
 
 (=-) = (,)
 infixr 0 =-
