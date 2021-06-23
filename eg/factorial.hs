@@ -19,7 +19,8 @@ main  =  do
   conjure "factorial n" factorial
     [ pr (1::Int)
     , prim ".." (enumFromTo :: Int -> Int -> [Int])
-    , prim "product" (product :: [Int] -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
+    , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
     ]
 
   -- explicit recursion

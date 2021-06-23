@@ -2,9 +2,11 @@ factorial :: Int -> Int
 -- testing 6 combinations of argument values
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 2 candidates of size 4
-factorial n  =  product [1..n]
+-- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 8 candidates of size 6
+factorial n  =  foldr (*) 1 [1..n]
 
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
