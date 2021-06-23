@@ -42,7 +42,7 @@ casE  =  undefined
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
 --   when a recursive call is found.
 fxprToDynamic :: (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe Dynamic
-fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * {- FIXME: -} 12) n
+fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . snd) cx)) n
   where
   (ef':_)  =  unfoldApp . fst $ head cx
 
