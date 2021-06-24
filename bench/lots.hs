@@ -3,6 +3,7 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
+import System.Environment
 
 factorial :: Int -> Int
 factorial 0  =  1
@@ -30,11 +31,19 @@ count' 0 [1,0,0]  =  2
 main :: IO ()
 main  =  do
   putStrLn $ "running with " ++ show (length primitives) ++ " primitives"
-  conjure "factorial n" factorial primitives
---conjure "sum"     (sum     :: [Int] -> Int) primitives
---conjure "product" (product :: [Int] -> Int) primitives
---conjure "length"  (length  :: [Int] -> Int) primitives
---conjure "count" count' (prim "length" (length :: [Int] -> Int):primitives)
+  as <- getArgs
+  case as of
+    ["factorial"]     -> conjure       "factorial n" factorial primitives
+    ["factorial","t"] -> conjureTheory "factorial n" factorial primitives
+    ["sum"]           -> conjure       "sum"     (sum     :: [Int] -> Int) primitives
+    ["sum","t"]       -> conjureTheory "sum"     (sum     :: [Int] -> Int) primitives
+    ["product"]       -> conjure       "product" (product :: [Int] -> Int) primitives
+    ["product","t"]   -> conjureTheory "product" (product :: [Int] -> Int) primitives
+    ["length"]        -> conjure       "length"  (length  :: [Int] -> Int) primitives
+    ["length","t"]    -> conjureTheory "length"  (length  :: [Int] -> Int) primitives
+    ["count"]         -> conjure       "count"   count' primitives
+    ["count","t"]     -> conjureTheory "count"   count' primitives
+    _                 -> conjure       "factorial n" factorial primitives
 
 primitives :: [Prim]
 primitives  =
