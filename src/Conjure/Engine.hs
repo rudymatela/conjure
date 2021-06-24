@@ -197,7 +197,10 @@ conjureTheory  =  conjureTheoryWith args
 
 
 conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
-conjureTheoryWith args nm f es  =  printThy thy
+conjureTheoryWith args nm f es  =  do
+  putStrLn $ "theory with " ++ (show . length $ rules thy) ++ " rules and "
+                            ++ (show . length $ equations thy) ++ " equations"
+  printThy thy
   where
   (_, _, _, thy)  =  conjpureWith args nm f es
 
