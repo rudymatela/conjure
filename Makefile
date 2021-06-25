@@ -23,6 +23,7 @@ EG = \
   bench/longshot \
   bench/self \
   bench/take-drop \
+  bench/p12 \
   proto/u-conjure
 
 TESTS = \
