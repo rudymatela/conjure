@@ -1,4 +1,4 @@
--- A big set of background primitives, will Conjure scale?
+-- 12 background primitives
 --
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
@@ -47,24 +47,13 @@ main  =  do
 
 primitives :: [Prim]
 primitives  =
-  [ pr False
-  , pr True
-  , prim "&&" (&&)
-  , prim "||" (||)
-  , prim "not" not
-
-  , pr (0::Int)
+  [ pr (0::Int)
   , pr (1::Int)
   , prim "+" ((+) :: Int -> Int -> Int)
   , prim "*" ((*) :: Int -> Int -> Int)
   , prim "dec" (subtract 1 :: Int -> Int)
-  , prim "-" ((-) :: Int -> Int -> Int)
 
   , prim "==" ((==) :: Int -> Int -> Bool)
-  , prim "<=" ((<=) :: Int -> Int -> Bool)
-  , prim "<"  ((<) :: Int -> Int -> Bool)
-
-  , prim "const" (const :: Int -> Int -> Int)
 
   , pr ([] :: [Int])
   , prim ":" ((:) :: Int -> [Int] -> [Int])
@@ -72,11 +61,5 @@ primitives  =
   , prim "tail" (tail :: [Int] -> [Int])
   , prim "null" (null :: [Int] -> Bool)
   , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-
-  , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
-  , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
   , prim ".." (enumFromTo :: Int -> Int -> [Int])
-
-  , prim "++" ((++) :: [Int] -> [Int] -> [Int])
-  , prim "elem" (elem :: Int -> [Int] -> Bool)
   ]

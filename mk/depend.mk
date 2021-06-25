@@ -24,10 +24,10 @@ bench/longshot.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Cases.hs \
   bench/longshot.hs
-bench/lots: \
-  bench/lots.hs \
+bench/p12: \
+  bench/p12.hs \
   mk/toplibs
-bench/lots.o: \
+bench/p12.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure/Prim.hs \
@@ -36,7 +36,20 @@ bench/lots.o: \
   src/Conjure/Engine.hs \
   src/Conjure/Conjurable.hs \
   src/Conjure/Cases.hs \
-  bench/lots.hs
+  bench/p12.hs
+bench/p30: \
+  bench/p30.hs \
+  mk/toplibs
+bench/p30.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Cases.hs \
+  bench/p30.hs
 bench/self: \
   bench/self.hs \
   mk/toplibs
