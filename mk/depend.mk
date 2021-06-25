@@ -1,3 +1,8 @@
+bench/avgs: \
+  bench/avgs.hs \
+  mk/toplibs
+bench/avgs.o: \
+  bench/avgs.hs
 bench/ill-hit: \
   bench/ill-hit.hs \
   mk/toplibs

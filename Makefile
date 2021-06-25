@@ -94,6 +94,9 @@ mk/toplibs: mk/Toplibs.o
 	touch mk/toplibs
 
 p12: bench/p12
-	./bench/bench $< | tee -a bench/runtime/$$HOSTNAME/p12.runtimes
+	./bench/bench $< | tee bench/runtime/$$HOSTNAME/p12.runtimes
+
+avgs:
+	runhaskell bench/avgs.hs <bench/runtime/$$HOSTNAME/p12.runtimes
 
 include mk/haskell.mk

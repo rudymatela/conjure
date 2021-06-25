@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# A more elaborate benchmark for p12 and p30
+#
+# Copyright (C) 2021 Rudy Matela
+# Distributed under the 3-Clause BSD licence (see the file LICENSE).
 
 run1() {
 	echo -n "$@" ""
@@ -14,48 +19,8 @@ run6() {
 	run1 "$@"
 }
 
-avgs() {
-runhaskell <<HASKELL
-import Data.List
-import Data.Function
-import Text.Printf
-
-groupOn f  =  groupBy ((==) \`on\` f)
-
-parseLine :: String -> (String,Double)
-parseLine s  =  (n,t)
-  where
-  n  =  unwords $ init ws
-  t  =  read $ last ws
-  ws  =  words s
-
-showLine :: (String,Double) -> String
-showLine (s,x)  =  printf "%-25s %.2f" s x
-
-collapseAvg :: [(String,Double)] -> (String,Double)
-collapseAvg sxs  =  (fst $ head sxs, avg $ map snd sxs)
-
-avg :: [Double] -> Double
-avg xs  =  sum xs / fromIntegral (length xs)
-
-io :: String -> String
-io  =  unlines
-    .  map showLine
-    .  map collapseAvg
-    .  groupOn fst
-    .  map parseLine
-    .  lines
-
-main :: IO ()
-main  =  interact io
-HASKELL
-}
-
-tmpfile=`mktemp /tmp/conjure-bench-XXXXXXXXXX`
 for fun in factorial sum product length
 do
 	run6 $1 "$fun"
 	run6 $1 "$fun" t
-done | tee $tmpfile
-avgs <$tmpfile
-rm $tmpfile
+done
