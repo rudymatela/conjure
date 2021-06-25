@@ -28,6 +28,7 @@ extra-doc-files: README.md
 extra-source-files: .gitignore
                   , .github/workflows/build.yml
                   , Makefile
+                  , bench/bench
                   , bench/*.hs
                   , bench/*.out
                   , eg/*.hs
