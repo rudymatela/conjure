@@ -7,6 +7,11 @@ A non-exhaustive list of things TO DO for Conjure.
 
 	-- pruning with 33/99 rewrite rules
 
+* make sure recursive holes are treated as distinct values on candidateExprs
+  on keep
+
+* restore the maxBodyRecursion limit (not being really used now...)
+
 * generate functions with top-level case patterns:
 
         len []  =  0
