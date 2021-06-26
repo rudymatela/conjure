@@ -19,7 +19,7 @@ run6() {
 	run1 "$@"
 }
 
-for fun in factorial sum product length
+for fun in factorial sum product length count
 do
 	run6 $1 "$fun"
 	run6 $1 "$fun" t
