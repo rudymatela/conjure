@@ -40,6 +40,13 @@ main = do
     , prim "concat"    (concat :: [String] -> String)
     ]
 
+  -- emulates an alternative generation that works on MagicHaskeller
+  conjureWith args{maxTests=360} "replicates" replicates'
+    [ prim "replicate" (replicate :: Int -> Char -> String)
+    , prim "map"       (map :: (Char -> String) -> String -> [String])
+    , prim "concat"    (concat :: [String] -> String)
+    ]
+
   -- alternative generation using recursion
   conjureWith args{maxTests=360, maxSize=13} "replicates" replicates'
     [ pr ""
