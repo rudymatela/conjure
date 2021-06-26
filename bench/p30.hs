@@ -41,8 +41,8 @@ main  =  do
     ["product","t"]   -> conjureTheory "product" (product :: [Int] -> Int) primitives
     ["length"]        -> conjure       "length"  (length  :: [Int] -> Int) primitives
     ["length","t"]    -> conjureTheory "length"  (length  :: [Int] -> Int) primitives
-    ["count"]         -> conjure       "count"   count' primitives
-    ["count","t"]     -> conjureTheory "count"   count' primitives
+    ["count"]         -> conjure       "count"   count' $ primitives ++ primsLength
+    ["count","t"]     -> conjureTheory "count"   count' $ primitives ++ primsLength
     _                 -> conjure       "factorial n" factorial primitives
 
 primitives :: [Prim]
@@ -79,4 +79,9 @@ primitives  =
 
   , prim "++" ((++) :: [Int] -> [Int] -> [Int])
   , prim "elem" (elem :: Int -> [Int] -> Bool)
+  ]
+
+primsLength :: [Prim]
+primsLength =
+  [ prim "length" (length :: [Int] -> Int)
   ]
