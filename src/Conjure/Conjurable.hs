@@ -19,6 +19,7 @@ module Conjure.Conjurable
   , reifyEquality
   , conjureApplication
   , conjureVarApplication
+  , conjurePats
   , conjureHoles
   , conjureTiersFor
   , conjureAreEqual
@@ -132,6 +133,9 @@ class Typeable a => Conjurable a where
 
   conjureCases :: a -> [Expr]
   conjureCases _  =  []
+
+  conjureArgumentCases :: a -> [[Expr]]
+  conjureArgumentCases _  =  []
 
 
 conjureType :: Conjurable a => a -> Reification
@@ -353,6 +357,7 @@ instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
   conjureIf f  =  conjureIf (f undefined)
+  conjureArgumentCases f  =  conjureCases (argTy f) : conjureArgumentCases (f undefined)
 
 argTy :: (a -> b) -> a
 argTy _  =  undefined
@@ -372,6 +377,23 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
   where
   (nf:nas)  =  words nm ++ repeat ""
 
+conjurePats :: Conjurable f => String -> f -> [[Expr]]
+conjurePats nm f  =  undefined
+  where
+  cs  =  zipWith (\h cs -> [[h], cs]) (conjureArgumentHoles f) (conjureArgumentCases f)
+
+{-
+[ [ [_ :: [Int]]
+  , [ [] :: [Int]
+    , _:_ :: [Int]]
+  ]
+, [ [_ :: [Char]]
+  , ["" :: [Char]
+    ,_:_ :: [Char]
+    ]
+  ]
+]
+-}
 
 
 -- -- -- other Conjurable instances -- -- --
