@@ -22,11 +22,11 @@ fib01 0 1 6  =  13
 fib01 0 1 7  =  21
 
 as :: Args
-as  =  args{maxSize=13,maxBodyRecursions=2}
+as  =  args{maxSize=13}
 
 main :: IO ()
 main  =  do
-  conjureWith as "fibonacci n" fibonacci
+  conjureWithMaxSize 13 "fibonacci n" fibonacci
     [ pr (1::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
@@ -36,7 +36,7 @@ main  =  do
 -- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 --                 1  2 3  4      5      6          7   8  9        10  11   12  13
 
-  conjureWithMaxSize 12 "fib01" fib01
+  conjure "fib01" fib01
     [ pr (0::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)

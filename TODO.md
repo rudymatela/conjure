@@ -3,9 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* consider removing the `maxBodyRecursions` limit,
-  it does not make much difference in terms of cutting down search space
-
 * generate functions with top-level case patterns:
 
         len []  =  0

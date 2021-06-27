@@ -91,7 +91,7 @@ main = do
     , prim "right" right
     ]
 
-  conjureWith args{maxBodyRecursions=2, maxSize=13} "size" size
+  conjureWithMaxSize 13 "size" size
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
@@ -100,7 +100,7 @@ main = do
     , prim "right" right
     ]
 
-  conjureWith args{maxBodyRecursions=2, maxSize=13} "height" height
+  conjureWithMaxSize 13 "height" height
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , pr (-1 :: Int)
@@ -112,7 +112,7 @@ main = do
     ]
 
   -- out of reach performance-wise
-  conjureWith args{maxBodyRecursions=2, maxSize=12} "mem" mem
+  conjure "mem" mem
     [ pr False
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)
@@ -123,7 +123,7 @@ main = do
     ]
 
   -- simply out of reach performance-wise (size 34)
-  conjureWith args{maxBodyRecursions=2, maxSize=9} "insert" mem
+  conjureWithMaxSize 9 "insert" mem
     [ pr Leaf
     , prim "Node" Node
     , prim "left" left

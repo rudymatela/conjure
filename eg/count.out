@@ -23,9 +23,9 @@ count :: A -> [A] -> Int
 -- looking through 90 candidates of size 10
 -- looking through 258 candidates of size 11
 -- looking through 448 candidates of size 12
--- looking through 1141 candidates of size 13
--- looking through 2124 candidates of size 14
--- looking through 5134 candidates of size 15
--- looking through 10066 candidates of size 16
+-- looking through 1145 candidates of size 13
+-- looking through 2144 candidates of size 14
+-- looking through 5216 candidates of size 15
+-- looking through 10320 candidates of size 16
 count x xs  =  if null xs then 0 else (if head xs == x then 1 else 0) + count x (tail xs)
 

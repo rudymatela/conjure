@@ -97,7 +97,6 @@ conjureWithMaxSize sz  =  conjureWith args
 data Args = Args
   { maxTests          :: Int  -- ^ maximum number of tests to each candidate
   , maxSize           :: Int  -- ^ maximum size of candidate bodies
-  , maxBodyRecursions :: Int  -- ^ maximum number of recursive calls in candidate bodies
   , maxEvalRecursions :: Int  -- ^ maximum number of recursive evaluations when testing candidates
   , maxEquationSize   :: Int  -- ^ maximum size of equation operands
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
@@ -119,7 +118,6 @@ args :: Args
 args = Args
   { maxTests           =  60
   , maxSize            =  12
-  , maxBodyRecursions  =   1
   , maxEvalRecursions  =  60
   , maxEquationSize    =   5
   , maxSearchTests     =  100000
@@ -227,8 +225,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
-  keep e  =  isRootNormalE thy (fastMostGeneralVariation e)
-          && count (== eh) (vars e) <= maxBodyRecursions
+  keep  =  isRootNormalE thy . fastMostGeneralVariation
   ds  =  map snd $ deconstructors f maxTests es
   keepR | requireDescent  =  descends (`elem` ds) efxs
         | otherwise       =  const True

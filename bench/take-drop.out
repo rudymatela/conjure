@@ -32,8 +32,8 @@ take :: Int -> [A] -> [A]
 -- looking through 1270 candidates of size 11
 -- looking through 3346 candidates of size 12
 -- looking through 8650 candidates of size 13
--- looking through 21206 candidates of size 14
--- looking through 50558 candidates of size 15
--- looking through 118418 candidates of size 16
+-- looking through 21270 candidates of size 14
+-- looking through 51166 candidates of size 15
+-- looking through 121430 candidates of size 16
 take x xs  =  if null xs || x == 0 then [] else head xs:take (dec x) (tail xs)
 

@@ -24,7 +24,7 @@ or :: [Bool] -> Bool
 -- looking through 45 candidates of size 7
 -- looking through 80 candidates of size 8
 -- looking through 172 candidates of size 9
--- looking through 454 candidates of size 10
+-- looking through 462 candidates of size 10
 or ps  =  not (null ps) && (head ps || or (tail ps))
 
 and :: [Bool] -> Bool

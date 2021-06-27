@@ -12,7 +12,7 @@ subset :: [Int] -> [Int] -> Bool
 -- looking through 854 candidates of size 9
 -- looking through 2421 candidates of size 10
 -- looking through 6452 candidates of size 11
--- looking through 17303 candidates of size 12
+-- looking through 17815 candidates of size 12
 subset xs ys  =  null xs || elem (head xs) ys && subset (tail xs) ys
 
 subset :: [Int] -> [Int] -> Bool
