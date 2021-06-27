@@ -1,5 +1,6 @@
 fibonacci :: Int -> Int
 -- testing 8 combinations of argument values
+-- pruning with 20/38 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 6 candidates of size 3
@@ -17,6 +18,7 @@ fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n)
 
 fib01 :: Int -> Int -> Int -> Int
 -- testing 8 combinations of argument values
+-- pruning with 18/37 rules
 -- looking through 4 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3

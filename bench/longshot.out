@@ -1,5 +1,6 @@
 qsort :: [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 13/14 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -16,6 +17,7 @@ cannot conjure
 
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
+-- pruning with 40/73 rules
 -- looking through 4 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 13 candidates of size 3
@@ -28,6 +30,7 @@ cannot conjure
 
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
+-- pruning with 31/55 rules
 -- looking through 4 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 15 candidates of size 3
@@ -40,6 +43,7 @@ cannot conjure
 
 duplicates :: [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 44/55 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -56,6 +60,7 @@ cannot conjure
 
 positionsFrom :: Int -> Int -> [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 42/55 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 6 candidates of size 3

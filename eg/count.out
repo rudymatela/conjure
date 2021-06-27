@@ -1,5 +1,6 @@
 count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
+-- pruning with 1/2 rules
 -- looking through 0 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -9,6 +10,7 @@ count x xs  =  length (filter (x ==) xs)
 
 count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
+-- pruning with 8/13 rules
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3

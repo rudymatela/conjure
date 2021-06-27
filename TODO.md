@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add message:
-
-	-- pruning with 33/99 rewrite rules
-
 * make sure recursive holes are treated as distinct values on candidateExprs
   on keep
 

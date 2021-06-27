@@ -1,5 +1,6 @@
 elem :: Int -> [Int] -> Bool
 -- testing 60 combinations of argument values
+-- pruning with 44/57 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -17,6 +18,7 @@ elem x xs  =  not (null xs) && (head xs == x || elem x (tail xs))
 
 set :: [Int] -> Bool
 -- testing 60 combinations of argument values
+-- pruning with 46/57 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3

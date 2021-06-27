@@ -1,5 +1,6 @@
 third :: [Int] -> Int
 -- testing 60 combinations of argument values
+-- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -8,6 +9,7 @@ third xs  =  head (tail (tail xs))
 
 product :: [Int] -> Int
 -- testing 60 combinations of argument values
+-- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -22,6 +24,7 @@ product xs  =  if null xs then 1 else head xs * product (tail xs)
 
 product :: [Int] -> Int
 -- testing 60 combinations of argument values
+-- pruning with 15/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3

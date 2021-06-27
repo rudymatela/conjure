@@ -135,6 +135,7 @@ conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureWith args nm f es  =  do
   print (var (head $ words nm) f)
   putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
+  putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure\n"
@@ -148,7 +149,9 @@ conjureWith args nm f es  =  do
       (i:_)  ->  do putStrLn $ showEq i
                     putStrLn ""
   rs  =  zip iss css
-  (iss, css, ts, _)  =  conjpureWith args nm f es
+  (iss, css, ts, thy)  =  conjpureWith args nm f es
+  nRules  =  length (rules thy)
+  nREs  =  length (equations thy) + nRules
 
 
 -- | Like 'conjure' but in the pure world.

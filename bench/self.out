@@ -1,5 +1,6 @@
 (?) :: Int -> Int -> Int
 -- testing 60 combinations of argument values
+-- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 32 candidates of size 3
@@ -7,6 +8,7 @@ x ? y  =  x + y
 
 (?) :: Int -> Int -> Int
 -- testing 60 combinations of argument values
+-- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 32 candidates of size 3
@@ -14,6 +16,7 @@ x ? y  =  x * y
 
 i :: Int -> Int
 -- testing 60 combinations of argument values
+-- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 18 candidates of size 3
@@ -21,6 +24,7 @@ i x  =  x + 1
 
 d :: Int -> Int
 -- testing 60 combinations of argument values
+-- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 18 candidates of size 3

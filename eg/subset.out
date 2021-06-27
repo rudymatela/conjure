@@ -1,5 +1,6 @@
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
+-- pruning with 30/40 rules
 -- looking through 0 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -16,6 +17,7 @@ subset xs ys  =  null xs || elem (head xs) ys && subset (tail xs) ys
 
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
+-- pruning with 3/3 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3

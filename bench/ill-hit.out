@@ -1,5 +1,6 @@
 sum :: [Int] -> Int
 -- testing 4 combinations of argument values
+-- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -14,6 +15,7 @@ sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 sum :: [Int] -> Int
 -- testing 6 combinations of argument values
+-- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -28,6 +30,7 @@ sum xs  =  if null xs then 0 else head xs + sum (tail xs)
 
 sum :: [Int] -> Int
 -- testing 6 combinations of argument values
+-- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3

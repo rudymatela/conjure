@@ -1,5 +1,6 @@
 length :: [Int] -> Int
 -- testing 60 combinations of argument values
+-- pruning with 4/8 rules
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
@@ -13,6 +14,7 @@ length xs  =  if null xs then 0 else 1 + length (tail xs)
 
 reverse :: [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 12/13 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 5 candidates of size 3
@@ -28,6 +30,7 @@ reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 6/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -42,6 +45,7 @@ sort xs  =  if null xs then xs else insert (head xs) (sort (tail xs))
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 4/4 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -57,6 +61,7 @@ xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 
 length :: [Int] -> Int
 -- testing 60 combinations of argument values
+-- pruning with 6/10 rules
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
@@ -67,6 +72,7 @@ length xs  =  foldr (const (1 +)) 0 xs
 
 reverse :: [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 6/6 rules
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
@@ -78,6 +84,7 @@ reverse xs  =  foldr (flip (++) . unit) [] xs
 
 sort :: [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 1/2 rules
 -- looking through 2 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -86,6 +93,7 @@ sort xs  =  foldr insert [] xs
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 2/2 rules
 -- looking through 3 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -94,6 +102,7 @@ xs ++ ys  =  foldr (:) ys xs
 
 (\/) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
+-- pruning with 4/4 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 3 candidates of size 3

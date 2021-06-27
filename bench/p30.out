@@ -1,6 +1,7 @@
 running with 26 primitives
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
+-- pruning with 133/168 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 6 candidates of size 3
