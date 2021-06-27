@@ -93,12 +93,13 @@ feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
 fevl :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> a
 fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
 
-class Express a => Cases a where
+class Typeable a => Cases a where
   cases :: a -> [Expr]
   cases _  =  []
 
 -- Atomic types have no cases.
 -- It's out of the scope of this typeclass to handle these.
+instance (Typeable a, Typeable b) => Cases (a -> b) -- TODO: remove eventually
 instance Cases Int
 instance Cases Integer
 instance Cases Char
