@@ -25,7 +25,7 @@ reverse :: [Int] -> [Int]
 -- looking through 381 candidates of size 8
 -- looking through 1014 candidates of size 9
 -- looking through 2736 candidates of size 10
--- looking through 7451 candidates of size 11
+-- looking through 7447 candidates of size 11
 reverse xs  =  if null xs then xs else reverse (tail xs) ++ unit (head xs)
 
 sort :: [Int] -> [Int]

@@ -6,7 +6,8 @@ A non-exhaustive list of things TO DO for Conjure.
 * make sure recursive holes are treated as distinct values on candidateExprs
   on keep
 
-* restore the maxBodyRecursion limit (not being really used now...)
+* consider removing the `maxBodyRecursions` limit,
+  it does not make much difference in terms of cutting down search space
 
 * generate functions with top-level case patterns:
 
