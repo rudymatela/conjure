@@ -130,6 +130,9 @@ class Typeable a => Conjurable a where
   conjureIf :: a -> Expr
   conjureIf   =  ifFor
 
+  conjureCases :: a -> [Expr]
+  conjureCases _  =  []
+
 
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
@@ -213,10 +216,12 @@ conjureIsDeconstructor f maxTests  =  isDeconstructionE
 instance Conjurable () where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureCases _   =  [val ()]
 
 instance Conjurable Bool where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureCases _   =  [val False, val True]
 
 instance Conjurable Int where
   conjureEquality  =  reifyEquality
@@ -237,6 +242,9 @@ instance Conjurable Char where
 instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
+  conjureCases xs  =  [ val ([] -: xs)
+                      , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
+                      ]  where  x  =  head xs
   conjureEquality xs  =  from <$> conjureEquality x
     where
     x  =  head xs
@@ -254,6 +262,9 @@ instance ( Conjurable a, Listable a, Show a
   conjureTiers     =  reifyTiers
   conjureSubTypes xy  =  conjureType (fst xy)
                       .  conjureType (snd xy)
+  conjureCases xy  =  [value "," ((,) ->>: xy) :$ hole x :$ hole y]
+    where
+    (x,y) = (undefined,undefined) -: xy
   conjureEquality xy  =  from <$> conjureEquality x <*> conjureEquality y
     where
     (x,y)  =  xy
@@ -273,6 +284,9 @@ instance ( Conjurable a, Listable a, Show a
                       .  conjureType y
                       .  conjureType z
                       where (x,y,z) = xyz
+  conjureCases xyz  =  [value ",," ((,,) ->>>: xyz) :$ hole x :$ hole y :$ hole z]
+    where
+    (x,y,z) = (undefined,undefined,undefined) -: xyz
   conjureEquality xyz  =  from
                       <$> conjureEquality x
                       <*> conjureEquality y
@@ -291,6 +305,11 @@ instance ( Conjurable a, Listable a, Show a
 instance (Conjurable a, Listable a, Show a) => Conjurable (Maybe a) where
   conjureTiers     =  reifyTiers
   conjureSubTypes mx  =  conjureType (fromJust mx)
+  conjureCases mx  =  [ value "Nothing" (Nothing -: mx)
+                      , value "Just" (Just ->: mx) :$ hole x
+                      ]
+    where
+    x  =  Just undefined -: mx
   conjureEquality mx  =  from <$> conjureEquality x
     where
     x  =  fromJust mx
@@ -311,6 +330,12 @@ instance ( Conjurable a, Listable a, Show a
     where
     Left l   =  elr
     Right r  =  elr
+  conjureCases exy  =  [ value "Left" (Left ->: exy) :$ hole x
+                       , value "Right" (Right ->: exy) :$ hole y
+                       ]
+    where
+    x  =  Left undefined -: exy
+    y  =  Right undefined -: exy
   conjureEquality elr  =  from <$> conjureEquality l <*> conjureEquality r
     where
     Left l   =  elr
