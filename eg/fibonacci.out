@@ -13,7 +13,7 @@ fibonacci :: Int -> Int
 -- looking through 172 candidates of size 10
 -- looking through 519 candidates of size 11
 -- looking through 1281 candidates of size 12
--- looking through 3281 candidates of size 13
+-- looking through 3289 candidates of size 13
 fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 
 fib01 :: Int -> Int -> Int -> Int

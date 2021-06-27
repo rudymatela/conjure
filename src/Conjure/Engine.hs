@@ -227,7 +227,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
-  keep e  =  isRootNormalE thy e
+  keep e  =  isRootNormalE thy (fastMostGeneralVariation e)
           && count (== eh) (vars e) <= maxBodyRecursions
   ds  =  map snd $ deconstructors f maxTests es
   keepR | requireDescent  =  descends (`elem` ds) efxs

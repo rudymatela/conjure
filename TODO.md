@@ -3,9 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* make sure recursive holes are treated as distinct values on candidateExprs
-  on keep
-
 * consider removing the `maxBodyRecursions` limit,
   it does not make much difference in terms of cutting down search space
 
