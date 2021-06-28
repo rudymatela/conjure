@@ -381,7 +381,9 @@ conjurePats :: Conjurable f => String -> f -> [[[Expr]]]
 conjurePats nm f  =  mapT (map (foldApp . (ef:)) . prods) $ cs
   where
   ef  =  var nm f
-  cs  =  products $ zipWith (\h cs -> [[[h]], [cs]]) (conjureArgumentHoles f) (conjureArgumentCases f)
+  cs  =  products $ zipWith mk (conjureArgumentHoles f) (conjureArgumentCases f)
+  mk h []  =  [[[h]]]
+  mk h cs  =  [[[h]], [cs]]
 -- TODO: enumerate base values for atomic types?
 
 prods :: [[a]] -> [[a]]

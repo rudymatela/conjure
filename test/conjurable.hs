@@ -109,6 +109,22 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Bool,Unit))
 
+  , conjurePats "f" (undefined :: Int -> Int)
+    == [ [ [ ff i_
+           ]
+         ]
+       ]
+
+  , conjurePats "f" (undefined :: [Int] -> Int)
+    == [ [ [ ffs is_
+           ]
+         ]
+       , [ [ ffs nilInt
+           , ffs (i_ -:- is_)
+           ]
+         ]
+       ]
+
   , conjurePats "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo is_ cs_
            ]
@@ -131,6 +147,11 @@ tests n  =
 
 cs_ :: Expr
 cs_  =  hole (undefined :: String)
+
+ffs :: Expr -> Expr
+ffs e  =  ffE :$ e
+  where
+  ffE  =  var "f" (undefined :: [Int] -> Int)
 
 ffoo :: Expr -> Expr -> Expr
 ffoo e1 e2  =  fooE :$ e1 :$ e2
