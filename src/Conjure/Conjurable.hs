@@ -389,19 +389,6 @@ prods  =  foldr (productWith (:)) [[]]
   where
   productWith (?) xs ys  =  [x ? y | x <- xs, y <- ys]
 
-{-
-[ [ [_ :: [Int]]
-  , [ [] :: [Int]
-    , _:_ :: [Int]]
-  ]
-, [ [_ :: [Char]]
-  , ["" :: [Char]
-    ,_:_ :: [Char]
-    ]
-  ]
-]
--}
-
 
 -- -- -- other Conjurable instances -- -- --
 
