@@ -108,7 +108,34 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Unit,Bool,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Bool,Unit))
+
+  , conjurePats "foo" (undefined :: [Int] -> [Char] -> Int)
+    == [ [ [ ffoo is_ cs_
+           ]
+         ]
+       , [ [ ffoo is_ emptyString
+           , ffoo is_ (c_ -:- cs_)
+           ]
+         , [ ffoo nilInt       cs_
+           , ffoo (i_ -:- is_) cs_
+           ]
+         ]
+       , [ [ ffoo nilInt emptyString
+           , ffoo nilInt (c_ -:- cs_)
+           , ffoo (i_ -:- is_) emptyString
+           , ffoo (i_ -:- is_) (c_ -:- cs_)
+           ]
+         ]
+       ]
   ]
+
+cs_ :: Expr
+cs_  =  hole (undefined :: String)
+
+ffoo :: Expr -> Expr -> Expr
+ffoo e1 e2  =  fooE :$ e1 :$ e2
+  where
+  fooE  =  var "foo" (undefined :: [Int] -> [Char] -> Int)
 
 -- Equality but obtained through conjurable
 (<==>) :: Conjurable a => a -> a -> Bool

@@ -377,10 +377,17 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
   where
   (nf:nas)  =  words nm ++ repeat ""
 
-conjurePats :: Conjurable f => String -> f -> [[Expr]]
-conjurePats nm f  =  undefined
+conjurePats :: Conjurable f => String -> f -> [[[Expr]]]
+conjurePats nm f  =  mapT (map (foldApp . (ef:)) . prods) $ cs
   where
-  cs  =  zipWith (\h cs -> [[h], cs]) (conjureArgumentHoles f) (conjureArgumentCases f)
+  ef  =  var nm f
+  cs  =  products $ zipWith (\h cs -> [[[h]], [cs]]) (conjureArgumentHoles f) (conjureArgumentCases f)
+-- TODO: enumerate base values for atomic types?
+
+prods :: [[a]] -> [[a]]
+prods  =  foldr (productWith (:)) [[]]
+  where
+  productWith (?) xs ys  =  [x ? y | x <- xs, y <- ys]
 
 {-
 [ [ [_ :: [Int]]
