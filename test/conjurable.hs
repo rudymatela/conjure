@@ -145,9 +145,6 @@ tests n  =
        ]
   ]
 
-cs_ :: Expr
-cs_  =  hole (undefined :: String)
-
 ffs :: Expr -> Expr
 ffs e  =  ffE :$ e
   where
