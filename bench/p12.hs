@@ -5,6 +5,9 @@
 import Conjure
 import System.Environment
 
+conjureT :: Conjurable f => String -> f -> [Prim] -> IO ()
+conjureT  =  conjureWith args{maxSize=1}
+
 factorial :: Int -> Int
 factorial 0  =  1
 factorial 1  =  1
@@ -33,17 +36,17 @@ main  =  do
   putStrLn $ "running with " ++ show (length primitives) ++ " primitives"
   as <- getArgs
   case as of
-    ["factorial"]     -> conjure       "factorial n" factorial primitives
-    ["factorial","t"] -> conjureTheory "factorial n" factorial primitives
-    ["sum"]           -> conjure       "sum"     (sum     :: [Int] -> Int) primitives
-    ["sum","t"]       -> conjureTheory "sum"     (sum     :: [Int] -> Int) primitives
-    ["product"]       -> conjure       "product" (product :: [Int] -> Int) primitives
-    ["product","t"]   -> conjureTheory "product" (product :: [Int] -> Int) primitives
-    ["length"]        -> conjure       "length"  (length  :: [Int] -> Int) primitives
-    ["length","t"]    -> conjureTheory "length"  (length  :: [Int] -> Int) primitives
-    ["count"]         -> conjure       "count"   count' $ primitives ++ primsCount
-    ["count","t"]     -> conjureTheory "count"   count' $ primitives ++ primsCount
-    _                 -> conjure       "factorial n" factorial primitives
+    ["factorial"]     -> conjure  "factorial n" factorial primitives
+    ["factorial","t"] -> conjureT "factorial n" factorial primitives
+    ["sum"]           -> conjure  "sum"     (sum     :: [Int] -> Int) primitives
+    ["sum","t"]       -> conjureT "sum"     (sum     :: [Int] -> Int) primitives
+    ["product"]       -> conjure  "product" (product :: [Int] -> Int) primitives
+    ["product","t"]   -> conjureT "product" (product :: [Int] -> Int) primitives
+    ["length"]        -> conjure  "length"  (length  :: [Int] -> Int) primitives
+    ["length","t"]    -> conjureT "length"  (length  :: [Int] -> Int) primitives
+    ["count"]         -> conjure  "count"   count' $ primitives ++ primsCount
+    ["count","t"]     -> conjureT "count"   count' $ primitives ++ primsCount
+    _                 -> conjure  "factorial n" factorial primitives
 
 primitives :: [Prim]
 primitives  =
