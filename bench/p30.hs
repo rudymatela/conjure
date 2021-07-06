@@ -46,7 +46,7 @@ main  =  do
     ["length","t"]    -> conjureT "length"  (length  :: [Int] -> Int) primitives
     ["count"]         -> conjure  "count"   count' $ primitives ++ primsLength
     ["count","t"]     -> conjureT "count"   count' $ primitives ++ primsLength
-    _                 -> conjure  "factorial n" factorial primitives
+    _                 -> putStrLn "usage: p30 <factorial|sum|product|length|count> [t]"
 
 primitives :: [Prim]
 primitives  =
