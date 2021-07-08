@@ -50,17 +50,10 @@ sumV     =  var "sum"    (undefined :: [Int] -> Int)
 isZeroV  =  var "isZero" (undefined :: Int -> Bool)
 nullV    =  var "null"   (undefined :: [Int] -> Bool)
 
--- in Conjure.Conjurable there should be a function
--- called conjureExprExpr that conjures this for the required types.
+-- NOTE: a hack for testing needs all types that are Express as arguments of
+--       undefined.
 exprExpr :: Expr -> Expr
-exprExpr e  =  evl $ headOr err $ mapMaybe ($$ e)
-  [ value "expr" (expr :: Int -> Expr)
-  , value "expr" (expr :: [Int] -> Expr)
-  , value "expr" (expr :: Bool -> Expr)
-  , value "expr" (expr :: [Bool] -> Expr)
-  ]
-  where
-  err  =  error "exprExpr: unhandled type"
+exprExpr  =  conjureExpress (undefined :: Int -> [Int] -> ())
 
 sumFxpr :: Fxpr
 sumFxpr  =  [ sum' nil           =-  zero
