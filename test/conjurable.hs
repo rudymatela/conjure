@@ -109,8 +109,24 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Bool,Unit))
 
-  , conjurePats "f" (undefined :: Int -> Int)
+  , take 4 (conjurePats "f" (undefined :: Int -> Int))
     == [ [ [ ff i_
+           ]
+         ]
+       , [ [ ff zero
+           , ff i_
+           ]
+         ]
+       , [ [ ff one
+           , ff i_
+           ]
+         ]
+       , [ [ ff zero
+           , ff one
+           , ff i_
+           ]
+         , [ ff minusOne
+           , ff i_
            ]
          ]
        ]
