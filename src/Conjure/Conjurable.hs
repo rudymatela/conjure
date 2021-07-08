@@ -17,6 +17,7 @@ module Conjure.Conjurable
   , conjureType
   , reifyTiers
   , reifyEquality
+  , reifyExpress
   , conjureApplication
   , conjureVarApplication
   , conjurePats
@@ -137,6 +138,8 @@ class Typeable a => Conjurable a where
   conjureArgumentCases :: a -> [[Expr]]
   conjureArgumentCases _  =  []
 
+  conjureExpress :: a -> Expr -> Expr
+
 
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
@@ -185,6 +188,11 @@ reifyEquality  =  Just . head . reifyEq
 reifyTiers :: (Listable a, Show a, Typeable a) => a -> Maybe [[Expr]]
 reifyTiers  =  Just . mkExprTiers
 
+reifyExpress :: (Express a, Show a) => a -> Expr -> Expr
+reifyExpress a e  =  case value "expr" (expr -:> a) $$ e of
+  Nothing -> e         -- TODO: consider throwing an error
+  Just e' -> eval e e' -- TODO: consider throwing an error
+
 mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
@@ -218,24 +226,29 @@ conjureIsDeconstructor f maxTests  =  isDeconstructionE
                                    .  grounds (conjureTiersFor f)
 
 instance Conjurable () where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureCases _   =  [val ()]
 
 instance Conjurable Bool where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureCases _   =  [val False, val True]
 
 instance Conjurable Int where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Integer where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Char where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
@@ -243,7 +256,8 @@ instance Conjurable Char where
 (==:) :: (a -> a -> Bool) -> a -> (a -> a -> Bool)
 (==:)  =  const
 
-instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
+instance (Conjurable a, Listable a, Express a, Show a) => Conjurable [a] where
+  conjureExpress   =  reifyExpress
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
   conjureCases xs  =  [ val ([] -: xs)
@@ -260,9 +274,10 @@ instance (Conjurable a, Listable a, Show a) => Conjurable [a] where
       []     == (y:ys) = False
       (x:xs) == (y:ys) = x .==. y && xs == ys
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
          ) => Conjurable (a,b) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes xy  =  conjureType (fst xy)
                       .  conjureType (snd xy)
@@ -279,10 +294,11 @@ instance ( Conjurable a, Listable a, Show a
       (x1,y1) == (x2,y2)  =  x1 ==. x2 && y1 .== y2
 
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
-         , Conjurable c, Listable c, Show c
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
          ) => Conjurable (a,b,c) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes xyz =  conjureType x
                       .  conjureType y
@@ -306,7 +322,8 @@ instance ( Conjurable a, Listable a, Show a
                                 && y1 .==. y2
                                 && z1 ..== z2
 
-instance (Conjurable a, Listable a, Show a) => Conjurable (Maybe a) where
+instance (Conjurable a, Listable a, Show a, Express a) => Conjurable (Maybe a) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes mx  =  conjureType (fromJust mx)
   conjureCases mx  =  [ value "Nothing" (Nothing -: mx)
@@ -326,9 +343,10 @@ instance (Conjurable a, Listable a, Show a) => Conjurable (Maybe a) where
       (Just x) == (Just y)  =  x .==. y
 
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
          ) => Conjurable (Either a b) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes elr  =  conjureType l . conjureType r
     where
@@ -358,6 +376,9 @@ instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
   conjureIf f  =  conjureIf (f undefined)
   conjureArgumentCases f  =  conjureCases (argTy f) : conjureArgumentCases (f undefined)
+  conjureExpress f e
+    | typ e == typeOf (argTy f)  =  conjureExpress (argTy f) e
+    | otherwise                  =  conjureExpress (f undefined) e
 
 argTy :: (a -> b) -> a
 argTy _  =  undefined
@@ -395,59 +416,76 @@ prods  =  foldr (productWith (:)) [[]]
 -- -- -- other Conjurable instances -- -- --
 
 instance Conjurable Ordering where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Float where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Double where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Int8 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Int16 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Int32 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Int64 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Word where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Word8 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Word16 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Word32 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable Word64 where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
-instance (Integral a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Ratio a) where
+instance (Integral a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Ratio a) where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes q  =  conjureType (numerator q)
 
-instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Complex a) where
+-- TODO: move Express (Complex a) to Data.Express
+instance (Show a, Typeable a) => Express (Complex a) where  expr  =  val
+
+instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Complex a) where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes x  =  conjureType (realPart x)
@@ -455,37 +493,44 @@ instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a) => Conjurable (Co
 
 -- Conjurable helper types --
 instance Conjurable A where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable B where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable C where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable D where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable E where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 instance Conjurable F where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
 
 
 -- Conjurable tuples --
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
-         , Conjurable c, Listable c, Show c
-         , Conjurable d, Listable d, Show d
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
          ) => Conjurable (a,b,c,d) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzw =  conjureType x
                        .  conjureType y
@@ -510,12 +555,13 @@ instance ( Conjurable a, Listable a, Show a
                                       && z1 ..==. z2
                                       && w1 ...== w2
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
-         , Conjurable c, Listable c, Show c
-         , Conjurable d, Listable d, Show d
-         , Conjurable e, Listable e, Show e
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
          ) => Conjurable (a,b,c,d,e) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzwv =  conjureType x
                         .  conjureType y
@@ -544,13 +590,14 @@ instance ( Conjurable a, Listable a, Show a
                                             && w1 ...==. w2
                                             && v1 ....== v2
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
-         , Conjurable c, Listable c, Show c
-         , Conjurable d, Listable d, Show d
-         , Conjurable e, Listable e, Show e
-         , Conjurable f, Listable f, Show f
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
+         , Conjurable f, Listable f, Show f, Express f
          ) => Conjurable (a,b,c,d,e,f) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzwvu =  conjureType x
                          .  conjureType y
@@ -583,14 +630,15 @@ instance ( Conjurable a, Listable a, Show a
                                                   && v1 ....==. v2
                                                   && u1 .....== u2
 
-instance ( Conjurable a, Listable a, Show a
-         , Conjurable b, Listable b, Show b
-         , Conjurable c, Listable c, Show c
-         , Conjurable d, Listable d, Show d
-         , Conjurable e, Listable e, Show e
-         , Conjurable f, Listable f, Show f
-         , Conjurable g, Listable g, Show g
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
+         , Conjurable f, Listable f, Show f, Express f
+         , Conjurable g, Listable g, Show g, Express g
          ) => Conjurable (a,b,c,d,e,f,g) where
+  conjureExpress   =  reifyExpress
   conjureTiers     =  reifyTiers
   conjureSubTypes xyzwvut =  conjureType x
                           .  conjureType y

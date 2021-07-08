@@ -8,7 +8,7 @@ A non-exhaustive list of things TO DO for Conjure.
         len []  =  0
         len (x:xs)  =  1 + len xs
 
-	1. add `conjureExpr` to `Conjurable`
+	1. test `conjureExpr`
 
 
 ### for later

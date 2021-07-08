@@ -53,6 +53,7 @@ import Control.Applicative ((<$>)) -- for GHC <= 7.8
 
 import Test.LeanCheck (mapT, filterT, (\/), delay, productWith, productMaybeWith)
 import Test.LeanCheck.Tiers (products)
+import Test.LeanCheck.Utils.Types (A, B, C, D, E, F)
 
 -- | /O(n)/.
 -- Compares the simplicity of two 'Expr's.
@@ -399,3 +400,10 @@ fliproductWith f xss (ys:yss)  =  map (** ys) xss
                                \/ delay (productWith f xss yss)
   where
   xs ** ys  =  [x `f` y | x <- xs, y <- ys]
+
+instance Express A where  expr  =  val
+instance Express B where  expr  =  val
+instance Express C where  expr  =  val
+instance Express D where  expr  =  val
+instance Express E where  expr  =  val
+instance Express F where  expr  =  val

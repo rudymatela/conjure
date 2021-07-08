@@ -2,7 +2,7 @@
 --
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
-{-# LANGUAGE CPP #-}
+{-# LANGUAGE CPP, TemplateHaskell #-}
 #if __GLASGOW_HASKELL__ == 708
 {-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
 import Data.Typeable (Typeable)
@@ -10,6 +10,7 @@ import Data.Typeable (Typeable)
 
 import Conjure
 import Test.LeanCheck
+import Data.Express (deriveExpress)
 
 data Tree  =  Leaf
            |  Node Tree Int Tree
@@ -18,6 +19,8 @@ data Tree  =  Leaf
 #if __GLASGOW_HASKELL__ == 708
 deriving instance Typeable Tree
 #endif
+
+deriveExpress ''Tree
 
 unit :: Int -> Tree
 unit x  =  Node Leaf x Leaf
@@ -70,6 +73,7 @@ instance Listable Tree where
         \/  cons3 Node
 
 instance Conjurable Tree where
+  conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes x  =  conjureType (undefined :: Int)

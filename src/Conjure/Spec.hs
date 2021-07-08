@@ -98,7 +98,7 @@ type Spec3 a b c d = [((a,b,c),d)]
 -- > xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 --
 -- (cf. 'Spec1', 'conjure1With')
-conjure1 :: (Eq a, Eq b, Show a, Conjurable a, Conjurable b)
+conjure1 :: (Eq a, Eq b, Show a, Express a, Conjurable a, Conjurable b)
          => String -> Spec1 a b -> [Prim] -> IO ()
 conjure1  =  conjure1With args
 
@@ -132,8 +132,8 @@ conjure1  =  conjure1With args
 -- > xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
 --
 -- (cf. 'Spec2', 'conjure2With')
-conjure2 :: ( Conjurable a, Eq a, Show a
-            , Conjurable b, Eq b, Show b
+conjure2 :: ( Conjurable a, Eq a, Show a, Express a
+            , Conjurable b, Eq b, Show b, Express b
             , Conjurable c, Eq c
             ) => String -> Spec2 a b c -> [Prim] -> IO ()
 conjure2  =  conjure2With args
@@ -142,16 +142,16 @@ conjure2  =  conjure2With args
 -- | Conjures a three argument function from a specification.
 --
 -- (cf. 'Spec3', 'conjure3With')
-conjure3 :: ( Conjurable a, Eq a, Show a
-            , Conjurable b, Eq b, Show b
-            , Conjurable c, Eq c, Show c
+conjure3 :: ( Conjurable a, Eq a, Show a, Express a
+            , Conjurable b, Eq b, Show b, Express b
+            , Conjurable c, Eq c, Show c, Express c
             , Conjurable d, Eq d
             ) => String -> Spec3 a b c d -> [Prim] -> IO ()
 conjure3  =  conjure3With args
 
 
 -- | Like 'conjure1' but allows setting options through 'Args'/'args'.
-conjure1With :: (Eq a, Eq b, Show a, Conjurable a, Conjurable b)
+conjure1With :: (Eq a, Eq b, Show a, Express a, Conjurable a, Conjurable b)
              => Args -> String -> Spec1 a b -> [Prim] -> IO ()
 conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
   where
@@ -159,8 +159,8 @@ conjure1With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun1 bs)
 
 
 -- | Like 'conjure2' but allows setting options through 'Args'/'args'.
-conjure2With :: ( Conjurable a, Eq a, Show a
-                , Conjurable b, Eq b, Show b
+conjure2With :: ( Conjurable a, Eq a, Show a, Express a
+                , Conjurable b, Eq b, Show b, Express b
                 , Conjurable c, Eq c
                 ) => Args -> String -> Spec2 a b c -> [Prim] -> IO ()
 conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
@@ -169,9 +169,9 @@ conjure2With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun2 bs)
 
 
 -- | Like 'conjure3' but allows setting options through 'Args'/'args'.
-conjure3With :: ( Conjurable a, Eq a, Show a
-                , Conjurable b, Eq b, Show b
-                , Conjurable c, Eq c, Show c
+conjure3With :: ( Conjurable a, Eq a, Show a, Express a
+                , Conjurable b, Eq b, Show b, Express b
+                , Conjurable c, Eq c, Show c, Express c
                 , Conjurable d, Eq d
                 ) => Args -> String -> Spec3 a b c d -> [Prim] -> IO ()
 conjure3With args nm bs  =  conjureWith args{forceTests=ts} nm (mkFun3 bs)

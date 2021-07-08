@@ -12,7 +12,10 @@ deriving instance Typeable Unit  -- for GHC < 7.10
 
 instance Listable Unit where list = [Unit]
 instance Conjurable Unit where
+  conjureExpress = reifyExpress
   conjureTiers = reifyTiers
+
+instance Express Unit where  expr  =  val
 
 main :: IO ()
 main  =  mainTest tests 5040
