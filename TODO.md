@@ -8,7 +8,8 @@ A non-exhaustive list of things TO DO for Conjure.
         len []  =  0
         len (x:xs)  =  1 + len xs
 
-	1. test `conjureExpr`
+    1. create blind `candidateFxpr`s
+    2. prune with equations
 
 
 ### for later
