@@ -12,6 +12,11 @@ import Conjure
 import Test.LeanCheck
 import Data.Express (deriveExpress)
 
+-- TODO: remove the following import
+-- and fix build on GHC 7.10 and 7.8
+-- the generation fo -: and ->>>: somehow fails.
+import Test.LeanCheck.Utils
+
 data Tree  =  Leaf
            |  Node Tree Int Tree
   deriving (Eq, Ord, Show, Read)
