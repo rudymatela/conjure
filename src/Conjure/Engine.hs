@@ -18,6 +18,8 @@ module Conjure.Engine
   , conjpure
   , conjpureWith
   , candidateExprs
+  , candidateFxprs
+  , blindCandidateFxprs
   , conjureTheory
   , conjureTheoryWith
   , module Data.Express
@@ -43,6 +45,7 @@ import Test.Speculate.Engine (theoryFromAtoms, groundBinds, boolTy)
 import Conjure.Expr
 import Conjure.Conjurable
 import Conjure.Prim
+import Conjure.Cases
 
 
 -- | Conjures an implementation of a partially defined function.
@@ -234,6 +237,31 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
+
+candidateFxprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], Thy)
+candidateFxprs Args{..} nm f ps  =  undefined
+
+blindCandidateFxprs :: Conjurable f => Args -> String -> f -> [Prim] -> [[Fxpr]]
+blindCandidateFxprs Args{..} nm f ps  =  fss
+  where
+  fss  =  concatMapT ps2fss (conjurePats nm f)
+  es  =  map fst ps
+
+  eh  =  holeAsTypeOf efxs
+  efxs  =  conjureVarApplication nm f
+  (ef:exs)  =  unfoldApp efxs
+
+  keep  =  const True
+
+  appsWith :: [Expr] -> [[Expr]]
+  appsWith vs  =  enumerateAppsFor eh keep $ vs ++ es
+
+  p2eess :: Expr -> [[(Expr,Expr)]]
+  p2eess pat  =  mapT (pat,) $ appsWith (vars pat)
+
+  ps2fss :: [Expr] -> [[Fxpr]]
+  ps2fss  =  products . map p2eess
+
 
 -- | Returns whether the given recursive call
 --   deconstructs one of its arguments.
