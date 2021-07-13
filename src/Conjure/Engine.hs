@@ -261,6 +261,8 @@ blindCandidateFxprs Args{..} nm f ps  =  fss
 
   ps2fss :: [Expr] -> [[Fxpr]]
   ps2fss  =  products . map p2eess
+-- this seems to work, see:
+-- > blindCandidateFxprs args "fact" (undefined :: [Int] -> Int) [pr (0::Int), pr (1::Int), prim "+" ((+)::Int->Int->Int)]
 
 
 -- | Returns whether the given recursive call
