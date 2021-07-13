@@ -113,52 +113,52 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Bool,Unit))
 
   , take 4 (conjurePats "f" (undefined :: Int -> Int))
-    == [ [ [ ff i_
+    == [ [ [ ff xx
            ]
          ]
        , [ [ ff zero
-           , ff i_
+           , ff xx
            ]
          ]
        , [ [ ff one
-           , ff i_
+           , ff xx
            ]
          ]
        , [ [ ff zero
            , ff one
-           , ff i_
+           , ff xx
            ]
          , [ ff minusOne
-           , ff i_
+           , ff xx
            ]
          ]
        ]
 
   , conjurePats "f" (undefined :: [Int] -> Int)
-    == [ [ [ ffs is_
+    == [ [ [ ffs xxs
            ]
          ]
        , [ [ ffs nilInt
-           , ffs (i_ -:- is_)
+           , ffs (xx -:- xxs)
            ]
          ]
        ]
 
   , conjurePats "foo" (undefined :: [Int] -> [Char] -> Int)
-    == [ [ [ ffoo is_ cs_
+    == [ [ [ ffoo xxs ccs
            ]
          ]
-       , [ [ ffoo is_ emptyString
-           , ffoo is_ (c_ -:- cs_)
+       , [ [ ffoo xxs emptyString
+           , ffoo xxs (cc -:- ccs)
            ]
-         , [ ffoo nilInt       cs_
-           , ffoo (i_ -:- is_) cs_
+         , [ ffoo nilInt       ccs
+           , ffoo (xx -:- xxs) ccs
            ]
          ]
        , [ [ ffoo nilInt emptyString
-           , ffoo nilInt (c_ -:- cs_)
-           , ffoo (i_ -:- is_) emptyString
-           , ffoo (i_ -:- is_) (c_ -:- cs_)
+           , ffoo nilInt (cc -:- ccs)
+           , ffoo (xx -:- xxs) emptyString
+           , ffoo (xx -:- xxs) (cc -:- ccs)
            ]
          ]
        ]

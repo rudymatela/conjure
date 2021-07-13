@@ -399,7 +399,7 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
   (nf:nas)  =  words nm ++ repeat ""
 
 conjurePats :: Conjurable f => String -> f -> [[[Expr]]]
-conjurePats nm f  =  mapT (map (foldApp . (ef:)) . prods) $ cs
+conjurePats nm f  =  mapT (map (foldApp . (ef:) . unfold . mostGeneralCanonicalVariation . fold) . prods) $ cs
   where
   ef  =  var nm f
   cs  =  products $ zipWith mk (conjureArgumentHoles f) (conjureArgumentCases f)

@@ -257,7 +257,7 @@ blindCandidateFxprs Args{..} nm f ps  =  fss
   appsWith vs  =  enumerateAppsFor eh keep $ vs ++ es
 
   p2eess :: Expr -> [[(Expr,Expr)]]
-  p2eess pat  =  mapT (pat,) $ appsWith (vars pat)
+  p2eess pat  =  mapT (pat,) $ appsWith (tail $ vars pat)
 
   ps2fss :: [Expr] -> [[Fxpr]]
   ps2fss  =  products . map p2eess
