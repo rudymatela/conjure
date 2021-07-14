@@ -19,7 +19,6 @@ module Conjure.Engine
   , conjpureWith
   , candidateExprs
   , candidateFxprs
-  , blindCandidateFxprs
   , conjureTheory
   , conjureTheoryWith
   , module Data.Express
@@ -239,10 +238,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
 candidateFxprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], Thy)
-candidateFxprs Args{..} nm f ps  =  undefined
-
-blindCandidateFxprs :: Conjurable f => Args -> String -> f -> [Prim] -> [[Fxpr]]
-blindCandidateFxprs Args{..} nm f ps  =  fss
+candidateFxprs Args{..} nm f ps  =  (fss,thy)
   where
   fss  =  concatMapT ps2fss (conjurePats nm f)
   es  =  map fst ps
@@ -251,7 +247,7 @@ blindCandidateFxprs Args{..} nm f ps  =  fss
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
 
-  keep  =  const True
+  keep  =  isRootNormalE thy . fastMostGeneralVariation
 
   appsWith :: [Expr] -> [[Expr]]
   appsWith vs  =  enumerateAppsFor eh keep $ vs ++ es
@@ -261,6 +257,10 @@ blindCandidateFxprs Args{..} nm f ps  =  fss
 
   ps2fss :: [Expr] -> [[Fxpr]]
   ps2fss  =  products . map p2eess
+
+  thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
+       $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
+  (===)  =  cjAreEqual (prim nm f:ps) maxTests
 -- this seems to work, see:
 -- > blindCandidateFxprs args "fact" (undefined :: [Int] -> Int) [pr (0::Int), pr (1::Int), prim "+" ((+)::Int->Int->Int)]
 
