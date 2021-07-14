@@ -19,6 +19,7 @@ module Conjure.Cases
   , fevaluate
   , feval
   , fevl
+  , showFxpr
   )
 where
 
@@ -37,6 +38,12 @@ type Fxpr  =  [(Expr,Expr)]
 casE :: Expr -> [(Expr,Expr)] -> Expr
 casE  =  undefined
 -- I could use the same tricks of foldTuple...
+
+
+showFxpr :: Fxpr -> String
+showFxpr  =  unlines . map show1
+  where
+  show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
 
 
 -- | Evaluates an 'Expr' using the given 'Fxpr' as definition
