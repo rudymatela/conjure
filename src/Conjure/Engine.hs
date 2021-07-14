@@ -238,7 +238,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
 candidateFxprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], Thy)
-candidateFxprs Args{..} nm f ps  =  (fss,thy)
+candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   where
   fss  =  concatMapT ps2fss (conjurePats nm f)
   es  =  map fst ps
@@ -260,6 +260,15 @@ candidateFxprs Args{..} nm f ps  =  (fss,thy)
 
   ps2fss :: [Expr] -> [[Fxpr]]
   ps2fss  =  products . map p2eess
+
+  fillingsFor1 :: (Expr,Expr) -> [[(Expr,Expr)]]
+  fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
+                        .  products
+                        .  replicate (length $ holes er)
+                        $  appsWith (vars ep)
+
+  fillingsFor :: Fxpr -> [[Fxpr]]
+  fillingsFor  =  products . map fillingsFor1
 
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
