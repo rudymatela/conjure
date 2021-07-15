@@ -256,7 +256,7 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   p2eess pat  =  mapT (pat,)
               .  appsWith
               .  tail
-              $  vars pat ++ [eh | not . null $ consts pat]
+              $  vars pat ++ [eh | not (null $ consts pat)]
 
   ps2fss :: [Expr] -> [[Fxpr]]
   ps2fss  =  products . map p2eess
@@ -273,6 +273,7 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
+  isUnbreakable  =  conjureIsUnbreakable f
 -- this seems to work, see:
 -- > blindCandidateFxprs args "fact" (undefined :: [Int] -> Int) [pr (0::Int), pr (1::Int), prim "+" ((+)::Int->Int->Int)]
 

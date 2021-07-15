@@ -27,6 +27,7 @@ module Conjure.Conjurable
   , conjureMkEquation
   , A, B, C, D, E, F
   , conjureIsDeconstructor
+  , conjureIsUnbreakable
   , conjureReification
   , conjureReification1
   )
@@ -50,7 +51,7 @@ import Data.Complex -- for instance
 -- | Single reification of some functions over a type as 'Expr's.
 --
 -- A hole, an equality function and tiers.
-type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]])
+type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], Bool)
 
 -- | A reification over a collection of types.
 --
@@ -143,18 +144,18 @@ class Typeable a => Conjurable a where
 
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
-  if hole x `elem` [h | (h,_,_) <- ms]
+  if hole x `elem` [h | (h,_,_,_) <- ms]
   then ms
   else conjureSubTypes x $ conjureReification1 x : ms
 
 -- | like 'conjureType' but without type repetitions
 nubConjureType :: Conjurable a => a -> Reification
-nubConjureType x  =  nubOn (\(eh,_,_) -> eh) . conjureType x
+nubConjureType x  =  nubOn (\(eh,_,_,_) -> eh) . conjureType x
 -- The use of nubOn above is O(n^2).
 -- So long as there is not a huge number of subtypes of a, so we're fine.
 
 conjureReification1 :: Conjurable a => a -> Reification1
-conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x)
+conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, null $ conjureCases x)
 
 conjureReification :: Conjurable a => a -> [Reification1]
 conjureReification x  =  nubConjureType x [conjureReification1 bool]
@@ -197,10 +198,10 @@ mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
 conjureHoles :: Conjurable f => f -> [Expr]
-conjureHoles f  =  [eh | (eh,_,Just _) <- conjureReification f]
+conjureHoles f  =  [eh | (eh,_,Just _,_) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
-conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_) <- conjureReification f]
+conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_) <- conjureReification f]
 
 conjureAreEqual :: Conjurable f => f -> Int -> Expr -> Expr -> Bool
 conjureAreEqual f maxTests  =  (===)
@@ -214,7 +215,7 @@ conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]
-  allTiers  =  [etiers | (_,_,Just etiers) <- conjureReification f]
+  allTiers  =  [etiers | (_,_,Just etiers,_) <- conjureReification f]
   tf []  =  [[e]] -- no tiers found, keep variable
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
@@ -224,6 +225,10 @@ conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Expr -> Expr -> Bo
 conjureIsDeconstructor f maxTests  =  isDeconstructionE
                                    .  take maxTests
                                    .  grounds (conjureTiersFor f)
+
+conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
+conjureIsUnbreakable f e  =  head
+  [is | (h,_,_,is) <- conjureReification f, typ h == typ e]
 
 instance Conjurable () where
   conjureExpress   =  reifyExpress
