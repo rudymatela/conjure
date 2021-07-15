@@ -10,7 +10,7 @@ import Data.Typeable (Typeable)
 
 import Conjure
 import Test.LeanCheck
-import Data.Express (deriveExpress)
+import Data.Express hiding (height,size)
 
 -- TODO: remove the following import
 -- and fix build on GHC 7.10 and 7.8
@@ -82,6 +82,11 @@ instance Conjurable Tree where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes x  =  conjureType (undefined :: Int)
+  conjureCases t   =  [ val (Leaf -: t)
+                      , value "Node" (Node ->>>: t) :$ hole l :$ hole x :$ hole r
+                      ]
+    where
+    Node l x r  =  Node undefined undefined undefined -: t
 
 
 main :: IO ()
