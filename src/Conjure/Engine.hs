@@ -252,17 +252,18 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   appsWith :: [Expr] -> [[Expr]]
   appsWith vs  =  enumerateAppsFor eh keep $ vs ++ es
 
-  p2eess :: Expr -> [[(Expr,Expr)]]
-  p2eess pat  =  mapT (pat,)
-              .  appsWith
-              .  tail
-              $  vars pat ++ [eh | any should aes]
-    where
-    should ae  =  hasVar ae && (isApp ae || isUnbreakable ae)
-    (_:aes)  =  unfoldApp pat
 
   ps2fss :: [Expr] -> [[Fxpr]]
-  ps2fss  =  products . map p2eess
+  ps2fss pats  =  products $ map p2eess pats
+    where
+    p2eess :: Expr -> [[(Expr,Expr)]]
+    p2eess pat  =  mapT (pat,)
+                .  appsWith
+                .  tail
+                $  vars pat ++ [eh | length pats > 1, any should aes]
+      where
+      should ae  =  hasVar ae && (isApp ae || isUnbreakable ae)
+      (_:aes)  =  unfoldApp pat
 
   fillingsFor1 :: (Expr,Expr) -> [[(Expr,Expr)]]
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
