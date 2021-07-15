@@ -256,7 +256,10 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   p2eess pat  =  mapT (pat,)
               .  appsWith
               .  tail
-              $  vars pat ++ [eh | not (null $ consts pat)]
+              $  vars pat ++ [eh | any should aes]
+    where
+    should ae  =  hasVar ae && (isApp ae || isUnbreakable ae)
+    (_:aes)  =  unfoldApp pat
 
   ps2fss :: [Expr] -> [[Fxpr]]
   ps2fss  =  products . map p2eess
