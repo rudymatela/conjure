@@ -19,11 +19,14 @@ module Conjure.Cases
   , fevaluate
   , feval
   , fevl
+  , deval
   , showFxpr
+  , defnApparentlyTerminates
   )
 where
 
 import Conjure.Utils
+import Conjure.Expr
 import Data.Express
 import Data.Express.Express
 import Data.Express.Fixtures
@@ -97,6 +100,9 @@ fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
 feval :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> a -> Expr -> a
 feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
 
+deval :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> a -> Expr -> a
+deval _ n [defn] x  =  reval defn n x
+
 fevl :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> a
 fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
 
@@ -149,3 +155,7 @@ instance (Express a, Express b) => Cases (Either a b) where
     where
     x  =  Left undefined -: exy
     y  =  Right undefined -: exy
+
+defnApparentlyTerminates :: Fxpr -> Bool
+defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e
+defnApparentlyTerminates _  =  True

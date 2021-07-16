@@ -143,11 +143,10 @@ conjureWith args nm f es  =  do
     putStrLn $ "-- looking through "
             ++ show (length cs)
             ++ " candidates of size " ++ show n
-    -- when (n<=12) $ putStrLn $ unlines $ map show cs
+    -- when (n<=12) $ putStrLn $ unlines $ map showFxpr cs
     case is of
       []     ->  pr (n+1) rs
-      (i:_)  ->  do putStrLn $ showEq i
-                    putStrLn ""
+      (i:_)  ->  putStrLn $ showFxpr i
   rs  =  zip iss css
   (iss, css, ts, thy)  =  conjpureWith args nm f es
   nRules  =  length (rules thy)
@@ -162,20 +161,20 @@ conjureWith args nm f es  =  do
 -- 2. tiers of candidate bodies (right type)
 -- 3. tiers of candidate expressions (any type)
 -- 4. a list of tests
-conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Expr]], [[Expr]], [Expr], Thy)
+conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Fxpr]], [[Fxpr]], [Expr], Thy)
 conjpure =  conjpureWith args
 
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], [[Expr]], [Expr], Thy)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], [[Fxpr]], [Expr], Thy)
 conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
-  implementationsT  =  mapT (vffxx -==-) $ filterT implements candidatesT
-  implements e  =  apparentlyTerminates rrff e
-                && requal (vffxx,e) ffxx vffxx
+  implementationsT  =  filterT implements candidatesT
+  implements fx  =  defnApparentlyTerminates fx
+                 && requal fx ffxx vffxx
   candidatesT  =  take maxSize candidatesTT
-  (candidatesTT, thy)  =  candidateExprs args nm f es
+  (candidatesTT, thy)  =  candidateFExprs args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
@@ -183,7 +182,8 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, 
   requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
-  isTrueWhenDefined dfn e  =  all (errorToFalse . reval dfn maxEvalRecursions False) $ map (e //-) dbss
+  isTrueWhenDefined dfn e  =  all (errorToFalse . deval (conjureExpress f) maxEvalRecursions dfn False)
+                           $  map (e //-) dbss
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
@@ -206,6 +206,14 @@ conjureTheoryWith args nm f es  =  do
   printThy thy
   where
   (_, _, _, thy)  =  conjpureWith args nm f es
+
+
+candidateFExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], Thy)
+candidateFExprs args nm f ps  =  mapFst (mapT toFxpr) $ candidateExprs args nm f ps
+  where
+  mapFst f (x,y)  =  (f x, y)
+  efxs  =  conjureVarApplication nm f
+  toFxpr e  =  [(efxs, e)]
 
 
 candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy)

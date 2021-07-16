@@ -293,6 +293,7 @@ proto/u-conjure: \
   mk/toplibs
 src/Conjure/Cases.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Expr.hs \
   src/Conjure/Cases.hs
 src/Conjure/Conjurable.o: \
   src/Conjure/Utils.hs \
