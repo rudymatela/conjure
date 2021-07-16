@@ -12,29 +12,29 @@ tests :: Int -> [Bool]
 tests n  =
   [ True
 
-  , fvl sumFxpr (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
-  , fvl sumFxpr (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
-  , fvl sumFxpr (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
+  , fvl sumDefn (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
+  , fvl sumDefn (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
+  , fvl sumDefn (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
 
-  , fvl factFxpr (factV :$ val (0 :: Int)) == (1 :: Int)
-  , fvl factFxpr (factV :$ val (1 :: Int)) == (1 :: Int)
-  , fvl factFxpr (factV :$ val (2 :: Int)) == (2 :: Int)
-  , fvl factFxpr (factV :$ val (3 :: Int)) == (6 :: Int)
-  , fvl factFxpr (factV :$ val (4 :: Int)) == (24 :: Int)
-  , fvl factFxpr (factV :$ val (9 :: Int)) == (362880 :: Int)
-  , errorToLeft (fvl factFxpr (factV :$ val (10 :: Int)))
+  , fvl factDefn (factV :$ val (0 :: Int)) == (1 :: Int)
+  , fvl factDefn (factV :$ val (1 :: Int)) == (1 :: Int)
+  , fvl factDefn (factV :$ val (2 :: Int)) == (2 :: Int)
+  , fvl factDefn (factV :$ val (3 :: Int)) == (6 :: Int)
+  , fvl factDefn (factV :$ val (4 :: Int)) == (24 :: Int)
+  , fvl factDefn (factV :$ val (9 :: Int)) == (362880 :: Int)
+  , errorToLeft (fvl factDefn (factV :$ val (10 :: Int)))
     == Right (3628800 :: Int)
-  , errorToLeft (fvl factFxpr (factV :$ val (11 :: Int)) == (39916800 :: Int))
+  , errorToLeft (fvl factDefn (factV :$ val (11 :: Int)) == (39916800 :: Int))
     == Left "fxprToDynamic: recursion limit reached"
 
-  , fvl isZeroFxpr (isZeroV :$ val (0 :: Int)) == True
-  , fvl isZeroFxpr (isZeroV :$ val (1 :: Int)) == False
+  , fvl isZeroDefn (isZeroV :$ val (0 :: Int)) == True
+  , fvl isZeroDefn (isZeroV :$ val (1 :: Int)) == False
 
-  , fvl nullFxpr (nullV :$ val [0,1,2,3::Int]) == False
-  , fvl nullFxpr (nullV :$ val ([] :: [Int])) == False
+  , fvl nullDefn (nullV :$ val [0,1,2,3::Int]) == False
+  , fvl nullDefn (nullV :$ val ([] :: [Int])) == False
   ]
 
-fvl :: Typeable a => Fxpr -> Expr -> a
+fvl :: Typeable a => Defn -> Expr -> a
 fvl  =  fevl exprExpr 12
 
 sumV, factV, nullV, isZeroV :: Expr
@@ -48,23 +48,23 @@ nullV    =  var "null"   (undefined :: [Int] -> Bool)
 exprExpr :: Expr -> Expr
 exprExpr  =  conjureExpress (undefined :: Int -> [Int] -> ())
 
-sumFxpr :: Fxpr
-sumFxpr  =  [ sum' nil           =-  zero
+sumDefn :: Defn
+sumDefn  =  [ sum' nil           =-  zero
             , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
             ]  where  sum' e  =  sumV :$ e
 
-factFxpr :: Fxpr
-factFxpr  =  [ fact' zero  =-  one
+factDefn :: Defn
+factDefn  =  [ fact' zero  =-  one
              , fact' xx    =-  xx -*- (factV :$ (xx -+- minusOne))
              ]  where  fact' e  =  factV :$ e
 
-nullFxpr :: Fxpr
-nullFxpr  =  [ null' nil           =-  false
+nullDefn :: Defn
+nullDefn  =  [ null' nil           =-  false
              , null' (xx -:- xxs)  =-  false
              ]  where  null' e  =  nullV :$ e
 
-isZeroFxpr :: Fxpr
-isZeroFxpr  =  [ isZero' zero  =-  true
+isZeroDefn :: Defn
+isZeroDefn  =  [ isZero' zero  =-  true
                , isZero' xx    =-  false
                ]  where  isZero' e  =  isZeroV :$ e
 

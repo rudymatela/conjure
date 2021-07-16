@@ -11,13 +11,14 @@
 -- You are probably better off importing "Conjure".
 {-# LANGUAGE TupleSections #-}
 module Conjure.Defn
-  ( Fxpr
+  ( Defn
+  , Bndn
   , fxprToDynamic
   , fevaluate
   , feval
   , fevl
   , deval
-  , showFxpr
+  , showDefn
   , defnApparentlyTerminates
   , module Conjure.Expr
   )
@@ -32,18 +33,18 @@ import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
 import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
 
-type Fxpr  =  [(Expr,Expr)]
+type Defn  =  [Bndn]
+type Bndn  =  (Expr,Expr)
 
-
-showFxpr :: Fxpr -> String
-showFxpr  =  unlines . map show1
+showDefn :: Defn -> String
+showDefn  =  unlines . map show1
   where
   show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
 
 
--- | Evaluates an 'Expr' using the given 'Fxpr' as definition
+-- | Evaluates an 'Expr' using the given 'Defn' as definition
 --   when a recursive call is found.
-fxprToDynamic :: (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe Dynamic
+fxprToDynamic :: (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe Dynamic
 fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . snd) cx)) n
   where
   (ef':_)  =  unfoldApp . fst $ head cx
@@ -86,18 +87,18 @@ fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . 
                           Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
 
-fevaluate :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> Maybe a
+fevaluate :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe a
 fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
 
-feval :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> a -> Expr -> a
+feval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
 
-deval :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> a -> Expr -> a
+deval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 deval _ n [defn] x  =  reval defn n x
 
-fevl :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> a
+fevl :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> a
 fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
 
-defnApparentlyTerminates :: Fxpr -> Bool
+defnApparentlyTerminates :: Defn -> Bool
 defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e
 defnApparentlyTerminates _  =  True

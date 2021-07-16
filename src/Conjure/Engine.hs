@@ -18,7 +18,7 @@ module Conjure.Engine
   , conjpure
   , conjpureWith
   , candidateExprs
-  , candidateFxprs
+  , candidateDefns
   , conjureTheory
   , conjureTheoryWith
   , module Data.Express
@@ -143,10 +143,10 @@ conjureWith args nm f es  =  do
     putStrLn $ "-- looking through "
             ++ show (length cs)
             ++ " candidates of size " ++ show n
-    -- when (n<=12) $ putStrLn $ unlines $ map showFxpr cs
+    -- when (n<=12) $ putStrLn $ unlines $ map showDefn cs
     case is of
       []     ->  pr (n+1) rs
-      (i:_)  ->  putStrLn $ showFxpr i
+      (i:_)  ->  putStrLn $ showDefn i
   rs  =  zip iss css
   (iss, css, ts, thy)  =  conjpureWith args nm f es
   nRules  =  length (rules thy)
@@ -161,12 +161,12 @@ conjureWith args nm f es  =  do
 -- 2. tiers of candidate bodies (right type)
 -- 3. tiers of candidate expressions (any type)
 -- 4. a list of tests
-conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Fxpr]], [[Fxpr]], [Expr], Thy)
+conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure =  conjpureWith args
 
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], [[Fxpr]], [Expr], Thy)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
@@ -208,12 +208,12 @@ conjureTheoryWith args nm f es  =  do
   (_, _, _, thy)  =  conjpureWith args nm f es
 
 
-candidateFExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], Thy)
-candidateFExprs args nm f ps  =  mapFst (mapT toFxpr) $ candidateExprs args nm f ps
+candidateFExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateFExprs args nm f ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
   where
   mapFst f (x,y)  =  (f x, y)
   efxs  =  conjureVarApplication nm f
-  toFxpr e  =  [(efxs, e)]
+  toDefn e  =  [(efxs, e)]
 
 
 candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy)
@@ -245,8 +245,8 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
-candidateFxprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Fxpr]], Thy)
-candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
+candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateDefns Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   where
   fss  =  concatMapT ps2fss (conjurePats nm f)
   es  =  map fst ps
@@ -261,10 +261,10 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   appsWith vs  =  enumerateAppsFor eh keep $ vs ++ es
 
 
-  ps2fss :: [Expr] -> [[Fxpr]]
+  ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  products $ map p2eess pats
     where
-    p2eess :: Expr -> [[(Expr,Expr)]]
+    p2eess :: Expr -> [[Bndn]]
     p2eess pat  =  mapT (pat,)
                 .  appsWith
                 .  tail
@@ -273,13 +273,13 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
       should ae  =  hasVar ae && (isApp ae || isUnbreakable ae)
       (_:aes)  =  unfoldApp pat
 
-  fillingsFor1 :: (Expr,Expr) -> [[(Expr,Expr)]]
+  fillingsFor1 :: Bndn -> [[Bndn]]
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
                         $  appsWith (vars ep)
 
-  fillingsFor :: Fxpr -> [[Fxpr]]
+  fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
 
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
@@ -287,7 +287,7 @@ candidateFxprs Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
 -- this seems to work, see:
--- > blindCandidateFxprs args "fact" (undefined :: [Int] -> Int) [pr (0::Int), pr (1::Int), prim "+" ((+)::Int->Int->Int)]
+-- > blindCandidateDefns args "fact" (undefined :: [Int] -> Int) [pr (0::Int), pr (1::Int), prim "+" ((+)::Int->Int->Int)]
 
 
 -- | Returns whether the given recursive call
