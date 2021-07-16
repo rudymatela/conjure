@@ -14,6 +14,7 @@ EG = \
   eg/bools \
   eg/gcd \
   eg/list \
+  eg/replicate \
   eg/setelem \
   eg/subset \
   eg/spec \
