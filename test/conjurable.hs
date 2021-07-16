@@ -119,7 +119,7 @@ tests n  =
   , length (conjureCases (undefined :: [Int]))   == 2
   , length (conjureCases (undefined :: [Bool]))  == 2
 
-  , take 4 (conjurePats "f" (undefined :: Int -> Int))
+  , conjurePats [zero, one] "f" (undefined :: Int -> Int)
     == [ [ [ ff xx
            ]
          ]
@@ -135,13 +135,10 @@ tests n  =
            , ff one
            , ff xx
            ]
-         , [ ff minusOne
-           , ff xx
-           ]
          ]
        ]
 
-  , conjurePats "f" (undefined :: [Int] -> Int)
+  , conjurePats [] "f" (undefined :: [Int] -> Int)
     == [ [ [ ffs xxs
            ]
          ]
@@ -151,7 +148,7 @@ tests n  =
          ]
        ]
 
-  , conjurePats "foo" (undefined :: [Int] -> [Char] -> Int)
+  , conjurePats [] "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo xxs ccs
            ]
          ]

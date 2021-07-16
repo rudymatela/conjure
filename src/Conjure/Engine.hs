@@ -260,7 +260,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
 candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   where
-  fss  =  concatMapT ps2fss (conjurePats nm f)
+  fss  =  concatMapT ps2fss (conjurePats es nm f)
   es  =  map fst ps
 
   eh  =  holeAsTypeOf efxs

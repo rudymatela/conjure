@@ -403,12 +403,12 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
   where
   (nf:nas)  =  words nm ++ repeat ""
 
-conjurePats :: Conjurable f => String -> f -> [[[Expr]]]
-conjurePats nm f  =  mapT (map (foldApp . (ef:) . unfold . mostGeneralCanonicalVariation . fold) . prods) $ cs
+conjurePats :: Conjurable f => [Expr] -> String -> f -> [[[Expr]]]
+conjurePats es nm f  =  mapT (map (foldApp . (ef:) . unfold . mostGeneralCanonicalVariation . fold) . prods) $ cs
   where
   ef  =  var (head $ words nm) f  -- TODO: take the tail into account
   cs  =  products $ zipWith mk (conjureArgumentHoles f) (conjureArgumentCases f)
-  mk h []  =  mapT (++ [h]) $ setsOf (tiersFor h)
+  mk h []  =  mapT (++ [h]) $ setsOf [[e] | e <- es, typ e == typ h]
   mk h cs  =  [[[h]], [cs]]
   tiersFor  =  conjureTiersFor f
 
