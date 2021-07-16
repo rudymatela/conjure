@@ -17,7 +17,7 @@ module Conjure.Defn
   , fevaluate
   , feval
   , fevl
-  , deval
+  , fevalFast
   , showDefn
   , defnApparentlyTerminates
   , module Conjure.Expr
@@ -93,8 +93,8 @@ fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
 feval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
 
-deval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
-deval _ n [defn] x  =  reval defn n x
+fevalFast :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
+fevalFast _ n [defn] x  =  reval defn n x
 
 fevl :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> a
 fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
