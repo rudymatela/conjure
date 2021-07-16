@@ -13,8 +13,7 @@
 -- You are probably better off importing "Conjure".
 {-# LANGUAGE TupleSections #-}
 module Conjure.Cases
-  ( Cases (..)
-  , Fxpr
+  ( Fxpr
   , fxprToDynamic
   , fevaluate
   , feval
@@ -35,12 +34,6 @@ import Control.Applicative ((<$>)) -- for older GHCs
 import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
 
 type Fxpr  =  [(Expr,Expr)]
--- consider changing back to [(Expr,Expr)] as it will be easier to match
-
--- I wonder if I can encode a Cxpr into a simple Expr with some cleverness:
-casE :: Expr -> [(Expr,Expr)] -> Expr
-casE  =  undefined
--- I could use the same tricks of foldTuple...
 
 
 showFxpr :: Fxpr -> String
@@ -105,56 +98,6 @@ deval _ n [defn] x  =  reval defn n x
 
 fevl :: Typeable a => (Expr -> Expr) -> Int -> Fxpr -> Expr -> a
 fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
-
-class Typeable a => Cases a where
-  cases :: a -> [Expr]
-  cases _  =  []
-
--- Atomic types have no cases.
--- It's out of the scope of this typeclass to handle these.
-instance (Typeable a, Typeable b) => Cases (a -> b) -- TODO: remove eventually
-instance Cases Int
-instance Cases Integer
-instance Cases Char
-
-instance Cases () where
-  cases _  =  [val ()]
-
-instance Cases Bool where
-  cases _  =  [val False, val True]
-
-instance Express a => Cases [a] where
-  cases xs  =  [ val ([] -: xs)
-               , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
-               ]
-    where
-    x  =  head xs
-
-instance (Express a, Express b) => Cases (a,b) where
-  cases xy  =  [value "," ((,) ->>: xy) :$ hole x :$ hole y]
-    where
-    (x,y) = (undefined,undefined) -: xy
-
-instance (Express a, Express b, Express c) => Cases (a,b,c) where
-  cases xyz  =  [value ",," ((,,) ->>>: xyz) :$ hole x :$ hole y :$ hole z]
-    where
-    (x,y,z) = (undefined,undefined,undefined) -: xyz
-
-instance Express a => Cases (Maybe a) where
-  cases mx  =  [ value "Nothing" (Nothing -: mx)
-               , value "Just" (Just ->: mx) :$ hole x
-               ]
-    where
-    x  =  Just undefined -: mx
-
-
-instance (Express a, Express b) => Cases (Either a b) where
-  cases exy  =  [ value "Left" (Left ->: exy) :$ hole x
-                , value "Right" (Right ->: exy) :$ hole y
-                ]
-    where
-    x  =  Left undefined -: exy
-    y  =  Right undefined -: exy
 
 defnApparentlyTerminates :: Fxpr -> Bool
 defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e

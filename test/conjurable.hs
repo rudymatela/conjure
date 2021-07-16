@@ -112,6 +112,13 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Bool,Unit))
 
+  , length (conjureCases (undefined :: ()))      == 1
+  , length (conjureCases (undefined :: Bool))    == 2
+  , length (conjureCases (undefined :: Int))     == 0
+  , length (conjureCases (undefined :: Integer)) == 0
+  , length (conjureCases (undefined :: [Int]))   == 2
+  , length (conjureCases (undefined :: [Bool]))  == 2
+
   , take 4 (conjurePats "f" (undefined :: Int -> Int))
     == [ [ [ ff xx
            ]
