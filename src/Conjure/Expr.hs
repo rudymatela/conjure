@@ -34,7 +34,6 @@ module Conjure.Expr
   , revaluate
   , reval
 
-  , enumerateApps
   , enumerateAppsFor
   , enumerateFillings
 
@@ -287,41 +286,7 @@ possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
 -- -- Expression enumeration -- --
 
 enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateAppsFor  =  enumerateApps3For
-
-enumerateApps :: (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateApps  =  enumerateApps1
-
-enumerateApps1For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateApps1For h keep  =  filterT (\e -> typ e == typ h) . enumerateApps1 keep
-
-enumerateApps1 :: (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateApps1 keep  =  exprT . (:[])
-  where
-  exprT ess  =  filterT keep
-             $  ess \/ (delay $ productMaybeWith ($$) rss rss)
-    where
-    rss = exprT ess
-
-enumerateApps2For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateApps2For h keep  =  map concat
-                          .  filterT (\(e:_) -> typ e == typ h)
-                          .  exprT
-                          .  map (groupOn typ . sortOn typ)
-                          .  (:[])
-  where
-  exprT :: [[[Expr]]] -> [[[Expr]]]
-  exprT ess  =  ess \/ (delay $ productMaybeWith ($$**) rss rss)
-    where
-    rss = exprT ess
-    efs $$** exs
-      | isNothing (head efs $$ head exs)  =  Nothing
-      | otherwise  =  case [ef :$ ex | ef <- efs, ex <- exs, keep (ef :$ ex)] of
-                      [] -> Nothing
-                      es -> Just es
-
-enumerateApps3For :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
-enumerateApps3For h keep es  =  for h
+enumerateAppsFor h keep es  =  for h
   where
   hs :: [Expr]
   hs  =  possibleHoles es
