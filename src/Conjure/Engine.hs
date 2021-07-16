@@ -182,7 +182,7 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, 
   requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
 
-  isTrueWhenDefined dfn e  =  all (errorToFalse . fevalFast (conjureExpress f) maxEvalRecursions dfn False)
+  isTrueWhenDefined dfn e  =  all (errorToFalse . devalFast (conjureExpress f) maxEvalRecursions dfn False)
                            $  map (e //-) dbss
 
   bss, dbss :: [[(Expr,Expr)]]

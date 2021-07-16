@@ -12,30 +12,30 @@ tests :: Int -> [Bool]
 tests n  =
   [ True
 
-  , fvl sumDefn (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
-  , fvl sumDefn (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
-  , fvl sumDefn (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
+  , dvl sumDefn (sumV :$ val [1,2,3,11::Int]) == (17 :: Int)
+  , dvl sumDefn (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
+  , dvl sumDefn (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
 
-  , fvl factDefn (factV :$ val (0 :: Int)) == (1 :: Int)
-  , fvl factDefn (factV :$ val (1 :: Int)) == (1 :: Int)
-  , fvl factDefn (factV :$ val (2 :: Int)) == (2 :: Int)
-  , fvl factDefn (factV :$ val (3 :: Int)) == (6 :: Int)
-  , fvl factDefn (factV :$ val (4 :: Int)) == (24 :: Int)
-  , fvl factDefn (factV :$ val (9 :: Int)) == (362880 :: Int)
-  , errorToLeft (fvl factDefn (factV :$ val (10 :: Int)))
+  , dvl factDefn (factV :$ val (0 :: Int)) == (1 :: Int)
+  , dvl factDefn (factV :$ val (1 :: Int)) == (1 :: Int)
+  , dvl factDefn (factV :$ val (2 :: Int)) == (2 :: Int)
+  , dvl factDefn (factV :$ val (3 :: Int)) == (6 :: Int)
+  , dvl factDefn (factV :$ val (4 :: Int)) == (24 :: Int)
+  , dvl factDefn (factV :$ val (9 :: Int)) == (362880 :: Int)
+  , errorToLeft (dvl factDefn (factV :$ val (10 :: Int)))
     == Right (3628800 :: Int)
-  , errorToLeft (fvl factDefn (factV :$ val (11 :: Int)) == (39916800 :: Int))
-    == Left "fxprToDynamic: recursion limit reached"
+  , errorToLeft (dvl factDefn (factV :$ val (11 :: Int)) == (39916800 :: Int))
+    == Left "toDynamicWithDefn: recursion limit reached"
 
-  , fvl isZeroDefn (isZeroV :$ val (0 :: Int)) == True
-  , fvl isZeroDefn (isZeroV :$ val (1 :: Int)) == False
+  , dvl isZeroDefn (isZeroV :$ val (0 :: Int)) == True
+  , dvl isZeroDefn (isZeroV :$ val (1 :: Int)) == False
 
-  , fvl nullDefn (nullV :$ val [0,1,2,3::Int]) == False
-  , fvl nullDefn (nullV :$ val ([] :: [Int])) == False
+  , dvl nullDefn (nullV :$ val [0,1,2,3::Int]) == False
+  , dvl nullDefn (nullV :$ val ([] :: [Int])) == False
   ]
 
-fvl :: Typeable a => Defn -> Expr -> a
-fvl  =  fevl exprExpr 12
+dvl :: Typeable a => Defn -> Expr -> a
+dvl  =  devl exprExpr 12
 
 sumV, factV, nullV, isZeroV :: Expr
 factV    =  var "fact"   (undefined :: Int -> Int)

@@ -13,11 +13,11 @@
 module Conjure.Defn
   ( Defn
   , Bndn
-  , fxprToDynamic
-  , fevaluate
-  , feval
-  , fevl
-  , fevalFast
+  , toDynamicWithDefn
+  , devaluate
+  , deval
+  , devl
+  , devalFast
   , showDefn
   , defnApparentlyTerminates
   , module Conjure.Expr
@@ -31,7 +31,7 @@ import Data.Express.Express
 import Data.Express.Fixtures
 import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
-import Test.LeanCheck.Utils ((-:>)) -- for fxprToDynamic
+import Test.LeanCheck.Utils ((-:>)) -- for toDynamicWithDefn
 
 type Defn  =  [Bndn]
 type Bndn  =  (Expr,Expr)
@@ -44,8 +44,8 @@ showDefn  =  unlines . map show1
 
 -- | Evaluates an 'Expr' using the given 'Defn' as definition
 --   when a recursive call is found.
-fxprToDynamic :: (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe Dynamic
-fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . snd) cx)) n
+toDynamicWithDefn :: (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe Dynamic
+toDynamicWithDefn exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . snd) cx)) n
   where
   (ef':_)  =  unfoldApp . fst $ head cx
 
@@ -57,8 +57,8 @@ fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . 
                                 Just x  -> Just (m, n, x)
 
   re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
-  re m n _  | n <= 0  =  error "fxprToDynamic: recursion limit reached"
-  re m n _  | m <= 0  =  error "fxprToDynamic: evaluation limit reached"
+  re m n _  | n <= 0  =  error "toDynamicWithDefn: recursion limit reached"
+  re m n _  | m <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
   re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev m n ec of
     Nothing    -> Nothing
     Just (m,n,True)  -> re m n ex
@@ -72,9 +72,9 @@ fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . 
     Just (m,n,True)  -> re m n eq
     Just (m,n,False) -> (m,n,) <$> toDynamic (val False)
   re m n e  =  case unfoldApp e of
-    [] -> error "fxprToDynamic: empty application unfold"  -- should never happen
+    [] -> error "toDynamicWithDefn: empty application unfold"  -- should never happen
     [e] -> (m-1,n,) <$> toDynamic e
-    (ef:exs) | ef == ef' -> headOr (error $ "fxprToDynamic: unhandled pattern " ++ show e)
+    (ef:exs) | ef == ef' -> headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
                           [ re m (n-1) $ e' //- bs
                           | let e  =  foldApp (ef:map exprExpr exs)
                           , (a',e') <- cx
@@ -87,17 +87,17 @@ fxprToDynamic exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . 
                           Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
 
-fevaluate :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe a
-fevaluate ee n fxpr e  =  fxprToDynamic ee n fxpr e >>= fromDynamic
+devaluate :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe a
+devaluate ee n fxpr e  =  toDynamicWithDefn ee n fxpr e >>= fromDynamic
 
-feval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
-feval ee n fxpr x  =  fromMaybe x . fevaluate ee n fxpr
+deval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
+deval ee n fxpr x  =  fromMaybe x . devaluate ee n fxpr
 
-fevalFast :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
-fevalFast _ n [defn] x  =  reval defn n x
+devalFast :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
+devalFast _ n [defn] x  =  reval defn n x
 
-fevl :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> a
-fevl ee n fxpr  =  feval ee n fxpr (error "fevl: incorrect type?")
+devl :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> a
+devl ee n fxpr  =  deval ee n fxpr (error "devl: incorrect type?")
 
 defnApparentlyTerminates :: Defn -> Bool
 defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e
