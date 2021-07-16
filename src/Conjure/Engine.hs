@@ -44,7 +44,7 @@ import Test.Speculate.Engine (theoryFromAtoms, groundBinds, boolTy)
 import Conjure.Expr
 import Conjure.Conjurable
 import Conjure.Prim
-import Conjure.Cases
+import Conjure.Defn
 
 
 -- | Conjures an implementation of a partially defined function.

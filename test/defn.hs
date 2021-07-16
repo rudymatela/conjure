@@ -2,7 +2,7 @@
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 
 import Test
-import Conjure.Cases
+import Conjure.Defn
 import Test.LeanCheck.Error (errorToLeft)
 
 main :: IO ()

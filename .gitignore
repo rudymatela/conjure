@@ -55,3 +55,4 @@ test/expr
 test/conjurable
 test/utils
 test/cases
+test/defn

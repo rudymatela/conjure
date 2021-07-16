@@ -1,18 +1,16 @@
 -- |
--- Module      : Conjure.Cases
+-- Module      : Conjure.Defn
 -- Copyright   : (c) 2021 Rudy Matela
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
 -- This module is part of 'Conjure'.
 --
--- This module defines the 'Cases' typeclass
--- that allows listing cases of a type
--- encoded as 'Expr's.
+-- This module exports the 'Defn' type synonym and utilities involving it.
 --
 -- You are probably better off importing "Conjure".
 {-# LANGUAGE TupleSections #-}
-module Conjure.Cases
+module Conjure.Defn
   ( Fxpr
   , fxprToDynamic
   , fevaluate
@@ -21,6 +19,7 @@ module Conjure.Cases
   , deval
   , showFxpr
   , defnApparentlyTerminates
+  , module Conjure.Expr
   )
 where
 

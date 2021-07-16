@@ -30,8 +30,8 @@ EG = \
 
 TESTS = \
   test/expr \
+  test/defn \
   test/conjurable \
-  test/cases \
   test/utils
 
 all: mk/toplibs
