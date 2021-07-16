@@ -19,6 +19,8 @@ module Conjure.Engine
   , conjpureWith
   , candidateExprs
   , candidateDefns
+  , candidateDefns1
+  , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
   , module Data.Express
@@ -174,7 +176,7 @@ conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, 
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
   candidatesT  =  take maxSize candidatesTT
-  (candidatesTT, thy)  =  candidateFExprs args nm f es
+  (candidatesTT, thy)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
@@ -208,14 +210,22 @@ conjureTheoryWith args nm f es  =  do
   (_, _, _, thy)  =  conjpureWith args nm f es
 
 
-candidateFExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateFExprs args nm f ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
+-- | Return apparently unique candidate definitions.
+candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateDefns  =  candidateDefns1
+
+
+-- | Return apparently unique candidate definitions
+--   where there is a single body.
+candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateDefns1 args nm f ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
   where
   mapFst f (x,y)  =  (f x, y)
   efxs  =  conjureVarApplication nm f
   toDefn e  =  [(efxs, e)]
 
 
+-- | Return apparently unique candidate bodies.
 candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy)
 candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs) ts, thy)
   where
@@ -245,8 +255,10 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
-candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
+-- | Return apparently unique candidate definitions
+--   using pattern matching.
+candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   where
   fss  =  concatMapT ps2fss (conjurePats nm f)
   es  =  map fst ps
