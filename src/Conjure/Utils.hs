@@ -33,6 +33,7 @@ module Conjure.Utils
   , mapHead
   , sets
   , headOr
+  , allEqual
   )
 where
 
@@ -44,6 +45,12 @@ import Data.Tuple
 import Data.Typeable
 
 import System.IO.Unsafe
+
+allEqual :: Eq a => [a] -> Bool
+allEqual []  =  False
+allEqual [x]  =  False
+allEqual [x,y]  =  x == y
+allEqual (x:y:xs)  =  x == y && allEqual (y:xs)
 
 count :: (a -> Bool) -> [a] -> Int
 count p  =  length . filter p

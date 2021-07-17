@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 6/10 rules
   [3,0,4,0,8,0] direct candidates
-  [3,6,20,33,120,182] pattern candidates
+  [3,4,18,31,120,181] pattern candidates
 
 rules:
 x * y == x + y
@@ -61,9 +61,6 @@ foo 0  =  0
 foo x  =  x
 
 foo 0  =  0
-foo x  =  0
-
-foo 0  =  0
 foo x  =  1
 
 foo 0  =  1
@@ -71,9 +68,6 @@ foo x  =  x
 
 foo 0  =  1
 foo x  =  0
-
-foo 0  =  1
-foo x  =  1
 
 foo 0  =  0
 foo x  =  foo x
@@ -117,9 +111,6 @@ foo 1  =  0
 foo x  =  x
 
 foo 1  =  0
-foo x  =  0
-
-foo 1  =  0
 foo x  =  1
 
 foo 1  =  1
@@ -127,9 +118,6 @@ foo x  =  x
 
 foo 1  =  1
 foo x  =  0
-
-foo 1  =  1
-foo x  =  1
 
 foo 1  =  0
 foo x  =  foo x
@@ -200,10 +188,6 @@ foo x  =  x
 
 foo 0  =  0
 foo 1  =  0
-foo x  =  0
-
-foo 0  =  0
-foo 1  =  0
 foo x  =  1
 
 foo 0  =  0
@@ -237,10 +221,6 @@ foo x  =  x
 foo 0  =  1
 foo 1  =  1
 foo x  =  0
-
-foo 0  =  1
-foo 1  =  1
-foo x  =  1
 
 foo 0  =  0
 foo x  =  foo (x + x)
@@ -1063,9 +1043,6 @@ foo x  =  x + 1
 
 foo 0  =  1 + 1
 foo x  =  1 + x
-
-foo 0  =  1 + 1
-foo x  =  1 + 1
 
 foo 0  =  1 + (1 + 1)
 foo x  =  x
@@ -1192,7 +1169,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 6/10 rules
   [3,0,4,0] direct candidates
-  [3,12,16,140] pattern candidates
+  [3,8,15,140] pattern candidates
 
 rules:
 x * y == x + y
@@ -1233,9 +1210,6 @@ x ? y  =  y
 x ? y  =  0
 
 x ? 0  =  x
-x ? y  =  x
-
-x ? 0  =  x
 x ? y  =  y
 
 x ? 0  =  x
@@ -1247,12 +1221,6 @@ x ? y  =  x
 x ? 0  =  0
 x ? y  =  y
 
-x ? 0  =  0
-x ? y  =  0
-
-0 ? x  =  x
-x ? y  =  x
-
 0 ? x  =  x
 x ? y  =  y
 
@@ -1264,9 +1232,6 @@ x ? y  =  x
 
 0 ? x  =  0
 x ? y  =  y
-
-0 ? x  =  0
-x ? y  =  0
 
 x ? y  =  x + x
 
@@ -1330,11 +1295,6 @@ x ? y  =  x
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  0
 
 x ? 0  =  x
 x ? y  =  x ? x
@@ -1760,7 +1720,7 @@ x ? y  =  0
 Candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
   [2,0,1,0,1,0] direct candidates
-  [2,2,4,3,18,15] pattern candidates
+  [2,1,4,3,18,15] pattern candidates
 
 rules:
 xs ++ [] == xs
@@ -1787,9 +1747,6 @@ goo xs  =  []
 
 goo []  =  []
 goo (x:xs)  =  xs
-
-goo []  =  []
-goo (x:xs)  =  []
 
 goo []  =  []
 goo (x:xs)  =  goo xs
@@ -1913,7 +1870,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0] direct candidates
-  [3,12,16,98] pattern candidates
+  [3,8,15,98] pattern candidates
 
 rules:
 xs ++ [] == xs
@@ -1947,9 +1904,6 @@ xs ?? ys  =  ys
 xs ?? ys  =  []
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  ys
 
 xs ?? []  =  xs
@@ -1960,12 +1914,6 @@ xs ?? (x:ys)  =  xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  []
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys
@@ -1978,9 +1926,6 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  []
 
 xs ?? ys  =  xs ++ xs
 
@@ -2044,11 +1989,6 @@ xs ?? ys  =  ys ++ ys
 [] ?? (x:xs)  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? xs
@@ -2348,7 +2288,7 @@ xs ?? (x:ys)  =  []
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
   [3,1,0,0,2,4] direct candidates
-  [3,5,0,0,0,0] pattern candidates
+  [3,3,0,0,0,0] pattern candidates
 
 rules:
 not False == True
@@ -2436,22 +2376,16 @@ ton p  =  True
 ton p  =  not p
 
 ton False  =  False
-ton True  =  False
-
-ton False  =  False
 ton True  =  True
 
 ton False  =  True
 ton True  =  False
-
-ton False  =  True
-ton True  =  True
 
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,4,72] direct candidates
-  [4,20,32,10,4,32] pattern candidates
+  [4,14,30,8,4,32] pattern candidates
 
 rules:
 not False == True
@@ -2711,9 +2645,6 @@ p &| q  =  not p
 p &| q  =  not q
 
 p &| False  =  p
-p &| True  =  p
-
-p &| False  =  p
 p &| True  =  False
 
 p &| False  =  p
@@ -2723,9 +2654,6 @@ p &| False  =  False
 p &| True  =  p
 
 p &| False  =  False
-p &| True  =  False
-
-p &| False  =  False
 p &| True  =  True
 
 p &| False  =  True
@@ -2734,12 +2662,6 @@ p &| True  =  p
 p &| False  =  True
 p &| True  =  False
 
-p &| False  =  True
-p &| True  =  True
-
-False &| p  =  p
-True &| p  =  p
-
 False &| p  =  p
 True &| p  =  False
 
@@ -2750,9 +2672,6 @@ False &| p  =  False
 True &| p  =  p
 
 False &| p  =  False
-True &| p  =  False
-
-False &| p  =  False
 True &| p  =  True
 
 False &| p  =  True
@@ -2760,9 +2679,6 @@ True &| p  =  p
 
 False &| p  =  True
 True &| p  =  False
-
-False &| p  =  True
-True &| p  =  True
 
 p &| q  =  p && q
 
@@ -2811,11 +2727,6 @@ True &| p  =  True
 False &| False  =  False
 False &| True  =  False
 True &| False  =  False
-True &| True  =  False
-
-False &| False  =  False
-False &| True  =  False
-True &| False  =  False
 True &| True  =  True
 
 False &| False  =  False
@@ -2882,11 +2793,6 @@ False &| False  =  True
 False &| True  =  True
 True &| False  =  True
 True &| True  =  False
-
-False &| False  =  True
-False &| True  =  True
-True &| False  =  True
-True &| True  =  True
 
 p &| q  =  not p && q
 
@@ -2903,12 +2809,6 @@ p &| q  =  q && not p
 p &| q  =  p || not q
 
 p &| q  =  q || not p
-
-p &| False  =  not p
-p &| True  =  not p
-
-False &| p  =  not p
-True &| p  =  not p
 
 p &| q  =  not p && not q
 

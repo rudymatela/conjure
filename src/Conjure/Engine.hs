@@ -274,7 +274,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
 
 
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  products $ map p2eess pats
+  ps2fss pats  =  discardT (allEqual . map snd) . products $ map p2eess pats
     where
     p2eess :: Expr -> [[Bndn]]
     p2eess pat  =  mapT (pat,)
