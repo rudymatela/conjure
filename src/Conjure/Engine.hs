@@ -269,8 +269,8 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
 
   keep  =  isRootNormalE thy . fastMostGeneralVariation
 
-  appsWith :: [Expr] -> [[Expr]]
-  appsWith vs  =  enumerateAppsFor eh keep $ vs ++ es
+  appsWith :: Expr -> [Expr] -> [[Expr]]
+  appsWith eh vs  =  enumerateAppsFor eh keep $ vs ++ es
 
 
   ps2fss :: [Expr] -> [[Defn]]
@@ -278,7 +278,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
     where
     p2eess :: Expr -> [[Bndn]]
     p2eess pat  =  mapT (pat,)
-                .  appsWith
+                .  appsWith pat
                 .  tail
                 $  vars pat ++ [eh | length pats > 1, any should aes]
       where
@@ -289,11 +289,14 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
-                        $  appsWith (vars ep)
+                        .  recs
+                        $  tail (vars ep) ++ es
 
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
 
+  recs es  =  filterT (const True) -- TODO: proper descent check
+           $  foldAppProducts ef [appsWith h es | h <- conjureArgumentHoles f]
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
