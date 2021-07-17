@@ -3,13 +3,11 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* generate functions with top-level case patterns:
+* add switch for case candidates?
 
-        len []  =  0
-        len (x:xs)  =  1 + len xs
+* add test for case candidates?
 
-    1. create blind `candidateFxpr`s
-    2. prune with equations
+* improve pruning of generated case candidates
 
 
 ### for later
