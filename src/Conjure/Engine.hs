@@ -289,14 +289,13 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
-                        .  recs
-                        $  tail (vars ep) ++ es
+                        $  recs ep es
 
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
 
-  recs es  =  filterT (const True) -- TODO: proper descent check
-           $  foldAppProducts ef [appsWith h es | h <- conjureArgumentHoles f]
+  recs ep es  =  filterT (const True) -- TODO: proper descent check
+              $  foldAppProducts ef [appsWith h (tail (vars ep) ++ es) | h <- conjureArgumentHoles f]
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
