@@ -2345,3 +2345,641 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? ys  =  []
 
 
+Candidates for: ton :: Bool -> Bool
+  pruning with 39/49 rules
+  [3,1,0,0,2,4] direct candidates
+  [3,5,0,0,0,0] pattern candidates
+
+rules:
+not False == True
+not True == False
+p && p == p
+p || p == p
+not (not p) == p
+p && False == False
+p && True == p
+False && p == False
+True && p == p
+p || False == p
+p || True == True
+False || p == p
+True || p == True
+not (p && q) == not p || not q
+not (p && q) == not q || not p
+not (p || q) == not p && not q
+not (p || q) == not q && not p
+p && not p == False
+not p && p == False
+p || not p == True
+not p || p == True
+(p && q) && r == p && (q && r)
+(p && q) && r == q && (p && r)
+(p || q) || r == p || (q || r)
+(p || q) || r == q || (p || r)
+p && (p && q) == p && q
+p && (q && p) == p && q
+p && (q && p) == q && p
+p || (p || q) == p || q
+p || (q || p) == p || q
+p || (q || p) == q || p
+p && (p || q) == p
+p && (q || p) == p
+(p || q) && p == p
+(p || q) && q == q
+p || p && q == p
+p || q && p == p
+p && q || p == p
+p && q || q == q
+equations:
+q && p == p && q
+q || p == p || q
+q && (p && r) == p && (q && r)
+r && (p && q) == p && (q && r)
+r && (q && p) == p && (q && r)
+q || (p || r) == p || (q || r)
+r || (p || q) == p || (q || r)
+r || (q || p) == p || (q || r)
+(r || q) && p == p && (q || r)
+r && q || p == p || q && r
+
+direct candidates:
+
+ton p  =  p
+
+ton p  =  False
+
+ton p  =  True
+
+ton p  =  not p
+
+ton p  =  p && ton (not p)
+
+ton p  =  p || ton (not p)
+
+ton p  =  p && not (ton (not p))
+
+ton p  =  not p && ton (not p)
+
+ton p  =  p || not (ton (not p))
+
+ton p  =  not p || ton (not p)
+
+
+pattern candidates:
+
+ton p  =  p
+
+ton p  =  False
+
+ton p  =  True
+
+ton p  =  not p
+
+ton False  =  False
+ton True  =  False
+
+ton False  =  False
+ton True  =  True
+
+ton False  =  True
+ton True  =  False
+
+ton False  =  True
+ton True  =  True
+
+
+Candidates for: &| :: Bool -> Bool -> Bool
+  pruning with 39/49 rules
+  [4,2,4,8,4,72] direct candidates
+  [4,20,32,10,4,32] pattern candidates
+
+rules:
+not False == True
+not True == False
+p && p == p
+p || p == p
+not (not p) == p
+p && False == False
+p && True == p
+False && p == False
+True && p == p
+p || False == p
+p || True == True
+False || p == p
+True || p == True
+not (p && q) == not p || not q
+not (p && q) == not q || not p
+not (p || q) == not p && not q
+not (p || q) == not q && not p
+p && not p == False
+not p && p == False
+p || not p == True
+not p || p == True
+(p && q) && r == p && (q && r)
+(p && q) && r == q && (p && r)
+(p || q) || r == p || (q || r)
+(p || q) || r == q || (p || r)
+p && (p && q) == p && q
+p && (q && p) == p && q
+p && (q && p) == q && p
+p || (p || q) == p || q
+p || (q || p) == p || q
+p || (q || p) == q || p
+p && (p || q) == p
+p && (q || p) == p
+(p || q) && p == p
+(p || q) && q == q
+p || p && q == p
+p || q && p == p
+p && q || p == p
+p && q || q == q
+equations:
+q && p == p && q
+q || p == p || q
+q && (p && r) == p && (q && r)
+r && (p && q) == p && (q && r)
+r && (q && p) == p && (q && r)
+q || (p || r) == p || (q || r)
+r || (p || q) == p || (q || r)
+r || (q || p) == p || (q || r)
+(r || q) && p == p && (q || r)
+r && q || p == p || q && r
+
+direct candidates:
+
+p &| q  =  p
+
+p &| q  =  q
+
+p &| q  =  False
+
+p &| q  =  True
+
+p &| q  =  not p
+
+p &| q  =  not q
+
+p &| q  =  p && q
+
+p &| q  =  q && p
+
+p &| q  =  p || q
+
+p &| q  =  q || p
+
+p &| q  =  not p && q
+
+p &| q  =  not q && p
+
+p &| q  =  not p || q
+
+p &| q  =  not q || p
+
+p &| q  =  p && not q
+
+p &| q  =  q && not p
+
+p &| q  =  p || not q
+
+p &| q  =  q || not p
+
+p &| q  =  not p && not q
+
+p &| q  =  not q && not p
+
+p &| q  =  not p || not q
+
+p &| q  =  not q || not p
+
+p &| q  =  p && (not p && q)
+
+p &| q  =  p && (not p || q)
+
+p &| q  =  p && (q && not p)
+
+p &| q  =  p && (q || not p)
+
+p &| q  =  q && (not q && p)
+
+p &| q  =  q && (not q || p)
+
+p &| q  =  q && (p && not q)
+
+p &| q  =  q && (p || not q)
+
+p &| q  =  p || not p && q
+
+p &| q  =  p || (not p || q)
+
+p &| q  =  p || q && not p
+
+p &| q  =  p || (q || not p)
+
+p &| q  =  q || not q && p
+
+p &| q  =  q || (not q || p)
+
+p &| q  =  q || p && not q
+
+p &| q  =  q || (p || not q)
+
+p &| q  =  not p && (p || q)
+
+p &| q  =  not p && (q || p)
+
+p &| q  =  not q && (p || q)
+
+p &| q  =  not q && (q || p)
+
+p &| q  =  not p || p && q
+
+p &| q  =  not p || q && p
+
+p &| q  =  not q || p && q
+
+p &| q  =  not q || q && p
+
+p &| q  =  (p || q) && not p
+
+p &| q  =  (p || q) && not q
+
+p &| q  =  (q || p) && not p
+
+p &| q  =  (q || p) && not q
+
+p &| q  =  p && q || not p
+
+p &| q  =  p && q || not q
+
+p &| q  =  q && p || not p
+
+p &| q  =  q && p || not q
+
+p &| q  =  p && p &| not q
+
+p &| q  =  p && q &| not p
+
+p &| q  =  p && q &| not q
+
+p &| q  =  p && False &| not q
+
+p &| q  =  p && True &| not q
+
+p &| q  =  p && not p &| p
+
+p &| q  =  p && not p &| q
+
+p &| q  =  p && not p &| False
+
+p &| q  =  p && not p &| True
+
+p &| q  =  p && not q &| p
+
+p &| q  =  q && p &| not q
+
+p &| q  =  q && q &| not p
+
+p &| q  =  q && q &| not q
+
+p &| q  =  q && False &| not q
+
+p &| q  =  q && True &| not q
+
+p &| q  =  q && not p &| p
+
+p &| q  =  q && not p &| q
+
+p &| q  =  q && not p &| False
+
+p &| q  =  q && not p &| True
+
+p &| q  =  q && not q &| p
+
+p &| q  =  p || p &| not q
+
+p &| q  =  p || q &| not p
+
+p &| q  =  p || q &| not q
+
+p &| q  =  p || False &| not q
+
+p &| q  =  p || True &| not q
+
+p &| q  =  p || not p &| p
+
+p &| q  =  p || not p &| q
+
+p &| q  =  p || not p &| False
+
+p &| q  =  p || not p &| True
+
+p &| q  =  p || not q &| p
+
+p &| q  =  q || p &| not q
+
+p &| q  =  q || q &| not p
+
+p &| q  =  q || q &| not q
+
+p &| q  =  q || False &| not q
+
+p &| q  =  q || True &| not q
+
+p &| q  =  q || not p &| p
+
+p &| q  =  q || not p &| q
+
+p &| q  =  q || not p &| False
+
+p &| q  =  q || not p &| True
+
+p &| q  =  q || not q &| p
+
+
+pattern candidates:
+
+p &| q  =  p
+
+p &| q  =  q
+
+p &| q  =  False
+
+p &| q  =  True
+
+p &| q  =  not p
+
+p &| q  =  not q
+
+p &| False  =  p
+p &| True  =  p
+
+p &| False  =  p
+p &| True  =  False
+
+p &| False  =  p
+p &| True  =  True
+
+p &| False  =  False
+p &| True  =  p
+
+p &| False  =  False
+p &| True  =  False
+
+p &| False  =  False
+p &| True  =  True
+
+p &| False  =  True
+p &| True  =  p
+
+p &| False  =  True
+p &| True  =  False
+
+p &| False  =  True
+p &| True  =  True
+
+False &| p  =  p
+True &| p  =  p
+
+False &| p  =  p
+True &| p  =  False
+
+False &| p  =  p
+True &| p  =  True
+
+False &| p  =  False
+True &| p  =  p
+
+False &| p  =  False
+True &| p  =  False
+
+False &| p  =  False
+True &| p  =  True
+
+False &| p  =  True
+True &| p  =  p
+
+False &| p  =  True
+True &| p  =  False
+
+False &| p  =  True
+True &| p  =  True
+
+p &| q  =  p && q
+
+p &| q  =  q && p
+
+p &| q  =  p || q
+
+p &| q  =  q || p
+
+p &| False  =  p
+p &| True  =  not p
+
+p &| False  =  False
+p &| True  =  not p
+
+p &| False  =  True
+p &| True  =  not p
+
+p &| False  =  not p
+p &| True  =  p
+
+p &| False  =  not p
+p &| True  =  False
+
+p &| False  =  not p
+p &| True  =  True
+
+False &| p  =  p
+True &| p  =  not p
+
+False &| p  =  False
+True &| p  =  not p
+
+False &| p  =  True
+True &| p  =  not p
+
+False &| p  =  not p
+True &| p  =  p
+
+False &| p  =  not p
+True &| p  =  False
+
+False &| p  =  not p
+True &| p  =  True
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  True
+True &| True  =  True
+
+p &| q  =  not p && q
+
+p &| q  =  not q && p
+
+p &| q  =  not p || q
+
+p &| q  =  not q || p
+
+p &| q  =  p && not q
+
+p &| q  =  q && not p
+
+p &| q  =  p || not q
+
+p &| q  =  q || not p
+
+p &| False  =  not p
+p &| True  =  not p
+
+False &| p  =  not p
+True &| p  =  not p
+
+p &| q  =  not p && not q
+
+p &| q  =  not q && not p
+
+p &| q  =  not p || not q
+
+p &| q  =  not q || not p
+
+p &| q  =  p && (not p && q)
+
+p &| q  =  p && (not p || q)
+
+p &| q  =  p && (q && not p)
+
+p &| q  =  p && (q || not p)
+
+p &| q  =  q && (not q && p)
+
+p &| q  =  q && (not q || p)
+
+p &| q  =  q && (p && not q)
+
+p &| q  =  q && (p || not q)
+
+p &| q  =  p || not p && q
+
+p &| q  =  p || (not p || q)
+
+p &| q  =  p || q && not p
+
+p &| q  =  p || (q || not p)
+
+p &| q  =  q || not q && p
+
+p &| q  =  q || (not q || p)
+
+p &| q  =  q || p && not q
+
+p &| q  =  q || (p || not q)
+
+p &| q  =  not p && (p || q)
+
+p &| q  =  not p && (q || p)
+
+p &| q  =  not q && (p || q)
+
+p &| q  =  not q && (q || p)
+
+p &| q  =  not p || p && q
+
+p &| q  =  not p || q && p
+
+p &| q  =  not q || p && q
+
+p &| q  =  not q || q && p
+
+p &| q  =  (p || q) && not p
+
+p &| q  =  (p || q) && not q
+
+p &| q  =  (q || p) && not p
+
+p &| q  =  (q || p) && not q
+
+p &| q  =  p && q || not p
+
+p &| q  =  p && q || not q
+
+p &| q  =  q && p || not p
+
+p &| q  =  q && p || not q
+
+

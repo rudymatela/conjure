@@ -53,3 +53,19 @@ main  =  do
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
+
+  printCandidates 6 "ton" (undefined :: Bool -> Bool)
+    [ pr False
+    , pr True
+    , prim "&&" (&&)
+    , prim "||" (||)
+    , prim "not" not
+    ]
+
+  printCandidates 6 "&|" (undefined :: Bool -> Bool -> Bool)
+    [ pr False
+    , pr True
+    , prim "&&" (&&)
+    , prim "||" (||)
+    , prim "not" not
+    ]
