@@ -50,6 +50,7 @@ bench/take-drop
 bench/lots
 bench/p12
 bench/p30
+bench/candidates
 proto/u-conjure
 test/expr
 test/conjurable

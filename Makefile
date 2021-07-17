@@ -20,6 +20,7 @@ EG = \
   eg/spec \
   eg/tapps \
   eg/tree \
+  bench/candidates \
   bench/ill-hit \
   bench/longshot \
   bench/self \

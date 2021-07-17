@@ -3,6 +3,19 @@ bench/avgs: \
   mk/toplibs
 bench/avgs.o: \
   bench/avgs.hs
+bench/candidates: \
+  bench/candidates.hs \
+  mk/toplibs
+bench/candidates.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  bench/candidates.hs
 bench/ill-hit: \
   bench/ill-hit.hs \
   mk/toplibs

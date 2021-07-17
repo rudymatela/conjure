@@ -1,0 +1,2347 @@
+Candidates for: foo :: Int -> Int
+  pruning with 6/10 rules
+  [3,0,4,0,8,0] direct candidates
+  [3,6,20,33,120,182] pattern candidates
+
+rules:
+x * y == x + y
+x * y == y + x
+x + 0 == x
+0 + x == x
+(x + y) + z == x + (y + z)
+(x + y) + z == y + (x + z)
+equations:
+y + x == x + y
+y + (x + z) == x + (y + z)
+z + (x + y) == x + (y + z)
+z + (y + x) == x + (y + z)
+
+direct candidates:
+
+foo x  =  x
+
+foo x  =  0
+
+foo x  =  1
+
+foo x  =  x + x
+
+foo x  =  x + 1
+
+foo x  =  1 + x
+
+foo x  =  1 + 1
+
+foo x  =  x + (x + x)
+
+foo x  =  x + (x + 1)
+
+foo x  =  x + (1 + x)
+
+foo x  =  x + (1 + 1)
+
+foo x  =  1 + (x + x)
+
+foo x  =  1 + (x + 1)
+
+foo x  =  1 + (1 + x)
+
+foo x  =  1 + (1 + 1)
+
+
+pattern candidates:
+
+foo x  =  x
+
+foo x  =  0
+
+foo x  =  1
+
+foo 0  =  0
+foo x  =  x
+
+foo 0  =  0
+foo x  =  0
+
+foo 0  =  0
+foo x  =  1
+
+foo 0  =  1
+foo x  =  x
+
+foo 0  =  1
+foo x  =  0
+
+foo 0  =  1
+foo x  =  1
+
+foo 0  =  0
+foo x  =  foo x
+
+foo 0  =  0
+foo x  =  foo 0
+
+foo 0  =  0
+foo x  =  foo 1
+
+foo 0  =  0
+foo x  =  foo 0
+
+foo 0  =  0
+foo x  =  foo 1
+
+foo 0  =  1
+foo x  =  foo x
+
+foo 0  =  1
+foo x  =  foo 0
+
+foo 0  =  1
+foo x  =  foo 1
+
+foo 0  =  1
+foo x  =  foo 0
+
+foo 0  =  1
+foo x  =  foo 1
+
+foo x  =  x + x
+
+foo x  =  x + 1
+
+foo x  =  1 + x
+
+foo x  =  1 + 1
+
+foo 1  =  0
+foo x  =  x
+
+foo 1  =  0
+foo x  =  0
+
+foo 1  =  0
+foo x  =  1
+
+foo 1  =  1
+foo x  =  x
+
+foo 1  =  1
+foo x  =  0
+
+foo 1  =  1
+foo x  =  1
+
+foo 1  =  0
+foo x  =  foo x
+
+foo 1  =  0
+foo x  =  foo 0
+
+foo 1  =  0
+foo x  =  foo 1
+
+foo 1  =  0
+foo x  =  foo 0
+
+foo 1  =  0
+foo x  =  foo 1
+
+foo 1  =  1
+foo x  =  foo x
+
+foo 1  =  1
+foo x  =  foo 0
+
+foo 1  =  1
+foo x  =  foo 1
+
+foo 1  =  1
+foo x  =  foo 0
+
+foo 1  =  1
+foo x  =  foo 1
+
+foo 0  =  0
+foo x  =  x + x
+
+foo 0  =  0
+foo x  =  x + 1
+
+foo 0  =  0
+foo x  =  1 + x
+
+foo 0  =  0
+foo x  =  1 + 1
+
+foo 0  =  1
+foo x  =  x + x
+
+foo 0  =  1
+foo x  =  x + 1
+
+foo 0  =  1
+foo x  =  1 + x
+
+foo 0  =  1
+foo x  =  1 + 1
+
+foo 0  =  1 + 1
+foo x  =  x
+
+foo 0  =  1 + 1
+foo x  =  0
+
+foo 0  =  1 + 1
+foo x  =  1
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  x
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  0
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  x
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  0
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  0
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  1
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  0
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  1
+
+foo 0  =  0
+foo x  =  foo (x + x)
+
+foo 0  =  0
+foo x  =  foo (x + 1)
+
+foo 0  =  0
+foo x  =  foo (x + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + x)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + x)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (x + x)
+
+foo 0  =  0
+foo x  =  foo (x + 1)
+
+foo 0  =  0
+foo x  =  foo (x + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + x)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + x)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (x + x)
+
+foo 0  =  1
+foo x  =  foo (x + 1)
+
+foo 0  =  1
+foo x  =  foo (x + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + x)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + x)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (x + x)
+
+foo 0  =  1
+foo x  =  foo (x + 1)
+
+foo 0  =  1
+foo x  =  foo (x + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + x)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + x)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  x + foo x
+
+foo 0  =  0
+foo x  =  x + foo 0
+
+foo 0  =  0
+foo x  =  x + foo 1
+
+foo 0  =  0
+foo x  =  x + foo 0
+
+foo 0  =  0
+foo x  =  x + foo 1
+
+foo 0  =  0
+foo x  =  foo x + x
+
+foo 0  =  0
+foo x  =  foo 0 + x
+
+foo 0  =  0
+foo x  =  foo 1 + x
+
+foo 0  =  0
+foo x  =  foo 0 + x
+
+foo 0  =  0
+foo x  =  foo 1 + x
+
+foo 0  =  0
+foo x  =  foo x + 1
+
+foo 0  =  0
+foo x  =  foo 0 + 1
+
+foo 0  =  0
+foo x  =  foo 1 + 1
+
+foo 0  =  0
+foo x  =  foo 0 + 1
+
+foo 0  =  0
+foo x  =  foo 1 + 1
+
+foo 0  =  0
+foo x  =  1 + foo x
+
+foo 0  =  0
+foo x  =  1 + foo 0
+
+foo 0  =  0
+foo x  =  1 + foo 1
+
+foo 0  =  0
+foo x  =  1 + foo 0
+
+foo 0  =  0
+foo x  =  1 + foo 1
+
+foo 0  =  1
+foo x  =  x + foo x
+
+foo 0  =  1
+foo x  =  x + foo 0
+
+foo 0  =  1
+foo x  =  x + foo 1
+
+foo 0  =  1
+foo x  =  x + foo 0
+
+foo 0  =  1
+foo x  =  x + foo 1
+
+foo 0  =  1
+foo x  =  foo x + x
+
+foo 0  =  1
+foo x  =  foo 0 + x
+
+foo 0  =  1
+foo x  =  foo 1 + x
+
+foo 0  =  1
+foo x  =  foo 0 + x
+
+foo 0  =  1
+foo x  =  foo 1 + x
+
+foo 0  =  1
+foo x  =  foo x + 1
+
+foo 0  =  1
+foo x  =  foo 0 + 1
+
+foo 0  =  1
+foo x  =  foo 1 + 1
+
+foo 0  =  1
+foo x  =  foo 0 + 1
+
+foo 0  =  1
+foo x  =  foo 1 + 1
+
+foo 0  =  1
+foo x  =  1 + foo x
+
+foo 0  =  1
+foo x  =  1 + foo 0
+
+foo 0  =  1
+foo x  =  1 + foo 1
+
+foo 0  =  1
+foo x  =  1 + foo 0
+
+foo 0  =  1
+foo x  =  1 + foo 1
+
+foo 0  =  1 + 1
+foo x  =  foo x
+
+foo 0  =  1 + 1
+foo x  =  foo 0
+
+foo 0  =  1 + 1
+foo x  =  foo 1
+
+foo 0  =  1 + 1
+foo x  =  foo 0
+
+foo 0  =  1 + 1
+foo x  =  foo 1
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  foo x
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  foo 0
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  foo 1
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  foo 0
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  foo 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo x
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo 0
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo 0
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo 1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo 0
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo 1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo 0
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo 1
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  foo x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  foo 0
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  foo 1
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  foo 0
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  foo 1
+
+foo x  =  x + (x + x)
+
+foo x  =  x + (x + 1)
+
+foo x  =  x + (1 + x)
+
+foo x  =  x + (1 + 1)
+
+foo x  =  1 + (x + x)
+
+foo x  =  1 + (x + 1)
+
+foo x  =  1 + (1 + x)
+
+foo x  =  1 + (1 + 1)
+
+foo 1  =  0
+foo x  =  x + x
+
+foo 1  =  0
+foo x  =  x + 1
+
+foo 1  =  0
+foo x  =  1 + x
+
+foo 1  =  0
+foo x  =  1 + 1
+
+foo 1  =  1
+foo x  =  x + x
+
+foo 1  =  1
+foo x  =  x + 1
+
+foo 1  =  1
+foo x  =  1 + x
+
+foo 1  =  1
+foo x  =  1 + 1
+
+foo 1  =  1 + 1
+foo x  =  x
+
+foo 1  =  1 + 1
+foo x  =  0
+
+foo 1  =  1 + 1
+foo x  =  1
+
+foo 1  =  0
+foo x  =  foo (x + x)
+
+foo 1  =  0
+foo x  =  foo (x + 1)
+
+foo 1  =  0
+foo x  =  foo (x + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + x)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + x)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (x + x)
+
+foo 1  =  0
+foo x  =  foo (x + 1)
+
+foo 1  =  0
+foo x  =  foo (x + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + x)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + x)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  0
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (x + x)
+
+foo 1  =  1
+foo x  =  foo (x + 1)
+
+foo 1  =  1
+foo x  =  foo (x + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + x)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + x)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (x + x)
+
+foo 1  =  1
+foo x  =  foo (x + 1)
+
+foo 1  =  1
+foo x  =  foo (x + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + x)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + x)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 1  =  1
+foo x  =  foo (1 + 1)
+
+foo 0  =  0
+foo x  =  foo x + foo x
+
+foo 0  =  0
+foo x  =  foo x + foo 0
+
+foo 0  =  0
+foo x  =  foo x + foo 1
+
+foo 0  =  0
+foo x  =  foo x + foo 0
+
+foo 0  =  0
+foo x  =  foo x + foo 1
+
+foo 0  =  0
+foo x  =  foo 0 + foo x
+
+foo 0  =  0
+foo x  =  foo 0 + foo 0
+
+foo 0  =  0
+foo x  =  foo 0 + foo 1
+
+foo 0  =  0
+foo x  =  foo 0 + foo 0
+
+foo 0  =  0
+foo x  =  foo 0 + foo 1
+
+foo 0  =  0
+foo x  =  foo 1 + foo x
+
+foo 0  =  0
+foo x  =  foo 1 + foo 0
+
+foo 0  =  0
+foo x  =  foo 1 + foo 1
+
+foo 0  =  0
+foo x  =  foo 1 + foo 0
+
+foo 0  =  0
+foo x  =  foo 1 + foo 1
+
+foo 0  =  0
+foo x  =  foo 0 + foo x
+
+foo 0  =  0
+foo x  =  foo 0 + foo 0
+
+foo 0  =  0
+foo x  =  foo 0 + foo 1
+
+foo 0  =  0
+foo x  =  foo 0 + foo 0
+
+foo 0  =  0
+foo x  =  foo 0 + foo 1
+
+foo 0  =  0
+foo x  =  foo 1 + foo x
+
+foo 0  =  0
+foo x  =  foo 1 + foo 0
+
+foo 0  =  0
+foo x  =  foo 1 + foo 1
+
+foo 0  =  0
+foo x  =  foo 1 + foo 0
+
+foo 0  =  0
+foo x  =  foo 1 + foo 1
+
+foo 0  =  1
+foo x  =  foo x + foo x
+
+foo 0  =  1
+foo x  =  foo x + foo 0
+
+foo 0  =  1
+foo x  =  foo x + foo 1
+
+foo 0  =  1
+foo x  =  foo x + foo 0
+
+foo 0  =  1
+foo x  =  foo x + foo 1
+
+foo 0  =  1
+foo x  =  foo 0 + foo x
+
+foo 0  =  1
+foo x  =  foo 0 + foo 0
+
+foo 0  =  1
+foo x  =  foo 0 + foo 1
+
+foo 0  =  1
+foo x  =  foo 0 + foo 0
+
+foo 0  =  1
+foo x  =  foo 0 + foo 1
+
+foo 0  =  1
+foo x  =  foo 1 + foo x
+
+foo 0  =  1
+foo x  =  foo 1 + foo 0
+
+foo 0  =  1
+foo x  =  foo 1 + foo 1
+
+foo 0  =  1
+foo x  =  foo 1 + foo 0
+
+foo 0  =  1
+foo x  =  foo 1 + foo 1
+
+foo 0  =  1
+foo x  =  foo 0 + foo x
+
+foo 0  =  1
+foo x  =  foo 0 + foo 0
+
+foo 0  =  1
+foo x  =  foo 0 + foo 1
+
+foo 0  =  1
+foo x  =  foo 0 + foo 0
+
+foo 0  =  1
+foo x  =  foo 0 + foo 1
+
+foo 0  =  1
+foo x  =  foo 1 + foo x
+
+foo 0  =  1
+foo x  =  foo 1 + foo 0
+
+foo 0  =  1
+foo x  =  foo 1 + foo 1
+
+foo 0  =  1
+foo x  =  foo 1 + foo 0
+
+foo 0  =  1
+foo x  =  foo 1 + foo 1
+
+foo 1  =  0
+foo x  =  x + foo x
+
+foo 1  =  0
+foo x  =  x + foo 0
+
+foo 1  =  0
+foo x  =  x + foo 1
+
+foo 1  =  0
+foo x  =  x + foo 0
+
+foo 1  =  0
+foo x  =  x + foo 1
+
+foo 1  =  0
+foo x  =  foo x + x
+
+foo 1  =  0
+foo x  =  foo 0 + x
+
+foo 1  =  0
+foo x  =  foo 1 + x
+
+foo 1  =  0
+foo x  =  foo 0 + x
+
+foo 1  =  0
+foo x  =  foo 1 + x
+
+foo 1  =  0
+foo x  =  foo x + 1
+
+foo 1  =  0
+foo x  =  foo 0 + 1
+
+foo 1  =  0
+foo x  =  foo 1 + 1
+
+foo 1  =  0
+foo x  =  foo 0 + 1
+
+foo 1  =  0
+foo x  =  foo 1 + 1
+
+foo 1  =  0
+foo x  =  1 + foo x
+
+foo 1  =  0
+foo x  =  1 + foo 0
+
+foo 1  =  0
+foo x  =  1 + foo 1
+
+foo 1  =  0
+foo x  =  1 + foo 0
+
+foo 1  =  0
+foo x  =  1 + foo 1
+
+foo 1  =  1
+foo x  =  x + foo x
+
+foo 1  =  1
+foo x  =  x + foo 0
+
+foo 1  =  1
+foo x  =  x + foo 1
+
+foo 1  =  1
+foo x  =  x + foo 0
+
+foo 1  =  1
+foo x  =  x + foo 1
+
+foo 1  =  1
+foo x  =  foo x + x
+
+foo 1  =  1
+foo x  =  foo 0 + x
+
+foo 1  =  1
+foo x  =  foo 1 + x
+
+foo 1  =  1
+foo x  =  foo 0 + x
+
+foo 1  =  1
+foo x  =  foo 1 + x
+
+foo 1  =  1
+foo x  =  foo x + 1
+
+foo 1  =  1
+foo x  =  foo 0 + 1
+
+foo 1  =  1
+foo x  =  foo 1 + 1
+
+foo 1  =  1
+foo x  =  foo 0 + 1
+
+foo 1  =  1
+foo x  =  foo 1 + 1
+
+foo 1  =  1
+foo x  =  1 + foo x
+
+foo 1  =  1
+foo x  =  1 + foo 0
+
+foo 1  =  1
+foo x  =  1 + foo 1
+
+foo 1  =  1
+foo x  =  1 + foo 0
+
+foo 1  =  1
+foo x  =  1 + foo 1
+
+foo 1  =  1 + 1
+foo x  =  foo x
+
+foo 1  =  1 + 1
+foo x  =  foo 0
+
+foo 1  =  1 + 1
+foo x  =  foo 1
+
+foo 1  =  1 + 1
+foo x  =  foo 0
+
+foo 1  =  1 + 1
+foo x  =  foo 1
+
+foo 0  =  0
+foo x  =  x + (x + x)
+
+foo 0  =  0
+foo x  =  x + (x + 1)
+
+foo 0  =  0
+foo x  =  x + (1 + x)
+
+foo 0  =  0
+foo x  =  x + (1 + 1)
+
+foo 0  =  0
+foo x  =  1 + (x + x)
+
+foo 0  =  0
+foo x  =  1 + (x + 1)
+
+foo 0  =  0
+foo x  =  1 + (1 + x)
+
+foo 0  =  0
+foo x  =  1 + (1 + 1)
+
+foo 0  =  1
+foo x  =  x + (x + x)
+
+foo 0  =  1
+foo x  =  x + (x + 1)
+
+foo 0  =  1
+foo x  =  x + (1 + x)
+
+foo 0  =  1
+foo x  =  x + (1 + 1)
+
+foo 0  =  1
+foo x  =  1 + (x + x)
+
+foo 0  =  1
+foo x  =  1 + (x + 1)
+
+foo 0  =  1
+foo x  =  1 + (1 + x)
+
+foo 0  =  1
+foo x  =  1 + (1 + 1)
+
+foo 0  =  1 + 1
+foo x  =  x + x
+
+foo 0  =  1 + 1
+foo x  =  x + 1
+
+foo 0  =  1 + 1
+foo x  =  1 + x
+
+foo 0  =  1 + 1
+foo x  =  1 + 1
+
+foo 0  =  1 + (1 + 1)
+foo x  =  x
+
+foo 0  =  1 + (1 + 1)
+foo x  =  0
+
+foo 0  =  1 + (1 + 1)
+foo x  =  1
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  x + x
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  x + 1
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  1 + x
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  1 + 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  x + x
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  x + 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  1 + x
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  1 + 1
+
+foo 0  =  0
+foo 1  =  1 + 1
+foo x  =  x
+
+foo 0  =  0
+foo 1  =  1 + 1
+foo x  =  0
+
+foo 0  =  0
+foo 1  =  1 + 1
+foo x  =  1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  x + x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  x + 1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  1 + x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  1 + 1
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  x + x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  x + 1
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  1 + x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  1 + 1
+
+foo 0  =  1
+foo 1  =  1 + 1
+foo x  =  x
+
+foo 0  =  1
+foo 1  =  1 + 1
+foo x  =  0
+
+foo 0  =  1
+foo 1  =  1 + 1
+foo x  =  1
+
+foo 0  =  1 + 1
+foo 1  =  0
+foo x  =  x
+
+foo 0  =  1 + 1
+foo 1  =  0
+foo x  =  0
+
+foo 0  =  1 + 1
+foo 1  =  0
+foo x  =  1
+
+foo 0  =  1 + 1
+foo 1  =  1
+foo x  =  x
+
+foo 0  =  1 + 1
+foo 1  =  1
+foo x  =  0
+
+foo 0  =  1 + 1
+foo 1  =  1
+foo x  =  1
+
+
+Candidates for: ? :: Int -> Int -> Int
+  pruning with 6/10 rules
+  [3,0,4,0] direct candidates
+  [3,12,16,140] pattern candidates
+
+rules:
+x * y == x + y
+x * y == y + x
+x + 0 == x
+0 + x == x
+(x + y) + z == x + (y + z)
+(x + y) + z == y + (x + z)
+equations:
+y + x == x + y
+y + (x + z) == x + (y + z)
+z + (x + y) == x + (y + z)
+z + (y + x) == x + (y + z)
+
+direct candidates:
+
+x ? y  =  x
+
+x ? y  =  y
+
+x ? y  =  0
+
+x ? y  =  x + x
+
+x ? y  =  x + y
+
+x ? y  =  y + x
+
+x ? y  =  y + y
+
+
+pattern candidates:
+
+x ? y  =  x
+
+x ? y  =  y
+
+x ? y  =  0
+
+x ? 0  =  x
+x ? y  =  x
+
+x ? 0  =  x
+x ? y  =  y
+
+x ? 0  =  x
+x ? y  =  0
+
+x ? 0  =  0
+x ? y  =  x
+
+x ? 0  =  0
+x ? y  =  y
+
+x ? 0  =  0
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  x
+
+0 ? x  =  x
+x ? y  =  y
+
+0 ? x  =  x
+x ? y  =  0
+
+0 ? x  =  0
+x ? y  =  x
+
+0 ? x  =  0
+x ? y  =  y
+
+0 ? x  =  0
+x ? y  =  0
+
+x ? y  =  x + x
+
+x ? y  =  x + y
+
+x ? y  =  y + x
+
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  0
+
+x ? 0  =  x
+x ? y  =  x ? x
+
+x ? 0  =  x
+x ? y  =  x ? y
+
+x ? 0  =  x
+x ? y  =  x ? 0
+
+x ? 0  =  x
+x ? y  =  x ? 0
+
+x ? 0  =  x
+x ? y  =  y ? x
+
+x ? 0  =  x
+x ? y  =  y ? y
+
+x ? 0  =  x
+x ? y  =  y ? 0
+
+x ? 0  =  x
+x ? y  =  y ? 0
+
+x ? 0  =  x
+x ? y  =  0 ? x
+
+x ? 0  =  x
+x ? y  =  0 ? y
+
+x ? 0  =  x
+x ? y  =  0 ? 0
+
+x ? 0  =  x
+x ? y  =  0 ? 0
+
+x ? 0  =  x
+x ? y  =  0 ? x
+
+x ? 0  =  x
+x ? y  =  0 ? y
+
+x ? 0  =  x
+x ? y  =  0 ? 0
+
+x ? 0  =  x
+x ? y  =  0 ? 0
+
+x ? 0  =  x ? x
+x ? y  =  x
+
+x ? 0  =  x ? 0
+x ? y  =  x
+
+x ? 0  =  x ? 0
+x ? y  =  x
+
+x ? 0  =  0 ? x
+x ? y  =  x
+
+x ? 0  =  0 ? 0
+x ? y  =  x
+
+x ? 0  =  0 ? 0
+x ? y  =  x
+
+x ? 0  =  0 ? x
+x ? y  =  x
+
+x ? 0  =  0 ? 0
+x ? y  =  x
+
+x ? 0  =  0 ? 0
+x ? y  =  x
+
+x ? 0  =  x ? x
+x ? y  =  y
+
+x ? 0  =  x ? 0
+x ? y  =  y
+
+x ? 0  =  x ? 0
+x ? y  =  y
+
+x ? 0  =  0 ? x
+x ? y  =  y
+
+x ? 0  =  0 ? 0
+x ? y  =  y
+
+x ? 0  =  0 ? 0
+x ? y  =  y
+
+x ? 0  =  0 ? x
+x ? y  =  y
+
+x ? 0  =  0 ? 0
+x ? y  =  y
+
+x ? 0  =  0 ? 0
+x ? y  =  y
+
+x ? 0  =  x ? x
+x ? y  =  0
+
+x ? 0  =  x ? 0
+x ? y  =  0
+
+x ? 0  =  x ? 0
+x ? y  =  0
+
+x ? 0  =  0 ? x
+x ? y  =  0
+
+x ? 0  =  0 ? 0
+x ? y  =  0
+
+x ? 0  =  0 ? 0
+x ? y  =  0
+
+x ? 0  =  0 ? x
+x ? y  =  0
+
+x ? 0  =  0 ? 0
+x ? y  =  0
+
+x ? 0  =  0 ? 0
+x ? y  =  0
+
+x ? 0  =  0
+x ? y  =  x ? x
+
+x ? 0  =  0
+x ? y  =  x ? y
+
+x ? 0  =  0
+x ? y  =  x ? 0
+
+x ? 0  =  0
+x ? y  =  x ? 0
+
+x ? 0  =  0
+x ? y  =  y ? x
+
+x ? 0  =  0
+x ? y  =  y ? y
+
+x ? 0  =  0
+x ? y  =  y ? 0
+
+x ? 0  =  0
+x ? y  =  y ? 0
+
+x ? 0  =  0
+x ? y  =  0 ? x
+
+x ? 0  =  0
+x ? y  =  0 ? y
+
+x ? 0  =  0
+x ? y  =  0 ? 0
+
+x ? 0  =  0
+x ? y  =  0 ? 0
+
+x ? 0  =  0
+x ? y  =  0 ? x
+
+x ? 0  =  0
+x ? y  =  0 ? y
+
+x ? 0  =  0
+x ? y  =  0 ? 0
+
+x ? 0  =  0
+x ? y  =  0 ? 0
+
+0 ? x  =  x
+x ? y  =  x ? x
+
+0 ? x  =  x
+x ? y  =  x ? y
+
+0 ? x  =  x
+x ? y  =  x ? 0
+
+0 ? x  =  x
+x ? y  =  x ? 0
+
+0 ? x  =  x
+x ? y  =  y ? x
+
+0 ? x  =  x
+x ? y  =  y ? y
+
+0 ? x  =  x
+x ? y  =  y ? 0
+
+0 ? x  =  x
+x ? y  =  y ? 0
+
+0 ? x  =  x
+x ? y  =  0 ? x
+
+0 ? x  =  x
+x ? y  =  0 ? y
+
+0 ? x  =  x
+x ? y  =  0 ? 0
+
+0 ? x  =  x
+x ? y  =  0 ? 0
+
+0 ? x  =  x
+x ? y  =  0 ? x
+
+0 ? x  =  x
+x ? y  =  0 ? y
+
+0 ? x  =  x
+x ? y  =  0 ? 0
+
+0 ? x  =  x
+x ? y  =  0 ? 0
+
+0 ? x  =  x ? x
+x ? y  =  x
+
+0 ? x  =  x ? 0
+x ? y  =  x
+
+0 ? x  =  x ? 0
+x ? y  =  x
+
+0 ? x  =  0 ? x
+x ? y  =  x
+
+0 ? x  =  0 ? 0
+x ? y  =  x
+
+0 ? x  =  0 ? 0
+x ? y  =  x
+
+0 ? x  =  0 ? x
+x ? y  =  x
+
+0 ? x  =  0 ? 0
+x ? y  =  x
+
+0 ? x  =  0 ? 0
+x ? y  =  x
+
+0 ? x  =  x ? x
+x ? y  =  y
+
+0 ? x  =  x ? 0
+x ? y  =  y
+
+0 ? x  =  x ? 0
+x ? y  =  y
+
+0 ? x  =  0 ? x
+x ? y  =  y
+
+0 ? x  =  0 ? 0
+x ? y  =  y
+
+0 ? x  =  0 ? 0
+x ? y  =  y
+
+0 ? x  =  0 ? x
+x ? y  =  y
+
+0 ? x  =  0 ? 0
+x ? y  =  y
+
+0 ? x  =  0 ? 0
+x ? y  =  y
+
+0 ? x  =  x ? x
+x ? y  =  0
+
+0 ? x  =  x ? 0
+x ? y  =  0
+
+0 ? x  =  x ? 0
+x ? y  =  0
+
+0 ? x  =  0 ? x
+x ? y  =  0
+
+0 ? x  =  0 ? 0
+x ? y  =  0
+
+0 ? x  =  0 ? 0
+x ? y  =  0
+
+0 ? x  =  0 ? x
+x ? y  =  0
+
+0 ? x  =  0 ? 0
+x ? y  =  0
+
+0 ? x  =  0 ? 0
+x ? y  =  0
+
+0 ? x  =  0
+x ? y  =  x ? x
+
+0 ? x  =  0
+x ? y  =  x ? y
+
+0 ? x  =  0
+x ? y  =  x ? 0
+
+0 ? x  =  0
+x ? y  =  x ? 0
+
+0 ? x  =  0
+x ? y  =  y ? x
+
+0 ? x  =  0
+x ? y  =  y ? y
+
+0 ? x  =  0
+x ? y  =  y ? 0
+
+0 ? x  =  0
+x ? y  =  y ? 0
+
+0 ? x  =  0
+x ? y  =  0 ? x
+
+0 ? x  =  0
+x ? y  =  0 ? y
+
+0 ? x  =  0
+x ? y  =  0 ? 0
+
+0 ? x  =  0
+x ? y  =  0 ? 0
+
+0 ? x  =  0
+x ? y  =  0 ? x
+
+0 ? x  =  0
+x ? y  =  0 ? y
+
+0 ? x  =  0
+x ? y  =  0 ? 0
+
+0 ? x  =  0
+x ? y  =  0 ? 0
+
+x ? 0  =  x
+x ? y  =  x + x
+
+x ? 0  =  x
+x ? y  =  x + y
+
+x ? 0  =  x
+x ? y  =  y + x
+
+x ? 0  =  x
+x ? y  =  y + y
+
+x ? 0  =  0
+x ? y  =  x + x
+
+x ? 0  =  0
+x ? y  =  x + y
+
+x ? 0  =  0
+x ? y  =  y + x
+
+x ? 0  =  0
+x ? y  =  y + y
+
+x ? 0  =  x + x
+x ? y  =  x
+
+x ? 0  =  x + x
+x ? y  =  y
+
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  x + x
+
+0 ? x  =  x
+x ? y  =  x + y
+
+0 ? x  =  x
+x ? y  =  y + x
+
+0 ? x  =  x
+x ? y  =  y + y
+
+0 ? x  =  0
+x ? y  =  x + x
+
+0 ? x  =  0
+x ? y  =  x + y
+
+0 ? x  =  0
+x ? y  =  y + x
+
+0 ? x  =  0
+x ? y  =  y + y
+
+0 ? x  =  x + x
+x ? y  =  x
+
+0 ? x  =  x + x
+x ? y  =  y
+
+0 ? x  =  x + x
+x ? y  =  0
+
+
+Candidates for: goo :: [Int] -> [Int]
+  pruning with 4/4 rules
+  [2,0,1,0,1,0] direct candidates
+  [2,2,4,3,18,15] pattern candidates
+
+rules:
+xs ++ [] == xs
+[] ++ xs == xs
+(xs ++ ys) ++ zs == xs ++ (ys ++ zs)
+(x:xs) ++ ys == x:(xs ++ ys)
+
+direct candidates:
+
+goo xs  =  xs
+
+goo xs  =  []
+
+goo xs  =  xs ++ xs
+
+goo xs  =  xs ++ (xs ++ xs)
+
+
+pattern candidates:
+
+goo xs  =  xs
+
+goo xs  =  []
+
+goo []  =  []
+goo (x:xs)  =  xs
+
+goo []  =  []
+goo (x:xs)  =  []
+
+goo []  =  []
+goo (x:xs)  =  goo xs
+
+goo []  =  []
+goo (x:xs)  =  goo []
+
+goo []  =  []
+goo (x:xs)  =  goo []
+
+goo xs  =  xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  x:xs
+
+goo []  =  []
+goo (x:xs)  =  [x]
+
+goo []  =  []
+goo (x:xs)  =  xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  goo (x:xs)
+
+goo []  =  []
+goo (x:xs)  =  goo [x]
+
+goo []  =  []
+goo (x:xs)  =  goo [x]
+
+goo []  =  []
+goo (x:xs)  =  goo (x:xs)
+
+goo []  =  []
+goo (x:xs)  =  goo [x]
+
+goo []  =  []
+goo (x:xs)  =  goo [x]
+
+goo []  =  []
+goo (x:xs)  =  goo (xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  goo (xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  x:goo xs
+
+goo []  =  []
+goo (x:xs)  =  x:goo []
+
+goo []  =  []
+goo (x:xs)  =  x:goo []
+
+goo []  =  []
+goo (x:xs)  =  xs ++ goo xs
+
+goo []  =  []
+goo (x:xs)  =  xs ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  xs ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ xs
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ xs
+
+goo xs  =  xs ++ (xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ goo xs
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ goo xs
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ goo xs
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  goo [] ++ goo []
+
+goo []  =  []
+goo (x:xs)  =  x:x:xs
+
+goo []  =  []
+goo (x:xs)  =  [x,x]
+
+goo []  =  []
+goo (x:xs)  =  x:(xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (x:xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ [x]
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (xs ++ xs)
+
+
+Candidates for: ?? :: [Int] -> [Int] -> [Int]
+  pruning with 4/4 rules
+  [3,0,4,0] direct candidates
+  [3,12,16,98] pattern candidates
+
+rules:
+xs ++ [] == xs
+[] ++ xs == xs
+(xs ++ ys) ++ zs == xs ++ (ys ++ zs)
+(x:xs) ++ ys == x:(xs ++ ys)
+
+direct candidates:
+
+xs ?? ys  =  xs
+
+xs ?? ys  =  ys
+
+xs ?? ys  =  []
+
+xs ?? ys  =  xs ++ xs
+
+xs ?? ys  =  xs ++ ys
+
+xs ?? ys  =  ys ++ xs
+
+xs ?? ys  =  ys ++ ys
+
+
+pattern candidates:
+
+xs ?? ys  =  xs
+
+xs ?? ys  =  ys
+
+xs ?? ys  =  []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  []
+
+xs ?? ys  =  xs ++ xs
+
+xs ?? ys  =  xs ++ ys
+
+xs ?? ys  =  ys ++ xs
+
+xs ?? ys  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ?? xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ?? ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ?? xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ?? ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [] ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [] ?? []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [x]
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [x]
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  xs
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  x:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  x:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [x]
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  x:xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  x:ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [x]
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  ys
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  []
+
+

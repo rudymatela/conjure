@@ -5,8 +5,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * add switch for case candidates?
 
-* add test for case candidates?
-
 * improve pruning of generated case candidates
 
 
