@@ -7,7 +7,7 @@ upcoming
 
 * background primitives are now provided with `pr` and `prim`.
 * report number of rules used in pruning
-* require Express v1.0.2
+* require Express v1.0.4 and Speculate v0.4.12
 * allow `..` notation
 * add benchmarks, replicate, subset, p12, p30 and candidates
 * add and use the `Defn` type and `conjureDefns`
