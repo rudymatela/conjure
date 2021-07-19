@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.4.0
+------
 
 * background primitives are now provided with `pr` and `prim`.
 * report number of rules used in pruning
