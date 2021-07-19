@@ -2,6 +2,19 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* background primitives are now provided with `pr` and `prim`.
+* report number of rules used in pruning
+* require Express v1.0.2
+* allow `..` notation
+* add benchmarks, replicate, subset, p12, p30 and candidates
+* add and use the `Defn` type and `conjureDefns`
+* minor changes in benchmarks
+* cleanup unused code
+
+
 v0.3.6
 ------
 
