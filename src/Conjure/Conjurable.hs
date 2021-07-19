@@ -486,9 +486,6 @@ instance (Integral a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conj
   conjureTiers     =  reifyTiers
   conjureSubTypes q  =  conjureType (numerator q)
 
--- TODO: move Express (Complex a) to Data.Express
-instance (Show a, Typeable a) => Express (Complex a) where  expr  =  val
-
 instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Complex a) where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
