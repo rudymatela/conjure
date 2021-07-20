@@ -14,13 +14,6 @@ sort' [x,y,z]
   | x <= y && y <= z  =  [x,y,z]
   | z <= y && y <= x  =  [z,y,x]
 
-pow :: Int -> Int -> Int
-pow 2 0  =  1
-pow 2 1  =  2
-pow 2 2  =  4
-pow 2 3  =  8
-pow 3 2  =  9
-
 duplicates :: [Int] -> [Int] -- Eq a => [a] -> [a]
 duplicates []  =  []
 duplicates (x:xs)  =
@@ -59,32 +52,6 @@ main = do
     , prim "<" ((<) :: Int -> Int -> Bool)
     , prim ">=" ((>=) :: Int -> Int -> Bool)
     , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
-    ]
-
-  -- pow b e  =  if e == 0 then 1 else b * pow b (dec e)
-  --             1  2  3 4      5      6 7 8   9  10 11
-  -- somehow this takes 30s to run, the two arguments
-  -- of the same type introduce the difficulty here.
-  conjureWithMaxSize 8 "pow" pow
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
-    ]
-
-  -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1
-  --             1  2  3 4      5      6   7  8     9 10 11 12  13   14 15 16 17  18    19     20
-  -- -- OR --
-  -- pow b 0  =  1
-  -- pow b e  =  pow b (halve e) * pow b (halve e) * if odd e then b else 1
-  --             2   3  4     5  6 7   8  9    10 11 12 13 14     15     16
-  -- out of reach performance wise
-  conjureWithMaxSize 6 "pow" pow
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "halve" ((`div` 2) :: Int -> Int)
     ]
 
   -- duplicates xs  =

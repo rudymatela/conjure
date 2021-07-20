@@ -198,6 +198,19 @@ eg/list.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   eg/list.hs
+eg/pow: \
+  eg/pow.hs \
+  mk/toplibs
+eg/pow.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  eg/pow.hs
 eg/replicate: \
   eg/replicate.hs \
   mk/toplibs

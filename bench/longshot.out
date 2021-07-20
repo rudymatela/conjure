@@ -11,30 +11,6 @@ qsort :: [Int] -> [Int]
 -- looking through 197 candidates of size 8
 cannot conjure
 
-pow :: Int -> Int -> Int
--- testing 5 combinations of argument values
--- pruning with 8/12 rules
--- looking through 4 candidates of size 1
--- looking through 21 candidates of size 2
--- looking through 129 candidates of size 3
--- looking through 687 candidates of size 4
--- looking through 3994 candidates of size 5
--- looking through 19593 candidates of size 6
--- looking through 105753 candidates of size 7
-pow x 0  =  1
-pow x y  =  x * pow x (dec y)
-
-pow :: Int -> Int -> Int
--- testing 5 combinations of argument values
--- pruning with 17/28 rules
--- looking through 4 candidates of size 1
--- looking through 20 candidates of size 2
--- looking through 123 candidates of size 3
--- looking through 646 candidates of size 4
--- looking through 3857 candidates of size 5
--- looking through 20149 candidates of size 6
-cannot conjure
-
 duplicates :: [Int] -> [Int]
 -- testing 60 combinations of argument values
 -- pruning with 39/50 rules
