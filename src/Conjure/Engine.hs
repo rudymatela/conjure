@@ -105,6 +105,7 @@ data Args = Args
   , maxEquationSize   :: Int  -- ^ maximum size of equation operands
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
   , requireDescent    :: Bool -- ^ require recursive calls to deconstruct arguments
+  , usePatterns       :: Bool -- ^ use pattern matching to create (recursive) candidates
   , forceTests :: [[Expr]]  -- ^ force tests
   }
 
@@ -126,6 +127,7 @@ args = Args
   , maxEquationSize    =   5
   , maxSearchTests     =  100000
   , requireDescent     =  True
+  , usePatterns        =  True
   , forceTests         =  []
   }
 
@@ -212,7 +214,11 @@ conjureTheoryWith args nm f es  =  do
 
 -- | Return apparently unique candidate definitions.
 candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns  =  candidateDefnsC
+candidateDefns args  =  cds args
+  where
+  cds  =  if usePatterns args
+          then candidateDefnsC
+          else candidateDefns1
 
 
 -- | Return apparently unique candidate definitions

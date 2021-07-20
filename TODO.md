@@ -5,8 +5,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * consider not breaking in some cases (increased crossproduct of patterns)
 
-* add switch for case candidates?
-
 * improve pruning of generated case candidates
 
 
