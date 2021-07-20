@@ -2,46 +2,39 @@ and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 37/47 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 19 candidates of size 6
--- looking through 45 candidates of size 7
--- looking through 80 candidates of size 8
--- looking through 172 candidates of size 9
-and ps  =  null ps || head ps && and (tail ps)
+-- looking through 6 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 18 candidates of size 4
+-- looking through 50 candidates of size 5
+and []  =  True
+and (p:ps)  =  p && and ps
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 37/47 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 19 candidates of size 6
--- looking through 45 candidates of size 7
--- looking through 80 candidates of size 8
--- looking through 172 candidates of size 9
--- looking through 462 candidates of size 10
-or ps  =  not (null ps) && (head ps || or (tail ps))
+-- looking through 6 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 18 candidates of size 4
+-- looking through 50 candidates of size 5
+or []  =  False
+or (p:ps)  =  p || or ps
 
 and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 40/50 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 6 candidates of size 4
+-- looking through 6 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 20 candidates of size 4
 and ps  =  foldr (&&) True ps
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 40/50 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 6 candidates of size 4
+-- looking through 6 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 20 candidates of size 4
 or ps  =  foldr (||) False ps
 

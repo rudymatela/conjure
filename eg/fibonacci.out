@@ -1,35 +1,28 @@
 fibonacci :: Int -> Int
 -- testing 8 combinations of argument values
--- pruning with 20/38 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 11 candidates of size 5
--- looking through 5 candidates of size 6
--- looking through 27 candidates of size 7
--- looking through 20 candidates of size 8
--- looking through 95 candidates of size 9
--- looking through 172 candidates of size 10
--- looking through 519 candidates of size 11
--- looking through 1281 candidates of size 12
--- looking through 3289 candidates of size 13
-fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
+-- pruning with 9/13 rules
+-- looking through 3 candidates of size 1
+-- looking through 6 candidates of size 2
+-- looking through 17 candidates of size 3
+-- looking through 43 candidates of size 4
+-- looking through 107 candidates of size 5
+-- looking through 262 candidates of size 6
+-- looking through 797 candidates of size 7
+-- looking through 1988 candidates of size 8
+-- looking through 6718 candidates of size 9
+-- looking through 16953 candidates of size 10
+-- looking through 56299 candidates of size 11
+fibonacci 0  =  1
+fibonacci 1  =  1
+fibonacci x  =  fibonacci (dec x) + fibonacci (dec (dec x))
 
 fib01 :: Int -> Int -> Int -> Int
 -- testing 8 combinations of argument values
--- pruning with 18/37 rules
+-- pruning with 6/10 rules
 -- looking through 4 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 21 candidates of size 4
--- looking through 43 candidates of size 5
--- looking through 84 candidates of size 6
--- looking through 192 candidates of size 7
--- looking through 391 candidates of size 8
--- looking through 840 candidates of size 9
--- looking through 9294 candidates of size 10
--- looking through 45295 candidates of size 11
--- looking through 215844 candidates of size 12
-fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
+-- looking through 31 candidates of size 2
+-- looking through 295 candidates of size 3
+-- looking through 1968 candidates of size 4
+-- looking through 12376 candidates of size 5
+cannot conjure
 

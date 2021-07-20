@@ -42,6 +42,8 @@ positionsFrom n x  =  from n
 
 main :: IO ()
 main = do
+  -- TODO: review longshots when using case patterns
+
   -- qsort
   -- qsort xs  =  if null xs                                 -- 3
   --              then []                                    -- 4
@@ -50,12 +52,9 @@ main = do
   --                ++ qsort (filter (>= head xs) (tail xs)) -- 24
   -- not only this is out of reach performance wise,
   -- but the needed recursive calls will not be enumerated
-  conjure "qsort" sort'
+  conjureWithMaxSize 8 "qsort" sort'  -- OOM when bigger, TODO: why?
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     , prim "<" ((<) :: Int -> Int -> Bool)
     , prim ">=" ((>=) :: Int -> Int -> Bool)
@@ -69,22 +68,23 @@ main = do
   conjureWithMaxSize 8 "pow" pow
     [ pr (0::Int)
     , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1
   --             1  2  3 4      5      6   7  8     9 10 11 12  13   14 15 16 17  18    19     20
+  -- -- OR --
+  -- pow b 0  =  1
+  -- pow b e  =  pow b (halve e) * pow b (halve e) * if odd e then b else 1
+  --             2   3  4     5  6 7   8  9    10 11 12 13 14     15     16
   -- out of reach performance wise
-  conjureWithMaxSize 8 "pow" pow
+  conjureWithMaxSize 6 "pow" pow
     [ pr (0::Int)
     , pr (1::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "halve" ((`div` 2) :: Int -> Int)
-    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- duplicates xs  =
@@ -93,6 +93,12 @@ main = do
   --   else if head xs `elem` tail xs && not (head xs `elem` duplicates (tail xs))  -- 18
   --        then head xs : duplicates (tail xs)                                     -- 24
   --        else duplicates (tail xs)                                               -- 27
+  -- -- OR --
+  -- duplicates []  =  []                                                  --  1
+  -- duplicates (x:xs)  =  if x `elem` xs && not (x `elem` duplicates xs)  -- 11
+  --                       then x : duplicates xs                          -- 15
+  --                       else duplicates xs                              -- 17
+  -- out of reach memory and performance wise
   conjure "duplicates" duplicates
     [ pr ([] :: [Int])
     , pr True
@@ -101,13 +107,10 @@ main = do
     , prim "||" (||)
     , prim "&&" (&&)
     , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     , prim "elem" (elem :: Int -> [Int] -> Bool)
     ]
 
-  conjure "positionsFrom" positionsFrom
+  conjureWithMaxSize 9 "positionsFrom" positionsFrom
     [ pr ([] :: [Int])
     , pr True
     , pr False
@@ -115,8 +118,5 @@ main = do
     , prim "||" (||)
     , prim "&&" (&&)
     , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     , prim "==" ((==) :: Int -> Int -> Bool)
     ]

@@ -2,35 +2,27 @@ elem :: Int -> [Int] -> Bool
 -- testing 60 combinations of argument values
 -- pruning with 44/57 rules
 -- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 14 candidates of size 5
--- looking through 25 candidates of size 6
--- looking through 60 candidates of size 7
--- looking through 145 candidates of size 8
--- looking through 332 candidates of size 9
--- looking through 747 candidates of size 10
--- looking through 1826 candidates of size 11
--- looking through 4411 candidates of size 12
--- looking through 10932 candidates of size 13
-elem x xs  =  not (null xs) && (head xs == x || elem x (tail xs))
+-- looking through 3 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 32 candidates of size 4
+-- looking through 115 candidates of size 5
+-- looking through 347 candidates of size 6
+-- looking through 1358 candidates of size 7
+-- looking through 5466 candidates of size 8
+elem x []  =  False
+elem x (y:xs)  =  x == y || elem x xs
 
 set :: [Int] -> Bool
 -- testing 60 combinations of argument values
 -- pruning with 46/57 rules
 -- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 5 candidates of size 4
--- looking through 11 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 64 candidates of size 7
--- looking through 145 candidates of size 8
--- looking through 310 candidates of size 9
--- looking through 721 candidates of size 10
--- looking through 1762 candidates of size 11
--- looking through 4235 candidates of size 12
--- looking through 10038 candidates of size 13
-set xs  =  null xs || not (elem (head xs) (tail xs)) && set (tail xs)
+-- looking through 3 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 21 candidates of size 4
+-- looking through 53 candidates of size 5
+-- looking through 178 candidates of size 6
+-- looking through 600 candidates of size 7
+-- looking through 2051 candidates of size 8
+set []  =  True
+set (x:xs)  =  not (elem x xs) && set xs
 

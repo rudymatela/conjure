@@ -2,14 +2,11 @@ gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
 -- pruning with 1/2 rules
 -- looking through 3 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 54 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 405 candidates of size 7
--- looking through 90 candidates of size 8
--- looking through 3402 candidates of size 9
--- looking through 2016 candidates of size 10
-gcd a b  =  if a == 0 then b else gcd (b `mod` a) a
+-- looking through 8 candidates of size 2
+-- looking through 20 candidates of size 3
+-- looking through 122 candidates of size 4
+-- looking through 230 candidates of size 5
+-- looking through 2206 candidates of size 6
+gcd x 0  =  x
+gcd x y  =  gcd y (x `mod` y)
 

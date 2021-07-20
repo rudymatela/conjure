@@ -92,17 +92,15 @@ instance Conjurable Tree where
 main :: IO ()
 main = do
   conjure "leftmost" leftmost
-    [ prim "valu" valu
+    [ prim "undefined" (undefined :: Int)
+    , prim "if" (\p x y -> if p then x else y :: Int)
     , prim "nil" nil
-    , prim "left" left
-    , prim "right" right
     ]
 
   conjure "rightmost" rightmost
-    [ prim "valu" valu
+    [ prim "undefined" (undefined :: Int)
+    , prim "if" (\p x y -> if p then x else y :: Int)
     , prim "nil" nil
-    , prim "left" left
-    , prim "right" right
     ]
 
   conjureWithMaxSize 13 "size" size
@@ -130,10 +128,6 @@ main = do
     [ pr False
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "nil" nil
-    , prim "left" left
-    , prim "right" right
-    , prim "valu" valu
     ]
 
   -- simply out of reach performance-wise (size 34)

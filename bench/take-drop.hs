@@ -21,13 +21,15 @@ main :: IO ()
 main = do
   -- drop n xs = if n==0 || null xs then xs else drop (dec n) (tail xs)
   -- needs size 13
-  conjureWithMaxSize 13 "drop" (drop' :: Int -> [A] -> [A])
+  -- drop 0 []      =  []               -- 1
+  -- drop 0 (x:xs)  =  x : xs           -- 4
+  -- drop n []      =  []               -- 5
+  -- drop n (x:xs)  =  drop (dec n) xs  -- 9
+  conjure "drop" (drop' :: Int -> [A] -> [A])
     [ pr (0 :: Int)
-    , prim "null" (null :: [A] -> Bool)
-    , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "||" (||)
+    , pr ([] :: [A])
+    , prim ":" ((:) :: A -> [A] -> [A])
     , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "tail" (tail :: [A] -> [A])
     ]
 
   -- take n xs = if n==0 || null xs then [] else head xs : take (dec n) (tail xs)

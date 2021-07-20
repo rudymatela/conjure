@@ -1,39 +1,32 @@
 drop :: Int -> [A] -> [A]
 -- testing 60 combinations of argument values
--- pruning with 16/22 rules
--- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 1 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 7 candidates of size 8
--- looking through 35 candidates of size 9
--- looking through 109 candidates of size 10
--- looking through 261 candidates of size 11
--- looking through 567 candidates of size 12
--- looking through 1183 candidates of size 13
-drop x xs  =  if null xs || x == 0 then xs else drop (dec x) (tail xs)
+-- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 60 candidates of size 5
+-- looking through 143 candidates of size 6
+-- looking through 392 candidates of size 7
+-- looking through 951 candidates of size 8
+drop 0 []  =  []
+drop 0 (x:xs)  =  x:xs
+drop x []  =  []
+drop x (y:xs)  =  drop (dec x) xs
 
 take :: Int -> [A] -> [A]
 -- testing 60 combinations of argument values
 -- pruning with 20/26 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 10 candidates of size 5
--- looking through 14 candidates of size 6
--- looking through 26 candidates of size 7
--- looking through 62 candidates of size 8
--- looking through 182 candidates of size 9
--- looking through 498 candidates of size 10
--- looking through 1270 candidates of size 11
--- looking through 3346 candidates of size 12
--- looking through 8650 candidates of size 13
--- looking through 21270 candidates of size 14
--- looking through 51166 candidates of size 15
--- looking through 121430 candidates of size 16
-take x xs  =  if null xs || x == 0 then [] else head xs:take (dec x) (tail xs)
+-- looking through 5 candidates of size 2
+-- looking through 17 candidates of size 3
+-- looking through 52 candidates of size 4
+-- looking through 224 candidates of size 5
+-- looking through 835 candidates of size 6
+-- looking through 3236 candidates of size 7
+-- looking through 12778 candidates of size 8
+take 0 []  =  []
+take 0 (x:xs)  =  []
+take x []  =  []
+take x (y:xs)  =  y:take (dec x) xs
 

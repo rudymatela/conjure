@@ -21,27 +21,35 @@ fib01 0 1 5  =  8
 fib01 0 1 6  =  13
 fib01 0 1 7  =  21
 
-as :: Args
-as  =  args{maxSize=13}
-
 main :: IO ()
 main  =  do
-  conjureWithMaxSize 13 "fibonacci n" fibonacci
-    [ pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
+  conjure "fibonacci n" fibonacci
+    [ pr (0::Int)
+    , pr (1::Int)
     , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prim "+" ((+) :: Int -> Int -> Int)
     ]
 -- expected function:
 -- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 --                 1  2 3  4      5      6          7   8  9        10  11   12  13
 
-  conjure "fib01" fib01
+  conjureWithMaxSize 5 "fib01" fib01
     [ pr (0::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prim "+" ((+) :: Int -> Int -> Int)
     ]
 -- expected function:
 -- fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
 --                 1  2 3  4      5      6     7  8 9 10  11 12
+
+
+{- to note:
+
+conjureWith ...  =
+
+> print $ canReduceTo thy (xx -+- dec xx) (dec (dec xx))
+False
+> print $ canReduceTo thy (dec (dec xx)) (xx -+- dec xx)
+True
+
+-}

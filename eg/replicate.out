@@ -4,15 +4,12 @@ replicate :: Int -> Char -> [Char]
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 0 candidates of size 8
--- looking through 3 candidates of size 9
--- looking through 4 candidates of size 10
--- looking through 11 candidates of size 11
-replicate x c  =  if x == 0 then "" else c:replicate (dec x) c
+-- looking through 4 candidates of size 4
+-- looking through 11 candidates of size 5
+-- looking through 26 candidates of size 6
+-- looking through 61 candidates of size 7
+replicate 0 c  =  ""
+replicate x c  =  c:replicate (dec x) c
 
 replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values
@@ -38,17 +35,13 @@ replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values
 -- pruning with 9/14 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 13 candidates of size 4
--- looking through 28 candidates of size 5
--- looking through 67 candidates of size 6
--- looking through 197 candidates of size 7
--- looking through 523 candidates of size 8
--- looking through 1430 candidates of size 9
--- looking through 4072 candidates of size 10
--- looking through 11488 candidates of size 11
--- looking through 32782 candidates of size 12
--- looking through 94734 candidates of size 13
-replicates cs x  =  if null cs then cs else replicate x (head cs) ++ replicates (tail cs) x
+-- looking through 3 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 25 candidates of size 4
+-- looking through 78 candidates of size 5
+-- looking through 227 candidates of size 6
+-- looking through 824 candidates of size 7
+-- looking through 3041 candidates of size 8
+replicates "" x  =  ""
+replicates (c:cs) x  =  replicate x c ++ replicates cs x
 

@@ -212,7 +212,7 @@ conjureTheoryWith args nm f es  =  do
 
 -- | Return apparently unique candidate definitions.
 candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns  =  candidateDefns1
+candidateDefns  =  candidateDefnsC
 
 
 -- | Return apparently unique candidate definitions

@@ -2,35 +2,35 @@ double :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 4 candidates of size 2
+-- looking through 9 candidates of size 3
 double x  =  x + x
 
 add :: Int -> Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- looking through 4 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 13 candidates of size 3
+-- looking through 18 candidates of size 2
+-- looking through 101 candidates of size 3
 add x y  =  x + y
 
 square :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 4 candidates of size 2
+-- looking through 9 candidates of size 3
 square x  =  x * x
 
 tnpo :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 42 candidates of size 7
+-- looking through 4 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 23 candidates of size 4
+-- looking through 50 candidates of size 5
+-- looking through 89 candidates of size 6
+-- looking through 487 candidates of size 7
 tnpo x  =  x + (x + (x + 1))
 

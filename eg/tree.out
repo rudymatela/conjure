@@ -1,83 +1,74 @@
 leftmost :: Tree -> Int
 -- testing 60 combinations of argument values
--- pruning with 0/0 rules
--- looking through 0 candidates of size 1
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 8 candidates of size 5
--- looking through 16 candidates of size 6
--- looking through 32 candidates of size 7
--- looking through 68 candidates of size 8
--- looking through 152 candidates of size 9
-leftmost x  =  if nil (left x) then valu x else leftmost (left x)
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 4 candidates of size 6
+-- looking through 16 candidates of size 7
+leftmost Leaf  =  undefined
+leftmost (Node x y z)  =  if nil x then y else leftmost x
 
 rightmost :: Tree -> Int
 -- testing 60 combinations of argument values
--- pruning with 0/0 rules
--- looking through 0 candidates of size 1
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 8 candidates of size 5
--- looking through 16 candidates of size 6
--- looking through 32 candidates of size 7
--- looking through 68 candidates of size 8
--- looking through 152 candidates of size 9
-rightmost x  =  if nil (right x) then valu x else rightmost (right x)
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 4 candidates of size 6
+-- looking through 16 candidates of size 7
+rightmost Leaf  =  undefined
+rightmost (Node x y z)  =  if nil z then y else rightmost z
 
 size :: Tree -> Int
 -- testing 60 combinations of argument values
 -- pruning with 4/8 rules
 -- looking through 2 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 9 candidates of size 7
--- looking through 32 candidates of size 8
--- looking through 117 candidates of size 9
--- looking through 336 candidates of size 10
--- looking through 933 candidates of size 11
--- looking through 2416 candidates of size 12
--- looking through 6113 candidates of size 13
-size x  =  if nil x then 0 else 1 + (size (left x) + size (right x))
+-- looking through 4 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 27 candidates of size 4
+-- looking through 83 candidates of size 5
+-- looking through 358 candidates of size 6
+-- looking through 1435 candidates of size 7
+-- looking through 5963 candidates of size 8
+size Leaf  =  0
+size (Node x y z)  =  size x + (size z + 1)
 
 height :: Tree -> Int
 -- testing 60 combinations of argument values
 -- pruning with 49/65 rules
 -- looking through 3 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 2 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 21 candidates of size 7
--- looking through 48 candidates of size 8
--- looking through 299 candidates of size 9
--- looking through 896 candidates of size 10
--- looking through 3137 candidates of size 11
--- looking through 8672 candidates of size 12
--- looking through 26088 candidates of size 13
-height x  =  if nil x then -1 else 1 + max (height (left x)) (height (right x))
+-- looking through 9 candidates of size 2
+-- looking through 8 candidates of size 3
+-- looking through 71 candidates of size 4
+-- looking through 186 candidates of size 5
+-- looking through 948 candidates of size 6
+-- looking through 3943 candidates of size 7
+-- looking through 18069 candidates of size 8
+height Leaf  =  -1
+height (Node x y z)  =  1 + max (height x) (height z)
 
 mem :: Int -> Tree -> Bool
 -- testing 60 combinations of argument values
 -- pruning with 11/17 rules
 -- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
 -- looking through 6 candidates of size 4
--- looking through 12 candidates of size 5
--- looking through 28 candidates of size 6
--- looking through 64 candidates of size 7
--- looking through 156 candidates of size 8
--- looking through 376 candidates of size 9
--- looking through 930 candidates of size 10
--- looking through 2302 candidates of size 11
--- looking through 5760 candidates of size 12
-cannot conjure
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 34 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 0 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 184 candidates of size 12
+mem x Leaf  =  False
+mem x (Node y z x')  =  mem x y || (x == z || mem x x')
 
 insert :: Int -> Tree -> Bool
 -- testing 60 combinations of argument values
@@ -86,10 +77,10 @@ insert :: Int -> Tree -> Bool
 -- looking through 1 candidates of size 2
 -- looking through 4 candidates of size 3
 -- looking through 16 candidates of size 4
--- looking through 36 candidates of size 5
--- looking through 90 candidates of size 6
--- looking through 205 candidates of size 7
--- looking through 497 candidates of size 8
--- looking through 1199 candidates of size 9
+-- looking through 40 candidates of size 5
+-- looking through 156 candidates of size 6
+-- looking through 705 candidates of size 7
+-- looking through 3245 candidates of size 8
+-- looking through 15025 candidates of size 9
 cannot conjure
 
