@@ -512,8 +512,8 @@ foo x  =  1
 
 Candidates for: ? :: Int -> Int -> Int
   pruning with 6/10 rules
-  [3,0,4,0,8,0] direct candidates
-  [3,8,15,84,116,630] pattern candidates
+  [3,0,4,0,8,0,16,0] direct candidates
+  [3,8,15,84,116,630,996,4656] pattern candidates
 
 rules:
 x * y == x + y
@@ -991,8 +991,8 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,0,4,0,8,0] direct candidates
-  [3,8,15,82,192,870] pattern candidates
+  [3,0,4,0,8,0,16,0] direct candidates
+  [3,8,15,82,192,870,2908,8958] pattern candidates
 
 rules:
 xs ++ [] == xs

@@ -36,7 +36,7 @@ main  =  do
     , prim "*" ((+) :: Int -> Int -> Int)
     ]
 
-  printCandidates 6 4 "?" (undefined :: Int -> Int -> Int)
+  printCandidates 8 4 "?" (undefined :: Int -> Int -> Int)
     [ pr (0 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((+) :: Int -> Int -> Int)
@@ -48,7 +48,7 @@ main  =  do
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
-  printCandidates 6 4 "??" (undefined :: [Int] -> [Int] -> [Int])
+  printCandidates 8 4 "??" (undefined :: [Int] -> [Int] -> [Int])
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
