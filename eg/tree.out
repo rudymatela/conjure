@@ -9,7 +9,7 @@ leftmost :: Tree -> Int
 -- looking through 4 candidates of size 6
 -- looking through 16 candidates of size 7
 leftmost Leaf  =  undefined
-leftmost (Node x y z)  =  if nil x then y else leftmost x
+leftmost (Node t1 x t2)  =  if nil t1 then x else leftmost t1
 
 rightmost :: Tree -> Int
 -- testing 60 combinations of argument values
@@ -22,7 +22,7 @@ rightmost :: Tree -> Int
 -- looking through 4 candidates of size 6
 -- looking through 16 candidates of size 7
 rightmost Leaf  =  undefined
-rightmost (Node x y z)  =  if nil z then y else rightmost z
+rightmost (Node t1 x t2)  =  if nil t2 then x else rightmost t2
 
 size :: Tree -> Int
 -- testing 60 combinations of argument values
@@ -36,7 +36,7 @@ size :: Tree -> Int
 -- looking through 1435 candidates of size 7
 -- looking through 5963 candidates of size 8
 size Leaf  =  0
-size (Node x y z)  =  size x + (size z + 1)
+size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
 height :: Tree -> Int
 -- testing 60 combinations of argument values
@@ -50,7 +50,7 @@ height :: Tree -> Int
 -- looking through 3943 candidates of size 7
 -- looking through 18069 candidates of size 8
 height Leaf  =  -1
-height (Node x y z)  =  1 + max (height x) (height z)
+height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 
 mem :: Int -> Tree -> Bool
 -- testing 60 combinations of argument values
@@ -68,7 +68,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 11
 -- looking through 184 candidates of size 12
 mem x Leaf  =  False
-mem x (Node y z x')  =  mem x y || (x == z || mem x x')
+mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
 insert :: Int -> Tree -> Bool
 -- testing 60 combinations of argument values

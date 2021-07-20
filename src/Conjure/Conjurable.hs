@@ -51,7 +51,7 @@ import Data.Complex -- for instance
 -- | Single reification of some functions over a type as 'Expr's.
 --
 -- A hole, an equality function and tiers.
-type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], Bool)
+type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], Bool)
 
 -- | A reification over a collection of types.
 --
@@ -113,7 +113,7 @@ prim s x  =  (value s x, conjureType x)
 -- Please see the source code of "Conjure.Conjurable" for more examples.
 --
 -- (cf. 'reifyTiers', 'reifyEquality', 'conjureType')
-class Typeable a => Conjurable a where
+class (Typeable a, Name a) => Conjurable a where
   conjureArgumentHoles :: a -> [Expr]
   conjureArgumentHoles _  =  []
 
@@ -144,18 +144,18 @@ class Typeable a => Conjurable a where
 
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
-  if hole x `elem` [h | (h,_,_,_) <- ms]
+  if hole x `elem` [h | (h,_,_,_,_) <- ms]
   then ms
   else conjureSubTypes x $ conjureReification1 x : ms
 
 -- | like 'conjureType' but without type repetitions
 nubConjureType :: Conjurable a => a -> Reification
-nubConjureType x  =  nubOn (\(eh,_,_,_) -> eh) . conjureType x
+nubConjureType x  =  nubOn (\(eh,_,_,_,_) -> eh) . conjureType x
 -- The use of nubOn above is O(n^2).
 -- So long as there is not a huge number of subtypes of a, so we're fine.
 
 conjureReification1 :: Conjurable a => a -> Reification1
-conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, null $ conjureCases x)
+conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, null $ conjureCases x)
 
 conjureReification :: Conjurable a => a -> [Reification1]
 conjureReification x  =  nubConjureType x [conjureReification1 bool]
@@ -198,10 +198,10 @@ mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
 conjureHoles :: Conjurable f => f -> [Expr]
-conjureHoles f  =  [eh | (eh,_,Just _,_) <- conjureReification f]
+conjureHoles f  =  [eh | (eh,_,Just _,_,_) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
-conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_) <- conjureReification f]
+conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_) <- conjureReification f]
 
 conjureAreEqual :: Conjurable f => f -> Int -> Expr -> Expr -> Bool
 conjureAreEqual f maxTests  =  (===)
@@ -215,11 +215,20 @@ conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]
-  allTiers  =  [etiers | (_,_,Just etiers,_) <- conjureReification f]
+  allTiers  =  [etiers | (_,_,Just etiers,_,_) <- conjureReification f]
   tf []  =  [[e]] -- no tiers found, keep variable
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
+
+conjureNamesFor :: Conjurable f => f -> Expr -> [String]
+conjureNamesFor f e  =  head
+                     $  [ns | (eh, _, _, ns, _) <- conjureReification f, typ e == typ eh]
+                     ++ [names (undefined :: Int)] -- use [Int] on lists
+
+conjureMostGeneralCanonicalVariation :: Conjurable f => f -> Expr -> Expr
+conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
+                                        .  fastMostGeneralVariation
 
 conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Expr -> Expr -> Bool
 conjureIsDeconstructor f maxTests  =  isDeconstructionE
@@ -228,7 +237,7 @@ conjureIsDeconstructor f maxTests  =  isDeconstructionE
 
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f e  =  head
-  [is | (h,_,_,is) <- conjureReification f, typ h == typ e]
+  [is | (h,_,_,_,is) <- conjureReification f, typ h == typ e]
 
 instance Conjurable () where
   conjureExpress   =  reifyExpress
@@ -408,7 +417,7 @@ conjurePats es nm f  =  mapT (map mkApp . prods) $ cs
   where
   mkApp  =  foldApp . (ef:)
          .  unfold
-         .  mostGeneralCanonicalVariation
+         .  conjureMostGeneralCanonicalVariation f
          .  fold
   ef  =  var (head $ words nm) f  -- TODO: take the tail into account
   cs  =  products $ zipWith mk (conjureArgumentHoles f) (conjureArgumentCases f)
@@ -682,3 +691,10 @@ instance ( Conjurable a, Listable a, Show a, Express a
                                                         && t1 ......== t2
 
 -- TODO: go up to 12-tuples
+
+instance Name A
+instance Name B
+instance Name C
+instance Name D
+instance Name E
+instance Name F

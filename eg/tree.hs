@@ -77,6 +77,9 @@ instance Listable Tree where
   tiers  =  cons0 Leaf
         \/  cons3 Node
 
+instance Name Tree where
+  name _  =  "t1"
+
 instance Conjurable Tree where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality

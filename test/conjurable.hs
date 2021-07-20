@@ -11,6 +11,7 @@ data Unit  =  Unit  deriving Show
 deriving instance Typeable Unit  -- for GHC < 7.10
 
 instance Listable Unit where list = [Unit]
+instance Name Unit where name _ = "u"
 instance Conjurable Unit where
   conjureExpress = reifyExpress
   conjureTiers = reifyTiers

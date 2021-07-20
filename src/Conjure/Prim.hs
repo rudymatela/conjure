@@ -52,14 +52,14 @@ prim s x  =  (value s x, conjureType x)
 -- representative.
 
 cjReification :: [Prim] -> [Reification1]
-cjReification ps  =  nubOn (\(eh,_,_,_) -> eh)
+cjReification ps  =  nubOn (\(eh,_,_,_,_) -> eh)
                   $  foldr (.) id (map snd ps) [conjureReification1 bool]
 
 cjHoles :: [Prim] -> [Expr]
-cjHoles ps  =  [eh | (eh,_,Just _,_) <- cjReification ps]
+cjHoles ps  =  [eh | (eh,_,Just _,_,_) <- cjReification ps]
 
 cjMkEquation :: [Prim] -> Expr -> Expr -> Expr
-cjMkEquation ps  =  mkEquation [eq | (_,Just eq,_,_) <- cjReification ps]
+cjMkEquation ps  =  mkEquation [eq | (_,Just eq,_,_,_) <- cjReification ps]
 
 cjAreEqual :: [Prim] -> Int -> Expr -> Expr -> Bool
 cjAreEqual ps maxTests  =  (===)
@@ -73,7 +73,7 @@ cjTiersFor :: [Prim] -> Expr -> [[Expr]]
 cjTiersFor ps e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]
-  allTiers  =  [etiers | (_,_,Just etiers,_) <- cjReification ps]
+  allTiers  =  [etiers | (_,_,Just etiers,_,_) <- cjReification ps]
   tf []  =  [[e]] -- no tiers found, keep variable
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers

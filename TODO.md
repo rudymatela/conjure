@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* require Name on Conjurable?  improved naming on tree.hs
-
 * move pow out of longshot
 
 * consider not breaking in some cases (increased crossproduct of patterns)
