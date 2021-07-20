@@ -11,8 +11,5 @@ fibonacci :: Int -> Int
 -- looking through 1988 candidates of size 8
 -- looking through 6718 candidates of size 9
 -- looking through 16953 candidates of size 10
--- looking through 56299 candidates of size 11
-fibonacci 0  =  1
-fibonacci 1  =  1
-fibonacci x  =  fibonacci (dec x) + fibonacci (dec (dec x))
+cannot conjure
 

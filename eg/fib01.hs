@@ -19,7 +19,8 @@ main  =  do
     , prim "+" ((+) :: Int -> Int -> Int)
     ]
 
-  conjureWith args{usePatterns = False} "fib01" fib01
+  -- takes about 22 seconds to run with maxSize=12
+  conjureWith args{usePatterns = False, maxSize = 10} "fib01" fib01
     [ pr (0::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
