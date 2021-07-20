@@ -38,12 +38,20 @@ main  =  do
     , prim "dec" (subtract 1 :: Int -> Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     ]
+
+  conjureWith args{usePatterns = False} "fib01" fib01
+    [ pr (0::Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    ]
+
 -- expected function:
 -- fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
 --                 1  2 3  4      5      6     7  8 9 10  11 12
 
 
-{- to note:
+{- to note, if dec appears later than + in the primitives list:
 
 conjureWith ...  =
 
