@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 6/10 rules
-  [3,0,4,0,8,0] direct candidates
-  [3,4,8,21,39,70] pattern candidates
+  [3,0,4,0,8,0,16,0,32] direct candidates
+  [3,4,8,21,39,70,320,352,2597] pattern candidates
 
 rules:
 x * y == x + y
@@ -512,8 +512,8 @@ foo x  =  1
 
 Candidates for: ? :: Int -> Int -> Int
   pruning with 6/10 rules
-  [3,0,4,0] direct candidates
-  [3,8,15,84] pattern candidates
+  [3,0,4,0,8,0] direct candidates
+  [3,8,15,84,116,630] pattern candidates
 
 rules:
 x * y == x + y
@@ -895,8 +895,8 @@ x ? y  =  0
 
 Candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,0,1,0,1,0] direct candidates
-  [2,1,2,3,10,7] pattern candidates
+  [2,0,1,0,1,0,1,0,1] direct candidates
+  [2,1,2,3,10,7,60,29,304] pattern candidates
 
 rules:
 xs ++ [] == xs
@@ -991,8 +991,8 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,0,4,0] direct candidates
-  [3,8,15,82] pattern candidates
+  [3,0,4,0,8,0] direct candidates
+  [3,8,15,82,192,870] pattern candidates
 
 rules:
 xs ++ [] == xs
@@ -1361,8 +1361,8 @@ xs ?? (x:ys)  =  []
 
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,1,0,0,2,4] direct candidates
-  [3,3,0,0,0,0] pattern candidates
+  [3,1,0,0,2,4,10,24,28] direct candidates
+  [3,3,0,0,0,0,0,0,0] pattern candidates
 
 rules:
 not False == True
@@ -1458,8 +1458,8 @@ ton True  =  False
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,4,8,4,72] direct candidates
-  [4,14,30,8,4,32] pattern candidates
+  [4,2,4,8,4,72,132,616,1768] direct candidates
+  [4,14,30,8,4,32,36,112,264] pattern candidates
 
 rules:
 not False == True
