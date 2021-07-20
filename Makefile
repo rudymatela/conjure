@@ -10,6 +10,7 @@ EG = \
   eg/count \
   eg/factorial \
   eg/fibonacci \
+  eg/fib01 \
   eg/ints \
   eg/bools \
   eg/gcd \

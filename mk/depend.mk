@@ -146,6 +146,19 @@ eg/factorial.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   eg/factorial.hs
+eg/fib01: \
+  eg/fib01.hs \
+  mk/toplibs
+eg/fib01.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  eg/fib01.hs
 eg/fibonacci: \
   eg/fibonacci.hs \
   mk/toplibs
