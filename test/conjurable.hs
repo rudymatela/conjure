@@ -149,6 +149,50 @@ tests n  =
          ]
        ]
 
+  , take 4 (conjurePats [zero, one] "?" (undefined :: Int -> Int -> Int))
+    == [ [ [ xx -?- yy
+           ]
+         ]
+       , [ [ xx -?- zero
+           , xx -?- yy
+           ]
+         , [ zero -?- xx
+           , xx -?- yy
+           ]
+         ]
+       , [ [ xx -?- one
+           , xx -?- yy
+           ]
+         , [ zero -?- zero
+           , zero -?- xx
+           , xx -?- zero
+           , xx -?- yy
+           ]
+         , [ one -?- xx
+           , xx -?- yy
+           ]
+         ]
+       , [ [ xx -?- zero
+           , xx -?- one
+           , xx -?- yy
+           ]
+         , [ zero -?- one
+           , zero -?- xx
+           , xx -?- one
+           , xx -?- yy
+           ]
+         , [ one -?- zero
+           , one -?- xx
+           , xx -?- zero
+           , xx -?- yy
+           ]
+         , [ zero -?- xx
+           , one -?- xx
+           , xx -?- yy
+           ]
+         ]
+       ]
+
   , conjurePats [] "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo xxs ccs
            ]
