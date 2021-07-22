@@ -5,7 +5,7 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 5 candidates of size 4
--- looking through 11 candidates of size 5
+-- looking through 7 candidates of size 5
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -17,7 +17,7 @@ sum (x:xs)  =  x + sum xs
 -- looking through 10 candidates of size 3
 -- looking through 28 candidates of size 4
 -- looking through 94 candidates of size 5
--- looking through 304 candidates of size 6
+-- looking through 260 candidates of size 6
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

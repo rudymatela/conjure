@@ -300,10 +300,14 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
 
-  recs ep es  =  discardT (\e -> e == ep)
-              $  filterT (\e -> any (`elem` vs) (vars e))
+  ds  =  map snd $ deconstructors f maxTests es
+  keepR ep | requireDescent  =  descends (`elem` ds) ep
+           | otherwise       =  const True
+  recs ep es  =  filterT (keepR ep)
+              .  discardT (\e -> e == ep)
+              .  filterT (\e -> any (`elem` vs) (vars e))
               $  foldAppProducts ef [appsWith h (vs ++ es) | h <- conjureArgumentHoles f]
-    where -- TODO: proper descent check above
+    where
     vs  =  tail (vars ep)
 
   thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
@@ -370,22 +374,19 @@ deconstructs1 isDec _ e  =  any isDeconstruction exs
 descends :: (Expr -> Bool) -> Expr -> Expr -> Bool
 descends isDec e' e  =  any d1 ss
   where
-  d1 exys  =  nubVars (foldApp exs) == nubVars (foldApp eys)
-           && all isNotConstruction eys
-           && any isDeconstruction eys
-    where
-    exs  =  map fst exys
-    eys  =  map snd exys
+  desc  =  any d1 . uncurry useMatches . unzip
+  d1 exys  =  all isNotConstruction exys
+           && any isDeconstruction exys
   ss  =  init $ sets exys
   exys  =  zip exs eys
   (_:exs)  =  unfoldApp e'
   (_:eys)  =  unfoldApp e
-  isDeconstruction e  =  not (null cs) && all isDec cs
+  isDeconstruction (p,e) | isVar p    =  not (null cs) && all isDec cs
+                         | otherwise  =  size e < size p
     where
     cs  =  consts e
-  isNotConstruction e  =  all isDec cs
-    where
-    cs  =  consts e
+  isNotConstruction (p,e) | isVar p    =  all isDec (consts e)
+                          | otherwise  =  size e <= size p -- TODO: allow filter and id somehow
 
 -- | Example:
 --

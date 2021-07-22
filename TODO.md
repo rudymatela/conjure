@@ -3,9 +3,9 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* consider not breaking in some cases (increased crossproduct of patterns)
+* add `conjureSize` and use it to implement `isDeconstructor`?
 
-* improve pruning of generated case candidates
+* consider not breaking in some cases (increased crossproduct of patterns)
 
 
 ### for later

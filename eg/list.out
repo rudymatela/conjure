@@ -5,7 +5,7 @@ length :: [Int] -> Int
 -- looking through 4 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 15 candidates of size 4
--- looking through 18 candidates of size 5
+-- looking through 10 candidates of size 5
 length []  =  0
 length (x:xs)  =  length xs + 1
 
@@ -16,8 +16,8 @@ reverse :: [Int] -> [Int]
 -- looking through 3 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 26 candidates of size 4
--- looking through 74 candidates of size 5
--- looking through 238 candidates of size 6
+-- looking through 64 candidates of size 5
+-- looking through 166 candidates of size 6
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ unit x
 
@@ -28,7 +28,7 @@ sort :: [Int] -> [Int]
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 17 candidates of size 4
--- looking through 48 candidates of size 5
+-- looking through 38 candidates of size 5
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
@@ -40,7 +40,7 @@ sort (x:xs)  =  insert x (sort xs)
 -- looking through 38 candidates of size 3
 -- looking through 152 candidates of size 4
 -- looking through 717 candidates of size 5
--- looking through 3106 candidates of size 6
+-- looking through 2794 candidates of size 6
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -62,8 +62,8 @@ reverse :: [Int] -> [Int]
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 7 candidates of size 5
--- looking through 25 candidates of size 6
+-- looking through 5 candidates of size 5
+-- looking through 17 candidates of size 6
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ unit x
 
@@ -93,7 +93,7 @@ xs ++ ys  =  foldr (:) ys xs
 -- looking through 38 candidates of size 3
 -- looking through 152 candidates of size 4
 -- looking through 717 candidates of size 5
--- looking through 3106 candidates of size 6
+-- looking through 2794 candidates of size 6
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 

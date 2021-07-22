@@ -4,10 +4,10 @@ replicate :: Int -> Char -> [Char]
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 11 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 61 candidates of size 7
+-- looking through 2 candidates of size 4
+-- looking through 3 candidates of size 5
+-- looking through 6 candidates of size 6
+-- looking through 13 candidates of size 7
 replicate 0 c  =  ""
 replicate x c  =  c:replicate (dec x) c
 
@@ -38,10 +38,10 @@ replicates :: [Char] -> Int -> [Char]
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 25 candidates of size 4
--- looking through 78 candidates of size 5
--- looking through 227 candidates of size 6
--- looking through 824 candidates of size 7
--- looking through 3041 candidates of size 8
+-- looking through 70 candidates of size 5
+-- looking through 175 candidates of size 6
+-- looking through 516 candidates of size 7
+-- looking through 1469 candidates of size 8
 replicates "" x  =  ""
 replicates (c:cs) x  =  replicate x c ++ replicates cs x
 

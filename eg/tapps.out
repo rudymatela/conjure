@@ -14,7 +14,7 @@ product :: [Int] -> Int
 -- looking through 5 candidates of size 2
 -- looking through 6 candidates of size 3
 -- looking through 21 candidates of size 4
--- looking through 39 candidates of size 5
+-- looking through 31 candidates of size 5
 product []  =  1
 product (x:xs)  =  x * product xs
 

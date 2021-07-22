@@ -16,12 +16,12 @@ count :: A -> [A] -> Int
 -- looking through 1 candidates of size 3
 -- looking through 8 candidates of size 4
 -- looking through 15 candidates of size 5
--- looking through 52 candidates of size 6
--- looking through 135 candidates of size 7
--- looking through 366 candidates of size 8
--- looking through 953 candidates of size 9
--- looking through 2540 candidates of size 10
--- looking through 6766 candidates of size 11
+-- looking through 36 candidates of size 6
+-- looking through 87 candidates of size 7
+-- looking through 198 candidates of size 8
+-- looking through 513 candidates of size 9
+-- looking through 1252 candidates of size 10
+-- looking through 3190 candidates of size 11
 count x []  =  0
 count x (y:xs)  =  (if x == y then 1 else 0) + count x xs
 
