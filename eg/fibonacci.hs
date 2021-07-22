@@ -13,12 +13,13 @@ fibonacci 7  =  21
 
 main :: IO ()
 main  =  do
-  -- finds a implementation in about 20s to run with maxSize = 11 or 12
+  -- finds a implementation in about 32s to run with maxSize = 11 or 12 and ==
   conjureWith args{maxSize = 10} "fibonacci n" fibonacci
     [ pr (0::Int)
     , pr (1::Int)
     , prim "dec" (subtract 1 :: Int -> Int)
     , prim "+" ((+) :: Int -> Int -> Int)
+--  , prim "==" ((==) :: Int -> Int -> Bool)  -- needed for isDeconstructor! TODO: FIXME.
     ]
 -- expected function:
 -- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
