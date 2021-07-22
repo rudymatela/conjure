@@ -188,4 +188,42 @@ tests n  =
        , hole (undefined :: Int -> Int)
        , hole (undefined :: Int -> Int -> Int)
        ]
+
+  , useMatches [xx,yy] [xx,yy] == [[(xx,xx), (yy,yy)]]
+  , useMatches [xx,yy] [yy,xx] == [[(xx,xx), (yy,yy)]]
+  , useMatches [yy,xx] [xx,yy] == [[(yy,yy), (xx,xx)]]
+  , useMatches [xx,yy] [xx,xx] == []
+
+  , useMatches [xx,yy] [abs' xx, abs' yy]
+    == [ [ (xx, abs' xx)
+         , (yy, abs' yy)
+         ]
+       ]
+
+  , useMatches [xx-:-xxs, yy-:-yys] [abs' xx, abs' yy]
+    == [ [ (xx-:-xxs, abs' xx)
+         , (yy-:-yys, abs' yy)
+         ]
+       ]
+
+  , useMatches [xx-:-xxs, yy-:-yys] [xx-:-xxs, yy-:-yys]
+    == [ [ (xx-:-xxs, xx-:-xxs)
+         , (yy-:-yys, yy-:-yys)
+         ]
+       ]
+
+  , useMatches [xx-:-xxs, yy-:-yys] [yy-:-xxs, yy-:-yys]
+    == [ [ (xx-:-xxs, yy-:-xxs)
+         , (yy-:-yys, yy-:-yys)
+         ]
+       ]
+
+  , useMatches [xx-:-xxs, yy-:-yys] [yy-:-xxs, xx-:-yys]
+    == [ [ (xx-:-xxs, yy-:-xxs)
+         , (yy-:-yys, xx-:-yys)
+         ]
+       , [ (xx-:-xxs, xx-:-yys)
+         , (yy-:-yys, yy-:-xxs)
+         ]
+       ]
   ]

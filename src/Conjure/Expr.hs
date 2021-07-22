@@ -33,6 +33,7 @@ module Conjure.Expr
   , isDeconstructionE
   , revaluate
   , reval
+  , useMatches
 
   , enumerateAppsFor
   , enumerateFillings
@@ -365,6 +366,24 @@ fliproductWith f xss (ys:yss)  =  map (** ys) xss
                                \/ delay (productWith f xss yss)
   where
   xs ** ys  =  [x `f` y | x <- xs, y <- ys]
+
+-- |
+--
+-- > useMatches [xx,yy] [xx,yy]  =  [[(xx,xx), (yy,yy)]]
+-- > useMatches [xx,yy] [yy,xx]  =  [[(xx,xx), (yy,yy)]]
+-- > useMatches [yy,xx] [xx,yy]  =  [[(yy,yy), (xx,xx)]]
+-- > useMatches [xx,yy] [xx,xx]  =  []
+-- > useMatches [xx,yy] [abs' xx, abs' yy]  =  [[(xx,abs' xx), (yy, abs' yy)]]
+-- > useMatches [xx-:-xxs, yy-:-yys] [abs' xx, abs' yy]
+-- >   =  [(xx-:-xxs, abs' xx), (yy-:-yys, abs' yy)]
+useMatches :: [Expr] -> [Expr] -> [[(Expr,Expr)]]
+useMatches [] []  =  [[]]
+useMatches [] es  =  [] -- no matches when lists have different lengths
+useMatches es []  =  [] -- no matches when lists have different lengths
+useMatches (e:es) es'  =  concat
+  [ map ((e,e'):) (useMatches es es')
+  | (e',es') <- choicesThat (\e' _ -> any (`elem` vars e') (vars e)) es'
+  ]
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

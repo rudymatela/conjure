@@ -34,6 +34,8 @@ module Conjure.Utils
   , sets
   , headOr
   , allEqual
+  , choices
+  , choicesThat
   )
 where
 
@@ -130,3 +132,12 @@ sets (x:xs)  =  map (x:) ss ++ ss
 headOr :: a -> [a] -> a
 headOr x []  =  x
 headOr _ (x:xs)  =  x
+
+choices :: [a] -> [(a,[a])]
+choices []  =  []
+choices (x:xs)  =  (x,xs) : map (mapSnd (x:)) (choices xs)
+  where
+  mapSnd f (x,y)  =  (x,f y)
+
+choicesThat :: (a -> [a] -> Bool) -> [a] -> [(a,[a])]
+choicesThat (?)  =  filter (uncurry (?)) . choices
