@@ -295,7 +295,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
-                        $  recs ep es
+                        $  recs ep
 
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
@@ -303,10 +303,10 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   ds  =  filter (conjureIsDeconstructor f maxTests) es
   keepR ep | requireDescent  =  descends (`elem` ds) ep
            | otherwise       =  const True
-  recs ep es  =  filterT (keepR ep)
-              .  discardT (\e -> e == ep)
-              .  filterT (\e -> any (`elem` vs) (vars e))
-              $  foldAppProducts ef [appsWith h (vs ++ es) | h <- conjureArgumentHoles f]
+  recs ep  =  filterT (keepR ep)
+           .  discardT (\e -> e == ep)
+           .  filterT (\e -> any (`elem` vs) (vars e))
+           $  foldAppProducts ef [appsWith h (vs ++ es) | h <- conjureArgumentHoles f]
     where
     vs  =  tail (vars ep)
 
