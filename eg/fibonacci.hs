@@ -13,8 +13,7 @@ fibonacci 7  =  21
 
 main :: IO ()
 main  =  do
-  -- finds a implementation in about 20s to run with maxSize = 11 or 12
-  conjureWith args{maxSize = 10} "fibonacci n" fibonacci
+  conjure "fibonacci n" fibonacci
     [ pr (0::Int)
     , pr (1::Int)
     , prim "dec" (subtract 1 :: Int -> Int)
