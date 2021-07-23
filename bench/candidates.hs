@@ -34,12 +34,14 @@ main  =  do
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((+) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
     ]
 
   printCandidates 8 4 "?" (undefined :: Int -> Int -> Int)
     [ pr (0 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((+) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
     ]
 
   printCandidates 9 6 "goo" (undefined :: [Int] -> [Int])
