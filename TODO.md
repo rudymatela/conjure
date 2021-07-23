@@ -3,6 +3,38 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* remove some _very_ duplicate candidates:
+
+	foo 0  =  0
+	foo x  =  foo (dec x)
+
+	foo 0  =  0
+	foo x  =  foo (dec x)
+
+	foo 0  =  1
+	foo x  =  foo (dec x)
+
+	foo 0  =  1
+	foo x  =  foo (dec x)
+
+	foo 0  =  dec 0
+	foo x  =  foo (dec x)
+
+	foo 0  =  dec 0
+	foo x  =  foo (dec x)
+
+	foo 1  =  0
+	foo x  =  foo (dec x)
+
+	foo 1  =  0
+	foo x  =  foo (dec x)
+
+	foo 1  =  1
+	foo x  =  foo (dec x)
+
+	foo 1  =  1
+	foo x  =  foo (dec x)
+
 * remove `requireDescent=False` requirement from `gcd`
   (add and use `isDeconstruction`)
   this would also eliminate the requirement of providing `dec`
