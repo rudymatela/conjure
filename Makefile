@@ -41,10 +41,10 @@ all: mk/toplibs
 
 all-all: all $(EG) $(TESTS)
 
-test: $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
+test: $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
 .PHONY: bench
-bench: $(patsubst %,%.bench,$(EG))
+bench: $(EG) $(patsubst %,%.bench,$(EG))
 	@mkdir -p bench/runtime/$$HOSTNAME
 	./bench/versions | tee bench/runtime/$$HOSTNAME/versions
 
@@ -57,9 +57,9 @@ ghci: src/Conjure.ghci
 	python3 -c 'print("%.1f" % float(input()))' | \
 	tee bench/runtime/$$HOSTNAME/$<.runtime
 
-diff-test: $(patsubst %,%.diff-test,$(EG))
+diff-test: $(EG) $(patsubst %,%.diff-test,$(EG))
 
-out: $(patsubst %,%.out,$(EG))
+out: $(EG) $(patsubst %,%.out,$(EG))
 
 test-sdist:
 	./test/sdist
