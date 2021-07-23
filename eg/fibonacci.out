@@ -4,12 +4,12 @@ fibonacci :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 6 candidates of size 2
 -- looking through 17 candidates of size 3
--- looking through 43 candidates of size 4
--- looking through 87 candidates of size 5
--- looking through 204 candidates of size 6
--- looking through 409 candidates of size 7
--- looking through 962 candidates of size 8
--- looking through 2056 candidates of size 9
--- looking through 4781 candidates of size 10
+-- looking through 41 candidates of size 4
+-- looking through 76 candidates of size 5
+-- looking through 155 candidates of size 6
+-- looking through 249 candidates of size 7
+-- looking through 481 candidates of size 8
+-- looking through 762 candidates of size 9
+-- looking through 1413 candidates of size 10
 cannot conjure
 

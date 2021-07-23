@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 13/26 rules
   [3,2,4,3,12,7,27,25,58] direct candidates
-  [3,6,15,36,66,128,209,436,701] pattern candidates
+  [3,6,15,34,61,111,174,344,529] pattern candidates
 
 rules:
 dec 1 == 0
@@ -165,12 +165,6 @@ foo x  =  0
 foo 0  =  0
 foo x  =  foo (dec x)
 
-foo 0  =  0
-foo x  =  foo (dec x)
-
-foo 0  =  1
-foo x  =  foo (dec x)
-
 foo 0  =  1
 foo x  =  foo (dec x)
 
@@ -280,28 +274,13 @@ foo x  =  0
 foo 0  =  0
 foo x  =  dec (foo (dec x))
 
-foo 0  =  0
-foo x  =  dec (foo (dec x))
-
-foo 0  =  1
-foo x  =  dec (foo (dec x))
-
 foo 0  =  1
 foo x  =  dec (foo (dec x))
 
 foo 0  =  dec 0
 foo x  =  foo (dec x)
 
-foo 0  =  dec 0
-foo x  =  foo (dec x)
-
 foo 1  =  0
-foo x  =  foo (dec x)
-
-foo 1  =  0
-foo x  =  foo (dec x)
-
-foo 1  =  1
 foo x  =  foo (dec x)
 
 foo 1  =  1
@@ -487,22 +466,10 @@ foo 0  =  0
 foo x  =  x + foo (dec x)
 
 foo 0  =  0
-foo x  =  x + foo (dec x)
-
-foo 0  =  0
-foo x  =  foo (dec x) + x
-
-foo 0  =  0
 foo x  =  foo (dec x) + x
 
 foo 0  =  0
 foo x  =  foo (dec x) + 1
-
-foo 0  =  0
-foo x  =  foo (dec x) + 1
-
-foo 0  =  0
-foo x  =  1 + foo (dec x)
 
 foo 0  =  0
 foo x  =  1 + foo (dec x)
@@ -511,22 +478,10 @@ foo 0  =  1
 foo x  =  x + foo (dec x)
 
 foo 0  =  1
-foo x  =  x + foo (dec x)
-
-foo 0  =  1
-foo x  =  foo (dec x) + x
-
-foo 0  =  1
 foo x  =  foo (dec x) + x
 
 foo 0  =  1
 foo x  =  foo (dec x) + 1
-
-foo 0  =  1
-foo x  =  foo (dec x) + 1
-
-foo 0  =  1
-foo x  =  1 + foo (dec x)
 
 foo 0  =  1
 foo x  =  1 + foo (dec x)
@@ -534,29 +489,14 @@ foo x  =  1 + foo (dec x)
 foo 0  =  dec 0
 foo x  =  dec (foo (dec x))
 
-foo 0  =  dec 0
-foo x  =  dec (foo (dec x))
-
-foo 0  =  1 + 1
-foo x  =  foo (dec x)
-
 foo 0  =  1 + 1
 foo x  =  foo (dec x)
 
 foo 1  =  0
 foo x  =  dec (foo (dec x))
 
-foo 1  =  0
-foo x  =  dec (foo (dec x))
-
 foo 1  =  1
 foo x  =  dec (foo (dec x))
-
-foo 1  =  1
-foo x  =  dec (foo (dec x))
-
-foo 1  =  dec 0
-foo x  =  foo (dec x)
 
 foo 1  =  dec 0
 foo x  =  foo (dec x)
@@ -566,27 +506,11 @@ foo 1  =  0
 foo x  =  foo (dec x)
 
 foo 0  =  0
-foo 1  =  0
-foo x  =  foo (dec x)
-
-foo 0  =  0
-foo 1  =  1
-foo x  =  foo (dec x)
-
-foo 0  =  0
 foo 1  =  1
 foo x  =  foo (dec x)
 
 foo 0  =  1
 foo 1  =  0
-foo x  =  foo (dec x)
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  foo (dec x)
-
-foo 0  =  1
-foo 1  =  1
 foo x  =  foo (dec x)
 
 foo 0  =  1
@@ -911,7 +835,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93] direct candidates
-  [3,11,39,88,361,1188,3610,11813] pattern candidates
+  [3,11,39,88,257,632,1624,4115] pattern candidates
 
 rules:
 x * y == x + y
@@ -1587,7 +1511,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0] direct candidates
-  [3,8,15,82,192,622,2668,5034] pattern candidates
+  [3,8,15,66,152,362,1400,2084] pattern candidates
 
 rules:
 xs ++ [] == xs
@@ -1717,9 +1641,6 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? []
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? xs
 
 xs ?? []  =  xs
@@ -1727,15 +1648,6 @@ xs ?? (x:ys)  =  ys ?? ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? []
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? []
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  [] ?? xs
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  [] ?? ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  [] ?? xs
@@ -1753,9 +1665,6 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  xs ?? []
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  xs ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? xs
 
 xs ?? []  =  []
@@ -1765,15 +1674,6 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? []
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  ys ?? []
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  [] ?? xs
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  [] ?? ys
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  [] ?? xs
 
 xs ?? []  =  []
@@ -1789,9 +1689,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  xs ?? []
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? []
-
-[] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ?? xs
 
 [] ?? xs  =  xs
@@ -1799,15 +1696,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ?? []
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ?? []
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  [] ?? xs
@@ -1825,9 +1713,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  xs ?? []
 
 [] ?? xs  =  []
-(x:xs) ?? ys  =  xs ?? []
-
-[] ?? xs  =  []
 (x:xs) ?? ys  =  ys ?? xs
 
 [] ?? xs  =  []
@@ -1835,15 +1720,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ?? []
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ?? []
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  [] ?? xs

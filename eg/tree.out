@@ -30,11 +30,11 @@ size :: Tree -> Int
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 27 candidates of size 4
--- looking through 83 candidates of size 5
--- looking through 102 candidates of size 6
--- looking through 411 candidates of size 7
--- looking through 715 candidates of size 8
+-- looking through 19 candidates of size 4
+-- looking through 35 candidates of size 5
+-- looking through 66 candidates of size 6
+-- looking through 163 candidates of size 7
+-- looking through 311 candidates of size 8
 size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
@@ -44,11 +44,11 @@ height :: Tree -> Int
 -- looking through 3 candidates of size 1
 -- looking through 9 candidates of size 2
 -- looking through 8 candidates of size 3
--- looking through 71 candidates of size 4
--- looking through 186 candidates of size 5
--- looking through 564 candidates of size 6
--- looking through 2407 candidates of size 7
--- looking through 6293 candidates of size 8
+-- looking through 59 candidates of size 4
+-- looking through 114 candidates of size 5
+-- looking through 388 candidates of size 6
+-- looking through 1255 candidates of size 7
+-- looking through 3833 candidates of size 8
 height Leaf  =  -1
 height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 
@@ -78,9 +78,9 @@ insert :: Int -> Tree -> Bool
 -- looking through 4 candidates of size 3
 -- looking through 16 candidates of size 4
 -- looking through 40 candidates of size 5
--- looking through 140 candidates of size 6
--- looking through 561 candidates of size 7
--- looking through 2365 candidates of size 8
--- looking through 9285 candidates of size 9
+-- looking through 136 candidates of size 6
+-- looking through 473 candidates of size 7
+-- looking through 1517 candidates of size 8
+-- looking through 4409 candidates of size 9
 cannot conjure
 

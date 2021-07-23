@@ -5,13 +5,13 @@ subset :: [Int] -> [Int] -> Bool
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 11 candidates of size 4
--- looking through 64 candidates of size 5
--- looking through 247 candidates of size 6
--- looking through 750 candidates of size 7
--- looking through 2349 candidates of size 8
--- looking through 8305 candidates of size 9
--- looking through 30407 candidates of size 10
--- looking through 107700 candidates of size 11
+-- looking through 56 candidates of size 5
+-- looking through 167 candidates of size 6
+-- looking through 430 candidates of size 7
+-- looking through 1177 candidates of size 8
+-- looking through 3717 candidates of size 9
+-- looking through 11363 candidates of size 10
+-- looking through 32772 candidates of size 11
 subset [] xs  =  elem (head xs) xs
 subset (x:xs) ys  =  elem x ys && subset xs ys
 

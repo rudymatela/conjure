@@ -306,7 +306,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   recs ep  =  filterT (keepR ep)
            .  discardT (\e -> e == ep)
            .  filterT (\e -> any (`elem` vs) (vars e))
-           $  foldAppProducts ef [appsWith h (vs ++ es) | h <- conjureArgumentHoles f]
+           $  foldAppProducts ef [appsWith h vs | h <- conjureArgumentHoles f]
     where
     vs  =  tail (vars ep)
 
