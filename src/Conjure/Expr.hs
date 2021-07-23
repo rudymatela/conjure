@@ -11,6 +11,7 @@ module Conjure.Expr
   ( module Data.Express
   , module Data.Express.Fixtures
 
+  , rehole
   , (>$$<)
   , funToVar
   , recursexpr
@@ -384,6 +385,11 @@ useMatches (e:es) es'  =  concat
   [ map ((e,e'):) (useMatches es es')
   | (e',es') <- choicesThat (\e' _ -> any (`elem` vars e') (vars e)) es'
   ]
+
+rehole :: Expr -> Expr
+rehole (e1 :$ e2)    = rehole e1 :$ rehole e2
+rehole e | isVar e   = "" `varAsTypeOf` e
+         | otherwise = e
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

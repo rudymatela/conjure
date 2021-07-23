@@ -289,8 +289,8 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
       should aes ae  =  length (nub aes) > 1 && hasVar ae && (isApp ae || isUnbreakable ae)
-      aes   =                  (tail . unfoldApp) pat
-      aess  =  transpose $ map (tail . unfoldApp) pats
+      aes   =                  (tail . unfoldApp . rehole) pat
+      aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
   fillingsFor1 :: Bndn -> [[Bndn]]
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))

@@ -835,7 +835,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,11,39,88,251,614,1583,3998,9784] pattern candidates, 0 duplicates
+  [3,11,39,88,245,596,1542,3881,9466] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1623,24 +1623,6 @@ x ? y  =  dec y ? y
 0 ? x  =  x
 x ? y  =  dec y ? 0
 
-0 ? x  =  x ? dec x
-x ? y  =  x
-
-0 ? x  =  0 ? dec x
-x ? y  =  x
-
-0 ? x  =  x ? dec x
-x ? y  =  y
-
-0 ? x  =  0 ? dec x
-x ? y  =  y
-
-0 ? x  =  x ? dec x
-x ? y  =  0
-
-0 ? x  =  0 ? dec x
-x ? y  =  0
-
 0 ? x  =  0
 x ? y  =  x ? dec x
 
@@ -2523,24 +2505,6 @@ x ? y  =  dec 0 ? dec x
 0 ? x  =  x
 x ? y  =  dec 0 ? dec y
 
-0 ? x  =  dec x ? dec x
-x ? y  =  x
-
-0 ? x  =  dec 0 ? dec x
-x ? y  =  x
-
-0 ? x  =  dec x ? dec x
-x ? y  =  y
-
-0 ? x  =  dec 0 ? dec x
-x ? y  =  y
-
-0 ? x  =  dec x ? dec x
-x ? y  =  0
-
-0 ? x  =  dec 0 ? dec x
-x ? y  =  0
-
 0 ? x  =  0
 x ? y  =  dec x ? dec x
 
@@ -2745,24 +2709,6 @@ x ? y  =  dec (dec y ? y)
 0 ? x  =  x
 x ? y  =  dec (dec y ? 0)
 
-0 ? x  =  x ? dec x
-x ? y  =  dec x
-
-0 ? x  =  0 ? dec x
-x ? y  =  dec x
-
-0 ? x  =  x ? dec x
-x ? y  =  dec y
-
-0 ? x  =  0 ? dec x
-x ? y  =  dec y
-
-0 ? x  =  x ? dec x
-x ? y  =  dec 0
-
-0 ? x  =  0 ? dec x
-x ? y  =  dec 0
-
 0 ? x  =  0
 x ? y  =  dec (x ? dec x)
 
@@ -2834,24 +2780,6 @@ x ? y  =  dec y ? y
 
 0 ? x  =  dec x
 x ? y  =  dec y ? 0
-
-0 ? x  =  dec (x ? dec x)
-x ? y  =  x
-
-0 ? x  =  dec (0 ? dec x)
-x ? y  =  x
-
-0 ? x  =  dec (x ? dec x)
-x ? y  =  y
-
-0 ? x  =  dec (0 ? dec x)
-x ? y  =  y
-
-0 ? x  =  dec (x ? dec x)
-x ? y  =  0
-
-0 ? x  =  dec (0 ? dec x)
-x ? y  =  0
 
 0 ? x  =  dec 0
 x ? y  =  x ? dec x
