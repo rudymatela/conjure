@@ -18,6 +18,7 @@ module Conjure.Utils
 
   , count
   , nubOn
+  , nubSort
   , iterateUntil
   , mzip
   , groupOn
@@ -59,6 +60,14 @@ count p  =  length . filter p
 
 nubOn :: Eq b => (a -> b) -> [a] -> [a]
 nubOn f  =  nubBy ((==) `on` f)
+
+nubSort :: Ord a => [a] -> [a]
+nubSort  =  nnub . sort
+  where
+  -- linear nub of adjacent values
+  nnub [] = []
+  nnub [x] = [x]
+  nnub (x:xs) = x : nnub (dropWhile (==x) xs)
 
 iterateUntil :: (a -> a -> Bool) -> (a -> a) -> a -> a
 iterateUntil (?) f  =  iu

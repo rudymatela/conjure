@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* on `bench/candidates.hs` print whether there are duplicates
-
 * consider memoizing `recs ep` in `candidateDefnsC`
   and a sub function with `vs` arguments.
 
