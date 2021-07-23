@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add `conjureSize` and use it to implement `isDeconstructor`?
+* remove `requireDescent=False` requirement from `gcd` (add and use `isDeconstruction`)
 
 * consider not breaking in some cases (increased crossproduct of patterns)
 
