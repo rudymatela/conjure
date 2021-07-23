@@ -70,17 +70,20 @@ mem :: Int -> Tree -> Bool
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
-insert :: Int -> Tree -> Bool
+insert :: Int -> Tree -> Tree
 -- testing 60 combinations of argument values
--- pruning with 9/10 rules
--- looking through 0 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 16 candidates of size 4
--- looking through 40 candidates of size 5
--- looking through 136 candidates of size 6
--- looking through 473 candidates of size 7
--- looking through 1517 candidates of size 8
--- looking through 4409 candidates of size 9
+-- pruning with 6/7 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 21 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 118 candidates of size 7
+-- looking through 239 candidates of size 8
+-- looking through 216 candidates of size 9
+-- looking through 2204 candidates of size 10
+-- looking through 3651 candidates of size 11
+-- looking through 8280 candidates of size 12
 cannot conjure
 

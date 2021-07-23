@@ -134,17 +134,13 @@ main = do
     ]
 
   -- simply out of reach performance-wise (size 34)
-  conjureWithMaxSize 9 "insert" mem
+  conjureWithMaxSize 12 "insert" insert
     [ pr Leaf
     , prim "Node" Node
-    , prim "left" left
-    , prim "right" right
-    , prim "valu" valu
-    , prim "nil" nil
-    , prim "unit" unit
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
     , prim ">" ((>) :: Int -> Int -> Bool)
+    , prim "if" (\p t1 t2 -> if p then t1 else t2 :: Tree)
     ]
 
 
