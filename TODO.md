@@ -3,6 +3,27 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* prune these away somehow:
+
+        x ? 0  =  dec x ? x
+        x ? y  =  x
+
+        x ? 0  =  dec x ? 0
+        x ? y  =  x
+
+        x ? 0  =  dec x ? x
+        x ? y  =  y
+
+        x ? 0  =  dec x ? 0
+        x ? y  =  y
+
+        x ? 0  =  dec x ? x
+        x ? y  =  0
+
+        x ? 0  =  dec x ? 0
+        x ? y  =  0
+
+
 * consider memoizing `recs ep` in `candidateDefnsC`
   and a sub function with `vs` arguments.
 
