@@ -30,7 +30,6 @@ main  =  do
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
 -- the actual factorial function:

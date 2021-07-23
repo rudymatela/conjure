@@ -23,7 +23,6 @@ main  =  do
     , pr (1::Int)
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "==" ((==) :: Int -> Int -> Bool) -- needed for isDeconstructor! TODO: FIXME.
     ]
 
   -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1

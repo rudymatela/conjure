@@ -11,7 +11,7 @@ factorial x  =  foldr (*) 1 [1..x]
 
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
--- pruning with 40/73 rules
+-- pruning with 22/42 rules
 -- looking through 3 candidates of size 1
 -- looking through 6 candidates of size 2
 -- looking through 16 candidates of size 3

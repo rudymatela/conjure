@@ -1,6 +1,6 @@
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
--- pruning with 19/26 rules
+-- pruning with 8/12 rules
 -- looking through 4 candidates of size 1
 -- looking through 21 candidates of size 2
 -- looking through 129 candidates of size 3

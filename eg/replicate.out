@@ -1,6 +1,6 @@
 replicate :: Int -> Char -> [Char]
 -- testing 60 combinations of argument values
--- pruning with 6/7 rules
+-- pruning with 0/0 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3

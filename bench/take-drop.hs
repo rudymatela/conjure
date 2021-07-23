@@ -38,7 +38,6 @@ main = do
     [ pr (0 :: Int)
     , pr ([] :: [A])
     , prim "null" (null :: [A] -> Bool)
-    , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "||" ((||) :: Bool -> Bool -> Bool)
     , prim "dec" ((\n -> n-1) :: Int -> Int)
     , prim ":" ((:) :: A -> [A] -> [A])
