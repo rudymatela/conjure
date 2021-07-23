@@ -3,7 +3,9 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* remove `requireDescent=False` requirement from `gcd` (add and use `isDeconstruction`)
+* remove `requireDescent=False` requirement from `gcd`
+  (add and use `isDeconstruction`)
+  this would also eliminate the requirement of providing `dec`
 
 * consider not breaking in some cases (increased crossproduct of patterns)
 
