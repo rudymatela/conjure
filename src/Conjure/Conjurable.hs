@@ -524,13 +524,14 @@ instance (Integral a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conj
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize q    =  fromIntegral $ numerator q + denominator q
+  conjureSize q    =  conjureSize (numerator q) + conjureSize (denominator q)
   conjureSubTypes q  =  conjureType (numerator q)
 
 instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Complex a) where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize x    =  conjureSize (realPart x) + conjureSize (imagPart x)
   conjureSubTypes x  =  conjureType (realPart x)
 
 
