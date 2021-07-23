@@ -11,19 +11,19 @@ printCandidates :: Conjurable f => Int -> Int -> String -> f -> [Prim] -> IO ()
 printCandidates m n nm f ps  =  do
   putStrLn $ "Candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
   putStrLn $ "  pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
-  putStrLn $ "  " ++ show (map length cs1) ++ " direct candidates"
-  putStrLn $ "  " ++ show (map length csC) ++ " pattern candidates"
+  putStrLn $ "  " ++ show (map length css1) ++ " direct candidates"
+  putStrLn $ "  " ++ show (map length cssC) ++ " pattern candidates"
   putStrLn ""
   printThy thy
   putStrLn $ "direct candidates:\n"
-  putStrLn $ unlines $ map showDefn $ concat $ take n $ cs1
+  putStrLn $ unlines $ map showDefn $ concat $ take n $ css1
   putStrLn $ "pattern candidates:\n"
-  putStrLn $ unlines $ map showDefn $ concat $ take n $ csC
+  putStrLn $ unlines $ map showDefn $ concat $ take n $ cssC
   where
-  cs1  =  take m cs1'
-  csC  =  take m csC'
-  (cs1', thy)  =  candidateDefns1 args nm f ps
-  (csC', _)    =  candidateDefnsC args nm f ps
+  css1  =  take m css1'
+  cssC  =  take m cssC'
+  (css1', thy)  =  candidateDefns1 args nm f ps
+  (cssC', _)    =  candidateDefnsC args nm f ps
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 
