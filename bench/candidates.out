@@ -834,8 +834,8 @@ foo x  =  1
 
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,3,4,10,17,26,54,93] direct candidates, 0 duplicates
-  [3,11,39,88,257,632,1624,4115] pattern candidates, 0 duplicates
+  [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
+  [3,11,39,88,257,632,1624,4115,10102] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -904,6 +904,92 @@ x ? y  =  y + dec x
 x ? y  =  y + dec y
 
 x ? y  =  y + dec 0
+
+x ? y  =  x + (x + x)
+
+x ? y  =  x + (x + y)
+
+x ? y  =  x + (y + x)
+
+x ? y  =  x + (y + y)
+
+x ? y  =  y + (x + x)
+
+x ? y  =  y + (x + y)
+
+x ? y  =  y + (y + x)
+
+x ? y  =  y + (y + y)
+
+x ? y  =  dec x + dec x
+
+x ? y  =  dec x + dec y
+
+x ? y  =  dec x + dec 0
+
+x ? y  =  dec y + dec x
+
+x ? y  =  dec y + dec y
+
+x ? y  =  dec y + dec 0
+
+x ? y  =  dec 0 + dec x
+
+x ? y  =  dec 0 + dec y
+
+x ? y  =  dec 0 + dec 0
+
+x ? y  =  x + (dec x + y)
+
+x ? y  =  x + (dec y + x)
+
+x ? y  =  x + (dec 0 + x)
+
+x ? y  =  x + (dec 0 + y)
+
+x ? y  =  x + (x + dec x)
+
+x ? y  =  x + (x + dec y)
+
+x ? y  =  x + (x + dec 0)
+
+x ? y  =  x + (y + dec x)
+
+x ? y  =  x + (y + dec y)
+
+x ? y  =  x + (y + dec 0)
+
+x ? y  =  y + (dec x + y)
+
+x ? y  =  y + (dec y + x)
+
+x ? y  =  y + (dec 0 + x)
+
+x ? y  =  y + (dec 0 + y)
+
+x ? y  =  y + (x + dec x)
+
+x ? y  =  y + (x + dec y)
+
+x ? y  =  y + (x + dec 0)
+
+x ? y  =  y + (y + dec x)
+
+x ? y  =  y + (y + dec y)
+
+x ? y  =  y + (y + dec 0)
+
+x ? y  =  dec x + (y + y)
+
+x ? y  =  dec y + (x + x)
+
+x ? y  =  dec 0 + (x + x)
+
+x ? y  =  dec 0 + (x + y)
+
+x ? y  =  dec 0 + (y + x)
+
+x ? y  =  dec 0 + (y + y)
 
 
 pattern candidates:
@@ -1426,6 +1512,3390 @@ x ? y  =  y
 
 0 ? 0  =  dec 0
 0 ? x  =  0
+x ? 0  =  0
+x ? y  =  0
+
+x ? 0  =  x
+x ? y  =  x ? dec x
+
+x ? 0  =  x
+x ? y  =  x ? dec y
+
+x ? 0  =  x
+x ? y  =  y ? dec x
+
+x ? 0  =  x
+x ? y  =  y ? dec y
+
+x ? 0  =  x
+x ? y  =  0 ? dec x
+
+x ? 0  =  x
+x ? y  =  0 ? dec y
+
+x ? 0  =  x
+x ? y  =  dec x ? x
+
+x ? 0  =  x
+x ? y  =  dec x ? y
+
+x ? 0  =  x
+x ? y  =  dec x ? 0
+
+x ? 0  =  x
+x ? y  =  dec y ? x
+
+x ? 0  =  x
+x ? y  =  dec y ? y
+
+x ? 0  =  x
+x ? y  =  dec y ? 0
+
+x ? 0  =  dec x ? x
+x ? y  =  x
+
+x ? 0  =  dec x ? 0
+x ? y  =  x
+
+x ? 0  =  dec x ? x
+x ? y  =  y
+
+x ? 0  =  dec x ? 0
+x ? y  =  y
+
+x ? 0  =  dec x ? x
+x ? y  =  0
+
+x ? 0  =  dec x ? 0
+x ? y  =  0
+
+x ? 0  =  0
+x ? y  =  x ? dec x
+
+x ? 0  =  0
+x ? y  =  x ? dec y
+
+x ? 0  =  0
+x ? y  =  y ? dec x
+
+x ? 0  =  0
+x ? y  =  y ? dec y
+
+x ? 0  =  0
+x ? y  =  0 ? dec x
+
+x ? 0  =  0
+x ? y  =  0 ? dec y
+
+x ? 0  =  0
+x ? y  =  dec x ? x
+
+x ? 0  =  0
+x ? y  =  dec x ? y
+
+x ? 0  =  0
+x ? y  =  dec x ? 0
+
+x ? 0  =  0
+x ? y  =  dec y ? x
+
+x ? 0  =  0
+x ? y  =  dec y ? y
+
+x ? 0  =  0
+x ? y  =  dec y ? 0
+
+0 ? x  =  x
+x ? y  =  x ? dec x
+
+0 ? x  =  x
+x ? y  =  x ? dec y
+
+0 ? x  =  x
+x ? y  =  y ? dec x
+
+0 ? x  =  x
+x ? y  =  y ? dec y
+
+0 ? x  =  x
+x ? y  =  0 ? dec x
+
+0 ? x  =  x
+x ? y  =  0 ? dec y
+
+0 ? x  =  x
+x ? y  =  dec x ? x
+
+0 ? x  =  x
+x ? y  =  dec x ? y
+
+0 ? x  =  x
+x ? y  =  dec x ? 0
+
+0 ? x  =  x
+x ? y  =  dec y ? x
+
+0 ? x  =  x
+x ? y  =  dec y ? y
+
+0 ? x  =  x
+x ? y  =  dec y ? 0
+
+0 ? x  =  x ? dec x
+x ? y  =  x
+
+0 ? x  =  0 ? dec x
+x ? y  =  x
+
+0 ? x  =  x ? dec x
+x ? y  =  y
+
+0 ? x  =  0 ? dec x
+x ? y  =  y
+
+0 ? x  =  x ? dec x
+x ? y  =  0
+
+0 ? x  =  0 ? dec x
+x ? y  =  0
+
+0 ? x  =  0
+x ? y  =  x ? dec x
+
+0 ? x  =  0
+x ? y  =  x ? dec y
+
+0 ? x  =  0
+x ? y  =  y ? dec x
+
+0 ? x  =  0
+x ? y  =  y ? dec y
+
+0 ? x  =  0
+x ? y  =  0 ? dec x
+
+0 ? x  =  0
+x ? y  =  0 ? dec y
+
+0 ? x  =  0
+x ? y  =  dec x ? x
+
+0 ? x  =  0
+x ? y  =  dec x ? y
+
+0 ? x  =  0
+x ? y  =  dec x ? 0
+
+0 ? x  =  0
+x ? y  =  dec y ? x
+
+0 ? x  =  0
+x ? y  =  dec y ? y
+
+0 ? x  =  0
+x ? y  =  dec y ? 0
+
+x ? y  =  x + (x + x)
+
+x ? y  =  x + (x + y)
+
+x ? y  =  x + (y + x)
+
+x ? y  =  x + (y + y)
+
+x ? y  =  y + (x + x)
+
+x ? y  =  y + (x + y)
+
+x ? y  =  y + (y + x)
+
+x ? y  =  y + (y + y)
+
+x ? y  =  dec x + dec x
+
+x ? y  =  dec x + dec y
+
+x ? y  =  dec x + dec 0
+
+x ? y  =  dec y + dec x
+
+x ? y  =  dec y + dec y
+
+x ? y  =  dec y + dec 0
+
+x ? y  =  dec 0 + dec x
+
+x ? y  =  dec 0 + dec y
+
+x ? y  =  dec 0 + dec 0
+
+x ? 0  =  x
+x ? y  =  dec x + y
+
+x ? 0  =  x
+x ? y  =  dec y + x
+
+x ? 0  =  x
+x ? y  =  dec 0 + x
+
+x ? 0  =  x
+x ? y  =  dec 0 + y
+
+x ? 0  =  x
+x ? y  =  x + dec x
+
+x ? 0  =  x
+x ? y  =  x + dec y
+
+x ? 0  =  x
+x ? y  =  x + dec 0
+
+x ? 0  =  x
+x ? y  =  y + dec x
+
+x ? 0  =  x
+x ? y  =  y + dec y
+
+x ? 0  =  x
+x ? y  =  y + dec 0
+
+x ? 0  =  0
+x ? y  =  dec x + y
+
+x ? 0  =  0
+x ? y  =  dec y + x
+
+x ? 0  =  0
+x ? y  =  dec 0 + x
+
+x ? 0  =  0
+x ? y  =  dec 0 + y
+
+x ? 0  =  0
+x ? y  =  x + dec x
+
+x ? 0  =  0
+x ? y  =  x + dec y
+
+x ? 0  =  0
+x ? y  =  x + dec 0
+
+x ? 0  =  0
+x ? y  =  y + dec x
+
+x ? 0  =  0
+x ? y  =  y + dec y
+
+x ? 0  =  0
+x ? y  =  y + dec 0
+
+x ? 0  =  dec x
+x ? y  =  x + x
+
+x ? 0  =  dec x
+x ? y  =  x + y
+
+x ? 0  =  dec x
+x ? y  =  y + x
+
+x ? 0  =  dec x
+x ? y  =  y + y
+
+x ? 0  =  dec 0
+x ? y  =  x + x
+
+x ? 0  =  dec 0
+x ? y  =  x + y
+
+x ? 0  =  dec 0
+x ? y  =  y + x
+
+x ? 0  =  dec 0
+x ? y  =  y + y
+
+x ? 0  =  x + x
+x ? y  =  dec x
+
+x ? 0  =  x + x
+x ? y  =  dec y
+
+x ? 0  =  x + x
+x ? y  =  dec 0
+
+x ? 0  =  dec 0 + x
+x ? y  =  x
+
+x ? 0  =  dec 0 + x
+x ? y  =  y
+
+x ? 0  =  dec 0 + x
+x ? y  =  0
+
+x ? 0  =  x + dec x
+x ? y  =  x
+
+x ? 0  =  x + dec x
+x ? y  =  y
+
+x ? 0  =  x + dec x
+x ? y  =  0
+
+x ? 0  =  x + dec 0
+x ? y  =  x
+
+x ? 0  =  x + dec 0
+x ? y  =  y
+
+x ? 0  =  x + dec 0
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  dec x + y
+
+0 ? x  =  x
+x ? y  =  dec y + x
+
+0 ? x  =  x
+x ? y  =  dec 0 + x
+
+0 ? x  =  x
+x ? y  =  dec 0 + y
+
+0 ? x  =  x
+x ? y  =  x + dec x
+
+0 ? x  =  x
+x ? y  =  x + dec y
+
+0 ? x  =  x
+x ? y  =  x + dec 0
+
+0 ? x  =  x
+x ? y  =  y + dec x
+
+0 ? x  =  x
+x ? y  =  y + dec y
+
+0 ? x  =  x
+x ? y  =  y + dec 0
+
+0 ? x  =  0
+x ? y  =  dec x + y
+
+0 ? x  =  0
+x ? y  =  dec y + x
+
+0 ? x  =  0
+x ? y  =  dec 0 + x
+
+0 ? x  =  0
+x ? y  =  dec 0 + y
+
+0 ? x  =  0
+x ? y  =  x + dec x
+
+0 ? x  =  0
+x ? y  =  x + dec y
+
+0 ? x  =  0
+x ? y  =  x + dec 0
+
+0 ? x  =  0
+x ? y  =  y + dec x
+
+0 ? x  =  0
+x ? y  =  y + dec y
+
+0 ? x  =  0
+x ? y  =  y + dec 0
+
+0 ? x  =  dec x
+x ? y  =  x + x
+
+0 ? x  =  dec x
+x ? y  =  x + y
+
+0 ? x  =  dec x
+x ? y  =  y + x
+
+0 ? x  =  dec x
+x ? y  =  y + y
+
+0 ? x  =  dec 0
+x ? y  =  x + x
+
+0 ? x  =  dec 0
+x ? y  =  x + y
+
+0 ? x  =  dec 0
+x ? y  =  y + x
+
+0 ? x  =  dec 0
+x ? y  =  y + y
+
+0 ? x  =  x + x
+x ? y  =  dec x
+
+0 ? x  =  x + x
+x ? y  =  dec y
+
+0 ? x  =  x + x
+x ? y  =  dec 0
+
+0 ? x  =  dec 0 + x
+x ? y  =  x
+
+0 ? x  =  dec 0 + x
+x ? y  =  y
+
+0 ? x  =  dec 0 + x
+x ? y  =  0
+
+0 ? x  =  x + dec x
+x ? y  =  x
+
+0 ? x  =  x + dec x
+x ? y  =  y
+
+0 ? x  =  x + dec x
+x ? y  =  0
+
+0 ? x  =  x + dec 0
+x ? y  =  x
+
+0 ? x  =  x + dec 0
+x ? y  =  y
+
+0 ? x  =  x + dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  0
+
+x ? 0  =  x
+x ? y  =  dec x ? dec x
+
+x ? 0  =  x
+x ? y  =  dec x ? dec y
+
+x ? 0  =  x
+x ? y  =  dec x ? dec 0
+
+x ? 0  =  x
+x ? y  =  dec y ? dec x
+
+x ? 0  =  x
+x ? y  =  dec y ? dec y
+
+x ? 0  =  x
+x ? y  =  dec y ? dec 0
+
+x ? 0  =  x
+x ? y  =  dec 0 ? dec x
+
+x ? 0  =  x
+x ? y  =  dec 0 ? dec y
+
+x ? 0  =  dec x ? dec x
+x ? y  =  x
+
+x ? 0  =  dec x ? dec 0
+x ? y  =  x
+
+x ? 0  =  dec x ? dec x
+x ? y  =  y
+
+x ? 0  =  dec x ? dec 0
+x ? y  =  y
+
+x ? 0  =  dec x ? dec x
+x ? y  =  0
+
+x ? 0  =  dec x ? dec 0
+x ? y  =  0
+
+x ? 0  =  0
+x ? y  =  dec x ? dec x
+
+x ? 0  =  0
+x ? y  =  dec x ? dec y
+
+x ? 0  =  0
+x ? y  =  dec x ? dec 0
+
+x ? 0  =  0
+x ? y  =  dec y ? dec x
+
+x ? 0  =  0
+x ? y  =  dec y ? dec y
+
+x ? 0  =  0
+x ? y  =  dec y ? dec 0
+
+x ? 0  =  0
+x ? y  =  dec 0 ? dec x
+
+x ? 0  =  0
+x ? y  =  dec 0 ? dec y
+
+0 ? x  =  x
+x ? y  =  dec x ? dec x
+
+0 ? x  =  x
+x ? y  =  dec x ? dec y
+
+0 ? x  =  x
+x ? y  =  dec x ? dec 0
+
+0 ? x  =  x
+x ? y  =  dec y ? dec x
+
+0 ? x  =  x
+x ? y  =  dec y ? dec y
+
+0 ? x  =  x
+x ? y  =  dec y ? dec 0
+
+0 ? x  =  x
+x ? y  =  dec 0 ? dec x
+
+0 ? x  =  x
+x ? y  =  dec 0 ? dec y
+
+0 ? x  =  dec x ? dec x
+x ? y  =  x
+
+0 ? x  =  dec 0 ? dec x
+x ? y  =  x
+
+0 ? x  =  dec x ? dec x
+x ? y  =  y
+
+0 ? x  =  dec 0 ? dec x
+x ? y  =  y
+
+0 ? x  =  dec x ? dec x
+x ? y  =  0
+
+0 ? x  =  dec 0 ? dec x
+x ? y  =  0
+
+0 ? x  =  0
+x ? y  =  dec x ? dec x
+
+0 ? x  =  0
+x ? y  =  dec x ? dec y
+
+0 ? x  =  0
+x ? y  =  dec x ? dec 0
+
+0 ? x  =  0
+x ? y  =  dec y ? dec x
+
+0 ? x  =  0
+x ? y  =  dec y ? dec y
+
+0 ? x  =  0
+x ? y  =  dec y ? dec 0
+
+0 ? x  =  0
+x ? y  =  dec 0 ? dec x
+
+0 ? x  =  0
+x ? y  =  dec 0 ? dec y
+
+x ? 0  =  x
+x ? y  =  dec (x ? dec x)
+
+x ? 0  =  x
+x ? y  =  dec (x ? dec y)
+
+x ? 0  =  x
+x ? y  =  dec (y ? dec x)
+
+x ? 0  =  x
+x ? y  =  dec (y ? dec y)
+
+x ? 0  =  x
+x ? y  =  dec (0 ? dec x)
+
+x ? 0  =  x
+x ? y  =  dec (0 ? dec y)
+
+x ? 0  =  x
+x ? y  =  dec (dec x ? x)
+
+x ? 0  =  x
+x ? y  =  dec (dec x ? y)
+
+x ? 0  =  x
+x ? y  =  dec (dec x ? 0)
+
+x ? 0  =  x
+x ? y  =  dec (dec y ? x)
+
+x ? 0  =  x
+x ? y  =  dec (dec y ? y)
+
+x ? 0  =  x
+x ? y  =  dec (dec y ? 0)
+
+x ? 0  =  dec x ? x
+x ? y  =  dec x
+
+x ? 0  =  dec x ? 0
+x ? y  =  dec x
+
+x ? 0  =  dec x ? x
+x ? y  =  dec y
+
+x ? 0  =  dec x ? 0
+x ? y  =  dec y
+
+x ? 0  =  dec x ? x
+x ? y  =  dec 0
+
+x ? 0  =  dec x ? 0
+x ? y  =  dec 0
+
+x ? 0  =  0
+x ? y  =  dec (x ? dec x)
+
+x ? 0  =  0
+x ? y  =  dec (x ? dec y)
+
+x ? 0  =  0
+x ? y  =  dec (y ? dec x)
+
+x ? 0  =  0
+x ? y  =  dec (y ? dec y)
+
+x ? 0  =  0
+x ? y  =  dec (0 ? dec x)
+
+x ? 0  =  0
+x ? y  =  dec (0 ? dec y)
+
+x ? 0  =  0
+x ? y  =  dec (dec x ? x)
+
+x ? 0  =  0
+x ? y  =  dec (dec x ? y)
+
+x ? 0  =  0
+x ? y  =  dec (dec x ? 0)
+
+x ? 0  =  0
+x ? y  =  dec (dec y ? x)
+
+x ? 0  =  0
+x ? y  =  dec (dec y ? y)
+
+x ? 0  =  0
+x ? y  =  dec (dec y ? 0)
+
+x ? 0  =  dec x
+x ? y  =  x ? dec x
+
+x ? 0  =  dec x
+x ? y  =  x ? dec y
+
+x ? 0  =  dec x
+x ? y  =  y ? dec x
+
+x ? 0  =  dec x
+x ? y  =  y ? dec y
+
+x ? 0  =  dec x
+x ? y  =  0 ? dec x
+
+x ? 0  =  dec x
+x ? y  =  0 ? dec y
+
+x ? 0  =  dec x
+x ? y  =  dec x ? x
+
+x ? 0  =  dec x
+x ? y  =  dec x ? y
+
+x ? 0  =  dec x
+x ? y  =  dec x ? 0
+
+x ? 0  =  dec x
+x ? y  =  dec y ? x
+
+x ? 0  =  dec x
+x ? y  =  dec y ? y
+
+x ? 0  =  dec x
+x ? y  =  dec y ? 0
+
+x ? 0  =  dec (dec x ? x)
+x ? y  =  x
+
+x ? 0  =  dec (dec x ? 0)
+x ? y  =  x
+
+x ? 0  =  dec (dec x ? x)
+x ? y  =  y
+
+x ? 0  =  dec (dec x ? 0)
+x ? y  =  y
+
+x ? 0  =  dec (dec x ? x)
+x ? y  =  0
+
+x ? 0  =  dec (dec x ? 0)
+x ? y  =  0
+
+x ? 0  =  dec 0
+x ? y  =  x ? dec x
+
+x ? 0  =  dec 0
+x ? y  =  x ? dec y
+
+x ? 0  =  dec 0
+x ? y  =  y ? dec x
+
+x ? 0  =  dec 0
+x ? y  =  y ? dec y
+
+x ? 0  =  dec 0
+x ? y  =  0 ? dec x
+
+x ? 0  =  dec 0
+x ? y  =  0 ? dec y
+
+x ? 0  =  dec 0
+x ? y  =  dec x ? x
+
+x ? 0  =  dec 0
+x ? y  =  dec x ? y
+
+x ? 0  =  dec 0
+x ? y  =  dec x ? 0
+
+x ? 0  =  dec 0
+x ? y  =  dec y ? x
+
+x ? 0  =  dec 0
+x ? y  =  dec y ? y
+
+x ? 0  =  dec 0
+x ? y  =  dec y ? 0
+
+0 ? x  =  x
+x ? y  =  dec (x ? dec x)
+
+0 ? x  =  x
+x ? y  =  dec (x ? dec y)
+
+0 ? x  =  x
+x ? y  =  dec (y ? dec x)
+
+0 ? x  =  x
+x ? y  =  dec (y ? dec y)
+
+0 ? x  =  x
+x ? y  =  dec (0 ? dec x)
+
+0 ? x  =  x
+x ? y  =  dec (0 ? dec y)
+
+0 ? x  =  x
+x ? y  =  dec (dec x ? x)
+
+0 ? x  =  x
+x ? y  =  dec (dec x ? y)
+
+0 ? x  =  x
+x ? y  =  dec (dec x ? 0)
+
+0 ? x  =  x
+x ? y  =  dec (dec y ? x)
+
+0 ? x  =  x
+x ? y  =  dec (dec y ? y)
+
+0 ? x  =  x
+x ? y  =  dec (dec y ? 0)
+
+0 ? x  =  x ? dec x
+x ? y  =  dec x
+
+0 ? x  =  0 ? dec x
+x ? y  =  dec x
+
+0 ? x  =  x ? dec x
+x ? y  =  dec y
+
+0 ? x  =  0 ? dec x
+x ? y  =  dec y
+
+0 ? x  =  x ? dec x
+x ? y  =  dec 0
+
+0 ? x  =  0 ? dec x
+x ? y  =  dec 0
+
+0 ? x  =  0
+x ? y  =  dec (x ? dec x)
+
+0 ? x  =  0
+x ? y  =  dec (x ? dec y)
+
+0 ? x  =  0
+x ? y  =  dec (y ? dec x)
+
+0 ? x  =  0
+x ? y  =  dec (y ? dec y)
+
+0 ? x  =  0
+x ? y  =  dec (0 ? dec x)
+
+0 ? x  =  0
+x ? y  =  dec (0 ? dec y)
+
+0 ? x  =  0
+x ? y  =  dec (dec x ? x)
+
+0 ? x  =  0
+x ? y  =  dec (dec x ? y)
+
+0 ? x  =  0
+x ? y  =  dec (dec x ? 0)
+
+0 ? x  =  0
+x ? y  =  dec (dec y ? x)
+
+0 ? x  =  0
+x ? y  =  dec (dec y ? y)
+
+0 ? x  =  0
+x ? y  =  dec (dec y ? 0)
+
+0 ? x  =  dec x
+x ? y  =  x ? dec x
+
+0 ? x  =  dec x
+x ? y  =  x ? dec y
+
+0 ? x  =  dec x
+x ? y  =  y ? dec x
+
+0 ? x  =  dec x
+x ? y  =  y ? dec y
+
+0 ? x  =  dec x
+x ? y  =  0 ? dec x
+
+0 ? x  =  dec x
+x ? y  =  0 ? dec y
+
+0 ? x  =  dec x
+x ? y  =  dec x ? x
+
+0 ? x  =  dec x
+x ? y  =  dec x ? y
+
+0 ? x  =  dec x
+x ? y  =  dec x ? 0
+
+0 ? x  =  dec x
+x ? y  =  dec y ? x
+
+0 ? x  =  dec x
+x ? y  =  dec y ? y
+
+0 ? x  =  dec x
+x ? y  =  dec y ? 0
+
+0 ? x  =  dec (x ? dec x)
+x ? y  =  x
+
+0 ? x  =  dec (0 ? dec x)
+x ? y  =  x
+
+0 ? x  =  dec (x ? dec x)
+x ? y  =  y
+
+0 ? x  =  dec (0 ? dec x)
+x ? y  =  y
+
+0 ? x  =  dec (x ? dec x)
+x ? y  =  0
+
+0 ? x  =  dec (0 ? dec x)
+x ? y  =  0
+
+0 ? x  =  dec 0
+x ? y  =  x ? dec x
+
+0 ? x  =  dec 0
+x ? y  =  x ? dec y
+
+0 ? x  =  dec 0
+x ? y  =  y ? dec x
+
+0 ? x  =  dec 0
+x ? y  =  y ? dec y
+
+0 ? x  =  dec 0
+x ? y  =  0 ? dec x
+
+0 ? x  =  dec 0
+x ? y  =  0 ? dec y
+
+0 ? x  =  dec 0
+x ? y  =  dec x ? x
+
+0 ? x  =  dec 0
+x ? y  =  dec x ? y
+
+0 ? x  =  dec 0
+x ? y  =  dec x ? 0
+
+0 ? x  =  dec 0
+x ? y  =  dec y ? x
+
+0 ? x  =  dec 0
+x ? y  =  dec y ? y
+
+0 ? x  =  dec 0
+x ? y  =  dec y ? 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x ? dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y ? dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  0 ? dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  0 ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x ? x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x ? y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x ? 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y ? x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y ? y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y ? 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x ? x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x ? 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x ? x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x ? 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x ? x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x ? 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x ? dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y ? dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  0 ? dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  0 ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x ? x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x ? y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x ? 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y ? x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y ? y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y ? 0
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x ? dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y ? dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  0 ? dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  0 ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x ? x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x ? y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x ? 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y ? x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y ? y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y ? 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x ? x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x ? 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x ? x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x ? 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x ? x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x ? 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x ? dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y ? dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  0 ? dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  0 ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x ? x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x ? y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x ? 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y ? x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y ? y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y ? 0
+
+x ? y  =  x + (dec x + y)
+
+x ? y  =  x + (dec y + x)
+
+x ? y  =  x + (dec 0 + x)
+
+x ? y  =  x + (dec 0 + y)
+
+x ? y  =  x + (x + dec x)
+
+x ? y  =  x + (x + dec y)
+
+x ? y  =  x + (x + dec 0)
+
+x ? y  =  x + (y + dec x)
+
+x ? y  =  x + (y + dec y)
+
+x ? y  =  x + (y + dec 0)
+
+x ? y  =  y + (dec x + y)
+
+x ? y  =  y + (dec y + x)
+
+x ? y  =  y + (dec 0 + x)
+
+x ? y  =  y + (dec 0 + y)
+
+x ? y  =  y + (x + dec x)
+
+x ? y  =  y + (x + dec y)
+
+x ? y  =  y + (x + dec 0)
+
+x ? y  =  y + (y + dec x)
+
+x ? y  =  y + (y + dec y)
+
+x ? y  =  y + (y + dec 0)
+
+x ? y  =  dec x + (y + y)
+
+x ? y  =  dec y + (x + x)
+
+x ? y  =  dec 0 + (x + x)
+
+x ? y  =  dec 0 + (x + y)
+
+x ? y  =  dec 0 + (y + x)
+
+x ? y  =  dec 0 + (y + y)
+
+x ? 0  =  x
+x ? y  =  x + (x + x)
+
+x ? 0  =  x
+x ? y  =  x + (x + y)
+
+x ? 0  =  x
+x ? y  =  x + (y + x)
+
+x ? 0  =  x
+x ? y  =  x + (y + y)
+
+x ? 0  =  x
+x ? y  =  y + (x + x)
+
+x ? 0  =  x
+x ? y  =  y + (x + y)
+
+x ? 0  =  x
+x ? y  =  y + (y + x)
+
+x ? 0  =  x
+x ? y  =  y + (y + y)
+
+x ? 0  =  x
+x ? y  =  dec x + dec x
+
+x ? 0  =  x
+x ? y  =  dec x + dec y
+
+x ? 0  =  x
+x ? y  =  dec x + dec 0
+
+x ? 0  =  x
+x ? y  =  dec y + dec x
+
+x ? 0  =  x
+x ? y  =  dec y + dec y
+
+x ? 0  =  x
+x ? y  =  dec y + dec 0
+
+x ? 0  =  x
+x ? y  =  dec 0 + dec x
+
+x ? 0  =  x
+x ? y  =  dec 0 + dec y
+
+x ? 0  =  x
+x ? y  =  dec 0 + dec 0
+
+x ? 0  =  0
+x ? y  =  x + (x + x)
+
+x ? 0  =  0
+x ? y  =  x + (x + y)
+
+x ? 0  =  0
+x ? y  =  x + (y + x)
+
+x ? 0  =  0
+x ? y  =  x + (y + y)
+
+x ? 0  =  0
+x ? y  =  y + (x + x)
+
+x ? 0  =  0
+x ? y  =  y + (x + y)
+
+x ? 0  =  0
+x ? y  =  y + (y + x)
+
+x ? 0  =  0
+x ? y  =  y + (y + y)
+
+x ? 0  =  0
+x ? y  =  dec x + dec x
+
+x ? 0  =  0
+x ? y  =  dec x + dec y
+
+x ? 0  =  0
+x ? y  =  dec x + dec 0
+
+x ? 0  =  0
+x ? y  =  dec y + dec x
+
+x ? 0  =  0
+x ? y  =  dec y + dec y
+
+x ? 0  =  0
+x ? y  =  dec y + dec 0
+
+x ? 0  =  0
+x ? y  =  dec 0 + dec x
+
+x ? 0  =  0
+x ? y  =  dec 0 + dec y
+
+x ? 0  =  0
+x ? y  =  dec 0 + dec 0
+
+x ? 0  =  dec x
+x ? y  =  dec x + y
+
+x ? 0  =  dec x
+x ? y  =  dec y + x
+
+x ? 0  =  dec x
+x ? y  =  dec 0 + x
+
+x ? 0  =  dec x
+x ? y  =  dec 0 + y
+
+x ? 0  =  dec x
+x ? y  =  x + dec x
+
+x ? 0  =  dec x
+x ? y  =  x + dec y
+
+x ? 0  =  dec x
+x ? y  =  x + dec 0
+
+x ? 0  =  dec x
+x ? y  =  y + dec x
+
+x ? 0  =  dec x
+x ? y  =  y + dec y
+
+x ? 0  =  dec x
+x ? y  =  y + dec 0
+
+x ? 0  =  dec 0
+x ? y  =  dec x + y
+
+x ? 0  =  dec 0
+x ? y  =  dec y + x
+
+x ? 0  =  dec 0
+x ? y  =  dec 0 + x
+
+x ? 0  =  dec 0
+x ? y  =  dec 0 + y
+
+x ? 0  =  dec 0
+x ? y  =  x + dec x
+
+x ? 0  =  dec 0
+x ? y  =  x + dec y
+
+x ? 0  =  dec 0
+x ? y  =  x + dec 0
+
+x ? 0  =  dec 0
+x ? y  =  y + dec x
+
+x ? 0  =  dec 0
+x ? y  =  y + dec y
+
+x ? 0  =  dec 0
+x ? y  =  y + dec 0
+
+x ? 0  =  x + x
+x ? y  =  x + y
+
+x ? 0  =  x + x
+x ? y  =  y + x
+
+x ? 0  =  x + x
+x ? y  =  y + y
+
+x ? 0  =  dec 0 + x
+x ? y  =  dec x
+
+x ? 0  =  dec 0 + x
+x ? y  =  dec y
+
+x ? 0  =  dec 0 + x
+x ? y  =  dec 0
+
+x ? 0  =  x + dec x
+x ? y  =  dec x
+
+x ? 0  =  x + dec x
+x ? y  =  dec y
+
+x ? 0  =  x + dec x
+x ? y  =  dec 0
+
+x ? 0  =  x + dec 0
+x ? y  =  dec x
+
+x ? 0  =  x + dec 0
+x ? y  =  dec y
+
+x ? 0  =  x + dec 0
+x ? y  =  dec 0
+
+x ? 0  =  x + (x + x)
+x ? y  =  x
+
+x ? 0  =  x + (x + x)
+x ? y  =  y
+
+x ? 0  =  x + (x + x)
+x ? y  =  0
+
+x ? 0  =  dec x + dec x
+x ? y  =  x
+
+x ? 0  =  dec x + dec x
+x ? y  =  y
+
+x ? 0  =  dec x + dec x
+x ? y  =  0
+
+x ? 0  =  dec x + dec 0
+x ? y  =  x
+
+x ? 0  =  dec x + dec 0
+x ? y  =  y
+
+x ? 0  =  dec x + dec 0
+x ? y  =  0
+
+x ? 0  =  dec 0 + dec x
+x ? y  =  x
+
+x ? 0  =  dec 0 + dec x
+x ? y  =  y
+
+x ? 0  =  dec 0 + dec x
+x ? y  =  0
+
+x ? 0  =  dec 0 + dec 0
+x ? y  =  x
+
+x ? 0  =  dec 0 + dec 0
+x ? y  =  y
+
+x ? 0  =  dec 0 + dec 0
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  x + (x + x)
+
+0 ? x  =  x
+x ? y  =  x + (x + y)
+
+0 ? x  =  x
+x ? y  =  x + (y + x)
+
+0 ? x  =  x
+x ? y  =  x + (y + y)
+
+0 ? x  =  x
+x ? y  =  y + (x + x)
+
+0 ? x  =  x
+x ? y  =  y + (x + y)
+
+0 ? x  =  x
+x ? y  =  y + (y + x)
+
+0 ? x  =  x
+x ? y  =  y + (y + y)
+
+0 ? x  =  x
+x ? y  =  dec x + dec x
+
+0 ? x  =  x
+x ? y  =  dec x + dec y
+
+0 ? x  =  x
+x ? y  =  dec x + dec 0
+
+0 ? x  =  x
+x ? y  =  dec y + dec x
+
+0 ? x  =  x
+x ? y  =  dec y + dec y
+
+0 ? x  =  x
+x ? y  =  dec y + dec 0
+
+0 ? x  =  x
+x ? y  =  dec 0 + dec x
+
+0 ? x  =  x
+x ? y  =  dec 0 + dec y
+
+0 ? x  =  x
+x ? y  =  dec 0 + dec 0
+
+0 ? x  =  0
+x ? y  =  x + (x + x)
+
+0 ? x  =  0
+x ? y  =  x + (x + y)
+
+0 ? x  =  0
+x ? y  =  x + (y + x)
+
+0 ? x  =  0
+x ? y  =  x + (y + y)
+
+0 ? x  =  0
+x ? y  =  y + (x + x)
+
+0 ? x  =  0
+x ? y  =  y + (x + y)
+
+0 ? x  =  0
+x ? y  =  y + (y + x)
+
+0 ? x  =  0
+x ? y  =  y + (y + y)
+
+0 ? x  =  0
+x ? y  =  dec x + dec x
+
+0 ? x  =  0
+x ? y  =  dec x + dec y
+
+0 ? x  =  0
+x ? y  =  dec x + dec 0
+
+0 ? x  =  0
+x ? y  =  dec y + dec x
+
+0 ? x  =  0
+x ? y  =  dec y + dec y
+
+0 ? x  =  0
+x ? y  =  dec y + dec 0
+
+0 ? x  =  0
+x ? y  =  dec 0 + dec x
+
+0 ? x  =  0
+x ? y  =  dec 0 + dec y
+
+0 ? x  =  0
+x ? y  =  dec 0 + dec 0
+
+0 ? x  =  dec x
+x ? y  =  dec x + y
+
+0 ? x  =  dec x
+x ? y  =  dec y + x
+
+0 ? x  =  dec x
+x ? y  =  dec 0 + x
+
+0 ? x  =  dec x
+x ? y  =  dec 0 + y
+
+0 ? x  =  dec x
+x ? y  =  x + dec x
+
+0 ? x  =  dec x
+x ? y  =  x + dec y
+
+0 ? x  =  dec x
+x ? y  =  x + dec 0
+
+0 ? x  =  dec x
+x ? y  =  y + dec x
+
+0 ? x  =  dec x
+x ? y  =  y + dec y
+
+0 ? x  =  dec x
+x ? y  =  y + dec 0
+
+0 ? x  =  dec 0
+x ? y  =  dec x + y
+
+0 ? x  =  dec 0
+x ? y  =  dec y + x
+
+0 ? x  =  dec 0
+x ? y  =  dec 0 + x
+
+0 ? x  =  dec 0
+x ? y  =  dec 0 + y
+
+0 ? x  =  dec 0
+x ? y  =  x + dec x
+
+0 ? x  =  dec 0
+x ? y  =  x + dec y
+
+0 ? x  =  dec 0
+x ? y  =  x + dec 0
+
+0 ? x  =  dec 0
+x ? y  =  y + dec x
+
+0 ? x  =  dec 0
+x ? y  =  y + dec y
+
+0 ? x  =  dec 0
+x ? y  =  y + dec 0
+
+0 ? x  =  x + x
+x ? y  =  x + y
+
+0 ? x  =  x + x
+x ? y  =  y + x
+
+0 ? x  =  x + x
+x ? y  =  y + y
+
+0 ? x  =  dec 0 + x
+x ? y  =  dec x
+
+0 ? x  =  dec 0 + x
+x ? y  =  dec y
+
+0 ? x  =  dec 0 + x
+x ? y  =  dec 0
+
+0 ? x  =  x + dec x
+x ? y  =  dec x
+
+0 ? x  =  x + dec x
+x ? y  =  dec y
+
+0 ? x  =  x + dec x
+x ? y  =  dec 0
+
+0 ? x  =  x + dec 0
+x ? y  =  dec x
+
+0 ? x  =  x + dec 0
+x ? y  =  dec y
+
+0 ? x  =  x + dec 0
+x ? y  =  dec 0
+
+0 ? x  =  x + (x + x)
+x ? y  =  x
+
+0 ? x  =  x + (x + x)
+x ? y  =  y
+
+0 ? x  =  x + (x + x)
+x ? y  =  0
+
+0 ? x  =  dec x + dec x
+x ? y  =  x
+
+0 ? x  =  dec x + dec x
+x ? y  =  y
+
+0 ? x  =  dec x + dec x
+x ? y  =  0
+
+0 ? x  =  dec x + dec 0
+x ? y  =  x
+
+0 ? x  =  dec x + dec 0
+x ? y  =  y
+
+0 ? x  =  dec x + dec 0
+x ? y  =  0
+
+0 ? x  =  dec 0 + dec x
+x ? y  =  x
+
+0 ? x  =  dec 0 + dec x
+x ? y  =  y
+
+0 ? x  =  dec 0 + dec x
+x ? y  =  0
+
+0 ? x  =  dec 0 + dec 0
+x ? y  =  x
+
+0 ? x  =  dec 0 + dec 0
+x ? y  =  y
+
+0 ? x  =  dec 0 + dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec 0 + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec 0 + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0 + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0 + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0 + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x + dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec 0 + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec 0 + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0 + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0 + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0 + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x + dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec 0 + x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0 + x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0 + x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec 0 + x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0 + x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0 + x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + dec x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + dec x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + dec x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + dec x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + dec x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + dec x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + dec 0
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + dec 0
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + dec 0
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x + dec 0
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x + dec 0
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x + dec 0
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y + y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x + y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y + y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec x
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec 0
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x + x
 x ? 0  =  0
 x ? y  =  0
 
