@@ -252,7 +252,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep  =  isRootNormalE thy . fastMostGeneralVariation
-  ds  =  map snd $ deconstructors f maxTests es
+  ds  =  filter (conjureIsDeconstructor f maxTests) es
   keepR | requireDescent  =  descends (`elem` ds) efxs
         | otherwise       =  const True
   recs  =  filterT keepR
@@ -300,7 +300,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
 
-  ds  =  map snd $ deconstructors f maxTests es
+  ds  =  filter (conjureIsDeconstructor f maxTests) es
   keepR ep | requireDescent  =  descends (`elem` ds) ep
            | otherwise       =  const True
   recs ep es  =  filterT (keepR ep)
@@ -387,44 +387,6 @@ descends isDec e' e  =  any d1 ss
     cs  =  consts e
   isNotConstruction (p,e) | isVar p    =  all isDec (consts e)
                           | otherwise  =  size e <= size p -- TODO: allow filter and id somehow
-
--- | Example:
---
--- > > deconstructors and 60
--- > >   [ val False
--- > >   , val True
--- > >   , value "null" (null::[Bool]->Bool)
--- > >   , value "head" (head :: [Bool] -> Bool)
--- > >   , value "tail" (tail :: [Bool] -> [Bool])
--- > >   , value "drop1" (drop 1 :: [Bool] -> [Bool])
--- > >   ]
--- > [tail :: [Bool] -> [Bool]]
---
--- In this case, inc is a deconstructor as it converges for more than half the
--- values:
---
--- > > deconstructors (negate :: Int -> Int) 60
--- > >   [ value "eq0" ((==0) :: Int -> Bool)
--- > >   , val (0 :: Int)
--- > >   , value "==" ((==) :: Int -> Int -> Bool)
--- > >   , value "dec" (subtract 1 :: Int -> Int)
--- > >   , value "inc" ((+1) :: Int -> Int)
--- > >   ]
--- > [ ((0 ==) :: Int -> Bool,dec :: Int -> Int)
--- > , ((0 ==) :: Int -> Bool,inc :: Int -> Int)
--- > ]
-deconstructors :: Conjurable f => f -> Int -> [Expr] -> [(Expr, Expr)]
-deconstructors f maxTests es  =
-  [ (z, d)
-  | d <- es
-  , h <- take 1 [h | h <- hs, mtyp (d :$ h) == mtyp h]
-  , z <- take 1 [z | z <- es2, mtyp (z :$ h) == mtyp b && isDeconstructor h z d]
-  ]
-  where
-  b  =  hole (undefined :: Bool)
-  hs  =  nub $ conjureArgumentHoles f
-  isDeconstructor  =  conjureIsDeconstructor f maxTests
-  es2  =  es ++ [e1 :$ e2 | e1 <- es, e2 <- es, isWellTyped (e1 :$ e2)]
 
 
 candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]

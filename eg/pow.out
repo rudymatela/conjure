@@ -18,7 +18,7 @@ pow :: Int -> Int -> Int
 -- looking through 20 candidates of size 2
 -- looking through 123 candidates of size 3
 -- looking through 476 candidates of size 4
--- looking through 2325 candidates of size 5
--- looking through 7039 candidates of size 6
+-- looking through 2693 candidates of size 5
+-- looking through 10119 candidates of size 6
 cannot conjure
 

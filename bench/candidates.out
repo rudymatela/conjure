@@ -1037,7 +1037,7 @@ xs ?? (x:ys)  =  []
 
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,1,0,0,2,4,10,24,28] direct candidates
+  [3,1,0,0,0,0,0,0,0] direct candidates
   [3,3,0,0,0,0,0,0,0] pattern candidates
 
 rules:
@@ -1102,18 +1102,6 @@ ton p  =  True
 
 ton p  =  not p
 
-ton p  =  p && ton (not p)
-
-ton p  =  p || ton (not p)
-
-ton p  =  p && not (ton (not p))
-
-ton p  =  not p && ton (not p)
-
-ton p  =  p || not (ton (not p))
-
-ton p  =  not p || ton (not p)
-
 
 pattern candidates:
 
@@ -1134,7 +1122,7 @@ ton True  =  False
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,4,8,4,96,180,912,2616] direct candidates
+  [4,2,4,8,4,32,36,112,264] direct candidates
   [4,14,30,8,4,32,36,112,264] pattern candidates
 
 rules:
@@ -1298,134 +1286,6 @@ p &| q  =  p && q || not q
 p &| q  =  q && p || not p
 
 p &| q  =  q && p || not q
-
-p &| q  =  p && p &| not p
-
-p &| q  =  p && p &| not q
-
-p &| q  =  p && q &| not p
-
-p &| q  =  p && q &| not q
-
-p &| q  =  p && False &| not p
-
-p &| q  =  p && False &| not q
-
-p &| q  =  p && True &| not p
-
-p &| q  =  p && True &| not q
-
-p &| q  =  p && not p &| p
-
-p &| q  =  p && not p &| q
-
-p &| q  =  p && not p &| False
-
-p &| q  =  p && not p &| True
-
-p &| q  =  p && not q &| p
-
-p &| q  =  p && not q &| q
-
-p &| q  =  p && not q &| False
-
-p &| q  =  p && not q &| True
-
-p &| q  =  q && p &| not p
-
-p &| q  =  q && p &| not q
-
-p &| q  =  q && q &| not p
-
-p &| q  =  q && q &| not q
-
-p &| q  =  q && False &| not p
-
-p &| q  =  q && False &| not q
-
-p &| q  =  q && True &| not p
-
-p &| q  =  q && True &| not q
-
-p &| q  =  q && not p &| p
-
-p &| q  =  q && not p &| q
-
-p &| q  =  q && not p &| False
-
-p &| q  =  q && not p &| True
-
-p &| q  =  q && not q &| p
-
-p &| q  =  q && not q &| q
-
-p &| q  =  q && not q &| False
-
-p &| q  =  q && not q &| True
-
-p &| q  =  p || p &| not p
-
-p &| q  =  p || p &| not q
-
-p &| q  =  p || q &| not p
-
-p &| q  =  p || q &| not q
-
-p &| q  =  p || False &| not p
-
-p &| q  =  p || False &| not q
-
-p &| q  =  p || True &| not p
-
-p &| q  =  p || True &| not q
-
-p &| q  =  p || not p &| p
-
-p &| q  =  p || not p &| q
-
-p &| q  =  p || not p &| False
-
-p &| q  =  p || not p &| True
-
-p &| q  =  p || not q &| p
-
-p &| q  =  p || not q &| q
-
-p &| q  =  p || not q &| False
-
-p &| q  =  p || not q &| True
-
-p &| q  =  q || p &| not p
-
-p &| q  =  q || p &| not q
-
-p &| q  =  q || q &| not p
-
-p &| q  =  q || q &| not q
-
-p &| q  =  q || False &| not p
-
-p &| q  =  q || False &| not q
-
-p &| q  =  q || True &| not p
-
-p &| q  =  q || True &| not q
-
-p &| q  =  q || not p &| p
-
-p &| q  =  q || not p &| q
-
-p &| q  =  q || not p &| False
-
-p &| q  =  q || not p &| True
-
-p &| q  =  q || not q &| p
-
-p &| q  =  q || not q &| q
-
-p &| q  =  q || not q &| False
-
-p &| q  =  q || not q &| True
 
 
 pattern candidates:

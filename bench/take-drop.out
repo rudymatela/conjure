@@ -5,10 +5,10 @@ drop :: Int -> [A] -> [A]
 -- looking through 3 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 7 candidates of size 4
--- looking through 32 candidates of size 5
--- looking through 55 candidates of size 6
--- looking through 156 candidates of size 7
--- looking through 315 candidates of size 8
+-- looking through 52 candidates of size 5
+-- looking through 111 candidates of size 6
+-- looking through 288 candidates of size 7
+-- looking through 691 candidates of size 8
 drop 0 []  =  []
 drop 0 (x:xs)  =  x:xs
 drop x []  =  []

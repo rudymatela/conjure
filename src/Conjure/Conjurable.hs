@@ -51,7 +51,7 @@ import Data.Complex -- for instance
 -- | Single reification of some functions over a type as 'Expr's.
 --
 -- A hole, an equality function and tiers.
-type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], Bool)
+type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], Bool, Expr)
 
 -- | A reification over a collection of types.
 --
@@ -139,23 +139,26 @@ class (Typeable a, Name a) => Conjurable a where
   conjureArgumentCases :: a -> [[Expr]]
   conjureArgumentCases _  =  []
 
+  conjureSize :: a -> Int
+  conjureSize _  =  0
+
   conjureExpress :: a -> Expr -> Expr
 
 
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
-  if hole x `elem` [h | (h,_,_,_,_) <- ms]
+  if hole x `elem` [h | (h,_,_,_,_,_) <- ms]
   then ms
   else conjureSubTypes x $ conjureReification1 x : ms
 
 -- | like 'conjureType' but without type repetitions
 nubConjureType :: Conjurable a => a -> Reification
-nubConjureType x  =  nubOn (\(eh,_,_,_,_) -> eh) . conjureType x
+nubConjureType x  =  nubOn (\(eh,_,_,_,_,_) -> eh) . conjureType x
 -- The use of nubOn above is O(n^2).
 -- So long as there is not a huge number of subtypes of a, so we're fine.
 
 conjureReification1 :: Conjurable a => a -> Reification1
-conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, null $ conjureCases x)
+conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, null $ conjureCases x, value "conjureSize" (conjureSize -:> x))
 
 conjureReification :: Conjurable a => a -> [Reification1]
 conjureReification x  =  nubConjureType x [conjureReification1 bool]
@@ -198,10 +201,10 @@ mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
 conjureHoles :: Conjurable f => f -> [Expr]
-conjureHoles f  =  [eh | (eh,_,Just _,_,_) <- conjureReification f]
+conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
-conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_) <- conjureReification f]
+conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- conjureReification f]
 
 conjureAreEqual :: Conjurable f => f -> Int -> Expr -> Expr -> Bool
 conjureAreEqual f maxTests  =  (===)
@@ -215,7 +218,7 @@ conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]
-  allTiers  =  [etiers | (_,_,Just etiers,_,_) <- conjureReification f]
+  allTiers  =  [etiers | (_,_,Just etiers,_,_,_) <- conjureReification f]
   tf []  =  [[e]] -- no tiers found, keep variable
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
@@ -223,21 +226,31 @@ conjureTiersFor f e  =  tf allTiers
 
 conjureNamesFor :: Conjurable f => f -> Expr -> [String]
 conjureNamesFor f e  =  head
-                     $  [ns | (eh, _, _, ns, _) <- conjureReification f, typ e == typ eh]
+                     $  [ns | (eh, _, _, ns, _, _) <- conjureReification f, typ e == typ eh]
                      ++ [names (undefined :: Int)] -- use [Int] on lists
 
 conjureMostGeneralCanonicalVariation :: Conjurable f => f -> Expr -> Expr
 conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
                                         .  fastMostGeneralVariation
 
-conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Expr -> Expr -> Bool
-conjureIsDeconstructor f maxTests  =  isDeconstructionE
-                                   .  take maxTests
-                                   .  grounds (conjureTiersFor f)
+conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Bool
+conjureIsDeconstructor f maxTests e  =  case as of
+  [] -> False
+  (h:_) -> isDec h
+  where
+  as  =  [h | h <- hs, isWellTyped (e:$h), typ (e:$h) == typ h]
+  hs  =  conjureArgumentHoles f
+  isDec h  =  count is gs >= length gs `div` 2
+    where
+    gs  =  take maxTests $ grounds (conjureTiersFor f) h
+    sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
+                    , isWellTyped (sz :$ h)]
+    esz e  =  eval (0::Int) (sz :$ e)
+    is e  =  esz (h :$ e) < esz e
 
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f e  =  head
-  [is | (h,_,_,_,is) <- conjureReification f, typ h == typ e]
+  [is | (h,_,_,_,is,_) <- conjureReification f, typ h == typ e]
 
 instance Conjurable () where
   conjureExpress   =  reifyExpress
@@ -255,11 +268,13 @@ instance Conjurable Int where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  abs
 
 instance Conjurable Integer where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Char where
   conjureExpress   =  reifyExpress
@@ -274,6 +289,7 @@ instance (Conjurable a, Listable a, Express a, Show a) => Conjurable [a] where
   conjureExpress   =  reifyExpress
   conjureSubTypes xs  =  conjureType (head xs)
   conjureTiers     =  reifyTiers
+  conjureSize      =  length
   conjureCases xs  =  [ val ([] -: xs)
                       , value ":" ((:) ->>: xs) :$ hole x :$ hole xs
                       ]  where  x  =  head xs
@@ -442,61 +458,73 @@ instance Conjurable Float where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  round
 
 instance Conjurable Double where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  round
 
 instance Conjurable Int8 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Int16 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Int32 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Int64 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Word where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Word8 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Word16 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Word32 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable Word64 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance (Integral a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Ratio a) where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  round
   conjureSubTypes q  =  conjureType (numerator q)
 
 instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Complex a) where
@@ -511,31 +539,37 @@ instance Conjurable A where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable B where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable C where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable D where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable E where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 instance Conjurable F where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
+  conjureSize      =  fromIntegral . abs
 
 
 -- Conjurable tuples --
