@@ -5,6 +5,9 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * on `bench/candidates.hs` print whether there are duplicates
 
+* consider memoizing `recs ep` in `candidateDefnsC`
+  and a sub function with `vs` arguments.
+
 * remove `requireDescent=False` requirement from `gcd`
   (add and use `isDeconstruction`)
   this would also eliminate the requirement of providing `dec`
