@@ -9,36 +9,47 @@ qsort :: [Int] -> [Int]
 -- looking through 9 candidates of size 6
 -- looking through 22 candidates of size 7
 -- looking through 37 candidates of size 8
-cannot conjure
+-- looking through 84 candidates of size 9
+-- looking through 169 candidates of size 10
+-- looking through 352 candidates of size 11
+-- looking through 767 candidates of size 12
+-- looking through 1600 candidates of size 13
+-- looking through 3499 candidates of size 14
+qsort []  =  []
+qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
 duplicates :: [Int] -> [Int]
--- testing 60 combinations of argument values
--- pruning with 39/50 rules
+-- testing 360 combinations of argument values
+-- pruning with 21/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 2 candidates of size 4
 -- looking through 1 candidates of size 5
 -- looking through 2 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 2 candidates of size 8
--- looking through 1 candidates of size 9
--- looking through 2 candidates of size 10
--- looking through 1 candidates of size 11
--- looking through 2 candidates of size 12
+-- looking through 3 candidates of size 7
+-- looking through 8 candidates of size 8
+-- looking through 16 candidates of size 9
+-- looking through 25 candidates of size 10
 cannot conjure
 
-positionsFrom :: Int -> Int -> [Int] -> [Int]
+positionsFrom :: Int -> A -> [A] -> [Int]
 -- testing 60 combinations of argument values
--- pruning with 38/51 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 26 candidates of size 5
--- looking through 36 candidates of size 6
--- looking through 106 candidates of size 7
--- looking through 130 candidates of size 8
--- looking through 374 candidates of size 9
-cannot conjure
+-- pruning with 5/10 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 7 candidates of size 4
+-- looking through 18 candidates of size 5
+-- looking through 35 candidates of size 6
+-- looking through 89 candidates of size 7
+-- looking through 190 candidates of size 8
+-- looking through 440 candidates of size 9
+-- looking through 926 candidates of size 10
+-- looking through 2113 candidates of size 11
+-- looking through 4520 candidates of size 12
+-- looking through 10066 candidates of size 13
+-- looking through 21492 candidates of size 14
+positionsFrom x y []  =  []
+positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
 
