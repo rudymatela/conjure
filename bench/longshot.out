@@ -31,7 +31,15 @@ duplicates :: [Int] -> [Int]
 -- looking through 8 candidates of size 8
 -- looking through 16 candidates of size 9
 -- looking through 25 candidates of size 10
-cannot conjure
+-- looking through 36 candidates of size 11
+-- looking through 65 candidates of size 12
+-- looking through 141 candidates of size 13
+-- looking through 322 candidates of size 14
+-- looking through 644 candidates of size 15
+-- looking through 1185 candidates of size 16
+-- looking through 2153 candidates of size 17
+duplicates []  =  []
+duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 
 positionsFrom :: Int -> A -> [A] -> [Int]
 -- testing 60 combinations of argument values

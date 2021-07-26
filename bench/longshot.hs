@@ -83,9 +83,8 @@ main = do
   -- duplicates (x:xs)  =  if x `elem` xs && not (x `elem` duplicates xs)  -- 11
   --                       then x : duplicates xs                          -- 15
   --                       else duplicates xs                              -- 17
-  -- within reach performance wise,
-  -- TODO: why is it not being generated?
-  conjureWith args{maxSize=10, maxTests=360} "duplicates" duplicates
+  -- within reach performance wise.
+  conjureWith args{maxSize=18, maxTests=360, maxEvalRecursions=3600} "duplicates" duplicates
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)
