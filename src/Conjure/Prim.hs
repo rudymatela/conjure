@@ -13,6 +13,7 @@ module Conjure.Prim
   ( Prim (..)
   , prim
   , pr
+  , prif
   , cjHoles
   , cjTiersFor
   , cjAreEqual
@@ -45,6 +46,11 @@ pr x  =  (val x, conjureType x)
 --   (cf. 'pr')
 prim :: Conjurable a => String -> a -> Prim
 prim s x  =  (value s x, conjureType x)
+
+
+-- | Provides an if condition bound to the given return type.
+prif :: Conjurable a => a -> Prim
+prif x  =  (ifFor x, conjureType x)
 
 
 -- the following functions mirror their "conjure" counterparts from

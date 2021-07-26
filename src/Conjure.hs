@@ -46,6 +46,7 @@ module Conjure
   , Prim
   , pr
   , prim
+  , prif
 
 -- * Advanced use
   , conjureWithMaxSize
