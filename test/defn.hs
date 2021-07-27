@@ -4,6 +4,7 @@
 import Test
 import Conjure.Defn
 import Test.LeanCheck.Error (errorToLeft)
+import Data.Express.Fixtures
 
 main :: IO ()
 main  =  mainTest tests 5040
@@ -16,9 +17,14 @@ tests n  =
   , dvl sumDefn (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
   , dvl sumDefn (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
 
+  , dvl andDefn (andV :$ val [False,False])     == False
   , dvl andDefn (andV :$ val [False,True])      == False
   , dvl andDefn (andV :$ val [True,True])       == True
   , dvl andDefn (andV :$ val [True,False,True]) == False
+  , dvl orDefn  (orV  :$ val [False,False])     == False
+  , dvl orDefn  (orV  :$ val [False,True])      == True
+  , dvl orDefn  (orV  :$ val [True,True])       == True
+  , dvl orDefn  (orV  :$ val [True,False,True]) == True
 
   , dvl factDefn (factV :$ val (0 :: Int)) == (1 :: Int)
   , dvl factDefn (factV :$ val (1 :: Int)) == (1 :: Int)
@@ -33,6 +39,8 @@ tests n  =
 
   , dvl isZeroDefn (isZeroV :$ val (0 :: Int)) == True
   , dvl isZeroDefn (isZeroV :$ val (1 :: Int)) == False
+  , dvl isOneDefn  (isOneV  :$ val (0 :: Int)) == False
+  , dvl isOneDefn  (isOneV  :$ val (1 :: Int)) == True
 
   , dvl nullDefn (nullV :$ val [0,1,2,3::Int]) == False
   , dvl nullDefn (nullV :$ val ([] :: [Int])) == False
@@ -45,7 +53,9 @@ sumV, factV, nullV, isZeroV :: Expr
 factV    =  var "fact"   (undefined :: Int -> Int)
 sumV     =  var "sum"    (undefined :: [Int] -> Int)
 andV     =  var "and"    (undefined :: [Bool] -> Bool)
+orV      =  var "or"     (undefined :: [Bool] -> Bool)
 isZeroV  =  var "isZero" (undefined :: Int -> Bool)
+isOneV   =  var "isOne"  (undefined :: Int -> Bool)
 nullV    =  var "null"   (undefined :: [Int] -> Bool)
 
 -- NOTE: a hack for testing needs all types that are Express as arguments of
@@ -57,11 +67,6 @@ sumDefn :: Defn
 sumDefn  =  [ sum' nil           =-  zero
             , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
             ]  where  sum' e  =  sumV :$ e
-
-andDefn :: Defn
-andDefn  =  [ and' nilBool       =-  true
-            , and' (pp -:- pps)  =-  pp -&&- (andV :$ pps)
-            ]  where  and' e  =  andV :$ e
 
 factDefn :: Defn
 factDefn  =  [ fact' zero  =-  one
@@ -77,6 +82,20 @@ isZeroDefn :: Defn
 isZeroDefn  =  [ isZero' zero  =-  true
                , isZero' xx    =-  false
                ]  where  isZero' e  =  isZeroV :$ e
+
+isOneDefn :: Defn
+isOneDefn  =  [ isOne' xx  =-  xx -==- one ]
+  where isOne' e  =  isOneV :$ e
+
+andDefn :: Defn
+andDefn  =  [ and' nilBool       =-  true
+            , and' (pp -:- pps)  =-  pp -&&- (andV :$ pps)
+            ]  where  and' e  =  andV :$ e
+
+orDefn :: Defn
+orDefn  =  [ or' nilBool       =-  false
+           , or' (pp -:- pps)  =-  pp -||- (orV :$ pps)
+           ]  where or' e  =  orV :$ e
 
 (=-) = (,)
 infixr 0 =-
