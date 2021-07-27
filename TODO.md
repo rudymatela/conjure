@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* `merge` and `msort`
-
 * implement memoization and loop detection on deval?
 
   0. keep a memo list `:: (Expr, Maybe Dynamic)`;
