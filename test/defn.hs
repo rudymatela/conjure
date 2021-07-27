@@ -16,6 +16,10 @@ tests n  =
   , dvl sumDefn (sumV :$ val [1,2,3::Int])    == ( 6 :: Int)
   , dvl sumDefn (sumV :$ val [1,2,3,4::Int])  == (10 :: Int)
 
+  , dvl andDefn (andV :$ val [False,True])      == False
+  , dvl andDefn (andV :$ val [True,True])       == True
+  , dvl andDefn (andV :$ val [True,False,True]) == False
+
   , dvl factDefn (factV :$ val (0 :: Int)) == (1 :: Int)
   , dvl factDefn (factV :$ val (1 :: Int)) == (1 :: Int)
   , dvl factDefn (factV :$ val (2 :: Int)) == (2 :: Int)
@@ -40,18 +44,24 @@ dvl  =  devl exprExpr 12
 sumV, factV, nullV, isZeroV :: Expr
 factV    =  var "fact"   (undefined :: Int -> Int)
 sumV     =  var "sum"    (undefined :: [Int] -> Int)
+andV     =  var "and"    (undefined :: [Bool] -> Bool)
 isZeroV  =  var "isZero" (undefined :: Int -> Bool)
 nullV    =  var "null"   (undefined :: [Int] -> Bool)
 
 -- NOTE: a hack for testing needs all types that are Express as arguments of
 --       undefined.
 exprExpr :: Expr -> Expr
-exprExpr  =  conjureExpress (undefined :: Int -> [Int] -> ())
+exprExpr  =  conjureExpress (undefined :: Bool -> [Bool] -> Int -> [Int] -> ())
 
 sumDefn :: Defn
 sumDefn  =  [ sum' nil           =-  zero
             , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
             ]  where  sum' e  =  sumV :$ e
+
+andDefn :: Defn
+andDefn  =  [ and' nilBool       =-  true
+            , and' (pp -:- pps)  =-  pp -&&- (andV :$ pps)
+            ]  where  and' e  =  andV :$ e
 
 factDefn :: Defn
 factDefn  =  [ fact' zero  =-  one
