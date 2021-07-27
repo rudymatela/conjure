@@ -45,46 +45,46 @@ showDefn  =  unlines . map show1
 -- | Evaluates an 'Expr' using the given 'Defn' as definition
 --   when a recursive call is found.
 toDynamicWithDefn :: (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe Dynamic
-toDynamicWithDefn exprExpr n cx  =  fmap (\(_,_,d) -> d) . re (n * sum (map (size . snd) cx)) n
+toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (size . snd) cx)) mx
   where
   (ef':_)  =  unfoldApp . fst $ head cx
 
   rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
-  rev m n e  =  case re m n e of
+  rev n m e  =  case re n m e of
                 Nothing    -> Nothing
-                Just (m,n,d) -> case fromDynamic d of
+                Just (n,m,d) -> case fromDynamic d of
                                 Nothing -> Nothing
-                                Just x  -> Just (m, n, x)
+                                Just x  -> Just (n, m, x)
 
   re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
-  re m n _  | n <= 0  =  error "toDynamicWithDefn: recursion limit reached"
-  re m n _  | m <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
-  re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev m n ec of
+  re n m _  | m <= 0  =  error "toDynamicWithDefn: recursion limit reached"
+  re n m _  | n <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
+  re n m (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev n m ec of
     Nothing    -> Nothing
-    Just (m,n,True)  -> re m n ex
-    Just (m,n,False) -> re m n ey
-  re m n (Value "||" _ :$ ep :$ eq)  =  case rev m n ep of
+    Just (n,m,True)  -> re n m ex
+    Just (n,m,False) -> re n m ey
+  re n m (Value "||" _ :$ ep :$ eq)  =  case rev n m ep of
     Nothing        -> Nothing
-    Just (m,n,True)  -> (m,n,) <$> toDynamic (val True)
-    Just (m,n,False) -> re m n eq
-  re m n (Value "&&" _ :$ ep :$ eq)  =  case rev m n ep of
+    Just (n,m,True)  -> (n,m,) <$> toDynamic (val True)
+    Just (n,m,False) -> re n m eq
+  re n m (Value "&&" _ :$ ep :$ eq)  =  case rev n m ep of
     Nothing    -> Nothing
-    Just (m,n,True)  -> re m n eq
-    Just (m,n,False) -> (m,n,) <$> toDynamic (val False)
-  re m n e  =  case unfoldApp e of
+    Just (n,m,True)  -> re n m eq
+    Just (n,m,False) -> (n,m,) <$> toDynamic (val False)
+  re n m e  =  case unfoldApp e of
     [] -> error "toDynamicWithDefn: empty application unfold"  -- should never happen
-    [e] -> (m-1,n,) <$> toDynamic e
+    [e] -> (n-1,m,) <$> toDynamic e
     (ef:exs) | ef == ef' -> headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
-                          [ re m (n-1) $ e' //- bs
+                          [ re n (m-1) $ e' //- bs
                           | let e  =  foldApp (ef:map exprExpr exs)
                           , (a',e') <- cx
                           , Just bs <- [e `match` a']
                           ]
-             | otherwise -> foldl ($$) (re m n ef) exs
+             | otherwise -> foldl ($$) (re n m ef) exs
 
-  Just (m,n,d1) $$ e2  =  case re m n e2 of
+  Just (n,m,d1) $$ e2  =  case re n m e2 of
                           Nothing -> Nothing
-                          Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
+                          Just (n', m', d2) -> (n',m',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
 
 devaluate :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe a

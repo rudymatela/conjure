@@ -25,6 +25,7 @@ tests n  =
   , dvl orDefn  (orV  :$ val [False,True])      == True
   , dvl orDefn  (orV  :$ val [True,True])       == True
   , dvl orDefn  (orV  :$ val [True,False,True]) == True
+
   , dvl and1Defn (andV :$ val [False,False])     == False
   , dvl and1Defn (andV :$ val [False,True])      == False
   , dvl and1Defn (andV :$ val [True,True])       == True
