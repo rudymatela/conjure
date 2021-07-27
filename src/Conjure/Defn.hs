@@ -74,13 +74,14 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   re n m e  =  case unfoldApp e of
     [] -> error "toDynamicWithDefn: empty application unfold"  -- should never happen
     [e] -> (n-1,m,) <$> toDynamic e
-    (ef:exs) | ef == ef' -> headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
-                          [ re n (m-1) $ e' //- bs
-                          | let e  =  foldApp (ef:map exprExpr exs)
-                          , (a',e') <- cx
-                          , Just bs <- [e `match` a']
-                          ]
+    (ef:exs) | ef == ef' -> red n m (foldApp (ef:map exprExpr exs))
              | otherwise -> foldl ($$) (re n m ef) exs
+
+  red n m e  =  headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
+             [  re n (m-1) $ e' //- bs
+             |  (a',e') <- cx
+             ,  Just bs <- [e `match` a']
+             ]
 
   Just (n,m,d1) $$ e2  =  case re n m e2 of
                           Nothing -> Nothing
