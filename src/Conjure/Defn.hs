@@ -49,13 +49,6 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   where
   (ef':_)  =  unfoldApp . fst $ head cx
 
-  rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
-  rev n m e  =  case re n m e of
-                Nothing    -> Nothing
-                Just (n,m,d) -> case fromDynamic d of
-                                Nothing -> Nothing
-                                Just x  -> Just (n, m, x)
-
   re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   re n m _  | m <= 0  =  error "toDynamicWithDefn: recursion limit reached"
   re n m _  | n <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
@@ -76,6 +69,13 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
     [e] -> (n-1,m,) <$> toDynamic e
     (ef:exs) | ef == ef' -> red n m (foldApp (ef:map exprExpr exs))
              | otherwise -> foldl ($$) (re n m ef) exs
+
+  rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
+  rev n m e  =  case re n m e of
+                Nothing    -> Nothing
+                Just (n,m,d) -> case fromDynamic d of
+                                Nothing -> Nothing
+                                Just x  -> Just (n, m, x)
 
   red :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   red n m e  =  headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
