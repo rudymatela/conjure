@@ -49,6 +49,7 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   where
   (ef':_)  =  unfoldApp . fst $ head cx
 
+  -- recursively evaluate an expression, the entry point
   re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   re n m _  | m <= 0  =  error "toDynamicWithDefn: recursion limit reached"
   re n m _  | n <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
@@ -70,6 +71,7 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
     (ef:exs) | ef == ef' -> red n m (foldApp (ef:map exprExpr exs))
              | otherwise -> foldl ($$) (re n m ef) exs
 
+  -- like 're' but is bound to an actual Haskell value instead of a Dynamic
   rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
   rev n m e  =  case re n m e of
                 Nothing    -> Nothing
@@ -77,6 +79,9 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
                                 Nothing -> Nothing
                                 Just x  -> Just (n, m, x)
 
+  -- evaluates by matching on one of cases of the actual definition
+  -- should only be used to evaluate an expr of the form:
+  -- ef' :$ exprExpr ex :$ exprExpr ey :$ ...
   red :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   red n m e  =  headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
              [  re n (m-1) $ e' //- bs
