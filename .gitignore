@@ -44,6 +44,7 @@ eg/tapps
 eg/tree
 eg/replicate
 eg/setelem
+eg/sort
 eg/subset
 eg/spec
 bench/self

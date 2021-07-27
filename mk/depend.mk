@@ -263,6 +263,19 @@ eg/setelem.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   eg/setelem.hs
+eg/sort: \
+  eg/sort.hs \
+  mk/toplibs
+eg/sort.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  eg/sort.hs
 eg/spec: \
   eg/spec.hs \
   mk/toplibs

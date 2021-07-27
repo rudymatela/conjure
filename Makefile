@@ -19,6 +19,7 @@ EG = \
   eg/pow \
   eg/replicate \
   eg/setelem \
+  eg/sort \
   eg/subset \
   eg/spec \
   eg/tapps \
