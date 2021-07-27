@@ -430,17 +430,18 @@ argTy _  =  undefined
 resTy :: (a -> b) -> b
 resTy _  =  undefined
 
-cevaluate :: Conjurable f => Int -> Defn -> Expr -> Maybe f
-cevaluate mx defn e  =  mr
+cevaluate :: Conjurable f => Int -> Defn -> Maybe f
+cevaluate mx defn  =  mr
   where
-  mr  =  conjureEvaluate exprExpr mx defn e
+  mr  =  conjureEvaluate exprExpr mx defn ef'
   exprExpr  =  conjureExpress $ fromJust mr
+  (ef':_)  =  unfoldApp . fst $ head defn
 
-ceval :: Conjurable f => Int -> Defn -> f -> Expr -> f
-ceval mx defn z  =  fromMaybe z . cevaluate mx defn
+ceval :: Conjurable f => Int -> f -> Defn -> f
+ceval mx z  =  fromMaybe z . cevaluate mx
 
-cevl :: Conjurable f => Int -> Defn -> Expr -> f
-cevl mx defn  =  ceval mx defn err
+cevl :: Conjurable f => Int -> Defn -> f
+cevl mx  =  ceval mx err
   where
   err  =  error "cevl: type mismatch"
 
