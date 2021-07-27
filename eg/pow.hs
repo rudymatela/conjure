@@ -31,11 +31,11 @@ main  =  do
   -- pow b 0  =  1
   -- pow b e  =  pow b (halve e) * pow b (halve e) * if odd e then b else 1
   --             2   3  4     5  6 7   8  9    10 11 12 13 14     15     16
-  -- out of reach performance wise
+  -- out of reach performance wise, OOM at size 9
   conjureWithMaxSize 6 "pow" pow
     [ pr (0::Int)
     , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "halve" ((`div` 2) :: Int -> Int)
+    , prif (undefined :: Int)
     ]
