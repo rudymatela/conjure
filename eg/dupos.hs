@@ -45,8 +45,7 @@ main = do
   --                       then x : duplicates xs                          -- 15
   --                       else duplicates xs                              -- 17
   -- within reach performance wise.
-  -- TODO: somehow avoid the need for setting maxEvalRecursions.
-  conjureWith args{maxSize=18, maxTests=360, maxEvalRecursions=3600} "duplicates" duplicates
+  conjureWith args{maxSize=18, maxTests=360} "duplicates" duplicates
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)

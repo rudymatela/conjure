@@ -67,7 +67,7 @@ tests n  =
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
-dvl  =  devl exprExpr 12
+dvl  =  devl exprExpr 11
 
 sumV, factV, nullV, isZeroV :: Expr
 factV    =  var "fact"   (undefined :: Int -> Int)

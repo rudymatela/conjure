@@ -41,17 +41,18 @@ showDefn  =  unlines . map show1
   where
   show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
 
+type Memo  =  [(Expr, Maybe Dynamic)]
 
 -- | Evaluates an 'Expr' using the given 'Defn' as definition
 --   when a recursive call is found.
 toDynamicWithDefn :: (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe Dynamic
-toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (size . snd) cx)) mx
+toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (size . snd) cx)) []
   where
   (ef':_)  =  unfoldApp . fst $ head cx
 
   -- recursively evaluate an expression, the entry point
-  re :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
-  re n m _  | m <= 0  =  error "toDynamicWithDefn: recursion limit reached"
+  re :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
+  re n m _  | length m > mx  =  error "toDynamicWithDefn: recursion limit reached"
   re n m _  | n <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
   re n m (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev n m ec of
     Nothing    -> Nothing
@@ -72,7 +73,7 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
              | otherwise -> foldl ($$) (re n m ef) exs
 
   -- like 're' but is bound to an actual Haskell value instead of a Dynamic
-  rev :: Typeable a => Int -> Int -> Expr -> Maybe (Int, Int, a)
+  rev :: Typeable a => Int -> Memo -> Expr -> Maybe (Int, Memo, a)
   rev n m e  =  case re n m e of
                 Nothing    -> Nothing
                 Just (n,m,d) -> case fromDynamic d of
@@ -82,14 +83,16 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   -- evaluates by matching on one of cases of the actual definition
   -- should only be used to evaluate an expr of the form:
   -- ef' :$ exprExpr ex :$ exprExpr ey :$ ...
-  red :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
-  red n m e  =  headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
-             [  re n (m-1) $ e' //- bs
-             |  (a',e') <- cx
-             ,  Just bs <- [e `match` a']
-             ]
+  red :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
+  red n m e  =  case lookup e m of
+    Just Nothing -> error $ "toDynamicWithDefn: loop detected " ++ show e
+    Just (Just d) -> Just (n,m,d)
+    Nothing -> case [re n ((e,Nothing):m) $ e' //- bs | (a',e') <- cx, Just bs <- [e `match` a']] of
+               [] -> error $ "toDynamicWithDefn: unhandled pattern " ++ show e
+               (Nothing:_) -> Nothing
+               (Just (n,m,d):_) -> Just (n,[(e',if e == e' then Just d else md) | (e',md) <- m],d)
 
-  ($$) :: Maybe (Int,Int,Dynamic) -> Expr -> Maybe (Int, Int, Dynamic)
+  ($$) :: Maybe (Int,Memo,Dynamic) -> Expr -> Maybe (Int, Memo, Dynamic)
   Just (n,m,d1) $$ e2  =  case re n m e2 of
                           Nothing -> Nothing
                           Just (n', m', d2) -> (n',m',) <$> dynApply d1 d2
