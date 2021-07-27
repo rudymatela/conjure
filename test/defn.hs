@@ -63,7 +63,14 @@ tests n  =
   , dvl isOneDefn  (isOneV  :$ val (1 :: Int)) == True
 
   , dvl nullDefn (nullV :$ val [0,1,2,3::Int]) == False
-  , dvl nullDefn (nullV :$ val ([] :: [Int])) == False
+  , dvl nullDefn (nullV :$ val ([] :: [Int]))  == True
+
+  , holds n $ conjureEvl 60 sumDefn    sumV    === (sum :: [Int] -> Int)
+  , holds n $ conjureEvl 60 andDefn    andV    === (and :: [Bool] -> Bool)
+  , holds n $ conjureEvl 60 orDefn     orV     === (or :: [Bool] -> Bool)
+  , holds n $ conjureEvl 60 isZeroDefn isZeroV === ((==0) :: Int -> Bool)
+  , holds n $ conjureEvl 60 isOneDefn  isOneV  === ((==1) :: Int -> Bool)
+  , holds n $ conjureEvl 60 nullDefn   nullV   === (null :: [Int] -> Bool)
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -98,7 +105,7 @@ fact1Defn  =  [ fact' xx  =-  if' (xx -==- zero) (one) (xx -*- (factV :$ (minus 
               ]  where  fact' e  =  factV :$ e
 
 nullDefn :: Defn
-nullDefn  =  [ null' nil           =-  false
+nullDefn  =  [ null' nil           =-  true
              , null' (xx -:- xxs)  =-  false
              ]  where  null' e  =  nullV :$ e
 

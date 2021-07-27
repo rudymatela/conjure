@@ -25,6 +25,7 @@ module Conjure.Conjurable
   , conjureTiersFor
   , conjureAreEqual
   , conjureMkEquation
+  , conjureEvl
   , A, B, C, D, E, F
   , conjureIsDeconstructor
   , conjureIsUnbreakable
@@ -143,6 +144,12 @@ class (Typeable a, Name a) => Conjurable a where
   conjureSize _  =  0
 
   conjureExpress :: a -> Expr -> Expr
+
+  conjureEvaluate :: Int -> Defn -> Expr -> Maybe a
+  conjureEvaluate mx defn e  =  mr
+    where
+    mr  =  devaluate exprExpr mx defn e
+    exprExpr  =  conjureExpress $ fromJust mr
 
 
 conjureType :: Conjurable a => a -> Reification
@@ -409,12 +416,29 @@ instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureExpress f e
     | typ e == typeOf (argTy f)  =  conjureExpress (argTy f) e
     | otherwise                  =  conjureExpress (f undefined) e
+  conjureEvaluate mx defn ef  =  mf
+    where
+    mf  =  case devaluate exprExpr mx defn (holeAsTypeOf ef :$ hole x) -: Just (f x) of
+           Nothing -> Nothing
+           Just _  -> Just $ \x -> fromMaybe err $ devaluate exprExpr mx defn $ ef :$ exprExpr (value "" x)
+    f  =  undefined -: fromJust mf
+    x  =  argTy f
+    exprExpr  =  conjureExpress f
+    err  =  error "conjureEvaluate (a->b): BUG!  This should never be evaluated as it is protected by the outer case."
+  -- TODO: fix the above as it fails for more than one argument:
+  --       1. recursively call conjureEvaluate
+  --       2. keep the same exprExpr throughout
 
 argTy :: (a -> b) -> a
 argTy _  =  undefined
 
 resTy :: (a -> b) -> b
 resTy _  =  undefined
+
+conjureEvl :: Conjurable f => Int -> Defn -> Expr -> f
+conjureEvl m defn  =  fromMaybe err . conjureEvaluate m defn
+  where
+  err  =  error "conjureEvl: type mismatch"
 
 conjureApplication :: Conjurable f => String -> f -> Expr
 conjureApplication  =  conjureWhatApplication value

@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* fix `conjureEvaluate :: ... a->b ...` to make it support more than one argument
+
 * consider memoizing `recs ep` in `candidateDefnsC`
   and a sub function with `vs` arguments.
 
