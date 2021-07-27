@@ -8,6 +8,7 @@ INSTALL_DEPS = leancheck express speculate
 EG = \
   eg/arith \
   eg/count \
+  eg/dupos \
   eg/factorial \
   eg/fibonacci \
   eg/fib01 \

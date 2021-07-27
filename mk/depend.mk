@@ -133,6 +133,19 @@ eg/count.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   eg/count.hs
+eg/dupos: \
+  eg/dupos.hs \
+  mk/toplibs
+eg/dupos.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  eg/dupos.hs
 eg/factorial: \
   eg/factorial.hs \
   mk/toplibs

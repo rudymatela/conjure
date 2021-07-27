@@ -1,0 +1,43 @@
+duplicates :: [Int] -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 21/26 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 2 candidates of size 6
+-- looking through 3 candidates of size 7
+-- looking through 8 candidates of size 8
+-- looking through 16 candidates of size 9
+-- looking through 25 candidates of size 10
+-- looking through 36 candidates of size 11
+-- looking through 65 candidates of size 12
+-- looking through 141 candidates of size 13
+-- looking through 322 candidates of size 14
+-- looking through 644 candidates of size 15
+-- looking through 1185 candidates of size 16
+-- looking through 2153 candidates of size 17
+duplicates []  =  []
+duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
+
+positionsFrom :: Int -> A -> [A] -> [Int]
+-- testing 60 combinations of argument values
+-- pruning with 5/10 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 7 candidates of size 4
+-- looking through 18 candidates of size 5
+-- looking through 35 candidates of size 6
+-- looking through 89 candidates of size 7
+-- looking through 190 candidates of size 8
+-- looking through 440 candidates of size 9
+-- looking through 926 candidates of size 10
+-- looking through 2113 candidates of size 11
+-- looking through 4520 candidates of size 12
+-- looking through 10066 candidates of size 13
+-- looking through 21492 candidates of size 14
+positionsFrom x y []  =  []
+positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
+
