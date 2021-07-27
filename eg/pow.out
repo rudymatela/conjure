@@ -13,12 +13,12 @@ pow x y  =  x * pow x (dec y)
 
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
--- pruning with 17/28 rules
+-- pruning with 15/19 rules
 -- looking through 4 candidates of size 1
 -- looking through 20 candidates of size 2
--- looking through 123 candidates of size 3
--- looking through 476 candidates of size 4
--- looking through 2421 candidates of size 5
--- looking through 7815 candidates of size 6
+-- looking through 114 candidates of size 3
+-- looking through 376 candidates of size 4
+-- looking through 1714 candidates of size 5
+-- looking through 4706 candidates of size 6
 cannot conjure
 

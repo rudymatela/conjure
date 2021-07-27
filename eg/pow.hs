@@ -35,6 +35,7 @@ main  =  do
   conjureWithMaxSize 6 "pow" pow
     [ pr (0::Int)
     , pr (1::Int)
+--  , prim "sq" ((\x -> x*x) :: Int -> Int) -- cheat! OOM still
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "halve" ((`div` 2) :: Int -> Int)
     , prif (undefined :: Int)
