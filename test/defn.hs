@@ -65,12 +65,12 @@ tests n  =
   , dvl nullDefn (nullV :$ val [0,1,2,3::Int]) == False
   , dvl nullDefn (nullV :$ val ([] :: [Int]))  == True
 
-  , holds n $ conjureEvl 60 sumDefn    sumV    === (sum :: [Int] -> Int)
-  , holds n $ conjureEvl 60 andDefn    andV    === (and :: [Bool] -> Bool)
-  , holds n $ conjureEvl 60 orDefn     orV     === (or :: [Bool] -> Bool)
-  , holds n $ conjureEvl 60 isZeroDefn isZeroV === ((==0) :: Int -> Bool)
-  , holds n $ conjureEvl 60 isOneDefn  isOneV  === ((==1) :: Int -> Bool)
-  , holds n $ conjureEvl 60 nullDefn   nullV   === (null :: [Int] -> Bool)
+  , holds n $ cevl 60 sumDefn    sumV    === (sum :: [Int] -> Int)
+  , holds n $ cevl 60 andDefn    andV    === (and :: [Bool] -> Bool)
+  , holds n $ cevl 60 orDefn     orV     === (or :: [Bool] -> Bool)
+  , holds n $ cevl 60 isZeroDefn isZeroV === ((==0) :: Int -> Bool)
+  , holds n $ cevl 60 isOneDefn  isOneV  === ((==1) :: Int -> Bool)
+  , holds n $ cevl 60 nullDefn   nullV   === (null :: [Int] -> Bool)
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
