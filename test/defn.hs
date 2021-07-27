@@ -45,6 +45,17 @@ tests n  =
   , errorToLeft (dvl factDefn (factV :$ val (11 :: Int)) == (39916800 :: Int))
     == Left "toDynamicWithDefn: recursion limit reached"
 
+  , dvl fact1Defn (factV :$ val (0 :: Int)) == (1 :: Int)
+  , dvl fact1Defn (factV :$ val (1 :: Int)) == (1 :: Int)
+  , dvl fact1Defn (factV :$ val (2 :: Int)) == (2 :: Int)
+  , dvl fact1Defn (factV :$ val (3 :: Int)) == (6 :: Int)
+  , dvl fact1Defn (factV :$ val (4 :: Int)) == (24 :: Int)
+  , dvl fact1Defn (factV :$ val (9 :: Int)) == (362880 :: Int)
+  , errorToLeft (dvl fact1Defn (factV :$ val (10 :: Int)))
+    == Right (3628800 :: Int)
+  , errorToLeft (dvl fact1Defn (factV :$ val (11 :: Int)) == (39916800 :: Int))
+    == Left "toDynamicWithDefn: recursion limit reached"
+
   , dvl isZeroDefn (isZeroV :$ val (0 :: Int)) == True
   , dvl isZeroDefn (isZeroV :$ val (1 :: Int)) == False
   , dvl isOneDefn  (isOneV  :$ val (0 :: Int)) == False
@@ -80,6 +91,10 @@ factDefn :: Defn
 factDefn  =  [ fact' zero  =-  one
              , fact' xx    =-  xx -*- (factV :$ (xx -+- minusOne))
              ]  where  fact' e  =  factV :$ e
+
+fact1Defn :: Defn
+fact1Defn  =  [ fact' xx  =-  if' (xx -==- zero) (one) (xx -*- (factV :$ (minus :$ xx :$ one)))
+              ]  where  fact' e  =  factV :$ e
 
 nullDefn :: Defn
 nullDefn  =  [ null' nil           =-  false
