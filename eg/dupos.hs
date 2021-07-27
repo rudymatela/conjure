@@ -13,6 +13,14 @@ duplicates (x:xs)  =
   where
   d  =  duplicates xs
 
+duplicates' :: [Int] -> [Int]
+duplicates' [0,0]  =  [0]
+duplicates' [0,1]  =  []
+duplicates' [1,0,1]  =  [1]
+duplicates' [0,1,0,1]  =  [0,1]
+duplicates' [1,0,1,0,1]  =  [0,1]
+duplicates' [0,1,2,1]  =  [1]
+
 positionsFrom :: Int -> Int -> [Int] -> [Int]
 positionsFrom n x  =  from n
   where
@@ -45,7 +53,7 @@ main = do
   --                       then x : duplicates xs                          -- 15
   --                       else duplicates xs                              -- 17
   -- within reach performance wise.
-  conjureWith args{maxSize=18, maxTests=360} "duplicates" duplicates
+  conjureWith args{maxSize=18} "duplicates" duplicates'
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)
