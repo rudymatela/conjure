@@ -3,7 +3,6 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
-import Data.List (insert)
 
 length' :: [Int] -> Int
 length' []       =  0
@@ -61,16 +60,6 @@ main = do
     , prim "null" (null :: [Int] -> Bool)
     ]
 
-  -- sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
-  --             1  2    3       4       5       6    7    8     9    10
-  conjure "sort" sort'
-    [ pr ([] :: [Int])
-    , prim "insert" (insert :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
-    ]
-
   -- xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
   --              1  2    3       4       5    6 7  8   9  10 11
   conjure "++" (+++)
@@ -102,14 +91,6 @@ main = do
     -- these last two are cheats:
     , prim "flip" (flip :: ([Int]->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
     , prim "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
-    ]
-
-  -- now through fold
-  -- sort xs  =  foldr insert [] xs
-  conjure "sort" sort'
-    [ pr ([] :: [Int])
-    , prim "insert" (insert :: Int -> [Int] -> [Int])
-    , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
   -- now through fold

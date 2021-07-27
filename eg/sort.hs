@@ -3,6 +3,7 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
+import Data.List (insert)
 
 sort' :: [Int] -> [Int]
 sort' []       =  []
@@ -20,6 +21,28 @@ sort' [x,y,z]
 
 main :: IO ()
 main = do
+  -- recursive insertion sort
+  -- sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
+  --             1  2    3       4       5       6    7    8     9    10
+  -- -- OR --
+  -- sort []  =  []
+  -- sort (x:xs)  =  insert x (sort xs)
+  conjure "sort" sort'
+    [ pr ([] :: [Int])
+    , prim "insert" (insert :: Int -> [Int] -> [Int])
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    ]
+
+  -- now through fold
+  -- sort xs  =  foldr insert [] xs
+  conjure "sort" sort'
+    [ pr ([] :: [Int])
+    , prim "insert" (insert :: Int -> [Int] -> [Int])
+    , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
   -- qsort
   -- qsort xs  =  if null xs                                 --  3
   --              then []                                    --  4

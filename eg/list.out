@@ -21,17 +21,6 @@ reverse :: [Int] -> [Int]
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ unit x
 
-sort :: [Int] -> [Int]
--- testing 60 combinations of argument values
--- pruning with 6/7 rules
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 16 candidates of size 4
--- looking through 36 candidates of size 5
-sort []  =  []
-sort (x:xs)  =  insert x (sort xs)
-
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
 -- pruning with 4/4 rules
@@ -66,15 +55,6 @@ reverse :: [Int] -> [Int]
 -- looking through 15 candidates of size 6
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ unit x
-
-sort :: [Int] -> [Int]
--- testing 60 combinations of argument values
--- pruning with 1/2 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 4 candidates of size 4
-sort xs  =  foldr insert [] xs
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 60 combinations of argument values
