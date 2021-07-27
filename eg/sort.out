@@ -38,3 +38,20 @@ qsort :: [Int] -> [Int]
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
+merge :: [Int] -> [Int] -> [Int]
+-- testing 60 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 3 candidates of size 1
+-- looking through 8 candidates of size 2
+-- looking through 11 candidates of size 3
+-- looking through 44 candidates of size 4
+-- looking through 116 candidates of size 5
+-- looking through 80 candidates of size 6
+-- looking through 719 candidates of size 7
+-- looking through 164 candidates of size 8
+-- looking through 3360 candidates of size 9
+-- looking through 1448 candidates of size 10
+-- looking through 12905 candidates of size 11
+-- looking through 15208 candidates of size 12
+cannot conjure
+

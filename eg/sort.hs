@@ -3,7 +3,7 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
-import Data.List (insert)
+import Data.List (insert, sort)
 
 sort' :: [Int] -> [Int]
 sort' []       =  []
@@ -18,6 +18,9 @@ sort' [x,y,z]
   | y <= z && z <= x  =  [y,z,x]
   | z <= x && x <= y  =  [z,x,y]
   | z <= y && y <= x  =  [z,y,x]
+
+merge' :: [Int] -> [Int] -> [Int]
+merge' xs ys  =  sort (xs ++ ys)
 
 main :: IO ()
 main = do
@@ -65,4 +68,15 @@ main = do
     , prim "<=" ((<=) :: Int -> Int -> Bool)
     , prim ">"  ((>)  :: Int -> Int -> Bool)
     , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    ]
+
+  -- merge [] []  =  []
+  -- merge (x:xs) (y:ys)  =  if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
+  --                         2  3 4  5      678     9 10 11 12  13 14 15  16 17 18 19
+  -- OOM after size 17, out of reach performance wise
+  conjureWith args{maxSize=12} "merge" merge'
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prif (undefined :: [Int])
     ]
