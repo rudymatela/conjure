@@ -77,12 +77,14 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
     (ef:exs) | ef == ef' -> red n m (foldApp (ef:map exprExpr exs))
              | otherwise -> foldl ($$) (re n m ef) exs
 
+  red :: Int -> Int -> Expr -> Maybe (Int, Int, Dynamic)
   red n m e  =  headOr (error $ "toDynamicWithDefn: unhandled pattern " ++ show e)
              [  re n (m-1) $ e' //- bs
              |  (a',e') <- cx
              ,  Just bs <- [e `match` a']
              ]
 
+  ($$) :: Maybe (Int,Int,Dynamic) -> Expr -> Maybe (Int, Int, Dynamic)
   Just (n,m,d1) $$ e2  =  case re n m e2 of
                           Nothing -> Nothing
                           Just (n', m', d2) -> (n',m',) <$> dynApply d1 d2
