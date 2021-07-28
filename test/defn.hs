@@ -71,6 +71,11 @@ tests n  =
   , holds n $ cevl 60 isZeroDefn === ((==0) :: Int -> Bool)
   , holds n $ cevl 60 isOneDefn  === ((==1) :: Int -> Bool)
   , holds n $ cevl 60 nullDefn   === (null :: [Int] -> Bool)
+
+  -- evaluating at the incorrect types should return Nothing
+  , isNothing (cevaluate 60 sumDefn :: Maybe ([Bool] -> Bool))
+  , isNothing (cevaluate 60 andDefn :: Maybe ([Int] -> Int))
+  , isNothing (cevaluate 60 nullDefn :: Maybe ([Int] -> Int))
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
