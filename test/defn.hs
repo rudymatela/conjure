@@ -71,6 +71,7 @@ tests n  =
   , holds n $ cevl 60 isZeroDefn === ((==0) :: Int -> Bool)
   , holds n $ cevl 60 isOneDefn  === ((==1) :: Int -> Bool)
   , holds n $ cevl 60 nullDefn   === (null :: [Int] -> Bool)
+  , holds n $ cevl 60 appendDefn ==== ((++) :: [Int] -> [Int] -> [Int])
 
   -- evaluating at the incorrect types should return Nothing
   , isNothing (cevaluate 60 sumDefn :: Maybe ([Bool] -> Bool))
@@ -89,6 +90,7 @@ orV      =  var "or"     (undefined :: [Bool] -> Bool)
 isZeroV  =  var "isZero" (undefined :: Int -> Bool)
 isOneV   =  var "isOne"  (undefined :: Int -> Bool)
 nullV    =  var "null"   (undefined :: [Int] -> Bool)
+appendV  =  var "++"     (undefined :: [Int] -> [Int] -> [Int])
 
 -- NOTE: a hack for testing needs all types that are Express as arguments of
 --       undefined.
@@ -140,6 +142,11 @@ and1Defn  =  [ and' pps  =-  null' pps -||- head' pps -&&- and' (tail' pps)
 or1Defn :: Defn
 or1Defn  =  [ or' pps  =-  not' (null' pps) -&&- (head' pps -||- or' (tail' pps))
             ]  where or' e  =  orV :$ e
+
+appendDefn :: Defn
+appendDefn  =  [ nil -++- xxs  =-  xxs
+               , (xx -:- xxs) -++- yys  =-  xx -:- (xxs -++- yys)
+               ]  where  exs -++- eys  =  appendV :$ exs :$ eys
 
 (=-) = (,)
 infixr 0 =-
