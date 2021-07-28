@@ -43,13 +43,15 @@ main :: IO ()
 main = do
   -- subset xs ys  =  null xs || elem (head xs) ys && subset (tail xs) ys
   --                  1    2  3  4     5    6   7  8  9       10   11  12
+  -- -- OR --
+  -- subset [] ys  =  True
+  -- subset (x:xs) ys  =  elem x ys && subset xs ys
   conjure "subset" (subset')
     [ pr ([] :: [Int])
+    , pr True
+    , pr False
     , prim "&&" (&&)
     , prim "||" (||)
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     , prim "elem" (elem :: Int -> [Int] -> Bool)
     ]
 
