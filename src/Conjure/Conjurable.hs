@@ -417,9 +417,10 @@ instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
     | otherwise                  =  conjureExpress (f undefined) e
   conjureEvaluate exprExpr mx defn ef  =  mf
     where
-    mf  =  case conjureEvaluate exprExpr mx defn (holeAsTypeOf ef :$ hole x) -: Just (f x) of
+    ce  =  conjureEvaluate exprExpr mx defn
+    mf  =  case ce (holeAsTypeOf ef :$ hole x) -: Just (f x) of
            Nothing -> Nothing
-           Just _  -> Just $ \x -> fromMaybe err $ conjureEvaluate exprExpr mx defn $ ef :$ exprExpr (value "" x)
+           Just _  -> Just $ \x -> fromMaybe err . ce $ ef :$ exprExpr (value "" x)
     f  =  undefined -: fromJust mf
     x  =  argTy f
     err  =  error "conjureEvaluate (a->b): BUG!  This should never be evaluated as it is protected by the outer case."
