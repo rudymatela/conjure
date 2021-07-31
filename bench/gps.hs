@@ -81,6 +81,10 @@ gps3c  =  do
 
 main :: IO ()
 main  =  do
-  gps1c
-  gps2c
-  gps3c
+  sequence_ gpss
+
+gpss :: [IO ()]
+gpss  =  [ gps1c
+         , gps2c
+         , gps3c
+         ]
