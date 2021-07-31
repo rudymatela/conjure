@@ -3,6 +3,7 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
+import System.Environment (getArgs)
 
 
 gps1p :: Int -> Float -> Float
@@ -79,9 +80,14 @@ gps3c  =  do
     , prif (undefined :: [Int])
     ]
 
+
 main :: IO ()
 main  =  do
-  sequence_ gpss
+  as <- getArgs
+  case as of
+    [] -> sequence_ gpss
+    (n:_) -> gpss !! (read n - 1)
+
 
 gpss :: [IO ()]
 gpss  =  [ gps1c
