@@ -5,6 +5,8 @@
 import Conjure
 import System.Environment (getArgs)
 
+import Data.Char (isLetter) -- GPS #5
+
 
 gps1p :: Int -> Float -> Float
 gps1p 0 1.0  =  1.0
@@ -104,6 +106,31 @@ gps4c  =  do
     ]
 
 
+gps5p :: String -> String
+gps5p "a"  =  "aa"
+gps5p "b"  =  "bb"
+gps5p " "  =  " "
+gps5p "!"  =  "!!!"
+gps5p "aa"  =  "aaaa"
+
+gps5g :: String -> String
+gps5g []  =  []
+gps5g (c:cs)
+  | isLetter c  =  c:c:gps5g cs
+  | c == '!'    =  c:c:c:gps5g cs
+  | otherwise   =  c:gps5g cs
+
+gps5c :: IO ()
+gps5c  =  conjureWith args{maxSize=6} "gps5" gps5p -- can't find
+  [ pr ""
+  , prim ":" ((:) :: Char -> String -> String)
+  , pr '!'
+  , prim "==" ((==) :: Char -> Char -> Bool)
+  , prim "isLetter" (isLetter :: Char -> Bool)
+  , prif (undefined :: String -> String)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -117,4 +144,5 @@ gpss  =  [ gps1c
          , gps2c
          , gps3c
          , gps4c
+         , gps5c
          ]

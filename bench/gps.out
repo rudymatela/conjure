@@ -67,3 +67,14 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- looking through 30 candidates of size 11
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
+gps5 :: [Char] -> [Char]
+-- testing 5 combinations of argument values
+-- pruning with 2/6 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 5 candidates of size 5
+-- looking through 13 candidates of size 6
+cannot conjure
+
