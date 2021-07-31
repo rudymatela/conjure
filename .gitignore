@@ -55,6 +55,7 @@ bench/lots
 bench/p12
 bench/p30
 bench/candidates
+bench/gps
 proto/u-conjure
 test/expr
 test/conjurable

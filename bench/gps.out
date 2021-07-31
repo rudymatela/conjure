@@ -1,0 +1,27 @@
+gps1 :: Int -> Float -> Float
+-- testing 4 combinations of argument values
+-- pruning with 2/6 rules
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 2 candidates of size 4
+gps1 x y  =  fromIntegral x + y
+
+gps2 :: Int -> Maybe [Char]
+-- testing 6 combinations of argument values
+-- pruning with 9/17 rules
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 4 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 12 candidates of size 6
+-- looking through 38 candidates of size 7
+-- looking through 48 candidates of size 8
+-- looking through 112 candidates of size 9
+-- looking through 144 candidates of size 10
+-- looking through 176 candidates of size 11
+-- looking through 704 candidates of size 12
+-- looking through 1856 candidates of size 13
+gps2 x  =  if 2000 <= x then Just "large" else (if x < 1000 then Just "small" else Nothing)
+

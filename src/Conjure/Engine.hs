@@ -140,6 +140,7 @@ conjureWith args nm f es  =  do
   print (var (head $ words nm) f)
   putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
   putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
+  -- printThy thy
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure\n"

@@ -3,6 +3,11 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* make sure to print a warning when an incorrect property is discovered by Speculate.
+  Tell the user to increase the number of tests.
+  Filter out and run with minimum pruning
+  (cf. gps2c)
+
 * consider memoizing `recs ep` in `candidateDefnsC`
   and a sub function with `vs` arguments.
 
