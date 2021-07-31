@@ -51,3 +51,19 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- looking through 36 candidates of size 8
 cannot conjure
 
+gps4 :: [Char] -> [Char] -> [Char] -> Bool
+-- testing 9 combinations of argument values
+-- pruning with 11/15 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 6 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 162 candidates of size 9
+-- looking through 30 candidates of size 10
+-- looking through 30 candidates of size 11
+gps4 cs ds es  =  length cs < length ds && length ds < length es
+

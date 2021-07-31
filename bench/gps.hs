@@ -81,6 +81,29 @@ gps3c  =  do
     ]
 
 
+gps4p :: String -> String -> String -> Bool
+gps4p "" "a" "aa"  =  True
+gps4p "aa" "a" ""  =  False
+gps4p "a" "aa" ""  =  False
+gps4p "a" "aa" "aaa"  =  True
+gps4p "a" "aaa" "aa"  =  False
+gps4p "aa" "a" "aaa"  =  False
+gps4p "aa" "aaa" "a"  =  False
+gps4p "aaa" "a" "aa"  =  False
+gps4p "aaa" "aa" "a"  =  False
+
+gps4g :: String -> String -> String -> Bool
+gps4g s1 s2 s3  =  length s1 < length s2 && length s2 < length s3
+
+gps4c :: IO ()
+gps4c  =  do
+  conjure "gps4" gps4p
+    [ prim "length" (length :: String -> Int)
+    , prim "<" ((<) :: Int -> Int -> Bool)
+    , prim "&&" (&&)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -93,4 +116,5 @@ gpss :: [IO ()]
 gpss  =  [ gps1c
          , gps2c
          , gps3c
+         , gps4c
          ]
