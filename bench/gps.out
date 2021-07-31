@@ -25,3 +25,29 @@ gps2 :: Int -> Maybe [Char]
 -- looking through 1856 candidates of size 13
 gps2 x  =  if 2000 <= x then Just "large" else (if x < 1000 then Just "small" else Nothing)
 
+gps3 :: Int -> Int -> Int -> [Int]
+-- testing 2 combinations of argument values
+-- pruning with 11/33 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 64 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 1536 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 26127 candidates of size 8
+gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
+
+gps3 :: Int -> Int -> Int -> [Int]
+-- testing 2 combinations of argument values
+-- pruning with 6/18 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 18 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 108 candidates of size 7
+-- looking through 36 candidates of size 8
+cannot conjure
+
