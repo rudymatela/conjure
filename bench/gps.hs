@@ -131,6 +131,45 @@ gps5c  =  conjureWith args{maxSize=6} "gps5" gps5p -- can't find
   ]
 
 
+-- GPS Benchmark #6 -- Collatz/Hailstone numbers --
+
+gps6p :: Int -> Int
+gps6p 1  =  1
+gps6p 2  =  2
+gps6p 3  =  8
+gps6p 4  =  3
+gps6p 5  =  6
+gps6p 6  =  9
+gps6p 12  =  10
+gps6p 60  =  20
+gps6p 360  =  20
+
+gps6g :: Int -> Int
+gps6g  =  tnp1
+  where
+  tnp1 n | n <= 0  =  undefined
+  tnp1 1  =  1                          --  1
+  tnp1 n  =  1 + gps6g (if even n       --  7
+                        then n `div` 2  -- 10
+                        else 3*n + 1)   -- 15
+
+-- This one is out of reach performance wise:
+-- Speculate hangs with this background.
+-- Removing three or setting maxEqSize to 4 makes it unhang.
+-- But a size of 15 or 17 is simplyl out of our reach.
+gps6c :: IO ()
+gps6c  =  conjureWith args{maxSize=6,maxEquationSize=3} "gps6" gps6g
+  [ pr (1 :: Int)
+  , pr (2 :: Int)
+  , pr (3 :: Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "`div`" (div :: Int -> Int -> Int)
+  , prim "even" (even :: Int -> Bool)
+  , prif (undefined :: Int)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -145,4 +184,5 @@ gpss  =  [ gps1c
          , gps3c
          , gps4c
          , gps5c
+         , gps6c
          ]

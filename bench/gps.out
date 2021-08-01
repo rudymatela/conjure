@@ -78,3 +78,14 @@ gps5 :: [Char] -> [Char]
 -- looking through 13 candidates of size 6
 cannot conjure
 
+gps6 :: Int -> Int
+-- testing 60 combinations of argument values
+-- pruning with 16/18 rules
+-- looking through 4 candidates of size 1
+-- looking through 9 candidates of size 2
+-- looking through 30 candidates of size 3
+-- looking through 125 candidates of size 4
+-- looking through 415 candidates of size 5
+-- looking through 1602 candidates of size 6
+cannot conjure
+
