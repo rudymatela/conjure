@@ -128,3 +128,29 @@ gps9 :: Int -> [Int]
 -- looking through 272 candidates of size 10
 gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
+wallisNext :: Ratio Integer -> Ratio Integer
+-- testing 6 combinations of argument values
+-- pruning with 37/66 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 4 candidates of size 5
+-- looking through 118 candidates of size 6
+-- looking through 5 candidates of size 7
+-- looking through 825 candidates of size 8
+wallisNext (x % y)  =  (y + 1) % (x + 1)
+
+gps10 :: Int -> Ratio Integer
+-- testing 6 combinations of argument values
+-- pruning with 3/5 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 5 candidates of size 6
+-- looking through 8 candidates of size 7
+-- looking through 13 candidates of size 8
+gps10 x  =  product (take x (iterate wallisNext (2 % 3)))
+

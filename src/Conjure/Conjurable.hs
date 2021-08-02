@@ -556,6 +556,10 @@ instance (Integral a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conj
   conjureTiers     =  reifyTiers
   conjureSize q    =  conjureSize (numerator q) + conjureSize (denominator q)
   conjureSubTypes q  =  conjureType (numerator q)
+  conjureCases q  =  [value "%" ((%) ->>: q) :$ hole n :$ hole d]
+    where
+    n  =  numerator q
+    d  =  denominator q
 
 instance (RealFloat a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Complex a) where
   conjureExpress   =  reifyExpress

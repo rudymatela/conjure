@@ -5,8 +5,9 @@
 import Conjure
 import System.Environment (getArgs)
 
-import Data.Char (isLetter) -- GPS #5
-import Data.Char (isSpace)  -- GPS #7
+import Data.Char (isLetter)                      -- GPS bench  #5
+import Data.Char (isSpace)                       -- GPS bench  #7
+import Data.Ratio ((%), numerator, denominator)  -- GPS bench #10
 
 
 gps1p :: Int -> Float -> Float
@@ -251,6 +252,68 @@ gps9c  =  conjure "gps9" gps9p
   ]
 
 
+-- GPS Benchmark #10 -- Wallis Pi
+-- (quarter pi approximation)
+-- 2   4   4   6   6   8   8
+-- - x - x - x - x - x - x - x ...
+-- 3   3   5   5   7   7   9
+
+gps10p :: Int -> Rational
+gps10p 1  =     2/3
+gps10p 2  =     8/9
+gps10p 3  =    32/45
+gps10p 4  =    64/75
+gps10p 5  =   128/175
+gps10p 6  =  1024/1225
+
+gps10g :: Int -> Rational
+gps10g n  =  product $ take n $ iterate wallisNext (2/3)
+
+wallisNextP :: Rational -> Rational
+wallisNextP q
+  | q == 2/3  =  4/3
+  | q == 4/3  =  4/5
+  | q == 4/5  =  6/5
+  | q == 6/5  =  6/7
+  | q == 6/7  =  8/7
+  | q == 8/7  =  8/9
+
+wallisNext :: Rational -> Rational
+wallisNext q  =  if n < d
+                 then (n+2) % d
+                 else n % (d+2)
+  where
+  n  =  numerator q
+  d  =  denominator q
+-- wallisNext (x % y)  =  (y + (y + 2)) % (x + (x + 2)) -- which simplifies to...
+-- wallisNext (x % y)  =  (x + x * y) % (x + x * x)     -- which simplifies to...
+-- wallisNext (x % y)  =  (y + 1) % (x + 1)             -- this correct version
+
+
+gps10c :: IO ()
+gps10c  =  do
+  conjureWith args{maxSize=14} "wallisNext" wallisNextP
+    [ pr (1 :: Integer)
+    , pr (2 :: Integer)
+    , prim "+" ((+) :: Integer -> Integer -> Integer)
+    , prim "*" ((*) :: Integer -> Integer -> Integer)
+    , prim "%" ((%) :: Integer -> Integer -> Rational)
+    , prim "<" ((<) :: Integer -> Integer -> Bool)
+--  , prim "numerator" (numerator :: Rational -> Integer)
+--  , prim "denominator" (denominator :: Rational -> Integer)
+    , prif (undefined :: Rational)
+    ]
+
+  conjure "gps10" gps10p
+    [ pr (2 :: Integer)
+    , pr (3 :: Integer)
+    , prim "%" ((%) :: Integer -> Integer -> Rational)
+--  , pr (2/3 :: Rational)
+    , prim "product"    (product :: [Rational] -> Rational)
+    , prim "take"       (take :: Int -> [Rational] -> [Rational])
+    , prim "iterate"    ((\f -> take 1080 . iterate f) :: (Rational -> Rational) -> Rational -> [Rational])
+    , prim "wallisNext" wallisNext
+    ]
 
 main :: IO ()
 main  =  do
@@ -270,4 +333,5 @@ gpss  =  [ gps1c
          , gps7c
          , gps8c
          , gps9c
+         , gps10c
          ]
