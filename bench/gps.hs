@@ -6,6 +6,7 @@ import Conjure
 import System.Environment (getArgs)
 
 import Data.Char (isLetter) -- GPS #5
+import Data.Char (isSpace)  -- GPS #7
 
 
 gps1p :: Int -> Float -> Float
@@ -158,7 +159,7 @@ gps6g  =  tnp1
 -- Removing three or setting maxEqSize to 4 makes it unhang.
 -- But a size of 15 or 17 is simplyl out of our reach.
 gps6c :: IO ()
-gps6c  =  conjureWith args{maxSize=6,maxEquationSize=3} "gps6" gps6g
+gps6c  =  conjureWith args{maxSize=6,maxEquationSize=3} "gps6" gps6p
   [ pr (1 :: Int)
   , pr (2 :: Int)
   , pr (3 :: Int)
@@ -167,6 +168,31 @@ gps6c  =  conjureWith args{maxSize=6,maxEquationSize=3} "gps6" gps6g
   , prim "`div`" (div :: Int -> Int -> Int)
   , prim "even" (even :: Int -> Bool)
   , prif (undefined :: Int)
+  ]
+
+
+-- GPS Benchmark #7 -- Replace Space with Newline (P 4.3)
+
+gps7p :: String -> (String, Int)
+gps7p "a"  =  ("a", 1)
+gps7p "aa"  =  ("aa", 2)
+gps7p "a a"  =  ("a\na", 2)
+gps7p "a\na"  =  ("a\na", 2)
+
+gps7g :: String -> (String, Int)
+gps7g s  =  (init $ unlines $ words s, length (filter (not . isSpace) s))
+
+gps7c :: IO ()
+gps7c  =  conjure "gps7" gps7p
+  [ prim "," ((,) :: String -> Int -> (String, Int))
+  , prim "init" (init :: String -> String)
+  , prim "unlines" unlines
+  , prim "words" words
+  , prim "length" (length :: String -> Int)
+  , prim "filter" (filter :: (Char -> Bool) -> String -> String)
+  , prim "not" not
+  , prim "." ((.) :: (Bool -> Bool) -> (Char -> Bool) -> Char -> Bool) -- cheat?
+  , prim "isSpace" (isSpace :: Char -> Bool)
   ]
 
 
@@ -185,4 +211,5 @@ gpss  =  [ gps1c
          , gps4c
          , gps5c
          , gps6c
+         , gps7c
          ]

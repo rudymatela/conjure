@@ -79,7 +79,7 @@ gps5 :: [Char] -> [Char]
 cannot conjure
 
 gps6 :: Int -> Int
--- testing 60 combinations of argument values
+-- testing 9 combinations of argument values
 -- pruning with 16/18 rules
 -- looking through 4 candidates of size 1
 -- looking through 9 candidates of size 2
@@ -88,4 +88,20 @@ gps6 :: Int -> Int
 -- looking through 415 candidates of size 5
 -- looking through 1602 candidates of size 6
 cannot conjure
+
+gps7 :: [Char] -> ([Char],Int)
+-- testing 4 combinations of argument values
+-- pruning with 5/10 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 7 candidates of size 6
+-- looking through 16 candidates of size 7
+-- looking through 39 candidates of size 8
+-- looking through 86 candidates of size 9
+-- looking through 193 candidates of size 10
+-- looking through 414 candidates of size 11
+gps7 cs  =  (init (unlines (words cs)),length (filter (not . isSpace) cs))
 
