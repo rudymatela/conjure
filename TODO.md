@@ -8,6 +8,8 @@ A non-exhaustive list of things TO DO for Conjure.
   Filter out and run with minimum pruning
   (cf. gps2c)
 
+* carry on implementing all GPS benches while taking notes on the paper
+
 * consider memoizing `recs ep` in `candidateDefnsC`
   and a sub function with `vs` arguments.
 
