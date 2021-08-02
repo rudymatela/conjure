@@ -113,3 +113,18 @@ gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
 -- looking through 0 candidates of size 3
 cannot conjure
 
+gps9 :: Int -> [Int]
+-- testing 3 combinations of argument values
+-- pruning with 13/14 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 4 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 10 candidates of size 5
+-- looking through 25 candidates of size 6
+-- looking through 35 candidates of size 7
+-- looking through 87 candidates of size 8
+-- looking through 150 candidates of size 9
+-- looking through 272 candidates of size 10
+gps9 x  =  filter even (filter (x >) (map sq [1..x]))
+

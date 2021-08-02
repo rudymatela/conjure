@@ -221,6 +221,37 @@ gps8c  =  conjure "gps8" gps8p
   [
   ]
 
+
+-- GPS Benchmark #9 -- Even Squares
+-- given an integer _n_, print all of the positive even perfect squares less
+-- than _n_ on separate lines.
+
+gps9p :: Int -> [Int]
+gps9p 10  =  [4]
+gps9p 100  =  [4,16,36,64]
+gps9p 1000  =  [4,16,36,64,100,144,196,256,324,400,484,576,676,784,900]
+
+-- non-optimal performance, but does the job
+-- gps9g :: Int -> [Int]
+-- gps9g n  =  [x*x | x <- [1..n], x*x < n, even (x*x)]
+gps9g :: Int -> [Int]
+gps9g n  =  filter (n >) (filter even (map sq [1..n]))
+  where
+  sq  =  (^2)
+
+gps9c :: IO ()
+gps9c  =  conjure "gps9" gps9p
+  [ pr (1 :: Int)
+  , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
+  , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+  , prim ".." (enumFromTo :: Int -> Int -> [Int])
+  , prim ">" ((>) :: Int -> Int -> Bool)
+  , prim "even" (even :: Int -> Bool)
+  , prim "sq" ((^2) :: Int -> Int)  -- invented separately
+  ]
+
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -238,4 +269,5 @@ gpss  =  [ gps1c
          , gps6c
          , gps7c
          , gps8c
+         , gps9c
          ]
