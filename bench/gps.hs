@@ -196,6 +196,31 @@ gps7c  =  conjure "gps7" gps7p
   ]
 
 
+-- GPS Benchmark #8 -- String Differences
+
+gps8p :: String -> String -> [(Int, Char, Char)]
+gps8p "a" "a"  =  []
+gps8p "a" "b"  =  [(0,'a','b')]
+gps8p "aa" "ab"  =  [(1,'a','b')]
+gps8p "dealer" "dollar"  =  [(1,'e','o'), (2,'a','l'),(4,'e','a')]
+
+gps8g :: String -> String -> [(Int, Char, Char)]
+gps8g  =  diffs 0
+  where
+  diffs _ [] _  =  []
+  diffs _ _ []  =  []
+  diffs n (c:cs) (d:ds)  =  if c == d
+                            then diffs (n+1) cs ds
+                            else (n,c,d) : diffs (n+1) cs ds
+
+-- out of reach as Conjure cannot invent helper functions
+-- even if that would be solved,
+-- I conjecture it would be out-of-reach performance-wise.
+gps8c :: IO ()
+gps8c  =  conjure "gps8" gps8p
+  [
+  ]
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -212,4 +237,5 @@ gpss  =  [ gps1c
          , gps5c
          , gps6c
          , gps7c
+         , gps8c
          ]

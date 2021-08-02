@@ -105,3 +105,11 @@ gps7 :: [Char] -> ([Char],Int)
 -- looking through 414 candidates of size 11
 gps7 cs  =  (init (unlines (words cs)),length (filter (not . isSpace) cs))
 
+gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
+-- testing 3 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+cannot conjure
+
