@@ -55,6 +55,19 @@ bench/longshot.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   bench/longshot.hs
+bench/lowtests: \
+  bench/lowtests.hs \
+  mk/toplibs
+bench/lowtests.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  bench/lowtests.hs
 bench/p12: \
   bench/p12.hs \
   mk/toplibs

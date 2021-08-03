@@ -27,6 +27,7 @@ EG = \
   bench/candidates \
   bench/ill-hit \
   bench/longshot \
+  bench/lowtests \
   bench/self \
   bench/take-drop \
   bench/p12 \

@@ -1,0 +1,54 @@
+subset :: [Int] -> [Int] -> Bool
+-- testing 44 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 0 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 0 candidates of size 12
+cannot conjure
+
+subset :: [Int] -> [Int] -> Bool
+-- testing 44 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 2 candidates of size 5
+subset xs ys  =  sort xs `isSubsequenceOf` sort ys
+
+replicates :: [Char] -> Int -> [Char]
+-- testing 60 combinations of argument values
+-- pruning with 2/2 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 1 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 1 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 0 candidates of size 12
+cannot conjure
+
+replicates :: [Char] -> Int -> [Char]
+-- testing 360 combinations of argument values
+-- pruning with 2/2 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 1 candidates of size 5
+replicates cs x  =  concat (transpose (replicate x cs))
+
