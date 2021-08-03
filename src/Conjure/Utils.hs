@@ -37,6 +37,7 @@ module Conjure.Utils
   , allEqual
   , choices
   , choicesThat
+  , filterAnd
   )
 where
 
@@ -150,3 +151,10 @@ choices (x:xs)  =  (x,xs) : map (mapSnd (x:)) (choices xs)
 
 choicesThat :: (a -> [a] -> Bool) -> [a] -> [(a,[a])]
 choicesThat (?)  =  filter (uncurry (?)) . choices
+
+filterAnd :: (a -> Bool) -> [a] -> ([a],Bool)
+filterAnd p xs  =  (xs', and ps)
+  where
+  xps  =  [(x,p x) | x <- xs]
+  xs'  =  [x | (x,True) <- xps]
+  ps   =  [p | (_,p) <- xps]

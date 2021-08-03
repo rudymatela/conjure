@@ -40,7 +40,7 @@ import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 
-import Test.Speculate.Reason (Thy, rules, equations, canReduceTo, printThy)
+import Test.Speculate.Reason (Thy, rules, equations, canReduceTo, printThy, closureLimit)
 import Test.Speculate.Engine (theoryFromAtoms, groundBinds, boolTy)
 
 import Conjure.Expr
@@ -147,6 +147,9 @@ conjureWith args nm f es  =  do
     putStrLn $ "{-"
     printThy thy
     putStrLn $ "-}"
+  when (filtered thy) $
+    putStrLn $ "-- reasoning produced incorrect properties," -- TODO: add Num
+            ++ " please re-run with more tests for faster results"
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure\n"
@@ -264,7 +267,8 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
         | otherwise       =  const True
   recs  =  filterT keepR
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
-  thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
+  thy  =  filterTheory (===)
+       .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
@@ -318,7 +322,8 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
     where
     vs  =  tail (vars ep)
 
-  thy  =  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
+  thy  =  filterTheory (===)
+       .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
@@ -452,6 +457,29 @@ isRootNormalE thy e  =  isRootNormal thy e
   where
   trie  =  T.fromList $ equations thy ++ map swap (equations thy)
   (->-)  =  canReduceTo thy
+
+
+--- double checks ---
+
+filtered :: Thy -> Bool
+filtered  =  (< 0) . closureLimit
+
+filterTheory :: (Expr -> Expr -> Bool) -> Thy -> Thy
+-- TODO: move filterTheory into Speculate, and add new Thy field "doubleChecked / invalid"
+--       or maybe have a third list of equations:
+--       invalid :: (Expr,Expr)
+--       that lists ones that were discarded
+filterTheory (===) thy  =  thy
+                        {  rules = rs
+                        ,  equations = es
+                        ,  closureLimit = if r' && e'
+                                          then closureLimit thy
+                                          else -1
+                        }
+  where
+  correct  =  uncurry (===)
+  (rs,r')  =  filterAnd correct (rules thy)
+  (es,e')  =  filterAnd correct (equations thy)
 
 
 --- tiers utils ---

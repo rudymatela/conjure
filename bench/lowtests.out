@@ -1,23 +1,23 @@
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
--- pruning with 4/4 rules
+-- pruning with 3/3 rules
 {-
 rules:
 xs `isSubsequenceOf` xs == True
 sort (sort xs) == sort xs
 sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
-xs `isSubsequenceOf` sort xs == True
 
 -}
+-- reasoning produced incorrect properties, please re-run with more tests for faster results
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 2 candidates of size 4
+-- looking through 4 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 0 candidates of size 7
--- looking through 0 candidates of size 8
--- looking through 0 candidates of size 9
+-- looking through 12 candidates of size 7
+-- looking through 22 candidates of size 8
+-- looking through 8 candidates of size 9
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 0 candidates of size 12
