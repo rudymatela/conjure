@@ -33,21 +33,21 @@ main = do
     ]
 
   -- emulates how MagicHaskeller generates "replicates"
-  conjureWith args{maxTests=360} "replicates" replicates'
+  conjure "replicates" replicates'
     [ prim "replicate" (replicate :: Int -> String -> [String])
     , prim "transpose" (transpose :: [[Char]] -> [[Char]])
     , prim "concat"    (concat :: [String] -> String)
     ]
 
   -- emulates an alternative generation that works on MagicHaskeller
-  conjureWith args{maxTests=360} "replicates" replicates'
+  conjure "replicates" replicates'
     [ prim "replicate" (replicate :: Int -> Char -> String)
     , prim "map"       (map :: (Char -> String) -> String -> [String])
     , prim "concat"    (concat :: [String] -> String)
     ]
 
   -- alternative generation using recursion
-  conjureWith args{maxTests=360, maxSize=13} "replicates" replicates'
+  conjureWith args{maxSize=13} "replicates" replicates'
     [ pr ""
     , prim "null" (null :: String -> Bool)
     , prim "head" (head :: String -> Char)

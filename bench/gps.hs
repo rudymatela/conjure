@@ -70,7 +70,7 @@ gps3c :: IO ()
 gps3c  =  do
   conjure "gps3" gps3p
     [ pr (1 :: Int)
-    , prim "enumFromThenTo" ((\x y z -> take 360 $ enumFromThenTo x y z) :: Int -> Int -> Int -> [Int])
+    , prim "enumFromThenTo" ((\x y z -> take 720 $ enumFromThenTo x y z) :: Int -> Int -> Int -> [Int])
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "-" ((-) :: Int -> Int -> Int)
     ]
@@ -241,7 +241,7 @@ gps9g n  =  filter (n >) (filter even (map sq [1..n]))
   sq  =  (^2)
 
 gps9c :: IO ()
-gps9c  =  conjure "gps9" gps9p
+gps9c  =  conjureWith args{maxTests=60} "gps9" gps9p
   [ pr (1 :: Int)
   , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
   , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
@@ -311,7 +311,7 @@ gps10c  =  do
 --  , pr (2/3 :: Rational)
     , prim "product"    (product :: [Rational] -> Rational)
     , prim "take"       (take :: Int -> [Rational] -> [Rational])
-    , prim "iterate"    ((\f -> take 1080 . iterate f) :: (Rational -> Rational) -> Rational -> [Rational])
+    , prim "iterate"    ((\f -> take 720 . iterate f) :: (Rational -> Rational) -> Rational -> [Rational])
     , prim "wallisNext" wallisNext
     ]
 
@@ -319,7 +319,7 @@ main :: IO ()
 main  =  do
   as <- getArgs
   case as of
-    [] -> sequence_ gpss
+    [] -> sequence_ $ take 10 gpss
     (n:_) -> gpss !! (read n - 1)
 
 

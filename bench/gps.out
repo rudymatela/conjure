@@ -1,6 +1,6 @@
 gps1 :: Int -> Float -> Float
 -- testing 4 combinations of argument values
--- pruning with 2/6 rules
+-- pruning with 1/2 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
@@ -69,7 +69,7 @@ gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
 -- testing 5 combinations of argument values
--- pruning with 2/6 rules
+-- pruning with 2/3 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -130,7 +130,7 @@ gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
 wallisNext :: Ratio Integer -> Ratio Integer
 -- testing 6 combinations of argument values
--- pruning with 37/66 rules
+-- pruning with 37/64 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 3 candidates of size 3
@@ -143,7 +143,7 @@ wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 gps10 :: Int -> Ratio Integer
 -- testing 6 combinations of argument values
--- pruning with 3/5 rules
+-- pruning with 3/4 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 3 candidates of size 3

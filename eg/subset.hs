@@ -56,7 +56,7 @@ main = do
     ]
 
   -- subset xs ys  =  sort xs `isSubsequenceOf` sort ys
-  conjureWith args{maxTests=360} "subset" (subset')
+  conjure "subset" (subset')
     [ prim "sort" (sort :: [Int] -> [Int])
     , prim "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
     ]

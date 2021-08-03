@@ -22,7 +22,7 @@ duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 
 positionsFrom :: Int -> A -> [A] -> [Int]
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 5/10 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2

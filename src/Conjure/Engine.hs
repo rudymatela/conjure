@@ -123,7 +123,7 @@ data Args = Args
 -- * don't show the theory used in pruning
 args :: Args
 args = Args
-  { maxTests           =  60
+  { maxTests           =  360
   , maxSize            =  12
   , maxEvalRecursions  =  60
   , maxEquationSize    =   5

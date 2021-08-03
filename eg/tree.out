@@ -1,5 +1,5 @@
 leftmost :: Tree -> Int
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 3/3 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
@@ -12,7 +12,7 @@ leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)  =  if nil t1 then x else leftmost t1
 
 rightmost :: Tree -> Int
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 3/3 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
@@ -25,7 +25,7 @@ rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)  =  if nil t2 then x else rightmost t2
 
 size :: Tree -> Int
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 4/8 rules
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
@@ -39,7 +39,7 @@ size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
 height :: Tree -> Int
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 49/65 rules
 -- looking through 3 candidates of size 1
 -- looking through 9 candidates of size 2
@@ -53,7 +53,7 @@ height Leaf  =  -1
 height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 
 mem :: Int -> Tree -> Bool
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 11/17 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
@@ -71,7 +71,7 @@ mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
 insert :: Int -> Tree -> Tree
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 6/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2

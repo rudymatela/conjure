@@ -1,5 +1,5 @@
 sort :: [Int] -> [Int]
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 6/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
@@ -10,7 +10,7 @@ sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
 sort :: [Int] -> [Int]
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 1/2 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
@@ -19,7 +19,7 @@ sort :: [Int] -> [Int]
 sort xs  =  foldr insert [] xs
 
 qsort :: [Int] -> [Int]
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 8/8 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
@@ -39,7 +39,7 @@ qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
 merge :: [Int] -> [Int] -> [Int]
--- testing 60 combinations of argument values
+-- testing 360 combinations of argument values
 -- pruning with 4/4 rules
 -- looking through 3 candidates of size 1
 -- looking through 8 candidates of size 2
