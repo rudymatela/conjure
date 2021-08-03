@@ -41,7 +41,7 @@ gps2g n
   | otherwise  =  Nothing
 
 gps2c :: IO ()
-gps2c  =  conjureWith args{maxTests=5080, maxSize=30} "gps2" gps2p
+gps2c  =  conjureWith args{maxTests=5040, maxSize=30} "gps2" gps2p
   [ pr "small"
   , pr "large"
   , pr (1000 :: Int)
