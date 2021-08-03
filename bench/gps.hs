@@ -319,7 +319,7 @@ main :: IO ()
 main  =  do
   as <- getArgs
   case as of
-    [] -> sequence_ $ take 10 gpss
+    [] -> sequence_ gpss
     (n:_) -> gpss !! (read n - 1)
 
 
