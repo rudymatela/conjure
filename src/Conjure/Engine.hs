@@ -106,6 +106,7 @@ data Args = Args
   , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
   , requireDescent    :: Bool -- ^ require recursive calls to deconstruct arguments
   , usePatterns       :: Bool -- ^ use pattern matching to create (recursive) candidates
+  , showTheory        :: Bool -- ^ show theory discovered by Speculate used in pruning
   , forceTests :: [[Expr]]  -- ^ force tests
   }
 
@@ -119,6 +120,7 @@ data Args = Args
 -- * pruning with equations up to size 5
 -- * search for defined applications for up to 100000 combinations
 -- * require recursive calls to deconstruct arguments
+-- * don't show the theory used in pruning
 args :: Args
 args = Args
   { maxTests           =  60
@@ -128,6 +130,7 @@ args = Args
   , maxSearchTests     =  100000
   , requireDescent     =  True
   , usePatterns        =  True
+  , showTheory         =  False
   , forceTests         =  []
   }
 
@@ -140,7 +143,10 @@ conjureWith args nm f es  =  do
   print (var (head $ words nm) f)
   putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
   putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
-  -- printThy thy
+  when (showTheory args) $ do
+    putStrLn $ "{-"
+    printThy thy
+    putStrLn $ "-}"
   pr 1 rs
   where
   pr n []  =  putStrLn $ "cannot conjure\n"

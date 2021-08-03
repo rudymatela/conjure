@@ -1,6 +1,14 @@
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
 -- pruning with 4/4 rules
+{-
+rules:
+xs `isSubsequenceOf` xs == True
+sort (sort xs) == sort xs
+sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
+xs `isSubsequenceOf` sort xs == True
+
+-}
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -18,6 +26,13 @@ cannot conjure
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
 -- pruning with 3/3 rules
+{-
+rules:
+xs `isSubsequenceOf` xs == True
+sort (sort xs) == sort xs
+sort xs `isSubsequenceOf` xs == xs `isSubsequenceOf` sort xs
+
+-}
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -28,6 +43,12 @@ subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 replicates :: [Char] -> Int -> [Char]
 -- testing 60 combinations of argument values
 -- pruning with 2/2 rules
+{-
+rules:
+concat (transpose xss) == concat xss
+transpose (transpose (transpose xss)) == transpose xss
+
+-}
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -45,6 +66,12 @@ cannot conjure
 replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values
 -- pruning with 2/2 rules
+{-
+rules:
+transpose (transpose (transpose xss)) == transpose xss
+replicate x (concat (transpose xss)) == replicate x (concat xss)
+
+-}
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
