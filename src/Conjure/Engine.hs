@@ -277,7 +277,8 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
 candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   where
-  fss  =  concatMapT ps2fss (conjurePats es nm f)
+  pats  =  conjurePats es nm f
+  fss  =  concatMapT ps2fss pats
   es  =  map fst ps
 
   eh  =  holeAsTypeOf efxs
@@ -307,7 +308,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
-                        $  recs ep
+                        $  recs' ep
 
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
@@ -321,14 +322,18 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
            $  foldAppProducts ef [appsWith h vs | h <- conjureArgumentHoles f]
     where
     vs  =  tail (vars ep)
+  -- like recs, but memoized
+  recs' ep  =  fromMaybe errRP $ lookup ep eprs
+    where
+    eprs = [(ep, recs ep) | ep <- nubSort . concat $ concat pats]
+    possiblePats  =  nubSort . concat . concat $ pats
 
   thy  =  filterTheory (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
--- this seems to work, see:
--- > blindCandidateDefns args "fact" (undefined :: [Int] -> Int) [pr (0::Int), pr (1::Int), prim "+" ((+)::Int->Int->Int)]
+  errRP  =  error "candidateDefnsC: unexpected pattern.  You have found a bug, please report it."
 
 
 -- | Returns whether the given recursive call
