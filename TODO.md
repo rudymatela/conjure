@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* pretty-print top-level ifs?
+
 * carry on implementing all GPS benches while taking notes on the paper
 
 * consider memoizing `recs ep` in `candidateDefnsC`
