@@ -318,15 +318,18 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
            | otherwise       =  const True
   recs ep  =  filterT (keepR ep)
            .  discardT (\e -> e == ep)
-           .  filterT (\e -> any (`elem` vs) (vars e))
-           $  foldAppProducts ef [appsWith h vs | h <- conjureArgumentHoles f]
-    where
-    vs  =  tail (vars ep)
+           $  recsV' (tail (vars ep))
+  recsV vs  =  filterT (\e -> any (`elem` vs) (vars e))
+            $  foldAppProducts ef [appsWith h vs | h <- conjureArgumentHoles f]
   -- like recs, but memoized
   recs' ep  =  fromMaybe errRP $ lookup ep eprs
     where
-    eprs = [(ep, recs ep) | ep <- nubSort . concat $ concat pats]
-    possiblePats  =  nubSort . concat . concat $ pats
+    eprs = [(ep, recs ep) | ep <- possiblePats]
+  possiblePats  =  nubSort . concat . concat $ pats
+  -- like recsV, but memoized
+  recsV' vs  =  fromMaybe errRV $ lookup vs evrs
+    where
+    evrs = [(vs, recsV vs) | vs <- nubSort $ map (tail . vars) possiblePats]
 
   thy  =  filterTheory (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
@@ -334,6 +337,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
   errRP  =  error "candidateDefnsC: unexpected pattern.  You have found a bug, please report it."
+  errRV  =  error "candidateDefnsC: unexpected variables.  You have found a bug, please report it."
 
 
 -- | Returns whether the given recursive call
