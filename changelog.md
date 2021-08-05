@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.4.2
+------
 
 * default to using top-level patterns on generated functions;
 * memoize function evaluation;
