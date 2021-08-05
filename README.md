@@ -37,7 +37,11 @@ NOTE: the name of the Hackage package is __[`code-conjure`]__
 Conjuring functions
 -------------------
 
-Given
+You first need to import the library with:
+
+	import Conjure
+
+Then, given
 
 	square :: Int -> Int
 	square 0  =  0
@@ -61,9 +65,10 @@ yields
 
 	square :: Int -> Int
 	-- testing 3 combinations of argument values
+	-- pruning with 14/25 rules
 	-- looking through 3 candidates of size 1
-	-- looking through 3 candidates of size 2
-	-- looking through 5 candidates of size 3
+	-- looking through 4 candidates of size 2
+	-- looking through 9 candidates of size 3
 	square x  =  x * x
 
 in less than a second.
@@ -77,12 +82,10 @@ Conjuring recursive functions
 Given
 
 	factorial :: Int -> Int
-	factorial 0  =  1
 	factorial 1  =  1
 	factorial 2  =  2
 	factorial 3  =  6
 	factorial 4  =  24
-	factorial 5  =  120
 
 and
 
@@ -92,7 +95,6 @@ and
 	               , prim "+" ((+) :: Int -> Int -> Int)
 	               , prim "*" ((*) :: Int -> Int -> Int)
 	               , prim "dec" (subtract 1 :: Int -> Int)
-	               , prim "==" ((==) :: Int -> Int -> Bool)
 	               ]
 
 running
@@ -102,28 +104,26 @@ running
 yields
 
 	factorial :: Int -> Int
-	-- testing 6 combinations of argument values
+	-- testing 4 combinations of argument values
+	-- pruning with 22/42 rules
 	-- looking through 3 candidates of size 1
-	-- looking through 5 candidates of size 2
-	-- looking through 8 candidates of size 3
-	-- looking through 26 candidates of size 4
-	-- looking through 59 candidates of size 5
-	-- looking through 167 candidates of size 6
-	-- looking through 581 candidates of size 7
-	-- looking through 1654 candidates of size 8
-	-- looking through 5754 candidates of size 9
-	-- looking through 17797 candidates of size 10
-	factorial n  =  if n == 0 then 1 else n * factorial (dec n)
+	-- looking through 6 candidates of size 2
+	-- looking through 16 candidates of size 3
+	-- looking through 39 candidates of size 4
+	-- looking through 78 candidates of size 5
+	-- looking through 166 candidates of size 6
+	factorial 0  =  1
+	factorial x  =  x * factorial (dec x)
 
-in about 3 seconds.
+in less than a second.
+
+It is also possible to generate
+
+	factorial x  =  foldr (*) 1 [1..x]
+
+by including `enumFromTo` and `foldr` in the background.
 
 See the `eg/factorial.hs` example.
-
-It is also possible to generate:
-
-    factorial n  =  if n == 0 then 1 else n * factorial (n - 1)
-
-in about 90s by including `(-) :: Int -> Int -> Int` in the primitives.
 
 
 Related work
