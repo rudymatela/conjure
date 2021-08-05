@@ -2,6 +2,19 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* default to using top-level patterns on generated functions;
+* memoize function evaluation;
+* double-check theory at the end and report warning on incorrect properties;
+* add `prif` to `Conjure`;
+* simplify deconstructor discovery and add `conjureSize` to `Conjurable`;
+* add `cevaluate`, `ceval` and `cvl` to `Conjure.Conjurable`;
+* add `bench/gps` and `bench/lowtests`;
+* improve tests and benchmarks.
+
+
 v0.4.0
 ------
 
