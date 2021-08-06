@@ -154,3 +154,42 @@ gps10 :: Int -> Ratio Integer
 -- looking through 13 candidates of size 8
 gps10 x  =  product (take x (iterate wallisNext (2 % 3)))
 
+gps11 :: [[Char]] -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 1/1 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 1 candidates of size 4
+gps11 css  =  reverse (map length css)
+
+gps11 :: [[Char]] -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 2 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 2 candidates of size 8
+gps11 []  =  []
+gps11 (cs:css)  =  gps11 css ++ [length cs]
+
+gps12 :: [Int] -> Int
+-- testing 6 combinations of argument values
+-- pruning with 13/27 rules
+-- looking through 2 candidates of size 1
+-- looking through 5 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 23 candidates of size 5
+-- looking through 53 candidates of size 6
+-- looking through 120 candidates of size 7
+-- looking through 263 candidates of size 8
+-- looking through 694 candidates of size 9
+-- looking through 1644 candidates of size 10
+-- looking through 4433 candidates of size 11
+cannot conjure
+

@@ -8,6 +8,8 @@ import System.Environment (getArgs)
 import Data.Char (isLetter)                      -- GPS bench  #5
 import Data.Char (isSpace)                       -- GPS bench  #7
 import Data.Ratio ((%), numerator, denominator)  -- GPS bench #10
+import Data.List (findIndex)                     -- GPS bench #12
+import Data.Maybe (fromJust)                     -- GPS bench #12
 
 
 gps1p :: Int -> Float -> Float
@@ -315,6 +317,64 @@ gps10c  =  do
     , prim "wallisNext" wallisNext
     ]
 
+
+-- GPS Benchmark #11 -- Lengths Backwards
+
+gps11p :: [String] -> [Int]
+gps11p ["a"]  =  [1]
+gps11p ["aa","a"]  =  [1,2]
+gps11p ["a","aa"]  =  [2,1]
+gps11p ["a","aa","aaa"]  =  [3,2,1]
+
+gps11g :: [String] -> [Int]
+gps11g  =  reverse . map length
+
+gps11g2 :: [String] -> [Int]
+gps11g2 []  =  []
+gps11g2 (s:ss)  =  gps11g2 ss ++ [length s]
+
+gps11c :: IO ()
+gps11c  =  do
+  conjure "gps11" gps11p
+    [ prim "reverse" (reverse :: [Int] -> [Int])
+    , prim "length"  (length :: String -> Int)
+    , prim "map"     (map :: (String -> Int) -> [String] -> [Int])
+    ]
+
+  conjure "gps11" gps11p
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    , prim "length"  (length :: String -> Int)
+    ]
+
+
+-- GPS Benchmark #12 -- Last index or zero
+
+gps12p :: [Int] -> Int
+gps12p [0]  =  0
+gps12p [0,0]  =  1
+gps12p [0,1,0]  =  2
+gps12p [1,0,1]  =  1
+gps12p [0,1,0,1]  =  2
+gps12p [1,0,1,0]  =  3
+
+gps12g :: [Int] -> Int
+gps12g xs  =  length xs - fromJust (findIndex (0==) (reverse xs)) - 1
+
+gps12c :: IO ()
+gps12c  =  do
+  conjureWith args{maxSize = 11} "gps12" gps12p
+    [ prim "length"    (length :: [Int] -> Int)
+    , prim "reverse"   (reverse :: [Int] -> [Int])
+    , prim "findIndex" (findIndex :: (Int -> Bool) -> [Int] -> Maybe Int)
+    , prim "fromJust"  (fromJust :: Maybe Int -> Int)
+    , prim "-"         ((-) :: Int -> Int -> Int)
+    , prim "=="        ((==) :: Int -> Int -> Bool)
+    , pr (0 :: Int)
+    , pr (1 :: Int)
+    ]
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -334,4 +394,6 @@ gpss  =  [ gps1c
          , gps8c
          , gps9c
          , gps10c
+         , gps11c
+         , gps12c
          ]
