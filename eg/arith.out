@@ -29,8 +29,8 @@ tnpo :: Int -> Int
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3
 -- looking through 23 candidates of size 4
--- looking through 26 candidates of size 5
--- looking through 65 candidates of size 6
--- looking through 75 candidates of size 7
+-- looking through 29 candidates of size 5
+-- looking through 71 candidates of size 6
+-- looking through 113 candidates of size 7
 tnpo x  =  x + (x + (x + 1))
 

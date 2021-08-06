@@ -14,10 +14,10 @@ factorial :: Int -> Int
 -- pruning with 22/42 rules
 -- looking through 3 candidates of size 1
 -- looking through 6 candidates of size 2
--- looking through 16 candidates of size 3
--- looking through 39 candidates of size 4
--- looking through 78 candidates of size 5
--- looking through 166 candidates of size 6
+-- looking through 18 candidates of size 3
+-- looking through 51 candidates of size 4
+-- looking through 122 candidates of size 5
+-- looking through 342 candidates of size 6
 factorial 0  =  1
 factorial x  =  x * factorial (dec x)
 

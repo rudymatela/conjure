@@ -35,7 +35,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- looking through 0 candidates of size 5
 -- looking through 1536 candidates of size 6
 -- looking through 0 candidates of size 7
--- looking through 26127 candidates of size 8
+-- looking through 26991 candidates of size 8
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
 gps3 :: Int -> Int -> Int -> [Int]
@@ -83,10 +83,10 @@ gps6 :: Int -> Int
 -- pruning with 16/18 rules
 -- looking through 4 candidates of size 1
 -- looking through 9 candidates of size 2
--- looking through 30 candidates of size 3
--- looking through 125 candidates of size 4
--- looking through 415 candidates of size 5
--- looking through 1602 candidates of size 6
+-- looking through 33 candidates of size 3
+-- looking through 146 candidates of size 4
+-- looking through 609 candidates of size 5
+-- looking through 2561 candidates of size 6
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -100,9 +100,9 @@ gps7 :: [Char] -> ([Char],Int)
 -- looking through 7 candidates of size 6
 -- looking through 16 candidates of size 7
 -- looking through 39 candidates of size 8
--- looking through 86 candidates of size 9
--- looking through 193 candidates of size 10
--- looking through 414 candidates of size 11
+-- looking through 88 candidates of size 9
+-- looking through 201 candidates of size 10
+-- looking through 442 candidates of size 11
 gps7 cs  =  (init (unlines (words cs)),length (filter (not . isSpace) cs))
 
 gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
@@ -138,7 +138,7 @@ wallisNext :: Ratio Integer -> Ratio Integer
 -- looking through 4 candidates of size 5
 -- looking through 118 candidates of size 6
 -- looking through 5 candidates of size 7
--- looking through 825 candidates of size 8
+-- looking through 1001 candidates of size 8
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 gps10 :: Int -> Ratio Integer
@@ -183,13 +183,13 @@ gps12 :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 15 candidates of size 4
--- looking through 23 candidates of size 5
--- looking through 53 candidates of size 6
--- looking through 120 candidates of size 7
--- looking through 263 candidates of size 8
--- looking through 694 candidates of size 9
--- looking through 1644 candidates of size 10
--- looking through 4433 candidates of size 11
-cannot conjure
+-- looking through 16 candidates of size 4
+-- looking through 26 candidates of size 5
+-- looking through 71 candidates of size 6
+-- looking through 160 candidates of size 7
+-- looking through 432 candidates of size 8
+-- looking through 1166 candidates of size 9
+-- looking through 3187 candidates of size 10
+-- looking through 9282 candidates of size 11
+gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 

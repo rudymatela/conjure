@@ -4,10 +4,10 @@ factorial :: Int -> Int
 -- pruning with 67/100 rules
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
--- looking through 22 candidates of size 3
--- looking through 62 candidates of size 4
--- looking through 175 candidates of size 5
--- looking through 542 candidates of size 6
+-- looking through 25 candidates of size 3
+-- looking through 82 candidates of size 4
+-- looking through 263 candidates of size 5
+-- looking through 954 candidates of size 6
 factorial 0  =  1
 factorial x  =  x * factorial (dec x)
 

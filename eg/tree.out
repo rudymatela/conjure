@@ -46,11 +46,11 @@ height :: Tree -> Int
 -- looking through 8 candidates of size 3
 -- looking through 59 candidates of size 4
 -- looking through 114 candidates of size 5
--- looking through 388 candidates of size 6
--- looking through 1255 candidates of size 7
--- looking through 3833 candidates of size 8
+-- looking through 472 candidates of size 6
+-- looking through 1440 candidates of size 7
+-- looking through 5781 candidates of size 8
 height Leaf  =  -1
-height (Node t1 x t2)  =  1 + max (height t1) (height t2)
+height (Node t1 x t2)  =  max (height t1) (height t2) + 1
 
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values

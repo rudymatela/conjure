@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 13/26 rules
   [3,2,4,3,12,7,27,25,58] direct candidates, 0 duplicates
-  [3,6,15,34,61,111,174,344,529] pattern candidates, 0 duplicates
+  [3,6,17,44,89,204,402,904,1871] pattern candidates, 0 duplicates
 
 rules:
 dec 1 == 0
@@ -129,6 +129,10 @@ foo x  =  1 + x
 
 foo x  =  1 + 1
 
+foo x  =  dec (dec x)
+
+foo x  =  dec (dec 0)
+
 foo 0  =  0
 foo x  =  dec x
 
@@ -167,8 +171,14 @@ foo x  =  foo (dec x)
 
 foo 0  =  1
 foo x  =  foo (dec x)
+
+foo x  =  dec x + x
 
 foo x  =  dec 0 + x
+
+foo x  =  dec (dec (dec x))
+
+foo x  =  dec (dec (dec 0))
 
 foo x  =  x + dec x
 
@@ -186,6 +196,12 @@ foo x  =  1 + x
 foo 0  =  0
 foo x  =  1 + 1
 
+foo 0  =  0
+foo x  =  dec (dec x)
+
+foo 0  =  0
+foo x  =  dec (dec 0)
+
 foo 0  =  1
 foo x  =  x + x
 
@@ -198,6 +214,12 @@ foo x  =  1 + x
 foo 0  =  1
 foo x  =  1 + 1
 
+foo 0  =  1
+foo x  =  dec (dec x)
+
+foo 0  =  1
+foo x  =  dec (dec 0)
+
 foo 0  =  dec 0
 foo x  =  dec x
 
@@ -208,6 +230,15 @@ foo 0  =  1 + 1
 foo x  =  0
 
 foo 0  =  1 + 1
+foo x  =  1
+
+foo 0  =  dec (dec 0)
+foo x  =  x
+
+foo 0  =  dec (dec 0)
+foo x  =  0
+
+foo 0  =  dec (dec 0)
 foo x  =  1
 
 foo 1  =  0
@@ -272,6 +303,12 @@ foo 1  =  1
 foo x  =  0
 
 foo 0  =  0
+foo x  =  foo (dec (dec x))
+
+foo 0  =  1
+foo x  =  foo (dec (dec x))
+
+foo 0  =  0
 foo x  =  dec (foo (dec x))
 
 foo 0  =  1
@@ -285,6 +322,14 @@ foo x  =  foo (dec x)
 
 foo 1  =  1
 foo x  =  foo (dec x)
+
+foo x  =  dec (dec x) + x
+
+foo x  =  dec (dec 0) + x
+
+foo x  =  dec (dec (dec (dec x)))
+
+foo x  =  dec (dec (dec (dec 0)))
 
 foo x  =  x + (x + x)
 
@@ -293,6 +338,10 @@ foo x  =  x + (x + 1)
 foo x  =  x + (1 + x)
 
 foo x  =  x + (1 + 1)
+
+foo x  =  x + dec (dec x)
+
+foo x  =  x + dec (dec 0)
 
 foo x  =  1 + (x + x)
 
@@ -311,7 +360,16 @@ foo x  =  dec 0 + dec x
 foo x  =  dec 0 + dec 0
 
 foo 0  =  0
+foo x  =  dec x + x
+
+foo 0  =  0
 foo x  =  dec 0 + x
+
+foo 0  =  0
+foo x  =  dec (dec (dec x))
+
+foo 0  =  0
+foo x  =  dec (dec (dec 0))
 
 foo 0  =  0
 foo x  =  x + dec x
@@ -320,7 +378,16 @@ foo 0  =  0
 foo x  =  x + dec 0
 
 foo 0  =  1
+foo x  =  dec x + x
+
+foo 0  =  1
 foo x  =  dec 0 + x
+
+foo 0  =  1
+foo x  =  dec (dec (dec x))
+
+foo 0  =  1
+foo x  =  dec (dec (dec 0))
 
 foo 0  =  1
 foo x  =  x + dec x
@@ -340,11 +407,32 @@ foo x  =  1 + x
 foo 0  =  dec 0
 foo x  =  1 + 1
 
+foo 0  =  dec 0
+foo x  =  dec (dec x)
+
+foo 0  =  dec 0
+foo x  =  dec (dec 0)
+
 foo 0  =  1 + 1
 foo x  =  dec x
 
 foo 0  =  1 + 1
 foo x  =  dec 0
+
+foo 0  =  dec (dec 0)
+foo x  =  dec x
+
+foo 0  =  dec (dec 0)
+foo x  =  dec 0
+
+foo 0  =  dec (dec (dec 0))
+foo x  =  x
+
+foo 0  =  dec (dec (dec 0))
+foo x  =  0
+
+foo 0  =  dec (dec (dec 0))
+foo x  =  1
 
 foo 1  =  0
 foo x  =  x + x
@@ -358,6 +446,12 @@ foo x  =  1 + x
 foo 1  =  0
 foo x  =  1 + 1
 
+foo 1  =  0
+foo x  =  dec (dec x)
+
+foo 1  =  0
+foo x  =  dec (dec 0)
+
 foo 1  =  1
 foo x  =  x + x
 
@@ -370,6 +464,12 @@ foo x  =  1 + x
 foo 1  =  1
 foo x  =  1 + 1
 
+foo 1  =  1
+foo x  =  dec (dec x)
+
+foo 1  =  1
+foo x  =  dec (dec 0)
+
 foo 1  =  dec 0
 foo x  =  dec x
 
@@ -382,6 +482,15 @@ foo x  =  0
 foo 1  =  1 + 1
 foo x  =  1
 
+foo 1  =  dec (dec 0)
+foo x  =  x
+
+foo 1  =  dec (dec 0)
+foo x  =  0
+
+foo 1  =  dec (dec 0)
+foo x  =  1
+
 foo 0  =  0
 foo 1  =  0
 foo x  =  dec x
@@ -461,6 +570,27 @@ foo x  =  0
 foo 0  =  dec 0
 foo 1  =  1
 foo x  =  1
+
+foo 0  =  0
+foo x  =  foo (dec (dec (dec x)))
+
+foo 0  =  1
+foo x  =  foo (dec (dec (dec x)))
+
+foo 0  =  0
+foo x  =  dec (foo (dec (dec x)))
+
+foo 0  =  1
+foo x  =  dec (foo (dec (dec x)))
+
+foo 0  =  dec 0
+foo x  =  foo (dec (dec x))
+
+foo 1  =  0
+foo x  =  foo (dec (dec x))
+
+foo 1  =  1
+foo x  =  foo (dec (dec x))
 
 foo 0  =  0
 foo x  =  x + foo (dec x)
@@ -474,6 +604,9 @@ foo x  =  foo (dec x) + 1
 foo 0  =  0
 foo x  =  1 + foo (dec x)
 
+foo 0  =  0
+foo x  =  dec (dec (foo (dec x)))
+
 foo 0  =  1
 foo x  =  x + foo (dec x)
 
@@ -486,10 +619,16 @@ foo x  =  foo (dec x) + 1
 foo 0  =  1
 foo x  =  1 + foo (dec x)
 
+foo 0  =  1
+foo x  =  dec (dec (foo (dec x)))
+
 foo 0  =  dec 0
 foo x  =  dec (foo (dec x))
 
 foo 0  =  1 + 1
+foo x  =  foo (dec x)
+
+foo 0  =  dec (dec 0)
 foo x  =  foo (dec x)
 
 foo 1  =  0
@@ -516,12 +655,28 @@ foo x  =  foo (dec x)
 foo 0  =  1
 foo 1  =  1
 foo x  =  foo (dec x)
+
+foo x  =  dec (dec (dec x)) + x
+
+foo x  =  dec (dec (dec 0)) + x
+
+foo x  =  dec (dec (dec (dec (dec x))))
+
+foo x  =  dec (dec (dec (dec (dec 0))))
+
+foo x  =  x + (dec x + x)
 
 foo x  =  x + (dec 0 + x)
+
+foo x  =  x + dec (dec (dec x))
+
+foo x  =  x + dec (dec (dec 0))
 
 foo x  =  x + (x + dec x)
 
 foo x  =  x + (x + dec 0)
+
+foo x  =  1 + (dec x + x)
 
 foo x  =  1 + (dec 0 + x)
 
@@ -529,8 +684,50 @@ foo x  =  1 + (x + dec x)
 
 foo x  =  1 + (x + dec 0)
 
+foo x  =  dec x + (x + x)
+
+foo x  =  dec x + (x + 1)
+
+foo x  =  dec x + (1 + x)
+
+foo x  =  dec x + (1 + 1)
+
+foo x  =  dec x + dec (dec x)
+
+foo x  =  dec x + dec (dec 0)
+
 foo x  =  dec 0 + (x + x)
 
+foo x  =  dec 0 + (x + 1)
+
+foo x  =  dec 0 + (1 + x)
+
+foo x  =  dec 0 + (1 + 1)
+
+foo x  =  dec 0 + dec (dec x)
+
+foo x  =  dec 0 + dec (dec 0)
+
+foo x  =  dec (dec x) + dec x
+
+foo x  =  dec (dec x) + dec 0
+
+foo x  =  dec (dec 0) + dec x
+
+foo x  =  dec (dec 0) + dec 0
+
+foo 0  =  0
+foo x  =  dec (dec x) + x
+
+foo 0  =  0
+foo x  =  dec (dec 0) + x
+
+foo 0  =  0
+foo x  =  dec (dec (dec (dec x)))
+
+foo 0  =  0
+foo x  =  dec (dec (dec (dec 0)))
+
 foo 0  =  0
 foo x  =  x + (x + x)
 
@@ -542,6 +739,12 @@ foo x  =  x + (1 + x)
 
 foo 0  =  0
 foo x  =  x + (1 + 1)
+
+foo 0  =  0
+foo x  =  x + dec (dec x)
+
+foo 0  =  0
+foo x  =  x + dec (dec 0)
 
 foo 0  =  0
 foo x  =  1 + (x + x)
@@ -568,6 +771,18 @@ foo 0  =  0
 foo x  =  dec 0 + dec 0
 
 foo 0  =  1
+foo x  =  dec (dec x) + x
+
+foo 0  =  1
+foo x  =  dec (dec 0) + x
+
+foo 0  =  1
+foo x  =  dec (dec (dec (dec x)))
+
+foo 0  =  1
+foo x  =  dec (dec (dec (dec 0)))
+
+foo 0  =  1
 foo x  =  x + (x + x)
 
 foo 0  =  1
@@ -578,6 +793,12 @@ foo x  =  x + (1 + x)
 
 foo 0  =  1
 foo x  =  x + (1 + 1)
+
+foo 0  =  1
+foo x  =  x + dec (dec x)
+
+foo 0  =  1
+foo x  =  x + dec (dec 0)
 
 foo 0  =  1
 foo x  =  1 + (x + x)
@@ -604,7 +825,16 @@ foo 0  =  1
 foo x  =  dec 0 + dec 0
 
 foo 0  =  dec 0
+foo x  =  dec x + x
+
+foo 0  =  dec 0
 foo x  =  dec 0 + x
+
+foo 0  =  dec 0
+foo x  =  dec (dec (dec x))
+
+foo 0  =  dec 0
+foo x  =  dec (dec (dec 0))
 
 foo 0  =  dec 0
 foo x  =  x + dec x
@@ -620,6 +850,42 @@ foo x  =  x + 1
 
 foo 0  =  1 + 1
 foo x  =  1 + x
+
+foo 0  =  1 + 1
+foo x  =  dec (dec x)
+
+foo 0  =  1 + 1
+foo x  =  dec (dec 0)
+
+foo 0  =  dec (dec 0)
+foo x  =  x + x
+
+foo 0  =  dec (dec 0)
+foo x  =  x + 1
+
+foo 0  =  dec (dec 0)
+foo x  =  1 + x
+
+foo 0  =  dec (dec 0)
+foo x  =  1 + 1
+
+foo 0  =  dec (dec 0)
+foo x  =  dec (dec x)
+
+foo 0  =  dec (dec (dec 0))
+foo x  =  dec x
+
+foo 0  =  dec (dec (dec 0))
+foo x  =  dec 0
+
+foo 0  =  dec (dec (dec (dec 0)))
+foo x  =  x
+
+foo 0  =  dec (dec (dec (dec 0)))
+foo x  =  0
+
+foo 0  =  dec (dec (dec (dec 0)))
+foo x  =  1
 
 foo 0  =  1 + (1 + 1)
 foo x  =  x
@@ -640,7 +906,16 @@ foo 0  =  dec 0 + dec 0
 foo x  =  1
 
 foo 1  =  0
+foo x  =  dec x + x
+
+foo 1  =  0
 foo x  =  dec 0 + x
+
+foo 1  =  0
+foo x  =  dec (dec (dec x))
+
+foo 1  =  0
+foo x  =  dec (dec (dec 0))
 
 foo 1  =  0
 foo x  =  x + dec x
@@ -649,7 +924,16 @@ foo 1  =  0
 foo x  =  x + dec 0
 
 foo 1  =  1
+foo x  =  dec x + x
+
+foo 1  =  1
 foo x  =  dec 0 + x
+
+foo 1  =  1
+foo x  =  dec (dec (dec x))
+
+foo 1  =  1
+foo x  =  dec (dec (dec 0))
 
 foo 1  =  1
 foo x  =  x + dec x
@@ -669,12 +953,33 @@ foo x  =  1 + x
 foo 1  =  dec 0
 foo x  =  1 + 1
 
+foo 1  =  dec 0
+foo x  =  dec (dec x)
+
+foo 1  =  dec 0
+foo x  =  dec (dec 0)
+
 foo 1  =  1 + 1
 foo x  =  dec x
 
 foo 1  =  1 + 1
 foo x  =  dec 0
 
+foo 1  =  dec (dec 0)
+foo x  =  dec x
+
+foo 1  =  dec (dec 0)
+foo x  =  dec 0
+
+foo 1  =  dec (dec (dec 0))
+foo x  =  x
+
+foo 1  =  dec (dec (dec 0))
+foo x  =  0
+
+foo 1  =  dec (dec (dec 0))
+foo x  =  1
+
 foo 0  =  0
 foo 1  =  0
 foo x  =  x + x
@@ -692,6 +997,14 @@ foo 1  =  0
 foo x  =  1 + 1
 
 foo 0  =  0
+foo 1  =  0
+foo x  =  dec (dec x)
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  dec (dec 0)
+
+foo 0  =  0
 foo 1  =  1
 foo x  =  x + x
 
@@ -706,6 +1019,14 @@ foo x  =  1 + x
 foo 0  =  0
 foo 1  =  1
 foo x  =  1 + 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  dec (dec x)
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  dec (dec 0)
 
 foo 0  =  0
 foo 1  =  dec 0
@@ -727,6 +1048,18 @@ foo 0  =  0
 foo 1  =  1 + 1
 foo x  =  1
 
+foo 0  =  0
+foo 1  =  dec (dec 0)
+foo x  =  x
+
+foo 0  =  0
+foo 1  =  dec (dec 0)
+foo x  =  0
+
+foo 0  =  0
+foo 1  =  dec (dec 0)
+foo x  =  1
+
 foo 0  =  1
 foo 1  =  0
 foo x  =  x + x
@@ -744,6 +1077,14 @@ foo 1  =  0
 foo x  =  1 + 1
 
 foo 0  =  1
+foo 1  =  0
+foo x  =  dec (dec x)
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  dec (dec 0)
+
+foo 0  =  1
 foo 1  =  1
 foo x  =  x + x
 
@@ -760,6 +1101,14 @@ foo 1  =  1
 foo x  =  1 + 1
 
 foo 0  =  1
+foo 1  =  1
+foo x  =  dec (dec x)
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  dec (dec 0)
+
+foo 0  =  1
 foo 1  =  dec 0
 foo x  =  dec x
 
@@ -777,6 +1126,18 @@ foo x  =  0
 
 foo 0  =  1
 foo 1  =  1 + 1
+foo x  =  1
+
+foo 0  =  1
+foo 1  =  dec (dec 0)
+foo x  =  x
+
+foo 0  =  1
+foo 1  =  dec (dec 0)
+foo x  =  0
+
+foo 0  =  1
+foo 1  =  dec (dec 0)
 foo x  =  1
 
 foo 0  =  dec 0
@@ -828,6 +1189,30 @@ foo 1  =  1
 foo x  =  0
 
 foo 0  =  1 + 1
+foo 1  =  1
+foo x  =  1
+
+foo 0  =  dec (dec 0)
+foo 1  =  0
+foo x  =  x
+
+foo 0  =  dec (dec 0)
+foo 1  =  0
+foo x  =  0
+
+foo 0  =  dec (dec 0)
+foo 1  =  0
+foo x  =  1
+
+foo 0  =  dec (dec 0)
+foo 1  =  1
+foo x  =  x
+
+foo 0  =  dec (dec 0)
+foo 1  =  1
+foo x  =  0
+
+foo 0  =  dec (dec 0)
 foo 1  =  1
 foo x  =  1
 
@@ -835,7 +1220,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,11,39,88,245,596,1542,3881,9466] pattern candidates, 0 duplicates
+  [3,11,42,117,370,1063,3154,9116,26160] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1038,6 +1423,12 @@ x ? y  =  y + x
 
 x ? y  =  y + y
 
+x ? y  =  dec (dec x)
+
+x ? y  =  dec (dec y)
+
+x ? y  =  dec (dec 0)
+
 x ? 0  =  x
 x ? y  =  dec x
 
@@ -1164,14 +1555,24 @@ x ? y  =  x
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y
+
+x ? y  =  dec x + x
 
 x ? y  =  dec x + y
 
 x ? y  =  dec y + x
 
+x ? y  =  dec y + y
+
 x ? y  =  dec 0 + x
 
 x ? y  =  dec 0 + y
+
+x ? y  =  dec (dec (dec x))
+
+x ? y  =  dec (dec (dec y))
+
+x ? y  =  dec (dec (dec 0))
 
 x ? y  =  x + dec x
 
@@ -1197,6 +1598,15 @@ x ? y  =  y + x
 x ? 0  =  x
 x ? y  =  y + y
 
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -1208,6 +1618,15 @@ x ? y  =  y + x
 
 x ? 0  =  0
 x ? y  =  y + y
+
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+x ? 0  =  0
+x ? y  =  dec (dec 0)
 
 x ? 0  =  dec x
 x ? y  =  dec y
@@ -1230,6 +1649,24 @@ x ? y  =  y
 x ? 0  =  x + x
 x ? y  =  0
 
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+x ? 0  =  dec (dec 0)
+x ? y  =  0
+
 0 ? x  =  x
 x ? y  =  x + x
 
@@ -1242,6 +1679,15 @@ x ? y  =  y + x
 0 ? x  =  x
 x ? y  =  y + y
 
+0 ? x  =  x
+x ? y  =  dec (dec x)
+
+0 ? x  =  x
+x ? y  =  dec (dec y)
+
+0 ? x  =  x
+x ? y  =  dec (dec 0)
+
 0 ? x  =  0
 x ? y  =  x + x
 
@@ -1254,6 +1700,15 @@ x ? y  =  y + x
 0 ? x  =  0
 x ? y  =  y + y
 
+0 ? x  =  0
+x ? y  =  dec (dec x)
+
+0 ? x  =  0
+x ? y  =  dec (dec y)
+
+0 ? x  =  0
+x ? y  =  dec (dec 0)
+
 0 ? x  =  dec x
 x ? y  =  dec y
 
@@ -1275,6 +1730,24 @@ x ? y  =  y
 0 ? x  =  x + x
 x ? y  =  0
 
+0 ? x  =  dec (dec x)
+x ? y  =  x
+
+0 ? x  =  dec (dec x)
+x ? y  =  y
+
+0 ? x  =  dec (dec x)
+x ? y  =  0
+
+0 ? x  =  dec (dec 0)
+x ? y  =  x
+
+0 ? x  =  dec (dec 0)
+x ? y  =  y
+
+0 ? x  =  dec (dec 0)
+x ? y  =  0
+
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
@@ -1658,6 +2131,24 @@ x ? y  =  dec y ? y
 
 0 ? x  =  0
 x ? y  =  dec y ? 0
+
+x ? y  =  dec (dec x) + x
+
+x ? y  =  dec (dec x) + y
+
+x ? y  =  dec (dec y) + x
+
+x ? y  =  dec (dec y) + y
+
+x ? y  =  dec (dec 0) + x
+
+x ? y  =  dec (dec 0) + y
+
+x ? y  =  dec (dec (dec (dec x)))
+
+x ? y  =  dec (dec (dec (dec y)))
+
+x ? y  =  dec (dec (dec (dec 0)))
 
 x ? y  =  x + (x + x)
 
@@ -1667,6 +2158,12 @@ x ? y  =  x + (y + x)
 
 x ? y  =  x + (y + y)
 
+x ? y  =  x + dec (dec x)
+
+x ? y  =  x + dec (dec y)
+
+x ? y  =  x + dec (dec 0)
+
 x ? y  =  y + (x + x)
 
 x ? y  =  y + (x + y)
@@ -1674,6 +2171,12 @@ x ? y  =  y + (x + y)
 x ? y  =  y + (y + x)
 
 x ? y  =  y + (y + y)
+
+x ? y  =  y + dec (dec x)
+
+x ? y  =  y + dec (dec y)
+
+x ? y  =  y + dec (dec 0)
 
 x ? y  =  dec x + dec x
 
@@ -1694,16 +2197,31 @@ x ? y  =  dec 0 + dec y
 x ? y  =  dec 0 + dec 0
 
 x ? 0  =  x
+x ? y  =  dec x + x
+
+x ? 0  =  x
 x ? y  =  dec x + y
 
 x ? 0  =  x
 x ? y  =  dec y + x
 
 x ? 0  =  x
+x ? y  =  dec y + y
+
+x ? 0  =  x
 x ? y  =  dec 0 + x
 
 x ? 0  =  x
 x ? y  =  dec 0 + y
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec 0))
 
 x ? 0  =  x
 x ? y  =  x + dec x
@@ -1724,16 +2242,31 @@ x ? 0  =  x
 x ? y  =  y + dec 0
 
 x ? 0  =  0
+x ? y  =  dec x + x
+
+x ? 0  =  0
 x ? y  =  dec x + y
 
 x ? 0  =  0
 x ? y  =  dec y + x
 
 x ? 0  =  0
+x ? y  =  dec y + y
+
+x ? 0  =  0
 x ? y  =  dec 0 + x
 
 x ? 0  =  0
 x ? y  =  dec 0 + y
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec 0))
 
 x ? 0  =  0
 x ? y  =  x + dec x
@@ -1765,6 +2298,15 @@ x ? y  =  y + x
 x ? 0  =  dec x
 x ? y  =  y + y
 
+x ? 0  =  dec x
+x ? y  =  dec (dec x)
+
+x ? 0  =  dec x
+x ? y  =  dec (dec y)
+
+x ? 0  =  dec x
+x ? y  =  dec (dec 0)
+
 x ? 0  =  dec 0
 x ? y  =  x + x
 
@@ -1776,6 +2318,15 @@ x ? y  =  y + x
 
 x ? 0  =  dec 0
 x ? y  =  y + y
+
+x ? 0  =  dec 0
+x ? y  =  dec (dec x)
+
+x ? 0  =  dec 0
+x ? y  =  dec (dec y)
+
+x ? 0  =  dec 0
+x ? y  =  dec (dec 0)
 
 x ? 0  =  x + x
 x ? y  =  dec x
@@ -1786,6 +2337,33 @@ x ? y  =  dec y
 x ? 0  =  x + x
 x ? y  =  dec 0
 
+x ? 0  =  dec (dec x)
+x ? y  =  dec x
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec y
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec 0
+
+x ? 0  =  dec (dec 0)
+x ? y  =  dec x
+
+x ? 0  =  dec (dec 0)
+x ? y  =  dec y
+
+x ? 0  =  dec (dec 0)
+x ? y  =  dec 0
+
+x ? 0  =  dec x + x
+x ? y  =  x
+
+x ? 0  =  dec x + x
+x ? y  =  y
+
+x ? 0  =  dec x + x
+x ? y  =  0
+
 x ? 0  =  dec 0 + x
 x ? y  =  x
 
@@ -1793,6 +2371,24 @@ x ? 0  =  dec 0 + x
 x ? y  =  y
 
 x ? 0  =  dec 0 + x
+x ? y  =  0
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  x
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  y
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  0
+
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  x
+
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  y
+
+x ? 0  =  dec (dec (dec 0))
 x ? y  =  0
 
 x ? 0  =  x + dec x
@@ -1812,6 +2408,9 @@ x ? y  =  y
 
 x ? 0  =  x + dec 0
 x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  dec x + x
 
 0 ? x  =  x
 x ? y  =  dec x + y
@@ -1820,10 +2419,22 @@ x ? y  =  dec x + y
 x ? y  =  dec y + x
 
 0 ? x  =  x
+x ? y  =  dec y + y
+
+0 ? x  =  x
 x ? y  =  dec 0 + x
 
 0 ? x  =  x
 x ? y  =  dec 0 + y
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec 0))
 
 0 ? x  =  x
 x ? y  =  x + dec x
@@ -1844,16 +2455,31 @@ x ? y  =  y + dec y
 x ? y  =  y + dec 0
 
 0 ? x  =  0
+x ? y  =  dec x + x
+
+0 ? x  =  0
 x ? y  =  dec x + y
 
 0 ? x  =  0
 x ? y  =  dec y + x
 
 0 ? x  =  0
+x ? y  =  dec y + y
+
+0 ? x  =  0
 x ? y  =  dec 0 + x
 
 0 ? x  =  0
 x ? y  =  dec 0 + y
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec 0))
 
 0 ? x  =  0
 x ? y  =  x + dec x
@@ -1885,6 +2511,15 @@ x ? y  =  y + x
 0 ? x  =  dec x
 x ? y  =  y + y
 
+0 ? x  =  dec x
+x ? y  =  dec (dec x)
+
+0 ? x  =  dec x
+x ? y  =  dec (dec y)
+
+0 ? x  =  dec x
+x ? y  =  dec (dec 0)
+
 0 ? x  =  dec 0
 x ? y  =  x + x
 
@@ -1896,6 +2531,15 @@ x ? y  =  y + x
 
 0 ? x  =  dec 0
 x ? y  =  y + y
+
+0 ? x  =  dec 0
+x ? y  =  dec (dec x)
+
+0 ? x  =  dec 0
+x ? y  =  dec (dec y)
+
+0 ? x  =  dec 0
+x ? y  =  dec (dec 0)
 
 0 ? x  =  x + x
 x ? y  =  dec x
@@ -1906,6 +2550,33 @@ x ? y  =  dec y
 0 ? x  =  x + x
 x ? y  =  dec 0
 
+0 ? x  =  dec (dec x)
+x ? y  =  dec x
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec y
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec 0
+
+0 ? x  =  dec (dec 0)
+x ? y  =  dec x
+
+0 ? x  =  dec (dec 0)
+x ? y  =  dec y
+
+0 ? x  =  dec (dec 0)
+x ? y  =  dec 0
+
+0 ? x  =  dec x + x
+x ? y  =  x
+
+0 ? x  =  dec x + x
+x ? y  =  y
+
+0 ? x  =  dec x + x
+x ? y  =  0
+
 0 ? x  =  dec 0 + x
 x ? y  =  x
 
@@ -1913,6 +2584,24 @@ x ? y  =  x
 x ? y  =  y
 
 0 ? x  =  dec 0 + x
+x ? y  =  0
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  x
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  y
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  0
+
+0 ? x  =  dec (dec (dec 0))
+x ? y  =  x
+
+0 ? x  =  dec (dec (dec 0))
+x ? y  =  y
+
+0 ? x  =  dec (dec (dec 0))
 x ? y  =  0
 
 0 ? x  =  x + dec x
@@ -1955,6 +2644,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -1975,6 +2679,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec x
 
@@ -2016,6 +2735,36 @@ x ? y  =  y
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
 x ? y  =  0
 
 0 ? 0  =  0
@@ -2040,6 +2789,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -2060,6 +2824,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec x
 
@@ -2104,6 +2883,36 @@ x ? 0  =  x + x
 x ? y  =  0
 
 0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  0
+
+0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec x
@@ -2253,6 +3062,66 @@ x ? y  =  y
 x ? 0  =  0
 x ? y  =  0
 
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  0
+
 0 ? 0  =  dec 0
 0 ? x  =  x
 x ? 0  =  x
@@ -2432,6 +3301,84 @@ x ? y  =  y
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  0
+
+x ? 0  =  x
+x ? y  =  x ? dec (dec x)
+
+x ? 0  =  x
+x ? y  =  x ? dec (dec y)
+
+x ? 0  =  x
+x ? y  =  y ? dec (dec x)
+
+x ? 0  =  x
+x ? y  =  y ? dec (dec y)
+
+x ? 0  =  x
+x ? y  =  0 ? dec (dec x)
+
+x ? 0  =  x
+x ? y  =  0 ? dec (dec y)
 
 x ? 0  =  x
 x ? y  =  dec x ? dec x
@@ -2457,6 +3404,42 @@ x ? y  =  dec 0 ? dec x
 x ? 0  =  x
 x ? y  =  dec 0 ? dec y
 
+x ? 0  =  x
+x ? y  =  dec (dec x) ? x
+
+x ? 0  =  x
+x ? y  =  dec (dec x) ? y
+
+x ? 0  =  x
+x ? y  =  dec (dec x) ? 0
+
+x ? 0  =  x
+x ? y  =  dec (dec y) ? x
+
+x ? 0  =  x
+x ? y  =  dec (dec y) ? y
+
+x ? 0  =  x
+x ? y  =  dec (dec y) ? 0
+
+x ? 0  =  0
+x ? y  =  x ? dec (dec x)
+
+x ? 0  =  0
+x ? y  =  x ? dec (dec y)
+
+x ? 0  =  0
+x ? y  =  y ? dec (dec x)
+
+x ? 0  =  0
+x ? y  =  y ? dec (dec y)
+
+x ? 0  =  0
+x ? y  =  0 ? dec (dec x)
+
+x ? 0  =  0
+x ? y  =  0 ? dec (dec y)
+
 x ? 0  =  0
 x ? y  =  dec x ? dec x
 
@@ -2481,6 +3464,42 @@ x ? y  =  dec 0 ? dec x
 x ? 0  =  0
 x ? y  =  dec 0 ? dec y
 
+x ? 0  =  0
+x ? y  =  dec (dec x) ? x
+
+x ? 0  =  0
+x ? y  =  dec (dec x) ? y
+
+x ? 0  =  0
+x ? y  =  dec (dec x) ? 0
+
+x ? 0  =  0
+x ? y  =  dec (dec y) ? x
+
+x ? 0  =  0
+x ? y  =  dec (dec y) ? y
+
+x ? 0  =  0
+x ? y  =  dec (dec y) ? 0
+
+0 ? x  =  x
+x ? y  =  x ? dec (dec x)
+
+0 ? x  =  x
+x ? y  =  x ? dec (dec y)
+
+0 ? x  =  x
+x ? y  =  y ? dec (dec x)
+
+0 ? x  =  x
+x ? y  =  y ? dec (dec y)
+
+0 ? x  =  x
+x ? y  =  0 ? dec (dec x)
+
+0 ? x  =  x
+x ? y  =  0 ? dec (dec y)
+
 0 ? x  =  x
 x ? y  =  dec x ? dec x
 
@@ -2505,6 +3524,42 @@ x ? y  =  dec 0 ? dec x
 0 ? x  =  x
 x ? y  =  dec 0 ? dec y
 
+0 ? x  =  x
+x ? y  =  dec (dec x) ? x
+
+0 ? x  =  x
+x ? y  =  dec (dec x) ? y
+
+0 ? x  =  x
+x ? y  =  dec (dec x) ? 0
+
+0 ? x  =  x
+x ? y  =  dec (dec y) ? x
+
+0 ? x  =  x
+x ? y  =  dec (dec y) ? y
+
+0 ? x  =  x
+x ? y  =  dec (dec y) ? 0
+
+0 ? x  =  0
+x ? y  =  x ? dec (dec x)
+
+0 ? x  =  0
+x ? y  =  x ? dec (dec y)
+
+0 ? x  =  0
+x ? y  =  y ? dec (dec x)
+
+0 ? x  =  0
+x ? y  =  y ? dec (dec y)
+
+0 ? x  =  0
+x ? y  =  0 ? dec (dec x)
+
+0 ? x  =  0
+x ? y  =  0 ? dec (dec y)
+
 0 ? x  =  0
 x ? y  =  dec x ? dec x
 
@@ -2528,6 +3583,24 @@ x ? y  =  dec 0 ? dec x
 
 0 ? x  =  0
 x ? y  =  dec 0 ? dec y
+
+0 ? x  =  0
+x ? y  =  dec (dec x) ? x
+
+0 ? x  =  0
+x ? y  =  dec (dec x) ? y
+
+0 ? x  =  0
+x ? y  =  dec (dec x) ? 0
+
+0 ? x  =  0
+x ? y  =  dec (dec y) ? x
+
+0 ? x  =  0
+x ? y  =  dec (dec y) ? y
+
+0 ? x  =  0
+x ? y  =  dec (dec y) ? 0
 
 x ? 0  =  x
 x ? y  =  dec (x ? dec x)
@@ -3176,14 +4249,42 @@ x ? y  =  dec y ? y
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec y ? 0
+
+x ? y  =  dec (dec (dec x)) + x
+
+x ? y  =  dec (dec (dec x)) + y
+
+x ? y  =  dec (dec (dec y)) + x
+
+x ? y  =  dec (dec (dec y)) + y
+
+x ? y  =  dec (dec (dec 0)) + x
+
+x ? y  =  dec (dec (dec 0)) + y
+
+x ? y  =  dec (dec (dec (dec (dec x))))
+
+x ? y  =  dec (dec (dec (dec (dec y))))
+
+x ? y  =  dec (dec (dec (dec (dec 0))))
+
+x ? y  =  x + (dec x + x)
 
 x ? y  =  x + (dec x + y)
 
 x ? y  =  x + (dec y + x)
 
+x ? y  =  x + (dec y + y)
+
 x ? y  =  x + (dec 0 + x)
 
 x ? y  =  x + (dec 0 + y)
+
+x ? y  =  x + dec (dec (dec x))
+
+x ? y  =  x + dec (dec (dec y))
+
+x ? y  =  x + dec (dec (dec 0))
 
 x ? y  =  x + (x + dec x)
 
@@ -3197,13 +4298,23 @@ x ? y  =  x + (y + dec y)
 
 x ? y  =  x + (y + dec 0)
 
+x ? y  =  y + (dec x + x)
+
 x ? y  =  y + (dec x + y)
 
 x ? y  =  y + (dec y + x)
 
+x ? y  =  y + (dec y + y)
+
 x ? y  =  y + (dec 0 + x)
 
 x ? y  =  y + (dec 0 + y)
+
+x ? y  =  y + dec (dec (dec x))
+
+x ? y  =  y + dec (dec (dec y))
+
+x ? y  =  y + dec (dec (dec 0))
 
 x ? y  =  y + (x + dec x)
 
@@ -3217,9 +4328,33 @@ x ? y  =  y + (y + dec y)
 
 x ? y  =  y + (y + dec 0)
 
+x ? y  =  dec x + (x + x)
+
+x ? y  =  dec x + (x + y)
+
+x ? y  =  dec x + (y + x)
+
 x ? y  =  dec x + (y + y)
 
+x ? y  =  dec x + dec (dec x)
+
+x ? y  =  dec x + dec (dec y)
+
+x ? y  =  dec x + dec (dec 0)
+
 x ? y  =  dec y + (x + x)
+
+x ? y  =  dec y + (x + y)
+
+x ? y  =  dec y + (y + x)
+
+x ? y  =  dec y + (y + y)
+
+x ? y  =  dec y + dec (dec x)
+
+x ? y  =  dec y + dec (dec y)
+
+x ? y  =  dec y + dec (dec 0)
 
 x ? y  =  dec 0 + (x + x)
 
@@ -3229,6 +4364,57 @@ x ? y  =  dec 0 + (y + x)
 
 x ? y  =  dec 0 + (y + y)
 
+x ? y  =  dec 0 + dec (dec x)
+
+x ? y  =  dec 0 + dec (dec y)
+
+x ? y  =  dec 0 + dec (dec 0)
+
+x ? y  =  dec (dec x) + dec x
+
+x ? y  =  dec (dec x) + dec y
+
+x ? y  =  dec (dec x) + dec 0
+
+x ? y  =  dec (dec y) + dec x
+
+x ? y  =  dec (dec y) + dec y
+
+x ? y  =  dec (dec y) + dec 0
+
+x ? y  =  dec (dec 0) + dec x
+
+x ? y  =  dec (dec 0) + dec y
+
+x ? y  =  dec (dec 0) + dec 0
+
+x ? 0  =  x
+x ? y  =  dec (dec x) + x
+
+x ? 0  =  x
+x ? y  =  dec (dec x) + y
+
+x ? 0  =  x
+x ? y  =  dec (dec y) + x
+
+x ? 0  =  x
+x ? y  =  dec (dec y) + y
+
+x ? 0  =  x
+x ? y  =  dec (dec 0) + x
+
+x ? 0  =  x
+x ? y  =  dec (dec 0) + y
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec (dec x)))
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec (dec y)))
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec (dec 0)))
+
 x ? 0  =  x
 x ? y  =  x + (x + x)
 
@@ -3242,6 +4428,15 @@ x ? 0  =  x
 x ? y  =  x + (y + y)
 
 x ? 0  =  x
+x ? y  =  x + dec (dec x)
+
+x ? 0  =  x
+x ? y  =  x + dec (dec y)
+
+x ? 0  =  x
+x ? y  =  x + dec (dec 0)
+
+x ? 0  =  x
 x ? y  =  y + (x + x)
 
 x ? 0  =  x
@@ -3252,6 +4447,15 @@ x ? y  =  y + (y + x)
 
 x ? 0  =  x
 x ? y  =  y + (y + y)
+
+x ? 0  =  x
+x ? y  =  y + dec (dec x)
+
+x ? 0  =  x
+x ? y  =  y + dec (dec y)
+
+x ? 0  =  x
+x ? y  =  y + dec (dec 0)
 
 x ? 0  =  x
 x ? y  =  dec x + dec x
@@ -3281,6 +4485,33 @@ x ? 0  =  x
 x ? y  =  dec 0 + dec 0
 
 x ? 0  =  0
+x ? y  =  dec (dec x) + x
+
+x ? 0  =  0
+x ? y  =  dec (dec x) + y
+
+x ? 0  =  0
+x ? y  =  dec (dec y) + x
+
+x ? 0  =  0
+x ? y  =  dec (dec y) + y
+
+x ? 0  =  0
+x ? y  =  dec (dec 0) + x
+
+x ? 0  =  0
+x ? y  =  dec (dec 0) + y
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec (dec x)))
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec (dec y)))
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec (dec 0)))
+
+x ? 0  =  0
 x ? y  =  x + (x + x)
 
 x ? 0  =  0
@@ -3293,6 +4524,15 @@ x ? 0  =  0
 x ? y  =  x + (y + y)
 
 x ? 0  =  0
+x ? y  =  x + dec (dec x)
+
+x ? 0  =  0
+x ? y  =  x + dec (dec y)
+
+x ? 0  =  0
+x ? y  =  x + dec (dec 0)
+
+x ? 0  =  0
 x ? y  =  y + (x + x)
 
 x ? 0  =  0
@@ -3303,6 +4543,15 @@ x ? y  =  y + (y + x)
 
 x ? 0  =  0
 x ? y  =  y + (y + y)
+
+x ? 0  =  0
+x ? y  =  y + dec (dec x)
+
+x ? 0  =  0
+x ? y  =  y + dec (dec y)
+
+x ? 0  =  0
+x ? y  =  y + dec (dec 0)
 
 x ? 0  =  0
 x ? y  =  dec x + dec x
@@ -3330,6 +4579,9 @@ x ? y  =  dec 0 + dec y
 
 x ? 0  =  0
 x ? y  =  dec 0 + dec 0
+
+x ? 0  =  dec x
+x ? y  =  dec x + x
 
 x ? 0  =  dec x
 x ? y  =  dec x + y
@@ -3338,10 +4590,22 @@ x ? 0  =  dec x
 x ? y  =  dec y + x
 
 x ? 0  =  dec x
+x ? y  =  dec y + y
+
+x ? 0  =  dec x
 x ? y  =  dec 0 + x
 
 x ? 0  =  dec x
 x ? y  =  dec 0 + y
+
+x ? 0  =  dec x
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  dec x
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  dec x
+x ? y  =  dec (dec (dec 0))
 
 x ? 0  =  dec x
 x ? y  =  x + dec x
@@ -3362,16 +4626,31 @@ x ? 0  =  dec x
 x ? y  =  y + dec 0
 
 x ? 0  =  dec 0
+x ? y  =  dec x + x
+
+x ? 0  =  dec 0
 x ? y  =  dec x + y
 
 x ? 0  =  dec 0
 x ? y  =  dec y + x
 
 x ? 0  =  dec 0
+x ? y  =  dec y + y
+
+x ? 0  =  dec 0
 x ? y  =  dec 0 + x
 
 x ? 0  =  dec 0
 x ? y  =  dec 0 + y
+
+x ? 0  =  dec 0
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  dec 0
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  dec 0
+x ? y  =  dec (dec (dec 0))
 
 x ? 0  =  dec 0
 x ? y  =  x + dec x
@@ -3400,6 +4679,60 @@ x ? y  =  y + x
 x ? 0  =  x + x
 x ? y  =  y + y
 
+x ? 0  =  x + x
+x ? y  =  dec (dec x)
+
+x ? 0  =  x + x
+x ? y  =  dec (dec y)
+
+x ? 0  =  x + x
+x ? y  =  dec (dec 0)
+
+x ? 0  =  dec (dec x)
+x ? y  =  x + x
+
+x ? 0  =  dec (dec x)
+x ? y  =  x + y
+
+x ? 0  =  dec (dec x)
+x ? y  =  y + x
+
+x ? 0  =  dec (dec x)
+x ? y  =  y + y
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec (dec y)
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec (dec 0)
+
+x ? 0  =  dec (dec 0)
+x ? y  =  x + x
+
+x ? 0  =  dec (dec 0)
+x ? y  =  x + y
+
+x ? 0  =  dec (dec 0)
+x ? y  =  y + x
+
+x ? 0  =  dec (dec 0)
+x ? y  =  y + y
+
+x ? 0  =  dec (dec 0)
+x ? y  =  dec (dec x)
+
+x ? 0  =  dec (dec 0)
+x ? y  =  dec (dec y)
+
+x ? 0  =  dec x + x
+x ? y  =  dec x
+
+x ? 0  =  dec x + x
+x ? y  =  dec y
+
+x ? 0  =  dec x + x
+x ? y  =  dec 0
+
 x ? 0  =  dec 0 + x
 x ? y  =  dec x
 
@@ -3407,6 +4740,24 @@ x ? 0  =  dec 0 + x
 x ? y  =  dec y
 
 x ? 0  =  dec 0 + x
+x ? y  =  dec 0
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  dec x
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  dec y
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  dec 0
+
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  dec x
+
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  dec y
+
+x ? 0  =  dec (dec (dec 0))
 x ? y  =  dec 0
 
 x ? 0  =  x + dec x
@@ -3426,6 +4777,42 @@ x ? y  =  dec y
 
 x ? 0  =  x + dec 0
 x ? y  =  dec 0
+
+x ? 0  =  dec (dec x) + x
+x ? y  =  x
+
+x ? 0  =  dec (dec x) + x
+x ? y  =  y
+
+x ? 0  =  dec (dec x) + x
+x ? y  =  0
+
+x ? 0  =  dec (dec 0) + x
+x ? y  =  x
+
+x ? 0  =  dec (dec 0) + x
+x ? y  =  y
+
+x ? 0  =  dec (dec 0) + x
+x ? y  =  0
+
+x ? 0  =  dec (dec (dec (dec x)))
+x ? y  =  x
+
+x ? 0  =  dec (dec (dec (dec x)))
+x ? y  =  y
+
+x ? 0  =  dec (dec (dec (dec x)))
+x ? y  =  0
+
+x ? 0  =  dec (dec (dec (dec 0)))
+x ? y  =  x
+
+x ? 0  =  dec (dec (dec (dec 0)))
+x ? y  =  y
+
+x ? 0  =  dec (dec (dec (dec 0)))
+x ? y  =  0
 
 x ? 0  =  x + (x + x)
 x ? y  =  x
@@ -3434,6 +4821,24 @@ x ? 0  =  x + (x + x)
 x ? y  =  y
 
 x ? 0  =  x + (x + x)
+x ? y  =  0
+
+x ? 0  =  x + dec (dec x)
+x ? y  =  x
+
+x ? 0  =  x + dec (dec x)
+x ? y  =  y
+
+x ? 0  =  x + dec (dec x)
+x ? y  =  0
+
+x ? 0  =  x + dec (dec 0)
+x ? y  =  x
+
+x ? 0  =  x + dec (dec 0)
+x ? y  =  y
+
+x ? 0  =  x + dec (dec 0)
 x ? y  =  0
 
 x ? 0  =  dec x + dec x
@@ -3471,6 +4876,33 @@ x ? y  =  y
 
 x ? 0  =  dec 0 + dec 0
 x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  dec (dec x) + x
+
+0 ? x  =  x
+x ? y  =  dec (dec x) + y
+
+0 ? x  =  x
+x ? y  =  dec (dec y) + x
+
+0 ? x  =  x
+x ? y  =  dec (dec y) + y
+
+0 ? x  =  x
+x ? y  =  dec (dec 0) + x
+
+0 ? x  =  x
+x ? y  =  dec (dec 0) + y
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec (dec x)))
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec (dec y)))
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec (dec 0)))
 
 0 ? x  =  x
 x ? y  =  x + (x + x)
@@ -3485,6 +4917,15 @@ x ? y  =  x + (y + x)
 x ? y  =  x + (y + y)
 
 0 ? x  =  x
+x ? y  =  x + dec (dec x)
+
+0 ? x  =  x
+x ? y  =  x + dec (dec y)
+
+0 ? x  =  x
+x ? y  =  x + dec (dec 0)
+
+0 ? x  =  x
 x ? y  =  y + (x + x)
 
 0 ? x  =  x
@@ -3495,6 +4936,15 @@ x ? y  =  y + (y + x)
 
 0 ? x  =  x
 x ? y  =  y + (y + y)
+
+0 ? x  =  x
+x ? y  =  y + dec (dec x)
+
+0 ? x  =  x
+x ? y  =  y + dec (dec y)
+
+0 ? x  =  x
+x ? y  =  y + dec (dec 0)
 
 0 ? x  =  x
 x ? y  =  dec x + dec x
@@ -3524,6 +4974,33 @@ x ? y  =  dec 0 + dec y
 x ? y  =  dec 0 + dec 0
 
 0 ? x  =  0
+x ? y  =  dec (dec x) + x
+
+0 ? x  =  0
+x ? y  =  dec (dec x) + y
+
+0 ? x  =  0
+x ? y  =  dec (dec y) + x
+
+0 ? x  =  0
+x ? y  =  dec (dec y) + y
+
+0 ? x  =  0
+x ? y  =  dec (dec 0) + x
+
+0 ? x  =  0
+x ? y  =  dec (dec 0) + y
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec (dec x)))
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec (dec y)))
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec (dec 0)))
+
+0 ? x  =  0
 x ? y  =  x + (x + x)
 
 0 ? x  =  0
@@ -3536,6 +5013,15 @@ x ? y  =  x + (y + x)
 x ? y  =  x + (y + y)
 
 0 ? x  =  0
+x ? y  =  x + dec (dec x)
+
+0 ? x  =  0
+x ? y  =  x + dec (dec y)
+
+0 ? x  =  0
+x ? y  =  x + dec (dec 0)
+
+0 ? x  =  0
 x ? y  =  y + (x + x)
 
 0 ? x  =  0
@@ -3546,6 +5032,15 @@ x ? y  =  y + (y + x)
 
 0 ? x  =  0
 x ? y  =  y + (y + y)
+
+0 ? x  =  0
+x ? y  =  y + dec (dec x)
+
+0 ? x  =  0
+x ? y  =  y + dec (dec y)
+
+0 ? x  =  0
+x ? y  =  y + dec (dec 0)
 
 0 ? x  =  0
 x ? y  =  dec x + dec x
@@ -3573,6 +5068,9 @@ x ? y  =  dec 0 + dec y
 
 0 ? x  =  0
 x ? y  =  dec 0 + dec 0
+
+0 ? x  =  dec x
+x ? y  =  dec x + x
 
 0 ? x  =  dec x
 x ? y  =  dec x + y
@@ -3581,10 +5079,22 @@ x ? y  =  dec x + y
 x ? y  =  dec y + x
 
 0 ? x  =  dec x
+x ? y  =  dec y + y
+
+0 ? x  =  dec x
 x ? y  =  dec 0 + x
 
 0 ? x  =  dec x
 x ? y  =  dec 0 + y
+
+0 ? x  =  dec x
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  dec x
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  dec x
+x ? y  =  dec (dec (dec 0))
 
 0 ? x  =  dec x
 x ? y  =  x + dec x
@@ -3605,16 +5115,31 @@ x ? y  =  y + dec y
 x ? y  =  y + dec 0
 
 0 ? x  =  dec 0
+x ? y  =  dec x + x
+
+0 ? x  =  dec 0
 x ? y  =  dec x + y
 
 0 ? x  =  dec 0
 x ? y  =  dec y + x
 
 0 ? x  =  dec 0
+x ? y  =  dec y + y
+
+0 ? x  =  dec 0
 x ? y  =  dec 0 + x
 
 0 ? x  =  dec 0
 x ? y  =  dec 0 + y
+
+0 ? x  =  dec 0
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  dec 0
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  dec 0
+x ? y  =  dec (dec (dec 0))
 
 0 ? x  =  dec 0
 x ? y  =  x + dec x
@@ -3643,6 +5168,60 @@ x ? y  =  y + x
 0 ? x  =  x + x
 x ? y  =  y + y
 
+0 ? x  =  x + x
+x ? y  =  dec (dec x)
+
+0 ? x  =  x + x
+x ? y  =  dec (dec y)
+
+0 ? x  =  x + x
+x ? y  =  dec (dec 0)
+
+0 ? x  =  dec (dec x)
+x ? y  =  x + x
+
+0 ? x  =  dec (dec x)
+x ? y  =  x + y
+
+0 ? x  =  dec (dec x)
+x ? y  =  y + x
+
+0 ? x  =  dec (dec x)
+x ? y  =  y + y
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec (dec y)
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec (dec 0)
+
+0 ? x  =  dec (dec 0)
+x ? y  =  x + x
+
+0 ? x  =  dec (dec 0)
+x ? y  =  x + y
+
+0 ? x  =  dec (dec 0)
+x ? y  =  y + x
+
+0 ? x  =  dec (dec 0)
+x ? y  =  y + y
+
+0 ? x  =  dec (dec 0)
+x ? y  =  dec (dec x)
+
+0 ? x  =  dec (dec 0)
+x ? y  =  dec (dec y)
+
+0 ? x  =  dec x + x
+x ? y  =  dec x
+
+0 ? x  =  dec x + x
+x ? y  =  dec y
+
+0 ? x  =  dec x + x
+x ? y  =  dec 0
+
 0 ? x  =  dec 0 + x
 x ? y  =  dec x
 
@@ -3650,6 +5229,24 @@ x ? y  =  dec x
 x ? y  =  dec y
 
 0 ? x  =  dec 0 + x
+x ? y  =  dec 0
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  dec x
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  dec y
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  dec 0
+
+0 ? x  =  dec (dec (dec 0))
+x ? y  =  dec x
+
+0 ? x  =  dec (dec (dec 0))
+x ? y  =  dec y
+
+0 ? x  =  dec (dec (dec 0))
 x ? y  =  dec 0
 
 0 ? x  =  x + dec x
@@ -3669,6 +5266,42 @@ x ? y  =  dec y
 
 0 ? x  =  x + dec 0
 x ? y  =  dec 0
+
+0 ? x  =  dec (dec x) + x
+x ? y  =  x
+
+0 ? x  =  dec (dec x) + x
+x ? y  =  y
+
+0 ? x  =  dec (dec x) + x
+x ? y  =  0
+
+0 ? x  =  dec (dec 0) + x
+x ? y  =  x
+
+0 ? x  =  dec (dec 0) + x
+x ? y  =  y
+
+0 ? x  =  dec (dec 0) + x
+x ? y  =  0
+
+0 ? x  =  dec (dec (dec (dec x)))
+x ? y  =  x
+
+0 ? x  =  dec (dec (dec (dec x)))
+x ? y  =  y
+
+0 ? x  =  dec (dec (dec (dec x)))
+x ? y  =  0
+
+0 ? x  =  dec (dec (dec (dec 0)))
+x ? y  =  x
+
+0 ? x  =  dec (dec (dec (dec 0)))
+x ? y  =  y
+
+0 ? x  =  dec (dec (dec (dec 0)))
+x ? y  =  0
 
 0 ? x  =  x + (x + x)
 x ? y  =  x
@@ -3677,6 +5310,24 @@ x ? y  =  x
 x ? y  =  y
 
 0 ? x  =  x + (x + x)
+x ? y  =  0
+
+0 ? x  =  x + dec (dec x)
+x ? y  =  x
+
+0 ? x  =  x + dec (dec x)
+x ? y  =  y
+
+0 ? x  =  x + dec (dec x)
+x ? y  =  0
+
+0 ? x  =  x + dec (dec 0)
+x ? y  =  x
+
+0 ? x  =  x + dec (dec 0)
+x ? y  =  y
+
+0 ? x  =  x + dec (dec 0)
 x ? y  =  0
 
 0 ? x  =  dec x + dec x
@@ -3718,6 +5369,11 @@ x ? y  =  0
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
+x ? y  =  dec x + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
 x ? y  =  dec x + y
 
 0 ? 0  =  0
@@ -3728,12 +5384,32 @@ x ? y  =  dec y + x
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
+x ? y  =  dec y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
 x ? y  =  dec 0 + x
 
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec (dec x))
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec (dec y))
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec (dec 0))
 
 0 ? 0  =  0
 0 ? x  =  x
@@ -3768,6 +5444,11 @@ x ? y  =  y + dec 0
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
+x ? y  =  dec x + x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
 x ? y  =  dec x + y
 
 0 ? 0  =  0
@@ -3778,12 +5459,32 @@ x ? y  =  dec y + x
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
+x ? y  =  dec y + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
 x ? y  =  dec 0 + x
 
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec (dec x))
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec (dec y))
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec (dec 0))
 
 0 ? 0  =  0
 0 ? x  =  x
@@ -3837,6 +5538,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  x + x
 
@@ -3857,6 +5573,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  dec x
 
@@ -3872,6 +5603,51 @@ x ? y  =  dec 0
 
 0 ? 0  =  0
 0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
 x ? 0  =  dec 0 + x
 x ? y  =  x
 
@@ -3883,6 +5659,36 @@ x ? y  =  y
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0 + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec (dec x))
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec (dec x))
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec (dec x))
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? 0  =  dec (dec (dec 0))
 x ? y  =  0
 
 0 ? 0  =  0
@@ -3914,6 +5720,11 @@ x ? y  =  y
 0 ? x  =  x
 x ? 0  =  x + dec 0
 x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x + x
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -3928,12 +5739,32 @@ x ? y  =  dec y + x
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
+x ? y  =  dec y + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
 x ? y  =  dec 0 + x
 
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec (dec x))
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec (dec y))
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec (dec 0))
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -3968,6 +5799,11 @@ x ? y  =  y + dec 0
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
+x ? y  =  dec x + x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
 x ? y  =  dec x + y
 
 0 ? 0  =  0
@@ -3978,12 +5814,32 @@ x ? y  =  dec y + x
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
+x ? y  =  dec y + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
 x ? y  =  dec 0 + x
 
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec 0 + y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec (dec x))
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec (dec y))
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec (dec 0))
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -4037,6 +5893,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  x + x
 
@@ -4057,6 +5928,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  0
 x ? 0  =  x + x
 x ? y  =  dec x
 
@@ -4072,6 +5958,51 @@ x ? y  =  dec 0
 
 0 ? 0  =  0
 0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x + x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x + x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
 x ? 0  =  dec 0 + x
 x ? y  =  x
 
@@ -4083,6 +6014,36 @@ x ? y  =  y
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0 + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec (dec x))
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec (dec x))
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec (dec x))
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec (dec 0))
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? 0  =  dec (dec (dec 0))
 x ? y  =  0
 
 0 ? 0  =  0
@@ -4137,6 +6098,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -4157,6 +6133,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  dec x
 x ? 0  =  dec x
 x ? y  =  dec x
 
@@ -4198,6 +6189,36 @@ x ? y  =  y
 0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? 0  =  dec (dec 0)
 x ? y  =  0
 
 0 ? 0  =  0
@@ -4222,6 +6243,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -4242,6 +6278,21 @@ x ? y  =  y + y
 
 0 ? 0  =  0
 0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
 x ? 0  =  dec x
 x ? y  =  dec x
 
@@ -4286,6 +6337,36 @@ x ? 0  =  x + x
 x ? y  =  0
 
 0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? 0  =  dec (dec 0)
+x ? y  =  0
+
+0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  dec x
@@ -4346,6 +6427,156 @@ x ? 0  =  dec 0
 x ? y  =  0
 
 0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x + x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x + x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x + x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec x + x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x + x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec x + x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
 0 ? x  =  dec 0 + x
 x ? 0  =  x
 x ? y  =  x
@@ -4372,6 +6603,66 @@ x ? y  =  y
 
 0 ? 0  =  0
 0 ? x  =  dec 0 + x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec x))
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec x))
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec x))
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec x))
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec x))
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec x))
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec 0))
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec 0))
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec 0))
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec 0))
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec 0))
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec (dec 0))
 x ? 0  =  0
 x ? y  =  0
 
@@ -4457,6 +6748,21 @@ x ? y  =  y + y
 
 0 ? 0  =  dec 0
 0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  dec 0
+0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -4477,6 +6783,21 @@ x ? y  =  y + y
 
 0 ? 0  =  dec 0
 0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  dec 0
+0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec x
 
@@ -4518,6 +6839,36 @@ x ? y  =  y
 0 ? 0  =  dec 0
 0 ? x  =  x
 x ? 0  =  x + x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  x
+x ? 0  =  dec (dec 0)
 x ? y  =  0
 
 0 ? 0  =  dec 0
@@ -4542,6 +6893,21 @@ x ? y  =  y + y
 
 0 ? 0  =  dec 0
 0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  dec 0
+0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + x
 
@@ -4562,6 +6928,21 @@ x ? y  =  y + y
 
 0 ? 0  =  dec 0
 0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  dec 0
+0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec x
 
@@ -4606,6 +6987,36 @@ x ? 0  =  x + x
 x ? y  =  0
 
 0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  0
+x ? 0  =  dec (dec 0)
+x ? y  =  0
+
+0 ? 0  =  dec 0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec x
@@ -4752,6 +7163,306 @@ x ? y  =  y
 
 0 ? 0  =  dec 0
 0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec 0)
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec 0
+0 ? x  =  dec (dec 0)
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec 0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec 0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  0
+x ? 0  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec 0
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  dec 0
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  0
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
 x ? 0  =  0
 x ? y  =  0
 
@@ -7082,7 +9793,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,4,32,36,112,264] direct candidates, 0 duplicates
-  [4,14,30,8,4,32,36,112,264] pattern candidates, 0 duplicates
+  [4,14,30,8,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -7435,6 +10146,22 @@ p &| q  =  not p || not q
 
 p &| q  =  not q || not p
 
+p &| q  =  (not p || q) && p
+
+p &| q  =  (not q || p) && q
+
+p &| q  =  (p || not q) && q
+
+p &| q  =  (q || not p) && p
+
+p &| q  =  not p && q || p
+
+p &| q  =  not q && p || q
+
+p &| q  =  p && not q || q
+
+p &| q  =  q && not p || p
+
 p &| q  =  p && (not p && q)
 
 p &| q  =  p && (not p || q)
@@ -7467,9 +10194,17 @@ p &| q  =  q || p && not q
 
 p &| q  =  q || (p || not q)
 
+p &| q  =  not p && (p && q)
+
+p &| q  =  not p && (q && p)
+
 p &| q  =  not p && (p || q)
 
 p &| q  =  not p && (q || p)
+
+p &| q  =  not q && (p && q)
+
+p &| q  =  not q && (q && p)
 
 p &| q  =  not q && (p || q)
 
@@ -7479,9 +10214,17 @@ p &| q  =  not p || p && q
 
 p &| q  =  not p || q && p
 
+p &| q  =  not p || (p || q)
+
+p &| q  =  not p || (q || p)
+
 p &| q  =  not q || p && q
 
 p &| q  =  not q || q && p
+
+p &| q  =  not q || (p || q)
+
+p &| q  =  not q || (q || p)
 
 p &| q  =  (p || q) && not p
 
