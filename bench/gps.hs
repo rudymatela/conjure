@@ -410,6 +410,12 @@ gps14g xs  =  length (filter odd xs)
   where
   odd x  =  x `mod` 2 /= 0
 
+gps14g2 :: [Int] -> Int
+gps14g2 []  =  0
+gps14g2 (x:xs)  =  if x `mod` 2 == 0
+                   then gps14g2 xs
+                   else 1 + gps14g2 xs
+
 odd' :: Int -> Bool
 odd' 0  =  False
 odd' 1  =  True
@@ -432,6 +438,19 @@ gps14c  =  do
     [ prim "odd" (odd :: Int -> Bool)
     , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     , prim "length" (length :: [Int] -> Int)
+    ]
+
+  -- hah!  I was expecting Conjure to use an if like above, but it was smarter:
+  -- gps14 []  =  0
+  -- gps14 (x:xs)  =  x `mod` 2 + gps14 xs
+  conjureWith args{maxSize=13} "gps14" gps14p
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , pr (2 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "`mod`" (mod :: Int -> Int -> Int)
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prif (undefined :: Int)
     ]
 
 

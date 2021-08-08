@@ -225,3 +225,16 @@ gps14 :: [Int] -> Int
 -- looking through 1 candidates of size 4
 gps14 xs  =  length (filter odd xs)
 
+gps14 :: [Int] -> Int
+-- testing 3 combinations of argument values
+-- pruning with 39/58 rules
+-- looking through 3 candidates of size 1
+-- looking through 9 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 58 candidates of size 4
+-- looking through 66 candidates of size 5
+-- looking through 600 candidates of size 6
+-- looking through 1034 candidates of size 7
+gps14 []  =  0
+gps14 (x:xs)  =  x `mod` 2 + gps14 xs
+
