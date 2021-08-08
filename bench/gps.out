@@ -193,3 +193,35 @@ gps12 :: [Int] -> Int
 -- looking through 9282 candidates of size 11
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
+gps13 :: [Ratio Integer] -> Ratio Integer
+-- testing 3 combinations of argument values
+-- pruning with 4/8 rules
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 15 candidates of size 5
+-- looking through 56 candidates of size 6
+-- looking through 125 candidates of size 7
+-- looking through 449 candidates of size 8
+gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
+
+odd :: Int -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 12/13 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 71 candidates of size 5
+odd x  =  x `mod` 2 /= 0
+
+gps14 :: [Int] -> Int
+-- testing 3 combinations of argument values
+-- pruning with 1/1 rules
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 1 candidates of size 4
+gps14 xs  =  length (filter odd xs)
+

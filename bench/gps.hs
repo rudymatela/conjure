@@ -375,6 +375,66 @@ gps12c  =  do
     , pr (1 :: Int)
     ]
 
+
+-- GPS Benchmark #13 -- Vector Average --
+
+gps13p :: [Rational] -> Rational
+gps13p [0,2]  =  1
+gps13p [1,2,3]  =  2
+gps13p [0,0,2,2]  =  1
+
+gps13g :: [Rational] -> Rational
+gps13g qs  =  foldr (+) 0 qs / fromIntegral (length qs)
+
+gps13c :: IO ()
+gps13c  =  do
+  conjure "gps13" gps13p
+    [ prim "0" (0 :: Rational)
+    , prim "+" ((+) :: Rational -> Rational -> Rational)
+    , prim "/" ((/) :: Rational -> Rational -> Rational)
+    , prim "foldr" (foldr :: (Rational -> Rational -> Rational) -> Rational -> [Rational] -> Rational)
+    , prim "length" (length :: [Rational] -> Int)
+    , prim "fromIntegral" (fromIntegral :: Int -> Rational)
+    ]
+
+
+-- GPS Benchmark #14 -- Count Odds --
+
+gps14p :: [Int] -> Int
+gps14p [0,0]  =  0
+gps14p [1,3]  =  2
+gps14p [0,1,2]  =  1
+
+gps14g :: [Int] -> Int
+gps14g xs  =  length (filter odd xs)
+  where
+  odd x  =  x `mod` 2 /= 0
+
+odd' :: Int -> Bool
+odd' 0  =  False
+odd' 1  =  True
+odd' 2  =  False
+odd' 3  =  True
+odd' 4  =  False
+odd' 5  =  True
+
+gps14c :: IO ()
+gps14c  =  do
+  conjure "odd" odd'
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , pr (2 :: Int)
+    , prim "`mod`" (mod :: Int -> Int -> Int)
+    , prim "/=" ((/=) :: Int -> Int -> Bool)
+    ]
+
+  conjure "gps14" gps14p
+    [ prim "odd" (odd :: Int -> Bool)
+    , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    , prim "length" (length :: [Int] -> Int)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -396,4 +456,6 @@ gpss  =  [ gps1c
          , gps10c
          , gps11c
          , gps12c
+         , gps13c
+         , gps14c
          ]
