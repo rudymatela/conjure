@@ -360,3 +360,38 @@ gps20c :: [Char] -> [Char]
 -- looking through 5 candidates of size 5
 gps20c cs  =  unwords (map pig1 (words cs))
 
+gps21 :: [Int] -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 5 candidates of size 5
+-- looking through 13 candidates of size 6
+-- looking through 9 candidates of size 7
+-- looking through 30 candidates of size 8
+-- looking through 25 candidates of size 9
+-- looking through 65 candidates of size 10
+gps21 []  =  []
+gps21 (x:xs)  =  (if x < 0 then 0 else x):gps21 xs
+
+gps22 :: [Char] -> Int
+-- testing 4 combinations of argument values
+-- pruning with 5/9 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 4 candidates of size 6
+gps22 ""  =  0
+gps22 (c:cs)  =  scrabble1 c + gps22 cs
+
+gps23 :: [Char] -> ([(Int,Int)],Int,Double)
+-- testing 1 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+

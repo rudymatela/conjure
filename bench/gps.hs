@@ -650,6 +650,86 @@ gps20c  =  do
     ]
 
 
+
+-- GPS Benchmark #21 -- Negative To Zero --
+
+gps21p :: [Int] -> [Int]
+gps21p [1]  =  [1]
+gps21p [-1]  =  [0]
+gps21p [1,-1]  =  [1,0]
+gps21p [-1,1]  =  [0,1]
+
+gps21g :: [Int] -> [Int]
+gps21g []  =  []
+gps21g (x:xs)  =  (if x < 0 then 0 else x) : gps21g xs
+
+gps21c :: IO ()
+gps21c  =  conjure "gps21" gps21p
+  [ pr ([] :: [Int])
+  , pr (0 :: Int)
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prim "<" ((<) :: Int -> Int -> Bool)
+  , prif (undefined :: Int)
+  ]
+
+
+-- GPS Benchmark #22 -- Scrabble Score --
+gps22p :: String -> Int
+gps22p "a"  =  1
+gps22p "hello"  =  8
+gps22p "world"  =  9
+gps22p "scrabble"  =  14
+
+gps22g :: String -> Int
+gps22g  =  scrabble
+
+scrabble :: String -> Int
+scrabble s  =  foldr (+) 0 (map scrabble1 s)
+
+scrabble1 :: Char -> Int
+scrabble1 'd'  =   2
+scrabble1 'g'  =   2
+scrabble1 'b'  =   3
+scrabble1 'c'  =   3
+scrabble1 'm'  =   3
+scrabble1 'p'  =   3
+scrabble1 'f'  =   4
+scrabble1 'h'  =   4
+scrabble1 'v'  =   4
+scrabble1 'w'  =   4
+scrabble1 'y'  =   4
+scrabble1 'k'  =   5
+scrabble1 'j'  =   8
+scrabble1 'x'  =   8
+scrabble1 'q'  =  10
+scrabble1 'z'  =  10
+scrabble1  _   =   1 -- aeilnorstu
+
+gps22c :: IO ()
+gps22c  =  do
+  let force  =  [ [val "a"]
+                , [val "hello"]
+                , [val "world"]
+                , [val "scrabble"]
+                ]
+
+  conjureWith args{forceTests=force} "gps22" gps22p
+    [ pr (0 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
+    , prim "scrabble1" scrabble1
+    ]
+
+
+-- GPS Benchmark #23 -- Word Stats --
+gps23p :: String -> ([(Int,Int)], Int, Double)
+gps23p ""  =  ([], 0, 1.0/0.0)
+
+gps23c :: IO ()
+gps23c  =  do
+  conjure "gps23" gps23p []
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -679,4 +759,7 @@ gpss  =  [ gps1c
          , gps18c
          , gps19c
          , gps20c
+         , gps21c
+         , gps22c
+         , gps23c
          ]
