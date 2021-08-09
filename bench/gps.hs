@@ -454,6 +454,26 @@ gps14c  =  do
     ]
 
 
+-- GPS Benchmark #15 -- Mirror Image --
+
+gps15p :: [Int] -> [Int] -> Bool
+gps15p [0] [0]  =  True
+gps15p [0,1] [1,0]  =  True
+gps15p [0,1] [0,1]  =  False
+gps15p [0,0,1] [1,0,0]  =  True
+gps15p [0,0,1] [0,0,1]  =  False
+
+gps15g :: [Int] -> [Int] -> Bool
+gps15g xs ys  =  reverse xs == ys
+
+gps15c :: IO ()
+gps15c  =  do
+  conjure "gps15" gps15p
+    [ prim "==" ((==) :: [Int] -> [Int] -> Bool)
+    , prim "reverse" (reverse :: [Int] -> [Int])
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -477,4 +497,5 @@ gpss  =  [ gps1c
          , gps12c
          , gps13c
          , gps14c
+         , gps15c
          ]
