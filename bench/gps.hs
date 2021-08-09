@@ -11,6 +11,7 @@ import Data.Ratio ((%), numerator, denominator)  -- GPS bench #10
 import Data.List (findIndex)                     -- GPS bench #12
 import Data.Maybe (fromJust)                     -- GPS bench #12
 import Data.List (isSubsequenceOf,sort)          -- GPS bench #16
+import Data.Char (chr,ord)                       -- GPS bench #24
 
 
 gps1p :: Int -> Float -> Float
@@ -730,6 +731,29 @@ gps23c  =  do
   conjure "gps23" gps23p []
 
 
+-- GPS Benchmark #24 -- Checksum --
+gps24p :: String -> Char
+gps24p "a"  =  'A'
+gps24p "aa"  =  '"'
+gps24p "a a"  =  'B'
+gps24p "b"  =   'B'
+
+gps24g :: String -> Char
+gps24g s  =  chr (sum (map ord s) `mod` 64 + ord ' ')
+
+gps24c :: IO ()
+gps24c  =  conjure "gps24" gps24p
+  [ pr ' '
+  , pr (64 :: Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "`mod`" (mod :: Int -> Int -> Int)
+  , prim "sum" (sum :: [Int] -> Int)
+  , prim "ord" ord
+  , prim "chr" chr
+  , prim "map" (map :: (Char -> Int) -> String -> [Int])
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -762,4 +786,5 @@ gpss  =  [ gps1c
          , gps21c
          , gps22c
          , gps23c
+         , gps24c
          ]

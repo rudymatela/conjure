@@ -395,3 +395,18 @@ gps23 :: [Char] -> ([(Int,Int)],Int,Double)
 -- looking through 0 candidates of size 2
 cannot conjure
 
+gps24 :: [Char] -> Char
+-- testing 4 combinations of argument values
+-- pruning with 15/19 rules
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 4 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 9 candidates of size 5
+-- looking through 19 candidates of size 6
+-- looking through 40 candidates of size 7
+-- looking through 97 candidates of size 8
+-- looking through 286 candidates of size 9
+-- looking through 739 candidates of size 10
+gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
+
