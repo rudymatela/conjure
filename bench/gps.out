@@ -247,3 +247,13 @@ gps15 :: [Int] -> [Int] -> Bool
 -- looking through 8 candidates of size 4
 gps15 xs ys  =  reverse xs == ys
 
+gps16 :: [Char] -> [Char] -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 2 candidates of size 5
+gps16 cs ds  =  sort cs `isSubsequenceOf` sort ds
+

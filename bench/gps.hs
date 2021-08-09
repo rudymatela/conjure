@@ -10,6 +10,7 @@ import Data.Char (isSpace)                       -- GPS bench  #7
 import Data.Ratio ((%), numerator, denominator)  -- GPS bench #10
 import Data.List (findIndex)                     -- GPS bench #12
 import Data.Maybe (fromJust)                     -- GPS bench #12
+import Data.List (isSubsequenceOf,sort)          -- GPS bench #16
 
 
 gps1p :: Int -> Float -> Float
@@ -474,6 +475,27 @@ gps15c  =  do
     ]
 
 
+-- GPS Benchmark #16 -- Super Anagrams --
+
+gps16p :: String -> String -> Bool
+gps16p "a" "aa"  =  True
+gps16p "aa" "a"  =  False
+gps16p "ab" "ba"  =  True
+gps16p "ba" "ab"  =  True
+gps16p "ab" "c"  =  False
+gps16p "ab" "aba"  =  True
+
+gps16g :: String -> String -> Bool
+gps16g cs ds  =  sort cs `isSubsequenceOf` sort ds
+
+gps16c :: IO ()
+gps16c  =  do
+  conjure "gps16" gps16p
+    [ prim "`isSubsequenceOf`" (isSubsequenceOf :: String -> String -> Bool)
+    , prim "sort" (sort :: String -> String)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -498,4 +520,5 @@ gpss  =  [ gps1c
          , gps13c
          , gps14c
          , gps15c
+         , gps16c
          ]
