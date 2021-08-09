@@ -584,21 +584,69 @@ pig  =  unwords . map pig1 . words
 
 pig1 :: String -> String
 pig1 (c:cs)  =  if isVowel c
-                then cs ++ "ay"
+                then (c:cs) ++ "ay"
                 else cs ++ (c:"ay")
-  where
-  isVowel 'a'  =  True
-  isVowel 'e'  =  True
-  isVowel 'i'  =  True
-  isVowel 'o'  =  True
-  isVowel 'u'  =  True
-  isVowel  _   =  False
+
+pig1' :: String -> String
+pig1' "hello"   =  "ellohay"
+pig1' "world"   =  "orldway"
+pig1' "string"  =  "tringsay"
+pig1' "east"    =  "eastay"
+
+isVowel :: Char -> Bool
+isVowel 'a'  =  True
+isVowel 'e'  =  True
+isVowel 'i'  =  True
+isVowel 'o'  =  True
+isVowel 'u'  =  True
+isVowel  _   =  False
+
+isVowel' :: Char -> Bool
+isVowel' 'a'  =  True
+isVowel' 'e'  =  True
+isVowel' 'i'  =  True
+isVowel' 'o'  =  True
+isVowel' 'u'  =  True
+isVowel' ' '  =  False
+isVowel' 'b'  =  False
+isVowel' 'c'  =  False
+isVowel' 'd'  =  False
+isVowel' 'f'  =  False
+isVowel' 'g'  =  False
 
 gps20c :: IO ()
 gps20c  =  do
-  -- unreachable
-  conjure "gps20c" gps20p
-    [
+  conjureWith args{maxSize=16} "isVowel" isVowel'
+    [ pr 'a'
+    , pr 'e'
+    , pr 'i'
+    , pr 'o'
+    , pr 'u'
+    , pr True
+    , pr False
+    ]
+
+  let force  =  [ [val "hello"]
+                , [val "world"]
+                , [val "string"]
+                , [val "east"]
+                ]
+  conjureWith args{forceTests=force, maxSize=14} "pig1" pig1'
+    [ pr "ay"
+    , prif (undefined :: String)
+    , prim "isVowel" isVowel
+    , prim "++" ((++) :: String -> String -> String)
+    , prim ":" ((:) :: Char -> String -> String)
+    ]
+
+  let force  =  [ [val "hello world"]
+                , [val "a string"]
+                ]
+  conjureWith args{forceTests=force} "gps20c" gps20p
+    [ prim "words" (words :: String -> [String])
+    , prim "unwords" (unwords :: [String] -> String)
+    , prim "map" (map :: (String -> String) -> [String] -> [String])
+    , prim "pig1" pig1
     ]
 
 

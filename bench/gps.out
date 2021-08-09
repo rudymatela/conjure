@@ -304,9 +304,59 @@ gps19 :: Int -> [Char] -> [Char]
 -- looking through 0 candidates of size 2
 cannot conjure
 
-gps20c :: [Char] -> [Char]
--- testing 0 combinations of argument values
+isVowel :: Char -> Bool
+-- testing 11 combinations of argument values
 -- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 14 candidates of size 6
+-- looking through 26 candidates of size 7
+-- looking through 26 candidates of size 8
+-- looking through 34 candidates of size 9
+-- looking through 34 candidates of size 10
+-- looking through 58 candidates of size 11
+-- looking through 44 candidates of size 12
+-- looking through 44 candidates of size 13
+-- looking through 30 candidates of size 14
+-- looking through 30 candidates of size 15
+-- looking through 62 candidates of size 16
+isVowel 'a'  =  True
+isVowel 'e'  =  True
+isVowel 'i'  =  True
+isVowel 'o'  =  True
+isVowel 'u'  =  True
+isVowel c  =  False
+
+pig1 :: [Char] -> [Char]
+-- testing 4 combinations of argument values
+-- pruning with 5/5 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 14 candidates of size 5
+-- looking through 28 candidates of size 6
+-- looking through 47 candidates of size 7
+-- looking through 126 candidates of size 8
+-- looking through 201 candidates of size 9
+-- looking through 631 candidates of size 10
+-- looking through 1069 candidates of size 11
+-- looking through 3495 candidates of size 12
+-- looking through 6382 candidates of size 13
+-- looking through 20409 candidates of size 14
+pig1 ""  =  "ay"
+pig1 (c:cs)  =  if isVowel c then (c:cs) ++ "ay" else cs ++ (c:"ay")
+
+gps20c :: [Char] -> [Char]
+-- testing 2 combinations of argument values
+-- pruning with 1/1 rules
 -- looking through 1 candidates of size 1
-gps20c cs  =  cs
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 5 candidates of size 5
+gps20c cs  =  unwords (map pig1 (words cs))
 
