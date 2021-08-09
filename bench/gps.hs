@@ -2,6 +2,7 @@
 --
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
+{-# LANGUAGE CPP #-}
 import Conjure
 import System.Environment (getArgs)
 
@@ -10,8 +11,20 @@ import Data.Char (isSpace)                       -- GPS bench  #7
 import Data.Ratio ((%), numerator, denominator)  -- GPS bench #10
 import Data.List (findIndex)                     -- GPS bench #12
 import Data.Maybe (fromJust)                     -- GPS bench #12
-import Data.List (isSubsequenceOf,sort)          -- GPS bench #16
+import Data.List (sort)                          -- GPS bench #16
 import Data.Char (chr,ord)                       -- GPS bench #24
+
+-- GPS bench #16:
+#if __GLASGOW_HASKELL__ >= 710
+import Data.List (isSubsequenceOf)
+#else
+isSubsequenceOf :: Eq a => [a] -> [a] -> Bool
+isSubsequenceOf []    _  = True
+isSubsequenceOf (_:_) [] = False
+isSubsequenceOf (x:xs) (y:ys)
+  | x == y    =    xs  `isSubsequenceOf` ys
+  | otherwise = (x:xs) `isSubsequenceOf` ys
+#endif
 
 
 gps1p :: Int -> Float -> Float
