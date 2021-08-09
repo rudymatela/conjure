@@ -571,6 +571,37 @@ gps19c  =  do
     ]
 
 
+-- GPS Benchmark #20 -- Pig Latin --
+gps20p :: String -> String
+gps20p "hello world"  =  "ellohay orldway"
+gps20p "a string"  =  "aay tringsay"
+
+gps20g :: String -> String
+gps20g  =  pig
+
+pig :: String -> String
+pig  =  unwords . map pig1 . words
+
+pig1 :: String -> String
+pig1 (c:cs)  =  if isVowel c
+                then cs ++ "ay"
+                else cs ++ (c:"ay")
+  where
+  isVowel 'a'  =  True
+  isVowel 'e'  =  True
+  isVowel 'i'  =  True
+  isVowel 'o'  =  True
+  isVowel 'u'  =  True
+  isVowel  _   =  False
+
+gps20c :: IO ()
+gps20c  =  do
+  -- unreachable
+  conjure "gps20c" gps20p
+    [
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -599,4 +630,5 @@ gpss  =  [ gps1c
          , gps17c
          , gps18c
          , gps19c
+         , gps20c
          ]

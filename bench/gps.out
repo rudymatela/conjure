@@ -304,3 +304,9 @@ gps19 :: Int -> [Char] -> [Char]
 -- looking through 0 candidates of size 2
 cannot conjure
 
+gps20c :: [Char] -> [Char]
+-- testing 0 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+gps20c cs  =  cs
+
