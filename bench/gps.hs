@@ -767,6 +767,64 @@ gps24c  =  conjure "gps24" gps24p
   ]
 
 
+-- GPS Benchmark #25 -- Digits --
+gps25p :: Int -> [Int]
+gps25p 0  =  [0]
+gps25p 1  =  [1]
+gps25p 12  =  [2,1]
+gps25p (-21)  =  [1,-2]
+
+gps25g :: Int -> [Int]
+gps25g 0  =  [0]                                          --  3
+gps25g n  =  if abs n < 10                                --  8
+             then [n]                                     -- 11
+             else abs (n `rem` 10) : gps25g (n `quot` 10) -- 20
+
+-- out of reach performance-wise
+gps25c :: IO ()
+gps25c  =  conjureWith args{maxSize=20} "gps25" gps25p $ take 0
+  [ pr (0 :: Int)
+  , pr (10 :: Int)
+  , pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prif (undefined :: [Int])
+  , prim "abs" (abs :: Int -> Int)
+  , prim "<" ((<) :: Int -> Int -> Bool)
+  , prim "rem" (rem :: Int -> Int -> Int)
+  , prim "quot" (quot :: Int -> Int -> Int)
+  ]
+
+
+-- GPS Benchmark #26 -- Grade --
+gps26p :: Int -> Int -> Int -> Int -> Int -> Char
+gps26p 4 3 2 1 5 = 'A'
+gps26p 4 3 2 1 4 = 'A'
+gps26p 4 3 2 1 3 = 'B'
+gps26p 4 3 2 1 2 = 'C'
+gps26p 4 3 2 1 1 = 'D'
+gps26p 4 3 2 1 0 = 'F'
+
+gps26g :: Int -> Int -> Int -> Int -> Int -> Char
+gps26g a b c d x
+  | x >= a     =  'A'
+  | x >= b     =  'B'
+  | x >= c     =  'C'
+  | x >= d     =  'D'
+  | otherwise  =  'F'
+
+-- out of reach performance-wise
+gps26c :: IO ()
+gps26c  =  conjureWith args{maxSize=2} "gps26" gps26p
+  [ pr 'A'
+  , pr 'B'
+  , pr 'C'
+  , pr 'D'
+  , pr 'F'
+  , prif (undefined :: Char)
+  , prim ">=" ((>=) :: Int -> Int -> Bool)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -800,4 +858,6 @@ gpss  =  [ gps1c
          , gps22c
          , gps23c
          , gps24c
+         , gps25c
+         , gps26c
          ]

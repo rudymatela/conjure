@@ -410,3 +410,16 @@ gps24 :: [Char] -> Char
 -- looking through 739 candidates of size 10
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
+gps25 :: Int -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+cannot conjure
+
+gps26 :: Int -> Int -> Int -> Int -> Int -> Char
+-- testing 5 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 5 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+
