@@ -825,6 +825,41 @@ gps26c  =  conjureWith args{maxSize=2} "gps26" gps26p
   ]
 
 
+-- GPS Benchmark #27 -- Median --
+gps27p :: Int -> Int -> Int -> Int
+gps27p 0 1 2  =  1
+gps27p 1 0 2  =  1
+gps27p (-1) 1 0  =  0
+
+gps27g :: Int -> Int -> Int -> Int
+gps27g x y z
+  | y < x && x < z  =  x  -- 8
+  | x < y && y < z  =  y  -- 16
+  | otherwise       =  z  -- 17
+-- Conjure found a smaller implementation!
+
+gps27c :: IO ()
+gps27c  =  conjure "gps27" gps27p
+  [ prim "<" ((<) :: Int -> Int -> Bool)
+  , prim "&&" (&&)
+  , prif (undefined :: Int)
+  ]
+
+
+-- GPS Benchmark #28 -- Smallest --
+gps28p :: Int -> Int -> Int -> Int -> Int
+gps28p 0 1 2 3  =  0
+gps28p 3 2 1 0  =  0
+gps28p 1 0 2 3  =  0
+gps28p 3 2 0 1  =  0
+gps28p 1 1 1 2  =  1
+
+gps28c :: IO ()
+gps28c  =  conjure "gps28" gps28p
+  [ prim "`min`" (min :: Int -> Int -> Int)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -860,4 +895,6 @@ gpss  =  [ gps1c
          , gps24c
          , gps25c
          , gps26c
+         , gps27c
+         , gps28c
          ]

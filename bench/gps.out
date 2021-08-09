@@ -423,3 +423,31 @@ gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- looking through 0 candidates of size 2
 cannot conjure
 
+gps27 :: Int -> Int -> Int -> Int
+-- testing 3 combinations of argument values
+-- pruning with 14/18 rules
+-- looking through 3 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 36 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 180 candidates of size 10
+-- looking through 2592 candidates of size 11
+gps27 x y z  =  if x < y then (if y < z then y else z) else x
+
+gps28 :: Int -> Int -> Int -> Int -> Int
+-- testing 5 combinations of argument values
+-- pruning with 6/10 rules
+-- looking through 4 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 24 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 72 candidates of size 7
+gps28 x y z x'  =  x `min` (y `min` (z `min` x'))
+
