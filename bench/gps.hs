@@ -496,6 +496,81 @@ gps16c  =  do
     ]
 
 
+-- GPS Benchmark #17 -- Sum of Squares --
+-- Given integer _n_, return the sum of squaring each integer in 1 to n
+gps17p :: Int -> Int
+gps17p 1  =  1
+gps17p 2  =  5
+gps17p 3  =  14
+gps17p 4  =  30
+
+gps17g :: Int -> Int
+gps17g n  =   n * n + gps17g (n - 1)
+
+gps17c :: IO ()
+gps17c  =  conjure "gps17" gps17p
+  [ pr (0 :: Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "dec" ((subtract 1) :: Int -> Int)
+  ]
+
+
+-- GPS Benchmark #18 -- Vectors Summed --
+-- zip with sum
+gps18p :: [Int] -> [Int] -> [Int]
+gps18p [0] [0]  =  [0]
+gps18p [0,1] [0,1]  =  [0,2]
+gps18p [1,0] [0,1]  =  [1,1]
+
+gps18g :: [Int] -> [Int] -> [Int]
+gps18g xs ys  =  zipWith (+) xs ys
+
+gps18g' :: [Int] -> [Int] -> [Int]
+gps18g' [] []  =  []
+gps18g' (x:xs) (y:ys)  =  x + y : gps18g' xs ys
+
+gps18c :: IO ()
+gps18c  =  do
+  conjure "gps18" gps18p
+    [ pr ([] :: [Int])
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    ]
+
+  conjure "gps18" gps18p
+    [ prim "+" ((+) :: Int -> Int -> Int)
+    , prim "zipWith" (zipWith :: (Int -> Int -> Int) -> [Int] -> [Int] -> [Int])
+    ]
+
+
+-- GPS Benchmark #19 -- X-Word Lines --
+
+gps19p :: Int -> String -> String
+gps19p 1 "a a a"  =  "a\na\na\n"
+gps19p 1 "a\na\na"  =  "a\na\na\n"
+gps19p 2 "a a a"  =  "a a\na\n"
+
+gps19g :: Int -> String -> String
+gps19g x xs  =  unlines (map unwords (chunk x (words xs)))
+
+chunk :: Int -> [String] -> [[String]]
+chunk x []  =  []
+chunk x ss  =  take x ss : chunk x (drop x ss)
+
+gps19c :: IO ()
+gps19c  =  do
+  -- speculate takes too long
+  conjure "gps19" gps19p $ take 0
+    [ prim "words" (words :: String -> [String])
+--  , prim "words" (lines :: String -> [String])
+    , prim "unwords" (unwords :: [String] -> String)
+    , prim "unlines" (unlines :: [String] -> String)
+--  , prim "chunk" (chunk :: Int -> [String] -> [[String]])
+--  , prim "map" (map :: ([String] -> String) -> [[String]] -> [String])
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -521,4 +596,7 @@ gpss  =  [ gps1c
          , gps14c
          , gps15c
          , gps16c
+         , gps17c
+         , gps18c
+         , gps19c
          ]

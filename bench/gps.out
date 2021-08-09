@@ -257,3 +257,50 @@ gps16 :: [Char] -> [Char] -> Bool
 -- looking through 2 candidates of size 5
 gps16 cs ds  =  sort cs `isSubsequenceOf` sort ds
 
+gps17 :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 13/33 rules
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 8 candidates of size 3
+-- looking through 19 candidates of size 4
+-- looking through 50 candidates of size 5
+-- looking through 139 candidates of size 6
+-- looking through 400 candidates of size 7
+-- looking through 1171 candidates of size 8
+gps17 0  =  0
+gps17 x  =  x * x + gps17 (dec x)
+
+gps18 :: [Int] -> [Int] -> [Int]
+-- testing 3 combinations of argument values
+-- pruning with 2/6 rules
+-- looking through 3 candidates of size 1
+-- looking through 8 candidates of size 2
+-- looking through 11 candidates of size 3
+-- looking through 44 candidates of size 4
+-- looking through 116 candidates of size 5
+-- looking through 92 candidates of size 6
+-- looking through 791 candidates of size 7
+-- looking through 220 candidates of size 8
+-- looking through 4632 candidates of size 9
+gps18 [] []  =  []
+gps18 [] (x:xs)  =  xs
+gps18 (x:xs) []  =  xs
+gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
+
+gps18 :: [Int] -> [Int] -> [Int]
+-- testing 3 combinations of argument values
+-- pruning with 2/7 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 12 candidates of size 4
+gps18 xs ys  =  zipWith (+) xs ys
+
+gps19 :: Int -> [Char] -> [Char]
+-- testing 2 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+
