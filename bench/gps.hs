@@ -860,6 +860,35 @@ gps28c  =  conjure "gps28" gps28p
   ]
 
 
+-- GPS Benchmark #29 -- Syllables --
+gps29p :: String -> Int
+gps29p "hello"  =  2
+gps29p "world"  =  1
+gps29p "string"  =  1
+gps29p "haskell"  =  2
+
+gps29g :: String -> Int
+gps29g ""  =  0
+gps29g (c:cs)  =  if isVowel c
+                  then 1 + gps29g cs
+                  else gps29g cs
+
+gps29c :: IO ()
+gps29c  =  conjureWith args{forceTests=force} "gps29" gps29p
+  [ pr (0 :: Int)
+  , pr (1 :: Int)
+  , prim "+" ((+) :: Int->Int->Int)
+  , prif (undefined :: Int)
+  , prim "isVowel" isVowel
+  ]
+  where
+  force  =  [ [val "hello"]
+            , [val "world"]
+            , [val "string"]
+            , [val "haskell"]
+            ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -897,4 +926,5 @@ gpss  =  [ gps1c
          , gps26c
          , gps27c
          , gps28c
+         , gps29c
          ]
