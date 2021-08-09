@@ -613,6 +613,7 @@ isVowel 'e'  =  True
 isVowel 'i'  =  True
 isVowel 'o'  =  True
 isVowel 'u'  =  True
+isVowel 'y'  =  True
 isVowel  _   =  False
 
 isVowel' :: Char -> Bool
@@ -621,6 +622,7 @@ isVowel' 'e'  =  True
 isVowel' 'i'  =  True
 isVowel' 'o'  =  True
 isVowel' 'u'  =  True
+isVowel' 'y'  =  True
 isVowel' ' '  =  False
 isVowel' 'b'  =  False
 isVowel' 'c'  =  False
@@ -630,12 +632,13 @@ isVowel' 'g'  =  False
 
 gps20c :: IO ()
 gps20c  =  do
-  conjureWith args{maxSize=16} "isVowel" isVowel'
+  conjureWith args{maxSize=22} "isVowel" isVowel'
     [ pr 'a'
     , pr 'e'
     , pr 'i'
     , pr 'o'
     , pr 'u'
+    , pr 'y'
     , pr True
     , pr False
     ]
@@ -862,10 +865,12 @@ gps28c  =  conjure "gps28" gps28p
 
 -- GPS Benchmark #29 -- Syllables --
 gps29p :: String -> Int
+gps29p "pub"  =  1
 gps29p "hello"  =  2
 gps29p "world"  =  1
 gps29p "string"  =  1
 gps29p "haskell"  =  2
+gps29p "photography"  =  4
 
 gps29g :: String -> Int
 gps29g ""  =  0
@@ -882,10 +887,12 @@ gps29c  =  conjureWith args{forceTests=force} "gps29" gps29p
   , prim "isVowel" isVowel
   ]
   where
-  force  =  [ [val "hello"]
+  force  =  [ [val "pub"]
+            , [val "hello"]
             , [val "world"]
             , [val "string"]
             , [val "haskell"]
+            , [val "photography"]
             ]
 
 
