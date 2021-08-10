@@ -1,5 +1,5 @@
 fibonacci :: Int -> Int
--- testing 8 combinations of argument values
+-- testing 7 combinations of argument values
 -- pruning with 11/24 rules
 -- looking through 3 candidates of size 1
 -- looking through 6 candidates of size 2

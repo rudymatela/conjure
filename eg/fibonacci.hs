@@ -9,7 +9,6 @@ fibonacci 3  =  3
 fibonacci 4  =  5
 fibonacci 5  =  8
 fibonacci 6  =  13
-fibonacci 7  =  21
 
 main :: IO ()
 main  =  do
