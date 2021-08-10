@@ -16,21 +16,9 @@ main  =  do
   conjure "fibonacci n" fibonacci
     [ pr (0::Int)
     , pr (1::Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
     , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
     ]
 -- expected function:
 -- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
 --                 1  2 3  4      5      6          7   8  9        10  11   12  13
-
-
-{- to note, if dec appears later than + in the primitives list:
-
-conjureWith ...  =
-
-> print $ canReduceTo thy (xx -+- dec xx) (dec (dec xx))
-False
-> print $ canReduceTo thy (dec (dec xx)) (xx -+- dec xx)
-True
-
--}
