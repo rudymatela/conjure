@@ -1,28 +1,28 @@
 second :: [Int] -> Int
 -- testing 360 combinations of argument values
--- pruning with 14/25 rules
--- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 6 candidates of size 3
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
 second xs  =  head (tail xs)
 
 third :: [Int] -> Int
 -- testing 360 combinations of argument values
--- pruning with 14/25 rules
--- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 20 candidates of size 4
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 1 candidates of size 4
 third xs  =  head (tail (tail xs))
 
 sum :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 20 candidates of size 4
--- looking through 34 candidates of size 5
+-- looking through 4 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 13 candidates of size 4
+-- looking through 14 candidates of size 5
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -30,10 +30,10 @@ product :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 20 candidates of size 4
--- looking through 34 candidates of size 5
+-- looking through 4 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 13 candidates of size 4
+-- looking through 14 candidates of size 5
 product []  =  1
 product (x:xs)  =  x * product xs
 
@@ -41,17 +41,17 @@ sum :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 15/26 rules
 -- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 23 candidates of size 4
+-- looking through 4 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 16 candidates of size 4
 sum xs  =  foldr (+) 0 xs
 
 product :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 15/26 rules
 -- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 23 candidates of size 4
+-- looking through 4 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 16 candidates of size 4
 product xs  =  foldr (*) 1 xs
 

@@ -25,12 +25,33 @@ product' [x,y,z]  =  x*y*z
 
 main :: IO ()
 main = do
-  conjure "second"  (second   :: [Int] -> Int) primitives
-  conjure "third"   (third    :: [Int] -> Int) primitives
-  conjure "sum"     (sum'     :: [Int] -> Int) primitives
-  conjure "product" (product' :: [Int] -> Int) primitives
+  conjure "second"  (second :: [Int] -> Int)
+    [ prim "null" (null :: [Int] -> Bool)
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    ]
 
-  conjure "sum"     (sum'     :: [Int] -> Int) primitivesWithFold
+  conjure "third"   (third :: [Int] -> Int)
+    [ prim "null" (null :: [Int] -> Bool)
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
+    ]
+
+  conjure "sum"     (sum' :: [Int] -> Int)
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
+    ]
+
+  conjure "product" (product' :: [Int] -> Int)
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
+    ]
+
+  conjure "sum"     (sum' :: [Int] -> Int) primitivesWithFold
   conjure "product" (product' :: [Int] -> Int) primitivesWithFold
 
 primitives :: [Prim]
@@ -39,9 +60,6 @@ primitives =
   , pr (1 :: Int)
   , prim "+" ((+) :: Int -> Int -> Int)
   , prim "*" ((*) :: Int -> Int -> Int)
-  , prim "null" (null :: [Int] -> Bool)
-  , prim "head" (head :: [Int] -> Int)
-  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
 primitivesWithFold :: [Prim]
