@@ -5,6 +5,8 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * see `access` example on terpret, prettyprint the type signature correctly
   as `access :: ...` instead of prefixing the infix name
+  (EDIT: this bug is on express itself.  Type signatures for infix variables
+  are printed incorrectly)
 
 * remove `requireDescent=False` requirement from `gcd`
   (add and use `isDeconstruction`)
