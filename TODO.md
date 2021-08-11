@@ -3,12 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* pretty-print top-level ifs?
-
-* carry on implementing all GPS benches while taking notes on the paper
-
-* consider memoizing `recs ep` in `candidateDefnsC`
-  and a sub function with `vs` arguments.
+* add `bench/terpret`?
 
 * remove `requireDescent=False` requirement from `gcd`
   (add and use `isDeconstruction`)
@@ -22,6 +17,8 @@ A non-exhaustive list of things TO DO for Conjure.
 * allow specifying properties that need to be true
 
 * allow recursion under any lazy functions (discover them by testing!)
+
+* pretty-print top-level ifs?
 
 * exclude magic numbers?  e.g.: `1+1`?
 
