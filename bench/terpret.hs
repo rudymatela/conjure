@@ -182,7 +182,7 @@ t7g (x:xs) i  =  t7g xs (i-1)
 
 t7c :: IO ()
 t7c  =  do
-  putStrLn "TerpreT benchmark #6: 2-bit adder\n"
+  putStrLn "TerpreT benchmark #7: access\n"
   -- yes, one can implement index with index...
   conjure "`access`" t7p
     [ prim "!!" ((!!) :: [A] -> Int -> A)
@@ -195,6 +195,37 @@ t7c  =  do
     , prim "dec" (subtract 1 :: Int -> Int)
     , prim "undefined" (undefined :: A)
     ]
+
+
+-- TerpreT #8 -- Decrement Elements --
+t8p :: [Int] -> [Int]
+t8p [2]  =  [1]
+t8p [1,0]  =  [0,-1]
+t8p [0,1,2]  =  [-1,0,1]
+
+t8c :: IO ()
+t8c  =  do
+  putStrLn "TerpreT benchmark #8: decrement elements\n"
+
+  conjure "decrelements" t8p
+    [ pr (1 :: Int)
+    , pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "-" ((-) :: Int -> Int -> Int)
+    , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
+    ]
+  -- above, even though map is provided, Conjure cannot use it as it cannot
+  -- introduce lambdas
+
+  conjure "decrelements" t8p
+    [ pr (1 :: Int)
+    , pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "-" ((-) :: Int -> Int -> Int)
+    , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
+    , prim "subtract" (subtract :: Int -> Int -> Int)
+    ]
+  -- now above, the story changes because of subtract, map is used
 
 
 main :: IO ()
@@ -213,4 +244,5 @@ ts  =  [ t1c
        , t5c
        , t6c
        , t7c
+       , t8c
        ]

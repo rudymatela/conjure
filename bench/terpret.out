@@ -105,7 +105,7 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 408 candidates of size 6
 cannot conjure
 
-TerpreT benchmark #6: 2-bit adder
+TerpreT benchmark #7: access
 
 (`access`) :: [A] -> Int -> A
 -- testing 5 combinations of argument values
@@ -128,4 +128,28 @@ xs `access` x  =  xs !! x
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
 (x:xs) `access` y  =  xs `access` dec y
+
+TerpreT benchmark #8: decrement elements
+
+decrelements :: [Int] -> [Int]
+-- testing 3 combinations of argument values
+-- pruning with 3/23 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 7 candidates of size 4
+-- looking through 9 candidates of size 5
+-- looking through 29 candidates of size 6
+-- looking through 41 candidates of size 7
+decrelements []  =  []
+decrelements (x:xs)  =  x - 1:decrelements xs
+
+decrelements :: [Int] -> [Int]
+-- testing 3 combinations of argument values
+-- pruning with 5/26 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 8 candidates of size 4
+decrelements xs  =  map (subtract 1) xs
 

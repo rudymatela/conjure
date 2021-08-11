@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* complete `bench/terpret`
-
 * see `access` example on terpret, prettyprint the type signature correctly
   as `access :: ...` instead of prefixing the infix name
 
