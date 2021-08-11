@@ -79,12 +79,44 @@ t3g (p:ps)  =  if p
 -- decrement []  =  []
 -- decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
-
 t3c :: IO ()
 t3c  =  do
   putStrLn "TerpreT benchmark #3: binary decrement\n"
 
   conjure "decrement" t3p primitives123
+
+
+-- TerpreT #4 -- 2-bit controlled shift register --
+
+t4p1 :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
+t4p1 (False, True, False)  =  (False, True, False)
+t4p1 (False, False, True)  =  (False, False, True)
+t4p1 (True, True, False)  =  (True, False, True)
+t4p1 (True, False, True)  =  (True, True, False)
+
+t4p2 :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
+t4p2 False  True   False   =  (False, True, False)
+t4p2 False  False  True    =  (False, False, True)
+t4p2 True   True   False   =  (True, False, True)
+t4p2 True   False  True    =  (True, True, False)
+
+t4g :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
+t4g (False,p,q)  =  (False,p,q)
+t4g (True,p,q)  =  (True,q,p)
+
+t4c :: IO ()
+t4c  =  do
+  putStrLn "TerpreT benchmark #4: controlled shift\n"
+
+  conjure "cshift" t4p1 $ primitives123 ++
+    [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
+    , prif (undefined :: (Bool,Bool,Bool))
+    ]
+
+  conjure "cshift" t4p2 $ primitives123 ++
+    [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
+    , prif (undefined :: (Bool,Bool,Bool))
+    ]
 
 
 main :: IO ()
@@ -99,4 +131,5 @@ ts :: [IO ()]
 ts  =  [ t1c
        , t2c
        , t3c
+       , t4c
        ]

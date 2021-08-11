@@ -39,3 +39,22 @@ decrement :: [Bool] -> [Bool]
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
+TerpreT benchmark #4: controlled shift
+
+cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
+-- testing 4 combinations of argument values
+-- pruning with 41/51 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 125 candidates of size 5
+-- looking through 225 candidates of size 6
+-- looking through 1035 candidates of size 7
+-- looking through 2457 candidates of size 8
+-- looking through 8154 candidates of size 9
+-- looking through 27072 candidates of size 10
+-- looking through 96714 candidates of size 11
+-- looking through 349218 candidates of size 12
+cannot conjure
+
