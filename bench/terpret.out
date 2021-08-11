@@ -77,18 +77,18 @@ TerpreT benchmark #5: full adder
 
 fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- testing 8 combinations of argument values
--- pruning with 78/96 rules
+-- pruning with 18/22 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 25 candidates of size 3
--- looking through 30 candidates of size 4
--- looking through 189 candidates of size 5
--- looking through 1068 candidates of size 6
--- looking through 3084 candidates of size 7
--- looking through 12504 candidates of size 8
--- looking through 44532 candidates of size 9
--- looking through 165336 candidates of size 10
--- looking through 774744 candidates of size 11
+-- looking through 9 candidates of size 3
+-- looking through 18 candidates of size 4
+-- looking through 45 candidates of size 5
+-- looking through 108 candidates of size 6
+-- looking through 300 candidates of size 7
+-- looking through 816 candidates of size 8
+-- looking through 2148 candidates of size 9
+-- looking through 5520 candidates of size 10
+-- looking through 13656 candidates of size 11
 fadder p q r  =  if p == q then (p,r) else (r,not r)
 
 TerpreT benchmark #6: 2-bit adder

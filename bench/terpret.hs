@@ -135,10 +135,13 @@ t5c :: IO ()
 t5c  =  do
   putStrLn "TerpreT benchmark #5: full adder\n"
 
-  conjure "fadder" t5p $ primitives123 ++
-    [ prim "," ((,) :: Bool -> Bool -> (Bool,Bool))
+  -- using primitives123 below works, but increases the runtime to 18 seconds
+  -- let's leave it commented out so runtime is faster when running automated tests
+  conjure "fadder" t5p $ -- primitives123 ++
+    [ prim "not" not
+    , prim "," ((,) :: Bool -> Bool -> (Bool,Bool))
     , prim "==" ((==) :: Bool -> Bool -> Bool)
-    , prim "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
+--  , prim "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
     , prif (undefined :: (Bool,Bool))
     ]
 -- the printed function is weird, but correct
