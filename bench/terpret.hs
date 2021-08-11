@@ -119,6 +119,51 @@ t4c  =  do
     ]
 
 
+-- TerpreT #5 -- Full adder --
+
+t5p :: Bool -> Bool -> Bool -> (Bool,Bool)
+t5p False False False  =  (False,False)
+t5p False False True   =  (False,True )
+t5p False True  False  =  (False,True )
+t5p True  False False  =  (False,True )
+t5p False True  True   =  (True ,False)
+t5p True  False True   =  (True ,False)
+t5p True  True  False  =  (True ,False)
+t5p True  True  True   =  (True ,True )
+
+t5c :: IO ()
+t5c  =  do
+  putStrLn "TerpreT benchmark #5: full adder\n"
+
+  conjure "fadder" t5p $ primitives123 ++
+    [ prim "," ((,) :: Bool -> Bool -> (Bool,Bool))
+    , prim "==" ((==) :: Bool -> Bool -> Bool)
+    , prim "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
+    , prif (undefined :: (Bool,Bool))
+    ]
+-- the printed function is weird, but correct
+-- fadder p q r  =  if p == q then (p,r) else (r,not r)
+
+
+-- TerpreT #6 -- 2-bit adder --
+t6p :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
+t6p (False,False) (False,False)  =  (False,False,False)
+t6p (True ,False) (False,True )  =  (False,True ,True )
+t6p (True ,True ) (False,True )  =  (True ,False,False)
+t6p (True ,True ) (True ,False)  =  (True ,False,True )
+t6p (True ,True ) (True ,True )  =  (True ,True ,False)
+
+t6c :: IO ()
+t6c  =  do
+  putStrLn "TerpreT benchmark #6: 2-bit adder\n"
+  conjureWith args{maxSize=6} "adder2" t6p $ primitives123 ++
+    [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
+    , prim "==" ((==) :: Bool -> Bool -> Bool)
+    , prim "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
+    , prif (undefined :: (Bool,Bool,Bool))
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -132,4 +177,6 @@ ts  =  [ t1c
        , t2c
        , t3c
        , t4c
+       , t5c
+       , t6c
        ]

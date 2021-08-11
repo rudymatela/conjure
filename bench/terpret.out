@@ -44,17 +44,64 @@ TerpreT benchmark #4: controlled shift
 cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
 -- pruning with 41/51 rules
+-- reasoning produced incorrect properties, please re-run with more tests for faster results
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 10 candidates of size 4
 -- looking through 125 candidates of size 5
 -- looking through 225 candidates of size 6
--- looking through 1035 candidates of size 7
+-- looking through 1075 candidates of size 7
 -- looking through 2457 candidates of size 8
 -- looking through 8154 candidates of size 9
--- looking through 27072 candidates of size 10
--- looking through 96714 candidates of size 11
--- looking through 349218 candidates of size 12
+-- looking through 27432 candidates of size 10
+-- looking through 174839 candidates of size 11
+cshift (p,q,r)  =  if p then (p,r,q) else (p,q,r)
+
+cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
+-- testing 4 combinations of argument values
+-- pruning with 41/51 rules
+-- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 125 candidates of size 4
+-- looking through 225 candidates of size 5
+-- looking through 1035 candidates of size 6
+-- looking through 2457 candidates of size 7
+-- looking through 20250 candidates of size 8
+cshift False p q  =  (False,p,q)
+cshift True p q  =  (True,q,p)
+
+TerpreT benchmark #5: full adder
+
+fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
+-- testing 8 combinations of argument values
+-- pruning with 78/96 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 25 candidates of size 3
+-- looking through 30 candidates of size 4
+-- looking through 189 candidates of size 5
+-- looking through 1068 candidates of size 6
+-- looking through 3084 candidates of size 7
+-- looking through 12504 candidates of size 8
+-- looking through 44532 candidates of size 9
+-- looking through 165336 candidates of size 10
+-- looking through 774744 candidates of size 11
+fadder p q r  =  if p == q then (p,r) else (r,not r)
+
+TerpreT benchmark #6: 2-bit adder
+
+adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
+-- testing 5 combinations of argument values
+-- pruning with 74/92 rules
+-- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 128 candidates of size 5
+-- looking through 408 candidates of size 6
 cannot conjure
 
