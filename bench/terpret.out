@@ -1,4 +1,4 @@
-TerpreT benchmark #1
+TerpreT benchmark #1: invert
 
 invert :: [Bool] -> [Bool]
 -- testing 4 combinations of argument values
@@ -19,4 +19,31 @@ invert :: [Bool] -> [Bool]
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
 invert ps  =  map not ps
+
+TerpreT benchmark #3: binary decrement
+
+prependZero :: [Bool] -> [Bool]
+-- testing 3 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 5 candidates of size 3
+prependZero ps  =  False:ps
+
+TerpreT benchmark #3: binary decrement
+
+decrement :: [Bool] -> [Bool]
+-- testing 3 combinations of argument values
+-- pruning with 7/7 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 5 candidates of size 5
+-- looking through 7 candidates of size 6
+-- looking through 16 candidates of size 7
+-- looking through 36 candidates of size 8
+-- looking through 63 candidates of size 9
+decrement []  =  []
+decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 

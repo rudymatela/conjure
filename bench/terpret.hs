@@ -13,6 +13,8 @@ import Conjure
 import System.Environment (getArgs)
 
 
+-- TerpreT #1 -- invert --
+
 t1p :: [Bool] -> [Bool]
 t1p [False]  =  [True]
 t1p [True]   =  [False]
@@ -24,7 +26,7 @@ t1g ps  =  map not ps
 
 t1c :: IO ()
 t1c  =  do
-  putStrLn "TerpreT benchmark #1\n"
+  putStrLn "TerpreT benchmark #1: invert\n"
 
   conjure "invert" t1p
     [ pr ([] :: [Bool])
@@ -38,6 +40,58 @@ t1c  =  do
     ]
 
 
+-- TerpreT #2 -- prepend zero --
+t2p :: [Bool] -> [Bool]
+t2p [True]  =  [False,True]
+t2p [False]  =  [False,False]
+t2p [True,True]  =  [False,True,True]
+
+t2g :: [Bool] -> [Bool]
+t2g ps  =  False:ps
+
+t2c :: IO ()
+t2c  =  do
+  putStrLn "TerpreT benchmark #3: binary decrement\n"
+
+  conjure "prependZero" t2p
+    [ pr False
+    , pr True
+    , pr ([] :: [Bool])
+    , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
+    ]
+
+
+-- TerpreT #3 -- binary decrement --
+-- here we choose to represent with little-endian notation
+
+t3p :: [Bool] -> [Bool]
+-- t3p [True]  =  [False]
+t3p [True,True]  =  [False,True]             --  11 - 1 =  10
+t3p [False,True]  =  [True,False]            --  10 - 1 =   1
+t3p [False,True,True]  =  [True,False,True]  -- 110 - 1 = 101
+
+t3g :: [Bool] -> [Bool]
+t3g []  =  []
+t3g (p:ps)  =  if p
+               then False : ps
+               else True : t3g ps
+-- hah!  Conjure surprised me again:
+-- decrement []  =  []
+-- decrement (p:ps)  =  not p:(if p then ps else decrement ps)
+
+
+t3c :: IO ()
+t3c  =  do
+  putStrLn "TerpreT benchmark #3: binary decrement\n"
+
+  conjure "decrement" t3p
+    [ pr ([] :: [Bool])
+    , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
+    , prim "not" (not :: Bool -> Bool)
+    , prif (undefined :: [Bool])
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -48,4 +102,6 @@ main  =  do
 
 ts :: [IO ()]
 ts  =  [ t1c
+       , t2c
+       , t3c
        ]
