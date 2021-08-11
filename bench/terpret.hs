@@ -28,16 +28,21 @@ t1c :: IO ()
 t1c  =  do
   putStrLn "TerpreT benchmark #1: invert\n"
 
-  conjure "invert" t1p
-    [ pr ([] :: [Bool])
-    , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
-    , prim "not" (not :: Bool -> Bool)
-    ]
+  conjure "invert" t1p primitives123
 
-  conjure "invert" t1p
-    [ prim "not" (not :: Bool -> Bool)
-    , prim "map" (map :: (Bool -> Bool) -> [Bool] -> [Bool])
-    ]
+-- the same primitives are used for TerpreT #1, #2 and #3
+primitives123 :: [Prim]
+primitives123  =
+  [ pr False
+  , pr True
+  , prim "not" not
+  , prim "&&" (&&)
+  , prim "||" (||)
+  , pr ([] :: [Bool])
+  , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
+--, prim "map" (map :: (Bool -> Bool) -> [Bool] -> [Bool])
+  , prif (undefined :: [Bool])
+  ]
 
 
 -- TerpreT #2 -- prepend zero --
@@ -51,14 +56,9 @@ t2g ps  =  False:ps
 
 t2c :: IO ()
 t2c  =  do
-  putStrLn "TerpreT benchmark #3: binary decrement\n"
+  putStrLn "TerpreT benchmark #2: prepend zero\n"
 
-  conjure "prependZero" t2p
-    [ pr False
-    , pr True
-    , pr ([] :: [Bool])
-    , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
-    ]
+  conjure "prependZero" t2p primitives123
 
 
 -- TerpreT #3 -- binary decrement --
@@ -84,12 +84,7 @@ t3c :: IO ()
 t3c  =  do
   putStrLn "TerpreT benchmark #3: binary decrement\n"
 
-  conjure "decrement" t3p
-    [ pr ([] :: [Bool])
-    , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
-    , prim "not" (not :: Bool -> Bool)
-    , prif (undefined :: [Bool])
-    ]
+  conjure "decrement" t3p primitives123
 
 
 main :: IO ()
