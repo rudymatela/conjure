@@ -1,0 +1,22 @@
+TerpreT benchmark #1
+
+invert :: [Bool] -> [Bool]
+-- testing 4 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 3 candidates of size 5
+-- looking through 3 candidates of size 6
+invert []  =  []
+invert (p:ps)  =  not p:invert ps
+
+invert :: [Bool] -> [Bool]
+-- testing 4 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+invert ps  =  map not ps
+

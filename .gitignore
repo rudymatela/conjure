@@ -57,6 +57,7 @@ bench/p30
 bench/candidates
 bench/gps
 bench/lowtests
+bench/terpret
 proto/u-conjure
 test/expr
 test/conjurable

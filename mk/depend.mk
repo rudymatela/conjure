@@ -120,6 +120,19 @@ bench/take-drop.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   bench/take-drop.hs
+bench/terpret: \
+  bench/terpret.hs \
+  mk/toplibs
+bench/terpret.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  bench/terpret.hs
 eg/arith: \
   eg/arith.hs \
   mk/toplibs
