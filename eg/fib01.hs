@@ -11,6 +11,12 @@ fib01 0 1 5  =  8
 fib01 0 1 6  =  13
 fib01 0 1 7  =  21
 
+fibonacci :: Int -> Int
+fibonacci  =  f 0 1
+  where
+  f x y 0  =  y
+  f x y n  =  f y (x + y) (n - 1)
+
 main :: IO ()
 main  =  do
   conjureWithMaxSize 5 "fib01" fib01
