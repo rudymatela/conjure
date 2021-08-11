@@ -167,6 +167,36 @@ t6c  =  do
     ]
 
 
+-- TerpreT #7 -- Access --
+t7p :: [A] -> Int -> A
+t7p [1,0] 0  =  1
+t7p [1,0] 1  =  0
+t7p [0,2,1]  0  =  0
+t7p [0,2,1]  1  =  2
+t7p [0,2,1]  2  =  1
+
+t7g :: [A] -> Int -> A
+t7g [] _  =  undefined
+t7g (x:xs) 0  =  x
+t7g (x:xs) i  =  t7g xs (i-1)
+
+t7c :: IO ()
+t7c  =  do
+  putStrLn "TerpreT benchmark #6: 2-bit adder\n"
+  -- yes, one can implement index with index...
+  conjure "`access`" t7p
+    [ prim "!!" ((!!) :: [A] -> Int -> A)
+    ]
+
+  conjure "`access`" t7p
+    [ pr (0 :: Int)
+    , pr ([] :: [A])
+    , prim ":" ((:) :: A -> [A] -> [A])
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "undefined" (undefined :: A)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -182,4 +212,5 @@ ts  =  [ t1c
        , t4c
        , t5c
        , t6c
+       , t7c
        ]

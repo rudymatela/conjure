@@ -3,7 +3,10 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add `bench/terpret`?
+* complete `bench/terpret`
+
+* see `access` example on terpret, prettyprint the type signature correctly
+  as `access :: ...` instead of prefixing the infix name
 
 * remove `requireDescent=False` requirement from `gcd`
   (add and use `isDeconstruction`)

@@ -105,3 +105,27 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 408 candidates of size 6
 cannot conjure
 
+TerpreT benchmark #6: 2-bit adder
+
+(`access`) :: [A] -> Int -> A
+-- testing 5 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+xs `access` x  =  xs !! x
+
+(`access`) :: [A] -> Int -> A
+-- testing 5 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 13 candidates of size 5
+-- looking through 17 candidates of size 6
+[] `access` 0  =  undefined
+[] `access` x  =  undefined
+(x:xs) `access` 0  =  x
+(x:xs) `access` y  =  xs `access` dec y
+
