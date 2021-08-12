@@ -69,6 +69,30 @@ gps1c  =  do
     ]
 
 
+gps2p :: Double -> Double -> Int -> Double
+gps2p 2 1 1  =  2 + 1
+gps2p 2 1 2  =  2 + 1 + 1 + 0.5
+gps2p 2 1 3  =  2 + 1 + 1 + 0.5 + 0.5 + 0.25
+gps2p 3 1 1  =  3 + 1
+gps2p 3 1 2  =  3 + 1 + 1/3
+
+-- apex to apex
+gps2g :: Double -> Double -> Int -> Double
+gps2g h0 h1 0  =  h0 + h1
+gps2g h0 h1 n  =  h0 + h1 + gps2g h1 (h1 * (h1 / h0)) (n - 1)
+-- size 16 with dec, out of reach performance-wise
+
+gps2c :: IO ()
+gps2c  =  do
+  conjureWithMaxSize 6 "gps2" gps2p
+    [ pr (0 :: Int)
+    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "*" ((*) :: Double -> Double -> Double)
+    , prim "/" ((/) :: Double -> Double -> Double)
+    , prim "+" ((+) :: Double -> Double -> Double)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -79,4 +103,5 @@ main  =  do
 
 gpss :: [IO ()]
 gpss  =  [ gps1c
+         , gps2c
          ]

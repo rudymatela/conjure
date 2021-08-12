@@ -35,3 +35,14 @@ gps1 :: Int -> [Int] -> Int
 -- looking through 451 candidates of size 4
 cannot conjure
 
+gps2 :: Double -> Double -> Int -> Double
+-- testing 5 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 48 candidates of size 4
+-- looking through 138 candidates of size 5
+-- looking through 692 candidates of size 6
+cannot conjure
+
