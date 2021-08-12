@@ -33,6 +33,7 @@ EG = \
   bench/p12 \
   bench/p30 \
   bench/gps \
+  bench/gps2 \
   bench/terpret \
   proto/u-conjure
 

@@ -16,6 +16,19 @@ bench/candidates.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   bench/candidates.hs
+bench/gps2: \
+  bench/gps2.hs \
+  mk/toplibs
+bench/gps2.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Spec.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  bench/gps2.hs
 bench/gps: \
   bench/gps.hs \
   mk/toplibs

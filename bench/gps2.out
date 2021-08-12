@@ -1,0 +1,28 @@
+gps1 :: [Int] -> Maybe Int
+-- testing 4 combinations of argument values
+-- pruning with 11/21 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 1 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 1 candidates of size 9
+-- looking through 2 candidates of size 10
+gps1 xs  =  findIndex (0 >) (map (foldr (+) 0) (tail (inits xs)))
+
+gps1 :: [Int] -> Maybe Int
+-- testing 4 combinations of argument values
+-- pruning with 11/21 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 1 candidates of size 7
+-- looking through 4 candidates of size 8
+gps1 xs  =  findIndex (0 >) (map sum (tail (inits xs)))
+
