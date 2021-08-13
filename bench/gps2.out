@@ -123,3 +123,10 @@ gps7 :: Integer -> Integer -> Ratio Integer
 -- looking through 0 candidates of size 1
 cannot conjure
 
+gps :: Int -> [Int] -> (Int,Int)
+-- testing 3 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+

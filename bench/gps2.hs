@@ -274,6 +274,22 @@ gps7c  =  do
     ]
 
 
+gps8p :: Int -> [Int] -> (Int,Int)
+gps8p 2 [1,1,2]  =  (1,1)
+gps8p 3 [1,1,2]  =  (1,2)
+gps8p 2 [0,1,0,2]  =  (0,2)
+
+gps8g :: Int -> [Int] -> (Int,Int)
+gps8g x xs  =  head [(y,z) | y <- xs, z <- xs, y + z == x]
+-- this one could be generated but is a bit of a stretch...
+-- it is unintuitive to provide the given symbols
+-- gps8g :: Int -> [Int] -> (Int,Int)
+-- gps8g x xs  =  head $ filter ((x ==) . uncurry (+)) $ liftA2 (,) xs xs
+
+gps8c :: IO ()
+gps8c  =  conjure "gps" gps8p []
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -290,4 +306,5 @@ gpss  =  [ gps1c
          , gps5c
          , gps6c
          , gps7c
+         , gps8c
          ]
