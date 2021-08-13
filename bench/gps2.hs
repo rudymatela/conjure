@@ -7,6 +7,7 @@ import Conjure
 import System.Environment (getArgs)
 
 import Data.List (findIndex, inits) -- for #1
+import Data.Char (toUpper)          -- for #4
 
 
 gps1p :: [Int] -> Maybe Int
@@ -93,6 +94,61 @@ gps2c  =  do
     ]
 
 
+gps3p :: String -> Int
+gps3p "X X X X X X X X X XXX"  =  300
+gps3p "11 11 11 11 11 11 11 11 11 11"  =  20
+
+-- unreachable performance wise
+-- I presume a correct solution would need around 30 symbols
+gps3c :: IO ()
+gps3c  =  conjure "gps3" gps3p []
+
+
+
+-- GPS #4: https://www.codewars.com/kata/517abf86da9663f1d2000003
+-- Here we're using the problem description as in the GPS2 paper
+-- considering we're getting input as kebab-case.
+-- Nevertheless, this one is out of reach performance-wise (and OOM-wise)
+
+gps4p :: String -> String
+gps4p "the-stealth-warrior"  =  "theStealthWarrior"
+--gps4p "The_Stealth_Warrior"  =  "TheStealthWarrior"
+gps4p "camel-case"  =  "camelCase"
+--gps4p "snake_case"  =  "snakeCase"
+gps4p "Kebab-Case"  =  "KebabCase"
+
+gps4g :: String -> String
+gps4g ""  =  ""
+-- gps4g ('-':c:cs)  =  toUpper c : gps4g cs
+-- gps4g ('_':c:cs)  =  toUpper c : gps4g cs
+gps4g (c:cs)  =  if c == '-'                                   --  5
+                 then if null cs                               --  8
+                      then ""                                  --  9
+                      else toUpper (head cs) : gps4g (tail cs) -- 16
+                 else c : gps4g cs                             -- 19
+
+gps4c :: IO ()
+gps4c  =  do
+  let force  =  [ [val "the-stealth-warrior"]
+--              , [val "The_Stealth_Warrior"]
+                , [val "camel-case"]
+--              , [val "snake_case"]
+                , [val "Kebab-Case"]
+                ]
+  conjureWith args{forceTests = force, maxSize=6} "gps4" gps4p
+    [ pr '-'
+--  , pr '_'
+    , pr ("" :: String)
+    , prim ":" ((:) :: Char -> String -> String)
+    , prim "==" ((==) :: Char -> Char -> Bool)
+    , prim "head" (head :: String -> Char)
+    , prim "tail" (tail :: String -> String)
+    , prif (undefined :: Char)
+    , prif (undefined :: String)
+    , prim "toUpper" (toUpper :: Char -> Char)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -104,4 +160,6 @@ main  =  do
 gpss :: [IO ()]
 gpss  =  [ gps1c
          , gps2c
+         , gps3c
+         , gps4c
          ]
