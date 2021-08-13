@@ -149,6 +149,80 @@ gps4c  =  do
     ]
 
 
+-- GPS #5: Coin Sums
+-- https://projecteuler.net/problem=31
+--
+-- The problem description is inconsistent with the one given in the paper.
+--
+-- Paper: change-making problem in USD
+-- Euler: How many different ways can £2 be made using any number of coins?
+--
+-- I'm considering the Paper to be canonical, as the one in Project Euler can be solved by a constant function:
+--
+-- solution :: Int
+-- solution  =  6378216738  -- <-- arbitrary example here, I didn't run the numbers
+gps5p :: Int -> [Int]
+gps5p 100  =  [1, 0, 0, 0, 0, 0]
+gps5p  50  =  [0, 1, 0, 0, 0, 0]
+gps5p  25  =  [0, 0, 1, 0, 0, 0]
+gps5p  30  =  [0, 0, 1, 0, 1, 0]
+gps5p   3  =  [0, 0, 0, 0, 0, 3]
+
+gps5p2 :: [Int] -> Int -> [Int]
+gps5p2 [100, 50, 25, 10, 5, 1] 100  =  [1, 0, 0, 0, 0, 0]
+gps5p2 [100, 50, 25, 10, 5, 1]  50  =  [0, 1, 0, 0, 0, 0]
+gps5p2 [100, 50, 25, 10, 5, 1]  25  =  [0, 0, 1, 0, 0, 0]
+gps5p2 [100, 50, 25, 10, 5, 1]  30  =  [0, 0, 1, 0, 1, 0]
+gps5p2 [100, 50, 25, 10, 5, 1]   3  =  [0, 0, 0, 0, 0, 3]
+
+coins :: [Int]
+coins  =  [100, 50, 25, 10, 5, 1]
+
+gps5g :: Int -> [Int]
+gps5g  =  tell coins
+
+tell :: [Int] -> Int -> [Int]
+tell []     a  =  []
+tell (n:ns) a  =  a `div` n : tell ns (a `mod` n)
+
+gps5c :: IO ()
+gps5c  =  do
+  -- cannot conjure directly due to needing to introduce a local definition
+  conjure "gps5" gps5p
+    [
+    ]
+
+  let force = [ [val coins, val (100::Int)]
+              , [val coins, val ( 50::Int)]
+              , [val coins, val ( 25::Int)]
+              , [val coins, val ( 30::Int)]
+              , [val coins, val (  3::Int)]
+              ]
+  conjureWith args{forceTests=force} "tell" gps5p2
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "`div`" (div :: Int -> Int -> Int)
+    , prim "`mod`" (mod :: Int -> Int -> Int)
+    ]
+
+  conjureWith args{forceTests=force} "gps5" gps5p
+    [ pr coins
+    , prim "tell" tell
+    ]
+
+  conjureWith args{forceTests=force} "gps5" gps5p
+    [ pr (1 :: Int)
+    , pr (5 :: Int)
+    , pr (10 :: Int)
+    , pr (25 :: Int)
+    , pr (50 :: Int)
+    , pr (100 :: Int)
+    , pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "tell" tell
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -162,4 +236,5 @@ gpss  =  [ gps1c
          , gps2c
          , gps3c
          , gps4c
+         , gps5c
          ]
