@@ -130,3 +130,9 @@ gps :: Int -> [Int] -> (Int,Int)
 -- looking through 0 candidates of size 2
 cannot conjure
 
+gps :: Int -> [Char]
+-- testing 7 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+cannot conjure
+

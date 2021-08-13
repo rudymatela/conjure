@@ -290,6 +290,28 @@ gps8c :: IO ()
 gps8c  =  conjure "gps" gps8p []
 
 
+-- GPSB#9: Fizz Buzz (CW)
+gps9p :: Int -> String
+gps9p 3  =  "Fizz"
+gps9p 4  =  "4"
+gps9p 5  =  "Buzz"
+gps9p 6  =  "Fizz"
+gps9p 10  =  "Buzz"
+gps9p 15  =  "FizzBuzz"
+gps9p 17  =  "17"
+
+gps9g :: Int -> String
+gps9g x
+  | x `div` 3 == 0  =  "Fizz" -- 7
+  | x `div` 5 == 0  =  "Buzz" -- 14
+  | x `div` 3 == 0 && x `div` 5 == 0  =  "FizzBuzz" -- 27
+  | otherwise       =  show x -- 29
+
+-- probably unreachable performance-wise
+gps9c :: IO ()
+gps9c  =  conjure "gps" gps9p []
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -307,4 +329,5 @@ gpss  =  [ gps1c
          , gps6c
          , gps7c
          , gps8c
+         , gps9c
          ]
