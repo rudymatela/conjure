@@ -110,3 +110,16 @@ gps5 :: Int -> [Int]
 -- looking through 44767 candidates of size 11
 gps5 x  =  tell [25,10,5,1] x
 
+gps6 :: [Int] -> Int
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+
+gps7 :: Integer -> Integer -> Ratio Integer
+-- testing 6 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+cannot conjure
+

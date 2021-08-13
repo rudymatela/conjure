@@ -8,6 +8,7 @@ import System.Environment (getArgs)
 
 import Data.List (findIndex, inits) -- for #1
 import Data.Char (toUpper)          -- for #4
+import Data.Ratio ((%))             -- for #7
 
 
 gps1p :: [Int] -> Maybe Int
@@ -224,6 +225,55 @@ gps5c  =  do
     ]
 
 
+-- GPS2#6: Cut Vector
+gps6g :: [Int] -> Int
+gps6g xs  =  snd
+          $  minimum
+          [  (abs (sum xs0 - sum xs1), i)
+          |  i <- [0 .. length xs]
+          ,  let (xs0, xs1) = splitAt i xs
+          ]
+
+-- not Conjurable due to needing local definition
+-- I conjecture it _perhaps-maybe_ this could be done in 3 steps,
+-- but I'll leave this as-is for now.
+gps6c :: IO ()
+gps6c  =
+  conjure "gps6" gps6g []
+
+
+-- GPS2#7: Dice Game
+-- https://projecteuler.net/problem=31
+-- https://github.com/thelmuth/Clojush/blob/psb2-v1.0/src/clojush/problems/psb2/dice_game.clj
+-- again, paper and problem are inconsistent, going with paper
+gps7p :: Integer -> Integer -> Rational
+gps7p 4 6  =  1 % 4
+gps7p 6 4  =  7 % 12
+gps7p 2 4  =  1 % 8
+gps7p 4 2  =  5 % 8
+gps7p 2 6  =  1 % 12
+gps7p 6 2  =  3 % 4
+
+gps7g :: Integer -> Integer -> Rational
+gps7g peter colin  =  sum (map (min colin) [0 .. (peter-1)]) % (colin*peter)
+
+-- out of reach performance-wise
+gps7c :: IO ()
+gps7c  =  do
+  conjureWith args{maxSize=6} "gps7" gps7p $ take 0
+    [ pr (0 :: Integer)
+    , pr (1 :: Integer)
+    , prim "%" ((%) :: Integer -> Integer -> Rational)
+    , prim "+" ((+) :: Integer -> Integer -> Integer)
+    , prim "-" ((-) :: Integer -> Integer -> Integer)
+    , prim "*" ((*) :: Integer -> Integer -> Integer)
+    , prim "min" (min :: Integer -> Integer -> Integer)
+    , prim ".." (enumFromTo :: Integer -> Integer -> [Integer])
+    , prim "map" (map :: (Integer -> Integer) -> [Integer] -> [Integer])
+    , prim "sum" (sum :: [Integer] -> Integer)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -238,4 +288,6 @@ gpss  =  [ gps1c
          , gps3c
          , gps4c
          , gps5c
+         , gps6c
+         , gps7c
          ]
