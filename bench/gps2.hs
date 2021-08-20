@@ -312,6 +312,19 @@ gps9c :: IO ()
 gps9c  =  conjure "gps" gps9p []
 
 
+gps10p :: [Int] -> Int
+gps10p [1,2,3]  =  -5
+gps10p [10,20,30]  =  13
+
+-- does not do rounding
+gps10g :: [Int] -> Int
+gps10g xs  =  sum $ map (\x -> x `div` 3 - 2) xs
+
+-- unreachable due to lambda
+gps10c :: IO ()
+gps10c  =  conjure "gps" gps9p []
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -330,4 +343,5 @@ gpss  =  [ gps1c
          , gps7c
          , gps8c
          , gps9c
+         , gps10c
          ]
