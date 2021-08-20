@@ -320,6 +320,10 @@ gps10p [10,20,30]  =  13
 -- does not do rounding
 gps10g :: [Int] -> Int
 gps10g xs  =  sum $ map (\x -> x `div` 3 - 2) xs
+-- TODO: reachable with explicit fold?
+-- gps10g []  =  0
+-- gps10g (x:xs)  =  x`div`3 - 2 : gps10g xs
+-- ??
 
 -- unreachable due to lambda
 gps10c :: IO ()
