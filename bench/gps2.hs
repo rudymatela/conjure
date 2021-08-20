@@ -466,6 +466,40 @@ gps16c  =  conjure "gps16_middle" gps16p
   ]
 
 
+gps17p :: [Int] -> Int
+gps17p [0,1,0]  =  0
+gps17p [1,1]  =  1
+gps17p [1,1,0]  =  1
+gps17p [0,1,1]  =  1
+gps17p [1,1,1]  =  2
+
+gps17g :: [Int] -> Int
+gps17g xs  =  pds xs
+  where
+  pds []  =  0
+  pds (x:xs)  =  if not (null xs) && x == head xs
+                 then x + pds xs
+                 else pds xs
+-- surprise:
+-- gps17_pds []  =  0
+-- gps17_pds (x:xs)  =  (if not (null xs) && head xs == x then x else 0) + gps17_pds xs
+
+
+-- can generate at size 15 in 18 seconds
+-- setting limit of 5 for faster output
+gps17c :: IO ()
+gps17c  =  conjureWith args{maxSize=5} "gps17_pds" gps17p
+  [ pr (0 :: Int)
+  , prif (undefined :: Int)
+  , prim "not" not
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "==" ((==) :: Int -> Int -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "&&" (&&)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -491,4 +525,5 @@ gpss  =  [ gps1c
          , gps14c
          , gps15c
          , gps16c
+         , gps17c
          ]

@@ -213,3 +213,13 @@ gps16_middle :: [Char] -> [Char]
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1 then c:cs else gps16_middle (init cs)
 
+gps17_pds :: [Int] -> Int
+-- testing 5 combinations of argument values
+-- pruning with 29/40 rules
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 5 candidates of size 5
+cannot conjure
+
