@@ -424,6 +424,48 @@ gps14c  =  conjure "gps14_luhn" gps14p
   ]
 
 
+gps15p :: () -> ()
+gps15p  =  undefined
+
+-- skipped
+gps15c :: IO ()
+gps15c  =  conjure "gps15_mastermind" gps15p []
+
+
+gps16p :: String -> String
+gps16p "a"      =  "a"
+gps16p "aaa"    =  "a"
+gps16p "aa"     =  "aa"
+gps16p "a a"    =  " "
+gps16p " a "    =  "a"
+gps16p "a a "   =  " a"
+gps16p " a a "  =  " "
+
+gps16g1 :: String -> String
+gps16g1 s  =  if odd len
+              then take 1 (drop (len `div` 2) s)
+              else take 2 (drop (len `div` 2 - 1) s)
+  where
+  len  =  length s
+
+gps16g2 :: String -> String
+gps16g2 ""  =  ""
+gps16g2 (c:cs)  =  if length cs <= 1
+                   then c : cs
+                   else gps16g2 (init cs)
+
+gps16c :: IO ()
+gps16c  =  conjure "gps16_middle" gps16p
+  [ pr ""
+  , pr (1 :: Int)
+  , prim "<=" ((<=) :: Int -> Int -> Bool)
+  , prim ":" ((:) :: Char -> String -> String)
+  , prim "length" (length :: String -> Int)
+  , prim "init" (init :: String -> String)
+  , prif (undefined :: String)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -447,4 +489,6 @@ gpss  =  [ gps1c
          , gps12c
          , gps13c
          , gps14c
+         , gps15c
+         , gps16c
          ]

@@ -189,3 +189,27 @@ gps14_luhn :: [Int] -> Int
 -- looking through 0 candidates of size 2
 cannot conjure
 
+gps15_mastermind :: () -> ()
+-- testing 0 combinations of argument values
+-- pruning with 0/1 rules
+-- looking through 1 candidates of size 1
+gps15_mastermind u  =  u
+
+gps16_middle :: [Char] -> [Char]
+-- testing 7 combinations of argument values
+-- pruning with 10/11 rules
+-- looking through 2 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 12 candidates of size 4
+-- looking through 21 candidates of size 5
+-- looking through 34 candidates of size 6
+-- looking through 61 candidates of size 7
+-- looking through 126 candidates of size 8
+-- looking through 307 candidates of size 9
+-- looking through 824 candidates of size 10
+-- looking through 2282 candidates of size 11
+-- looking through 6293 candidates of size 12
+gps16_middle ""  =  ""
+gps16_middle (c:cs)  =  if length cs <= 1 then c:cs else gps16_middle (init cs)
+
