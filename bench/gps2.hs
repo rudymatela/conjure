@@ -394,6 +394,36 @@ gps13c  =  conjure "gps13_leaders" gps13p
   ]
 
 
+gps14p :: [Int] -> Int
+gps14p  =  undefined
+
+-- 30 symbols
+gps14g :: [Int] -> Int
+gps14g  =  luhn
+  where
+  luhn :: [Int] -> Int
+  luhn xs  =  sum (firsts xs ++ map double9 (seconds xs))
+    where
+    double9 :: Int -> Int
+    double9 x  =  if xx > 9
+                  then xx - 9
+                  else xx
+      where
+      xx  =  x * 2
+    seconds :: [Int] -> [Int]
+    seconds []  =  []
+    seconds (x:y:xs)  =  y : seconds xs
+    firsts :: [Int] -> [Int]
+    firsts []  =  []
+    firsts (x:y:xs)  =  x : seconds xs
+
+-- cannot Conjure directly
+gps14c :: IO ()
+gps14c  =  conjure "gps14_luhn" gps14p
+  [
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -416,4 +446,5 @@ gpss  =  [ gps1c
          , gps11c
          , gps12c
          , gps13c
+         , gps14c
          ]

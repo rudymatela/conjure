@@ -182,3 +182,10 @@ gps13_leaders :: [Int] -> [Int]
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs then x:gps13_leaders xs else gps13_leaders xs
 
+gps14_luhn :: [Int] -> Int
+-- testing 0 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+
