@@ -154,3 +154,13 @@ gcd :: Int -> Int -> Int
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
+gps12 :: [Char] -> [Char] -> [Int]
+-- testing 5 combinations of argument values
+-- pruning with 1/2 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 4 candidates of size 5
+gps12 cs ds  =  findIndices (ds `isPrefixOf`) (tails cs)
+

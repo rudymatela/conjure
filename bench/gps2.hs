@@ -6,9 +6,10 @@
 import Conjure
 import System.Environment (getArgs)
 
-import Data.List (findIndex, inits) -- for #1
-import Data.Char (toUpper)          -- for #4
-import Data.Ratio ((%))             -- for #7
+import Data.List (findIndex, inits)               -- for  #1
+import Data.Char (toUpper)                        -- for  #4
+import Data.Ratio ((%))                           -- for  #7
+import Data.List (findIndices, tails, isPrefixOf) -- for #12
 
 
 gps1p :: [Int] -> Maybe Int
@@ -351,6 +352,24 @@ gps11c  =  conjureWith args{requireDescent=False} "gcd a b" gps11p
   -- gcd x y  =  gcd y (x `mod` y)
 
 
+gps12p :: String -> String -> [Int]
+gps12p "a"   "a"   =  [0]
+gps12p "aa"  "a"   =  [0,1]
+gps12p "aa"  "aa"  =  [0]
+gps12p "a a" "a"   =  [0,2]
+gps12p "b"   "a"   =  []
+
+gps12g :: String -> String -> [Int]
+gps12g s s'  =  findIndices (s' `isPrefixOf`) (tails s)
+
+gps12c :: IO ()
+gps12c  =  conjure "gps12" gps12p
+  [ prim "findIndices" (findIndices :: (String -> Bool) -> [String] -> [Int])
+  , prim "`isPrefixOf`" (isPrefixOf :: String -> String -> Bool)
+  , prim "tails" (tails :: String -> [String])
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -371,4 +390,5 @@ gpss  =  [ gps1c
          , gps9c
          , gps10c
          , gps11c
+         , gps12c
          ]
