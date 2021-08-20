@@ -370,6 +370,30 @@ gps12c  =  conjure "gps12" gps12p
   ]
 
 
+gps13p :: [Int] -> [Int]
+gps13p [0,1]  =  [1]
+gps13p [1,0]  =  [1,0]
+gps13p [2,0,1]  =  [2,1]
+gps13p [1,0,1]  =  [1]
+
+gps13g :: [Int] -> [Int]
+gps13g  =  leaders
+  where
+  leaders []  =  []
+  leaders (x:xs)  =  if all (x >) xs
+                     then x : leaders xs
+                     else leaders xs
+
+gps13c :: IO ()
+gps13c  =  conjure "gps13_leaders" gps13p
+  [ pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prim ">" ((>) :: Int -> Int -> Bool)
+  , prim "all" (all :: (Int -> Bool) -> [Int] -> Bool)
+  , prif (undefined :: [Int])
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -391,4 +415,5 @@ gpss  =  [ gps1c
          , gps10c
          , gps11c
          , gps12c
+         , gps13c
          ]
