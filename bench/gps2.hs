@@ -325,6 +325,32 @@ gps10c :: IO ()
 gps10c  =  conjure "gps" gps9p []
 
 
+gps11p :: Int -> Int -> Int
+gps11p  =  gcd'
+  where
+  gcd' :: Int -> Int -> Int
+  gcd' 1 1  =  1
+  gcd' 1 2  =  1
+  gcd' 2 1  =  1
+  gcd' 2 2  =  2
+  gcd' 2 6  =  2
+  gcd' 6 2  =  2
+  gcd' 3 6  =  3
+  gcd' 6 3  =  3
+  gcd' 6 9  =  3
+  gcd' 9 6  =  3
+  gcd' 12 18  =  6
+
+gps11c :: IO ()
+gps11c  =  conjureWith args{requireDescent=False} "gcd a b" gps11p
+  [ pr (0::Int)
+  , prim "`mod`" (mod :: Int -> Int -> Int)
+  ]
+  -- generated function:
+  -- gcd x 0  =  x
+  -- gcd x y  =  gcd y (x `mod` y)
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -344,4 +370,5 @@ gpss  =  [ gps1c
          , gps8c
          , gps9c
          , gps10c
+         , gps11c
          ]
