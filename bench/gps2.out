@@ -245,3 +245,10 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- looking through 2960 candidates of size 6
 cannot conjure
 
+gps20 :: [Char] -> Bool
+-- testing 0 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+cannot conjure
+

@@ -550,6 +550,15 @@ gps19c  =  conjureWithMaxSize 6 "gps19_snowday" gps19p
   ]
 
 
+gps20p :: String -> Bool
+gps20p  =  undefined
+
+gps20c :: IO ()
+gps20c  =  conjure "gps20" gps20p
+  [
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -578,4 +587,5 @@ gpss  =  [ gps1c
          , gps17c
          , gps18c
          , gps19c
+         , gps20c
          ]
