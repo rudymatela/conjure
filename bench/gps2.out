@@ -223,3 +223,25 @@ gps17_pds :: [Int] -> Int
 -- looking through 5 candidates of size 5
 cannot conjure
 
+gps18_price :: [Double] -> [Double] -> Double
+-- testing 4 combinations of argument values
+-- pruning with 28/34 rules
+-- looking through 2 candidates of size 1
+-- looking through 8 candidates of size 2
+-- looking through 72 candidates of size 3
+-- looking through 72 candidates of size 4
+-- looking through 1192 candidates of size 5
+-- looking through 696 candidates of size 6
+cannot conjure
+
+gps19_snowday :: Int -> Double -> Double -> Double -> Double
+-- testing 7 combinations of argument values
+-- pruning with 7/12 rules
+-- looking through 3 candidates of size 1
+-- looking through 7 candidates of size 2
+-- looking through 24 candidates of size 3
+-- looking through 144 candidates of size 4
+-- looking through 399 candidates of size 5
+-- looking through 2960 candidates of size 6
+cannot conjure
+

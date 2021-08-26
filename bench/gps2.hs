@@ -527,6 +527,29 @@ gps18c  =  conjureWithMaxSize 6 "gps18_price" gps18p
   ]
 
 
+gps19p :: Int -> Double -> Double -> Double -> Double
+gps19p 0 0 1.0 1.0  =  0
+gps19p 1 0 1.0 1.0  =  0
+gps19p 2 0 1.0 1.0  =  0
+gps19p 1 0 1.0 2.0  =  1.0
+gps19p 2 0 1.0 2.0  =  2.0
+gps19p 1 0 0.5 1.0  =  0.5
+gps19p 2 0 0.5 1.0  =  1.0
+
+gps19g :: Int -> Double -> Double -> Double -> Double
+gps19g 0 total melt fall  =  total
+gps19g n total melt fall  =  gps19p (n-1) (max 0 (total-melt+fall)) melt fall
+
+gps19c :: IO ()
+gps19c  =  conjureWithMaxSize 6 "gps19_snowday" gps19p
+  [ pr (0 :: Int)
+  , prim "dec" (subtract 1 :: Int -> Int)
+  , prim "max" (max :: Double -> Double -> Double)
+  , prim "+" ((+) :: Double -> Double -> Double)
+  , prim "-" ((-) :: Double -> Double -> Double)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -554,4 +577,5 @@ gpss  =  [ gps1c
          , gps16c
          , gps17c
          , gps18c
+         , gps19c
          ]
