@@ -504,6 +504,29 @@ gps17c  =  conjureWith args{maxSize=5} "gps17_pds" gps17p
   ]
 
 
+gps18p :: [Double] -> [Double] -> Double
+gps18p [1.0] [0.5]  =  0.5
+gps18p [2.0] [0.5]  =  1.0
+gps18p [1.0,1.0] [0.5,0.0]  =  1.5
+gps18p [1.0,1.0] [0.0,0.5]  =  1.5
+
+gps18g :: [Double] -> [Double] -> Double
+gps18g prices discounts  =  foldr (+) 0 (zipWith (*) prices (map (1-) discounts))
+
+-- this was OOM'd
+gps18c :: IO ()
+gps18c  =  conjureWithMaxSize 6 "gps18_price" gps18p
+  [ pr (0 :: Double)
+  , pr (1 :: Double)
+  , prim "+" ((+) :: Double -> Double -> Double)
+  , prim "*" ((*) :: Double -> Double -> Double)
+  , prim "-" ((-) :: Double -> Double -> Double)
+--  , prim "foldr" (foldr :: (Double -> Double -> Double) -> Double -> [Double] -> Double)
+--   , prim "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
+--  , prim "map" (map :: (Double -> Double) -> [Double] -> [Double])
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -530,4 +553,5 @@ gpss  =  [ gps1c
          , gps15c
          , gps16c
          , gps17c
+         , gps18c
          ]
