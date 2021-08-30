@@ -3,7 +3,7 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 {-# LANGUAGE CPP, TemplateHaskell #-}
-#if __GLASGOW_HASKELL__ < 710
+#if __GLASGOW_HASKELL__ <= 710
 {-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
 import Data.Typeable
 #endif
@@ -683,7 +683,7 @@ data Twitter  =  Tweet Int
               |  Empty
               deriving (Eq, Show)
 
-#if __GLASGOW_HASKELL__ < 710
+#if __GLASGOW_HASKELL__ <= 710
 deriving instance Typeable Twitter
 
 instance Express Twitter where
