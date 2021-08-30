@@ -2,7 +2,7 @@
 --
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
-{-# LANGUAGE CPP #-}
+{-# LANGUAGE CPP, TemplateHaskell #-}
 import Conjure
 import System.Environment (getArgs)
 
@@ -11,6 +11,8 @@ import Data.Char (toUpper)                        -- for  #4
 import Data.Ratio ((%))                           -- for  #7
 import Data.List (findIndices, tails, isPrefixOf) -- for #12
 import Data.Maybe (fromJust)                      -- for #23
+import Test.LeanCheck                             -- for #24
+import Data.Express                               -- for #24
 
 
 gps1p :: [Int] -> Maybe Int
@@ -672,6 +674,52 @@ gps23c  =  do
     ]
 
 
+data Twitter  =  Tweet Int
+              |  TooMany
+              |  Empty
+              deriving (Eq, Show)
+
+deriveExpress  ''Twitter
+deriveListable ''Twitter
+deriveName     ''Twitter
+
+instance Conjurable Twitter where
+  conjureExpress   =  reifyExpress
+  conjureEquality  =  reifyEquality
+  conjureTiers     =  reifyTiers
+
+gps24g_twitter :: String -> Twitter
+gps24g_twitter ""  =  Empty
+gps24g_twitter s  =  if length s > 140
+                     then TooMany
+                     else Tweet (length s)
+
+gps24p_twitter :: String -> Twitter
+gps24p_twitter "" =  Empty
+gps24p_twitter "abcd"  =  Tweet 4
+gps24p_twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij"  =  Tweet 140
+gps24p_twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX"  =  TooMany
+
+gps24c :: IO ()
+gps24c  =  do
+  let force = [ [ val "" ]
+              , [ val "abcd" ]
+              , [ val "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij" ]
+              , [ val "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX" ]
+              ]
+  conjureWith args{maxTests=360, forceTests=force} "gps24" gps24p_twitter
+    [ pr Empty
+    , pr TooMany
+    , prim "Tweet" Tweet
+    , prif (undefined :: Twitter)
+    , pr ""
+    , prim ":" ((:) :: Char -> String -> String)
+    , prim "length" (length :: String -> Int)
+    , pr (140 :: Int)
+    , prim ">" ((>) :: Int -> Int -> Bool)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -704,4 +752,5 @@ gpss  =  [ gps1c
          , gps21c
          , gps22c
          , gps23c
+         , gps24c
          ]

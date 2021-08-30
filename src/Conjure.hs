@@ -76,6 +76,8 @@ module Conjure
   , reifyEquality
   , reifyTiers
   , conjureType
+  , Name (..)
+  , Express (..)
 
 -- * Pure interfaces
   , conjpure

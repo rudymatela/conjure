@@ -33,6 +33,8 @@ module Conjure.Conjurable
   , cevaluate
   , ceval
   , cevl
+  , Name (..)
+  , Express (..)
   )
 where
 
@@ -44,6 +46,7 @@ import Conjure.Defn
 import Test.Speculate.Expr
 import Data.Functor ((<$>))
 import Control.Applicative ((<*>))
+import Data.Express
 
 import Data.Int     -- for instances
 import Data.Word    -- for instances
