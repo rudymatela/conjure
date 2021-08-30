@@ -679,7 +679,12 @@ data Twitter  =  Tweet Int
               |  Empty
               deriving (Eq, Show)
 
-deriveExpress  ''Twitter
+instance Express Twitter where
+  expr (Tweet n)  =  value "Tweet" Tweet :$ expr n
+  expr t  =  val t
+
+-- Does not work on GHC 7.8
+-- deriveExpress  ''Twitter
 deriveListable ''Twitter
 deriveName     ''Twitter
 
