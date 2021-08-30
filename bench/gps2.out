@@ -336,3 +336,14 @@ gps24 :: [Char] -> Twitter
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs then Tweet (length (c:cs)) else TooMany
 
+gps25 :: [Double] -> [Double] -> Double
+-- testing 6 combinations of argument values
+-- pruning with 33/58 rules
+-- looking through 2 candidates of size 1
+-- looking through 9 candidates of size 2
+-- looking through 89 candidates of size 3
+-- looking through 312 candidates of size 4
+-- looking through 2262 candidates of size 5
+-- looking through 9400 candidates of size 6
+cannot conjure
+

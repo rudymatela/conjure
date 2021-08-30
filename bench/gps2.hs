@@ -720,6 +720,32 @@ gps24c  =  do
     ]
 
 
+gps25p :: [Double] -> [Double] -> Double
+gps25p [0] [1]  =  1
+gps25p [1] [0]  =  1
+gps25p [-1] [1]  =  2
+gps25p [0,1] [1,0]  =  sqrt 2
+gps25p [1,0] [0,1]  =  sqrt 2
+gps25p [0,0,1] [1,0,0]  =  sqrt 2
+gps25p [0,1,2] [1,2,3]  =  sqrt 3
+
+gps25g :: [Double] -> [Double] -> Double
+gps25g v1 v2  =  sqrt (foldr (+) 0 (map (^2) (zipWith (-) v1 v2)))
+
+-- out of reach performance-wise
+gps25c :: IO ()
+gps25c  =  conjureWith args{maxSize=6} "gps25" gps25p
+  [ pr (0 :: Double)
+  , pr (2 :: Double)
+  , prim "+" ((+) :: Double -> Double -> Double)
+  , prim "-" ((-) :: Double -> Double -> Double)
+  , prim "**" ((**) :: Double -> Double -> Double)
+  , prim "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
+  , prim "map" (map :: (Double -> Double) -> [Double] -> [Double])
+  , prim "sqrt" (sqrt :: Double -> Double)
+  ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -753,4 +779,5 @@ gpss  =  [ gps1c
          , gps22c
          , gps23c
          , gps24c
+         , gps25c
          ]
