@@ -216,16 +216,16 @@ tests n  =
     == True
 
   , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "double" ((*2) :: Int -> Int))
-    == True -- TODO: shouldn't this be false?
+    == False
 
   , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "inc" ((+1) :: Int -> Int))
-    == True
+    == False -- _almost_ converges half the time
 
   , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "tail" (tail :: [Int] -> [Int]))
     == True
 
   , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "prep" ((0:) :: [Int] -> [Int]))
-    == True -- TODO: shouldn't this be false?
+    == False
   ]
 
 ffs :: Expr -> Expr

@@ -255,7 +255,7 @@ conjureIsDeconstructor f maxTests e  =  case as of
     sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
                     , isWellTyped (sz :$ h)]
     esz e  =  eval (0::Int) (sz :$ e)
-    is e  =  esz (h :$ e) < esz e
+    is e'  =  errorToFalse $ esz (e :$ e') < esz e'
 
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f e  =  head

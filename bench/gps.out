@@ -121,11 +121,11 @@ gps9 :: Int -> [Int]
 -- looking through 4 candidates of size 3
 -- looking through 4 candidates of size 4
 -- looking through 10 candidates of size 5
--- looking through 25 candidates of size 6
--- looking through 35 candidates of size 7
--- looking through 87 candidates of size 8
--- looking through 150 candidates of size 9
--- looking through 272 candidates of size 10
+-- looking through 24 candidates of size 6
+-- looking through 34 candidates of size 7
+-- looking through 83 candidates of size 8
+-- looking through 143 candidates of size 9
+-- looking through 259 candidates of size 10
 gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
 wallisNext :: Ratio Integer -> Ratio Integer
