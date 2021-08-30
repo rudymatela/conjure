@@ -3,6 +3,9 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 {-# LANGUAGE CPP, TemplateHaskell #-}
+#if __GLASGOW_HASKELL__ < 710
+{-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
+#endif
 import Conjure
 import System.Environment (getArgs)
 
@@ -679,12 +682,15 @@ data Twitter  =  Tweet Int
               |  Empty
               deriving (Eq, Show)
 
+#if __GLASGOW_HASKELL__ < 710
+deriving instance Typeable Twitter
+
 instance Express Twitter where
   expr (Tweet n)  =  value "Tweet" Tweet :$ expr n
   expr t  =  val t
-
--- Does not work on GHC 7.8
--- deriveExpress  ''Twitter
+#else
+deriveExpress  ''Twitter
+#endif
 deriveListable ''Twitter
 deriveName     ''Twitter
 
