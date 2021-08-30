@@ -5,6 +5,7 @@
 {-# LANGUAGE CPP, TemplateHaskell #-}
 #if __GLASGOW_HASKELL__ < 710
 {-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
+import Data.Typeable
 #endif
 import Conjure
 import System.Environment (getArgs)
