@@ -252,3 +252,68 @@ gps20 :: [Char] -> Bool
 -- looking through 0 candidates of size 2
 cannot conjure
 
+spin :: [Char] -> [Char]
+-- testing 7 combinations of argument values
+-- pruning with 6/6 rules
+-- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 4 candidates of size 8
+spin cs  =  if length cs >= 5 then reverse cs else cs
+
+gps21_spinwords :: [Char] -> [Char]
+-- testing 4 combinations of argument values
+-- pruning with 16/16 rules
+-- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 5 candidates of size 5
+gps21_spinwords cs  =  unwords (map spin (words cs))
+
+digits :: Int -> [Int]
+-- testing 5 combinations of argument values
+-- pruning with 7/7 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 11 candidates of size 5
+-- looking through 14 candidates of size 6
+-- looking through 85 candidates of size 7
+-- looking through 104 candidates of size 8
+-- looking through 811 candidates of size 9
+-- looking through 935 candidates of size 10
+-- looking through 8602 candidates of size 11
+-- looking through 9686 candidates of size 12
+cannot conjure
+
+gps22 :: Int -> [Char]
+-- testing 0 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+cannot conjure
+
+gps23 :: [Char] -> [Char] -> [Char] -> [Char]
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 3 candidates of size 1
+-- looking through 12 candidates of size 2
+-- looking through 33 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 162 candidates of size 5
+-- looking through 612 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 3168 candidates of size 9
+-- looking through 0 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 5184 candidates of size 12
+cannot conjure
+

@@ -10,6 +10,7 @@ import Data.List (findIndex, inits)               -- for  #1
 import Data.Char (toUpper)                        -- for  #4
 import Data.Ratio ((%))                           -- for  #7
 import Data.List (findIndices, tails, isPrefixOf) -- for #12
+import Data.Maybe (fromJust)                      -- for #23
 
 
 gps1p :: [Int] -> Maybe Int
@@ -618,6 +619,59 @@ gps21c  =  do
     ]
 
 
+digits :: Int -> [Int]
+digits 0  =  []
+digits n  =  n `mod` 10 : digits (n `div` 10)
+
+digits' :: Int -> [Int]
+digits' 1  =  [1]
+digits' 12  =  [2,1]
+digits' 21  =  [1,2]
+digits' 123  =  [3,2,1]
+digits' 321  =  [1,2,3]
+
+gps22p :: Int -> String
+gps22p  =  undefined
+
+gps22c :: IO ()
+gps22c  =  do
+  conjure "digits" digits'
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "`div`" (div :: Int -> Int -> Int)
+    , prim "`mod`" (mod :: Int -> Int -> Int)
+    , prim "div10" ((`div` 10) :: Int -> Int)
+    , pr (10 :: Int)
+    ]
+
+  conjure "gps22" gps22p
+    [
+    ]
+
+
+gps23p :: String -> String -> String -> String
+gps23p "abcd" "abcd" "abcd"  =  "abcd"
+gps23p "abcd" "dcba" "abcd"  =  "dcba"
+gps23p "abcd" "1234" "abcd"  =  "1234"
+gps23p "abcd" "1234" "bacd"  =  "2134"
+
+gps23g :: String -> String -> String -> String
+-- gps23g f t s  =  map (\c -> fromJust $ c `lookup` zipWith (,) f t) s
+gps23g f t s  =  map (fromJust . (`lookup` zipWith (,) f t)) s
+
+gps23c :: IO ()
+gps23c  =  do
+  let force = [ [ val "abcd", val "abcd", val "abcd" ]
+              , [ val "abcd", val "dcba", val "abcd" ]
+              , [ val "abcd", val "1234", val "abcd" ]
+              , [ val "abcd", val "1234", val "bacd" ]
+              ]
+  -- cannot conjure, needs lambda
+  conjureWith args{forceTests=force} "gps23" gps23p
+    [
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -648,4 +702,6 @@ gpss  =  [ gps1c
          , gps19c
          , gps20c
          , gps21c
+         , gps22c
+         , gps23c
          ]
