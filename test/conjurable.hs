@@ -220,6 +220,12 @@ tests n  =
 
   , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "inc" ((+1) :: Int -> Int))
     == True
+
+  , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "tail" (tail :: [Int] -> [Int]))
+    == True
+
+  , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "prep" ((0:) :: [Int] -> [Int]))
+    == True -- TODO: shouldn't this be false?
   ]
 
 ffs :: Expr -> Expr
