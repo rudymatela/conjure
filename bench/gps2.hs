@@ -559,6 +559,65 @@ gps20c  =  conjure "gps20" gps20p
   ]
 
 
+gps21p :: String -> String
+gps21p "word"  =  "word"
+gps21p "words"  =  "sdrow"
+gps21p "word words"  =  "word sdrow"
+gps21p "words word"  =  "sdrow word"
+
+spin' :: String -> String
+spin' "abc"  =  "abc"
+spin' "abcd"  =  "abcd"
+spin' "word"  =  "word"
+spin' "abcde"  =  "edcba"
+spin' "words"  =  "sdrow"
+spin' "hello"  =  "olleh"
+spin' "world"  =  "dlrow"
+
+spin :: String -> String
+spin w  =  if length w >= 5
+           then reverse w
+           else w
+
+gps21g :: String -> String
+gps21g s  =  unwords (map spin (words s))
+
+gps21c :: IO ()
+gps21c  =  do
+  let force  =  [ [ val "abc" ]
+                , [ val "abcd" ]
+                , [ val "word" ]
+                , [ val "abcde" ]
+                , [ val "words" ]
+                , [ val "hello" ]
+                , [ val "world" ]
+                ]
+  conjureWith args{maxSize=12, forceTests=force} "spin" spin'
+    [ prim "length"  (length :: String -> Int)
+    , prim "reverse" (reverse :: String -> String)
+    , prif (undefined :: String)
+    , prim ">="      ((>=) :: Int -> Int -> Bool)
+    , pr (5 :: Int)
+    ]
+
+  let force  =  [ [ val "word" ]
+                , [ val "words" ]
+                , [ val "word words" ]
+                , [ val "words word" ]
+                ]
+  conjureWith args{maxSize=12, forceTests=force} "gps21_spinwords" gps21p
+    [ prim "words"   words
+    , prim "unwords" unwords
+    , prim "spin"    (spin :: String -> String)
+    , prim "map"     (map :: (String -> String) -> [String] -> [String])
+    , prim "length"  (length :: String -> Int)
+    , prim "reverse" (reverse :: String -> String)
+    , prif (undefined :: String)
+    , prim ">="      ((>=) :: Int -> Int -> Bool)
+    , pr (5 :: Int)
+    ]
+
+
 main :: IO ()
 main  =  do
   as <- getArgs
@@ -588,4 +647,5 @@ gpss  =  [ gps1c
          , gps18c
          , gps19c
          , gps20c
+         , gps21c
          ]
