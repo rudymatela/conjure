@@ -236,7 +236,7 @@ tests n  =
   , isDecon (tail' is_)          == True
   , isDecon (init' is_)          == True
   , isDecon (mod' i_ two)        == True
-  , isDecon (mod' i_ xx)         == False -- TODO: make this True somehow
+  , isDecon (mod' i_ xx)         == True
 
   , isDecon (div' xx yy)         == False -- must have a hole to indicate the value being deconstructed
   , isDecon (div' i_ i_)         == False -- two holes are not allowed
