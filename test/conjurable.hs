@@ -235,6 +235,8 @@ tests n  =
   , isDecon (div' i_ two)        == True
   , isDecon (tail' is_)          == True
   , isDecon (init' is_)          == True
+  , isDecon (mod' i_ two)        == True
+  , isDecon (mod' i_ xx)         == False -- TODO: make this True somehow
 
   , isDecon (div' xx yy)         == False -- must have a hole to indicate the value being deconstructed
   , isDecon (div' i_ i_)         == False -- two holes are not allowed
@@ -272,3 +274,8 @@ init' :: Expr -> Expr
 init' exs  =  initE :$ exs
   where
   initE  =  value "init" (init :: [Int] -> [Int])
+
+mod' :: Expr -> Expr -> Expr
+mod' ex ey  =  modE :$ ex :$ ey
+  where
+  modE  =  value "`mod`" (mod :: Int -> Int -> Int)
