@@ -259,10 +259,12 @@ conjureIsDeconstructor f maxTests e  =  case as of
     is e'  =  errorToFalse $ esz (e :$ e') < esz e'
 
 -- the result does not increase the size for at least half the time
+-- the result decreases in size for at least a third of the time
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                                        && typ h == typ ed
                                        && count is gs >= length gs `div` 2
+                                       && count iz gs >= length gs `div` 3
   where
   gs  =  take maxTests $ grounds (conjureTiersFor f) ed
   [h]  =  holes ed
@@ -270,6 +272,7 @@ conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                   , isWellTyped (sz :$ h)]
   esz e  =  eval (0::Int) (sz :$ e)
   is e  =  errorToFalse $ esz e <= esz (holeValue e)
+  iz e  =  errorToFalse $ esz e < esz (holeValue e)
   holeValue e  =  fromMaybe err
                .  lookup h
                .  fromMaybe err
