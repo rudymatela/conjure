@@ -229,7 +229,21 @@ tests n  =
 
   , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "prep" ((0:) :: [Int] -> [Int]))
     == False
+
+  , isDecon (minus :$ i_ :$ one) == True
+  , isDecon (minusOne -+- i_)    == True
+  , isDecon (div' i_ two)        == True
+  , isDecon (tail' is_)          == True
+  , isDecon (init' is_)          == True
+
+  , isDecon (div' xx yy)         == False -- must have a hole to indicate the value being deconstructed
+  , isDecon (div' i_ i_)         == False -- two holes are not allowed
+  , isDecon (head' is_)          == False -- must deconstruct to the same type
+  , isDecon (i_ -*- two)         == False -- increases the size
   ]
+
+isDecon :: Expr -> Bool
+isDecon =  conjureIsDeconstruction (undefined :: [Int] -> [Char] -> [Bool]) 60
 
 ffs :: Expr -> Expr
 ffs e  =  ffE :$ e
@@ -248,3 +262,13 @@ x <==> y  =  x == y
   (==)  =  eval err . fromMaybe err $ conjureEquality x
   err  =  error "<==>: could not conjure"
 infix 4 <==>
+
+div' :: Expr -> Expr -> Expr
+div' ex ey  =  divE :$ ex :$ ey
+  where
+  divE  =  value "`div`" (div :: Int -> Int -> Int)
+
+init' :: Expr -> Expr
+init' exs  =  initE :$ exs
+  where
+  initE  =  value "init" (init :: [Int] -> [Int])

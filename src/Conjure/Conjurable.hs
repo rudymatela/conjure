@@ -27,6 +27,7 @@ module Conjure.Conjurable
   , conjureMkEquation
   , A, B, C, D, E, F
   , conjureIsDeconstructor
+  , conjureIsDeconstruction
   , conjureIsUnbreakable
   , conjureReification
   , conjureReification1
@@ -256,6 +257,23 @@ conjureIsDeconstructor f maxTests e  =  case as of
                     , isWellTyped (sz :$ h)]
     esz e  =  eval (0::Int) (sz :$ e)
     is e'  =  errorToFalse $ esz (e :$ e') < esz e'
+
+conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
+conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
+                                       && typ h == typ ed
+                                       && count is gs >= length gs `div` 2
+  where
+  gs  =  take maxTests $ grounds (conjureTiersFor f) ed
+  [h]  =  holes ed
+  sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
+                  , isWellTyped (sz :$ h)]
+  esz e  =  eval (0::Int) (sz :$ e)
+  is e  =  errorToFalse $ esz e < esz (holeValue e)
+  holeValue e  =  fromMaybe err
+               .  lookup h
+               .  fromMaybe err
+               $  e `match` ed
+  err  =  error "conjureIsDeconstructor: the impossible happened"
 
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f e  =  head
