@@ -23,6 +23,7 @@ module Conjure.Engine
   , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
+  , deconstructions
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -263,8 +264,22 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   (ef:exs)  =  unfoldApp efxs
   keep  =  isRootNormalE thy . fastMostGeneralVariation
   ds  =  filter (conjureIsDeconstructor f maxTests) es
-  keepR | requireDescent  =  descends (`elem` ds) efxs
+  keepR | requireDescent  =  descends isDecOf efxs
         | otherwise       =  const True
+    where
+    e `isDecOf` e'  =  not $ null
+                    [  ()
+                    |  d <- deconstructions
+                    ,  m <- maybeToList (e `match` d)
+                    ,  filter (uncurry (/=)) m == [(holeAsTypeOf e', e')]
+                    ]
+    deconstructions :: [Expr]
+    deconstructions  =  filter (conjureIsDeconstruction f maxTests)
+                     $  concatMap candidateDeconstructionsFrom
+                     $  concat . take 4 -- TODO: move magic number to args
+                     $  concatMapT forN [hs]
+      where
+      hs  =  nub $ conjureArgumentHoles f
   recs  =  filterT keepR
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  filterTheory (===)
@@ -314,8 +329,22 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor  =  products . map fillingsFor1
 
   ds  =  filter (conjureIsDeconstructor f maxTests) es
-  keepR ep | requireDescent  =  descends (`elem` ds) ep
+  keepR ep | requireDescent  =  descends isDecOf ep
            | otherwise       =  const True
+    where
+    e `isDecOf` e'  =  not $ null
+                    [  ()
+                    |  d <- deconstructions
+                    ,  m <- maybeToList (e `match` d)
+                    ,  filter (uncurry (/=)) m == [(holeAsTypeOf e', e')]
+                    ]
+    deconstructions :: [Expr]
+    deconstructions  =  filter (conjureIsDeconstruction f maxTests)
+                     $  concatMap candidateDeconstructionsFrom
+                     $  concat . take 4 -- TODO: move magic number to args
+                     $  concatMapT (`appsWith` vars ep) [hs]
+      where
+      hs  =  nub $ conjureArgumentHoles f
   recs ep  =  filterT (keepR ep)
            .  discardT (\e -> e == ep)
            $  recsV' (tail (vars ep))
@@ -393,8 +422,8 @@ deconstructs1 isDec _ e  =  any isDeconstruction exs
 -- For all possible sets of arguments (2^n - 1 elements: 1 3 7 15 31),
 -- see if any projects the same variables while only using deconstructions
 -- and where there is at least a single deconstruction.
-descends :: (Expr -> Bool) -> Expr -> Expr -> Bool
-descends isDec e' e  =  any d1 ss
+descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+descends isDecOf e' e  =  any d1 ss
   where
   desc  =  any d1 . uncurry useMatches . unzip
   d1 exys  =  all isNotConstruction exys
@@ -403,12 +432,13 @@ descends isDec e' e  =  any d1 ss
   exys  =  zip exs eys
   (_:exs)  =  unfoldApp e'
   (_:eys)  =  unfoldApp e
-  isDeconstruction (p,e) | isVar p    =  not (null cs) && all isDec cs
+  isDeconstruction (p,e) | isVar p    =  e `isDecOf` p
                          | otherwise  =  size e < size p
     where
     cs  =  consts e
-  isNotConstruction (p,e) | isVar p    =  all isDec (consts e)
+  isNotConstruction (p,e) | isVar p    =  e == p || e `isDecOf` p
                           | otherwise  =  size e <= size p -- TODO: allow filter and id somehow
+-- TODO: improve this function with better isNotConstruction
 
 
 candidatesTD :: (Expr -> Bool) -> Expr -> [Expr] -> [[Expr]]

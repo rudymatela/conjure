@@ -1,32 +1,34 @@
 drop :: Int -> [A] -> [A]
--- testing 143 combinations of argument values
--- pruning with 0/0 rules
+-- testing 360 combinations of argument values
+-- pruning with 4/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 5 candidates of size 4
--- looking through 23 candidates of size 5
--- looking through 24 candidates of size 6
--- looking through 55 candidates of size 7
--- looking through 71 candidates of size 8
+-- looking through 5 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 27 candidates of size 5
+-- looking through 41 candidates of size 6
+-- looking through 132 candidates of size 7
+-- looking through 127 candidates of size 8
+-- looking through 458 candidates of size 9
 drop 0 []  =  []
 drop 0 (x:xs)  =  x:xs
 drop x []  =  []
-drop x (y:xs)  =  drop (dec x) xs
+drop x (y:xs)  =  drop (x - 1) xs
 
 take :: Int -> [A] -> [A]
 -- testing 143 combinations of argument values
--- pruning with 14/18 rules
+-- pruning with 14/21 rules
 -- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 17 candidates of size 3
--- looking through 42 candidates of size 4
--- looking through 136 candidates of size 5
--- looking through 363 candidates of size 6
--- looking through 921 candidates of size 7
--- looking through 2354 candidates of size 8
+-- looking through 3 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 27 candidates of size 5
+-- looking through 41 candidates of size 6
+-- looking through 132 candidates of size 7
+-- looking through 127 candidates of size 8
+-- looking through 458 candidates of size 9
 take 0 []  =  []
 take 0 (x:xs)  =  []
 take x []  =  []
-take x (y:xs)  =  y:take (dec x) xs
+take x (y:xs)  =  y:take (x - 1) xs
 

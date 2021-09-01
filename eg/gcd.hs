@@ -18,7 +18,7 @@ gcd' 9 6  =  3
 gcd' 12 18  =  6
 
 main :: IO ()
-main = conjureWith args{requireDescent=False} "gcd a b" gcd'
+main = conjure "gcd a b" gcd'
   [ pr (0::Int)
   , prim "`mod`" (mod :: Int -> Int -> Int)
   ]

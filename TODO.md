@@ -8,11 +8,18 @@ A non-exhaustive list of things TO DO for Conjure.
   (EDIT: this bug is on express itself.  Type signatures for infix variables
   are printed incorrectly)
 
-* remove `requireDescent=False` requirement from `gcd`
-  (add and use `isDeconstruction`)
-  this would also eliminate the requirement of providing `dec`
-
 * consider not breaking in some cases (increased crossproduct of patterns)
+
+* reduce the number of `deconstructions` considered:
+
+	1. place a `traceShowId` in `deconstructions :: [Expr]`
+	2. run the GCD example
+
+		[_ `mod` y :: Int,x `mod` _ :: Int,_ `mod` x :: Int,y `mod` _ :: Int,0 `mod` _ :: Int,0 `mod` _ :: Int]
+
+	3. there's no need to go variable by variable.  Just generating expressions
+	   with a _single hole_ should be enough.
+
 
 
 ### for later

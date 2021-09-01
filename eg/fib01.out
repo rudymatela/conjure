@@ -20,6 +20,6 @@ fib01 :: Int -> Int -> Int -> Int
 -- looking through 192 candidates of size 7
 -- looking through 391 candidates of size 8
 -- looking through 840 candidates of size 9
--- looking through 15630 candidates of size 10
+-- looking through 6414 candidates of size 10
 cannot conjure
 

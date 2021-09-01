@@ -27,7 +27,8 @@ main :: IO ()
 main = do
   conjure "replicate" replicate'
     [ pr (0 :: Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , pr (1 :: Int)
+    , prim "-" ((-) :: Int -> Int -> Int)
     , pr ""
     , prim ":" ((:) :: Char -> String -> String)
     ]

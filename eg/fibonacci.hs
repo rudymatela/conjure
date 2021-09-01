@@ -15,9 +15,11 @@ main  =  do
   conjure "fibonacci n" fibonacci
     [ pr (0::Int)
     , pr (1::Int)
+    , pr (2::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "-" ((-) :: Int -> Int -> Int)
     ]
 -- expected function:
--- fibonacci n  =  if n <= 1 then 1 else fibonacci (dec n) + fibonacci (dec (dec n))
---                 1  2 3  4      5      6          7   8  9        10  11   12  13
+-- fibonacci 0  =  1
+-- fibonacci 1  =  1
+-- fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

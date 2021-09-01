@@ -85,8 +85,8 @@ gps6 :: Int -> Int
 -- looking through 9 candidates of size 2
 -- looking through 33 candidates of size 3
 -- looking through 146 candidates of size 4
--- looking through 609 candidates of size 5
--- looking through 2561 candidates of size 6
+-- looking through 624 candidates of size 5
+-- looking through 2576 candidates of size 6
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -265,9 +265,9 @@ gps17 :: Int -> Int
 -- looking through 8 candidates of size 3
 -- looking through 19 candidates of size 4
 -- looking through 50 candidates of size 5
--- looking through 139 candidates of size 6
--- looking through 400 candidates of size 7
--- looking through 1171 candidates of size 8
+-- looking through 140 candidates of size 6
+-- looking through 401 candidates of size 7
+-- looking through 1175 candidates of size 8
 gps17 0  =  0
 gps17 x  =  x * x + gps17 (dec x)
 

@@ -13,16 +13,13 @@ pow 3 2  =  9
 
 main :: IO ()
 main  =  do
-  -- pow b e  =  if e == 0 then 1 else b * pow b (dec e)
-  --             1  2  3 4      5      6 7 8   9  10 11
-  -- somehow the above takes 30s to run, the two arguments
-  -- of the same type introduce the difficulty here.
-  -- with cases below, runtime is ok:
+  -- pow x 0  =  1
+  -- pow x y  =  x * pow x (y - 1)
   conjureWithMaxSize 8 "pow" pow
     [ pr (0::Int)
     , pr (1::Int)
     , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
   -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1

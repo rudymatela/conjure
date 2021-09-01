@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 13/26 rules
   [3,2,4,3,12,7,27,25,58] direct candidates, 0 duplicates
-  [3,6,17,44,89,204,402,904,1871] pattern candidates, 0 duplicates
+  [3,6,17,44,89,206,405,917,1887] pattern candidates, 0 duplicates
 
 rules:
 dec 1 == 0
@@ -572,10 +572,16 @@ foo 1  =  1
 foo x  =  1
 
 foo 0  =  0
-foo x  =  foo (dec (dec (dec x)))
+foo x  =  foo (dec 0 + x)
+
+foo 0  =  0
+foo x  =  foo (x + dec 0)
 
 foo 0  =  1
-foo x  =  foo (dec (dec (dec x)))
+foo x  =  foo (dec 0 + x)
+
+foo 0  =  1
+foo x  =  foo (x + dec 0)
 
 foo 0  =  0
 foo x  =  dec (foo (dec (dec x)))
@@ -1220,7 +1226,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,11,42,117,370,1063,3154,9116,26160] pattern candidates, 0 duplicates
+  [3,11,42,117,346,955,2714,7510,20754] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1989,19 +1995,10 @@ x ? 0  =  0
 x ? y  =  0
 
 x ? 0  =  x
-x ? y  =  x ? dec x
-
-x ? 0  =  x
 x ? y  =  x ? dec y
 
 x ? 0  =  x
-x ? y  =  y ? dec x
-
-x ? 0  =  x
 x ? y  =  y ? dec y
-
-x ? 0  =  x
-x ? y  =  0 ? dec x
 
 x ? 0  =  x
 x ? y  =  0 ? dec y
@@ -2015,29 +2012,11 @@ x ? y  =  dec x ? y
 x ? 0  =  x
 x ? y  =  dec x ? 0
 
-x ? 0  =  x
-x ? y  =  dec y ? x
-
-x ? 0  =  x
-x ? y  =  dec y ? y
-
-x ? 0  =  x
-x ? y  =  dec y ? 0
-
-x ? 0  =  0
-x ? y  =  x ? dec x
-
 x ? 0  =  0
 x ? y  =  x ? dec y
 
 x ? 0  =  0
-x ? y  =  y ? dec x
-
-x ? 0  =  0
 x ? y  =  y ? dec y
-
-x ? 0  =  0
-x ? y  =  0 ? dec x
 
 x ? 0  =  0
 x ? y  =  0 ? dec y
@@ -2051,29 +2030,11 @@ x ? y  =  dec x ? y
 x ? 0  =  0
 x ? y  =  dec x ? 0
 
-x ? 0  =  0
-x ? y  =  dec y ? x
-
-x ? 0  =  0
-x ? y  =  dec y ? y
-
-x ? 0  =  0
-x ? y  =  dec y ? 0
-
-0 ? x  =  x
-x ? y  =  x ? dec x
-
 0 ? x  =  x
 x ? y  =  x ? dec y
 
 0 ? x  =  x
-x ? y  =  y ? dec x
-
-0 ? x  =  x
 x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? y  =  0 ? dec x
 
 0 ? x  =  x
 x ? y  =  0 ? dec y
@@ -2087,29 +2048,11 @@ x ? y  =  dec x ? y
 0 ? x  =  x
 x ? y  =  dec x ? 0
 
-0 ? x  =  x
-x ? y  =  dec y ? x
-
-0 ? x  =  x
-x ? y  =  dec y ? y
-
-0 ? x  =  x
-x ? y  =  dec y ? 0
-
-0 ? x  =  0
-x ? y  =  x ? dec x
-
 0 ? x  =  0
 x ? y  =  x ? dec y
 
 0 ? x  =  0
-x ? y  =  y ? dec x
-
-0 ? x  =  0
 x ? y  =  y ? dec y
-
-0 ? x  =  0
-x ? y  =  0 ? dec x
 
 0 ? x  =  0
 x ? y  =  0 ? dec y
@@ -2122,15 +2065,6 @@ x ? y  =  dec x ? y
 
 0 ? x  =  0
 x ? y  =  dec x ? 0
-
-0 ? x  =  0
-x ? y  =  dec y ? x
-
-0 ? x  =  0
-x ? y  =  dec y ? y
-
-0 ? x  =  0
-x ? y  =  dec y ? 0
 
 x ? y  =  dec (dec x) + x
 
@@ -3363,19 +3297,10 @@ x ? 0  =  0
 x ? y  =  0
 
 x ? 0  =  x
-x ? y  =  x ? dec (dec x)
-
-x ? 0  =  x
 x ? y  =  x ? dec (dec y)
 
 x ? 0  =  x
-x ? y  =  y ? dec (dec x)
-
-x ? 0  =  x
 x ? y  =  y ? dec (dec y)
-
-x ? 0  =  x
-x ? y  =  0 ? dec (dec x)
 
 x ? 0  =  x
 x ? y  =  0 ? dec (dec y)
@@ -3390,16 +3315,7 @@ x ? 0  =  x
 x ? y  =  dec x ? dec 0
 
 x ? 0  =  x
-x ? y  =  dec y ? dec x
-
-x ? 0  =  x
 x ? y  =  dec y ? dec y
-
-x ? 0  =  x
-x ? y  =  dec y ? dec 0
-
-x ? 0  =  x
-x ? y  =  dec 0 ? dec x
 
 x ? 0  =  x
 x ? y  =  dec 0 ? dec y
@@ -3413,29 +3329,11 @@ x ? y  =  dec (dec x) ? y
 x ? 0  =  x
 x ? y  =  dec (dec x) ? 0
 
-x ? 0  =  x
-x ? y  =  dec (dec y) ? x
-
-x ? 0  =  x
-x ? y  =  dec (dec y) ? y
-
-x ? 0  =  x
-x ? y  =  dec (dec y) ? 0
-
-x ? 0  =  0
-x ? y  =  x ? dec (dec x)
-
 x ? 0  =  0
 x ? y  =  x ? dec (dec y)
 
 x ? 0  =  0
-x ? y  =  y ? dec (dec x)
-
-x ? 0  =  0
 x ? y  =  y ? dec (dec y)
-
-x ? 0  =  0
-x ? y  =  0 ? dec (dec x)
 
 x ? 0  =  0
 x ? y  =  0 ? dec (dec y)
@@ -3450,16 +3348,7 @@ x ? 0  =  0
 x ? y  =  dec x ? dec 0
 
 x ? 0  =  0
-x ? y  =  dec y ? dec x
-
-x ? 0  =  0
 x ? y  =  dec y ? dec y
-
-x ? 0  =  0
-x ? y  =  dec y ? dec 0
-
-x ? 0  =  0
-x ? y  =  dec 0 ? dec x
 
 x ? 0  =  0
 x ? y  =  dec 0 ? dec y
@@ -3473,29 +3362,11 @@ x ? y  =  dec (dec x) ? y
 x ? 0  =  0
 x ? y  =  dec (dec x) ? 0
 
-x ? 0  =  0
-x ? y  =  dec (dec y) ? x
-
-x ? 0  =  0
-x ? y  =  dec (dec y) ? y
-
-x ? 0  =  0
-x ? y  =  dec (dec y) ? 0
-
-0 ? x  =  x
-x ? y  =  x ? dec (dec x)
-
 0 ? x  =  x
 x ? y  =  x ? dec (dec y)
 
 0 ? x  =  x
-x ? y  =  y ? dec (dec x)
-
-0 ? x  =  x
 x ? y  =  y ? dec (dec y)
-
-0 ? x  =  x
-x ? y  =  0 ? dec (dec x)
 
 0 ? x  =  x
 x ? y  =  0 ? dec (dec y)
@@ -3510,16 +3381,7 @@ x ? y  =  dec x ? dec y
 x ? y  =  dec x ? dec 0
 
 0 ? x  =  x
-x ? y  =  dec y ? dec x
-
-0 ? x  =  x
 x ? y  =  dec y ? dec y
-
-0 ? x  =  x
-x ? y  =  dec y ? dec 0
-
-0 ? x  =  x
-x ? y  =  dec 0 ? dec x
 
 0 ? x  =  x
 x ? y  =  dec 0 ? dec y
@@ -3533,29 +3395,11 @@ x ? y  =  dec (dec x) ? y
 0 ? x  =  x
 x ? y  =  dec (dec x) ? 0
 
-0 ? x  =  x
-x ? y  =  dec (dec y) ? x
-
-0 ? x  =  x
-x ? y  =  dec (dec y) ? y
-
-0 ? x  =  x
-x ? y  =  dec (dec y) ? 0
-
-0 ? x  =  0
-x ? y  =  x ? dec (dec x)
-
 0 ? x  =  0
 x ? y  =  x ? dec (dec y)
 
 0 ? x  =  0
-x ? y  =  y ? dec (dec x)
-
-0 ? x  =  0
 x ? y  =  y ? dec (dec y)
-
-0 ? x  =  0
-x ? y  =  0 ? dec (dec x)
 
 0 ? x  =  0
 x ? y  =  0 ? dec (dec y)
@@ -3570,16 +3414,7 @@ x ? y  =  dec x ? dec y
 x ? y  =  dec x ? dec 0
 
 0 ? x  =  0
-x ? y  =  dec y ? dec x
-
-0 ? x  =  0
 x ? y  =  dec y ? dec y
-
-0 ? x  =  0
-x ? y  =  dec y ? dec 0
-
-0 ? x  =  0
-x ? y  =  dec 0 ? dec x
 
 0 ? x  =  0
 x ? y  =  dec 0 ? dec y
@@ -3593,29 +3428,11 @@ x ? y  =  dec (dec x) ? y
 0 ? x  =  0
 x ? y  =  dec (dec x) ? 0
 
-0 ? x  =  0
-x ? y  =  dec (dec y) ? x
-
-0 ? x  =  0
-x ? y  =  dec (dec y) ? y
-
-0 ? x  =  0
-x ? y  =  dec (dec y) ? 0
-
-x ? 0  =  x
-x ? y  =  dec (x ? dec x)
-
 x ? 0  =  x
 x ? y  =  dec (x ? dec y)
 
 x ? 0  =  x
-x ? y  =  dec (y ? dec x)
-
-x ? 0  =  x
 x ? y  =  dec (y ? dec y)
-
-x ? 0  =  x
-x ? y  =  dec (0 ? dec x)
 
 x ? 0  =  x
 x ? y  =  dec (0 ? dec y)
@@ -3629,29 +3446,11 @@ x ? y  =  dec (dec x ? y)
 x ? 0  =  x
 x ? y  =  dec (dec x ? 0)
 
-x ? 0  =  x
-x ? y  =  dec (dec y ? x)
-
-x ? 0  =  x
-x ? y  =  dec (dec y ? y)
-
-x ? 0  =  x
-x ? y  =  dec (dec y ? 0)
-
-x ? 0  =  0
-x ? y  =  dec (x ? dec x)
-
 x ? 0  =  0
 x ? y  =  dec (x ? dec y)
 
 x ? 0  =  0
-x ? y  =  dec (y ? dec x)
-
-x ? 0  =  0
 x ? y  =  dec (y ? dec y)
-
-x ? 0  =  0
-x ? y  =  dec (0 ? dec x)
 
 x ? 0  =  0
 x ? y  =  dec (0 ? dec y)
@@ -3665,29 +3464,11 @@ x ? y  =  dec (dec x ? y)
 x ? 0  =  0
 x ? y  =  dec (dec x ? 0)
 
-x ? 0  =  0
-x ? y  =  dec (dec y ? x)
-
-x ? 0  =  0
-x ? y  =  dec (dec y ? y)
-
-x ? 0  =  0
-x ? y  =  dec (dec y ? 0)
-
-x ? 0  =  dec x
-x ? y  =  x ? dec x
-
 x ? 0  =  dec x
 x ? y  =  x ? dec y
 
 x ? 0  =  dec x
-x ? y  =  y ? dec x
-
-x ? 0  =  dec x
 x ? y  =  y ? dec y
-
-x ? 0  =  dec x
-x ? y  =  0 ? dec x
 
 x ? 0  =  dec x
 x ? y  =  0 ? dec y
@@ -3701,29 +3482,11 @@ x ? y  =  dec x ? y
 x ? 0  =  dec x
 x ? y  =  dec x ? 0
 
-x ? 0  =  dec x
-x ? y  =  dec y ? x
-
-x ? 0  =  dec x
-x ? y  =  dec y ? y
-
-x ? 0  =  dec x
-x ? y  =  dec y ? 0
-
-x ? 0  =  dec 0
-x ? y  =  x ? dec x
-
 x ? 0  =  dec 0
 x ? y  =  x ? dec y
 
 x ? 0  =  dec 0
-x ? y  =  y ? dec x
-
-x ? 0  =  dec 0
 x ? y  =  y ? dec y
-
-x ? 0  =  dec 0
-x ? y  =  0 ? dec x
 
 x ? 0  =  dec 0
 x ? y  =  0 ? dec y
@@ -3736,30 +3499,12 @@ x ? y  =  dec x ? y
 
 x ? 0  =  dec 0
 x ? y  =  dec x ? 0
-
-x ? 0  =  dec 0
-x ? y  =  dec y ? x
-
-x ? 0  =  dec 0
-x ? y  =  dec y ? y
-
-x ? 0  =  dec 0
-x ? y  =  dec y ? 0
-
-0 ? x  =  x
-x ? y  =  dec (x ? dec x)
 
 0 ? x  =  x
 x ? y  =  dec (x ? dec y)
 
 0 ? x  =  x
-x ? y  =  dec (y ? dec x)
-
-0 ? x  =  x
 x ? y  =  dec (y ? dec y)
-
-0 ? x  =  x
-x ? y  =  dec (0 ? dec x)
 
 0 ? x  =  x
 x ? y  =  dec (0 ? dec y)
@@ -3773,29 +3518,11 @@ x ? y  =  dec (dec x ? y)
 0 ? x  =  x
 x ? y  =  dec (dec x ? 0)
 
-0 ? x  =  x
-x ? y  =  dec (dec y ? x)
-
-0 ? x  =  x
-x ? y  =  dec (dec y ? y)
-
-0 ? x  =  x
-x ? y  =  dec (dec y ? 0)
-
-0 ? x  =  0
-x ? y  =  dec (x ? dec x)
-
 0 ? x  =  0
 x ? y  =  dec (x ? dec y)
 
 0 ? x  =  0
-x ? y  =  dec (y ? dec x)
-
-0 ? x  =  0
 x ? y  =  dec (y ? dec y)
-
-0 ? x  =  0
-x ? y  =  dec (0 ? dec x)
 
 0 ? x  =  0
 x ? y  =  dec (0 ? dec y)
@@ -3809,29 +3536,11 @@ x ? y  =  dec (dec x ? y)
 0 ? x  =  0
 x ? y  =  dec (dec x ? 0)
 
-0 ? x  =  0
-x ? y  =  dec (dec y ? x)
-
-0 ? x  =  0
-x ? y  =  dec (dec y ? y)
-
-0 ? x  =  0
-x ? y  =  dec (dec y ? 0)
-
-0 ? x  =  dec x
-x ? y  =  x ? dec x
-
 0 ? x  =  dec x
 x ? y  =  x ? dec y
 
 0 ? x  =  dec x
-x ? y  =  y ? dec x
-
-0 ? x  =  dec x
 x ? y  =  y ? dec y
-
-0 ? x  =  dec x
-x ? y  =  0 ? dec x
 
 0 ? x  =  dec x
 x ? y  =  0 ? dec y
@@ -3845,29 +3554,11 @@ x ? y  =  dec x ? y
 0 ? x  =  dec x
 x ? y  =  dec x ? 0
 
-0 ? x  =  dec x
-x ? y  =  dec y ? x
-
-0 ? x  =  dec x
-x ? y  =  dec y ? y
-
-0 ? x  =  dec x
-x ? y  =  dec y ? 0
-
-0 ? x  =  dec 0
-x ? y  =  x ? dec x
-
 0 ? x  =  dec 0
 x ? y  =  x ? dec y
 
 0 ? x  =  dec 0
-x ? y  =  y ? dec x
-
-0 ? x  =  dec 0
 x ? y  =  y ? dec y
-
-0 ? x  =  dec 0
-x ? y  =  0 ? dec x
 
 0 ? x  =  dec 0
 x ? y  =  0 ? dec y
@@ -3881,20 +3572,6 @@ x ? y  =  dec x ? y
 0 ? x  =  dec 0
 x ? y  =  dec x ? 0
 
-0 ? x  =  dec 0
-x ? y  =  dec y ? x
-
-0 ? x  =  dec 0
-x ? y  =  dec y ? y
-
-0 ? x  =  dec 0
-x ? y  =  dec y ? 0
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  x ? dec x
-
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
@@ -3903,17 +3580,7 @@ x ? y  =  x ? dec y
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
-x ? y  =  y ? dec x
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
 x ? y  =  y ? dec y
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  0 ? dec x
 
 0 ? 0  =  0
 0 ? x  =  x
@@ -3934,21 +3601,6 @@ x ? y  =  dec x ? y
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x ? 0
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec y ? x
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec y ? y
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec y ? 0
 
 0 ? 0  =  0
 0 ? x  =  x
@@ -3983,27 +3635,12 @@ x ? y  =  0
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
-x ? y  =  x ? dec x
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
 x ? y  =  x ? dec y
 
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
-x ? y  =  y ? dec x
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
 x ? y  =  y ? dec y
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  0 ? dec x
 
 0 ? 0  =  0
 0 ? x  =  x
@@ -4024,21 +3661,6 @@ x ? y  =  dec x ? y
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x ? 0
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec y ? x
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec y ? y
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec y ? 0
 
 0 ? 0  =  0
 0 ? x  =  x ? dec x
@@ -4103,27 +3725,12 @@ x ? y  =  0
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
-x ? y  =  x ? dec x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
 x ? y  =  x ? dec y
 
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
-x ? y  =  y ? dec x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
 x ? y  =  y ? dec y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  0 ? dec x
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -4144,21 +3751,6 @@ x ? y  =  dec x ? y
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x ? 0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec y ? x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec y ? y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec y ? 0
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -4193,27 +3785,12 @@ x ? y  =  0
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
-x ? y  =  x ? dec x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
 x ? y  =  x ? dec y
 
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
-x ? y  =  y ? dec x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
 x ? y  =  y ? dec y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  0 ? dec x
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -4234,21 +3811,6 @@ x ? y  =  dec x ? y
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x ? 0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec y ? x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec y ? y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec y ? 0
 
 x ? y  =  dec (dec (dec x)) + x
 
@@ -9707,7 +9269,7 @@ xs ?? (x:ys)  =  []
 
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,1,0,0,0,0,0,0,0] direct candidates, 0 duplicates
+  [3,1,0,2,6,14,38,68,140] direct candidates, 0 duplicates
   [3,3,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
 
 rules:
@@ -9772,6 +9334,50 @@ ton p  =  True
 
 ton p  =  not p
 
+ton p  =  p && ton p
+
+ton p  =  p || ton p
+
+ton p  =  p && ton (not p)
+
+ton p  =  p || ton (not p)
+
+ton p  =  p && not (ton p)
+
+ton p  =  not p && ton p
+
+ton p  =  p || not (ton p)
+
+ton p  =  not p || ton p
+
+ton p  =  p && not (ton (not p))
+
+ton p  =  not p && ton (not p)
+
+ton p  =  p || not (ton (not p))
+
+ton p  =  not p || ton (not p)
+
+ton p  =  p && (p && ton p)
+
+ton p  =  p && (ton p && p)
+
+ton p  =  p && (p || ton p)
+
+ton p  =  p && (ton p || p)
+
+ton p  =  not p && not (ton p)
+
+ton p  =  p || p && ton p
+
+ton p  =  p || ton p && p
+
+ton p  =  p || (p || ton p)
+
+ton p  =  p || (ton p || p)
+
+ton p  =  not p || not (ton p)
+
 
 pattern candidates:
 
@@ -9792,7 +9398,7 @@ ton True  =  False
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,4,8,4,32,36,112,264] direct candidates, 0 duplicates
+  [4,2,4,8,32,128,468,1576,4924] direct candidates, 0 duplicates
   [4,14,30,8,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
@@ -9893,6 +9499,62 @@ p &| q  =  not p || not q
 
 p &| q  =  not q || not p
 
+p &| q  =  p && p &| p
+
+p &| q  =  p && p &| q
+
+p &| q  =  p && p &| False
+
+p &| q  =  p && p &| True
+
+p &| q  =  p && q &| q
+
+p &| q  =  p && False &| q
+
+p &| q  =  p && True &| q
+
+p &| q  =  q && p &| p
+
+p &| q  =  q && p &| q
+
+p &| q  =  q && p &| False
+
+p &| q  =  q && p &| True
+
+p &| q  =  q && q &| q
+
+p &| q  =  q && False &| q
+
+p &| q  =  q && True &| q
+
+p &| q  =  p || p &| p
+
+p &| q  =  p || p &| q
+
+p &| q  =  p || p &| False
+
+p &| q  =  p || p &| True
+
+p &| q  =  p || q &| q
+
+p &| q  =  p || False &| q
+
+p &| q  =  p || True &| q
+
+p &| q  =  q || p &| p
+
+p &| q  =  q || p &| q
+
+p &| q  =  q || p &| False
+
+p &| q  =  q || p &| True
+
+p &| q  =  q || q &| q
+
+p &| q  =  q || False &| q
+
+p &| q  =  q || True &| q
+
 p &| q  =  p && (not p && q)
 
 p &| q  =  p && (not p || q)
@@ -9956,6 +9618,198 @@ p &| q  =  p && q || not q
 p &| q  =  q && p || not p
 
 p &| q  =  q && p || not q
+
+p &| q  =  p && p &| not p
+
+p &| q  =  p && p &| not q
+
+p &| q  =  p && q &| not q
+
+p &| q  =  p && False &| not q
+
+p &| q  =  p && True &| not q
+
+p &| q  =  p && not p &| p
+
+p &| q  =  p && not p &| q
+
+p &| q  =  p && not p &| False
+
+p &| q  =  p && not p &| True
+
+p &| q  =  p && not q &| q
+
+p &| q  =  q && p &| not p
+
+p &| q  =  q && p &| not q
+
+p &| q  =  q && q &| not q
+
+p &| q  =  q && False &| not q
+
+p &| q  =  q && True &| not q
+
+p &| q  =  q && not p &| p
+
+p &| q  =  q && not p &| q
+
+p &| q  =  q && not p &| False
+
+p &| q  =  q && not p &| True
+
+p &| q  =  q && not q &| q
+
+p &| q  =  p || p &| not p
+
+p &| q  =  p || p &| not q
+
+p &| q  =  p || q &| not q
+
+p &| q  =  p || False &| not q
+
+p &| q  =  p || True &| not q
+
+p &| q  =  p || not p &| p
+
+p &| q  =  p || not p &| q
+
+p &| q  =  p || not p &| False
+
+p &| q  =  p || not p &| True
+
+p &| q  =  p || not q &| q
+
+p &| q  =  q || p &| not p
+
+p &| q  =  q || p &| not q
+
+p &| q  =  q || q &| not q
+
+p &| q  =  q || False &| not q
+
+p &| q  =  q || True &| not q
+
+p &| q  =  q || not p &| p
+
+p &| q  =  q || not p &| q
+
+p &| q  =  q || not p &| False
+
+p &| q  =  q || not p &| True
+
+p &| q  =  q || not q &| q
+
+p &| q  =  p && not (p &| p)
+
+p &| q  =  p && not (p &| q)
+
+p &| q  =  p && not (p &| False)
+
+p &| q  =  p && not (p &| True)
+
+p &| q  =  p && not (q &| q)
+
+p &| q  =  p && not (False &| q)
+
+p &| q  =  p && not (True &| q)
+
+p &| q  =  q && not (p &| p)
+
+p &| q  =  q && not (p &| q)
+
+p &| q  =  q && not (p &| False)
+
+p &| q  =  q && not (p &| True)
+
+p &| q  =  q && not (q &| q)
+
+p &| q  =  q && not (False &| q)
+
+p &| q  =  q && not (True &| q)
+
+p &| q  =  not p && p &| p
+
+p &| q  =  not p && p &| q
+
+p &| q  =  not p && p &| False
+
+p &| q  =  not p && p &| True
+
+p &| q  =  not p && q &| q
+
+p &| q  =  not p && False &| q
+
+p &| q  =  not p && True &| q
+
+p &| q  =  not q && p &| p
+
+p &| q  =  not q && p &| q
+
+p &| q  =  not q && p &| False
+
+p &| q  =  not q && p &| True
+
+p &| q  =  not q && q &| q
+
+p &| q  =  not q && False &| q
+
+p &| q  =  not q && True &| q
+
+p &| q  =  p || not (p &| p)
+
+p &| q  =  p || not (p &| q)
+
+p &| q  =  p || not (p &| False)
+
+p &| q  =  p || not (p &| True)
+
+p &| q  =  p || not (q &| q)
+
+p &| q  =  p || not (False &| q)
+
+p &| q  =  p || not (True &| q)
+
+p &| q  =  q || not (p &| p)
+
+p &| q  =  q || not (p &| q)
+
+p &| q  =  q || not (p &| False)
+
+p &| q  =  q || not (p &| True)
+
+p &| q  =  q || not (q &| q)
+
+p &| q  =  q || not (False &| q)
+
+p &| q  =  q || not (True &| q)
+
+p &| q  =  not p || p &| p
+
+p &| q  =  not p || p &| q
+
+p &| q  =  not p || p &| False
+
+p &| q  =  not p || p &| True
+
+p &| q  =  not p || q &| q
+
+p &| q  =  not p || False &| q
+
+p &| q  =  not p || True &| q
+
+p &| q  =  not q || p &| p
+
+p &| q  =  not q || p &| q
+
+p &| q  =  not q || p &| False
+
+p &| q  =  not q || p &| True
+
+p &| q  =  not q || q &| q
+
+p &| q  =  not q || False &| q
+
+p &| q  =  not q || True &| q
 
 
 pattern candidates:

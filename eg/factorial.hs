@@ -27,7 +27,7 @@ main  =  do
     , pr (1::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
 -- the actual factorial function:
@@ -36,13 +36,8 @@ main  =  do
 --
 -- OR
 --
--- factorial n  =  if n == 0 then 1 else n * factorial (dec n)
---                 1  2 3  4      5      6 7 8          9  10 symbols
---
--- OR
---
--- factorial n  =  if (isZero n) then 1 else (n * factorial (dec n))
---                 1   2      3       4       5 6 7          8   9 symbols
+-- factorial 0  =  1
+-- factorial x  =  x * factorial (x - 1)
 
 
 {-

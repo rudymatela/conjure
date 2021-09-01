@@ -354,7 +354,7 @@ gps11p  =  gcd'
   gcd' 12 18  =  6
 
 gps11c :: IO ()
-gps11c  =  conjureWith args{requireDescent=False} "gcd a b" gps11p
+gps11c  =  conjure "gcd a b" gps11p
   [ pr (0::Int)
   , prim "`mod`" (mod :: Int -> Int -> Int)
   ]
