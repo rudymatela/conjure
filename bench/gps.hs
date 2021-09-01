@@ -524,9 +524,10 @@ gps17g n  =   n * n + gps17g (n - 1)
 gps17c :: IO ()
 gps17c  =  conjure "gps17" gps17p
   [ pr (0 :: Int)
+  , pr (1 :: Int)
   , prim "+" ((+) :: Int -> Int -> Int)
   , prim "*" ((*) :: Int -> Int -> Int)
-  , prim "dec" ((subtract 1) :: Int -> Int)
+  , prim "-" ((-) :: Int -> Int -> Int)
   ]
 
 
