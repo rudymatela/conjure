@@ -190,9 +190,10 @@ t7c  =  do
 
   conjure "`access`" t7p
     [ pr (0 :: Int)
+    , pr (1 :: Int)
     , pr ([] :: [A])
     , prim ":" ((:) :: A -> [A] -> [A])
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "-" ((-) :: Int -> Int -> Int)
     , prim "undefined" (undefined :: A)
     ]
 

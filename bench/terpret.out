@@ -117,17 +117,18 @@ xs `access` x  =  xs !! x
 
 (`access`) :: [A] -> Int -> A
 -- testing 5 combinations of argument values
--- pruning with 0/0 rules
+-- pruning with 4/7 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 13 candidates of size 5
--- looking through 17 candidates of size 6
+-- looking through 7 candidates of size 4
+-- looking through 19 candidates of size 5
+-- looking through 23 candidates of size 6
+-- looking through 68 candidates of size 7
 [] `access` 0  =  undefined
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
-(x:xs) `access` y  =  xs `access` dec y
+(x:xs) `access` y  =  xs `access` (y - 1)
 
 TerpreT benchmark #8: decrement elements
 
