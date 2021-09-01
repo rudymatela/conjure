@@ -28,6 +28,7 @@ module Conjure.Conjurable
   , A, B, C, D, E, F
   , conjureIsDeconstructor
   , conjureIsDeconstruction
+  , candidateDeconstructionsFrom
   , conjureIsUnbreakable
   , conjureReification
   , conjureReification1
@@ -278,6 +279,15 @@ conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                .  fromMaybe err
                $  e `match` ed
   err  =  error "conjureIsDeconstructor: the impossible happened"
+
+candidateDeconstructionsFrom :: Expr -> [Expr]
+candidateDeconstructionsFrom e  =
+  [ e'
+  | v <- vars e
+  , typ v == typ e
+  , let e' = e //- [(v, holeAsTypeOf v)]
+  , length (holes e') == 1
+  ]
 
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f e  =  head

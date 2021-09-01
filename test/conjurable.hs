@@ -242,6 +242,12 @@ tests n  =
   , isDecon (div' i_ i_)         == False -- two holes are not allowed
   , isDecon (head' is_)          == False -- must deconstruct to the same type
   , isDecon (i_ -*- two)         == False -- increases the size
+
+  , candidateDeconstructionsFrom (div' xx yy) == [ div' i_ yy
+                                                 , div' xx i_
+                                                 ]
+  , candidateDeconstructionsFrom (div' xx xx) == []
+  , candidateDeconstructionsFrom ((xx -+- xx) -+- yy) == [(xx -+- xx) -+- i_]
   ]
 
 isDecon :: Expr -> Bool
