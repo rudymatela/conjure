@@ -100,15 +100,16 @@ conjureWithMaxSize sz  =  conjureWith args
 -- | Arguments to be passed to 'conjureWith' or 'conjpureWith'.
 --   See 'args' for the defaults.
 data Args = Args
-  { maxTests          :: Int  -- ^ maximum number of tests to each candidate
-  , maxSize           :: Int  -- ^ maximum size of candidate bodies
-  , maxEvalRecursions :: Int  -- ^ maximum number of recursive evaluations when testing candidates
-  , maxEquationSize   :: Int  -- ^ maximum size of equation operands
-  , maxSearchTests    :: Int  -- ^ maximum number of tests to search for defined values
-  , requireDescent    :: Bool -- ^ require recursive calls to deconstruct arguments
-  , usePatterns       :: Bool -- ^ use pattern matching to create (recursive) candidates
-  , showTheory        :: Bool -- ^ show theory discovered by Speculate used in pruning
-  , forceTests :: [[Expr]]  -- ^ force tests
+  { maxTests              :: Int  -- ^ maximum number of tests to each candidate
+  , maxSize               :: Int  -- ^ maximum size of candidate bodies
+  , maxEvalRecursions     :: Int  -- ^ maximum number of recursive evaluations when testing candidates
+  , maxEquationSize       :: Int  -- ^ maximum size of equation operands
+  , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
+  , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
+  , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
+  , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
+  , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
+  , forceTests            :: [[Expr]]  -- ^ force tests
   }
 
 
@@ -124,15 +125,16 @@ data Args = Args
 -- * don't show the theory used in pruning
 args :: Args
 args = Args
-  { maxTests           =  360
-  , maxSize            =  12
-  , maxEvalRecursions  =  60
-  , maxEquationSize    =   5
-  , maxSearchTests     =  100000
-  , requireDescent     =  True
-  , usePatterns        =  True
-  , showTheory         =  False
-  , forceTests         =  []
+  { maxTests               =  360
+  , maxSize                =  12
+  , maxEvalRecursions      =  60
+  , maxEquationSize        =   5
+  , maxSearchTests         =  100000
+  , maxDeconstructionSize  =   4
+  , requireDescent         =  True
+  , usePatterns            =  True
+  , showTheory             =  False
+  , forceTests             =  []
   }
 
 
@@ -276,7 +278,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
     deconstructions :: [Expr]
     deconstructions  =  filter (conjureIsDeconstruction f maxTests)
                      $  concatMap candidateDeconstructionsFrom
-                     $  concat . take 4 -- TODO: move magic number to args
+                     $  concat . take maxDeconstructionSize
                      $  concatMapT forN [hs]
       where
       hs  =  nub $ conjureArgumentHoles f
@@ -341,7 +343,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
     deconstructions :: [Expr]
     deconstructions  =  filter (conjureIsDeconstruction f maxTests)
                      $  concatMap candidateDeconstructionsFrom
-                     $  concat . take 4 -- TODO: move magic number to args
+                     $  concat . take maxDeconstructionSize
                      $  concatMapT (`appsWith` vars ep) [hs]
       where
       hs  =  nub $ conjureArgumentHoles f
