@@ -94,7 +94,7 @@ and
 	               , pr (1::Int)
 	               , prim "+" ((+) :: Int -> Int -> Int)
 	               , prim "*" ((*) :: Int -> Int -> Int)
-	               , prim "dec" (subtract 1 :: Int -> Int)
+	               , prim "-" ((-) :: Int -> Int -> Int)
 	               ]
 
 running
@@ -105,15 +105,16 @@ yields
 
 	factorial :: Int -> Int
 	-- testing 4 combinations of argument values
-	-- pruning with 22/42 rules
+	-- pruning with 27/65 rules
 	-- looking through 3 candidates of size 1
-	-- looking through 6 candidates of size 2
-	-- looking through 16 candidates of size 3
-	-- looking through 39 candidates of size 4
-	-- looking through 78 candidates of size 5
-	-- looking through 166 candidates of size 6
+	-- looking through 4 candidates of size 2
+	-- looking through 13 candidates of size 3
+	-- looking through 34 candidates of size 4
+	-- looking through 75 candidates of size 5
+	-- looking through 183 candidates of size 6
+	-- looking through 577 candidates of size 7
 	factorial 0  =  1
-	factorial x  =  x * factorial (dec x)
+	factorial x  =  x * factorial (x - 1)
 
 in less than a second.
 
