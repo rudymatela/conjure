@@ -90,16 +90,17 @@ gps2p 3 1 2  =  3 + 1 + 1/3
 gps2g :: Double -> Double -> Int -> Double
 gps2g h0 h1 0  =  h0 + h1
 gps2g h0 h1 n  =  h0 + h1 + gps2g h1 (h1 * (h1 / h0)) (n - 1)
--- size 16 with dec, out of reach performance-wise
+-- size 17, out of reach performance-wise
 
 gps2c :: IO ()
 gps2c  =  do
   conjureWithMaxSize 6 "gps2" gps2p
     [ pr (0 :: Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , pr (1 :: Int)
     , prim "*" ((*) :: Double -> Double -> Double)
     , prim "/" ((/) :: Double -> Double -> Double)
     , prim "+" ((+) :: Double -> Double -> Double)
+    , prim "-" ((-) :: Double -> Double -> Double)
     ]
 
 
@@ -546,11 +547,12 @@ gps19p 2 0 0.5 1.0  =  1.0
 gps19g :: Int -> Double -> Double -> Double -> Double
 gps19g 0 total melt fall  =  total
 gps19g n total melt fall  =  gps19p (n-1) (max 0 (total-melt+fall)) melt fall
+-- size 14, out of reach performance wise.
 
 gps19c :: IO ()
 gps19c  =  conjureWithMaxSize 6 "gps19_snowday" gps19p
   [ pr (0 :: Int)
-  , prim "dec" (subtract 1 :: Int -> Int)
+  , pr (1 :: Int)
   , prim "max" (max :: Double -> Double -> Double)
   , prim "+" ((+) :: Double -> Double -> Double)
   , prim "-" ((-) :: Double -> Double -> Double)

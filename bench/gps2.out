@@ -40,10 +40,10 @@ gps2 :: Double -> Double -> Int -> Double
 -- pruning with 3/3 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 12 candidates of size 3
--- looking through 48 candidates of size 4
--- looking through 138 candidates of size 5
--- looking through 692 candidates of size 6
+-- looking through 18 candidates of size 3
+-- looking through 70 candidates of size 4
+-- looking through 314 candidates of size 5
+-- looking through 1432 candidates of size 6
 cannot conjure
 
 gps3 :: [Char] -> Int
@@ -239,10 +239,10 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- pruning with 7/12 rules
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
--- looking through 24 candidates of size 3
--- looking through 144 candidates of size 4
--- looking through 399 candidates of size 5
--- looking through 2960 candidates of size 6
+-- looking through 31 candidates of size 3
+-- looking through 169 candidates of size 4
+-- looking through 543 candidates of size 5
+-- looking through 3608 candidates of size 6
 cannot conjure
 
 gps20 :: [Char] -> Bool
