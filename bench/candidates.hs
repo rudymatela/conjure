@@ -38,7 +38,7 @@ main  =  do
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((+) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
   printCandidates 9 6 "?" (undefined :: Int -> Int -> Int)

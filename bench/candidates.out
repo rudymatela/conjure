@@ -1,36 +1,45 @@
 Candidates for: foo :: Int -> Int
-  pruning with 13/26 rules
-  [3,2,4,3,12,7,27,25,58] direct candidates, 0 duplicates
-  [3,6,17,44,89,206,405,917,1887] pattern candidates, 0 duplicates
+  pruning with 15/35 rules
+  [3,0,7,0,20,0,75,0,297] direct candidates, 0 duplicates
+  [3,4,12,32,54,139,287,691,1713] pattern candidates, 0 duplicates
 
 rules:
-dec 1 == 0
 x * y == x + y
 x * y == y + x
+x - x == 0
 x + 0 == x
 0 + x == x
-dec (x + y) == x + dec y
-dec (x + y) == y + dec x
-dec (x + y) == dec x + y
-dec (x + y) == dec y + x
-1 + dec x == x
-dec x + 1 == x
+x - 0 == x
 (x + y) + z == x + (y + z)
 (x + y) + z == y + (x + z)
+x - (y - z) == z + (x - y)
+(x - y) - z == x - (y + z)
+(x - y) - z == x - (z + y)
+(x + y) - z == x + (y - z)
+(x + y) - z == y + (x - z)
+x + (y - x) == y
+(x - y) + y == x
 equations:
 y + x == x + y
-y + dec x == x + dec y
-dec x + y == x + dec y
-dec y + x == dec x + y
-x + dec 0 == dec x
-dec 0 + x == dec x
 y + (x + z) == x + (y + z)
 z + (x + y) == x + (y + z)
 z + (y + x) == x + (y + z)
-y + dec (dec x) == x + dec (dec y)
-dec (dec x) + y == x + dec (dec y)
-x + dec (dec 0) == dec (dec x)
-dec (dec 0) + x == dec (dec x)
+y + (x - z) == x + (y - z)
+(x - z) + y == x + (y - z)
+(z - y) + x == (x - y) + z
+y - (x + y) == 0 - x
+y - (y + x) == 0 - x
+z - (y + z) == x - (x + y)
+z - (y + z) == x - (y + x)
+z - (z + y) == x - (x + y)
+z - (z + y) == x - (y + x)
+x + (0 - y) == x - y
+(0 - y) + x == x - y
+x - (x + 1) == 0 - 1
+x - (1 + x) == 0 - 1
+y - (y + 1) == x - (x + 1)
+y - (y + 1) == x - (1 + x)
+y - (1 + y) == x - (1 + x)
 
 direct candidates:
 
@@ -40,10 +49,6 @@ foo x  =  0
 
 foo x  =  1
 
-foo x  =  dec x
-
-foo x  =  dec 0
-
 foo x  =  x + x
 
 foo x  =  x + 1
@@ -52,11 +57,13 @@ foo x  =  1 + x
 
 foo x  =  1 + 1
 
-foo x  =  dec 0 + x
+foo x  =  x - 1
 
-foo x  =  x + dec x
+foo x  =  0 - x
 
-foo x  =  x + dec 0
+foo x  =  0 - 1
+
+foo x  =  (0 - 1) + x
 
 foo x  =  x + (x + x)
 
@@ -66,6 +73,10 @@ foo x  =  x + (1 + x)
 
 foo x  =  x + (1 + 1)
 
+foo x  =  x + (x - 1)
+
+foo x  =  x + (0 - 1)
+
 foo x  =  1 + (x + x)
 
 foo x  =  1 + (x + 1)
@@ -74,27 +85,23 @@ foo x  =  1 + (1 + x)
 
 foo x  =  1 + (1 + 1)
 
-foo x  =  dec x + dec x
+foo x  =  1 + (0 - x)
 
-foo x  =  dec x + dec 0
+foo x  =  x - (x + x)
 
-foo x  =  dec 0 + dec x
+foo x  =  x - (x + 1)
 
-foo x  =  dec 0 + dec 0
+foo x  =  x - (1 + x)
 
-foo x  =  x + (dec 0 + x)
+foo x  =  x - (1 + 1)
 
-foo x  =  x + (x + dec x)
+foo x  =  0 - (x + x)
 
-foo x  =  x + (x + dec 0)
+foo x  =  0 - (x + 1)
 
-foo x  =  1 + (dec 0 + x)
+foo x  =  0 - (1 + x)
 
-foo x  =  1 + (x + dec x)
-
-foo x  =  1 + (x + dec 0)
-
-foo x  =  dec 0 + (x + x)
+foo x  =  0 - (1 + 1)
 
 
 pattern candidates:
@@ -105,10 +112,6 @@ foo x  =  0
 
 foo x  =  1
 
-foo x  =  dec x
-
-foo x  =  dec 0
-
 foo 0  =  0
 foo x  =  x
 
@@ -129,30 +132,13 @@ foo x  =  1 + x
 
 foo x  =  1 + 1
 
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
-foo x  =  dec (dec 0)
+foo x  =  0 - x
 
-foo 0  =  0
-foo x  =  dec x
+foo x  =  0 - 1
 
-foo 0  =  0
-foo x  =  dec 0
-
-foo 0  =  1
-foo x  =  dec x
-
-foo 0  =  1
-foo x  =  dec 0
-
-foo 0  =  dec 0
-foo x  =  x
-
-foo 0  =  dec 0
-foo x  =  0
-
-foo 0  =  dec 0
-foo x  =  1
+foo x  =  1 - x
 
 foo 1  =  0
 foo x  =  x
@@ -165,24 +151,6 @@ foo x  =  x
 
 foo 1  =  1
 foo x  =  0
-
-foo 0  =  0
-foo x  =  foo (dec x)
-
-foo 0  =  1
-foo x  =  foo (dec x)
-
-foo x  =  dec x + x
-
-foo x  =  dec 0 + x
-
-foo x  =  dec (dec (dec x))
-
-foo x  =  dec (dec (dec 0))
-
-foo x  =  x + dec x
-
-foo x  =  x + dec 0
 
 foo 0  =  0
 foo x  =  x + x
@@ -197,10 +165,16 @@ foo 0  =  0
 foo x  =  1 + 1
 
 foo 0  =  0
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  0
-foo x  =  dec (dec 0)
+foo x  =  0 - x
+
+foo 0  =  0
+foo x  =  0 - 1
+
+foo 0  =  0
+foo x  =  1 - x
 
 foo 0  =  1
 foo x  =  x + x
@@ -215,13 +189,16 @@ foo 0  =  1
 foo x  =  1 + 1
 
 foo 0  =  1
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  1
-foo x  =  dec (dec 0)
+foo x  =  0 - x
 
-foo 0  =  dec 0
-foo x  =  dec x
+foo 0  =  1
+foo x  =  0 - 1
+
+foo 0  =  1
+foo x  =  1 - x
 
 foo 0  =  1 + 1
 foo x  =  x
@@ -232,34 +209,13 @@ foo x  =  0
 foo 0  =  1 + 1
 foo x  =  1
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo x  =  x
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo x  =  0
 
-foo 0  =  dec (dec 0)
-foo x  =  1
-
-foo 1  =  0
-foo x  =  dec x
-
-foo 1  =  0
-foo x  =  dec 0
-
-foo 1  =  1
-foo x  =  dec x
-
-foo 1  =  1
-foo x  =  dec 0
-
-foo 1  =  dec 0
-foo x  =  x
-
-foo 1  =  dec 0
-foo x  =  0
-
-foo 1  =  dec 0
+foo 0  =  0 - 1
 foo x  =  1
 
 foo 0  =  0
@@ -303,33 +259,24 @@ foo 1  =  1
 foo x  =  0
 
 foo 0  =  0
-foo x  =  foo (dec (dec x))
-
-foo 0  =  1
-foo x  =  foo (dec (dec x))
+foo x  =  foo (x - 1)
 
 foo 0  =  0
-foo x  =  dec (foo (dec x))
+foo x  =  foo (1 - x)
 
 foo 0  =  1
-foo x  =  dec (foo (dec x))
+foo x  =  foo (x - 1)
 
-foo 0  =  dec 0
-foo x  =  foo (dec x)
+foo 0  =  1
+foo x  =  foo (1 - x)
 
-foo 1  =  0
-foo x  =  foo (dec x)
+foo x  =  (x - 1) + x
 
-foo 1  =  1
-foo x  =  foo (dec x)
+foo x  =  (0 - x) + 1
 
-foo x  =  dec (dec x) + x
+foo x  =  (0 - 1) + x
 
-foo x  =  dec (dec 0) + x
-
-foo x  =  dec (dec (dec (dec x)))
-
-foo x  =  dec (dec (dec (dec 0)))
+foo x  =  (1 - x) + 1
 
 foo x  =  x + (x + x)
 
@@ -339,9 +286,9 @@ foo x  =  x + (1 + x)
 
 foo x  =  x + (1 + 1)
 
-foo x  =  x + dec (dec x)
+foo x  =  x + (x - 1)
 
-foo x  =  x + dec (dec 0)
+foo x  =  x + (0 - 1)
 
 foo x  =  1 + (x + x)
 
@@ -351,88 +298,33 @@ foo x  =  1 + (1 + x)
 
 foo x  =  1 + (1 + 1)
 
-foo x  =  dec x + dec x
+foo x  =  1 + (0 - x)
 
-foo x  =  dec x + dec 0
+foo x  =  1 + (1 - x)
 
-foo x  =  dec 0 + dec x
+foo x  =  x - (x + x)
 
-foo x  =  dec 0 + dec 0
+foo x  =  x - (x + 1)
 
-foo 0  =  0
-foo x  =  dec x + x
+foo x  =  x - (1 + x)
 
-foo 0  =  0
-foo x  =  dec 0 + x
+foo x  =  x - (1 + 1)
 
-foo 0  =  0
-foo x  =  dec (dec (dec x))
+foo x  =  0 - (x + x)
 
-foo 0  =  0
-foo x  =  dec (dec (dec 0))
+foo x  =  0 - (x + 1)
 
-foo 0  =  0
-foo x  =  x + dec x
+foo x  =  0 - (1 + x)
 
-foo 0  =  0
-foo x  =  x + dec 0
+foo x  =  0 - (1 + 1)
 
-foo 0  =  1
-foo x  =  dec x + x
+foo x  =  1 - (x + x)
 
-foo 0  =  1
-foo x  =  dec 0 + x
+foo x  =  1 - (x + 1)
 
-foo 0  =  1
-foo x  =  dec (dec (dec x))
+foo x  =  1 - (1 + x)
 
-foo 0  =  1
-foo x  =  dec (dec (dec 0))
-
-foo 0  =  1
-foo x  =  x + dec x
-
-foo 0  =  1
-foo x  =  x + dec 0
-
-foo 0  =  dec 0
-foo x  =  x + x
-
-foo 0  =  dec 0
-foo x  =  x + 1
-
-foo 0  =  dec 0
-foo x  =  1 + x
-
-foo 0  =  dec 0
-foo x  =  1 + 1
-
-foo 0  =  dec 0
-foo x  =  dec (dec x)
-
-foo 0  =  dec 0
-foo x  =  dec (dec 0)
-
-foo 0  =  1 + 1
-foo x  =  dec x
-
-foo 0  =  1 + 1
-foo x  =  dec 0
-
-foo 0  =  dec (dec 0)
-foo x  =  dec x
-
-foo 0  =  dec (dec 0)
-foo x  =  dec 0
-
-foo 0  =  dec (dec (dec 0))
-foo x  =  x
-
-foo 0  =  dec (dec (dec 0))
-foo x  =  0
-
-foo 0  =  dec (dec (dec 0))
-foo x  =  1
+foo x  =  1 - (1 + 1)
 
 foo 1  =  0
 foo x  =  x + x
@@ -447,10 +339,16 @@ foo 1  =  0
 foo x  =  1 + 1
 
 foo 1  =  0
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 1  =  0
-foo x  =  dec (dec 0)
+foo x  =  0 - x
+
+foo 1  =  0
+foo x  =  0 - 1
+
+foo 1  =  0
+foo x  =  1 - x
 
 foo 1  =  1
 foo x  =  x + x
@@ -465,13 +363,16 @@ foo 1  =  1
 foo x  =  1 + 1
 
 foo 1  =  1
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 1  =  1
-foo x  =  dec (dec 0)
+foo x  =  0 - x
 
-foo 1  =  dec 0
-foo x  =  dec x
+foo 1  =  1
+foo x  =  0 - 1
+
+foo 1  =  1
+foo x  =  1 - x
 
 foo 1  =  1 + 1
 foo x  =  x
@@ -482,257 +383,38 @@ foo x  =  0
 foo 1  =  1 + 1
 foo x  =  1
 
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  x
 
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  0
 
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  1
 
-foo 0  =  0
 foo 1  =  0
-foo x  =  dec x
-
-foo 0  =  0
-foo 1  =  0
-foo x  =  dec 0
-
-foo 0  =  0
-foo 1  =  1
-foo x  =  dec x
-
-foo 0  =  0
-foo 1  =  1
-foo x  =  dec 0
-
-foo 0  =  0
-foo 1  =  dec 0
-foo x  =  x
-
-foo 0  =  0
-foo 1  =  dec 0
-foo x  =  0
-
-foo 0  =  0
-foo 1  =  dec 0
-foo x  =  1
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  dec x
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  dec 0
-
-foo 0  =  1
-foo 1  =  1
-foo x  =  dec x
-
-foo 0  =  1
-foo 1  =  1
-foo x  =  dec 0
-
-foo 0  =  1
-foo 1  =  dec 0
-foo x  =  x
-
-foo 0  =  1
-foo 1  =  dec 0
-foo x  =  0
-
-foo 0  =  1
-foo 1  =  dec 0
-foo x  =  1
-
-foo 0  =  dec 0
-foo 1  =  0
-foo x  =  x
-
-foo 0  =  dec 0
-foo 1  =  0
-foo x  =  0
-
-foo 0  =  dec 0
-foo 1  =  0
-foo x  =  1
-
-foo 0  =  dec 0
-foo 1  =  1
-foo x  =  x
-
-foo 0  =  dec 0
-foo 1  =  1
-foo x  =  0
-
-foo 0  =  dec 0
-foo 1  =  1
-foo x  =  1
-
-foo 0  =  0
-foo x  =  foo (dec 0 + x)
-
-foo 0  =  0
-foo x  =  foo (x + dec 0)
-
-foo 0  =  1
-foo x  =  foo (dec 0 + x)
-
-foo 0  =  1
-foo x  =  foo (x + dec 0)
-
-foo 0  =  0
-foo x  =  dec (foo (dec (dec x)))
-
-foo 0  =  1
-foo x  =  dec (foo (dec (dec x)))
-
-foo 0  =  dec 0
-foo x  =  foo (dec (dec x))
+foo x  =  foo (x - 1)
 
 foo 1  =  0
-foo x  =  foo (dec (dec x))
+foo x  =  foo (1 - x)
 
 foo 1  =  1
-foo x  =  foo (dec (dec x))
-
-foo 0  =  0
-foo x  =  x + foo (dec x)
-
-foo 0  =  0
-foo x  =  foo (dec x) + x
-
-foo 0  =  0
-foo x  =  foo (dec x) + 1
-
-foo 0  =  0
-foo x  =  1 + foo (dec x)
-
-foo 0  =  0
-foo x  =  dec (dec (foo (dec x)))
-
-foo 0  =  1
-foo x  =  x + foo (dec x)
-
-foo 0  =  1
-foo x  =  foo (dec x) + x
-
-foo 0  =  1
-foo x  =  foo (dec x) + 1
-
-foo 0  =  1
-foo x  =  1 + foo (dec x)
-
-foo 0  =  1
-foo x  =  dec (dec (foo (dec x)))
-
-foo 0  =  dec 0
-foo x  =  dec (foo (dec x))
-
-foo 0  =  1 + 1
-foo x  =  foo (dec x)
-
-foo 0  =  dec (dec 0)
-foo x  =  foo (dec x)
-
-foo 1  =  0
-foo x  =  dec (foo (dec x))
+foo x  =  foo (x - 1)
 
 foo 1  =  1
-foo x  =  dec (foo (dec x))
-
-foo 1  =  dec 0
-foo x  =  foo (dec x)
+foo x  =  foo (1 - x)
 
 foo 0  =  0
-foo 1  =  0
-foo x  =  foo (dec x)
+foo x  =  (x - 1) + x
 
 foo 0  =  0
-foo 1  =  1
-foo x  =  foo (dec x)
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  foo (dec x)
-
-foo 0  =  1
-foo 1  =  1
-foo x  =  foo (dec x)
-
-foo x  =  dec (dec (dec x)) + x
-
-foo x  =  dec (dec (dec 0)) + x
-
-foo x  =  dec (dec (dec (dec (dec x))))
-
-foo x  =  dec (dec (dec (dec (dec 0))))
-
-foo x  =  x + (dec x + x)
-
-foo x  =  x + (dec 0 + x)
-
-foo x  =  x + dec (dec (dec x))
-
-foo x  =  x + dec (dec (dec 0))
-
-foo x  =  x + (x + dec x)
-
-foo x  =  x + (x + dec 0)
-
-foo x  =  1 + (dec x + x)
-
-foo x  =  1 + (dec 0 + x)
-
-foo x  =  1 + (x + dec x)
-
-foo x  =  1 + (x + dec 0)
-
-foo x  =  dec x + (x + x)
-
-foo x  =  dec x + (x + 1)
-
-foo x  =  dec x + (1 + x)
-
-foo x  =  dec x + (1 + 1)
-
-foo x  =  dec x + dec (dec x)
-
-foo x  =  dec x + dec (dec 0)
-
-foo x  =  dec 0 + (x + x)
-
-foo x  =  dec 0 + (x + 1)
-
-foo x  =  dec 0 + (1 + x)
-
-foo x  =  dec 0 + (1 + 1)
-
-foo x  =  dec 0 + dec (dec x)
-
-foo x  =  dec 0 + dec (dec 0)
-
-foo x  =  dec (dec x) + dec x
-
-foo x  =  dec (dec x) + dec 0
-
-foo x  =  dec (dec 0) + dec x
-
-foo x  =  dec (dec 0) + dec 0
+foo x  =  (0 - x) + 1
 
 foo 0  =  0
-foo x  =  dec (dec x) + x
+foo x  =  (0 - 1) + x
 
 foo 0  =  0
-foo x  =  dec (dec 0) + x
-
-foo 0  =  0
-foo x  =  dec (dec (dec (dec x)))
-
-foo 0  =  0
-foo x  =  dec (dec (dec (dec 0)))
+foo x  =  (1 - x) + 1
 
 foo 0  =  0
 foo x  =  x + (x + x)
@@ -747,10 +429,10 @@ foo 0  =  0
 foo x  =  x + (1 + 1)
 
 foo 0  =  0
-foo x  =  x + dec (dec x)
+foo x  =  x + (x - 1)
 
 foo 0  =  0
-foo x  =  x + dec (dec 0)
+foo x  =  x + (0 - 1)
 
 foo 0  =  0
 foo x  =  1 + (x + x)
@@ -765,28 +447,58 @@ foo 0  =  0
 foo x  =  1 + (1 + 1)
 
 foo 0  =  0
-foo x  =  dec x + dec x
+foo x  =  1 + (0 - x)
 
 foo 0  =  0
-foo x  =  dec x + dec 0
+foo x  =  1 + (1 - x)
 
 foo 0  =  0
-foo x  =  dec 0 + dec x
+foo x  =  x - (x + x)
 
 foo 0  =  0
-foo x  =  dec 0 + dec 0
+foo x  =  x - (x + 1)
+
+foo 0  =  0
+foo x  =  x - (1 + x)
+
+foo 0  =  0
+foo x  =  x - (1 + 1)
+
+foo 0  =  0
+foo x  =  0 - (x + x)
+
+foo 0  =  0
+foo x  =  0 - (x + 1)
+
+foo 0  =  0
+foo x  =  0 - (1 + x)
+
+foo 0  =  0
+foo x  =  0 - (1 + 1)
+
+foo 0  =  0
+foo x  =  1 - (x + x)
+
+foo 0  =  0
+foo x  =  1 - (x + 1)
+
+foo 0  =  0
+foo x  =  1 - (1 + x)
+
+foo 0  =  0
+foo x  =  1 - (1 + 1)
 
 foo 0  =  1
-foo x  =  dec (dec x) + x
+foo x  =  (x - 1) + x
 
 foo 0  =  1
-foo x  =  dec (dec 0) + x
+foo x  =  (0 - x) + 1
 
 foo 0  =  1
-foo x  =  dec (dec (dec (dec x)))
+foo x  =  (0 - 1) + x
 
 foo 0  =  1
-foo x  =  dec (dec (dec (dec 0)))
+foo x  =  (1 - x) + 1
 
 foo 0  =  1
 foo x  =  x + (x + x)
@@ -801,10 +513,10 @@ foo 0  =  1
 foo x  =  x + (1 + 1)
 
 foo 0  =  1
-foo x  =  x + dec (dec x)
+foo x  =  x + (x - 1)
 
 foo 0  =  1
-foo x  =  x + dec (dec 0)
+foo x  =  x + (0 - 1)
 
 foo 0  =  1
 foo x  =  1 + (x + x)
@@ -819,34 +531,46 @@ foo 0  =  1
 foo x  =  1 + (1 + 1)
 
 foo 0  =  1
-foo x  =  dec x + dec x
+foo x  =  1 + (0 - x)
 
 foo 0  =  1
-foo x  =  dec x + dec 0
+foo x  =  1 + (1 - x)
 
 foo 0  =  1
-foo x  =  dec 0 + dec x
+foo x  =  x - (x + x)
 
 foo 0  =  1
-foo x  =  dec 0 + dec 0
+foo x  =  x - (x + 1)
 
-foo 0  =  dec 0
-foo x  =  dec x + x
+foo 0  =  1
+foo x  =  x - (1 + x)
 
-foo 0  =  dec 0
-foo x  =  dec 0 + x
+foo 0  =  1
+foo x  =  x - (1 + 1)
 
-foo 0  =  dec 0
-foo x  =  dec (dec (dec x))
+foo 0  =  1
+foo x  =  0 - (x + x)
 
-foo 0  =  dec 0
-foo x  =  dec (dec (dec 0))
+foo 0  =  1
+foo x  =  0 - (x + 1)
 
-foo 0  =  dec 0
-foo x  =  x + dec x
+foo 0  =  1
+foo x  =  0 - (1 + x)
 
-foo 0  =  dec 0
-foo x  =  x + dec 0
+foo 0  =  1
+foo x  =  0 - (1 + 1)
+
+foo 0  =  1
+foo x  =  1 - (x + x)
+
+foo 0  =  1
+foo x  =  1 - (x + 1)
+
+foo 0  =  1
+foo x  =  1 - (1 + x)
+
+foo 0  =  1
+foo x  =  1 - (1 + 1)
 
 foo 0  =  1 + 1
 foo x  =  x + x
@@ -858,40 +582,37 @@ foo 0  =  1 + 1
 foo x  =  1 + x
 
 foo 0  =  1 + 1
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  1 + 1
-foo x  =  dec (dec 0)
+foo x  =  0 - x
 
-foo 0  =  dec (dec 0)
+foo 0  =  1 + 1
+foo x  =  0 - 1
+
+foo 0  =  1 + 1
+foo x  =  1 - x
+
+foo 0  =  0 - 1
 foo x  =  x + x
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo x  =  x + 1
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo x  =  1 + x
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo x  =  1 + 1
 
-foo 0  =  dec (dec 0)
-foo x  =  dec (dec x)
+foo 0  =  0 - 1
+foo x  =  x - 1
 
-foo 0  =  dec (dec (dec 0))
-foo x  =  dec x
+foo 0  =  0 - 1
+foo x  =  0 - x
 
-foo 0  =  dec (dec (dec 0))
-foo x  =  dec 0
-
-foo 0  =  dec (dec (dec (dec 0)))
-foo x  =  x
-
-foo 0  =  dec (dec (dec (dec 0)))
-foo x  =  0
-
-foo 0  =  dec (dec (dec (dec 0)))
-foo x  =  1
+foo 0  =  0 - 1
+foo x  =  1 - x
 
 foo 0  =  1 + (1 + 1)
 foo x  =  x
@@ -902,88 +623,22 @@ foo x  =  0
 foo 0  =  1 + (1 + 1)
 foo x  =  1
 
-foo 0  =  dec 0 + dec 0
+foo 0  =  0 - (1 + 1)
 foo x  =  x
 
-foo 0  =  dec 0 + dec 0
+foo 0  =  0 - (1 + 1)
 foo x  =  0
 
-foo 0  =  dec 0 + dec 0
+foo 0  =  0 - (1 + 1)
 foo x  =  1
 
-foo 1  =  0
-foo x  =  dec x + x
-
-foo 1  =  0
-foo x  =  dec 0 + x
-
-foo 1  =  0
-foo x  =  dec (dec (dec x))
-
-foo 1  =  0
-foo x  =  dec (dec (dec 0))
-
-foo 1  =  0
-foo x  =  x + dec x
-
-foo 1  =  0
-foo x  =  x + dec 0
-
-foo 1  =  1
-foo x  =  dec x + x
-
-foo 1  =  1
-foo x  =  dec 0 + x
-
-foo 1  =  1
-foo x  =  dec (dec (dec x))
-
-foo 1  =  1
-foo x  =  dec (dec (dec 0))
-
-foo 1  =  1
-foo x  =  x + dec x
-
-foo 1  =  1
-foo x  =  x + dec 0
-
-foo 1  =  dec 0
-foo x  =  x + x
-
-foo 1  =  dec 0
-foo x  =  x + 1
-
-foo 1  =  dec 0
-foo x  =  1 + x
-
-foo 1  =  dec 0
-foo x  =  1 + 1
-
-foo 1  =  dec 0
-foo x  =  dec (dec x)
-
-foo 1  =  dec 0
-foo x  =  dec (dec 0)
-
-foo 1  =  1 + 1
-foo x  =  dec x
-
-foo 1  =  1 + 1
-foo x  =  dec 0
-
-foo 1  =  dec (dec 0)
-foo x  =  dec x
-
-foo 1  =  dec (dec 0)
-foo x  =  dec 0
-
-foo 1  =  dec (dec (dec 0))
+foo 0  =  1 - (1 + 1)
 foo x  =  x
 
-foo 1  =  dec (dec (dec 0))
+foo 0  =  1 - (1 + 1)
 foo x  =  0
 
-foo 1  =  dec (dec (dec 0))
+foo 0  =  1 - (1 + 1)
 foo x  =  1
 
 foo 0  =  0
@@ -1004,11 +659,19 @@ foo x  =  1 + 1
 
 foo 0  =  0
 foo 1  =  0
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  0
 foo 1  =  0
-foo x  =  dec (dec 0)
+foo x  =  0 - x
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  0 - 1
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  1 - x
 
 foo 0  =  0
 foo 1  =  1
@@ -1028,19 +691,19 @@ foo x  =  1 + 1
 
 foo 0  =  0
 foo 1  =  1
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  0
 foo 1  =  1
-foo x  =  dec (dec 0)
+foo x  =  0 - x
 
 foo 0  =  0
-foo 1  =  dec 0
-foo x  =  dec x
+foo 1  =  1
+foo x  =  0 - 1
 
 foo 0  =  0
-foo 1  =  dec 0
-foo x  =  dec 0
+foo 1  =  1
+foo x  =  1 - x
 
 foo 0  =  0
 foo 1  =  1 + 1
@@ -1055,15 +718,15 @@ foo 1  =  1 + 1
 foo x  =  1
 
 foo 0  =  0
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  x
 
 foo 0  =  0
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  0
 
 foo 0  =  0
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  1
 
 foo 0  =  1
@@ -1084,11 +747,19 @@ foo x  =  1 + 1
 
 foo 0  =  1
 foo 1  =  0
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  1
 foo 1  =  0
-foo x  =  dec (dec 0)
+foo x  =  0 - x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  0 - 1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  1 - x
 
 foo 0  =  1
 foo 1  =  1
@@ -1108,19 +779,19 @@ foo x  =  1 + 1
 
 foo 0  =  1
 foo 1  =  1
-foo x  =  dec (dec x)
+foo x  =  x - 1
 
 foo 0  =  1
 foo 1  =  1
-foo x  =  dec (dec 0)
+foo x  =  0 - x
 
 foo 0  =  1
-foo 1  =  dec 0
-foo x  =  dec x
+foo 1  =  1
+foo x  =  0 - 1
 
 foo 0  =  1
-foo 1  =  dec 0
-foo x  =  dec 0
+foo 1  =  1
+foo x  =  1 - x
 
 foo 0  =  1
 foo 1  =  1 + 1
@@ -1135,43 +806,15 @@ foo 1  =  1 + 1
 foo x  =  1
 
 foo 0  =  1
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  x
 
 foo 0  =  1
-foo 1  =  dec (dec 0)
+foo 1  =  0 - 1
 foo x  =  0
 
 foo 0  =  1
-foo 1  =  dec (dec 0)
-foo x  =  1
-
-foo 0  =  dec 0
-foo 1  =  0
-foo x  =  dec x
-
-foo 0  =  dec 0
-foo 1  =  0
-foo x  =  dec 0
-
-foo 0  =  dec 0
-foo 1  =  1
-foo x  =  dec x
-
-foo 0  =  dec 0
-foo 1  =  1
-foo x  =  dec 0
-
-foo 0  =  dec 0
-foo 1  =  dec 0
-foo x  =  x
-
-foo 0  =  dec 0
-foo 1  =  dec 0
-foo x  =  0
-
-foo 0  =  dec 0
-foo 1  =  dec 0
+foo 1  =  0 - 1
 foo x  =  1
 
 foo 0  =  1 + 1
@@ -1198,27 +841,27 @@ foo 0  =  1 + 1
 foo 1  =  1
 foo x  =  1
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo 1  =  0
 foo x  =  x
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo 1  =  0
 foo x  =  0
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo 1  =  0
 foo x  =  1
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo 1  =  1
 foo x  =  x
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo 1  =  1
 foo x  =  0
 
-foo 0  =  dec (dec 0)
+foo 0  =  0 - 1
 foo 1  =  1
 foo x  =  1
 
