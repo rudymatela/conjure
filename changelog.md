@@ -2,6 +2,18 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* remove need for explicit deconstructions:
+	- use `-` and `1` instead of `dec`;
+	- allow `mod` and `div` as deconstructions;
+* bump Express requirement to v1.0.6 (bugfix);
+* complete the GPS1 benchmark;
+* add GPS2 and TerpreT benchmarks;
+* minor fixes in the README.
+
+
 v0.4.2
 ------
 
