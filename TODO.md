@@ -3,11 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* see `access` example on terpret, prettyprint the type signature correctly
-  as `access :: ...` instead of prefixing the infix name
-  (EDIT: this bug is on express itself.  Type signatures for infix variables
-  are printed incorrectly)
-
 * consider not breaking in some cases (increased crossproduct of patterns)
 
 * reduce the number of `deconstructions` considered:
