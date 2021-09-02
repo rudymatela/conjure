@@ -107,7 +107,7 @@ cannot conjure
 
 TerpreT benchmark #7: access
 
-(`access`) :: [A] -> Int -> A
+access :: [A] -> Int -> A
 -- testing 5 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
@@ -115,7 +115,7 @@ TerpreT benchmark #7: access
 -- looking through 1 candidates of size 3
 xs `access` x  =  xs !! x
 
-(`access`) :: [A] -> Int -> A
+access :: [A] -> Int -> A
 -- testing 5 combinations of argument values
 -- pruning with 4/7 rules
 -- looking through 1 candidates of size 1

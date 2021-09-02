@@ -270,18 +270,3 @@ x <==> y  =  x == y
   (==)  =  eval err . fromMaybe err $ conjureEquality x
   err  =  error "<==>: could not conjure"
 infix 4 <==>
-
-div' :: Expr -> Expr -> Expr
-div' ex ey  =  divE :$ ex :$ ey
-  where
-  divE  =  value "`div`" (div :: Int -> Int -> Int)
-
-init' :: Expr -> Expr
-init' exs  =  initE :$ exs
-  where
-  initE  =  value "init" (init :: [Int] -> [Int])
-
-mod' :: Expr -> Expr -> Expr
-mod' ex ey  =  modE :$ ex :$ ey
-  where
-  modE  =  value "`mod`" (mod :: Int -> Int -> Int)
