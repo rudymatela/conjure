@@ -8,7 +8,7 @@ sort (sort xs) == sort xs
 sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
 
 -}
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 1 incorrect properties, please re-run with more tests for faster results
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3

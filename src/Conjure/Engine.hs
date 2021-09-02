@@ -151,7 +151,8 @@ conjureWith args nm f es  =  do
     printThy thy
     putStrLn $ "-}"
   when (not . null $ invalid thy) $
-    putStrLn $ "-- reasoning produced incorrect properties," -- TODO: add Num
+    putStrLn $ "-- reasoning produced "
+            ++ show (length (invalid thy)) ++ " incorrect properties,"
             ++ " please re-run with more tests for faster results"
   pr 1 rs
   where

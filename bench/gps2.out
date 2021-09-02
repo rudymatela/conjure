@@ -255,7 +255,7 @@ cannot conjure
 spin :: [Char] -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 6/6 rules
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 1 incorrect properties, please re-run with more tests for faster results
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -269,7 +269,7 @@ spin cs  =  if length cs >= 5 then reverse cs else cs
 gps21_spinwords :: [Char] -> [Char]
 -- testing 4 combinations of argument values
 -- pruning with 16/16 rules
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- looking through 1 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -320,7 +320,7 @@ cannot conjure
 gps24 :: [Char] -> Twitter
 -- testing 4 combinations of argument values
 -- pruning with 4/8 rules
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 4 incorrect properties, please re-run with more tests for faster results
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 8 candidates of size 3

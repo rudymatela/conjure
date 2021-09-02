@@ -44,7 +44,7 @@ TerpreT benchmark #4: controlled shift
 cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
 -- pruning with 41/51 rules
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -61,7 +61,7 @@ cshift (p,q,r)  =  if p then (p,r,q) else (p,q,r)
 cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
 -- pruning with 41/51 rules
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -96,7 +96,7 @@ TerpreT benchmark #6: 2-bit adder
 adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 5 combinations of argument values
 -- pruning with 74/92 rules
--- reasoning produced incorrect properties, please re-run with more tests for faster results
+-- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
