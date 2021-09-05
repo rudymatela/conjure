@@ -38,36 +38,21 @@ sort' [x,y,z]
 
 main :: IO ()
 main = do
-  -- length xs  =  if null xs then 0 else 1 + length (tail xs)
-  --               1  2    3       4      5 6 7       8    9
   conjure "length" length'
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     ]
 
-  -- reverse xs  =  if null xs then [] else reverse (tail xs) ++ [head xs]
-  --                1  2    3       4       5        6    7   8  9 10 11 12
-  -- needs size 11 with unit
   conjure "reverse" reverse'
     [ pr ([] :: [Int])
     , prim "unit" ((:[]) :: Int -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     ]
 
-  -- xs ++ ys  =  if null xs then ys else head xs:(tail xs ++ ys)
-  --              1  2    3       4       5    6 7  8   9  10 11
   conjure "++" (+++)
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     ]
 
   -- now through fold
@@ -93,20 +78,13 @@ main = do
     , prim "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
     ]
 
-  -- now through fold
-  -- xs ++ ys  =  foldr (:) ys xs
   conjure "++" (+++)
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
-  -- intercalate
-  -- xs \/ ys  =  if null xs then ys else head xs : (ys \/ tail xs)
   conjure "\\/" (\/)
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
     ]
