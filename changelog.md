@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.4.4
+------
 
 * remove need for explicit deconstructions:
 	- use `-` and `1` instead of `dec`;
