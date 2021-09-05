@@ -114,4 +114,8 @@ avgs:
 	runhaskell bench/avgs.hs <bench/runtime/$$HOSTNAME/p12.runtimes
 	runhaskell bench/avgs.hs <bench/runtime/$$HOSTNAME/p30.runtimes
 
+gps-each: bench/gps
+	for i in {1..29}; do ./bench/time ./bench/gps $$i; done
+
+
 include mk/haskell.mk
