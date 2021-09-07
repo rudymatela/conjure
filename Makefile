@@ -120,5 +120,8 @@ gps-each: bench/gps
 terpret-each: bench/terpret
 	for i in {1..8}; do ./bench/time ./bench/terpret $$i; done
 
+gps2-each: bench/gps2
+	for i in {1..25}; do ./bench/time ./bench/gps2 $$i; done
+
 
 include mk/haskell.mk
