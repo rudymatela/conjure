@@ -14,7 +14,7 @@ import Data.Express hiding (height,size)
 
 -- TODO: remove the following import
 -- and fix build on GHC 7.10 and 7.8
--- the generation fo -: and ->>>: somehow fails.
+-- the generation of -: and ->>>: somehow fails.
 import Test.LeanCheck.Utils
 
 data Tree  =  Leaf
