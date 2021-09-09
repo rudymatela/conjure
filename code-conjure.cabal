@@ -48,6 +48,7 @@ extra-source-files: .gitignore
                   , bench/runtime/zero/proto/*.runtime
                   , bench/runtime/zero/versions
                   , bench/versions
+                  , bench/time
                   , test/sdist
 tested-with: GHC==9.0
            , GHC==8.10
