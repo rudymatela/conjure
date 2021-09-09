@@ -326,6 +326,10 @@ instance Conjurable Char where
 (==:) :: (a -> a -> Bool) -> a -> (a -> a -> Bool)
 (==:)  =  const
 
+-- the reconstruction of equality functions for polymorphic types
+-- such as [a], (a,b), Maybe a, Either a b
+-- is only needed so we don't impose an Eq restriction on the type context.
+
 instance (Conjurable a, Listable a, Express a, Show a) => Conjurable [a] where
   conjureExpress   =  reifyExpress
   conjureSubTypes xs  =  conjureType (head xs)
