@@ -66,9 +66,9 @@ t2c  =  do
 
 t3p :: [Bool] -> [Bool]
 -- t3p [True]  =  [False]
-t3p [True,True]  =  [False,True]             --  11 - 1 =  10
-t3p [False,True]  =  [True,False]            --  10 - 1 =   1
-t3p [False,True,True]  =  [True,False,True]  -- 110 - 1 = 101
+t3p [True,True]  =  [False,True]             -- 3-1=2
+t3p [False,True]  =  [True,False]            -- 2-1=1
+t3p [False,True,True]  =  [True,False,True]  -- 6-1=5
 
 t3g :: [Bool] -> [Bool]
 t3g []  =  []
