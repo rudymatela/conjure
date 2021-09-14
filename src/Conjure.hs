@@ -59,6 +59,8 @@ module Conjure
   , value
 
 -- * Conjuring from a specification
+  , conjureFromSpec
+  , conjureFromSpecWith
   , Spec1
   , Spec2
   , Spec3

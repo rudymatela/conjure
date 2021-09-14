@@ -14,14 +14,13 @@ sum' [1,2,3]  =  6
 sum' [3,4,5]  =  12
 sum' [1,2,3,4]  =  10
 
-sumSpec :: [([Int],Int)]
-sumSpec  =  [ [] -= 0
-            , [1] -= 1
-            , [1,2] -= 3
-            , [1,2,3] -= 6
-            , [3,4,5] -= 12
-            , [1,2,3,4] -= 10
-            ]
+sumSpec :: ([Int] -> Int) -> Bool
+sumSpec sum  =  sum [] == 0
+             && sum [1] == 1
+             && sum [1,2] == 3
+             && sum [1,2,3] == 6
+             && sum [3,4,5] == 12
+             && sum [1,2,3,4] == 10
 
 main :: IO ()
 main  =  do
@@ -32,7 +31,7 @@ main  =  do
   conjureWith as "sum" (sum' :: [Int] -> Int) primitives
 
   -- the following conjures from a spec
-  conjure1 "sum" sumSpec primitives
+  conjureFromSpec "sum" sumSpec primitives
 
 as :: Args
 as  =  args

@@ -5,12 +5,10 @@ import Conjure
 import Prelude hiding (sum)
 
 
-sumSpec :: Spec1 [Int] Int
-sumSpec  =
-  [ []      -= 0
-  , [1,2]   -= 3
-  , [3,4,5] -= 12
-  ]
+sumSpec :: ([Int] -> Int) -> Bool
+sumSpec sum  =  sum []      == 0
+             && sum [1,2]   == 3
+             && sum [3,4,5] == 12
 
 -- hoping for something like
 -- sum xs  =  if null xs then 0 else head xs + sum (tail xs)
@@ -25,12 +23,10 @@ sumPrimitives  =
   ]
 
 
-appSpec :: Spec2 [Int] [Int] [Int]
-appSpec  =
-  [ (,) []      [0,1]   -= [0,1]
-  , (,) [2,3]   []      -= [2,3]
-  , (,) [4,5,6] [7,8,9] -= [4,5,6,7,8,9]
-  ]
+appSpec :: ([Int] -> [Int] -> [Int]) -> Bool
+appSpec (++)  =  []      ++ [0,1]   == [0,1]
+              && [2,3]   ++ []      == [2,3]
+              && [4,5,6] ++ [7,8,9] == [4,5,6,7,8,9]
 
 -- hoping for something like
 -- app xs ys = if null xs then ys else head xs : app (tail xs) ys
@@ -46,5 +42,5 @@ appPrimitives =
 
 main :: IO ()
 main = do
-  conjure1 "sum" sumSpec sumPrimitives
-  conjure2 "++"  appSpec appPrimitives
+  conjureFromSpec "sum" sumSpec sumPrimitives
+  conjureFromSpec "++"  appSpec appPrimitives

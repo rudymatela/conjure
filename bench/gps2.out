@@ -47,7 +47,6 @@ gps2 :: Double -> Double -> Int -> Double
 cannot conjure
 
 gps3 :: [Char] -> Int
--- testing 0 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
@@ -183,14 +182,12 @@ gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs then x:gps13_leaders xs else gps13_leaders xs
 
 gps14_luhn :: [Int] -> Int
--- testing 0 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 cannot conjure
 
 gps15_mastermind :: () -> ()
--- testing 0 combinations of argument values
 -- pruning with 0/1 rules
 -- looking through 1 candidates of size 1
 gps15_mastermind u  =  u
@@ -246,7 +243,6 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 cannot conjure
 
 gps20 :: [Char] -> Bool
--- testing 0 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
@@ -295,7 +291,6 @@ digits :: Int -> [Int]
 cannot conjure
 
 gps22 :: Int -> [Char]
--- testing 0 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 cannot conjure

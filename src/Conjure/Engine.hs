@@ -15,10 +15,14 @@ module Conjure.Engine
   , Args(..)
   , args
   , conjureWith
+  , conjureFromSpec
+  , conjureFromSpecWith
   , conjure0
   , conjure0With
   , conjpure
   , conjpureWith
+  , conjpureFromSpec
+  , conjpureFromSpecWith
   , conjpure0
   , conjpure0With
   , candidateExprs
@@ -89,8 +93,8 @@ import Conjure.Defn
 conjure :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjure  =  conjureWith args
 
-conjureProp :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
-conjureProp  =  conjurePropWith args
+conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpec  =  conjureFromSpecWith args
 
 conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0  =  conjure0With args
@@ -154,13 +158,14 @@ args = Args
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureWith args nm f  =  conjure0With args nm f (const True)
 
-conjurePropWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
-conjurePropWith args nm p  =  conjure0With args nm undefined p
+conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
 conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
-  putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
+  when (length ts > 0) $
+    putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
   putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   when (showTheory args) $ do
     putStrLn $ "{-"
@@ -182,7 +187,7 @@ conjure0With args nm f p es  =  do
       []     ->  pr (n+1) rs
       (i:_)  ->  putStrLn $ showDefn i
   rs  =  zip iss css
-  (iss, css, ts, thy)  =  conjpureWith args nm f es
+  (iss, css, ts, thy)  =  conjpure0With args nm f p es
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 
@@ -198,8 +203,8 @@ conjure0With args nm f p es  =  do
 conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure =  conjpureWith args
 
-conjpureProp :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
-conjpureProp =  conjpurePropWith args
+conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpec  =  conjpureFromSpecWith args
 
 conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0 =  conjpure0With args
@@ -208,8 +213,8 @@ conjpure0 =  conjpure0With args
 conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureWith args nm f  =  conjpure0With args nm f (const True)
 
-conjpurePropWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
-conjpurePropWith args nm p  =  conjpure0With args nm undefined p
+conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
 conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
