@@ -15,8 +15,12 @@ module Conjure.Engine
   , Args(..)
   , args
   , conjureWith
+  , conjure0
+  , conjure0With
   , conjpure
   , conjpureWith
+  , conjpure0
+  , conjpure0With
   , candidateExprs
   , candidateDefns
   , candidateDefns1
@@ -85,6 +89,9 @@ import Conjure.Defn
 conjure :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjure  =  conjureWith args
 
+conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0  =  conjure0With args
+
 
 -- | Like 'conjure' but allows setting the maximum size of considered expressions
 --   instead of the default value of 12.
@@ -142,7 +149,10 @@ args = Args
 --
 -- > conjureWith args{maxSize = 11} "function" function [...]
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
-conjureWith args nm f es  =  do
+conjureWith args nm f  =  conjure0With args nm f (const True)
+
+conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
   putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
   putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
@@ -182,15 +192,22 @@ conjureWith args nm f es  =  do
 conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure =  conjpureWith args
 
+conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0 =  conjpure0With args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
-conjpureWith args@(Args{..}) nm f es  =  (implementationsT, candidatesT, tests, thy)
+conjpureWith args nm f  =  conjpure0With args nm f (const True)
+
+-- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
+conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
+                 && errorToFalse (p (cevl maxEvalRecursions fx))
   candidatesT  =  take maxSize candidatesTT
   (candidatesTT, thy)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
