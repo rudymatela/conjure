@@ -89,6 +89,9 @@ import Conjure.Defn
 conjure :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjure  =  conjureWith args
 
+conjureProp :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
+conjureProp  =  conjurePropWith args
+
 conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0  =  conjure0With args
 
@@ -151,6 +154,9 @@ args = Args
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureWith args nm f  =  conjure0With args nm f (const True)
 
+conjurePropWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
+conjurePropWith args nm p  =  conjure0With args nm undefined p
+
 conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
@@ -192,12 +198,18 @@ conjure0With args nm f p es  =  do
 conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure =  conjpureWith args
 
+conjpureProp :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureProp =  conjpurePropWith args
+
 conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0 =  conjpure0With args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureWith args nm f  =  conjpure0With args nm f (const True)
+
+conjpurePropWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpurePropWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
 conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
