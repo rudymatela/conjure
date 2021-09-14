@@ -69,7 +69,7 @@ import Conjure.Defn
 -- >   , pr (1::Int)
 -- >   , prim "+" ((+) :: Int -> Int -> Int)
 -- >   , prim "*" ((*) :: Int -> Int -> Int)
--- > ]
+-- >   ]
 --
 -- The conjure function does the following:
 --
