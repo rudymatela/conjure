@@ -159,4 +159,19 @@ tests n  =
          , (yy-:-yys, yy-:-xxs)
          ]
        ]
+
+  -- type-correct applications are allowed on $$, $$|< and $$**
+  , absE $$   zero  ==  Just (abs' zero)
+  , absE $$|< zero  ==  Just (abs' zero)
+  , absE $$** zero  ==  Just (abs' zero)
+
+  -- kind-correct applications are allowed on $$|< and $$**
+  , ordE $$   zero  ==  Nothing
+  , ordE $$|< zero  ==  Just (ordE :$ zero)
+  , ordE $$** zero  ==  Just (ordE :$ zero)
+
+  -- type-incorrect applications are allowed on $$**
+  , zero $$   zero  ==  Nothing
+  , zero $$|< zero  ==  Nothing
+  , zero $$** zero  ==  Just (zero :$ zero)
   ]

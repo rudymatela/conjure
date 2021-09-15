@@ -219,11 +219,38 @@ fillBFS e e'  =  fst (f e)
       | otherwise                    =  (e, Nothing)
 -- TODO: move BFS functions into Express?
 
--- Debug: application that always works
+-- | Like '$$' but always works regardless of type.
+--
+-- /Warning:/ just like ':$', this may produce ill-typed expressions.
+--
+-- > > zero $$** zero
+-- > Just (0 0 :: ill-typed # Int $ Int #)
+--
+-- Together with '$$|<', this function is unused
+-- but is useful when experiment with the soource
+-- to see the effect of type-corrected
+-- on pruning the search space.
+--
+-- (cf. '$$', '$$|<')
 ($$**) :: Expr -> Expr -> Maybe Expr
 e1 $$** e2  =  Just $ e1 :$ e2
 
--- Debug: application that works for the correct kinds
+-- | Like '$$' but relaxed to work on correct kinds.
+--
+-- > > ordE $$|< zero
+-- > Just (ord 0 :: ill-typed # Char -> Int $ Int #)
+--
+-- > > zero $$|< zero
+-- > Nothing
+--
+-- /Warning:/ just like ':$', this may produce ill-typed expressions.
+--
+-- Together with '$$**', this function is unused
+-- but is useful when experiment with the soource
+-- to see the effect of type-corrected
+-- on pruning the search space.
+--
+-- (cf. '$$', '$$**')
 ($$|<) :: Expr -> Expr -> Maybe Expr
 e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
                then Just $ e1 :$ e2
