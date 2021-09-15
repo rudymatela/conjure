@@ -19,8 +19,6 @@ module Conjure.Expr
   , mayNotEvaluateArgument
   , compareSimplicity
   , ifFor
-  , primitiveHoles
-  , primitiveApplications
   , valuesBFS
   , holesBFS
   , fillBFS
@@ -194,22 +192,6 @@ ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 (>$$<) :: [Expr] -> [Expr] -> [Expr]
 exs >$$< eys  =  catMaybes [ex $$ ey | ex <- exs, ey <- eys]
 -- TODO: move >$$< into Data.Express?
-
-primitiveHoles :: [Expr] -> [Expr]
-primitiveHoles prims  =  sort $ ph hs
-  where
-  hs  =  nub $ map holeAsTypeOf prims
-  ph  =  iterateUntil (==) ps
-  ps es  =  nub $ es ++ sq es
-  sq es  =  nub $ map holeAsTypeOf $ es >$$< es
--- FIXME: the function above is quite inefficient.
---        Should run fast for a small number of types,
---        but if this number increases runtime may start
---        to become significant.
-
-primitiveApplications :: [Expr] -> [[Expr]]
-primitiveApplications prims  =  takeWhile (not . null)
-                             $  iterate (>$$< primitiveHoles prims) prims
 
 -- lists terminal values in BFS order
 valuesBFS :: Expr -> [Expr]

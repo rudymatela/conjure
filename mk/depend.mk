@@ -393,7 +393,6 @@ mk/All.o: \
 mk/Toplibs.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure/Prim.hs \
@@ -455,7 +454,6 @@ src/Conjure/Utils.o: \
 test/conjurable.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   test/conjurable.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
@@ -468,13 +466,11 @@ test/conjurable.o: \
 test/conjurable: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   test/conjurable.hs \
   mk/toplibs
 test/defn.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   test/defn.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
@@ -487,13 +483,11 @@ test/defn.o: \
 test/defn: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   test/defn.hs \
   mk/toplibs
 test/expr.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   test/expr.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
@@ -506,19 +500,13 @@ test/expr.o: \
 test/expr: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   test/expr.hs \
   mk/toplibs
-test/Test/Candidates.o: \
-  test/Test/Candidates.hs \
-  src/Conjure/Utils.hs \
-  src/Conjure/Expr.hs
 test/Test/ListableExpr.o: \
   test/Test/ListableExpr.hs
 test/Test.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure/Prim.hs \
@@ -530,13 +518,11 @@ test/Test.o: \
 test/Test: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   mk/toplibs
 test/utils.o: \
   test/utils.hs \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   src/Conjure/Utils.hs \
   src/Conjure/Spec.hs \
   src/Conjure/Prim.hs \
@@ -549,5 +535,4 @@ test/utils: \
   test/utils.hs \
   test/Test.hs \
   test/Test/ListableExpr.hs \
-  test/Test/Candidates.hs \
   mk/toplibs
