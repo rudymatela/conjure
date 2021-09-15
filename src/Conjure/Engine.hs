@@ -31,7 +31,6 @@ module Conjure.Engine
   , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
-  , deconstructions
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine

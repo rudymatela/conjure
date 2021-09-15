@@ -25,11 +25,6 @@ module Conjure.Utils
 #if __GLASGOW_HASKELL__ < 710
   , sortOn
 #endif
-  , takeUntil
-  , takeNextWhile
-  , takeNextUntil
-  , deconstructions
-  , isDeconstruction
   , idIO
   , mapHead
   , sets
@@ -91,33 +86,6 @@ groupOn f = groupBy ((==) `on` f)
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
 sortOn f = sortBy (compare `on` f)
 #endif
-
-takeUntil :: (a -> Bool) -> [a] -> [a]
-takeUntil p  =  takeWhile (not . p)
-
-takeNextWhile :: (a -> a -> Bool) -> [a] -> [a]
-takeNextWhile (?)  =  t
-  where
-  t (x:y:xs) | x ? y  =  x : t (y:xs)
-             | otherwise  =  [x]
-  t xs  =  xs
-
-takeNextUntil :: (a -> a -> Bool) -> [a] -> [a]
-takeNextUntil (?)  =  takeNextWhile (not .: (?))
-  where
-  (.:)  =  (.) . (.)
-
-deconstructions :: (a -> Bool) -> (a -> a) -> a -> [a]
-deconstructions z d x  =  takeUntil z
-                       $  iterate d x
-
--- | The deconstruction is considered valid if it converges
---   for more than half of the given values.
-isDeconstruction :: [a] -> (a -> Bool) -> (a -> a) -> Bool
-isDeconstruction xs z d  =  count is xs >= l `div` 2
-  where
-  is x  =  length (take l $ deconstructions z d x) < l
-  l  =  length xs
 
 -- | __WARNING:__
 --   uses 'unsafePerformIO' and should only be used for debugging!
