@@ -22,9 +22,6 @@ module Conjure.Expr
   , valuesBFS
   , holesBFS
   , fillBFS
-  , showEq
-  , lhs
-  , rhs
   , ($$**)
   , ($$|<)
   , possibleHoles
@@ -221,14 +218,6 @@ fillBFS e e'  =  fst (f e)
   f e | isHole e && typ e == typ e'  =  (e', Just 0)
       | otherwise                    =  (e, Nothing)
 -- TODO: move BFS functions into Express?
-
-showEq :: Expr -> String
-showEq (((Value "==" _) :$ lhs) :$ rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
-showEq e  =  "not an Eq: " ++ show e
-
-lhs, rhs :: Expr -> Expr
-lhs (((Value "==" _) :$ e) :$ _)  =  e
-rhs (((Value "==" _) :$ _) :$ e)  =  e
 
 -- Debug: application that always works
 ($$**) :: Expr -> Expr -> Maybe Expr
