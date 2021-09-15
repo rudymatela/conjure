@@ -234,7 +234,7 @@ fillBFS e e'  =  fst (f e)
 -- > Just (0 0 :: ill-typed # Int $ Int #)
 --
 -- Together with '$$|<', this function is unused
--- but is useful when experiment with the soource
+-- but is useful when experiment with the source
 -- to see the effect of type-corrected
 -- on pruning the search space.
 --
@@ -253,7 +253,7 @@ e1 $$** e2  =  Just $ e1 :$ e2
 -- /Warning:/ just like ':$', this may produce ill-typed expressions.
 --
 -- Together with '$$**', this function is unused
--- but is useful when experiment with the soource
+-- but is useful when experiment with the source
 -- to see the effect of type-corrected
 -- on pruning the search space.
 --
