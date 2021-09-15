@@ -217,6 +217,11 @@ conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] 
 conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
+--
+-- This is where the actual implementation resides.  The functions
+-- 'conjpure', 'conjpureWith', 'conjpureFromSpec', 'conjpureFromSpecWith',
+-- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
+-- 'conjure0' all refer to this.
 conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, tests, thy)
   where
