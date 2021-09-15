@@ -378,6 +378,10 @@ useMatches (e:es) es'  =  concat
   | (e',es') <- choicesThat (\e' _ -> any (`elem` vars e') (vars e)) es'
   ]
 
+-- | Turns all variables of an expression into holes.
+--
+-- > > rehole (xx -+- yy)
+-- > _ + _ :: Int
 rehole :: Expr -> Expr
 rehole (e1 :$ e2)    = rehole e1 :$ rehole e2
 rehole e | isVar e   = "" `varAsTypeOf` e
