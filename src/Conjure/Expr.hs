@@ -281,6 +281,18 @@ possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
 
 -- -- Expression enumeration -- --
 
+-- | Enumerate applications between values of the given list of primitives
+--   and of the given expressions's type.
+--
+-- __Arguments:__
+--
+-- 1. an 'Expr' whose type we are interested in
+-- 2. a filtering function, returning 'True' for the expressions to keep
+-- 3. a list of primitives to be used in building expression.
+--
+-- __Result:__ a potentially infinite list of list of enumerated expressions
+--
+-- The enumeration here is type-directed for performance reasons.
 enumerateAppsFor :: Expr -> (Expr -> Bool) -> [Expr] -> [[Expr]]
 enumerateAppsFor h keep es  =  for h
   where
@@ -297,6 +309,10 @@ enumerateAppsFor h keep es  =  for h
           ,  typ h == typ hfx
           ]
 
+-- | Given an expression whose holes are /all of the same type/
+--   and an enumeration of 'Expr's of this same type,
+--   enumerate all possible fillings of the original expression
+--   with the 'Expr's in the enumeration.
 enumerateFillings :: Expr -> [[Expr]] -> [[Expr]]
 enumerateFillings e  =  mapT (fill e)
                      .  products
