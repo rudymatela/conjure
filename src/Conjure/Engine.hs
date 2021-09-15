@@ -83,6 +83,7 @@ import Conjure.Defn
 --
 -- > > conjure "square" square primitives
 -- > square :: Int -> Int
+-- > -- pruning with 14/25 rules
 -- > -- testing 3 combinations of argument values
 -- > -- looking through 3 candidates of size 1
 -- > -- looking through 3 candidates of size 2
@@ -93,6 +94,40 @@ import Conjure.Defn
 conjure :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjure  =  conjureWith args
 
+
+-- | Conjures an implementation from a function specification.
+--
+-- This function works like 'conjure' but instead of receiving a partial definition
+-- it receives a boolean filter / property about the function.
+--
+-- For example, given:
+--
+-- > squareSpec :: (Int -> Int) -> Bool
+-- > squareSpec square  =  square 0 == 0
+-- >                    && square 1 == 1
+-- >                    && square 2 == 4
+--
+-- Then:
+--
+-- > > conjureFromSpec "square" squareSpec primitives
+-- > square :: Int -> Int
+-- > -- pruning with 14/25 rules
+-- > -- looking through 3 candidates of size 1
+-- > -- looking through 4 candidates of size 2
+-- > -- looking through 9 candidates of size 3
+-- > square x  =  x * x
+--
+-- This allows users to specify QuickCheck-style properties,
+-- here is an example using LeanCheck:
+--
+-- > import Test.LeanCheck (holds, exists)
+-- >
+-- > squarePropertySpec :: (Int -> Int) -> Bool
+-- > squarePropertySpec square  =  and
+-- >   [ holds n $ \x -> square x >= x
+-- >   , holds n $ \x -> square x >= 0
+-- >   , exists n $ \x -> square x > x
+-- >   ]  where  n = 60
 conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
 conjureFromSpec  =  conjureFromSpecWith args
 
@@ -158,6 +193,9 @@ args = Args
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureWith args nm f  =  conjure0With args nm f (const True)
 
+-- | Like 'conjureFromSpec' but allows setting options through 'Args'/'args'.
+--
+-- > conjureFromSpecWith args{maxSize = 11} "function" spec [...]
 conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
 conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
