@@ -131,6 +131,11 @@ conjure  =  conjureWith args
 conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
 conjureFromSpec  =  conjureFromSpecWith args
 
+
+-- | Synthesizes an implementation from both a partial definition and a
+--   function specification.
+--
+--   This works like the functions 'conjure' and 'conjureFromSpec' combined.
 conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0  =  conjure0With args
 
@@ -199,6 +204,7 @@ conjureWith args nm f  =  conjure0With args nm f (const True)
 conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
 conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
+-- | Like 'conjure0' but allows setting options through 'Args'/'args'.
 conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
@@ -232,18 +238,20 @@ conjure0With args nm f p es  =  do
 
 -- | Like 'conjure' but in the pure world.
 --
--- Returns a triple with:
+-- Returns a quadruple with:
 --
 -- 1. tiers of implementations
--- 2. tiers of candidate bodies (right type)
--- 3. tiers of candidate expressions (any type)
--- 4. a list of tests
+-- 2. tiers of candidates
+-- 3. a list of tests
+-- 4. the underlying theory
 conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure =  conjpureWith args
 
+-- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
 conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureFromSpec  =  conjpureFromSpecWith args
 
+-- | Like 'conjure0' but in the pure world.  (cf. 'conjpure')
 conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0 =  conjpure0With args
 
@@ -251,6 +259,7 @@ conjpure0 =  conjpure0With args
 conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureWith args nm f  =  conjpure0With args nm f (const True)
 
+-- | Like 'conjureFromSpecWith' but in the pure world.  (cf. 'conjpure')
 conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
@@ -290,10 +299,13 @@ conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, test
     e  =  ffxx -==- ffxx
 
 
+-- | Just prints the underlying theory found by "Test.Speculate"
+--   without actually synthesizing a function.
 conjureTheory :: Conjurable f => String -> f -> [Prim] -> IO ()
 conjureTheory  =  conjureTheoryWith args
 
 
+-- | Like 'conjureTheory' but allows setting options through 'Args'/'args'.
 conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureTheoryWith args nm f es  =  do
   putStrLn $ "theory with " ++ (show . length $ rules thy) ++ " rules and "
