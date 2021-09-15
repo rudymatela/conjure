@@ -127,26 +127,33 @@ class (Typeable a, Name a) => Conjurable a where
 
   -- | Returns 'Just' the '==' function encoded as an 'Expr' when available
   --   or 'Nothing' otherwise.
+  --
+  -- Use 'reifyEquality' when defining this.
   conjureEquality :: a -> Maybe Expr
   conjureEquality _  =  Nothing
 
   -- | Returns 'Just' 'tiers' of values encoded as 'Expr's when possible
   --   or 'Nothing' otherwise.
+  --
+  -- Use 'reifyTiers' when defining this.
   conjureTiers :: a -> Maybe [[Expr]]
   conjureTiers _  =  Nothing
 
   conjureSubTypes :: a -> Reification
   conjureSubTypes _  =  id
 
+  -- | Returns an if-function encoded as an 'Expr'.
   conjureIf :: a -> Expr
   conjureIf   =  ifFor
 
+  -- | Returns a top-level case breakdown.
   conjureCases :: a -> [Expr]
   conjureCases _  =  []
 
   conjureArgumentCases :: a -> [[Expr]]
   conjureArgumentCases _  =  []
 
+  -- | Returns the (recursive) size of the given value.
   conjureSize :: a -> Int
   conjureSize _  =  0
 

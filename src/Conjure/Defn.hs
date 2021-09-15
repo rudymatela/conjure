@@ -33,7 +33,24 @@ import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
 import Test.LeanCheck.Utils ((-:>)) -- for toDynamicWithDefn
 
+-- | A function definition as a list of top-level case bindings ('Bndn').
+--
+-- Here is an example using the notation from "Data.Express.Fixtures":
+--
+-- > sumV :: Expr
+-- > sumV  =  var "sum" (undefined :: [Int] -> Int)
+-- >
+-- > (=-) = (,)
+-- > infixr 0 =-
+-- >
+-- > sumDefn :: Defn
+-- > sumDefn  =  [ sum' nil           =-  zero
+-- >             , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
+-- >             ]  where  sum' e  =  sumV :$ e
+
 type Defn  =  [Bndn]
+
+-- | A single binding in a definition ('Denf').
 type Bndn  =  (Expr,Expr)
 
 showDefn :: Defn -> String
