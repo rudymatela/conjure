@@ -190,7 +190,9 @@ ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 exs >$$< eys  =  catMaybes [ex $$ ey | ex <- exs, ey <- eys]
 -- TODO: move >$$< into Data.Express?
 
--- lists terminal values in BFS order
+-- | Lists terminal values in BFS order.
+--
+-- (cf. 'values', 'holesBFS', 'fillBFS')
 valuesBFS :: Expr -> [Expr]
 valuesBFS  =  concat . bfs
   where
@@ -198,10 +200,15 @@ valuesBFS  =  concat . bfs
   bfs (ef :$ ex)  =  [] : mzip (bfs ef) (bfs ex)
   bfs e  =  [[e]]
 
--- lists holes in BFS order
+-- | Lists holes in BFS order.
+--
+-- (cf. 'holes', 'valuesBFS', 'fillBFS')
 holesBFS :: Expr -> [Expr]
 holesBFS  =  filter isHole . valuesBFS
 
+-- | Fills holes in BFS order.
+--
+-- (cf. 'fill', 'valuesBFS', 'fillBFS')
 fillBFS :: Expr -> Expr -> Expr
 fillBFS e e'  =  fst (f e)
   where
