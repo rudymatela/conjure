@@ -47,12 +47,16 @@ import Test.LeanCheck.Utils ((-:>)) -- for toDynamicWithDefn
 -- > sumDefn  =  [ sum' nil           =-  zero
 -- >             , sum' (xx -:- xxs)  =-  xx -+- (sumV :$ xxs)
 -- >             ]  where  sum' e  =  sumV :$ e
-
 type Defn  =  [Bndn]
 
--- | A single binding in a definition ('Denf').
+-- | A single binding in a definition ('Defn').
 type Bndn  =  (Expr,Expr)
 
+-- | Pretty-prints a 'Defn' as a 'String':
+--
+-- > > putStr $ showDefn sumDefn
+-- > sum []  =  0
+-- > sum (x:xs)  =  x + sum xs
 showDefn :: Defn -> String
 showDefn  =  unlines . map show1
   where
@@ -60,8 +64,37 @@ showDefn  =  unlines . map show1
 
 type Memo  =  [(Expr, Maybe Dynamic)]
 
--- | Evaluates an 'Expr' using the given 'Defn' as definition
+-- | Evaluates an 'Expr' to a 'Dynamic' value
+--   using the given 'Defn' as definition
 --   when a recursive call is found.
+--
+-- Arguments:
+--
+-- 1. a function that deeply reencodes an expression (cf. 'expr')
+-- 2. the maximum number of recursive evaluations
+-- 3. a 'Defn' to be used when evaluating the given 'Expr'
+-- 4. an 'Expr' to be evaluated
+--
+-- This function cannot be used to evaluate a functional value for the given 'Defn'
+-- and can only be used when occurrences of the given 'Defn' are fully applied.
+--
+-- The function the deeply reencodes an 'Expr' can be defined using
+-- functionality present in "Conjure.Conjurable".  Here's a quick-and-dirty version
+-- that is able to reencode 'Bool's, 'Int's and their lists:
+--
+-- > exprExpr :: Expr -> Expr
+-- > exprExpr  =  conjureExpress (undefined :: Bool -> [Bool] -> Int -> [Int] -> ())
+--
+-- The maximum number of recursive evaluations counts in two ways:
+--
+-- 1. the maximum number of entries in the recursive-evaluation memo table;
+-- 2. the maximum number of terminal values considered (but in this case the
+--    limit is multiplied by the _size_ of the given 'Defn'.
+--
+-- These could be divided into two separate parameters but
+-- then there would be an extra _dial_ to care about...
+--
+-- (cf. 'devaluate', 'deval', 'devl')
 toDynamicWithDefn :: (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe Dynamic
 toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (size . snd) cx)) []
   where
@@ -115,18 +148,49 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
                           Just (n', m', d2) -> (n',m',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
 
+-- | Evaluates an 'Expr' expression into 'Just' a regular Haskell value
+--   using a 'Defn' definition when it is found.
+--   If there's a type-mismatch, this function returns 'Nothing'.
+--
+-- This function requires a 'Expr'-deep-reencoding function
+-- and a limit to the number of recursive evaluations.
+--
+-- (cf. 'toDynamicWithDefn', 'deval', 'devl')
 devaluate :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> Maybe a
 devaluate ee n fxpr e  =  toDynamicWithDefn ee n fxpr e >>= fromDynamic
 
+-- | Evaluates an 'Expr' expression into a regular Haskell value
+--   using a 'Defn' definition when it is found in the given expression.
+--   If there's a type-mismatch, this function return a default value.
+--
+-- This function requires a 'Expr'-deep-reencoding function
+-- and a limit to the number of recursive evaluations.
+--
+-- (cf. 'toDynamicWithDefn', 'devaluate', devl')
 deval :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 deval ee n fxpr x  =  fromMaybe x . devaluate ee n fxpr
 
+-- | Like 'deval' but only works for when the given 'Defn' definition
+--   has no case breakdowns.
+--
+-- In other words, this only works when the given 'Defn' is a singleton list
+-- whose first value of the only element is a simple application without
+-- constructors.
 devalFast :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 devalFast _ n [defn] x  =  reval defn n x
 
+-- | Evaluates an 'Expr' expression into a regular Haskell value
+--   using a 'Defn' definition when it is found in the given expression.
+--   If there's a type-mismatch, this raises an error.
+--
+-- This function requires a 'Expr'-deep-reencoding function
+-- and a limit to the number of recursive evaluations.
+--
+-- (cf. 'toDynamicWithDefn', 'devaluate', deval')
 devl :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> a
 devl ee n fxpr  =  deval ee n fxpr (error "devl: incorrect type?")
 
+-- | Returns whether the given definition 'apparentlyTerminates'.
 defnApparentlyTerminates :: Defn -> Bool
 defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e
 defnApparentlyTerminates _  =  True
