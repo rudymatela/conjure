@@ -168,16 +168,31 @@ nubConjureType x  =  nubOn (\(eh,_,_,_,_,_) -> eh) . conjureType x
 -- The use of nubOn above is O(n^2).
 -- So long as there is not a huge number of subtypes of a, so we're fine.
 
+-- | Conjures a 'Reification1' for a 'Conjurable' type.
+--
+-- This is used in the implementation of 'conjureReification'.
 conjureReification1 :: Conjurable a => a -> Reification1
 conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, null $ conjureCases x, value "conjureSize" (conjureSize -:> x))
 
+-- | Conjures a list of 'Reification1'
+--   for a 'Conjurable' type, its subtypes and 'Bool'.
+--
+-- This is used in the implementation of
+-- 'conjureHoles',
+-- 'conjureMkEquation',
+-- 'conjureAreEqual',
+-- 'conjureTiersFor',
+-- 'conjureIsDeconstructor',
+-- 'conjureNamesFor',
+-- 'conjureIsUnbreakable',
+-- etc.
 conjureReification :: Conjurable a => a -> [Reification1]
 conjureReification x  =  nubConjureType x [conjureReification1 bool]
   where
   bool :: Bool
   bool  =  error "conjureReification: evaluated proxy boolean value (definitely a bug)"
 
--- | Reifies equality to be used in a conjurable type.
+-- | Reifies equality '==' in a 'Conjurable' type instance.
 --
 -- This is to be used
 -- in the definition of 'conjureEquality'
@@ -203,6 +218,16 @@ reifyEquality  =  Just . head . reifyEq
 reifyTiers :: (Listable a, Show a, Typeable a) => a -> Maybe [[Expr]]
 reifyTiers  =  Just . mkExprTiers
 
+-- | Reifies the 'expr' function in a 'Conjurable' type instance.
+--
+-- This is to be used
+-- in the definition of 'conjureExpress'
+-- of 'Conjurable' typeclass instances.
+--
+-- > instance ... => Conjurable <Type> where
+-- >   ...
+-- >   conjureExpress  =  reifyExpress
+-- >   ...
 reifyExpress :: (Express a, Show a) => a -> Expr -> Expr
 reifyExpress a e  =  case value "expr" (expr -:> a) $$ e of
   Nothing -> e         -- TODO: consider throwing an error
