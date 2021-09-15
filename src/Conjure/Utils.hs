@@ -4,7 +4,7 @@
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
--- An internal module of 'Conjure'.
+-- An internal module of "Conjure".
 -- This exports 'Data.List', 'Data.Maybe', 'Data.Function'
 -- and a few other simple utitilites.
 {-# LANGUAGE CPP #-}

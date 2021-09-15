@@ -4,7 +4,7 @@
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
--- This module is part of 'Conjure'.
+-- This module is part of "Conjure".
 --
 -- This defines the 'Conjurable' typeclass
 -- and utilities involving it.

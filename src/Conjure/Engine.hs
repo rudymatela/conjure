@@ -4,7 +4,7 @@
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
--- An internal module of 'Conjure',
+-- An internal module of "Conjure",
 -- a library for Conjuring function implementations
 -- from tests or partial definitions.
 -- (a.k.a.: functional inductive programming)
