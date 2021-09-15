@@ -17,7 +17,6 @@ module Conjure.Expr
   , recursexpr
   , apparentlyTerminates
   , mayNotEvaluateArgument
-  , applicationOld
   , compareSimplicity
   , ifFor
   , primitiveHoles
@@ -177,15 +176,6 @@ mayNotEvaluateArgument (Value "if" ce :$ _ :$ _)  =  True
 mayNotEvaluateArgument (Value "&&" ce :$ _)       =  True
 mayNotEvaluateArgument (Value "||" ce :$ _)       =  True
 mayNotEvaluateArgument _                          =  False
-
-applicationOld :: Expr -> [Expr] -> Maybe Expr
-applicationOld ff es  =  appn ff
-  where
-  appn ff
-    | isFun ff   =  case [e | Just (_ :$ e) <- (map (ff $$)) es] of
-                    [] -> Nothing  -- could not find type representative in es
-                    (e:_) -> appn (ff :$ holeAsTypeOf e)
-    | otherwise  =  Just ff
 
 -- | Creates an if 'Expr' of the type of the given proxy.
 --
