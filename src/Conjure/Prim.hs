@@ -57,13 +57,22 @@ prif x  =  (ifFor x, conjureType x)
 -- Conjure.Conjurable but need a list of Prims instead of a Conjurable
 -- representative.
 
+-- | Computes a list of 'Reification1's from a list of 'Prim's.
+--
+-- This function mirrors functionality of 'conjureReification'.
 cjReification :: [Prim] -> [Reification1]
 cjReification ps  =  nubOn (\(eh,_,_,_,_,_) -> eh)
                   $  foldr (.) id (map snd ps) [conjureReification1 bool]
 
+-- | Computes a list of holes encoded as 'Expr's from a list of 'Prim's.
+--
+-- This function mirrors functionality from 'conjureHoles'.
 cjHoles :: [Prim] -> [Expr]
 cjHoles ps  =  [eh | (eh,_,Just _,_,_,_) <- cjReification ps]
 
+-- | Computes a function that equates two 'Expr's from a list of 'Prim's.
+--
+-- This function mirrors functionality from 'conjureMkEquation'.
 cjMkEquation :: [Prim] -> Expr -> Expr -> Expr
 cjMkEquation ps  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- cjReification ps]
 

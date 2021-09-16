@@ -253,6 +253,7 @@ mkExprTiers a  =  mapT val (tiers -: [[a]])
 conjureHoles :: Conjurable f => f -> [Expr]
 conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 
+-- | Computes a function that makes an equation between two expressions.
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- conjureReification f]
 
@@ -264,6 +265,8 @@ conjureAreEqual f maxTests  =  (===)
   isTrue  =  all (errorToFalse . eval False) . gs
   gs  =  take maxTests . grounds (conjureTiersFor f)
 
+-- | Compute 'tiers' of values encoded as 'Expr's
+--   of the type of the given 'Expr'.
 conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
 conjureTiersFor f e  =  tf allTiers
   where
@@ -274,6 +277,7 @@ conjureTiersFor f e  =  tf allTiers
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
 
+-- | Compute variable names for the given 'Expr' type.
 conjureNamesFor :: Conjurable f => f -> Expr -> [String]
 conjureNamesFor f e  =  head
                      $  [ns | (eh, _, _, ns, _, _) <- conjureReification f, typ e == typ eh]
@@ -546,12 +550,32 @@ cevl mx  =  ceval mx err
   where
   err  =  error "cevl: type mismatch"
 
+-- | Computes a complete application for the given function.
+--
+-- > > conjureApplication "not" not
+-- > not p :: Bool
+--
+-- > > conjureApplication "+" ((+) :: Int -> Int -> Int)
+-- > x + y :: Int
+--
+-- (cf. 'conjureVarApplication')
 conjureApplication :: Conjurable f => String -> f -> Expr
 conjureApplication  =  conjureWhatApplication value
 
+-- | Computes a complete application for a variable
+--   of the same type of the given function.
+--
+-- > > conjureVarApplication "not" not
+-- > not p :: Bool
+--
+-- > > conjureVarApplication "+" ((+) :: Int -> Int -> Int)
+-- > x + y :: Int
+--
+-- (cf. 'conjureApplication')
 conjureVarApplication :: Conjurable f => String -> f -> Expr
 conjureVarApplication  =  conjureWhatApplication var
 
+-- | Used in the implementation of 'conjureApplication' and 'conjureVarApplication'.
 conjureWhatApplication :: Conjurable f => (String -> f -> Expr) -> String -> f -> Expr
 conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
                                   $  what nf f : zipWith varAsTypeOf nas (conjureArgumentHoles f)
