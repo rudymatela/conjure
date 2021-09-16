@@ -45,15 +45,18 @@ import Data.Typeable
 
 import System.IO.Unsafe
 
+-- | Checks if all elements of a list are equal.
 allEqual :: Eq a => [a] -> Bool
 allEqual []  =  False
 allEqual [x]  =  False
 allEqual [x,y]  =  x == y
 allEqual (x:y:xs)  =  x == y && allEqual (y:xs)
 
+-- | Counts the number of occurrences on a list.
 count :: (a -> Bool) -> [a] -> Int
 count p  =  length . filter p
 
+-- | Nubs using a given field.
 nubOn :: Eq b => (a -> b) -> [a] -> [a]
 nubOn f  =  nubBy ((==) `on` f)
 

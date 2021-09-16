@@ -348,6 +348,11 @@ conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                $  e `match` ed
   err  =  error "conjureIsDeconstructor: the impossible happened"
 
+-- | Compute candidate deconstructions from an 'Expr'.
+--
+-- This is used in the implementation of
+-- 'Conjure.Engine.candidateDefnsC' and 'Conjure.Engine.candidateExprs'
+-- followed by 'conjureIsDeconstruction'.
 candidateDeconstructionsFrom :: Expr -> [Expr]
 candidateDeconstructionsFrom e  =
   [ e'
