@@ -3,6 +3,7 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
+import Test.LeanCheck  -- needed for duplicatesSpec only
 
 duplicates :: [Int] -> [Int] -- Eq a => [a] -> [a]
 duplicates []  =  []
@@ -20,6 +21,12 @@ duplicates' [1,0,1]  =  [1]
 duplicates' [0,1,0,1]  =  [0,1]
 duplicates' [1,0,1,0,1]  =  [0,1]
 duplicates' [0,1,2,1]  =  [1]
+
+duplicatesSpec :: ([Int] -> [Int]) -> Bool
+duplicatesSpec duplicates  =  and
+  [ holds 360 $ \x xs -> (count (x ==) xs > 1) == elem x (duplicates xs)
+  , holds 360 $ \x xs -> count (x ==) (duplicates xs) <= 1
+  ]  where  count p  =  length . filter p
 
 positionsFrom :: Int -> Int -> [Int] -> [Int]
 positionsFrom n x  =  from n
@@ -54,6 +61,15 @@ main = do
   --                       else duplicates xs                              -- 17
   -- within reach performance wise.
   conjureWith args{maxSize=18} "duplicates" duplicates'
+    [ pr ([] :: [Int])
+    , prim "not" not
+    , prim "&&" (&&)
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "elem" (elem :: Int -> [Int] -> Bool)
+    , prif (undefined :: [Int])
+    ]
+
+  conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)
