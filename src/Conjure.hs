@@ -27,7 +27,7 @@
 -- >   , pr (1::Int)
 -- >   , prim "+" ((+) :: Int -> Int -> Int)
 -- >   , prim "*" ((*) :: Int -> Int -> Int)
--- > ]
+-- >   ]
 --
 -- Step 3: call conjure and see your generated function:
 --
