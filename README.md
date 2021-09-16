@@ -287,7 +287,7 @@ Just use `==` and `&&` accordingly:
 	                           && duplicates [1,0,1,0,1]  ==  [0,1]
 	                           && duplicates [0,1,2,1]  ==  [1]
 
-With this, there is no way for Conjure to "miss" argument-result bindings.
+With this, there is no way for Conjure to miss argument-result bindings.
 
 
 Related work
