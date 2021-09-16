@@ -8,11 +8,7 @@ Conjure
 
 ![Conjure logo][conjure-logo]
 
-Conjure is a tool that produces Haskell functions out of partial definitions.
-
-This is currently an experimental tool in its early stages,
-don't expect much from its current version.
-It is just a piece of curiosity in its current state.
+Conjure is a tool that synthesizes Haskell functions out of partial definitions.
 
 
 Installing
@@ -34,10 +30,10 @@ NOTE: the name of the Hackage package is __[`code-conjure`]__
 -- not to be confused with [Conjure the BitTorrent client].
 
 
-Conjuring functions
--------------------
+Synthesizing functions
+----------------------
 
-You first need to import the library with:
+To use Conjure, you first import the library with:
 
 	import Conjure
 
@@ -73,11 +69,12 @@ yields
 
 in less than a second.
 
-See the `eg/arith.hs` example.
+See the `eg/arith.hs` example and
+the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
 
 
-Conjuring recursive functions
------------------------------
+Synthesizing recursive functions
+--------------------------------
 
 Given
 
@@ -122,13 +119,14 @@ It is also possible to generate
 
 	factorial x  =  foldr (*) 1 [1..x]
 
-by including `enumFromTo` and `foldr` in the background.
+by including [`enumFromTo`] and [`foldr`] in the background.
 
-See the `eg/factorial.hs` example.
+See the `eg/factorial.hs` example and
+the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
 
 
-Conjuring from specifications (duplicates)
-------------------------------------------
+Synthesizing from specifications (duplicates)
+---------------------------------------------
 
 In some cases,
 a partial definition may not be appropriate
@@ -265,6 +263,9 @@ passing our `duplicatesSpec`:
 	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 	(in 1.5s)
 
+For more information see the `eg/dupos.hs` example and
+the Haddock documentation for the [`conjureFromSpec`] and [`conjureFromSpecWith`] functions.
+
 
 Related work
 ------------
@@ -272,7 +273,7 @@ Related work
 [MagicHaskeller] (2007) is another tool
 that is able to generate Haskell code automatically.
 It supports recursion through
-catamorphisms, paramorphisms and the [fix] function.
+catamorphisms, paramorphisms and the [`fix`] function.
 It is more mature than Conjure and is several orders of magnitude faster.
 
 [Barliman] for Lisp is another tool that does program synthesis.
@@ -293,7 +294,14 @@ distribued under the 3-clause BSD license.
 
 
 [Conjure's Haddock documentation]: https://hackage.haskell.org/package/code-conjure/docs/Conjure.html
-[fix]: https://hackage.haskell.org/package/base/docs/Data-Function.html#v:fix
+[`conjure`]:             https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjure
+[`conjureWith`]:         https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjureWith
+[`conjureFromSpec`]:     https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjureFromSpec
+[`conjureFromSpecWith`]: https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjureFromSpecWith
+
+[`foldr`]:               https://hackage.haskell.org/package/base/docs/Prelude.html#v:foldr
+[`enumFromTo`]:          https://hackage.haskell.org/package/base/docs/Prelude.html#v:enumFromTo
+[`fix`]:                 https://hackage.haskell.org/package/base/docs/Data-Function.html#v:fix
 
 [symbol `>`]: https://www.haskell.org/haddock/doc/html/ch03s08.html#idm140354810780208
 [Template Haskell]: https://wiki.haskell.org/Template_Haskell
