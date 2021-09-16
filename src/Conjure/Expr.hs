@@ -325,8 +325,9 @@ enumerateFillings e  =  mapT (fill e)
                      .  products
                      .  replicate (length $ holes e)
 
--- | Evaluates an 'Expr' using the given recursive definition and maximum
---   number of recursive calls.
+-- | Evaluates an 'Expr' to a 'Dynamic' value
+--   using the given recursive definition and
+--   maximum number of recursive calls.
 --
 -- (cf. 'Conjure.Defn.toDynamicWithDefn')
 recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
@@ -367,9 +368,22 @@ recursiveToDynamic (efxs, ebody) n  =  fmap (\(_,_,d) -> d) . re (n * size ebody
                           Just (m', n', d2) -> (m',n',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
 
+-- | Evaluates an 'Expr' to a regular Haskell value
+--   using the given recursive definition and
+--   maximum number of recursive calls.
+--   If there's a type mismatch, this function returns 'Nothing'.
+--
+-- (cf. 'evaluate', 'Conjure.Defn.devaluate')
 revaluate :: Typeable a => (Expr,Expr) -> Int -> Expr -> Maybe a
 revaluate dfn n e  =  recursiveToDynamic dfn n e >>= fromDynamic
 
+-- | Evaluates an 'Expr' to a regular Haskell value
+--   using the given recursive definition and
+--   maximum number of recursive calls.
+--   If there's a type mismatch,
+--   this function returns the given default value.
+--
+-- (cf. 'eval', 'Conjure.Defn.deval')
 reval :: Typeable a => (Expr,Expr) -> Int -> a -> Expr -> a
 reval dfn n x  =  fromMaybe x . revaluate dfn n
 
