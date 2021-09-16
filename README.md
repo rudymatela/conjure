@@ -33,18 +33,20 @@ NOTE: the name of the Hackage package is __[`code-conjure`]__
 Synthesizing functions
 ----------------------
 
-To use Conjure, you first import the library with:
+To use Conjure, import the library with:
 
 	import Conjure
 
-Then, given
+Then, declare a partial definition of a function to be synthesized.
+Here's a partial implementation of a function that squares a number:
 
 	square :: Int -> Int
 	square 0  =  0
 	square 1  =  1
 	square 2  =  4
 
-and
+Next, declare a list of primitives that seem like interesting pieces
+in the final fully-defined implementation:
 
 	primitives :: [Prim]
 	primitives  =  [ pr (0::Int)
@@ -53,12 +55,10 @@ and
 	               , prim "*" ((*) :: Int -> Int -> Int)
 	               ]
 
-running
+Finally, call the [`conjure`] function,
+passing the function name, the partial definition and the list of primitives:
 
 	> conjure "square" square primitives
-
-yields
-
 	square :: Int -> Int
 	-- testing 3 combinations of argument values
 	-- pruning with 14/25 rules
@@ -67,16 +67,19 @@ yields
 	-- looking through 9 candidates of size 3
 	square x  =  x * x
 
-in less than a second.
+Conjure is able to synthesize the above implementation in less than a second.
 
-See the `eg/arith.hs` example and
+For more information, see the `eg/arith.hs` example and
 the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
 
 
 Synthesizing recursive functions
 --------------------------------
 
-Given
+Conjure supports synthetization of recursive functions.
+
+Take for example the following partial implementation of a function
+that computes the factorial of a number:
 
 	factorial :: Int -> Int
 	factorial 1  =  1
@@ -84,7 +87,7 @@ Given
 	factorial 3  =  6
 	factorial 4  =  24
 
-and
+Here is a list of primitives:
 
 	primitives :: [Prim]
 	primitives  =  [ pr (0::Int)
@@ -94,12 +97,10 @@ and
 	               , prim "-" ((-) :: Int -> Int -> Int)
 	               ]
 
-running
+And here is what Conjure produces
+with the above partial definition and list of primitives:
 
 	> conjure "factorial" factorial primitives
-
-yields
-
 	factorial :: Int -> Int
 	-- testing 4 combinations of argument values
 	-- pruning with 27/65 rules
@@ -113,22 +114,25 @@ yields
 	factorial 0  =  1
 	factorial x  =  x * factorial (x - 1)
 
-in less than a second.
+The above synthetization takes less than a second.
 
-It is also possible to generate
+It is also possible to generate a folding implementation
+like the following:
 
 	factorial x  =  foldr (*) 1 [1..x]
 
 by including [`enumFromTo`] and [`foldr`] in the background.
 
-See the `eg/factorial.hs` example and
+For more information, see the `eg/factorial.hs` example and
 the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
 
 
 Synthesizing from specifications (duplicates)
 ---------------------------------------------
 
-In some cases,
+Conjure also supports generating from a functional specification
+with the functions [`conjureFromSpec`] and [`conjureFromSpecWith`]
+as, in some cases,
 a partial definition may not be appropriate
 for one of two reasons:
 
@@ -158,7 +162,7 @@ Now here's a first attempt at a partial definition:
 	duplicates' [1,2,3,3,3]  =  [3]
 	duplicates' [1,2,2,3,3]  =  [2,3]
 
-Here's what `conjure` prints:
+Here's what [`conjureWith`] prints:
 
 	> conjureWith args{maxSize=18} "duplicates" duplicates primitives
 	duplicates :: [Int] -> [Int]
@@ -168,21 +172,20 @@ Here's what `conjure` prints:
 	duplicates xs  =  xs
 
 The generated function clearly does not follow our specification.
-But if we look at the number of tests,
+But if we look at the reported number of tests,
 we see that only _one_ of the argument-result bindings
 of our partial definition was used.
-Conjure failed to hit any of the argument values lists of 5 elements.
-(since Conjure uses enumeration to test function
-these values have to be kept "small").
+Conjure failed to hit any of the argument values with five elements.
+(Since Conjure uses enumeration to test functions these values have to be kept "small").
 
-Let's retry:
+Here is a second attempt:
 
 	duplicates :: [Int] -> [Int]
 	duplicates [0,0]  =  [0]
 	duplicates [0,1]  =  []
 	duplicates [1,0,1]  =  [1]
 
-Here's what `conjure` now prints:
+Here is what [`conjureWith`] now prints:
 
 	> conjureWith args{maxSize=18} "duplicates" duplicates primitives
 	duplicates :: [Int] -> [Int]
@@ -194,7 +197,8 @@ Here's what `conjure` now prints:
 	duplicates (x:xs)  =  if elem x xs then [x] else []
 
 The `duplicates` function that Conjure generated is still not correct.
-Nevertheless, it does follow our partial definition.  We have to refine it:
+Nevertheless, it does follow our partial definition.  We have to refine it.
+Here is a third attempt with more argument-result bindings:
 
 	duplicates :: [Int] -> [Int]
 	duplicates [0,0]  =  [0]
@@ -212,7 +216,7 @@ see:
 
 	duplicates [1,0,1,0,1]  =  [1,0,1]
 
-Let's do one final refinement:
+Here is a fourth and final refinement:
 
 	duplicates :: [Int] -> [Int]
 	duplicates [0,0]  =  [0]
@@ -233,15 +237,14 @@ Now Conjure prints a correct implementation:
 	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 	(in 1.5s)
 
-The above is a correct implementation.
-
 In this case,
 specifying the function with specific argument-result bindings
 is perhaps not the best approach.
+It took us four refinements of the partial definition to get a result.
 
 Specifying test properties perhaps better describes what we want.
 Again, we would like `duplicates` to return all duplicate elements
-without repetitions.  Let's encode this in a function using [LeanCheck]:
+without repetitions.  Let's encode this in a function using [`holds`] from [LeanCheck]:
 
 	import Test.LeanCheck (holds)
 
@@ -253,8 +256,10 @@ without repetitions.  Let's encode this in a function using [LeanCheck]:
 
 This function takes as argument a candidate implementation of `duplicates`
 and returns whether it is valid.
+The first property states that all duplicates must be listed.
+The second property states that duplicates themselves must not repeat.
 
-Then we can use the function `conjureFromSpecWith` to generate the same duplicates function
+Now, we can use the function `conjureFromSpecWith` to generate the same duplicates function
 passing our `duplicatesSpec`:
 
 	> conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec primitives
@@ -266,6 +271,9 @@ passing our `duplicatesSpec`:
 For more information see the `eg/dupos.hs` example and
 the Haddock documentation for the [`conjureFromSpec`] and [`conjureFromSpecWith`] functions.
 
+The functions [`conjureFromSpec`] and [`conjureFromSpecWith`] also accept specifications
+that bind specific arguments to results.
+
 
 Related work
 ------------
@@ -274,7 +282,6 @@ Related work
 that is able to generate Haskell code automatically.
 It supports recursion through
 catamorphisms, paramorphisms and the [`fix`] function.
-It is more mature than Conjure and is several orders of magnitude faster.
 
 [Barliman] for Lisp is another tool that does program synthesis.
 
@@ -302,6 +309,7 @@ distribued under the 3-clause BSD license.
 [`foldr`]:               https://hackage.haskell.org/package/base/docs/Prelude.html#v:foldr
 [`enumFromTo`]:          https://hackage.haskell.org/package/base/docs/Prelude.html#v:enumFromTo
 [`fix`]:                 https://hackage.haskell.org/package/base/docs/Data-Function.html#v:fix
+[`holds`]:               https://hackage.haskell.org/package/leancheck/docs/Test-LeanCheck.html#v:holds
 
 [symbol `>`]: https://www.haskell.org/haddock/doc/html/ch03s08.html#idm140354810780208
 [Template Haskell]: https://wiki.haskell.org/Template_Haskell
