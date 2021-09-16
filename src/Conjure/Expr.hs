@@ -270,13 +270,20 @@ e1 $$|< e2  =  if isFunTy t1 && tyArity (argumentTy t1) == tyArity t2
   ktyp (e1 :$ e2)  =  resultTy (ktyp e1)
   ktyp e  =  typ e
 
+
+-- | Lists all distinct holes that are possible with the given 'Expr's.
+--
+-- > > possibleHoles [zero, one, plus]
+-- > [_ :: Int,_ :: Int -> Int,_ :: Int -> Int -> Int]
+--
+-- > > possibleHoles [ae, ordE]
+-- > [_ :: Char,_ :: Int,_ :: Char -> Int]
 possibleHoles :: [Expr] -> [Expr]
 possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
   where
   ph hs  =  case nubSort $ hs ++ [holeAsTypeOf hfx | hf <- hs, hx <- hs, Just hfx <- [hf $$ hx]] of
             hs' | hs' == hs -> hs
                 | otherwise -> ph hs'
-  nubSort  =  nub . sort -- TODO: this is O(n^2), make this O(n log n)
 
 
 -- -- Expression enumeration -- --
@@ -318,6 +325,10 @@ enumerateFillings e  =  mapT (fill e)
                      .  products
                      .  replicate (length $ holes e)
 
+-- | Evaluates an 'Expr' using the given recursive definition and maximum
+--   number of recursive calls.
+--
+-- (cf. 'Conjure.Defn.toDynamicWithDefn')
 recursiveToDynamic :: (Expr,Expr) -> Int -> Expr -> Maybe Dynamic
 recursiveToDynamic (efxs, ebody) n  =  fmap (\(_,_,d) -> d) . re (n * size ebody) n
   where
