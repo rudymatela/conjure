@@ -58,7 +58,14 @@ import Data.Complex -- for instance
 
 -- | Single reification of some functions over a type as 'Expr's.
 --
--- A hole, an equality function and tiers.
+-- This is a sixtuple, in order:
+--
+-- 1. a hole encoded as an 'Expr';
+-- 2. the '==' function encoded as an 'Expr' when available;
+-- 3. 'tiers' of enumerated test values encoded as 'Expr's when available;
+-- 4. infinite list of potential variable names;
+-- 5. boolean indicating whether the type is atomic;
+-- 6. the 'conjureSize' function encoded as an 'Expr'.
 type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], Bool, Expr)
 
 -- | A reification over a collection of types.
@@ -276,6 +283,9 @@ conjureMostGeneralCanonicalVariation :: Conjurable f => f -> Expr -> Expr
 conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
                                         .  fastMostGeneralVariation
 
+-- | Checks if an unary function encoded as an 'Expr' is a deconstructor.
+--
+-- (cf. 'conjureIsDeconstruction')
 conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstructor f maxTests e  =  case as of
   [] -> False
@@ -291,8 +301,14 @@ conjureIsDeconstructor f maxTests e  =  case as of
     esz e  =  eval (0::Int) (sz :$ e)
     is e'  =  errorToFalse $ esz (e :$ e') < esz e'
 
--- the result does not increase the size for at least half the time
--- the result decreases in size for at least a third of the time
+-- | Checks if an expression is a deconstruction.
+--
+-- There should be a single 'hole' in the expression.
+--
+-- 1. The result does not increase the size for at least half the time.
+-- 2. The result decreases in size for at least a third of the time.
+--
+-- (cf. 'conjureIsDeconstructor')
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                                        && typ h == typ ed
@@ -321,6 +337,7 @@ candidateDeconstructionsFrom e  =
   , length (holes e') == 1
   ]
 
+-- | Checks if an 'Expr' is of an unbreakable type.
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f e  =  head
   [is | (h,_,_,_,is,_) <- conjureReification f, typ h == typ e]
@@ -502,6 +519,10 @@ argTy _  =  undefined
 resTy :: (a -> b) -> b
 resTy _  =  undefined
 
+-- | Evaluates a 'Defn' into a regular Haskell value
+--   returning 'Nothing' when there's a type mismatch.
+--
+-- The integer argument indicates the limit of recursive evaluations.
 cevaluate :: Conjurable f => Int -> Defn -> Maybe f
 cevaluate mx defn  =  mr
   where
@@ -509,9 +530,17 @@ cevaluate mx defn  =  mr
   exprExpr  =  conjureExpress $ fromJust mr
   (ef':_)  =  unfoldApp . fst $ head defn
 
+-- | Evaluates a 'Defn' into a regular Haskell value
+--   returning the given default value when there's a type mismatch.
+--
+-- The integer argument indicates the limit of recursive evaluations.
 ceval :: Conjurable f => Int -> f -> Defn -> f
 ceval mx z  =  fromMaybe z . cevaluate mx
 
+-- | Evaluates a 'Defn' into a regular Haskell value
+--   raising an error there's a type mismatch.
+--
+-- The integer argument indicates the limit of recursive evaluations.
 cevl :: Conjurable f => Int -> Defn -> f
 cevl mx  =  ceval mx err
   where
