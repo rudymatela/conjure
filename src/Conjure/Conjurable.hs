@@ -170,6 +170,15 @@ class (Typeable a, Name a) => Conjurable a where
   conjureEvaluate  =  devaluate
 
 
+-- | To be used in the implementation of 'conjureSubTypes'.
+--
+-- > instance ... => Conjurable <Type> where
+-- >   ...
+-- >   conjureSubTypes x  =  conjureType (field1 x)
+-- >                      .  conjureType (field2 x)
+-- >                      .  ...
+-- >                      .  conjureType (fieldN x)
+-- >   ...
 conjureType :: Conjurable a => a -> Reification
 conjureType x ms  =
   if hole x `elem` [h | (h,_,_,_,_,_) <- ms]
@@ -250,6 +259,10 @@ reifyExpress a e  =  case value "expr" (expr -:> a) $$ e of
 mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
 
+-- | Computes a list of holes encoded as 'Expr's
+--   from a 'Conjurable' functional value.
+--
+-- (cf. 'Conjure.Prim.cjHoles')
 conjureHoles :: Conjurable f => f -> [Expr]
 conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 
@@ -257,6 +270,9 @@ conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- conjureReification f]
 
+-- | Given a 'Conjurable' functional value,
+--   computes a function that checks whether two 'Expr's are equal
+--   up to a given number of tests.
 conjureAreEqual :: Conjurable f => f -> Int -> Expr -> Expr -> Bool
 conjureAreEqual f maxTests  =  (===)
   where
@@ -582,7 +598,11 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
   where
   (nf:nas)  =  words nm ++ repeat ""
 
-conjurePats :: Conjurable f => [Expr] -> String -> f -> [[[Expr]]]
+-- | Computes tiers of sets of patterns for the given function.
+--
+-- > > conjurePats [zero] "f" (undefined :: Int -> Int)
+-- > [[[f x :: Int]],[[f 0 :: Int,f x :: Int]]]
+conjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
 conjurePats es nm f  =  mapT (map mkApp . prods) $ cs
   where
   mkApp  =  foldApp . (ef:)

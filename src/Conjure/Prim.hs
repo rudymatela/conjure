@@ -76,6 +76,9 @@ cjHoles ps  =  [eh | (eh,_,Just _,_,_,_) <- cjReification ps]
 cjMkEquation :: [Prim] -> Expr -> Expr -> Expr
 cjMkEquation ps  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- cjReification ps]
 
+-- | Given a list of 'Prim's,
+--   computes a function that checks whether two 'Expr's are equal
+--   up to a given number of tests.
 cjAreEqual :: [Prim] -> Int -> Expr -> Expr -> Bool
 cjAreEqual ps maxTests  =  (===)
   where
@@ -84,6 +87,11 @@ cjAreEqual ps maxTests  =  (===)
   isTrue  =  all (errorToFalse . eval False) . gs
   gs  =  take maxTests . grounds (cjTiersFor ps)
 
+-- | Given a list of 'Prim's,
+--   returns a function that given an 'Expr'
+--   will return tiers of test 'Expr' values.
+--
+-- This is used in 'cjAreEqual'.
 cjTiersFor :: [Prim] -> Expr -> [[Expr]]
 cjTiersFor ps e  =  tf allTiers
   where
