@@ -31,7 +31,6 @@ module Conjure.Utils
   , allEqual
   , choices
   , choicesThat
-  , filterAnd
   )
 where
 
@@ -117,18 +116,13 @@ headOr :: a -> [a] -> a
 headOr x []  =  x
 headOr _ (x:xs)  =  x
 
+-- | Lists choices of values.
 choices :: [a] -> [(a,[a])]
 choices []  =  []
 choices (x:xs)  =  (x,xs) : map (mapSnd (x:)) (choices xs)
   where
   mapSnd f (x,y)  =  (x,f y)
 
+-- | Lists choices of values that follow a property.
 choicesThat :: (a -> [a] -> Bool) -> [a] -> [(a,[a])]
 choicesThat (?)  =  filter (uncurry (?)) . choices
-
-filterAnd :: (a -> Bool) -> [a] -> ([a],Bool)
-filterAnd p xs  =  (xs', and ps)
-  where
-  xps  =  [(x,p x) | x <- xs]
-  xs'  =  [x | (x,True) <- xps]
-  ps   =  [p | (_,p) <- xps]

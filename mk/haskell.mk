@@ -111,9 +111,9 @@ doc/index.html: $(LIB_HSS)
 	  --title=$(PKGNAME) \
 	  $(shell $(HADDOCK_HAS) --package-name          && echo "--package-name=$(PKGNAME)" ) \
 	  $(shell $(HADDOCK_HAS) --hyperlinked-source    && echo "--hyperlinked-source"      ) \
+	  $(shell $(HADDOCK_HAS) --no-print-missing-docs && echo --no-print-missing-docs     ) \
 	  $(HADDOCKFLAGS) | \
 	$(HADDOCK_FILTER)
-	  #$(shell $(HADDOCK_HAS) --no-print-missing-docs && echo --no-print-missing-docs     ) \
 
 clean-cabal:
 	rm -rf dist/ dist-newstyle/ cabal.project.local cabal.project.local~
