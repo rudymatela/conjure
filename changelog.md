@@ -2,6 +2,15 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* allow synthesizing/conjuring from properties with `conjureFromSpec`;
+* complete Haddock documentation;
+* remove several unused functions;
+* Makefile: add targets to run GPS(2) and TerpreT benches.
+
+
 v0.4.4
 ------
 
