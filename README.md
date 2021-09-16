@@ -38,7 +38,8 @@ To use Conjure, import the library with:
 	import Conjure
 
 Then, declare a partial definition of a function to be synthesized.
-Here's a partial implementation of a function that squares a number:
+For example,
+here is a partial implementation of a function that squares a number:
 
 	square :: Int -> Int
 	square 0  =  0
@@ -46,7 +47,10 @@ Here's a partial implementation of a function that squares a number:
 	square 2  =  4
 
 Next, declare a list of primitives that seem like interesting pieces
-in the final fully-defined implementation:
+in the final fully-defined implementation.
+For example,
+here is a list of primitives including
+addition, multiplication and their neutral elements:
 
 	primitives :: [Prim]
 	primitives  =  [ pr (0::Int)
@@ -127,10 +131,10 @@ For more information, see the `eg/factorial.hs` example and
 the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
 
 
-Synthesizing from specifications (duplicates)
----------------------------------------------
+Synthesizing from specifications (for advanced users)
+-----------------------------------------------------
 
-Conjure also supports generating from a functional specification
+Conjure also supports synthesizing from a functional specification
 with the functions [`conjureFromSpec`] and [`conjureFromSpecWith`]
 as, in some cases,
 a partial definition may not be appropriate
@@ -162,7 +166,7 @@ Now here's a first attempt at a partial definition:
 	duplicates' [1,2,3,3,3]  =  [3]
 	duplicates' [1,2,2,3,3]  =  [2,3]
 
-Here's what [`conjureWith`] prints:
+Here is what [`conjureWith`] prints:
 
 	> conjureWith args{maxSize=18} "duplicates" duplicates primitives
 	duplicates :: [Int] -> [Int]
@@ -206,12 +210,12 @@ Here is a third attempt with more argument-result bindings:
 	duplicates [1,0,1]  =  [1]
 	duplicates [0,1,0,1]  =  [0,1]
 
-Here's what Conjure prints:
+Here is what Conjure prints:
 
 	duplicates []  =  []
 	duplicates (x:xs)  =  if elem x xs then x:duplicates xs else []
 
-This implementation follows our definition, but may return duplicate duplicates,
+This implementation follows our partial definition, but may return duplicate duplicates,
 see:
 
 	duplicates [1,0,1,0,1]  =  [1,0,1]
@@ -241,10 +245,10 @@ In this case,
 specifying the function with specific argument-result bindings
 is perhaps not the best approach.
 It took us four refinements of the partial definition to get a result.
-
 Specifying test properties perhaps better describes what we want.
 Again, we would like `duplicates` to return all duplicate elements
-without repetitions.  Let's encode this in a function using [`holds`] from [LeanCheck]:
+without repetitions.
+This can be encoded in a function using [`holds`] from [LeanCheck]:
 
 	import Test.LeanCheck (holds)
 
@@ -259,8 +263,8 @@ and returns whether it is valid.
 The first property states that all duplicates must be listed.
 The second property states that duplicates themselves must not repeat.
 
-Now, we can use the function `conjureFromSpecWith` to generate the same duplicates function
-passing our `duplicatesSpec`:
+Now, we can use the function [`conjureFromSpecWith`] to generate the same duplicates function
+passing our `duplicatesSpec` as argument:
 
 	> conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec primitives
 	duplicates :: [Int] -> [Int]
@@ -273,6 +277,17 @@ the Haddock documentation for the [`conjureFromSpec`] and [`conjureFromSpecWith`
 
 The functions [`conjureFromSpec`] and [`conjureFromSpecWith`] also accept specifications
 that bind specific arguments to results.
+Just use `==` and `&&` accordingly:
+
+	duplicatesSpec :: ([Int] -> [Int]) -> Bool
+	duplicatesSpec duplicates  =  duplicates [0,0] == [0]
+	                           && duplicates [0,1]  ==  []
+	                           && duplicates [1,0,1]  ==  [1]
+	                           && duplicates [0,1,0,1]  ==  [0,1]
+	                           && duplicates [1,0,1,0,1]  ==  [0,1]
+	                           && duplicates [0,1,2,1]  ==  [1]
+
+With this, there is no way for Conjure to "miss" argument-result bindings.
 
 
 Related work
@@ -294,6 +309,9 @@ Further reading
 
 For a detailed documentation of each function, see
 [Conjure's Haddock documentation].
+
+The `eg` folders in the source distribution
+contains more than 60 examples of use.
 
 
 Conjure, Copyright 2021  Rudy Matela,
