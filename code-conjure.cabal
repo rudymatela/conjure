@@ -4,13 +4,9 @@
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 name:                code-conjure
 version:             0.4.5
-synopsis:            conjure Haskell functions out of partial definitions
+synopsis:            synthesize Haskell functions out of partial definitions
 description:
-  Conjure is a tool that produces Haskell functions out of partial definitions.
-  .
-  This is currently an experimental tool in its early stages,
-  don't expect much from its current version.
-  It is just a piece of curiosity in its current state.
+  Conjure is a tool that synthesizes Haskell functions out of partial definitions.
 
 homepage:            https://github.com/rudymatela/conjure#readme
 license:             BSD3
