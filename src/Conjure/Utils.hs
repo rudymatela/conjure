@@ -19,7 +19,6 @@ module Conjure.Utils
   , count
   , nubOn
   , nubSort
-  , iterateUntil
   , mzip
   , groupOn
 #if __GLASGOW_HASKELL__ < 710
@@ -60,6 +59,7 @@ count p  =  length . filter p
 nubOn :: Eq b => (a -> b) -> [a] -> [a]
 nubOn f  =  nubBy ((==) `on` f)
 
+-- | Equivalent to @nub . sort@ but running in /O(n log n)/.
 nubSort :: Ord a => [a] -> [a]
 nubSort  =  nnub . sort
   where
@@ -68,24 +68,22 @@ nubSort  =  nnub . sort
   nnub [x] = [x]
   nnub (x:xs) = x : nnub (dropWhile (==x) xs)
 
-iterateUntil :: (a -> a -> Bool) -> (a -> a) -> a -> a
-iterateUntil (?) f  =  iu
-  where
-  iu x | x ? fx     =  x
-       | otherwise  =  iu fx
-    where
-    fx  =  f x
-
+-- | Zips 'Monoid' values leaving trailing values.
+--
+-- > > mzip ["ab","cd"] ["ef"]
+-- > ["abef","cd"]
 mzip :: Monoid a => [a] -> [a] -> [a]
 mzip [] []  =  []
 mzip [] ys  =  ys
 mzip xs []  =  xs
 mzip (x:xs) (y:ys)  =  x <> y : mzip xs ys
 
+-- | Group values using a given field selector.
 groupOn :: Eq b => (a -> b) -> [a] -> [[a]]
 groupOn f = groupBy ((==) `on` f)
 
 #if __GLASGOW_HASKELL__ < 710
+-- | 'sort' on a given field.
 sortOn :: Ord b => (a -> b) -> [a] -> [a]
 sortOn f = sortBy (compare `on` f)
 #endif
@@ -101,15 +99,20 @@ idIO action x  =  unsafePerformIO $ do
   action x
   return x
 
+-- | Applies a function to the head of a list.
 mapHead :: (a -> a) -> [a] -> [a]
 mapHead f (x:xs)  =  f x : xs
 
+-- | Return sets of values based on the list.
+--
+-- The values in the list must me unique.
 sets :: [a] -> [[a]]
 sets []  =  [[]]
 sets (x:xs)  =  map (x:) ss ++ ss
   where
   ss  =  sets xs
 
+-- | Like 'head' but allows providing a default value.
 headOr :: a -> [a] -> a
 headOr x []  =  x
 headOr _ (x:xs)  =  x
