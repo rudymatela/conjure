@@ -120,12 +120,10 @@ gps3c  =  conjure "gps3" gps3p []
 -- considering we're getting input as kebab-case.
 -- Nevertheless, this one is out of reach performance-wise (and OOM-wise)
 
-gps4p :: String -> String
-gps4p "the-stealth-warrior"  =  "theStealthWarrior"
---gps4p "The_Stealth_Warrior"  =  "TheStealthWarrior"
-gps4p "camel-case"  =  "camelCase"
---gps4p "snake_case"  =  "snakeCase"
-gps4p "Kebab-Case"  =  "KebabCase"
+gps4s :: (String -> String) -> Bool
+gps4s g  =  g "the-stealth-warrior" == "theStealthWarrior"
+         && g "camel-case" == "camelCase"
+         && g "Kebab-Case" == "KebabCase"
 
 gps4g :: String -> String
 gps4g ""  =  ""
@@ -139,15 +137,8 @@ gps4g (c:cs)  =  if c == '-'                                   --  5
 
 gps4c :: IO ()
 gps4c  =  do
-  let force  =  [ [val "the-stealth-warrior"]
---              , [val "The_Stealth_Warrior"]
-                , [val "camel-case"]
---              , [val "snake_case"]
-                , [val "Kebab-Case"]
-                ]
-  conjureWith args{forceTests = force, maxSize=6} "gps4" gps4p
+  conjureFromSpecWith args{maxSize=6} "gps4" gps4s
     [ pr '-'
---  , pr '_'
     , pr ("" :: String)
     , prim ":" ((:) :: Char -> String -> String)
     , prim "==" ((==) :: Char -> Char -> Bool)
@@ -179,13 +170,13 @@ gps5p  30  =  [1, 0, 1, 0]
 gps5p  20  =  [0, 2, 0, 0]
 gps5p   3  =  [0, 0, 0, 3]
 
-gps5p2 :: [Int] -> Int -> [Int]
-gps5p2 [25, 10, 5, 1] 100  =  [4, 0, 0, 0]
-gps5p2 [25, 10, 5, 1]  50  =  [2, 0, 0, 0]
-gps5p2 [25, 10, 5, 1]  25  =  [1, 0, 0, 0]
-gps5p2 [25, 10, 5, 1]  30  =  [1, 0, 1, 0]
-gps5p2 [25, 10, 5, 1]  20  =  [0, 2, 0, 0]
-gps5p2 [25, 10, 5, 1]   3  =  [0, 0, 0, 3]
+gps5s :: ([Int] -> Int -> [Int]) -> Bool
+gps5s t  =  t [25, 10, 5, 1] 100 == [4, 0, 0, 0]
+         && t [25, 10, 5, 1]  50 == [2, 0, 0, 0]
+         && t [25, 10, 5, 1]  25 == [1, 0, 0, 0]
+         && t [25, 10, 5, 1]  30 == [1, 0, 1, 0]
+         && t [25, 10, 5, 1]  20 == [0, 2, 0, 0]
+         && t [25, 10, 5, 1]   3 == [0, 0, 0, 3]
 
 coins :: [Int]
 coins  =  [25, 10, 5, 1]
@@ -204,26 +195,19 @@ gps5c  =  do
     [
     ]
 
-  let force = [ [val coins, val (100::Int)]
-              , [val coins, val ( 50::Int)]
-              , [val coins, val ( 25::Int)]
-              , [val coins, val ( 30::Int)]
-              , [val coins, val ( 20::Int)]
-              , [val coins, val (  3::Int)]
-              ]
-  conjureWith args{forceTests=force} "tell" gps5p2
+  conjureFromSpec "tell" gps5s
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "`div`" (div :: Int -> Int -> Int)
     , prim "`mod`" (mod :: Int -> Int -> Int)
     ]
 
-  conjureWith args{forceTests=force} "gps5" gps5p
+  conjure "gps5" gps5p
     [ pr coins
     , prim "tell" tell
     ]
 
-  conjureWith args{forceTests=force} "gps5" gps5p
+  conjure "gps5" gps5p
     [ pr (1 :: Int)
     , pr (5 :: Int)
     , pr (10 :: Int)
@@ -568,20 +552,20 @@ gps20c  =  conjure "gps20" gps20p
   ]
 
 
-gps21p :: String -> String
-gps21p "word"  =  "word"
-gps21p "words"  =  "sdrow"
-gps21p "word words"  =  "word sdrow"
-gps21p "words word"  =  "sdrow word"
+gps21s :: (String -> String) -> Bool
+gps21s s  =  s "word" == "word"
+          && s "words" == "sdrow"
+          && s "word words" == "word sdrow"
+          && s "words word" == "sdrow word"
 
-spin' :: String -> String
-spin' "abc"  =  "abc"
-spin' "abcd"  =  "abcd"
-spin' "word"  =  "word"
-spin' "abcde"  =  "edcba"
-spin' "words"  =  "sdrow"
-spin' "hello"  =  "olleh"
-spin' "world"  =  "dlrow"
+spinSpec :: (String -> String) -> Bool
+spinSpec spin  =  spin "abc" == "abc"
+               && spin "abcd" == "abcd"
+               && spin "word" == "word"
+               && spin "abcde" == "edcba"
+               && spin "words" == "sdrow"
+               && spin "hello" == "olleh"
+               && spin "world" == "dlrow"
 
 spin :: String -> String
 spin w  =  if length w >= 5
@@ -593,15 +577,7 @@ gps21g s  =  unwords (map spin (words s))
 
 gps21c :: IO ()
 gps21c  =  do
-  let force  =  [ [ val "abc" ]
-                , [ val "abcd" ]
-                , [ val "word" ]
-                , [ val "abcde" ]
-                , [ val "words" ]
-                , [ val "hello" ]
-                , [ val "world" ]
-                ]
-  conjureWith args{maxSize=12, forceTests=force} "spin" spin'
+  conjureFromSpec "spin" spinSpec
     [ prim "length"  (length :: String -> Int)
     , prim "reverse" (reverse :: String -> String)
     , prif (undefined :: String)
@@ -609,12 +585,7 @@ gps21c  =  do
     , pr (5 :: Int)
     ]
 
-  let force  =  [ [ val "word" ]
-                , [ val "words" ]
-                , [ val "word words" ]
-                , [ val "words word" ]
-                ]
-  conjureWith args{maxSize=12, forceTests=force} "gps21_spinwords" gps21p
+  conjureFromSpec "gps21_spinwords" gps21s
     [ prim "words"   words
     , prim "unwords" unwords
     , prim "spin"    (spin :: String -> String)
@@ -657,11 +628,11 @@ gps22c  =  do
     ]
 
 
-gps23p :: String -> String -> String -> String
-gps23p "abcd" "abcd" "abcd"  =  "abcd"
-gps23p "abcd" "dcba" "abcd"  =  "dcba"
-gps23p "abcd" "1234" "abcd"  =  "1234"
-gps23p "abcd" "1234" "bacd"  =  "2134"
+gps23s :: (String -> String -> String -> String) -> Bool
+gps23s s  =  s "abcd" "abcd" "abcd" == "abcd"
+          && s "abcd" "dcba" "abcd" == "dcba"
+          && s "abcd" "1234" "abcd" == "1234"
+          && s "abcd" "1234" "bacd" == "2134"
 
 gps23g :: String -> String -> String -> String
 -- gps23g f t s  =  map (\c -> fromJust $ c `lookup` zipWith (,) f t) s
@@ -669,13 +640,8 @@ gps23g f t s  =  map (fromJust . (`lookup` zipWith (,) f t)) s
 
 gps23c :: IO ()
 gps23c  =  do
-  let force = [ [ val "abcd", val "abcd", val "abcd" ]
-              , [ val "abcd", val "dcba", val "abcd" ]
-              , [ val "abcd", val "1234", val "abcd" ]
-              , [ val "abcd", val "1234", val "bacd" ]
-              ]
   -- cannot conjure, needs lambda
-  conjureWith args{forceTests=force} "gps23" gps23p
+  conjureFromSpec "gps23" gps23s
     [
     ]
 
@@ -708,20 +674,15 @@ gps24g_twitter s  =  if length s > 140
                      then TooMany
                      else Tweet (length s)
 
-gps24p_twitter :: String -> Twitter
-gps24p_twitter "" =  Empty
-gps24p_twitter "abcd"  =  Tweet 4
-gps24p_twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij"  =  Tweet 140
-gps24p_twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX"  =  TooMany
+gps24s_twitter :: (String -> Twitter) -> Bool
+gps24s_twitter twitter  =  twitter "" == Empty
+                        && twitter "abcd" == Tweet 4
+                        && twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij" == Tweet 140
+                        && twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX" == TooMany
 
 gps24c :: IO ()
 gps24c  =  do
-  let force = [ [ val "" ]
-              , [ val "abcd" ]
-              , [ val "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij" ]
-              , [ val "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX" ]
-              ]
-  conjureWith args{maxTests=360, forceTests=force} "gps24" gps24p_twitter
+  conjureFromSpecWith args{maxTests=360} "gps24" gps24s_twitter
     [ pr Empty
     , pr TooMany
     , prim "Tweet" Tweet

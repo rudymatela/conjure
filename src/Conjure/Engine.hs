@@ -162,7 +162,6 @@ data Args = Args
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
-  , forceTests            :: [[Expr]]  -- ^ force tests
   }
 
 
@@ -187,7 +186,6 @@ args = Args
   , requireDescent         =  True
   , usePatterns            =  True
   , showTheory             =  False
-  , forceTests             =  []
   }
 
 
@@ -290,10 +288,7 @@ conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, test
 
   bss, dbss :: [[(Expr,Expr)]]
   bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
-  fbss  =  [zip xxs vs | vs <- forceTests, isWellTyped $ foldApp (rrff:vs)]
-  dbss  =  take maxTests
-        $  ([bs | bs <- bss, errorToFalse . eval False $ e //- bs] \\ fbss)
-        ++ fbss
+  dbss  =  take maxTests [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
     where
     e  =  ffxx -==- ffxx
 

@@ -587,9 +587,9 @@ gps19c  =  do
 
 
 -- GPS Benchmark #20 -- Pig Latin --
-gps20p :: String -> String
-gps20p "hello world"  =  "ellohay orldway"
-gps20p "a string"  =  "aay tringsay"
+gps20s :: (String -> String) -> Bool
+gps20s pig  =  pig "hello world" == "ellohay orldway"
+            && pig "a string"    == "aay tringsay"
 
 gps20g :: String -> String
 gps20g  =  pig
@@ -602,11 +602,11 @@ pig1 (c:cs)  =  if isVowel c
                 then (c:cs) ++ "ay"
                 else cs ++ (c:"ay")
 
-pig1' :: String -> String
-pig1' "hello"   =  "ellohay"
-pig1' "world"   =  "orldway"
-pig1' "string"  =  "tringsay"
-pig1' "east"    =  "eastay"
+pig1Spec :: (String -> String) -> Bool
+pig1Spec pig1  =  pig1 "hello" == "ellohay"
+               && pig1 "world"  == "orldway"
+               && pig1 "string" == "tringsay"
+               && pig1 "east"   == "eastay"
 
 isVowel :: Char -> Bool
 isVowel 'a'  =  True
@@ -644,12 +644,7 @@ gps20c  =  do
     , pr False
     ]
 
-  let force  =  [ [val "hello"]
-                , [val "world"]
-                , [val "string"]
-                , [val "east"]
-                ]
-  conjureWith args{forceTests=force, maxSize=14} "pig1" pig1'
+  conjureFromSpecWith args{maxSize=14} "pig1" pig1Spec
     [ pr "ay"
     , prif (undefined :: String)
     , prim "isVowel" isVowel
@@ -657,10 +652,7 @@ gps20c  =  do
     , prim ":" ((:) :: Char -> String -> String)
     ]
 
-  let force  =  [ [val "hello world"]
-                , [val "a string"]
-                ]
-  conjureWith args{forceTests=force} "gps20c" gps20p
+  conjureFromSpec "gps20c" gps20s
     [ prim "words" (words :: String -> [String])
     , prim "unwords" (unwords :: [String] -> String)
     , prim "map" (map :: (String -> String) -> [String] -> [String])
@@ -692,11 +684,11 @@ gps21c  =  conjure "gps21" gps21p
 
 
 -- GPS Benchmark #22 -- Scrabble Score --
-gps22p :: String -> Int
-gps22p "a"  =  1
-gps22p "hello"  =  8
-gps22p "world"  =  9
-gps22p "scrabble"  =  14
+gps22s :: (String -> Int) -> Bool
+gps22s scrabble  =  scrabble "a" == 1
+                 && scrabble "hello" == 8
+                 && scrabble "world" == 9
+                 && scrabble "scrabble" == 14
 
 gps22g :: String -> Int
 gps22g  =  scrabble
@@ -725,13 +717,7 @@ scrabble1  _   =   1 -- aeilnorstu
 
 gps22c :: IO ()
 gps22c  =  do
-  let force  =  [ [val "a"]
-                , [val "hello"]
-                , [val "world"]
-                , [val "scrabble"]
-                ]
-
-  conjureWith args{forceTests=force} "gps22" gps22p
+  conjureFromSpec "gps22" gps22s
     [ pr (0 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
@@ -865,13 +851,13 @@ gps28c  =  conjure "gps28" gps28p
 
 
 -- GPS Benchmark #29 -- Syllables --
-gps29p :: String -> Int
-gps29p "pub"  =  1
-gps29p "hello"  =  2
-gps29p "world"  =  1
-gps29p "string"  =  1
-gps29p "haskell"  =  2
-gps29p "photography"  =  4
+gps29s :: (String -> Int) -> Bool
+gps29s sys  =  sys "pub" == 1
+            && sys "hello" == 2
+            && sys "world" == 1
+            && sys "string" == 1
+            && sys "haskell" == 2
+            && sys "photography" == 4
 
 gps29g :: String -> Int
 gps29g ""  =  0
@@ -880,21 +866,13 @@ gps29g (c:cs)  =  if isVowel c
                   else gps29g cs
 
 gps29c :: IO ()
-gps29c  =  conjureWith args{forceTests=force} "gps29" gps29p
+gps29c  =  conjureFromSpec "gps29" gps29s
   [ pr (0 :: Int)
   , pr (1 :: Int)
   , prim "+" ((+) :: Int->Int->Int)
   , prif (undefined :: Int)
   , prim "isVowel" isVowel
   ]
-  where
-  force  =  [ [val "pub"]
-            , [val "hello"]
-            , [val "world"]
-            , [val "string"]
-            , [val "haskell"]
-            , [val "photography"]
-            ]
 
 
 main :: IO ()
