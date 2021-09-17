@@ -61,16 +61,6 @@ module Conjure
 -- * Conjuring from a specification
   , conjureFromSpec
   , conjureFromSpecWith
-  , Spec1
-  , Spec2
-  , Spec3
-  , (-=)
-  , conjure1
-  , conjure2
-  , conjure3
-  , conjure1With
-  , conjure2With
-  , conjure3With
 
 -- * When using custom types
   , Conjurable (conjureExpress, conjureEquality, conjureTiers, conjureCases, conjureSubTypes)
@@ -91,6 +81,5 @@ module Conjure
 where
 
 import Conjure.Engine
-import Conjure.Spec
 import Conjure.Conjurable
 import Conjure.Prim

@@ -71,7 +71,6 @@ library
                  , Conjure.Engine
                  , Conjure.Expr
                  , Conjure.Prim
-                 , Conjure.Spec
                  , Conjure.Utils
                  , Conjure.Defn
   other-extensions: TemplateHaskell, CPP
