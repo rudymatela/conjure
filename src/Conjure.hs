@@ -70,6 +70,9 @@ module Conjure
   , conjureType
   , Name (..)
   , Express (..)
+  , deriveConjurable
+  , deriveConjurableIfNeeded
+  , deriveConjurableCascading
 
 -- * Pure interfaces
   , conjpure
@@ -83,3 +86,4 @@ where
 import Conjure.Engine
 import Conjure.Conjurable
 import Conjure.Prim
+import Conjure.Conjurable.Derive

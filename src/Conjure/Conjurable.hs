@@ -164,6 +164,10 @@ class (Typeable a, Name a) => Conjurable a where
   conjureSize :: a -> Int
   conjureSize _  =  0
 
+  -- | Returns a function that deeply reencodes an expression when possible.
+  --   ('id' when not available.)
+  --
+  -- Use 'reifyExpress' when defining this.
   conjureExpress :: a -> Expr -> Expr
 
   conjureEvaluate :: (Expr->Expr) -> Int -> Defn -> Expr -> Maybe a
