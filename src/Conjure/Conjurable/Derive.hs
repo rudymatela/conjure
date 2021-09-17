@@ -63,6 +63,9 @@ reallyDeriveConjurable t  =  do
                    conjureEquality  =  reifyEquality
                    conjureTiers     =  reifyTiers |]
   withTheReturnTypeOfs |++| (cxt |=>| inst)
+-- TODO: derive conjureCases
+-- TODO: derive conjureSize
+-- TODO: derive conjureSubTypes (cf. Extrapolate.subInstances)
 
 -- Not only really derive Conjurable instances,
 -- but cascade through argument types.

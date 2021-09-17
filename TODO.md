@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* derive `conjureCases`, `conjureSize` and `conjureSubTypes`;
+
 * implement `deriveConjurable` using TH (cf. `deriveExpress` and `deriveGeneralizable`);
 
 * consider not breaking in some cases (increased crossproduct of patterns)
