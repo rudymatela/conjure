@@ -11,4 +11,4 @@ packages:
 extra-deps:
 - leancheck-0.9.10
 - speculate-0.4.14
-- express-1.0.6
+- express-1.0.8
