@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.0
+------
 
 * allow synthesizing/conjuring from properties with `conjureFromSpec`;
 * complete Haddock documentation;
