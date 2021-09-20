@@ -25,6 +25,10 @@ import Data.Char
 import Data.List
 import Language.Haskell.TH.Lib
 
+#if __GLASGOW_HASKELL__ < 710
+import Data.Functor ((<$>))
+#endif
+
 -- | Derives an 'Conjurable' instance for the given type 'Name'.
 --
 -- This function needs the @TemplateHaskell@ extension.
