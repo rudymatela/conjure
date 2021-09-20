@@ -310,7 +310,7 @@ Further reading
 For a detailed documentation of each function, see
 [Conjure's Haddock documentation].
 
-The `eg` folders in the source distribution
+The `eg` folder in the source distribution
 contains more than 60 examples of use.
 
 
