@@ -15,6 +15,7 @@ where
 
 import Test.LeanCheck
 import Test.LeanCheck.Derive
+import Test.LeanCheck.Utils
 import Conjure.Expr hiding (mkName, Name, isInstanceOf)
 import Conjure.Conjurable hiding (Name)
 import Data.Express.Utils (primeCycle)
