@@ -12,18 +12,6 @@ data List a  =  a :- List a | Nil deriving (Show, Eq, Typeable)
 data Bush a  =  Bush a :-: Bush a | Leaf a deriving (Show, Eq, Typeable)
 data Tree a  =  Node (Tree a) a (Tree a) | Null deriving (Show, Eq, Typeable)
 
-deriveName ''Choice
-deriveName ''Peano
-deriveName ''List
-deriveName ''Bush
-deriveName ''Tree
-
-deriveListable ''Choice
-deriveListable ''Peano
-deriveListable ''List
-deriveListable ''Bush
-deriveListable ''Tree
-
 deriveConjurable ''Choice
 deriveConjurable ''Peano
 deriveConjurable ''List
@@ -37,8 +25,6 @@ data N1 a    =  R1 a   deriving (Eq, Show, Typeable)
 data N2 a b  =  R2 a b deriving (Eq, Show, Typeable)
 
 deriveConjurableCascading ''Nested
-deriveListableCascading ''Nested
-deriveNameCascading ''Nested
 
 -- Recursive nested datatype cascade
 data RN       =  RN RN0 (RN1 Int) (RN2 Int RN) deriving (Eq, Show, Typeable)
@@ -49,8 +35,6 @@ data RN2 a b  =  Nest2 a b | Recurse2 RN deriving (Eq, Show, Typeable)
 --         derivation works but full evaluation does not terminate
 
 deriveConjurableCascading ''RN
-deriveListableCascading ''RN
-deriveNameCascading ''RN
 
 -- Those should have no effect (instance already exists):
 {- uncommenting those should generate warnings
@@ -67,8 +51,6 @@ deriveConjurableIfNeeded ''Either
 data Mutual    =  Mutual0   | Mutual CoMutual deriving (Eq, Show, Typeable)
 data CoMutual  =  CoMutual0 | CoMutual Mutual deriving (Eq, Show, Typeable)
 
-deriveNameCascading ''Mutual
-deriveListableCascading ''Mutual
 deriveConjurableCascading ''Mutual
 
 
@@ -84,5 +66,10 @@ tests n  =
 
 
 conjurableOK :: (Eq a, Show a, Listable a, Conjurable a) => a -> Bool
-conjurableOK x  =  holds 60 (evl (fromJust $ conjureEquality x) ==== ((==) -:> x))
-                && mapT evl (take 6 $ fromJust $ conjureTiers x) == (tiers -: [[x]])
+conjurableOK x  =  and
+  [ holds 60 ((-==-) ==== (==))
+  , tiers =| 6 |= (tiers -: [[x]])
+  ]
+  where
+  (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
+  tiers'  =  mapT evl (fromJust $ conjureTiers x) -: [[x]]
