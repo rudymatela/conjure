@@ -18,17 +18,17 @@ deriveName ''List
 deriveName ''Bush
 deriveName ''Tree
 
-deriveConjurable ''Choice
-deriveConjurable ''Peano
-deriveConjurable ''List
-deriveConjurable ''Bush
-deriveConjurable ''Tree
-
 deriveListable ''Choice
 deriveListable ''Peano
 deriveListable ''List
 deriveListable ''Bush
 deriveListable ''Tree
+
+deriveConjurable ''Choice
+deriveConjurable ''Peano
+deriveConjurable ''List
+deriveConjurable ''Bush
+deriveConjurable ''Tree
 
 -- Nested datatype cascade
 data Nested  =  Nested N0 (N1 Int) (N2 Int Int) deriving (Eq, Show, Typeable)
@@ -78,4 +78,11 @@ main  =  mainTest tests 5040
 tests :: Int -> [Bool]
 tests n  =
   [ True
+
+  , conjurableOK (undefined :: Bool)
   ]
+
+
+conjurableOK :: (Eq a, Show a, Listable a, Conjurable a) => a -> Bool
+conjurableOK x  =  holds 60 (evl (fromJust $ conjureEquality x) ==== ((==) -:> x))
+                && mapT evl (take 6 $ fromJust $ conjureTiers x) == (tiers -: [[x]])

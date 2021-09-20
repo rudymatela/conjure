@@ -13,6 +13,8 @@ module Conjure.Conjurable.Derive
   )
 where
 
+import Test.LeanCheck
+import Test.LeanCheck.Derive
 import Conjure.Expr hiding (mkName, Name, isInstanceOf)
 import Conjure.Conjurable hiding (Name)
 import Data.Express.Utils (primeCycle)
@@ -30,17 +32,34 @@ import Language.Haskell.TH.Lib
 -- If '-:', '->:', '->>:', '->>>:', ... are not in scope,
 -- this will derive them as well.
 deriveConjurable :: Name -> DecsQ
-deriveConjurable  =  deriveWhenNeededOrWarn ''Conjurable reallyDeriveConjurable
+deriveConjurable  =  deriveWhenNeededOrWarn ''Conjurable reallyDerive
+  where
+  reallyDerive  =  reallyDeriveConjurableWithRequisites
 
 -- | Same as 'deriveConjurable' but does not warn when instance already exists
 --   ('deriveConjurable' is preferable).
 deriveConjurableIfNeeded :: Name -> DecsQ
-deriveConjurableIfNeeded  =  deriveWhenNeeded ''Conjurable reallyDeriveConjurable
+deriveConjurableIfNeeded  =  deriveWhenNeeded ''Conjurable reallyDerive
+  where
+  reallyDerive  =  reallyDeriveConjurableWithRequisites
 
 -- | Derives a 'Conjurable' instance for a given type 'Name'
 --   cascading derivation of type arguments as well.
 deriveConjurableCascading :: Name -> DecsQ
-deriveConjurableCascading  =  deriveWhenNeeded ''Conjurable reallyDeriveConjurableCascading
+deriveConjurableCascading  =  deriveWhenNeeded ''Conjurable reallyDerive
+  where
+  reallyDerive t  =  concat
+                 <$> sequence [ deriveListableCascading t
+                              , deriveNameCascading t
+                              , deriveExpressCascading t
+                              , reallyDeriveConjurableCascading t ]
+
+reallyDeriveConjurableWithRequisites :: Name -> DecsQ
+reallyDeriveConjurableWithRequisites t  =  concat <$>
+  sequence [ deriveListableIfNeeded t
+           , deriveNameIfNeeded t
+           , deriveExpressIfNeeded t
+           , reallyDeriveConjurable t ]
 
 reallyDeriveConjurable :: Name -> DecsQ
 reallyDeriveConjurable t  =  do
@@ -53,7 +72,7 @@ reallyDeriveConjurable t  =  do
   -- template-haskell <= 2.9.0.0:
   cxt <- sequence [ classP c [return v]
 #endif
-                  | c <- ''Conjurable:([''Eq | isEq] ++ [''Ord | isOrd])
+                  | c <- [''Conjurable, ''Listable, ''Express] ++ [''Eq | isEq] ++ [''Ord | isOrd]
                   , v <- vs]
   cs <- typeConstructorsArgNames t
   asName <- newName "x"
@@ -62,7 +81,8 @@ reallyDeriveConjurable t  =  do
                    conjureExpress   =  reifyExpress
                    conjureEquality  =  reifyEquality
                    conjureTiers     =  reifyTiers |]
-  withTheReturnTypeOfs |++| (cxt |=>| inst)
+  -- withTheReturnTypeOfs |++| (cxt |=>| inst)
+  cxt |=>| inst
 -- TODO: derive conjureCases
 -- TODO: derive conjureSize
 -- TODO: derive conjureSubTypes (cf. Extrapolate.subInstances)
