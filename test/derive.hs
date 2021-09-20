@@ -62,14 +62,30 @@ tests n  =
   [ True
 
   , conjurableOK (undefined :: Bool)
+  , conjurableOK (undefined :: Int)
+  , conjurableOK (undefined :: Char)
+  , conjurableOK (undefined :: [Bool])
+  , conjurableOK (undefined :: [Int])
+  , conjurableOK (undefined :: String)
+
+  , conjurableOK (undefined :: Choice)
+  , conjurableOK (undefined :: Peano)
+  , conjurableOK (undefined :: List Int)
+  , conjurableOK (undefined :: Bush Int)
+  , conjurableOK (undefined :: Tree Int)
+--, conjurableOK (undefined :: RN) -- TODO: FIX: infinite loop somewhere...
   ]
 
 
-conjurableOK :: (Eq a, Show a, Listable a, Conjurable a) => a -> Bool
+-- checks if the functions conjureEquality, conjureExpress and conjureTiers
+-- were correctly generated.
+conjurableOK :: (Eq a, Show a, Express a, Listable a, Conjurable a) => a -> Bool
 conjurableOK x  =  and
-  [ holds 60 ((-==-) ==== (==))
+  [ holds 60 $ (-==-) ==== (==)
+  , holds 60 $ expr' === expr
   , tiers =| 6 |= (tiers -: [[x]])
   ]
   where
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
   tiers'  =  mapT evl (fromJust $ conjureTiers x) -: [[x]]
+  expr'  =  (conjureExpress x . val) -:> x
