@@ -126,10 +126,22 @@ reallyDeriveConjurable t  =  do
                    conjureEquality  =  reifyEquality
                    conjureTiers     =  reifyTiers |]
   -- withTheReturnTypeOfs |++| (cxt |=>| inst)
-  cxt |=>| inst
+  cxt |=>| inst `addFun` deriveSize t
 -- TODO: derive conjureCases
--- TODO: derive conjureSize
 -- TODO: derive conjureSubTypes (cf. Extrapolate.subInstances)
+
+deriveSize :: Name -> DecsQ
+deriveSize t  =  ((:[]) . FunD (mkName "conjureSize")) <$> deriveSizeClauses t
+
+deriveSizeClauses :: Name -> Q [Clause]
+deriveSizeClauses t  =  mapM (uncurry mkClause) =<< typeConstructors t
+  where
+  mkClause :: Name -> [Type] -> Q Clause
+  mkClause n as  =  clause pat body []
+    where
+    ns  =  take (length as) $ map mkName (variableNamesFromTemplate "x")
+    pat  =  [conP n [varP n | n <- ns]]
+    body  =  normalB $ foldl (\e n -> [| $e + conjureSize $(varE n) |]) [| 1 |] ns
 
 -- Not only really derive Conjurable instances,
 -- but cascade through argument types.
@@ -164,4 +176,15 @@ reallyDeriveWithTheReturnTypeOf n  =  do
   bind  =  id -- unbound variables are automatically bound
 #else
   bind  =  toBoundedQ
+#endif
+
+addFun :: DecsQ -> DecsQ -> DecsQ
+qds1 `addFun` qds2 = do ds1 <- qds1
+                        ds2 <- qds2
+                        return $ ds1 `m` ds2
+  where
+#if __GLASGOW_HASKELL__ < 800
+  [InstanceD   c ts ds1] `m` ds2 = [InstanceD   c ts (ds1 ++ ds2)]
+#else
+  [InstanceD o c ts ds1] `m` ds2 = [InstanceD o c ts (ds1 ++ ds2)]
 #endif

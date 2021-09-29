@@ -74,6 +74,15 @@ tests n  =
   , conjurableOK (undefined :: Bush Int)
   , conjurableOK (undefined :: Tree Int)
 --, conjurableOK (undefined :: RN) -- TODO: FIX: infinite loop somewhere...
+
+  , conjureSize Ae == 1
+  , conjureSize Bee == 1
+  , conjureSize Cee == 1
+  , conjureSize Zero == 1
+  , conjureSize (Succ Zero) == 2
+  , conjureSize (Succ (Succ Zero)) == 3
+  , conjureSize (Nil :: List Int) == 1
+  , conjureSize (10 :- (20 :- Nil) :: List Int) == 33
   ]
 
 
