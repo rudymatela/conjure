@@ -126,9 +126,28 @@ reallyDeriveConjurable t  =  do
                    conjureEquality  =  reifyEquality
                    conjureTiers     =  reifyTiers |]
   -- withTheReturnTypeOfs |++| (cxt |=>| inst)
-  cxt |=>| inst `addFun` deriveSize t
+  cxt |=>| inst `addFun` deriveSize t `mergeI` deriveSubTypes t
 -- TODO: derive conjureCases
 -- TODO: derive conjureSubTypes (cf. Extrapolate.subInstances)
+
+deriveSubTypes :: Name -> DecsQ
+deriveSubTypes t  =  do
+  n <- newName "x"
+  (nt,vs) <- normalizeType t
+  cs <- typeConstructorsArgNames t
+  let lets = [letin n c ns | (c,ns) <- cs, not (null ns)]
+  let rhs = foldr0 (\e1 e2 -> [| $e1 . $e2 |]) [|id|] lets
+  [d| instance Conjurable $(return nt) where
+        conjureSubTypes $(varP n) = $rhs |]
+  where
+  letin :: Name -> Name -> [Name] -> ExpQ
+  letin x c ns = do
+    und <- VarE <$> lookupValN "undefined"
+    let lhs = conP c (map varP ns)
+    let rhs = return $ foldl AppE (ConE c) [und | _ <- ns]
+    let bot = foldl1 (\e1 e2 -> [| $e1 . $e2 |])
+                     [ [| conjureType $(varE n) |] | n <- ns ]
+    [| let $lhs = $rhs `asTypeOf` $(varE x) in $bot |]
 
 deriveSize :: Name -> DecsQ
 deriveSize t  =  ((:[]) . FunD (mkName "conjureSize")) <$> deriveSizeClauses t

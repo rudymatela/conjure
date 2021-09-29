@@ -31,6 +31,7 @@ module Conjure.Utils
   , allEqual
   , choices
   , choicesThat
+  , foldr0
   )
 where
 
@@ -126,3 +127,8 @@ choices (x:xs)  =  (x,xs) : map (mapSnd (x:)) (choices xs)
 -- | Lists choices of values that follow a property.
 choicesThat :: (a -> [a] -> Bool) -> [a] -> [(a,[a])]
 choicesThat (?)  =  filter (uncurry (?)) . choices
+
+-- | A variation of foldr that only uses "zero" when the list is empty
+foldr0 :: (a -> a -> a) -> a -> [a] -> a
+foldr0 f z xs | null xs   = z
+              | otherwise = foldr1 f xs

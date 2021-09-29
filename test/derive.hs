@@ -83,6 +83,39 @@ tests n  =
   , conjureSize (Succ (Succ Zero)) == 3
   , conjureSize (Nil :: List Int) == 1
   , conjureSize (10 :- (20 :- Nil) :: List Int) == 33
+
+  , conjureHoles (undefined :: Choice) == [ hole (undefined :: Choice)
+                                          , hole (undefined :: Bool)
+                                          ]
+  , conjureHoles (undefined :: Peano) == [ hole (undefined :: Peano)
+                                         , hole (undefined :: Bool)
+                                         ]
+  , conjureHoles (undefined :: List Int) == [ hole (undefined :: Int)
+                                            , hole (undefined :: List Int)
+                                            , hole (undefined :: Bool)
+                                            ]
+  , conjureHoles (undefined :: Nested) == [ hole (undefined :: N0)
+                                          , hole (undefined :: N1 Int)
+                                          , hole (undefined :: Int)
+                                          , hole (undefined :: N2 Int Int)
+                                          , hole (undefined :: Nested)
+                                          , hole (undefined :: Bool)
+                                          ]
+  , conjureHoles (undefined :: RN) == [ hole (undefined :: RN0)
+                                      , hole (undefined :: RN1 Int)
+                                      , hole (undefined :: Int)
+                                      , hole (undefined :: RN2 Int RN)
+                                      , hole (undefined :: RN)
+                                      , hole (undefined :: Bool)
+                                      ]
+  , conjureHoles (undefined :: Mutual) == [ hole (undefined :: CoMutual)
+                                          , hole (undefined :: Mutual)
+                                          , hole (undefined :: Bool)
+                                          ]
+  , conjureHoles (undefined :: CoMutual) == [ hole (undefined :: Mutual)
+                                            , hole (undefined :: CoMutual)
+                                            , hole (undefined :: Bool)
+                                            ]
   ]
 
 
