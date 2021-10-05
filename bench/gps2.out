@@ -11,6 +11,7 @@ gps1 :: [Int] -> Maybe Int
 -- looking through 0 candidates of size 8
 -- looking through 1 candidates of size 9
 -- looking through 2 candidates of size 10
+-- tested 4 candidates
 gps1 xs  =  findIndex (0 >) (map (foldr (+) 0) (tail (inits xs)))
 
 gps1 :: [Int] -> Maybe Int
@@ -24,6 +25,7 @@ gps1 :: [Int] -> Maybe Int
 -- looking through 0 candidates of size 6
 -- looking through 1 candidates of size 7
 -- looking through 4 candidates of size 8
+-- tested 5 candidates
 gps1 xs  =  findIndex (0 >) (map sum (tail (inits xs)))
 
 gps1 :: Int -> [Int] -> Int
@@ -80,6 +82,7 @@ tell :: [Int] -> Int -> [Int]
 -- looking through 538 candidates of size 8
 -- looking through 134 candidates of size 9
 -- looking through 5299 candidates of size 10
+-- tested 2698 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -89,6 +92,7 @@ gps5 :: Int -> [Int]
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
+-- tested 1 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps5 :: Int -> [Int]
@@ -105,6 +109,7 @@ gps5 :: Int -> [Int]
 -- looking through 4450 candidates of size 9
 -- looking through 9710 candidates of size 10
 -- looking through 44767 candidates of size 11
+-- tested 32952 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps6 :: [Int] -> Int
@@ -148,6 +153,7 @@ gcd :: Int -> Int -> Int
 -- looking through 60 candidates of size 4
 -- looking through 150 candidates of size 5
 -- looking through 472 candidates of size 6
+-- tested 245 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
@@ -159,6 +165,7 @@ gps12 :: [Char] -> [Char] -> [Int]
 -- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 4 candidates of size 5
+-- tested 2 candidates
 gps12 cs ds  =  findIndices (ds `isPrefixOf`) (tails cs)
 
 gps13_leaders :: [Int] -> [Int]
@@ -176,6 +183,7 @@ gps13_leaders :: [Int] -> [Int]
 -- looking through 21 candidates of size 10
 -- looking through 34 candidates of size 11
 -- looking through 67 candidates of size 12
+-- tested 82 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs then x:gps13_leaders xs else gps13_leaders xs
 
@@ -188,6 +196,7 @@ cannot conjure
 gps15_mastermind :: () -> ()
 -- pruning with 0/1 rules
 -- looking through 1 candidates of size 1
+-- tested 0 candidates
 gps15_mastermind u  =  u
 
 gps16_middle :: [Char] -> [Char]
@@ -205,6 +214,7 @@ gps16_middle :: [Char] -> [Char]
 -- looking through 824 candidates of size 10
 -- looking through 2282 candidates of size 11
 -- looking through 6293 candidates of size 12
+-- tested 3976 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1 then c:cs else gps16_middle (init cs)
 
@@ -257,6 +267,7 @@ spin :: [Char] -> [Char]
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 4 candidates of size 8
+-- tested 2 candidates
 spin cs  =  if length cs >= 5 then reverse cs else cs
 
 gps21_spinwords :: [Char] -> [Char]
@@ -267,6 +278,7 @@ gps21_spinwords :: [Char] -> [Char]
 -- looking through 2 candidates of size 3
 -- looking through 3 candidates of size 4
 -- looking through 5 candidates of size 5
+-- tested 11 candidates
 gps21_spinwords cs  =  unwords (map spin (words cs))
 
 digits :: Int -> [Int]
@@ -322,6 +334,7 @@ gps24 :: [Char] -> Twitter
 -- looking through 232 candidates of size 10
 -- looking through 322 candidates of size 11
 -- looking through 483 candidates of size 12
+-- tested 935 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs then Tweet (length (c:cs)) else TooMany
 

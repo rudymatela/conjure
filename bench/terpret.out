@@ -9,6 +9,7 @@ invert :: [Bool] -> [Bool]
 -- looking through 10 candidates of size 4
 -- looking through 17 candidates of size 5
 -- looking through 41 candidates of size 6
+-- tested 35 candidates
 invert []  =  []
 invert (p:ps)  =  not p:invert ps
 
@@ -20,6 +21,7 @@ prependZero :: [Bool] -> [Bool]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 5 candidates of size 3
+-- tested 4 candidates
 prependZero ps  =  False:ps
 
 TerpreT benchmark #3: binary decrement
@@ -36,6 +38,7 @@ decrement :: [Bool] -> [Bool]
 -- looking through 86 candidates of size 7
 -- looking through 202 candidates of size 8
 -- looking through 487 candidates of size 9
+-- tested 417 candidates
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
@@ -56,6 +59,7 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 8154 candidates of size 9
 -- looking through 27432 candidates of size 10
 -- looking through 174839 candidates of size 11
+-- tested 137575 candidates
 cshift (p,q,r)  =  if p then (p,r,q) else (p,q,r)
 
 cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
@@ -70,6 +74,7 @@ cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- looking through 1035 candidates of size 6
 -- looking through 2457 candidates of size 7
 -- looking through 20250 candidates of size 8
+-- tested 22190 candidates
 cshift False p q  =  (False,p,q)
 cshift True p q  =  (True,q,p)
 
@@ -89,6 +94,7 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- looking through 2148 candidates of size 9
 -- looking through 5520 candidates of size 10
 -- looking through 13656 candidates of size 11
+-- tested 16289 candidates
 fadder p q r  =  if p == q then (p,r) else (r,not r)
 
 TerpreT benchmark #6: 2-bit adder
@@ -113,6 +119,7 @@ access :: [A] -> Int -> A
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
+-- tested 0 candidates
 xs `access` x  =  xs !! x
 
 access :: [A] -> Int -> A
@@ -125,6 +132,7 @@ access :: [A] -> Int -> A
 -- looking through 19 candidates of size 5
 -- looking through 23 candidates of size 6
 -- looking through 68 candidates of size 7
+-- tested 66 candidates
 [] `access` 0  =  undefined
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
@@ -142,6 +150,7 @@ decrelements :: [Int] -> [Int]
 -- looking through 9 candidates of size 5
 -- looking through 29 candidates of size 6
 -- looking through 41 candidates of size 7
+-- tested 52 candidates
 decrelements []  =  []
 decrelements (x:xs)  =  x - 1:decrelements xs
 
@@ -152,5 +161,6 @@ decrelements :: [Int] -> [Int]
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 8 candidates of size 4
+-- tested 7 candidates
 decrelements xs  =  map (subtract 1) xs
 

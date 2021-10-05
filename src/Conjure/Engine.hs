@@ -216,17 +216,18 @@ conjure0With args nm f p es  =  do
     putStrLn $ "-- reasoning produced "
             ++ show (length (invalid thy)) ++ " incorrect properties,"
             ++ " please re-run with more tests for faster results"
-  pr 1 rs
+  pr 1 0 rs
   where
-  pr n []  =  putStrLn $ "cannot conjure\n"
-  pr n ((is,cs):rs)  =  do
-    putStrLn $ "-- looking through "
-            ++ show (length cs)
-            ++ " candidates of size " ++ show n
+  pr n t []  =  putStrLn $ "cannot conjure\n"
+  pr n t ((is,cs):rs)  =  do
+    let nc  =  length cs
+    putStrLn $ "-- looking through " ++ show nc ++ " candidates of size " ++ show n
     -- when (n<=12) $ putStrLn $ unlines $ map showDefn cs
     case is of
-      []     ->  pr (n+1) rs
-      (i:_)  ->  putStrLn $ showDefn i
+      []     ->  pr (n+1) (t+nc) rs
+      (i:_)  ->  do let nc' = fromMaybe nc (findIndex (i==) cs)
+                    putStrLn $ "-- tested " ++ show (t+nc') ++ " candidates"
+                    putStrLn $ showDefn i
   rs  =  zip iss css
   (iss, css, ts, thy)  =  conjpure0With args nm f p es
   nRules  =  length (rules thy)

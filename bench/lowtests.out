@@ -38,6 +38,7 @@ sort xs `isSubsequenceOf` xs == xs `isSubsequenceOf` sort xs
 -- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 2 candidates of size 5
+-- tested 8 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 
 replicates :: [Char] -> Int -> [Char]
@@ -77,5 +78,6 @@ replicate x (concat (transpose xss)) == replicate x (concat xss)
 -- looking through 0 candidates of size 3
 -- looking through 1 candidates of size 4
 -- looking through 1 candidates of size 5
+-- tested 2 candidates
 replicates cs x  =  concat (transpose (replicate x cs))
 

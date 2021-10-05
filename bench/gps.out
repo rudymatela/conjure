@@ -5,6 +5,7 @@ gps1 :: Int -> Float -> Float
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 2 candidates of size 4
+-- tested 3 candidates
 gps1 x y  =  fromIntegral x + y
 
 gps2 :: Int -> Maybe [Char]
@@ -23,6 +24,7 @@ gps2 :: Int -> Maybe [Char]
 -- looking through 176 candidates of size 11
 -- looking through 704 candidates of size 12
 -- looking through 1856 candidates of size 13
+-- tested 1743 candidates
 gps2 x  =  if 2000 <= x then Just "large" else (if x < 1000 then Just "small" else Nothing)
 
 gps3 :: Int -> Int -> Int -> [Int]
@@ -36,6 +38,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- looking through 1536 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 26991 candidates of size 8
+-- tested 19479 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
 gps3 :: Int -> Int -> Int -> [Int]
@@ -65,6 +68,7 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- looking through 162 candidates of size 9
 -- looking through 30 candidates of size 10
 -- looking through 30 candidates of size 11
+-- tested 200 candidates
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
@@ -103,6 +107,7 @@ gps7 :: [Char] -> ([Char],Int)
 -- looking through 88 candidates of size 9
 -- looking through 201 candidates of size 10
 -- looking through 442 candidates of size 11
+-- tested 545 candidates
 gps7 cs  =  (init (unlines (words cs)),length (filter (not . isSpace) cs))
 
 gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
@@ -126,6 +131,7 @@ gps9 :: Int -> [Int]
 -- looking through 83 candidates of size 8
 -- looking through 143 candidates of size 9
 -- looking through 259 candidates of size 10
+-- tested 327 candidates
 gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
 wallisNext :: Ratio Integer -> Ratio Integer
@@ -139,6 +145,7 @@ wallisNext :: Ratio Integer -> Ratio Integer
 -- looking through 118 candidates of size 6
 -- looking through 5 candidates of size 7
 -- looking through 1001 candidates of size 8
+-- tested 1014 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 gps10 :: Int -> Ratio Integer
@@ -152,6 +159,7 @@ gps10 :: Int -> Ratio Integer
 -- looking through 5 candidates of size 6
 -- looking through 8 candidates of size 7
 -- looking through 13 candidates of size 8
+-- tested 32 candidates
 gps10 x  =  product (take x (iterate wallisNext (2 % 3)))
 
 gps11 :: [[Char]] -> [Int]
@@ -161,6 +169,7 @@ gps11 :: [[Char]] -> [Int]
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 1 candidates of size 4
+-- tested 1 candidates
 gps11 css  =  reverse (map length css)
 
 gps11 :: [[Char]] -> [Int]
@@ -174,6 +183,7 @@ gps11 :: [[Char]] -> [Int]
 -- looking through 2 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 2 candidates of size 8
+-- tested 5 candidates
 gps11 []  =  []
 gps11 (cs:css)  =  gps11 css ++ [length cs]
 
@@ -191,6 +201,7 @@ gps12 :: [Int] -> Int
 -- looking through 1166 candidates of size 9
 -- looking through 3187 candidates of size 10
 -- looking through 9282 candidates of size 11
+-- tested 10412 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -204,6 +215,7 @@ gps13 :: [Ratio Integer] -> Ratio Integer
 -- looking through 56 candidates of size 6
 -- looking through 125 candidates of size 7
 -- looking through 449 candidates of size 8
+-- tested 316 candidates
 gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 
 odd :: Int -> Bool
@@ -214,6 +226,7 @@ odd :: Int -> Bool
 -- looking through 7 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 71 candidates of size 5
+-- tested 16 candidates
 odd x  =  x `mod` 2 /= 0
 
 gps14 :: [Int] -> Int
@@ -223,6 +236,7 @@ gps14 :: [Int] -> Int
 -- looking through 1 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 1 candidates of size 4
+-- tested 1 candidates
 gps14 xs  =  length (filter odd xs)
 
 gps14 :: [Int] -> Int
@@ -235,6 +249,7 @@ gps14 :: [Int] -> Int
 -- looking through 66 candidates of size 5
 -- looking through 600 candidates of size 6
 -- looking through 1034 candidates of size 7
+-- tested 748 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x `mod` 2 + gps14 xs
 
@@ -245,6 +260,7 @@ gps15 :: [Int] -> [Int] -> Bool
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
 -- looking through 8 candidates of size 4
+-- tested 3 candidates
 gps15 xs ys  =  reverse xs == ys
 
 gps16 :: [Char] -> [Char] -> Bool
@@ -255,6 +271,7 @@ gps16 :: [Char] -> [Char] -> Bool
 -- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 2 candidates of size 5
+-- tested 8 candidates
 gps16 cs ds  =  sort cs `isSubsequenceOf` sort ds
 
 gps17 :: Int -> Int
@@ -269,6 +286,7 @@ gps17 :: Int -> Int
 -- looking through 577 candidates of size 7
 -- looking through 1311 candidates of size 8
 -- looking through 5282 candidates of size 9
+-- tested 2200 candidates
 gps17 0  =  0
 gps17 x  =  x * x + gps17 (x - 1)
 
@@ -284,6 +302,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 791 candidates of size 7
 -- looking through 220 candidates of size 8
 -- looking through 4632 candidates of size 9
+-- tested 3930 candidates
 gps18 [] []  =  []
 gps18 [] (x:xs)  =  xs
 gps18 (x:xs) []  =  xs
@@ -296,6 +315,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 12 candidates of size 4
+-- tested 13 candidates
 gps18 xs ys  =  zipWith (+) xs ys
 
 gps19 :: Int -> [Char] -> [Char]
@@ -330,6 +350,7 @@ isVowel :: Char -> Bool
 -- looking through 62 candidates of size 20
 -- looking through 62 candidates of size 21
 -- looking through 126 candidates of size 22
+-- tested 1206 candidates
 isVowel 'a'  =  True
 isVowel 'e'  =  True
 isVowel 'i'  =  True
@@ -354,6 +375,7 @@ pig1 :: [Char] -> [Char]
 -- looking through 3495 candidates of size 12
 -- looking through 6382 candidates of size 13
 -- looking through 20409 candidates of size 14
+-- tested 27900 candidates
 pig1 ""  =  "ay"
 pig1 (c:cs)  =  if isVowel c then (c:cs) ++ "ay" else cs ++ (c:"ay")
 
@@ -364,6 +386,7 @@ gps20c :: [Char] -> [Char]
 -- looking through 2 candidates of size 3
 -- looking through 3 candidates of size 4
 -- looking through 5 candidates of size 5
+-- tested 11 candidates
 gps20c cs  =  unwords (map pig1 (words cs))
 
 gps21 :: [Int] -> [Int]
@@ -379,6 +402,7 @@ gps21 :: [Int] -> [Int]
 -- looking through 30 candidates of size 8
 -- looking through 25 candidates of size 9
 -- looking through 65 candidates of size 10
+-- tested 95 candidates
 gps21 []  =  []
 gps21 (x:xs)  =  (if x < 0 then 0 else x):gps21 xs
 
@@ -390,6 +414,7 @@ gps22 :: [Char] -> Int
 -- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 4 candidates of size 6
+-- tested 4 candidates
 gps22 ""  =  0
 gps22 (c:cs)  =  scrabble1 c + gps22 cs
 
@@ -413,6 +438,7 @@ gps24 :: [Char] -> Char
 -- looking through 97 candidates of size 8
 -- looking through 286 candidates of size 9
 -- looking through 739 candidates of size 10
+-- tested 672 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]
@@ -442,6 +468,7 @@ gps27 :: Int -> Int -> Int -> Int
 -- looking through 0 candidates of size 9
 -- looking through 180 candidates of size 10
 -- looking through 2592 candidates of size 11
+-- tested 1578 candidates
 gps27 x y z  =  if x < y then (if y < z then y else z) else x
 
 gps28 :: Int -> Int -> Int -> Int -> Int
@@ -454,6 +481,7 @@ gps28 :: Int -> Int -> Int -> Int -> Int
 -- looking through 24 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 72 candidates of size 7
+-- tested 43 candidates
 gps28 x y z x'  =  x `min` (y `min` (z `min` x'))
 
 gps29 :: [Char] -> Int
@@ -467,6 +495,7 @@ gps29 :: [Char] -> Int
 -- looking through 18 candidates of size 7
 -- looking through 33 candidates of size 8
 -- looking through 65 candidates of size 9
+-- tested 85 candidates
 gps29 ""  =  0
 gps29 (c:cs)  =  (if isVowel c then 1 else 0) + gps29 cs
 

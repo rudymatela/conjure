@@ -6,6 +6,7 @@ and :: [Bool] -> Bool
 -- looking through 12 candidates of size 3
 -- looking through 16 candidates of size 4
 -- looking through 42 candidates of size 5
+-- tested 44 candidates
 and []  =  True
 and (p:ps)  =  p && and ps
 
@@ -17,6 +18,7 @@ or :: [Bool] -> Bool
 -- looking through 12 candidates of size 3
 -- looking through 16 candidates of size 4
 -- looking through 42 candidates of size 5
+-- tested 38 candidates
 or []  =  False
 or (p:ps)  =  p || or ps
 
@@ -27,6 +29,7 @@ and :: [Bool] -> Bool
 -- looking through 6 candidates of size 2
 -- looking through 12 candidates of size 3
 -- looking through 18 candidates of size 4
+-- tested 27 candidates
 and ps  =  foldr (&&) True ps
 
 or :: [Bool] -> Bool
@@ -36,5 +39,6 @@ or :: [Bool] -> Bool
 -- looking through 6 candidates of size 2
 -- looking through 12 candidates of size 3
 -- looking through 18 candidates of size 4
+-- tested 26 candidates
 or ps  =  foldr (||) False ps
 

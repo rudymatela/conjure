@@ -6,6 +6,7 @@ length :: [Int] -> Int
 -- looking through 3 candidates of size 3
 -- looking through 11 candidates of size 4
 -- looking through 10 candidates of size 5
+-- tested 22 candidates
 length []  =  0
 length (x:xs)  =  length xs + 1
 
@@ -18,6 +19,7 @@ reverse :: [Int] -> [Int]
 -- looking through 2 candidates of size 4
 -- looking through 5 candidates of size 5
 -- looking through 7 candidates of size 6
+-- tested 17 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ unit x
 
@@ -30,6 +32,7 @@ reverse (x:xs)  =  reverse xs ++ unit x
 -- looking through 44 candidates of size 4
 -- looking through 116 candidates of size 5
 -- looking through 80 candidates of size 6
+-- tested 235 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -41,6 +44,7 @@ length :: [Int] -> Int
 -- looking through 3 candidates of size 3
 -- looking through 13 candidates of size 4
 -- looking through 16 candidates of size 5
+-- tested 24 candidates
 length []  =  0
 length (x:xs)  =  length xs + 1
 
@@ -53,6 +57,7 @@ reverse :: [Int] -> [Int]
 -- looking through 2 candidates of size 4
 -- looking through 5 candidates of size 5
 -- looking through 15 candidates of size 6
+-- tested 17 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ unit x
 
@@ -63,6 +68,7 @@ reverse (x:xs)  =  reverse xs ++ unit x
 -- looking through 8 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 48 candidates of size 4
+-- tested 56 candidates
 xs ++ ys  =  foldr (:) ys xs
 
 (\/) :: [Int] -> [Int] -> [Int]
@@ -74,6 +80,7 @@ xs ++ ys  =  foldr (:) ys xs
 -- looking through 44 candidates of size 4
 -- looking through 116 candidates of size 5
 -- looking through 80 candidates of size 6
+-- tested 237 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 

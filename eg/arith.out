@@ -4,6 +4,7 @@ double :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3
+-- tested 7 candidates
 double x  =  x + x
 
 add :: Int -> Int -> Int
@@ -12,6 +13,7 @@ add :: Int -> Int -> Int
 -- looking through 4 candidates of size 1
 -- looking through 18 candidates of size 2
 -- looking through 101 candidates of size 3
+-- tested 23 candidates
 add x y  =  x + y
 
 square :: Int -> Int
@@ -20,6 +22,7 @@ square :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3
+-- tested 11 candidates
 square x  =  x * x
 
 tnpo :: Int -> Int
@@ -32,5 +35,6 @@ tnpo :: Int -> Int
 -- looking through 29 candidates of size 5
 -- looking through 71 candidates of size 6
 -- looking through 113 candidates of size 7
+-- tested 162 candidates
 tnpo x  =  x + (x + (x + 1))
 

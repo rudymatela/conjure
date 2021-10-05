@@ -6,6 +6,7 @@ count :: A -> [A] -> Int
 -- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 1 candidates of size 5
+-- tested 1 candidates
 count x xs  =  length (filter (x ==) xs)
 
 count :: A -> [A] -> Int
@@ -22,6 +23,7 @@ count :: A -> [A] -> Int
 -- looking through 272 candidates of size 9
 -- looking through 648 candidates of size 10
 -- looking through 1549 candidates of size 11
+-- tested 1750 candidates
 count x []  =  0
 count x (y:xs)  =  (if x == y then 1 else 0) + count x xs
 
