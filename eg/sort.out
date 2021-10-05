@@ -6,7 +6,7 @@ sort :: [Int] -> [Int]
 -- looking through 7 candidates of size 3
 -- looking through 16 candidates of size 4
 -- looking through 36 candidates of size 5
--- tested 30 candidates
+-- tested 31 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
@@ -17,7 +17,7 @@ sort :: [Int] -> [Int]
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 4 candidates of size 4
--- tested 5 candidates
+-- tested 6 candidates
 sort xs  =  foldr insert [] xs
 
 qsort :: [Int] -> [Int]
@@ -37,7 +37,7 @@ qsort :: [Int] -> [Int]
 -- looking through 767 candidates of size 12
 -- looking through 1600 candidates of size 13
 -- looking through 3499 candidates of size 14
--- tested 3667 candidates
+-- tested 3668 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 

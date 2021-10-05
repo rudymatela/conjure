@@ -9,7 +9,7 @@ replicate :: Int -> Char -> [Char]
 -- looking through 7 candidates of size 6
 -- looking through 5 candidates of size 7
 -- looking through 16 candidates of size 8
--- tested 19 candidates
+-- tested 20 candidates
 replicate 0 c  =  ""
 replicate x c  =  c:replicate (x - 1) c
 
@@ -21,7 +21,7 @@ replicates :: [Char] -> Int -> [Char]
 -- looking through 0 candidates of size 3
 -- looking through 1 candidates of size 4
 -- looking through 1 candidates of size 5
--- tested 2 candidates
+-- tested 3 candidates
 replicates cs x  =  concat (transpose (replicate x cs))
 
 replicates :: [Char] -> Int -> [Char]
@@ -32,7 +32,7 @@ replicates :: [Char] -> Int -> [Char]
 -- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 1 candidates of size 5
--- tested 1 candidates
+-- tested 2 candidates
 replicates cs x  =  concat (map (replicate x) cs)
 
 replicates :: [Char] -> Int -> [Char]
@@ -46,7 +46,7 @@ replicates :: [Char] -> Int -> [Char]
 -- looking through 161 candidates of size 6
 -- looking through 469 candidates of size 7
 -- looking through 1303 candidates of size 8
--- tested 790 candidates
+-- tested 791 candidates
 replicates "" x  =  ""
 replicates (c:cs) x  =  replicate x c ++ replicates cs x
 

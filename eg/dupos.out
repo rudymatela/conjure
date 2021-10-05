@@ -18,7 +18,7 @@ duplicates :: [Int] -> [Int]
 -- looking through 644 candidates of size 15
 -- looking through 1189 candidates of size 16
 -- looking through 2189 candidates of size 17
--- tested 2598 candidates
+-- tested 2599 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 
@@ -41,7 +41,7 @@ duplicates :: [Int] -> [Int]
 -- looking through 644 candidates of size 15
 -- looking through 1189 candidates of size 16
 -- looking through 2189 candidates of size 17
--- tested 2598 candidates
+-- tested 2599 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 
@@ -62,7 +62,7 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- looking through 4520 candidates of size 12
 -- looking through 10066 candidates of size 13
 -- looking through 21492 candidates of size 14
--- tested 19273 candidates
+-- tested 19274 candidates
 positionsFrom x y []  =  []
 positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
 

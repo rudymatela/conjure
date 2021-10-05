@@ -7,7 +7,7 @@ gcd :: Int -> Int -> Int
 -- looking through 60 candidates of size 4
 -- looking through 150 candidates of size 5
 -- looking through 472 candidates of size 6
--- tested 245 candidates
+-- tested 246 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 

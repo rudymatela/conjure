@@ -9,7 +9,7 @@ subset :: [Int] -> [Int] -> Bool
 -- looking through 0 candidates of size 6
 -- looking through 448 candidates of size 7
 -- looking through 784 candidates of size 8
--- tested 1317 candidates
+-- tested 1318 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  elem x ys && subset xs ys
 
@@ -21,6 +21,6 @@ subset :: [Int] -> [Int] -> Bool
 -- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 2 candidates of size 5
--- tested 8 candidates
+-- tested 9 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 

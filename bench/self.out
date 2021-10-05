@@ -4,7 +4,7 @@
 -- looking through 4 candidates of size 1
 -- looking through 18 candidates of size 2
 -- looking through 120 candidates of size 3
--- tested 23 candidates
+-- tested 24 candidates
 x ? y  =  x + y
 
 (?) :: Int -> Int -> Int
@@ -13,7 +13,7 @@ x ? y  =  x + y
 -- looking through 4 candidates of size 1
 -- looking through 18 candidates of size 2
 -- looking through 120 candidates of size 3
--- tested 39 candidates
+-- tested 40 candidates
 x ? y  =  x * y
 
 i :: Int -> Int
@@ -22,7 +22,7 @@ i :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 22 candidates of size 3
--- tested 9 candidates
+-- tested 10 candidates
 i x  =  x + 1
 
 d :: Int -> Int

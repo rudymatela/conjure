@@ -10,7 +10,7 @@ drop :: Int -> [A] -> [A]
 -- looking through 132 candidates of size 7
 -- looking through 127 candidates of size 8
 -- looking through 458 candidates of size 9
--- tested 494 candidates
+-- tested 495 candidates
 drop 0 []  =  []
 drop 0 (x:xs)  =  x:xs
 drop x []  =  []
@@ -28,7 +28,7 @@ take :: Int -> [A] -> [A]
 -- looking through 132 candidates of size 7
 -- looking through 127 candidates of size 8
 -- looking through 458 candidates of size 9
--- tested 483 candidates
+-- tested 484 candidates
 take 0 []  =  []
 take 0 (x:xs)  =  []
 take x []  =  []

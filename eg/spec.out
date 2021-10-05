@@ -3,7 +3,7 @@ square :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3
--- tested 11 candidates
+-- tested 12 candidates
 square x  =  x * x
 
 square :: Int -> Int
@@ -11,7 +11,7 @@ square :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 9 candidates of size 3
--- tested 11 candidates
+-- tested 12 candidates
 square x  =  x * x
 
 sum :: [Int] -> Int
@@ -21,7 +21,7 @@ sum :: [Int] -> Int
 -- looking through 3 candidates of size 3
 -- looking through 4 candidates of size 4
 -- looking through 7 candidates of size 5
--- tested 10 candidates
+-- tested 11 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -33,7 +33,7 @@ sum (x:xs)  =  x + sum xs
 -- looking through 28 candidates of size 4
 -- looking through 78 candidates of size 5
 -- looking through 172 candidates of size 6
--- tested 195 candidates
+-- tested 196 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

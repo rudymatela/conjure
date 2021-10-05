@@ -8,7 +8,7 @@ leftmost :: Tree -> Int
 -- looking through 0 candidates of size 5
 -- looking through 4 candidates of size 6
 -- looking through 16 candidates of size 7
--- tested 8 candidates
+-- tested 9 candidates
 leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)  =  if nil t1 then x else leftmost t1
 
@@ -22,7 +22,7 @@ rightmost :: Tree -> Int
 -- looking through 0 candidates of size 5
 -- looking through 4 candidates of size 6
 -- looking through 16 candidates of size 7
--- tested 17 candidates
+-- tested 18 candidates
 rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)  =  if nil t2 then x else rightmost t2
 
@@ -37,7 +37,7 @@ size :: Tree -> Int
 -- looking through 66 candidates of size 6
 -- looking through 163 candidates of size 7
 -- looking through 311 candidates of size 8
--- tested 427 candidates
+-- tested 428 candidates
 size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
@@ -52,7 +52,7 @@ height :: Tree -> Int
 -- looking through 472 candidates of size 6
 -- looking through 1440 candidates of size 7
 -- looking through 5781 candidates of size 8
--- tested 4170 candidates
+-- tested 4171 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  max (height t1) (height t2) + 1
 
@@ -71,7 +71,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 184 candidates of size 12
--- tested 106 candidates
+-- tested 107 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
