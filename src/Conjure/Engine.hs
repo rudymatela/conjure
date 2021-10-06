@@ -44,12 +44,14 @@ import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
 import qualified Data.Express.Triexpr as T
 
+import Data.Dynamic (fromDyn, dynApp)
+
 import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 
 import Test.Speculate.Reason (Thy, rules, equations, invalid, canReduceTo, printThy, closureLimit, doubleCheck)
-import Test.Speculate.Engine (theoryFromAtoms, groundBinds, boolTy)
+import Test.Speculate.Engine (theoryFromAtoms, grounds, groundBinds, boolTy)
 
 import Conjure.Expr
 import Conjure.Conjurable
@@ -317,6 +319,19 @@ candidateDefns args  =  cds args
   cds  =  if usePatterns args
           then candidateDefnsC
           else candidateDefns1
+
+
+nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
+nubCandidates Args{..} nm f  =  discardLaterT (===)
+  where
+  err  =  error "nubCandidates: unexpected evaluation error."
+  eq  =  conjureDynamicEq f
+  d1 === d2  =  all are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+    where
+    are :: Expr -> Bool
+    are e  =  (`fromDyn` err)
+           $  eq `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d1 e)
+                 `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d2 e)
 
 
 -- | Return apparently unique candidate definitions
