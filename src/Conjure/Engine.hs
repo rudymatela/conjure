@@ -314,11 +314,11 @@ conjureTheoryWith args nm f es  =  do
 
 -- | Return apparently unique candidate definitions.
 candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns args  =  cds args
+candidateDefns args  =  candidateDefns' args
   where
-  cds  =  if usePatterns args
-          then candidateDefnsC
-          else candidateDefns1
+  candidateDefns'  =  if usePatterns args
+                      then candidateDefnsC
+                      else candidateDefns1
 
 
 nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
