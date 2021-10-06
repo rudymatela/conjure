@@ -32,6 +32,7 @@ module Conjure.Conjurable
   , conjureIsUnbreakable
   , conjureReification
   , conjureReification1
+  , conjureDynamicEq
   , cevaluate
   , ceval
   , cevl
@@ -48,6 +49,7 @@ import Conjure.Defn
 import Test.Speculate.Expr
 import Data.Functor ((<$>))
 import Control.Applicative ((<*>))
+import Data.Dynamic
 import Data.Express
 
 import Data.Int     -- for instances
@@ -273,6 +275,13 @@ conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 -- | Computes a function that makes an equation between two expressions.
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- conjureReification f]
+
+conjureDynamicEq :: Conjurable f => f -> Dynamic
+conjureDynamicEq f  =  case conjureMkEquation f efxs efxs of
+                       (Value "==" deq :$ _ :$ _) -> deq
+                       _ -> error "conjureDynamicEq: expected an == but found something else.  Bug!"
+  where
+  efxs  =  conjureApplication "f" f
 
 -- | Given a 'Conjurable' functional value,
 --   computes a function that checks whether two 'Expr's are equal

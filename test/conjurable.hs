@@ -4,6 +4,7 @@
 {-# Language DeriveDataTypeable, StandaloneDeriving #-}  -- for GHC < 7.10
 
 import Test
+import Data.Dynamic
 
 -- An Unit type that is not an Eq instance
 data Unit  =  Unit  deriving Show
@@ -248,6 +249,11 @@ tests n  =
                                                  ]
   , candidateDeconstructionsFrom (div' xx xx) == []
   , candidateDeconstructionsFrom ((xx -+- xx) -+- yy) == [(xx -+- xx) -+- i_]
+
+  , fromDynamic (conjureDynamicEq ((+) :: Int -> Int -> Int) `dynApp` toDyn (1::Int) `dynApp` toDyn (2::Int))
+    == Just False
+  , fromDynamic (conjureDynamicEq ((+) :: Int -> Int -> Int) `dynApp` toDyn (1::Int) `dynApp` toDyn (1::Int))
+    == Just True
   ]
 
 isDecon :: Expr -> Bool
