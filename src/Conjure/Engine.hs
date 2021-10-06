@@ -164,6 +164,7 @@ data Args = Args
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
+  , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
   }
 
 
@@ -177,6 +178,7 @@ data Args = Args
 -- * search for defined applications for up to 100000 combinations
 -- * require recursive calls to deconstruct arguments
 -- * don't show the theory used in pruning
+-- * do not make candidates unique module testing
 args :: Args
 args = Args
   { maxTests               =  360
@@ -188,6 +190,7 @@ args = Args
   , requireDescent         =  True
   , usePatterns            =  True
   , showTheory             =  False
+  , uniqueCandidates       =  False
   }
 
 
@@ -277,7 +280,8 @@ conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, test
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
                  && errorToFalse (p (cevl maxEvalRecursions fx))
-  candidatesT  =  take maxSize candidatesTT
+  candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
+               $  take maxSize candidatesTT
   (candidatesTT, thy)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
