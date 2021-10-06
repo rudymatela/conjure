@@ -333,7 +333,8 @@ nubCandidates Args{..} nm f  =  discardLaterT (===)
   d1 === d2  =  all are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
     where
     are :: Expr -> Bool
-    are e  =  (`fromDyn` err)
+    are e  =  errorToFalse -- silences errors, ok since this is for optional measuring of optimal pruning
+           $  (`fromDyn` err)
            $  eq `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d1 e)
                  `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d2 e)
 
