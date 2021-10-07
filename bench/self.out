@@ -31,5 +31,6 @@ d :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 22 candidates of size 3
+-- tested 29 candidates
 cannot conjure
 

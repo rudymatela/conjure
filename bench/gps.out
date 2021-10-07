@@ -52,6 +52,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- looking through 0 candidates of size 6
 -- looking through 108 candidates of size 7
 -- looking through 36 candidates of size 8
+-- tested 166 candidates
 cannot conjure
 
 gps4 :: [Char] -> [Char] -> [Char] -> Bool
@@ -80,6 +81,7 @@ gps5 :: [Char] -> [Char]
 -- looking through 6 candidates of size 4
 -- looking through 5 candidates of size 5
 -- looking through 13 candidates of size 6
+-- tested 30 candidates
 cannot conjure
 
 gps6 :: Int -> Int
@@ -91,6 +93,7 @@ gps6 :: Int -> Int
 -- looking through 146 candidates of size 4
 -- looking through 624 candidates of size 5
 -- looking through 2576 candidates of size 6
+-- tested 3392 candidates
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -116,6 +119,7 @@ gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
+-- tested 0 candidates
 cannot conjure
 
 gps9 :: Int -> [Int]
@@ -323,6 +327,7 @@ gps19 :: Int -> [Char] -> [Char]
 -- pruning with 0/0 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 1 candidates
 cannot conjure
 
 isVowel :: Char -> Bool
@@ -423,6 +428,7 @@ gps23 :: [Char] -> ([(Int,Int)],Int,Double)
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 0 candidates
 cannot conjure
 
 gps24 :: [Char] -> Char
@@ -445,6 +451,7 @@ gps25 :: Int -> [Int]
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
+-- tested 0 candidates
 cannot conjure
 
 gps26 :: Int -> Int -> Int -> Int -> Int -> Char
@@ -452,6 +459,7 @@ gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- pruning with 4/4 rules
 -- looking through 5 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 5 candidates
 cannot conjure
 
 gps27 :: Int -> Int -> Int -> Int

@@ -6,6 +6,7 @@ fib01 :: Int -> Int -> Int -> Int
 -- looking through 295 candidates of size 3
 -- looking through 1968 candidates of size 4
 -- looking through 10684 candidates of size 5
+-- tested 12982 candidates
 cannot conjure
 
 fib01 :: Int -> Int -> Int -> Int
@@ -21,5 +22,6 @@ fib01 :: Int -> Int -> Int -> Int
 -- looking through 391 candidates of size 8
 -- looking through 840 candidates of size 9
 -- looking through 6414 candidates of size 10
+-- tested 8002 candidates
 cannot conjure
 

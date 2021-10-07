@@ -90,5 +90,6 @@ insert :: Int -> Tree -> Tree
 -- looking through 2204 candidates of size 10
 -- looking through 3651 candidates of size 11
 -- looking through 8280 candidates of size 12
+-- tested 14743 candidates
 cannot conjure
 

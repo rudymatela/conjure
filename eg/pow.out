@@ -22,5 +22,6 @@ pow :: Int -> Int -> Int
 -- looking through 378 candidates of size 4
 -- looking through 1690 candidates of size 5
 -- looking through 4572 candidates of size 6
+-- tested 6778 candidates
 cannot conjure
 

@@ -35,6 +35,7 @@ gps1 :: Int -> [Int] -> Int
 -- looking through 25 candidates of size 2
 -- looking through 255 candidates of size 3
 -- looking through 451 candidates of size 4
+-- tested 735 candidates
 cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
@@ -46,12 +47,14 @@ gps2 :: Double -> Double -> Int -> Double
 -- looking through 70 candidates of size 4
 -- looking through 314 candidates of size 5
 -- looking through 1432 candidates of size 6
+-- tested 1838 candidates
 cannot conjure
 
 gps3 :: [Char] -> Int
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 0 candidates
 cannot conjure
 
 gps4 :: [Char] -> [Char]
@@ -62,12 +65,14 @@ gps4 :: [Char] -> [Char]
 -- looking through 22 candidates of size 4
 -- looking through 54 candidates of size 5
 -- looking through 124 candidates of size 6
+-- tested 214 candidates
 cannot conjure
 
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
+-- tested 0 candidates
 cannot conjure
 
 tell :: [Int] -> Int -> [Int]
@@ -117,12 +122,14 @@ gps6 :: [Int] -> Int
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 0 candidates
 cannot conjure
 
 gps7 :: Integer -> Integer -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
+-- tested 0 candidates
 cannot conjure
 
 gps :: Int -> [Int] -> (Int,Int)
@@ -130,18 +137,21 @@ gps :: Int -> [Int] -> (Int,Int)
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 0 candidates
 cannot conjure
 
 gps :: Int -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
+-- tested 0 candidates
 cannot conjure
 
 gps :: Int -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
+-- tested 0 candidates
 cannot conjure
 
 gcd :: Int -> Int -> Int
@@ -191,6 +201,7 @@ gps14_luhn :: [Int] -> Int
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 0 candidates
 cannot conjure
 
 gps15_mastermind :: () -> ()
@@ -226,6 +237,7 @@ gps17_pds :: [Int] -> Int
 -- looking through 2 candidates of size 3
 -- looking through 1 candidates of size 4
 -- looking through 5 candidates of size 5
+-- tested 11 candidates
 cannot conjure
 
 gps18_price :: [Double] -> [Double] -> Double
@@ -237,6 +249,7 @@ gps18_price :: [Double] -> [Double] -> Double
 -- looking through 72 candidates of size 4
 -- looking through 1192 candidates of size 5
 -- looking through 696 candidates of size 6
+-- tested 2042 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -248,12 +261,14 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- looking through 169 candidates of size 4
 -- looking through 543 candidates of size 5
 -- looking through 3608 candidates of size 6
+-- tested 4361 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
+-- tested 0 candidates
 cannot conjure
 
 spin :: [Char] -> [Char]
@@ -296,11 +311,13 @@ digits :: Int -> [Int]
 -- looking through 935 candidates of size 10
 -- looking through 9018 candidates of size 11
 -- looking through 9686 candidates of size 12
+-- tested 20746 candidates
 cannot conjure
 
 gps22 :: Int -> [Char]
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
+-- tested 0 candidates
 cannot conjure
 
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
@@ -317,6 +334,7 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 5184 candidates of size 12
+-- tested 9174 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
@@ -347,5 +365,6 @@ gps25 :: [Double] -> [Double] -> Double
 -- looking through 312 candidates of size 4
 -- looking through 2262 candidates of size 5
 -- looking through 9400 candidates of size 6
+-- tested 12074 candidates
 cannot conjure
 

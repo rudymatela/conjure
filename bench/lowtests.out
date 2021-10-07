@@ -21,6 +21,7 @@ sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 0 candidates of size 12
+-- tested 48 candidates
 cannot conjure
 
 subset :: [Int] -> [Int] -> Bool
@@ -62,6 +63,7 @@ transpose (transpose (transpose xss)) == transpose xss
 -- looking through 1 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 0 candidates of size 12
+-- tested 4 candidates
 cannot conjure
 
 replicates :: [Char] -> Int -> [Char]

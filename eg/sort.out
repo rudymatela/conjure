@@ -56,5 +56,6 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 1448 candidates of size 10
 -- looking through 12905 candidates of size 11
 -- looking through 15208 candidates of size 12
+-- tested 34066 candidates
 cannot conjure
 

@@ -223,7 +223,8 @@ conjure0With args nm f p es  =  do
             ++ " please re-run with more tests for faster results"
   pr 1 0 rs
   where
-  pr n t []  =  putStrLn $ "cannot conjure\n"
+  pr n t []  =  do putStrLn $ "-- tested " ++ show t ++ " candidates"
+                   putStrLn $ "cannot conjure\n"
   pr n t ((is,cs):rs)  =  do
     let nc  =  length cs
     putStrLn $ "-- looking through " ++ show nc ++ " candidates of size " ++ show n

@@ -109,6 +109,7 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 8 candidates of size 4
 -- looking through 128 candidates of size 5
 -- looking through 408 candidates of size 6
+-- tested 544 candidates
 cannot conjure
 
 TerpreT benchmark #7: access
