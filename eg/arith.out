@@ -25,6 +25,17 @@ square :: Int -> Int
 -- tested 12 candidates
 square x  =  x * x
 
+cube :: Int -> Int
+-- testing 3 combinations of argument values
+-- pruning with 14/25 rules
+-- looking through 3 candidates of size 1
+-- looking through 4 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 23 candidates of size 4
+-- looking through 29 candidates of size 5
+-- tested 55 candidates
+cube x  =  x * (x * x)
+
 tnpo :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules

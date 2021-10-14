@@ -21,6 +21,11 @@ square 0  =  0
 square 1  =  1
 square 2  =  4
 
+cube :: Int -> Int
+cube 0  =  0
+cube 1  =  1
+cube 2  =  8
+
 tnpo :: Int -> Int
 tnpo 0  =  1
 tnpo 1  =  4
@@ -31,6 +36,7 @@ main = do
   conjure "double" double primitives
   conjure "add"    add    primitives
   conjure "square" square primitives
+  conjure "cube"   cube   primitives
   conjure "tnpo"   tnpo   primitives
 
 primitives :: [Prim]
