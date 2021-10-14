@@ -10,6 +10,12 @@ double 1  =  2
 double 2  =  4
 double 3  =  6
 
+triple :: Int -> Int
+triple 0  =  0
+triple 1  =  3
+triple 2  =  6
+triple 3  =  9
+
 add :: Int -> Int -> Int
 add 0 0  =  0
 add 0 1  =  1
@@ -34,6 +40,7 @@ tnpo 2  =  7
 main :: IO ()
 main = do
   conjure "double" double primitives
+  conjure "triple" triple primitives
   conjure "add"    add    primitives
   conjure "square" square primitives
   conjure "cube"   cube   primitives
