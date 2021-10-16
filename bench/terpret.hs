@@ -137,6 +137,7 @@ t5c  =  do
 
   -- using primitives123 below works, but increases the runtime to 18 seconds
   -- let's leave it commented out so runtime is faster when running automated tests
+  -- BENCHMARK: uncomment primitives123
   conjure "fadder" t5p $ -- primitives123 ++
     [ prim "not" not
     , prim "," ((,) :: Bool -> Bool -> (Bool,Bool))

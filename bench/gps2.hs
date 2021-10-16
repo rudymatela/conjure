@@ -482,7 +482,8 @@ gps17g xs  =  pds xs
 
 
 -- can generate at size 15 in 18 seconds
--- setting limit of 5 for faster output
+-- setting limit of 5 for faster automated tests
+-- BENCHMARK: increase maxSize from 5 to 18
 gps17c :: IO ()
 gps17c  =  conjureWith args{maxSize=5} "gps17_pds" gps17p
   [ pr (0 :: Int)
