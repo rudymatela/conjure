@@ -229,6 +229,41 @@ tests n  =
          ]
        ]
 
+  , concat (conjurePats [zero, one] "foo" (undefined :: Int -> [Int] -> Int))
+    == [ [ ffoo xx xxs
+         ]
+       , [ ffoo xx nil
+         , ffoo xx (yy -:- xxs)
+         ]
+       , [ ffoo zero xxs
+         , ffoo xx xxs
+         ]
+       , [ ffoo zero nil
+         , ffoo zero (xx -:- xxs)
+         , ffoo xx nil
+         , ffoo xx (yy -:- xxs)
+         ]
+       , [ ffoo one xxs
+         , ffoo xx xxs
+         ]
+       , [ ffoo one nil
+         , ffoo one (xx -:- xxs)
+         , ffoo xx nil
+         , ffoo xx (yy -:- xxs)
+         ]
+       , [ ffoo zero xxs
+         , ffoo one xxs
+         , ffoo xx xxs
+         ]
+       , [ ffoo zero nil
+         , ffoo zero (xx -:- xxs)
+         , ffoo one nil
+         , ffoo one (xx -:- xxs)
+         , ffoo xx nil
+         , ffoo xx (yy -:- xxs)
+         ]
+       ]
+
   , conjurePats [] "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo xxs ccs
            ]
