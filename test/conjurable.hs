@@ -194,6 +194,41 @@ tests n  =
          ]
        ]
 
+  , concat (conjurePats [zero, one] "foo" (undefined :: [Int] -> Int -> Int))
+    == [ [ ffoo xxs xx
+         ]
+       , [ ffoo xxs zero
+         , ffoo xxs xx
+         ]
+       , [ ffoo nil xx
+         , ffoo (xx -:- xxs) yy
+         ]
+       , [ ffoo xxs one
+         , ffoo xxs xx
+         ]
+       , [ ffoo nil zero
+         , ffoo nil xx
+         , ffoo (xx -:- xxs) zero
+         , ffoo (xx -:- xxs) yy
+         ]
+       , [ ffoo xxs zero
+         , ffoo xxs one
+         , ffoo xxs xx
+         ]
+       , [ ffoo nil one
+         , ffoo nil xx
+         , ffoo (xx -:- xxs) one
+         , ffoo (xx -:- xxs) yy
+         ]
+       , [ ffoo nil zero
+         , ffoo nil one
+         , ffoo nil xx
+         , ffoo (xx -:- xxs) zero
+         , ffoo (xx -:- xxs) one
+         , ffoo (xx -:- xxs) yy
+         ]
+       ]
+
   , conjurePats [] "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo xxs ccs
            ]
@@ -265,9 +300,11 @@ ffs e  =  ffE :$ e
   ffE  =  var "f" (undefined :: [Int] -> Int)
 
 ffoo :: Expr -> Expr -> Expr
-ffoo ex ey  =  fromMaybe err $ ($$ ey) $ headOr err $ mapMaybe ($$ ex)
-  [ var "foo" (undefined :: [Int] -> [Char] -> Int)
-  ]
+ffoo ex ey  =  headOr err . mapMaybe ($$ ey) . mapMaybe ($$ ex)
+            $  [ var "foo" (undefined :: [Int] -> [Char] -> Int)
+               , var "foo" (undefined :: Int -> [Int] -> Int)
+               , var "foo" (undefined :: [Int] -> Int -> Int)
+               ]
   where
   err  =  error $ "ffoo: cannot apply `foo :: * -> * -> *` to `"
                ++ show ex ++ "' and `" ++ show ey ++ "'.  Unhandled types?"
