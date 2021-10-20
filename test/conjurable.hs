@@ -265,9 +265,13 @@ ffs e  =  ffE :$ e
   ffE  =  var "f" (undefined :: [Int] -> Int)
 
 ffoo :: Expr -> Expr -> Expr
-ffoo e1 e2  =  fooE :$ e1 :$ e2
+ffoo ex ey  =  fromMaybe err $ ($$ ey) $ headOr err $ mapMaybe ($$ ex)
+  [ var "foo" (undefined :: [Int] -> [Char] -> Int)
+  ]
   where
-  fooE  =  var "foo" (undefined :: [Int] -> [Char] -> Int)
+  err  =  error $ "ffoo: cannot apply `foo :: * -> * -> *` to `"
+               ++ show ex ++ "' and `" ++ show ey ++ "'.  Unhandled types?"
+
 
 -- Equality but obtained through conjurable
 (<==>) :: Conjurable a => a -> a -> Bool
