@@ -152,6 +152,20 @@ wallisNext :: Ratio Integer -> Ratio Integer
 -- tested 1015 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
+wallisNext :: Ratio Integer -> Ratio Integer
+-- testing 6 combinations of argument values
+-- pruning with 15/26 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 4 candidates of size 3
+-- looking through 16 candidates of size 4
+-- looking through 3 candidates of size 5
+-- looking through 103 candidates of size 6
+-- looking through 5 candidates of size 7
+-- looking through 801 candidates of size 8
+-- tested 832 candidates
+wallisNext (x % y)  =  (y + 1) % (x + 1)
+
 gps10 :: Int -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 3/4 rules

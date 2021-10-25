@@ -321,6 +321,15 @@ gps10c  =  do
     , prif (undefined :: Rational)
     ]
 
+  -- simplified background
+  conjure "wallisNext" wallisNextP
+    [ pr (0 :: Integer)
+    , pr (1 :: Integer)
+    , prim "+" ((+) :: Integer -> Integer -> Integer)
+    , prim "*" ((*) :: Integer -> Integer -> Integer)
+    , prim "%" ((%) :: Integer -> Integer -> Rational)
+    ]
+
   conjure "gps10" gps10p
     [ pr (2 :: Integer)
     , pr (3 :: Integer)
