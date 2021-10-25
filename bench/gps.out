@@ -479,6 +479,17 @@ gps27 :: Int -> Int -> Int -> Int
 -- tested 1579 candidates
 gps27 x y z  =  if x < y then (if y < z then y else z) else x
 
+gps27b :: Int -> Int -> Int -> Int
+-- testing 3 combinations of argument values
+-- pruning with 20/30 rules
+-- looking through 3 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 36 candidates of size 5
+-- tested 16 candidates
+gps27b x y z  =  min (max x y) z
+
 gps28 :: Int -> Int -> Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- pruning with 6/10 rules

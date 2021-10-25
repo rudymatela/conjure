@@ -829,11 +829,17 @@ gps27g x y z
 -- Conjure found a smaller implementation!
 
 gps27c :: IO ()
-gps27c  =  conjure "gps27" gps27p
-  [ prim "<" ((<) :: Int -> Int -> Bool)
-  , prim "&&" (&&)
-  , prif (undefined :: Int)
-  ]
+gps27c  =  do
+  conjure "gps27" gps27p
+    [ prim "<" ((<) :: Int -> Int -> Bool)
+    , prim "&&" (&&)
+    , prif (undefined :: Int)
+    ]
+
+  conjure "gps27b" gps27p
+    [ prim "min" (min :: Int -> Int -> Int)
+    , prim "max" (max :: Int -> Int -> Int)
+    ]
 
 
 -- GPS Benchmark #28 -- Smallest --
