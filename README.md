@@ -293,7 +293,22 @@ With this, there is no way for Conjure to miss argument-result bindings.
 Related work
 ------------
 
-__Within Haskell.__
+__Conjure's dependencies__.
+Internally, Conjure uses [LeanCheck], [Speculate] and [Express].
+[LeanCheck] does testing similarly to [QuickCheck], [SmallCheck] or [Feat].
+[Speculate] discovers equations similarly to [QuickSpec].
+[Express] encodes expressions involving [Dynamic] types.
+
+[Speculate]:  https://github.com/rudymatela/speculate
+[Express]:    https://github.com/rudymatela/express
+[QuickCheck]: https://hackage.haskell.org/package/QuickCheck
+[smallcheck]: https://hackage.haskell.org/package/smallcheck
+[Feat]:       https://hackage.haskell.org/package/testing-feat
+[QuickSpec]:  https://hackage.haskell.org/package/quickspec
+[Dynamic]:    https://hackage.haskell.org/package/base/docs/Data-Dynamic.html
+
+
+__Program synthesis within Haskell.__
 
 [MagicHaskeller]: https://hackage.haskell.org/package/MagicHaskeller
 [Igor II]: https://cogsys.uni-bamberg.de/projects/effalip
@@ -317,7 +332,7 @@ In addition to the type, Hoogle+ allows
 users to provide tests that the function should pass.
 
 
-__Beyond Haskell.__
+__Program synthesis beyond Haskell.__
 
 [PushGP]: https://github.com/lspector/Clojush
 [G3P]: https://github.com/t-h-e/HeuristicLab.CFGGP
@@ -331,24 +346,6 @@ instead of just about half a dozen.
 [Barliman]:       https://github.com/webyrd/Barliman
 
 [Barliman] (2016) for Lisp is another tool that does program synthesis.
-
-There are hundreds of others,
-I'll add the most closely related here when I have the time.
-
-
-__Conjure's dependencies__.
-Internally, Conjure uses [LeanCheck], [Speculate] and [Express].
-[LeanCheck] does testing similarly to [QuickCheck], [SmallCheck] or [Feat].
-[Speculate] discovers equations similarly to [QuickSpec].
-[Express] encodes expressions involving [Dynamic] types.
-
-[Speculate]:  https://github.com/rudymatela/speculate
-[Express]:    https://github.com/rudymatela/express
-[QuickCheck]: https://hackage.haskell.org/package/QuickCheck
-[smallcheck]: https://hackage.haskell.org/package/smallcheck
-[Feat]:       https://hackage.haskell.org/package/testing-feat
-[QuickSpec]:  https://hackage.haskell.org/package/quickspec
-[Dynamic]:    https://hackage.haskell.org/package/base/docs/Data-Dynamic.html
 
 
 Further reading
