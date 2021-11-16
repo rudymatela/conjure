@@ -293,15 +293,62 @@ With this, there is no way for Conjure to miss argument-result bindings.
 Related work
 ------------
 
+__Within Haskell.__
+
+[MagicHaskeller]: https://hackage.haskell.org/package/MagicHaskeller
+[Igor II]: https://cogsys.uni-bamberg.de/projects/effalip
+
 [MagicHaskeller] (2007) is another tool
 that is able to generate Haskell code automatically.
 It supports recursion through
 catamorphisms, paramorphisms and the [`fix`] function.
+[Igor II] (2010) is able to synthesize Haskell
+programs as well.
 
-[Barliman] for Lisp is another tool that does program synthesis.
+[Hoogle]: https://hoogle.haskell.org/
+[Hoogle+]: https://hoogleplus.goto.ucsd.edu/
+
+[Hoogle] (2004) is a search engine for Haskell functions.
+It is not able to synthesize expressions
+but it can find functions that match a type.
+[Hoogle+] (2020) is similar to Hoogle
+but is able to search for small expressions.
+In addition to the type, Hoogle+ allows
+users to provide tests that the function should pass.
+
+
+__Beyond Haskell.__
+
+[PushGP]: https://github.com/lspector/Clojush
+[G3P]: https://github.com/t-h-e/HeuristicLab.CFGGP
+
+[PushGP] (2002) and [G3P] (2017) are genetic programming systems 
+that are able to synthesize programs in Push and Python respectively.
+Differently from Conjure or MagicHaskeller,
+they require around a hundred tests for traning
+instead of just about half a dozen.
+
+[Barliman]:       https://github.com/webyrd/Barliman
+
+[Barliman] (2016) for Lisp is another tool that does program synthesis.
 
 There are hundreds of others,
 I'll add the most closely related here when I have the time.
+
+
+__Conjure's dependencies__.
+Internally, Conjure uses [LeanCheck], [Speculate] and [Express].
+[LeanCheck] does testing similarly to [QuickCheck], [SmallCheck] or [Feat].
+[Speculate] discovers equations similarly to [QuickSpec].
+[Express] encodes expressions involving [Dynamic] types.
+
+[Speculate]:  https://github.com/rudymatela/speculate
+[Express]:    https://github.com/rudymatela/express
+[QuickCheck]: https://hackage.haskell.org/package/QuickCheck
+[smallcheck]: https://hackage.haskell.org/package/smallcheck
+[Feat]:       https://hackage.haskell.org/package/testing-feat
+[QuickSpec]:  https://hackage.haskell.org/package/quickspec
+[Dynamic]:    https://hackage.haskell.org/package/base/docs/Data-Dynamic.html
 
 
 Further reading
@@ -343,8 +390,6 @@ distribued under the 3-clause BSD license.
 [LeanCheck]:      https://hackage.haskell.org/package/leancheck
 [express]:        https://hackage.haskell.org/package/express
 [speculate]:      https://hackage.haskell.org/package/speculate
-[MagicHaskeller]: https://hackage.haskell.org/package/MagicHaskeller
-[Barliman]:       https://github.com/webyrd/Barliman
 
 [avoid using `cabal install`]:         https://github.com/haskell/cabal/issues/7373
 [latest Conjure version from Hackage]: https://hackage.haskell.org/package/code-conjure
