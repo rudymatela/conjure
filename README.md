@@ -17,17 +17,27 @@ Installing
 To install the [latest Conjure version from Hackage], just run:
 
 	$ cabal update
-	$ cabal v1-install code-conjure
-
-If you are using Cabal v3.0 or later,
-[avoid using `cabal install`] for the time being
-and use `v1-install` instead.
+	$ cabal install code-conjure
 
 Prerequisites are [express], [leancheck] and [speculate].
 They should be automatically resolved and installed by [Cabal].
 
 NOTE: the name of the Hackage package is __[`code-conjure`]__
 -- not to be confused with [Conjure the BitTorrent client].
+
+Starting from Cabal v3.0, you need to pass `--lib` as an argument to
+`cabal install` to install packages globally on the `default` user environment:
+
+	$ cabal install code-conjure --lib
+
+If you already have Conjure installed
+[Cabal may refuse to update](https://github.com/haskell/cabal/issues/7373)
+to the latest version.
+To update, you need to reset your user's cabal installation with:
+
+	rm -rf ~/.cabal/{bin,lib,logs,share,store} ~/.ghc/*/
+
+WARNING: the above command will erase all user-local packages.
 
 
 Synthesizing functions
