@@ -1,5 +1,5 @@
 GHCIMPORTDIRS = src:test
-GHCFLAGS = -O2 \
+GHCFLAGS = -O2 -v0 \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo -dynamic)
 HADDOCKFLAGS = \
   -i $(shell find ~/.cabal -name express.haddock | tail -1) \
