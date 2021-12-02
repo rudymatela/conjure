@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* derive `conjureCases` in `deriveConjurable`;
+* test `conjureCases` from `deriveConjurable`;
 
 * consider not breaking in some cases (increased crossproduct of patterns)
 

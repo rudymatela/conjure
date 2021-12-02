@@ -87,6 +87,13 @@ tests n  =
   , conjureSize (Nil :: List Int) == 1
   , conjureSize (10 :- (20 :- Nil) :: List Int) == 33
 
+  , conjureCases (undefined :: Tree Int) == [ value "Node" (Node :: Tree Int -> Int -> Tree Int -> Tree Int)
+                                                :$ hole (undefined :: Tree Int)
+                                                :$ hole (undefined :: Int)
+                                                :$ hole (undefined :: Tree Int)
+                                            , val (Null :: Tree Int)
+                                            ]
+
   , conjureHoles (undefined :: Choice) == [ hole (undefined :: Choice)
                                           , hole (undefined :: Bool)
                                           ]

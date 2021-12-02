@@ -126,11 +126,32 @@ reallyDeriveConjurable t  =  do
                    conjureEquality  =  reifyEquality
                    conjureTiers     =  reifyTiers |]
   -- withTheReturnTypeOfs |++| (cxt |=>| inst)
-  cxt |=>| inst `addFun` deriveSize t `mergeI` deriveSubTypes t
+  cxt |=>| inst `addFun` deriveSize t `mergeI` deriveSubTypes t `mergeI` deriveCases t
 -- TODO: derive conjureCases, e.g.:
 -- conjureCases mx  =  [ value "Nothing" (Nothing -: mx)
 --                     , value "Just" (Just ->: mx) :$ hole x
 --                     ]
+
+deriveCases :: Name -> DecsQ
+deriveCases t  =  do
+  n <- newName "x"
+  (nt,vs) <- normalizeType t
+  cs <- typeConstructorsArgNames t
+  let lets = [letin n c ns | (c,ns) <- cs]
+  let rhs = foldr (\e1 e2 -> [| $e1 : $e2 |]) [|[]|] lets
+  [d| instance Conjurable $(return nt) where
+        conjureCases $(varP n) = $rhs |]
+  where
+  letin :: Name -> Name -> [Name] -> ExpQ
+  letin x c ns = do
+    und <- VarE <$> lookupValN "undefined"
+    let lhs = conP c (map varP ns)
+    let rhs = return $ foldl AppE (ConE c) [und | _ <- ns]
+    let retTypeOf = varE $ mkName $ "-" ++ replicate (length ns) '>' ++ ":"
+    let ins = foldl (\e1 e2 -> [| $e1 :$ $e2 |])
+                [| value $(stringE $ nameBase c) ($retTypeOf $(conE c) $(varE x)) |]
+                [ [| hole $(varE n) |] | n <- ns ]
+    [| let $lhs = $rhs `asTypeOf` $(varE x) in $ins |]
 
 deriveSubTypes :: Name -> DecsQ
 deriveSubTypes t  =  do
