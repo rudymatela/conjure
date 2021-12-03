@@ -103,9 +103,18 @@ tests n  =
        , val (Nil :: List Int)
        ]
 
-  , conjureCases (undefined :: Tree Int)
+  , conjureCases (bush int)
+    == [ value ":-:" ((:-:) ->>: bush int) :$ hole (bush int) :$ hole (bush int)
+       , value "Leaf" (Leaf ->: bush int) :$ hole int
+       ]
+
+  , conjureCases (tree int)
     == [ value "Node" (Node ->>>: tree int) :$ hole (tree int) :$ hole int :$ hole (tree int)
        , val (Null :: Tree Int)
+       ]
+
+  , conjureCases nested
+    == [ value "Nested" Nested :$ hole n0 :$ hole (n1 int) :$ hole (n2 int int)
        ]
 
   , conjureHoles (undefined :: Choice) == [ hole (undefined :: Choice)
@@ -167,5 +176,20 @@ peano  =  undefined
 lst :: a -> List a
 lst _  =  undefined
 
+bush :: a -> Bush a
+bush _  =  undefined
+
 tree :: a -> Tree a
 tree _  =  undefined
+
+nested :: Nested
+nested  =  undefined
+
+n0 :: N0
+n0  =  undefined
+
+n1 :: a -> N1 a
+n1 _  =  undefined
+
+n2 :: a -> b -> N2 a b
+n2 _ _  =  undefined
