@@ -87,27 +87,24 @@ tests n  =
   , conjureSize (Nil :: List Int) == 1
   , conjureSize (10 :- (20 :- Nil) :: List Int) == 33
 
-  , conjureCases (undefined :: Choice)
+  , conjureCases choice
     == [ val Ae
        , val Bee
        , val Cee
        ]
 
-  , conjureCases (undefined :: Peano)
+  , conjureCases peano
     == [ val Zero
        , value "Succ" Succ :$ hole (undefined :: Peano)
        ]
 
-  , conjureCases (undefined :: List Int)
-    == [ value ":-" ((:-) :: Int -> List Int -> List Int) :$ hole (undefined :: Int) :$ hole (undefined :: List Int)
+  , conjureCases (lst int)
+    == [ value ":-" ((:-) ->>: lst int) :$ hole int :$ hole (lst int)
        , val (Nil :: List Int)
        ]
 
   , conjureCases (undefined :: Tree Int)
-    == [ value "Node" (Node :: Tree Int -> Int -> Tree Int -> Tree Int)
-                         :$ hole (undefined :: Tree Int)
-                         :$ hole (undefined :: Int)
-                         :$ hole (undefined :: Tree Int)
+    == [ value "Node" (Node ->>>: tree int) :$ hole (tree int) :$ hole int :$ hole (tree int)
        , val (Null :: Tree Int)
        ]
 
@@ -158,3 +155,17 @@ conjurableOK x  =  and
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
   tiers'  =  mapT evl (fromJust $ conjureTiers x) -: [[x]]
   expr'  =  (conjureExpress x . val) -:> x
+
+
+-- proxies --
+choice :: Choice
+choice  =  undefined
+
+peano :: Peano
+peano  =  undefined
+
+lst :: a -> List a
+lst _  =  undefined
+
+tree :: a -> Tree a
+tree _  =  undefined
