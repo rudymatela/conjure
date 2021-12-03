@@ -87,12 +87,29 @@ tests n  =
   , conjureSize (Nil :: List Int) == 1
   , conjureSize (10 :- (20 :- Nil) :: List Int) == 33
 
-  , conjureCases (undefined :: Tree Int) == [ value "Node" (Node :: Tree Int -> Int -> Tree Int -> Tree Int)
-                                                :$ hole (undefined :: Tree Int)
-                                                :$ hole (undefined :: Int)
-                                                :$ hole (undefined :: Tree Int)
-                                            , val (Null :: Tree Int)
-                                            ]
+  , conjureCases (undefined :: Choice)
+    == [ val Ae
+       , val Bee
+       , val Cee
+       ]
+
+  , conjureCases (undefined :: Peano)
+    == [ val Zero
+       , value "Succ" Succ :$ hole (undefined :: Peano)
+       ]
+
+  , conjureCases (undefined :: List Int)
+    == [ value ":-" ((:-) :: Int -> List Int -> List Int) :$ hole (undefined :: Int) :$ hole (undefined :: List Int)
+       , val (Nil :: List Int)
+       ]
+
+  , conjureCases (undefined :: Tree Int)
+    == [ value "Node" (Node :: Tree Int -> Int -> Tree Int -> Tree Int)
+                         :$ hole (undefined :: Tree Int)
+                         :$ hole (undefined :: Int)
+                         :$ hole (undefined :: Tree Int)
+       , val (Null :: Tree Int)
+       ]
 
   , conjureHoles (undefined :: Choice) == [ hole (undefined :: Choice)
                                           , hole (undefined :: Bool)
