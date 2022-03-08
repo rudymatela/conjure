@@ -2,6 +2,16 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* show number of tested candidates
+* complete `Conjurable` derivation functions
+* reference related work on README
+* add switch to unique-modulo-testing candidates (slow)
+  to allow computing the near upper/lower limit on pruning
+
+
 v0.5.0
 ------
 
