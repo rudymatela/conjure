@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+0.5.2
+-----
 
 * show number of tested candidates
 * complete `Conjurable` derivation functions
