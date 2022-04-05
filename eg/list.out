@@ -2,11 +2,11 @@ length :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 4/8 rules
 -- looking through 2 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 11 candidates of size 4
--- looking through 10 candidates of size 5
--- tested 23 candidates
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 5 candidates of size 5
+-- tested 13 candidates
 length []  =  0
 length (x:xs)  =  length xs + 1
 
@@ -40,11 +40,11 @@ length :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 6/10 rules
 -- looking through 2 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 13 candidates of size 4
--- looking through 16 candidates of size 5
--- tested 25 candidates
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 8 candidates of size 5
+-- tested 15 candidates
 length []  =  0
 length (x:xs)  =  length xs + 1
 

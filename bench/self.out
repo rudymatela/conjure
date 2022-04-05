@@ -3,7 +3,7 @@
 -- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
 -- looking through 18 candidates of size 2
--- looking through 120 candidates of size 3
+-- looking through 85 candidates of size 3
 -- tested 24 candidates
 x ? y  =  x + y
 
@@ -12,7 +12,7 @@ x ? y  =  x + y
 -- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
 -- looking through 18 candidates of size 2
--- looking through 120 candidates of size 3
+-- looking through 85 candidates of size 3
 -- tested 40 candidates
 x ? y  =  x * y
 
@@ -20,17 +20,17 @@ i :: Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 22 candidates of size 3
--- tested 10 candidates
+-- looking through 2 candidates of size 2
+-- looking through 21 candidates of size 3
+-- tested 8 candidates
 i x  =  x + 1
 
 d :: Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 22 candidates of size 3
--- tested 29 candidates
+-- looking through 3 candidates of size 2
+-- looking through 20 candidates of size 3
+-- tested 26 candidates
 cannot conjure
 

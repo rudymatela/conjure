@@ -3,12 +3,12 @@ factorial :: Int -> Int
 -- testing 6 combinations of argument values
 -- pruning with 67/100 rules
 -- looking through 3 candidates of size 1
--- looking through 7 candidates of size 2
--- looking through 25 candidates of size 3
--- looking through 82 candidates of size 4
--- looking through 263 candidates of size 5
--- looking through 960 candidates of size 6
--- tested 406 candidates
+-- looking through 5 candidates of size 2
+-- looking through 14 candidates of size 3
+-- looking through 39 candidates of size 4
+-- looking through 128 candidates of size 5
+-- looking through 497 candidates of size 6
+-- tested 200 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (dec x)
 

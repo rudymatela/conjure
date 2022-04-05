@@ -395,6 +395,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
 
+
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
 candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
@@ -413,11 +414,14 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh keep $ vs ++ es
 
-
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT (allEqual . map snd) . products $ map p2eess pats
     where
     p2eess :: Expr -> [[Bndn]]
+    -- the following guarded line is an optional optimization
+    -- if the function is defined for the given pattern,
+    -- simply use its return value as the only possible result
+    p2eess pat | isGroundPat f pat  =  [[(pat, toValPat f pat)]]
     p2eess pat  =  mapT (pat,)
                 .  appsWith pat
                 .  tail
@@ -547,6 +551,42 @@ descends isDecOf e' e  =  any d1 ss
   isNotConstruction (p,e) | isVar p    =  e == p || e `isDecOf` p
                           | otherwise  =  size e <= size p -- TODO: allow filter and id somehow
 -- TODO: improve this function with better isNotConstruction
+
+
+-- | Checks if the given pattern is a ground pattern.
+--
+-- A pattern is a ground pattern when its arguments are fully defined
+-- and evaluating the function returns a defined value.
+--
+-- This is to be used on values returned by conjurePats.
+--
+-- For now, this is only used on 'candidateDefnsC'.
+isGroundPat :: Conjurable f => f -> Expr -> Bool
+isGroundPat f pat  =  errorToFalse . eval False $ gpat -==- gpat
+  where
+  gpat  =  toGroundPat f pat
+  (-==-)  =  conjureMkEquation f
+
+
+-- | Given a complete "pattern", i.e. application encoded as expr,
+--   converts it from using a "variable" function,
+--   to an actual "value" function.
+--
+-- This function is used on 'isGroundPat' and 'toValPat'
+toGroundPat :: Conjurable f => f -> Expr -> Expr
+toGroundPat f pat  =  foldApp (value "f" f : tail (unfoldApp pat))
+
+-- | Evaluates a pattern to its final value.
+--
+-- Only to be used when the function is defined for the given set of arguments.
+--
+-- For now, this is only used on 'candidateDefnsC'.
+toValPat :: Conjurable f => f -> Expr -> Expr
+toValPat f  =  conjureExpress f . toGroundPat f
+-- NOTE: the use of conjureExpress above is a hack.
+--       Here, one could have used a conjureVal function,
+--       that lifts 'val' over 'Expr's.
+--       However this function does not exist.
 
 
 -- hardcoded filtering rules

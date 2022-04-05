@@ -107,22 +107,23 @@ gps5 :: Int -> [Int]
 -- looking through 0 candidates of size 2
 -- looking through 5 candidates of size 3
 -- looking through 9 candidates of size 4
--- looking through 44 candidates of size 5
--- looking through 91 candidates of size 6
--- looking through 441 candidates of size 7
--- looking through 946 candidates of size 8
--- looking through 4450 candidates of size 9
--- looking through 9710 candidates of size 10
--- looking through 44767 candidates of size 11
--- tested 32953 candidates
+-- looking through 45 candidates of size 5
+-- looking through 92 candidates of size 6
+-- looking through 438 candidates of size 7
+-- looking through 944 candidates of size 8
+-- looking through 4413 candidates of size 9
+-- looking through 9649 candidates of size 10
+-- looking through 44336 candidates of size 11
+-- tested 32852 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps6 :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- tested 0 candidates
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- tested 2 candidates
 cannot conjure
 
 gps7 :: Integer -> Integer -> Ratio Integer

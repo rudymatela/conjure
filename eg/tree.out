@@ -30,14 +30,14 @@ size :: Tree -> Int
 -- testing 360 combinations of argument values
 -- pruning with 4/8 rules
 -- looking through 2 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 19 candidates of size 4
--- looking through 35 candidates of size 5
--- looking through 66 candidates of size 6
--- looking through 163 candidates of size 7
--- looking through 311 candidates of size 8
--- tested 428 candidates
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 17 candidates of size 5
+-- looking through 28 candidates of size 6
+-- looking through 73 candidates of size 7
+-- looking through 136 candidates of size 8
+-- tested 219 candidates
 size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
@@ -45,14 +45,14 @@ height :: Tree -> Int
 -- testing 360 combinations of argument values
 -- pruning with 49/65 rules
 -- looking through 3 candidates of size 1
--- looking through 9 candidates of size 2
--- looking through 8 candidates of size 3
--- looking through 59 candidates of size 4
--- looking through 114 candidates of size 5
--- looking through 472 candidates of size 6
--- looking through 1440 candidates of size 7
--- looking through 5781 candidates of size 8
--- tested 4171 candidates
+-- looking through 3 candidates of size 2
+-- looking through 4 candidates of size 3
+-- looking through 17 candidates of size 4
+-- looking through 38 candidates of size 5
+-- looking through 144 candidates of size 6
+-- looking through 464 candidates of size 7
+-- looking through 1801 candidates of size 8
+-- tested 819 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  max (height t1) (height t2) + 1
 

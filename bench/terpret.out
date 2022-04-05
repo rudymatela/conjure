@@ -86,16 +86,16 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 9 candidates of size 3
--- looking through 18 candidates of size 4
--- looking through 45 candidates of size 5
--- looking through 108 candidates of size 6
--- looking through 300 candidates of size 7
--- looking through 816 candidates of size 8
--- looking through 2148 candidates of size 9
--- looking through 5520 candidates of size 10
--- looking through 13656 candidates of size 11
--- tested 16290 candidates
-fadder p q r  =  if p == q then (p,r) else (r,not r)
+-- looking through 19 candidates of size 4
+-- tested 28 candidates
+fadder False False False  =  (False,False)
+fadder False False True  =  (False,True)
+fadder False True False  =  (False,True)
+fadder False True True  =  (True,False)
+fadder True False False  =  (False,True)
+fadder True False True  =  (True,False)
+fadder True True False  =  (True,False)
+fadder True True True  =  (True,True)
 
 TerpreT benchmark #6: 2-bit adder
 

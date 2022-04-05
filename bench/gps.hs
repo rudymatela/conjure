@@ -736,7 +736,8 @@ gps22c  =  do
 
 -- GPS Benchmark #23 -- Word Stats --
 gps23p :: String -> ([(Int,Int)], Int, Double)
-gps23p ""  =  ([], 0, 1.0/0.0)
+gps23p  =  undefined
+-- gps23p ""  =  ([], 0, 1.0/0.0)
 
 gps23c :: IO ()
 gps23c  =  do

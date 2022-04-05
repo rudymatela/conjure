@@ -51,18 +51,18 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 7 candidates of size 4
--- looking through 18 candidates of size 5
--- looking through 35 candidates of size 6
--- looking through 89 candidates of size 7
--- looking through 190 candidates of size 8
--- looking through 440 candidates of size 9
--- looking through 926 candidates of size 10
--- looking through 2113 candidates of size 11
--- looking through 4520 candidates of size 12
--- looking through 10066 candidates of size 13
--- looking through 21492 candidates of size 14
--- tested 19274 candidates
+-- looking through 5 candidates of size 4
+-- looking through 15 candidates of size 5
+-- looking through 25 candidates of size 6
+-- looking through 60 candidates of size 7
+-- looking through 108 candidates of size 8
+-- looking through 256 candidates of size 9
+-- looking through 458 candidates of size 10
+-- looking through 1066 candidates of size 11
+-- looking through 1948 candidates of size 12
+-- looking through 4516 candidates of size 13
+-- looking through 8304 candidates of size 14
+-- tested 8847 candidates
 positionsFrom x y []  =  []
 positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
 

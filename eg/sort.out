@@ -3,10 +3,10 @@ sort :: [Int] -> [Int]
 -- pruning with 6/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 16 candidates of size 4
--- looking through 36 candidates of size 5
--- tested 31 candidates
+-- looking through 5 candidates of size 3
+-- looking through 12 candidates of size 4
+-- looking through 23 candidates of size 5
+-- tested 24 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 

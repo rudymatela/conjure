@@ -17,14 +17,14 @@ set :: [Int] -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 46/57 rules
 -- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 19 candidates of size 4
--- looking through 35 candidates of size 5
--- looking through 83 candidates of size 6
--- looking through 245 candidates of size 7
--- looking through 617 candidates of size 8
--- tested 466 candidates
+-- looking through 2 candidates of size 2
+-- looking through 5 candidates of size 3
+-- looking through 11 candidates of size 4
+-- looking through 20 candidates of size 5
+-- looking through 47 candidates of size 6
+-- looking through 136 candidates of size 7
+-- looking through 348 candidates of size 8
+-- tested 256 candidates
 set []  =  True
 set (x:xs)  =  not (elem x xs) && set xs
 

@@ -4,12 +4,12 @@ replicate :: Int -> Char -> [Char]
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 2 candidates of size 4
+-- looking through 1 candidates of size 4
 -- looking through 3 candidates of size 5
--- looking through 7 candidates of size 6
+-- looking through 5 candidates of size 6
 -- looking through 5 candidates of size 7
--- looking through 16 candidates of size 8
--- tested 20 candidates
+-- looking through 8 candidates of size 8
+-- tested 17 candidates
 replicate 0 c  =  ""
 replicate x c  =  c:replicate (x - 1) c
 
