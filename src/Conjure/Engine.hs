@@ -163,6 +163,7 @@ data Args = Args
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
+  , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
   }
@@ -189,6 +190,7 @@ args = Args
   , maxDeconstructionSize  =   4
   , requireDescent         =  True
   , usePatterns            =  True
+  , copyBindings           =  True
   , showTheory             =  False
   , uniqueCandidates       =  False
   }
@@ -421,7 +423,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
     -- the following guarded line is an optional optimization
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
-    p2eess pat | isGroundPat f pat  =  [[(pat, toValPat f pat)]]
+    p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
     p2eess pat  =  mapT (pat,)
                 .  appsWith pat
                 .  tail
