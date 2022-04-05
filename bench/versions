@@ -7,8 +7,12 @@
 get-ghc-v() {
     ghc --version | sed -e "s/.* version/GHC/"
 }
+ghc-pkg-list() {
+	ghc-pkg list "$@"
+	ghc-pkg list --package-db ~/.cabal/store/ghc-$(ghc --version | sed -e "s/.* version //")/package.db "$@"
+}
 get-pkg-v() {
-    ghc-pkg list $1 2>/dev/null |
+    ghc-pkg-list $1 2>/dev/null |
     grep " $1-" |
     sed -e "s/^ *//" |
     tail -1
