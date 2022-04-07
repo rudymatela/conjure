@@ -63,7 +63,7 @@ module Conjure
   , conjureFromSpecWith
 
 -- * When using custom types
-  , Conjurable (conjureExpress, conjureEquality, conjureTiers, conjureCases, conjureSubTypes)
+  , Conjurable (conjureExpress, conjureEquality, conjureTiers, conjureCases, conjureSubTypes, conjureSize)
   , reifyExpress
   , reifyEquality
   , reifyTiers
