@@ -163,28 +163,27 @@ main = do
     ]
 
   -- reaching before through some "cheating"
-  conjureWithMaxSize 14 "before" before
+  conjureWithMaxSize 16 "before" before
     [ pr Leaf
     , prim "Node" Node
-    , prim "compareCase" (compareCase :: Int -> Int -> Tree -> Tree -> Tree -> Tree)
+    , prim "`compare`" (compare :: Int -> Int -> Ordering)
+    , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
 
-
-compareCase :: Ord a => a -> a -> b -> b -> b -> b
-compareCase x y lt eq gt  =  case x `compare` y of
-                             LT -> lt
-                             EQ -> eq
-                             GT -> gt
+caseOrdering :: Ordering -> a -> a -> a -> a
+caseOrdering o lt eq gt  =  case o of
+                            LT -> lt
+                            EQ -> eq
+                            GT -> gt
 
 before :: Int -> Tree -> Tree
 before _ Leaf  =  Leaf
-before y (Node l x r)  =  if y < x then before y l -- 8
-                     else if y == x then l         -- 13
-                     else Node l x (before y r)    -- 19
-
-beforeCase :: Int -> Tree -> Tree
-beforeCase _ Leaf  =  Leaf
-beforeCase y (Node l x r)  =  compareCase y x (before y l) l (Node l x (before y r))
+before y (Node l x r)  =  case y `compare` x of
+                          LT -> before y l
+                          EQ -> l
+                          GT -> Node l x (before y r)
+-- single-line view:
+-- before y (Node l x r)  =  case y `compare` x of LT -> before y l; EQ -> l; GT -> Node l x (before y r)
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree
