@@ -63,14 +63,17 @@ mem :: Int -> Tree -> Bool
 mem _ Leaf  =  False
 mem y (Node l x r)  =  y == x || mem y l || mem y r
 
+-- member of binary search tree
+member :: Int -> Tree -> Bool
+member _ Leaf  =  False
+member y (Node l x r)  =  y == x || (if y < x then member y l else member y r)
+
 insert :: Int -> Tree -> Tree
 insert x Leaf  =  unit x
 insert x (Node l y r)  =  case compare x y of
   LT -> Node (insert x l) y r
   EQ -> Node l y r
   GT -> Node l y (insert x r)
-
--- TODO: mem alternative for binary search trees
 
 
 instance Listable Tree where
@@ -130,6 +133,14 @@ main = do
     [ pr False
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)
+    ]
+
+  conjureWithMaxSize 15 "member" member
+    [ pr False
+    , prim "||" (||)
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prim "<" ((<) :: Int -> Int -> Bool)
+    , prim "if" (\p q r -> if p then q else r :: Bool)
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 26)

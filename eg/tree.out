@@ -93,3 +93,25 @@ insert :: Int -> Tree -> Tree
 -- tested 14743 candidates
 cannot conjure
 
+member :: Int -> Tree -> Bool
+-- testing 360 combinations of argument values
+-- pruning with 20/30 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 60 candidates of size 8
+-- looking through 120 candidates of size 9
+-- looking through 0 candidates of size 10
+-- looking through 452 candidates of size 11
+-- looking through 424 candidates of size 12
+-- looking through 3840 candidates of size 13
+-- looking through 3840 candidates of size 14
+-- looking through 18272 candidates of size 15
+-- tested 18059 candidates
+member x Leaf  =  False
+member x (Node t1 y t2)  =  x == y || (if x < y then member x t1 else member x t2)
+
