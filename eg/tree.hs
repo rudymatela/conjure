@@ -106,7 +106,7 @@ main = do
     , prim "nil" nil
     ]
 
-  conjureWithMaxSize 13 "size" size
+  conjure "size" size
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
@@ -115,7 +115,7 @@ main = do
     , prim "right" right
     ]
 
-  conjureWithMaxSize 13 "height" height
+  conjure "height" height
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , pr (-1 :: Int)
@@ -142,19 +142,6 @@ main = do
     , prim ">" ((>) :: Int -> Int -> Bool)
     , prim "if" (\p t1 t2 -> if p then t1 else t2 :: Tree)
     ]
-
-
-sizeIf :: Tree -> Int
-sizeIf t  =  if nil t  -- 3
-             then 0    -- 4
-             else sizeIf (left t) + sizeIf (right t)
-             --      5     6   7  8   9      10  11
-
-heightIf :: Tree -> Int
-heightIf t  =  if nil t  -- 3
-               then -1   -- 4
-               else 1 + max (height (left t)) (height (right t))
-               --   5 6  7     8      9  10      11     12   13
 
 memIf :: Int -> Tree -> Bool
 memIf y t  =  if nil t     -- 3
