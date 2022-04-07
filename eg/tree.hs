@@ -170,6 +170,14 @@ main = do
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
 
+  -- reaching before through some "cheating"
+  conjureWithMaxSize 16 "beyond" beyond
+    [ pr Leaf
+    , prim "Node" Node
+    , prim "`compare`" (compare :: Int -> Int -> Ordering)
+    , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
+    ]
+
 caseOrdering :: Ordering -> a -> a -> a -> a
 caseOrdering o lt eq gt  =  case o of
                             LT -> lt
@@ -184,6 +192,13 @@ before y (Node l x r)  =  case y `compare` x of
                           GT -> Node l x (before y r)
 -- single-line view:
 -- before y (Node l x r)  =  case y `compare` x of LT -> before y l; EQ -> l; GT -> Node l x (before y r)
+
+beyond :: Int -> Tree -> Tree
+beyond _ Leaf  =  Leaf
+beyond y (Node l x r)  =  case x `compare` y of
+                          LT -> beyond y r
+                          EQ -> r
+                          GT -> Node (beyond y l) x r
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree
