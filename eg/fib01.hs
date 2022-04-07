@@ -2,6 +2,7 @@
 import Conjure
 
 fib01 :: Int -> Int -> Int -> Int
+-- fib01 x y 0  =  x  -- even with this, out of reach
 fib01 0 1 0  =  1
 fib01 0 1 1  =  1
 fib01 0 1 2  =  2
@@ -35,3 +36,11 @@ main  =  do
 -- expected function:
 -- fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
 --                 1  2 3  4      5      6     7  8 9 10  11 12
+
+  -- out of reach as well:
+  -- conjure "fib01" fib01
+  --   [ pr (0::Int)
+  --   , pr (1::Int)
+  --   , prim "+" ((+) :: Int -> Int -> Int)
+  --   , prim "-" ((-) :: Int -> Int -> Int)
+  --   ]
