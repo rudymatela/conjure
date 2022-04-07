@@ -126,7 +126,6 @@ main = do
     , prim "right" right
     ]
 
-  -- out of reach performance-wise
   conjure "mem" mem
     [ pr False
     , prim "||" (||)
@@ -142,12 +141,6 @@ main = do
     , prim ">" ((>) :: Int -> Int -> Bool)
     , prim "if" (\p t1 t2 -> if p then t1 else t2 :: Tree)
     ]
-
-memIf :: Int -> Tree -> Bool
-memIf y t  =  if nil t     -- 3
-              then False   -- 4
-              else y == valu t || memIf y (left t) || memIf y (right t)
-              --   5  6   7  8  9  10  11   12  13 14  15  16   17   18
 
 insertIf :: Int -> Tree -> Tree
 insertIf x t  =  if nil t                 -- 3
