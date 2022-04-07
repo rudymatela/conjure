@@ -47,5 +47,5 @@ main = do
     , prim "tail" (tail :: [A] -> [A])
     , prim "null" (null :: [A] -> Bool)
     , prim "==" ((==) :: A -> A -> Bool)
-    , prim "if" (\p x y -> if p then x else y :: Int)
+    , prif (undefined :: Int)
     ]

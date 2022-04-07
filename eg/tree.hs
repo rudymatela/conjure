@@ -99,13 +99,13 @@ main :: IO ()
 main = do
   conjure "leftmost" leftmost
     [ prim "undefined" (undefined :: Int)
-    , prim "if" (\p x y -> if p then x else y :: Int)
+    , prif (undefined :: Int)
     , prim "nil" nil
     ]
 
   conjure "rightmost" rightmost
     [ prim "undefined" (undefined :: Int)
-    , prim "if" (\p x y -> if p then x else y :: Int)
+    , prif (undefined :: Int)
     , prim "nil" nil
     ]
 
@@ -140,7 +140,7 @@ main = do
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
-    , prim "if" (\p q r -> if p then q else r :: Bool)
+    , prif (undefined :: Bool)
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 26)
@@ -150,7 +150,7 @@ main = do
     , prim "unit" unit
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
-    , prim "if" (\p t1 t2 -> if p then t1 else t2 :: Tree)
+    , prif (undefined :: Tree)
     ]
 
 -- same as insert, but using an if instead of a case:
