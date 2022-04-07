@@ -132,21 +132,21 @@ main = do
     , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
-  -- simply out of reach performance-wise (size 34)
+  -- simply out of reach performance-wise (reaching 16 but need size 26)
   conjureWithMaxSize 12 "insert" insert
     [ pr Leaf
     , prim "Node" Node
+    , prim "unit" unit
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
-    , prim ">" ((>) :: Int -> Int -> Bool)
     , prim "if" (\p t1 t2 -> if p then t1 else t2 :: Tree)
     ]
 
+-- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree
-insertIf x t  =  if nil t                 -- 3
-                 then unit x              -- 5
-                 else if x == valu t      -- 10
-                      then t              -- 11
-                      else if x < valu t  -- 16
-                           then Node (insert x (left t)) (valu t) (right t)  -- 25
-                           else Node (left t) (valu t) (insert x (right t))  -- 34
+insertIf x Leaf  =  unit x                                   -- 2
+insertIf x (Node l y r)  =  if x == y                        -- 6
+                            then Node l y r                  -- 10
+                            else if x < y                    -- 14
+                                 then Node (insert x l) y r  -- 20
+                                 else Node l y (insert x r)  -- 26
