@@ -153,6 +153,39 @@ main = do
     , prif (undefined :: Tree)
     ]
 
+  -- out of reach performance-wise (reaching 16 but need 19)
+  conjureWithMaxSize 12 "before" before
+    [ pr Leaf
+    , prim "Node" Node
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prim "<" ((<) :: Int -> Int -> Bool)
+    , prif (undefined :: Tree)
+    ]
+
+  -- reaching before through some "cheating"
+  conjureWithMaxSize 14 "before" before
+    [ pr Leaf
+    , prim "Node" Node
+    , prim "compareCase" (compareCase :: Int -> Int -> Tree -> Tree -> Tree -> Tree)
+    ]
+
+
+compareCase :: Ord a => a -> a -> b -> b -> b -> b
+compareCase x y lt eq gt  =  case x `compare` y of
+                             LT -> lt
+                             EQ -> eq
+                             GT -> gt
+
+before :: Int -> Tree -> Tree
+before _ Leaf  =  Leaf
+before y (Node l x r)  =  if y < x then before y l -- 8
+                     else if y == x then l         -- 13
+                     else Node l x (before y r)    -- 19
+
+beforeCase :: Int -> Tree -> Tree
+beforeCase _ Leaf  =  Leaf
+beforeCase y (Node l x r)  =  compareCase y x (before y l) l (Node l x (before y r))
+
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree
 insertIf x Leaf  =  unit x                                   -- 2

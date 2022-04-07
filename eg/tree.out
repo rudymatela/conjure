@@ -115,3 +115,42 @@ insert :: Int -> Tree -> Tree
 -- tested 14743 candidates
 cannot conjure
 
+before :: Int -> Tree -> Tree
+-- testing 360 combinations of argument values
+-- pruning with 5/6 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 18 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 112 candidates of size 7
+-- looking through 216 candidates of size 8
+-- looking through 216 candidates of size 9
+-- looking through 2096 candidates of size 10
+-- looking through 3384 candidates of size 11
+-- looking through 8064 candidates of size 12
+-- tested 14120 candidates
+cannot conjure
+
+before :: Int -> Tree -> Tree
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 18 candidates of size 5
+-- looking through 8 candidates of size 6
+-- looking through 196 candidates of size 7
+-- looking through 216 candidates of size 8
+-- looking through 800 candidates of size 9
+-- looking through 4616 candidates of size 10
+-- looking through 4632 candidates of size 11
+-- looking through 40848 candidates of size 12
+-- looking through 108880 candidates of size 13
+-- looking through 252352 candidates of size 14
+-- tested 185687 candidates
+before x Leaf  =  Leaf
+before x (Node t1 y t2)  =  compareCase y x (Node t1 y (before x t2)) t1 (before x t1)
+
