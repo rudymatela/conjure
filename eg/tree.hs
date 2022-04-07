@@ -88,6 +88,7 @@ instance Conjurable Tree where
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
   conjureSubTypes x  =  conjureType (undefined :: Int)
+  conjureSize     =  size
   conjureCases t  =  [ val (Leaf -: t)
                      , value "Node" (Node ->>>: t) :$ hole l :$ hole x :$ hole r
                      ]
