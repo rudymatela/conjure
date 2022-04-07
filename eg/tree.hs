@@ -170,13 +170,23 @@ main = do
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
 
-  -- reaching before through some "cheating"
+  -- reaching beyond through some "cheating"
   conjureWithMaxSize 16 "beyond" beyond
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
+
+  -- out of reach (reaching 7 but need 13)
+  conjureWithMaxSize 6 "union" union
+    [ pr Leaf
+    , prim "Node" Node
+    , prim "before" before
+    , prim "beyond" beyond
+    ]
+  -- maybe with invariant following test data there will be more pruning
+  -- properties?
 
 caseOrdering :: Ordering -> a -> a -> a -> a
 caseOrdering o lt eq gt  =  case o of
@@ -199,6 +209,10 @@ beyond y (Node l x r)  =  case x `compare` y of
                           LT -> beyond y r
                           EQ -> r
                           GT -> Node (beyond y l) x r
+
+union :: Tree -> Tree -> Tree
+union t Leaf  =  t
+union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree

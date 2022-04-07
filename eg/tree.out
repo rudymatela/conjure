@@ -177,3 +177,15 @@ beyond :: Int -> Tree -> Tree
 beyond x Leaf  =  Leaf
 beyond x (Node t1 y t2)  =  case (x `compare` y) (Node (beyond x t1) y t2) t2 (beyond x t2)
 
+union :: Tree -> Tree -> Tree
+-- testing 360 combinations of argument values
+-- pruning with 2/2 rules
+-- looking through 3 candidates of size 1
+-- looking through 12 candidates of size 2
+-- looking through 44 candidates of size 3
+-- looking through 84 candidates of size 4
+-- looking through 784 candidates of size 5
+-- looking through 1080 candidates of size 6
+-- tested 2007 candidates
+cannot conjure
+
