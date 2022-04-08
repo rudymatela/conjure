@@ -104,8 +104,6 @@ main = do
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "nil" nil
-    , prim "left" left
-    , prim "right" right
     ]
 
   conjure "height" height
@@ -115,8 +113,6 @@ main = do
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "max" (max :: Int -> Int -> Int)
     , prim "nil" nil
-    , prim "left" left
-    , prim "right" right
     ]
 
   conjure "mem" mem

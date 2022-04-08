@@ -32,12 +32,12 @@ size :: Tree -> Int
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 17 candidates of size 5
--- looking through 28 candidates of size 6
--- looking through 73 candidates of size 7
--- looking through 136 candidates of size 8
--- tested 219 candidates
+-- looking through 4 candidates of size 4
+-- looking through 9 candidates of size 5
+-- looking through 12 candidates of size 6
+-- looking through 25 candidates of size 7
+-- looking through 40 candidates of size 8
+-- tested 71 candidates
 size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
@@ -47,12 +47,12 @@ height :: Tree -> Int
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 4 candidates of size 3
--- looking through 17 candidates of size 4
--- looking through 38 candidates of size 5
--- looking through 144 candidates of size 6
--- looking through 464 candidates of size 7
--- looking through 1801 candidates of size 8
--- tested 819 candidates
+-- looking through 13 candidates of size 4
+-- looking through 30 candidates of size 5
+-- looking through 88 candidates of size 6
+-- looking through 320 candidates of size 7
+-- looking through 1093 candidates of size 8
+-- tested 475 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  max (height t1) (height t2) + 1
 
