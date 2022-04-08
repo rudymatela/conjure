@@ -58,6 +58,13 @@ size :: Tree -> Int
 size Leaf  =  0
 size (Node l _ r)  =  size l + 1 + size r
 
+ordered :: Tree -> Bool
+ordered Leaf  =  True
+ordered (Node l x r)  =  (nil l || rightmost l < x)
+                      && (nil r || x < leftmost r)
+                      && ordered l
+                      && ordered r
+
 
 -- this mem searches both sides of the tree
 mem :: Int -> Tree -> Bool
@@ -119,4 +126,14 @@ main = do
     [ pr False
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)
+    ]
+
+  -- unreachable: needs size 22 but OOMs at 18
+  conjureWithMaxSize 12 "ordered" ordered
+    [ pr False
+    , prim "&&" (&&)
+    , prim "||" (||)
+    , prim "<" ((<) :: Int -> Int -> Bool)
+    , prim "rightmost" rightmost
+    , prim "leftmost" leftmost
     ]
