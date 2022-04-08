@@ -134,6 +134,7 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   -- should only be used to evaluate an expr of the form:
   -- ef' :$ exprExpr ex :$ exprExpr ey :$ ...
   red :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
+  red n m e  |  size e > n  =  error "toDynamicWithDefn: argument-size limit reached"
   red n m e  =  case lookup e m of
     Just Nothing -> error $ "toDynamicWithDefn: loop detected " ++ show e
     Just (Just d) -> Just (n,m,d)
