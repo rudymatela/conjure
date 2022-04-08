@@ -172,6 +172,19 @@ eg/bools.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/bools.hs
+eg/bst: \
+  eg/bst.hs \
+  mk/toplibs
+eg/bst.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/bst.hs
 eg/count: \
   eg/count.hs \
   mk/toplibs
