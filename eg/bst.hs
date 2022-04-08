@@ -183,8 +183,8 @@ main = do
     , primOrdCaseFor (undefined :: Tree)
     ]
 
-  -- out of reach (reaching 6 but need 13)
-  conjureWith args{maxSize = 6} "union" union
+  -- out of reach (reaching 10 but need 13)
+  conjureWith args{maxSize = 9} "union" union
     [ pr Leaf
     , prim "Node" Node
     , prim "before" before
