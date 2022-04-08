@@ -90,6 +90,24 @@ insert x (Node l y r)  =  case compare x y of
   EQ -> Node l y r
   GT -> Node l y (insert x r)
 
+before :: Int -> Tree -> Tree
+before _ Leaf  =  Leaf
+before y (Node l x r)  =  case y `compare` x of
+                          LT -> before y l
+                          EQ -> l
+                          GT -> Node l x (before y r)
+
+beyond :: Int -> Tree -> Tree
+beyond _ Leaf  =  Leaf
+beyond y (Node l x r)  =  case x `compare` y of
+                          LT -> beyond y r
+                          EQ -> r
+                          GT -> Node (beyond y l) x r
+
+union :: Tree -> Tree -> Tree
+union t Leaf  =  t
+union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
+
 
 instance Listable Tree where
   tiers  =  cons0 Leaf
@@ -139,7 +157,7 @@ main = do
     ]
 
   -- out of reach performance-wise (reaching 16 but need 19)
-  conjureWithMaxSize 12 "before" before
+  conjureFromSpecWith args{maxSize = 12} "before" beforeSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "==" ((==) :: Int -> Int -> Bool)
@@ -148,7 +166,7 @@ main = do
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
-  conjureWithMaxSize 12 "before" before
+  conjureFromSpecWith args{maxSize = 12} "before" beforeSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
@@ -156,7 +174,7 @@ main = do
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
-  conjureWithMaxSize 12 "beyond" beyond
+  conjureFromSpecWith args{maxSize = 12} "beyond" beyondSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
@@ -164,7 +182,7 @@ main = do
     ]
 
   -- out of reach (reaching 7 but need 13)
-  conjureWithMaxSize 6 "union" union
+  conjureWith args{maxSize = 6} "union" union
     [ pr Leaf
     , prim "Node" Node
     , prim "before" before
@@ -173,25 +191,20 @@ main = do
   -- maybe with invariant following test data there will be more pruning
   -- properties?
 
-before :: Int -> Tree -> Tree
-before _ Leaf  =  Leaf
-before y (Node l x r)  =  case y `compare` x of
-                          LT -> before y l
-                          EQ -> l
-                          GT -> Node l x (before y r)
--- single-line view:
--- before y (Node l x r)  =  case y `compare` x of LT -> before y l; EQ -> l; GT -> Node l x (before y r)
+beforeSpec :: (Int -> Tree -> Tree) -> Bool
+beforeSpec before  =  and
+  [ holds n $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
+  ] where n = 360
 
-beyond :: Int -> Tree -> Tree
-beyond _ Leaf  =  Leaf
-beyond y (Node l x r)  =  case x `compare` y of
-                          LT -> beyond y r
-                          EQ -> r
-                          GT -> Node (beyond y l) x r
+beyondSpec :: (Int -> Tree -> Tree) -> Bool
+beyondSpec beyond  =  and
+  [ holds n $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
+  ] where n = 360
 
-union :: Tree -> Tree -> Tree
-union t Leaf  =  t
-union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
+-- unionSpec :: (Int -> Tree -> Tree) -> Bool
+-- unionSpec union  =  and
+--   [ holds n $ \t1 t2 -> ordered t ==> inorder (union t1 t2) == merge (inorder t1) (inorder t2)
+--   ] where n = 360
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree
