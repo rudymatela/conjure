@@ -65,6 +65,19 @@ ordered (Node l x r)  =  (nil l || rightmost l < x)
                       && ordered l
                       && ordered r
 
+preorder :: Tree -> [Int]
+preorder Leaf =  []
+preorder (Node l x r)  =  [x] ++ preorder l ++ preorder r
+
+inorder :: Tree -> [Int]
+inorder Leaf  =  []
+inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
+
+posorder :: Tree -> [Int]
+posorder Leaf =  []
+posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
+
+
 
 -- this mem searches both sides of the tree
 mem :: Int -> Tree -> Bool
@@ -137,4 +150,22 @@ main = do
     , prim "<" ((<) :: Int -> Int -> Bool)
     , prim "rightmost" rightmost
     , prim "leftmost" leftmost
+    ]
+
+  conjureWithMaxSize 12 "preorder" preorder
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    ]
+
+  conjureWithMaxSize 12 "inorder" inorder
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    ]
+
+  conjureWithMaxSize 12 "posorder" posorder
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]

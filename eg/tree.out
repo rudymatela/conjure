@@ -93,3 +93,50 @@ ordered :: Tree -> Bool
 -- tested 2799 candidates
 cannot conjure
 
+preorder :: Tree -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 5 candidates of size 6
+-- looking through 4 candidates of size 7
+-- looking through 9 candidates of size 8
+-- tested 17 candidates
+preorder Leaf  =  []
+preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
+
+inorder :: Tree -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 5 candidates of size 6
+-- looking through 4 candidates of size 7
+-- looking through 9 candidates of size 8
+-- tested 21 candidates
+inorder Leaf  =  []
+inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
+
+posorder :: Tree -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 5 candidates of size 6
+-- looking through 4 candidates of size 7
+-- looking through 9 candidates of size 8
+-- looking through 14 candidates of size 9
+-- looking through 17 candidates of size 10
+-- tested 52 candidates
+posorder Leaf  =  []
+posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])
+
