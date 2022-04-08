@@ -121,7 +121,7 @@ main = do
     , prif (undefined :: Tree)
     ]
 
-  -- with 15, this reaches the solution
+  -- with 15, this reaches the solution, using 12 for shorter runtime
   conjureWithMaxSize 12 "before" before
     [ pr Leaf
     , prim "Node" Node
@@ -129,15 +129,13 @@ main = do
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
 
-  {-
-  -- reaching beyond through some "cheating"
-  conjureWithMaxSize 16 "beyond" beyond
+  -- with 15, this reaches the solution, using 12 for shorter runtime
+  conjureWithMaxSize 12 "beyond" beyond
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
-  -}
 
   -- out of reach (reaching 7 but need 13)
   conjureWithMaxSize 6 "union" union
