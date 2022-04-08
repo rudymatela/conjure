@@ -45,10 +45,10 @@ valu (Node _ x _)  =  x
 
 
 leftmost :: Tree -> Int
-leftmost (Node l x _)  =  if nil l then x else leftmost (left l)
+leftmost (Node l x _)  =  if nil l then x else leftmost l
 
 rightmost :: Tree -> Int
-rightmost (Node _ x r)  =  if nil r then x else rightmost (right r)
+rightmost (Node _ x r)  =  if nil r then x else rightmost r
 
 height :: Tree -> Int
 height Leaf  =  -1
