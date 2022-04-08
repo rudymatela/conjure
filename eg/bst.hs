@@ -173,12 +173,6 @@ main = do
   -- maybe with invariant following test data there will be more pruning
   -- properties?
 
-caseOrdering :: Ordering -> a -> a -> a -> a
-caseOrdering o lt eq gt  =  case o of
-                            LT -> lt
-                            EQ -> eq
-                            GT -> gt
-
 before :: Int -> Tree -> Tree
 before _ Leaf  =  Leaf
 before y (Node l x r)  =  case y `compare` x of
