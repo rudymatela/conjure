@@ -129,6 +129,7 @@ main = do
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
 
+  {-
   -- reaching beyond through some "cheating"
   conjureWithMaxSize 16 "beyond" beyond
     [ pr Leaf
@@ -136,6 +137,7 @@ main = do
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
     , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
     ]
+  -}
 
   -- out of reach (reaching 7 but need 13)
   conjureWithMaxSize 6 "union" union
