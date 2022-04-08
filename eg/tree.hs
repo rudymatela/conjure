@@ -151,6 +151,11 @@ main = do
     , prim "leftmost" leftmost
     ]
 
+  conjure "ordered" ordered
+    [ prim "strictlyOrdered" (strictlyOrdered :: [Int] -> Bool)
+    , prim "inorder" inorder
+    ]
+
   conjureWithMaxSize 12 "preorder" preorder
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
@@ -168,3 +173,8 @@ main = do
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
+
+
+strictlyOrdered :: [Int] -> Bool
+strictlyOrdered []  =  True
+strictlyOrdered (x:xs)  =  (null xs || x < head xs) && strictlyOrdered xs

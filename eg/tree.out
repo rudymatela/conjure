@@ -93,6 +93,15 @@ ordered :: Tree -> Bool
 -- tested 2799 candidates
 cannot conjure
 
+ordered :: Tree -> Bool
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 3 candidates of size 3
+-- tested 3 candidates
+ordered t1  =  strictlyOrdered (inorder t1)
+
 preorder :: Tree -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
