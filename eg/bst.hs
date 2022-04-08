@@ -106,7 +106,7 @@ main = do
     [ pr False
     , pr True
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , prim "case" (caseOrdering :: Ordering -> Bool -> Bool -> Bool -> Bool)
+    , primOrdCaseFor (undefined :: Bool)
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 26)
@@ -133,7 +133,7 @@ main = do
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
+    , primOrdCaseFor (undefined :: Tree)
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
@@ -141,7 +141,7 @@ main = do
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , prim "case" (caseOrdering :: Ordering -> Tree -> Tree -> Tree -> Tree)
+    , primOrdCaseFor (undefined :: Tree)
     ]
 
   -- out of reach (reaching 7 but need 13)

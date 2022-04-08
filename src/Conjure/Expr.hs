@@ -19,6 +19,7 @@ module Conjure.Expr
   , mayNotEvaluateArgument
   , compareSimplicity
   , ifFor
+  , caseForOrd
   , valuesBFS
   , holesBFS
   , fillBFS
@@ -179,11 +180,18 @@ mayNotEvaluateArgument _                          =  False
 --
 -- > > ifFor (undefined :: String)
 -- > if :: Bool -> [Char] -> [Char] -> [Char]
---
--- You need to provide this as part of your building blocks on the primitives
--- if you want recursive functions to be considered and produced.
 ifFor :: Typeable a => a -> Expr
 ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
+
+-- | Creates a case 'Expr' of the type of the given proxy.
+--
+-- > > caseForOrd (undefined :: Int)
+-- > case :: Bool -> Int -> Int -> Int -> Int
+--
+-- > > caseForOrd (undefined :: String)
+-- > case :: Bool -> [Char] -> [Char] -> [Char] -> [Char]
+caseForOrd :: Typeable a => a -> Expr
+caseForOrd a  =  value "case" (\o x y z -> case o of LT -> x; EQ -> y; GT -> z `asTypeOf` a)
 
 -- | Application cross-product between lists of Exprs
 (>$$<) :: [Expr] -> [Expr] -> [Expr]

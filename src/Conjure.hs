@@ -48,6 +48,7 @@ module Conjure
   , pr
   , prim
   , prif
+  , primOrdCaseFor
 
 -- * Advanced use
   , conjureWithMaxSize

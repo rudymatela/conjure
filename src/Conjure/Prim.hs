@@ -14,6 +14,7 @@ module Conjure.Prim
   , prim
   , pr
   , prif
+  , primOrdCaseFor
   , cjHoles
   , cjTiersFor
   , cjAreEqual
@@ -51,6 +52,11 @@ prim s x  =  (value s x, conjureType x)
 -- | Provides an if condition bound to the given return type.
 prif :: Conjurable a => a -> Prim
 prif x  =  (ifFor x, conjureType x)
+
+
+-- | Provides a case condition bound to the given return type.
+primOrdCaseFor :: Conjurable a => a -> Prim
+primOrdCaseFor x  =  (caseForOrd x, conjureType x)
 
 
 -- the following functions mirror their "conjure" counterparts from
