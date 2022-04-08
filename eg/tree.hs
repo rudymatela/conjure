@@ -130,7 +130,8 @@ main = do
 
   -- unreachable: needs size 22 but OOMs at 18
   conjureWithMaxSize 12 "ordered" ordered
-    [ pr False
+    [ pr True
+    , pr False
     , prim "&&" (&&)
     , prim "||" (||)
     , prim "<" ((<) :: Int -> Int -> Bool)

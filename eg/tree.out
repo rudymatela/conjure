@@ -78,7 +78,7 @@ mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 29/39 rules
--- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
 -- looking through 0 candidates of size 4
@@ -90,6 +90,6 @@ ordered :: Tree -> Bool
 -- looking through 112 candidates of size 10
 -- looking through 964 candidates of size 11
 -- looking through 1480 candidates of size 12
--- tested 2798 candidates
+-- tested 2799 candidates
 cannot conjure
 
