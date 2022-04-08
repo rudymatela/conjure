@@ -62,36 +62,13 @@ main = do
 
   conjure "reverse" reverse'
     [ pr ([] :: [Int])
-    , prim "unit" ((:[]) :: Int -> [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjure "++" (+++)
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
-    ]
-
-  -- now through fold
-  -- length xs  =  foldr (const (1 +)) 0 xs
-  conjure "length" length'
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-    , prim "const" (const :: (Int -> Int) -> Int -> (Int -> Int)) -- cheating?
-    ]
-
-  -- now through fold and some cheating
-  --  reverse xs  =  foldr (\x xs -> xs ++ [x]) [] xs
-  --  reverse xs  =  foldr (flip (++) . unit) [] xs
-  conjure "reverse" reverse'
-    [ pr ([] :: [Int])
-    , prim "unit" ((:[]) :: Int -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
-    , prim "foldr" (foldr :: (Int->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
-    -- these last two are cheats:
-    , prim "flip" (flip :: ([Int]->[Int]->[Int]) -> [Int] -> [Int] -> [Int])
-    , prim "." ((.) :: ([Int]->[Int]->[Int]) -> (Int->[Int]) -> Int -> [Int] -> [Int])
     ]
 
   conjure "++" (+++)

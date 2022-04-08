@@ -12,16 +12,17 @@ length (x:xs)  =  length xs + 1
 
 reverse :: [Int] -> [Int]
 -- testing 360 combinations of argument values
--- pruning with 3/3 rules
+-- pruning with 4/4 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 2 candidates of size 4
--- looking through 5 candidates of size 5
+-- looking through 2 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 4 candidates of size 5
 -- looking through 7 candidates of size 6
--- tested 18 candidates
+-- looking through 10 candidates of size 7
+-- tested 27 candidates
 reverse []  =  []
-reverse (x:xs)  =  reverse xs ++ unit x
+reverse (x:xs)  =  reverse xs ++ [x]
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
@@ -35,31 +36,6 @@ reverse (x:xs)  =  reverse xs ++ unit x
 -- tested 236 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
-
-length :: [Int] -> Int
--- testing 360 combinations of argument values
--- pruning with 6/10 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 8 candidates of size 5
--- tested 15 candidates
-length []  =  0
-length (x:xs)  =  length xs + 1
-
-reverse :: [Int] -> [Int]
--- testing 360 combinations of argument values
--- pruning with 6/6 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 2 candidates of size 4
--- looking through 5 candidates of size 5
--- looking through 15 candidates of size 6
--- tested 18 candidates
-reverse []  =  []
-reverse (x:xs)  =  reverse xs ++ unit x
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
