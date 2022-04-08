@@ -84,3 +84,21 @@ xs ++ ys  =  foldr (:) ys xs
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
+ordered :: [Int] -> Bool
+-- testing 360 combinations of argument values
+-- pruning with 29/39 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 4 candidates of size 5
+-- looking through 16 candidates of size 6
+-- looking through 28 candidates of size 7
+-- looking through 48 candidates of size 8
+-- looking through 100 candidates of size 9
+-- looking through 226 candidates of size 10
+-- looking through 482 candidates of size 11
+-- tested 616 candidates
+ordered []  =  True
+ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
+

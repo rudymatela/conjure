@@ -36,6 +36,12 @@ sort' [x,y,z]
 [x,y] \/ [z,w]  =  [x,z,y,w]
 [x,y,z] \/ [w,v,u]  =  [x,w,y,v,z,u]
 
+ordered' :: [Int] -> Bool
+ordered' []  =  True
+ordered' [x]  =  True
+ordered' [x,y]  =  x <= y
+ordered' [x,y,z]  =  x <= y && y <= z
+
 main :: IO ()
 main = do
   conjure "length" length'
@@ -87,4 +93,15 @@ main = do
   conjure "\\/" (\/)
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
+    ]
+
+  conjure "ordered" ordered'
+    [ pr False
+    , pr True
+    , prim "&&" (&&)
+    , prim "||" (||)
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prim "null" (null :: [Int] -> Bool)
+    , prim "head" (head :: [Int] -> Int)
+    , prim "tail" (tail :: [Int] -> [Int])
     ]
