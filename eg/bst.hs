@@ -122,7 +122,7 @@ main = do
     ]
 
   -- reaching before through some "cheating"
-  conjureWithMaxSize 16 "before" before
+  conjureWithMaxSize 15 "before" before
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
