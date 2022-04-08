@@ -102,3 +102,21 @@ ordered :: [Int] -> Bool
 ordered []  =  True
 ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
 
+merge :: [Int] -> [Int] -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 1/2 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 12 candidates of size 4
+-- looking through 16 candidates of size 5
+-- looking through 20 candidates of size 6
+-- looking through 84 candidates of size 7
+-- looking through 40 candidates of size 8
+-- looking through 368 candidates of size 9
+-- looking through 216 candidates of size 10
+-- looking through 1838 candidates of size 11
+-- looking through 1016 candidates of size 12
+-- tested 3616 candidates
+cannot conjure
+
