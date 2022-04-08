@@ -166,7 +166,8 @@ main = do
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
-  conjureFromSpecWith args{maxSize = 12} "before" beforeSpec
+  -- using maxEquationSize = 7 reduces runtime from 13s to 11s
+  conjureFromSpecWith args{maxSize = 12, maxEquationSize = 7} "before" beforeSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
@@ -174,7 +175,8 @@ main = do
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
-  conjureFromSpecWith args{maxSize = 12} "beyond" beyondSpec
+  -- using maxEquationSize = 7 reduces runtime from 13s to 11s
+  conjureFromSpecWith args{maxSize = 12, maxEquationSize = 7} "beyond" beyondSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)
