@@ -13,12 +13,9 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 10
 -- looking through 452 candidates of size 11
 -- looking through 424 candidates of size 12
--- looking through 3840 candidates of size 13
--- looking through 3840 candidates of size 14
--- looking through 18272 candidates of size 15
--- tested 18059 candidates
+-- tested 707 candidates
 mem x Leaf  =  False
-mem x (Node t1 y t2)  =  x == y || (if x < y then mem x t1 else mem x t2)
+mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
@@ -110,13 +107,13 @@ cannot conjure
 
 union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
--- pruning with 2/2 rules
+-- pruning with 6/8 rules
 -- looking through 3 candidates of size 1
 -- looking through 12 candidates of size 2
 -- looking through 44 candidates of size 3
 -- looking through 84 candidates of size 4
 -- looking through 784 candidates of size 5
--- looking through 1080 candidates of size 6
--- tested 2007 candidates
+-- looking through 1032 candidates of size 6
+-- tested 1959 candidates
 cannot conjure
 

@@ -111,7 +111,7 @@ union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
 
 instance Listable Tree where
   tiers  =  cons0 Leaf
-        \/  cons3 Node
+        \/  cons3 Node `suchThat` ordered
 
 instance Name Tree where
   name _  =  "t1"
@@ -181,7 +181,7 @@ main = do
     , primOrdCaseFor (undefined :: Tree)
     ]
 
-  -- out of reach (reaching 7 but need 13)
+  -- out of reach (reaching 6 but need 13)
   conjureWith args{maxSize = 6} "union" union
     [ pr Leaf
     , prim "Node" Node
