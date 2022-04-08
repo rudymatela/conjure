@@ -121,8 +121,8 @@ main = do
     , prif (undefined :: Tree)
     ]
 
-  -- reaching before through some "cheating"
-  conjureWithMaxSize 15 "before" before
+  -- with 15, this reaches the solution
+  conjureWithMaxSize 12 "before" before
     [ pr Leaf
     , prim "Node" Node
     , prim "`compare`" (compare :: Int -> Int -> Ordering)

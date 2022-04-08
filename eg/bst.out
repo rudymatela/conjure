@@ -71,12 +71,8 @@ before :: Int -> Tree -> Tree
 -- looking through 2096 candidates of size 10
 -- looking through 6336 candidates of size 11
 -- looking through 3888 candidates of size 12
--- looking through 52696 candidates of size 13
--- looking through 146448 candidates of size 14
--- looking through 155520 candidates of size 15
--- tested 266809 candidates
-before x Leaf  =  Leaf
-before x (Node t1 y t2)  =  case (y `compare` x) (Node t1 y (before x t2)) t1 (before x t1)
+-- tested 12830 candidates
+cannot conjure
 
 union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
