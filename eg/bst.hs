@@ -102,6 +102,13 @@ main = do
     , prif (undefined :: Bool)
     ]
 
+  conjure "mem" mem
+    [ pr False
+    , pr True
+    , prim "`compare`" (compare :: Int -> Int -> Ordering)
+    , prim "case" (caseOrdering :: Ordering -> Bool -> Bool -> Bool -> Bool)
+    ]
+
   -- simply out of reach performance-wise (reaching 16 but need size 26)
   conjureWithMaxSize 12 "insert" insert
     [ pr Leaf

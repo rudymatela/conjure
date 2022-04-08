@@ -20,6 +20,25 @@ mem :: Int -> Tree -> Bool
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  x == y || (if x < y then mem x t1 else mem x t2)
 
+mem :: Int -> Tree -> Bool
+-- testing 360 combinations of argument values
+-- pruning with 1/2 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 6 candidates of size 7
+-- looking through 24 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 192 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 384 candidates of size 12
+-- tested 375 candidates
+mem x Leaf  =  False
+mem x (Node t1 y t2)  =  case x `compare` y of LT -> mem x t1; EQ -> True; GT -> mem x t2
+
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
 -- pruning with 6/7 rules
