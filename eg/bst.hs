@@ -58,6 +58,25 @@ size :: Tree -> Int
 size Leaf  =  0
 size (Node l _ r)  =  size l + 1 + size r
 
+ordered :: Tree -> Bool
+ordered Leaf  =  True
+ordered (Node l x r)  =  (nil l || rightmost l < x)
+                      && (nil r || x < leftmost r)
+                      && ordered l
+                      && ordered r
+
+preorder :: Tree -> [Int]
+preorder Leaf =  []
+preorder (Node l x r)  =  [x] ++ preorder l ++ preorder r
+
+inorder :: Tree -> [Int]
+inorder Leaf  =  []
+inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
+
+posorder :: Tree -> [Int]
+posorder Leaf =  []
+posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
+
 
 -- the following assume a binary search tree
 mem :: Int -> Tree -> Bool

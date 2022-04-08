@@ -78,7 +78,6 @@ posorder Leaf =  []
 posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
 
 
-
 -- this mem searches both sides of the tree
 mem :: Int -> Tree -> Bool
 mem _ Leaf  =  False
