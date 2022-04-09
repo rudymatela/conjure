@@ -128,12 +128,12 @@ access :: [A] -> Int -> A
 -- pruning with 4/7 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 7 candidates of size 4
--- looking through 19 candidates of size 5
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 18 candidates of size 5
 -- looking through 23 candidates of size 6
 -- looking through 68 candidates of size 7
--- tested 67 candidates
+-- tested 64 candidates
 [] `access` 0  =  undefined
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x

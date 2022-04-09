@@ -28,12 +28,12 @@ sum (x:xs)  =  x + sum xs
 (++) :: [Int] -> [Int] -> [Int]
 -- pruning with 3/3 rules
 -- looking through 2 candidates of size 1
--- looking through 4 candidates of size 2
+-- looking through 3 candidates of size 2
 -- looking through 10 candidates of size 3
--- looking through 28 candidates of size 4
+-- looking through 27 candidates of size 4
 -- looking through 78 candidates of size 5
--- looking through 172 candidates of size 6
--- tested 196 candidates
+-- looking through 171 candidates of size 6
+-- tested 194 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

@@ -2,11 +2,11 @@ fib01 :: Int -> Int -> Int -> Int
 -- testing 8 combinations of argument values
 -- pruning with 6/10 rules
 -- looking through 4 candidates of size 1
--- looking through 31 candidates of size 2
--- looking through 295 candidates of size 3
--- looking through 1968 candidates of size 4
--- looking through 10684 candidates of size 5
--- tested 12982 candidates
+-- looking through 24 candidates of size 2
+-- looking through 241 candidates of size 3
+-- looking through 1958 candidates of size 4
+-- looking through 10540 candidates of size 5
+-- tested 12767 candidates
 cannot conjure
 
 fib01 :: Int -> Int -> Int -> Int

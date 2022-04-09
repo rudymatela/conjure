@@ -45,6 +45,8 @@ import Data.Typeable
 import System.IO.Unsafe
 
 -- | Checks if all elements of a list are equal.
+--
+-- Exceptionally this function returns false for an empty or unit list.
 allEqual :: Eq a => [a] -> Bool
 allEqual []  =  False
 allEqual [x]  =  False

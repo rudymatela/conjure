@@ -3,13 +3,13 @@ subset :: [Int] -> [Int] -> Bool
 -- pruning with 29/39 rules
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
--- looking through 14 candidates of size 3
+-- looking through 10 candidates of size 3
 -- looking through 40 candidates of size 4
 -- looking through 160 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 448 candidates of size 7
+-- looking through 444 candidates of size 7
 -- looking through 784 candidates of size 8
--- tested 1318 candidates
+-- tested 1310 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  elem x ys && subset xs ys
 

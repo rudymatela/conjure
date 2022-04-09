@@ -20,6 +20,7 @@ module Conjure.Defn
   , devalFast
   , showDefn
   , defnApparentlyTerminates
+  , isRedundantDefn
   , module Conjure.Expr
   )
 where
@@ -31,7 +32,7 @@ import Data.Express.Express
 import Data.Express.Fixtures
 import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
-import Test.LeanCheck.Utils ((-:>)) -- for toDynamicWithDefn
+import Test.LeanCheck.Utils ((-:>), classifyOn)
 
 -- | A function definition as a list of top-level case bindings ('Bndn').
 --
@@ -195,3 +196,40 @@ devl ee n fxpr  =  deval ee n fxpr (error "devl: incorrect type?")
 defnApparentlyTerminates :: Defn -> Bool
 defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e
 defnApparentlyTerminates _  =  True
+
+-- | Returns whether the given 'Defn' is redundant
+--   with regards to its patterns.
+--
+-- Here is an example of a redundant 'Defn':
+--
+-- > 0 ? 0  =  0
+-- > 0 ? x  =  0
+-- > x ? 0  =  x
+-- > x ? y  =  x
+--
+-- It is redundant because it is equivalent to:
+--
+-- > 0 ? _  =  0
+-- > x ? _  =  x
+--
+-- If the given expression is incomplete ('hasHole')
+-- this function returns 'True' as nothing can be said.
+isRedundantDefn :: Defn -> Bool
+isRedundantDefn d  =  all isComplete (map snd d)
+                   && any isRedundant1 (unfoldDefnArgs d)
+  where
+  isRedundant1 :: [(Expr,Expr)] -> Bool
+  isRedundant1  =  all allEqual
+                .  map (map snd)
+                .  classifyOn fst
+                .  map (unfoldPair . canonicalize . foldPair)
+
+  -- Returns a list of degenerate 'Defn'
+  -- whose patterns have been "lensed" on each argument.
+  unfoldDefnArgs :: Defn -> [[(Expr,Expr)]]
+  unfoldDefnArgs  =  transpose . map unfoldBndnArgs
+    where
+    unfoldBndnArgs :: Bndn -> [(Expr,Expr)]
+    unfoldBndnArgs (p,r)  =  map (\a -> (a,r)) as
+      where
+      (_:as)  =  unfoldApp p

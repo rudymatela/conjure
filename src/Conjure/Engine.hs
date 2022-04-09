@@ -49,6 +49,7 @@ import Data.Dynamic (fromDyn, dynApp)
 import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
+import Test.LeanCheck.Utils (classifyOn)
 
 import Test.Speculate.Reason (Thy, rules, equations, invalid, canReduceTo, printThy, closureLimit, doubleCheck)
 import Test.Speculate.Engine (theoryFromAtoms, grounds, groundBinds, boolTy)
@@ -417,7 +418,10 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   appsWith eh vs  =  enumerateAppsFor eh keep $ vs ++ es
 
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT (allEqual . map snd) . products $ map p2eess pats
+  ps2fss pats  =  discardT isRedundantDefn
+               .  discardT (allEqual . map snd)
+               .  products
+               $  map p2eess pats
     where
     p2eess :: Expr -> [[Bndn]]
     -- the following guarded line is an optional optimization

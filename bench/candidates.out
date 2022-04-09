@@ -869,7 +869,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,11,42,117,346,955,2714,7510,20754] pattern candidates, 0 duplicates
+  [3,10,40,116,338,953,2702,7505,20728] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1053,9 +1053,6 @@ x ? 0  =  0
 x ? y  =  y
 
 0 ? x  =  x
-x ? y  =  y
-
-0 ? x  =  x
 x ? y  =  0
 
 0 ? x  =  0
@@ -1173,17 +1170,7 @@ x ? y  =  x
 0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
 x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  x
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -1357,9 +1344,6 @@ x ? y  =  dec (dec y)
 
 0 ? x  =  0
 x ? y  =  dec (dec 0)
-
-0 ? x  =  dec x
-x ? y  =  dec y
 
 0 ? x  =  dec x
 x ? y  =  dec 0
@@ -2417,11 +2401,6 @@ x ? y  =  dec (dec 0)
 0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
-x ? y  =  dec x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec x
 x ? y  =  dec y
 
 0 ? 0  =  0
@@ -2438,11 +2417,6 @@ x ? y  =  dec x
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  dec 0
 
 0 ? 0  =  0
 0 ? x  =  0
@@ -2512,11 +2486,6 @@ x ? y  =  dec x
 0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
-x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  0
 x ? y  =  dec 0
 
 0 ? 0  =  0
@@ -2573,11 +2542,6 @@ x ? y  =  dec x
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  dec 0
 
 0 ? 0  =  0
 0 ? x  =  dec 0
@@ -2752,11 +2716,6 @@ x ? y  =  x
 0 ? 0  =  dec 0
 0 ? x  =  x
 x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec 0
 x ? y  =  0
 
 0 ? 0  =  dec 0
@@ -2815,11 +2774,6 @@ x ? 0  =  dec 0
 x ? y  =  y
 
 0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  0
-
-0 ? 0  =  dec 0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  x
@@ -2852,11 +2806,6 @@ x ? y  =  0
 0 ? 0  =  dec 0
 0 ? x  =  dec 0
 x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  x
 x ? y  =  y
 
 0 ? 0  =  dec 0
@@ -2873,11 +2822,6 @@ x ? y  =  x
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  0
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  x
@@ -4371,9 +4315,6 @@ x ? y  =  x + y
 x ? y  =  y + x
 
 0 ? x  =  x + x
-x ? y  =  y + y
-
-0 ? x  =  x + x
 x ? y  =  dec (dec x)
 
 0 ? x  =  x + x
@@ -4393,9 +4334,6 @@ x ? y  =  y + x
 
 0 ? x  =  dec (dec x)
 x ? y  =  y + y
-
-0 ? x  =  dec (dec x)
-x ? y  =  dec (dec y)
 
 0 ? x  =  dec (dec x)
 x ? y  =  dec (dec 0)
@@ -6753,7 +6691,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,8,15,66,152,362,1400,2084,11820] pattern candidates, 0 duplicates
+  [3,7,13,66,152,361,1394,2084,11820] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -6815,9 +6753,6 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  ys
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  ys
-
-[] ?? xs  =  xs
 (x:xs) ?? ys  =  []
 
 [] ?? xs  =  []
@@ -6857,17 +6792,7 @@ xs ?? ys  =  ys ++ ys
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
@@ -8896,9 +8821,6 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  ys ++ xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  ys ++ ys
 
 [] ?? xs  =  xs ++ (xs ++ xs)
 (x:xs) ?? ys  =  xs
@@ -9042,7 +8964,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,32,128,468,1576,4924] direct candidates, 0 duplicates
-  [4,14,30,8,4,48,60,280,592] pattern candidates, 0 duplicates
+  [4,14,26,8,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -9560,19 +9482,9 @@ True &| False  =  True
 True &| True  =  False
 
 False &| False  =  False
-False &| True  =  False
-True &| False  =  True
-True &| True  =  True
-
-False &| False  =  False
 False &| True  =  True
 True &| False  =  False
 True &| True  =  False
-
-False &| False  =  False
-False &| True  =  True
-True &| False  =  False
-True &| True  =  True
 
 False &| False  =  False
 False &| True  =  True
@@ -9597,17 +9509,7 @@ True &| True  =  True
 False &| False  =  True
 False &| True  =  False
 True &| False  =  True
-True &| True  =  False
-
-False &| False  =  True
-False &| True  =  False
-True &| False  =  True
 True &| True  =  True
-
-False &| False  =  True
-False &| True  =  True
-True &| False  =  False
-True &| True  =  False
 
 False &| False  =  True
 False &| True  =  True

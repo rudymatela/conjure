@@ -16,12 +16,12 @@ sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 12 candidates of size 7
--- looking through 22 candidates of size 8
+-- looking through 21 candidates of size 8
 -- looking through 8 candidates of size 9
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 0 candidates of size 12
--- tested 48 candidates
+-- tested 47 candidates
 cannot conjure
 
 subset :: [Int] -> [Int] -> Bool

@@ -33,9 +33,9 @@ gps1 :: Int -> [Int] -> Int
 -- pruning with 8/9 rules
 -- looking through 4 candidates of size 1
 -- looking through 25 candidates of size 2
--- looking through 255 candidates of size 3
--- looking through 451 candidates of size 4
--- tested 735 candidates
+-- looking through 237 candidates of size 3
+-- looking through 433 candidates of size 4
+-- tested 699 candidates
 cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
@@ -82,12 +82,12 @@ tell :: [Int] -> Int -> [Int]
 -- looking through 2 candidates of size 3
 -- looking through 10 candidates of size 4
 -- looking through 6 candidates of size 5
--- looking through 61 candidates of size 6
+-- looking through 60 candidates of size 6
 -- looking through 26 candidates of size 7
 -- looking through 538 candidates of size 8
 -- looking through 134 candidates of size 9
--- looking through 5299 candidates of size 10
--- tested 2699 candidates
+-- looking through 5296 candidates of size 10
+-- tested 2698 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -159,12 +159,12 @@ gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 8 candidates of size 2
--- looking through 20 candidates of size 3
+-- looking through 7 candidates of size 2
+-- looking through 18 candidates of size 3
 -- looking through 60 candidates of size 4
 -- looking through 150 candidates of size 5
--- looking through 472 candidates of size 6
--- tested 246 candidates
+-- looking through 469 candidates of size 6
+-- tested 243 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
@@ -246,23 +246,23 @@ gps18_price :: [Double] -> [Double] -> Double
 -- pruning with 28/34 rules
 -- looking through 2 candidates of size 1
 -- looking through 8 candidates of size 2
--- looking through 72 candidates of size 3
+-- looking through 64 candidates of size 3
 -- looking through 72 candidates of size 4
 -- looking through 1192 candidates of size 5
 -- looking through 696 candidates of size 6
--- tested 2042 candidates
+-- tested 2034 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
 -- pruning with 7/12 rules
 -- looking through 3 candidates of size 1
--- looking through 7 candidates of size 2
--- looking through 31 candidates of size 3
--- looking through 169 candidates of size 4
+-- looking through 0 candidates of size 2
+-- looking through 24 candidates of size 3
+-- looking through 150 candidates of size 4
 -- looking through 543 candidates of size 5
--- looking through 3608 candidates of size 6
--- tested 4361 candidates
+-- looking through 3522 candidates of size 6
+-- tested 4242 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
@@ -324,8 +324,8 @@ cannot conjure
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 12 candidates of size 2
--- looking through 33 candidates of size 3
+-- looking through 5 candidates of size 2
+-- looking through 9 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 162 candidates of size 5
 -- looking through 612 candidates of size 6
@@ -335,7 +335,7 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 5184 candidates of size 12
--- tested 9174 candidates
+-- tested 9143 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
@@ -362,10 +362,10 @@ gps25 :: [Double] -> [Double] -> Double
 -- pruning with 33/58 rules
 -- looking through 2 candidates of size 1
 -- looking through 9 candidates of size 2
--- looking through 89 candidates of size 3
+-- looking through 81 candidates of size 3
 -- looking through 312 candidates of size 4
--- looking through 2262 candidates of size 5
+-- looking through 2248 candidates of size 5
 -- looking through 9400 candidates of size 6
--- tested 12074 candidates
+-- tested 12052 candidates
 cannot conjure
 

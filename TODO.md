@@ -3,20 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* filter out redundant cases like the following:
-
-	union Leaf Leaf  =  Leaf
-	union Leaf (Node t1 x t2)  =  Leaf
-	union (Node t1 x t2) Leaf  =  t1
-	union (Node t1 x t2) (Node t3 y t4)  =  t1
-
-  the above is equivalent to simply:
-
-	union Leaf           _  =  Leaf
-	union (Node t1 x t2) _  =  t1
-
-  which should be already enumerated anyway.
-
 * test `conjureCases` from `deriveConjurable`;
 
 * consider not breaking in some cases (increased crossproduct of patterns)

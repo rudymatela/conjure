@@ -109,14 +109,14 @@ union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
 -- pruning with 6/8 rules
 -- looking through 3 candidates of size 1
--- looking through 12 candidates of size 2
--- looking through 44 candidates of size 3
+-- looking through 11 candidates of size 2
+-- looking through 40 candidates of size 3
 -- looking through 84 candidates of size 4
 -- looking through 784 candidates of size 5
 -- looking through 1032 candidates of size 6
--- looking through 8376 candidates of size 7
+-- looking through 8368 candidates of size 7
 -- looking through 24890 candidates of size 8
--- looking through 75681 candidates of size 9
--- tested 110906 candidates
+-- looking through 75663 candidates of size 9
+-- tested 110875 candidates
 cannot conjure
 
