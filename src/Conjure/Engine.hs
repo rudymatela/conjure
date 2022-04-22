@@ -220,12 +220,18 @@ conjure0With args nm f p es  =  do
     putStrLn $ "{-"
     printThy thy
     putStrLn $ "-}"
-  when (not . null $ invalid thy) $
+  when (not . null $ invalid thy) $ do
     putStrLn $ "-- reasoning produced "
             ++ show (length (invalid thy)) ++ " incorrect properties,"
             ++ " please re-run with more tests for faster results"
+    when (showTheory args) $ do
+      putStrLn $ "{-"
+      putStrLn $ "invalid:"
+      putStr   $ unlines $ map showEq $ invalid thy
+      putStrLn $ "-}"
   pr 1 0 rs
   where
+  showEq eq  =  showExpr (fst eq) ++ " == " ++ showExpr (snd eq)
   pr n t []  =  do putStrLn $ "-- tested " ++ show t ++ " candidates"
                    putStrLn $ "cannot conjure\n"
   pr n t ((is,cs):rs)  =  do
