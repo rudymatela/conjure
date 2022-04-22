@@ -42,6 +42,42 @@ gps1c  =  conjure "gps1" gps1p
   , prim "fromIntegral" (fromIntegral :: Int -> Float)
   ]
 
+gps1c30p :: IO ()
+gps1c30p  =  conjure "gps1" gps1p
+  [ pr (0 :: Float)
+  , pr (1 :: Float)
+  , pr (1/2 :: Float)
+  , pr (-1 :: Float)
+  , prim "+" ((+) :: Float -> Float -> Float)
+  , prim "*" ((*) :: Float -> Float -> Float)
+  , prim "-" ((-) :: Float -> Float -> Float)
+  , prim "abs" (abs :: Float -> Float)
+  , prim "negate" (negate :: Float -> Float)
+  , prim "id" (id :: Float -> Float)
+  , prim "fromIntegral" (fromIntegral :: Int -> Float)
+
+  , pr (0 :: Int)
+  , pr (1 :: Int)
+  , pr (-1 :: Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "*" ((*) :: Int -> Int -> Int)
+  , prim "-" ((-) :: Int -> Int -> Int)
+  , prim "div" (div :: Int -> Int -> Int)
+  , prim "mod" (mod :: Int -> Int -> Int)
+  , prim "^" ((^) :: Int -> Int -> Int)
+  , prim "abs" (abs :: Int -> Int)
+  , prim "negate" (negate :: Int -> Int)
+  , prim "id" (id :: Int -> Int)
+  , prim "round" (round :: Float -> Int)
+  , prim "truncate" (truncate :: Float -> Int)
+
+  , pr False
+  , pr True
+  , prim "&&" (&&)
+  , prim "||" (||)
+  , prim "not" not
+  ]
+
 
 gps2p :: Int -> Maybe String
 gps2p    0  =  Just "small"
