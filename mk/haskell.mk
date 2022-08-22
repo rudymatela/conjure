@@ -52,7 +52,6 @@ INSTALL_DEPS ?=
 PKGNAME = $(shell cat *.cabal | grep "^name:"    | sed -e "s/name: *//")
 
 HADDOCK_HAS = haddock --help | grep -q --
-HADDOCK_FILTER ?= cat
 
 
 # Implicit rules
@@ -112,8 +111,7 @@ doc/index.html: $(LIB_HSS)
 	  $(shell $(HADDOCK_HAS) --package-name          && echo "--package-name=$(PKGNAME)" ) \
 	  $(shell $(HADDOCK_HAS) --hyperlinked-source    && echo "--hyperlinked-source"      ) \
 	  $(shell $(HADDOCK_HAS) --no-print-missing-docs && echo --no-print-missing-docs     ) \
-	  $(HADDOCKFLAGS) | \
-	$(HADDOCK_FILTER)
+	  $(HADDOCKFLAGS)
 
 clean-cabal:
 	rm -rf dist/ dist-newstyle/ cabal.project.local cabal.project.local~

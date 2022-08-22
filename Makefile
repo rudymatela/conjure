@@ -2,11 +2,12 @@ GHCIMPORTDIRS = src:test
 GHCFLAGS = -O2 -v0 \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo -dynamic)
 HADDOCKFLAGS = \
-  -i $(shell find ~/.cabal -name express.haddock | tail -1) \
+  -i $(shell find ~/.cabal -name leancheck.haddock | tail -1) \
+  -i $(shell find ~/.cabal -name express.haddock   | tail -1) \
   -i $(shell find ~/.cabal -name speculate.haddock | tail -1) \
   -i $(shell find /usr/share/doc/ghc/html/libraries -name template-haskell.haddock | tail -1) \
-  $(shell grep -q "Arch Linux" /etc/lsb-release && echo --optghc=-dynamic)
-HADDOCK_FILTER = grep -v "^Warning: Couldn't find .haddock for export [A-Z]$$"
+  $(shell grep -q "Arch Linux" /etc/lsb-release && echo --optghc=-dynamic) \
+  | grep -v "^Warning: Couldn't find .haddock for export [A-Z]$$"
 INSTALL_DEPS = leancheck express speculate
 
 EG = \
