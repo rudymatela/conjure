@@ -40,14 +40,14 @@ cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
 -- testing 5 combinations of argument values
--- pruning with 3/3 rules
+-- pruning with 2/6 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 18 candidates of size 3
 -- looking through 70 candidates of size 4
--- looking through 314 candidates of size 5
--- looking through 1432 candidates of size 6
--- tested 1838 candidates
+-- looking through 316 candidates of size 5
+-- looking through 1440 candidates of size 6
+-- tested 1848 candidates
 cannot conjure
 
 gps3 :: [Char] -> Int
@@ -243,26 +243,26 @@ cannot conjure
 
 gps18_price :: [Double] -> [Double] -> Double
 -- testing 4 combinations of argument values
--- pruning with 28/34 rules
+-- pruning with 26/35 rules
 -- looking through 2 candidates of size 1
 -- looking through 8 candidates of size 2
 -- looking through 64 candidates of size 3
 -- looking through 72 candidates of size 4
--- looking through 1192 candidates of size 5
--- looking through 696 candidates of size 6
--- tested 2034 candidates
+-- looking through 1193 candidates of size 5
+-- looking through 714 candidates of size 6
+-- tested 2053 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
--- pruning with 7/12 rules
+-- pruning with 6/19 rules
 -- looking through 3 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 24 candidates of size 3
 -- looking through 150 candidates of size 4
--- looking through 543 candidates of size 5
--- looking through 3522 candidates of size 6
--- tested 4242 candidates
+-- looking through 546 candidates of size 5
+-- looking through 3540 candidates of size 6
+-- tested 4263 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
@@ -359,13 +359,13 @@ gps24 (c:cs)  =  if 140 > length cs then Tweet (length (c:cs)) else TooMany
 
 gps25 :: [Double] -> [Double] -> Double
 -- testing 6 combinations of argument values
--- pruning with 33/58 rules
+-- pruning with 31/59 rules
 -- looking through 2 candidates of size 1
 -- looking through 9 candidates of size 2
 -- looking through 81 candidates of size 3
 -- looking through 312 candidates of size 4
--- looking through 2248 candidates of size 5
--- looking through 9400 candidates of size 6
--- tested 12052 candidates
+-- looking through 2249 candidates of size 5
+-- looking through 9419 candidates of size 6
+-- tested 12072 candidates
 cannot conjure
 
