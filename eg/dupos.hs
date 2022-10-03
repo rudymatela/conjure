@@ -22,8 +22,8 @@ duplicates' [0,1,0,1]  =  [0,1]
 duplicates' [1,0,1,0,1]  =  [0,1]
 duplicates' [0,1,2,1]  =  [1]
 
-duplicatesSpec :: ([Int] -> [Int]) -> Bool
-duplicatesSpec duplicates  =  and
+duplicatesSpec :: ([Int] -> [Int]) -> [Bool]
+duplicatesSpec duplicates  =  -- TODO: return list of tests instead of holds
   [ holds 360 $ \x xs -> (count (x ==) xs > 1) == elem x (duplicates xs)
   , holds 360 $ \x xs -> count (x ==) (duplicates xs) <= 1
   ]  where  count p  =  length . filter p

@@ -193,13 +193,13 @@ main = do
   -- maybe with invariant following test data there will be more pruning
   -- properties?
 
-beforeSpec :: (Int -> Tree -> Tree) -> Bool
-beforeSpec before  =  and
+beforeSpec :: (Int -> Tree -> Tree) -> [Bool]
+beforeSpec before  =  -- TODO: return list of tests instead of holds
   [ holds n $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
   ] where n = 360
 
-beyondSpec :: (Int -> Tree -> Tree) -> Bool
-beyondSpec beyond  =  and
+beyondSpec :: (Int -> Tree -> Tree) -> [Bool]
+beyondSpec beyond  =  -- TODO: return list of tests instead of holds
   [ holds n $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
   ] where n = 360
 

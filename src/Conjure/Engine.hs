@@ -104,10 +104,11 @@ conjure  =  conjureWith args
 --
 -- For example, given:
 --
--- > squareSpec :: (Int -> Int) -> Bool
--- > squareSpec square  =  square 0 == 0
--- >                    && square 1 == 1
--- >                    && square 2 == 4
+-- > squareSpec :: (Int -> Int) -> [Bool]
+-- > squareSpec square  =  [ square 0 == 0
+-- >                       , square 1 == 1
+-- >                       , square 2 == 4
+-- >                       ]
 --
 -- Then:
 --
@@ -124,13 +125,13 @@ conjure  =  conjureWith args
 --
 -- > import Test.LeanCheck (holds, exists)
 -- >
--- > squarePropertySpec :: (Int -> Int) -> Bool
+-- > squarePropertySpec :: (Int -> Int) -> [Bool]
 -- > squarePropertySpec square  =  and
 -- >   [ holds n $ \x -> square x >= x
 -- >   , holds n $ \x -> square x >= 0
 -- >   , exists n $ \x -> square x > x
 -- >   ]  where  n = 60
-conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpec :: Conjurable f => String -> (f -> [Bool]) -> [Prim] -> IO ()
 conjureFromSpec  =  conjureFromSpecWith args
 
 
@@ -138,7 +139,7 @@ conjureFromSpec  =  conjureFromSpecWith args
 --   function specification.
 --
 --   This works like the functions 'conjure' and 'conjureFromSpec' combined.
-conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0 :: Conjurable f => String -> f -> (f -> [Bool]) -> [Prim] -> IO ()
 conjure0  =  conjure0With args
 
 
@@ -201,16 +202,16 @@ args = Args
 --
 -- > conjureWith args{maxSize = 11} "function" function [...]
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
-conjureWith args nm f  =  conjure0With args nm f (const True)
+conjureWith args nm f  =  conjure0With args nm f (const [])
 
 -- | Like 'conjureFromSpec' but allows setting options through 'Args'/'args'.
 --
 -- > conjureFromSpecWith args{maxSize = 11} "function" spec [...]
-conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> [Bool]) -> [Prim] -> IO ()
 conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
 -- | Like 'conjure0' but allows setting options through 'Args'/'args'.
-conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0With :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
   when (length ts > 0) $
@@ -261,19 +262,19 @@ conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr]
 conjpure =  conjpureWith args
 
 -- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpec :: Conjurable f => String -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureFromSpec  =  conjpureFromSpecWith args
 
 -- | Like 'conjure0' but in the pure world.  (cf. 'conjpure')
-conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0 :: Conjurable f => String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0 =  conjpure0With args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
-conjpureWith args nm f  =  conjpure0With args nm f (const True)
+conjpureWith args nm f  =  conjpure0With args nm f (const [])
 
 -- | Like 'conjureFromSpecWith' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
@@ -282,14 +283,14 @@ conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 -- 'conjpure', 'conjpureWith', 'conjpureFromSpec', 'conjpureFromSpecWith',
 -- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
 -- 'conjure0' all refer to this.
-conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0With :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
-                 && errorToFalse (p (cevl maxEvalRecursions fx))
+                 && errorToFalse (and $ p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
                $  take maxSize candidatesTT
   (candidatesTT, thy)  =  candidateDefns args nm f es

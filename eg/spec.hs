@@ -6,10 +6,11 @@ import Test.LeanCheck (holds, exists)
 import Prelude hiding (sum)
 
 
-squareSpec :: (Int -> Int) -> Bool
-squareSpec square  =  square 0 == 0
-                   && square 1 == 1
-                   && square 2 == 4
+squareSpec :: (Int -> Int) -> [Bool]
+squareSpec square  =  [ square 0 == 0
+                      , square 1 == 1
+                      , square 2 == 4
+                      ]
 
 squarePrimitives :: [Prim]
 squarePrimitives  =
@@ -19,18 +20,19 @@ squarePrimitives  =
   , prim "*" ((*) :: Int -> Int -> Int)
   ]
 
-squarePropertySpec :: (Int -> Int) -> Bool
-squarePropertySpec square  =  and
+squarePropertySpec :: (Int -> Int) -> [Bool]
+squarePropertySpec square  =  -- TODO: return list of tests instead of holds/exists
   [ holds n $ \x -> square x >= x
   , holds n $ \x -> square x >= 0
   , exists n $ \x -> square x > x
   ]  where  n = 60
 
 
-sumSpec :: ([Int] -> Int) -> Bool
-sumSpec sum  =  sum []      == 0
-             && sum [1,2]   == 3
-             && sum [3,4,5] == 12
+sumSpec :: ([Int] -> Int) -> [Bool]
+sumSpec sum  =  [ sum []      == 0
+                , sum [1,2]   == 3
+                , sum [3,4,5] == 12
+                ]
 
 -- hoping for something like
 -- sum xs  =  if null xs then 0 else head xs + sum (tail xs)
@@ -45,10 +47,11 @@ sumPrimitives  =
   ]
 
 
-appSpec :: ([Int] -> [Int] -> [Int]) -> Bool
-appSpec (++)  =  []      ++ [0,1]   == [0,1]
-              && [2,3]   ++ []      == [2,3]
-              && [4,5,6] ++ [7,8,9] == [4,5,6,7,8,9]
+appSpec :: ([Int] -> [Int] -> [Int]) -> [Bool]
+appSpec (++)  =  [ []      ++ [0,1]   == [0,1]
+                 , [2,3]   ++ []      == [2,3]
+                 , [4,5,6] ++ [7,8,9] == [4,5,6,7,8,9]
+                 ]
 
 -- hoping for something like
 -- app xs ys = if null xs then ys else head xs : app (tail xs) ys

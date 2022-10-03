@@ -14,13 +14,14 @@ sum' [1,2,3]  =  6
 sum' [3,4,5]  =  12
 sum' [1,2,3,4]  =  10
 
-sumSpec :: ([Int] -> Int) -> Bool
-sumSpec sum  =  sum [] == 0
-             && sum [1] == 1
-             && sum [1,2] == 3
-             && sum [1,2,3] == 6
-             && sum [3,4,5] == 12
-             && sum [1,2,3,4] == 10
+sumSpec :: ([Int] -> Int) -> [Bool]
+sumSpec sum  =  [ sum [] == 0
+                , sum [1] == 1
+                , sum [1,2] == 3
+                , sum [1,2,3] == 6
+                , sum [3,4,5] == 12
+                , sum [1,2,3,4] == 10
+                ]
 
 main :: IO ()
 main  =  do
