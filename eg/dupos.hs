@@ -23,9 +23,9 @@ duplicates' [1,0,1,0,1]  =  [0,1]
 duplicates' [0,1,2,1]  =  [1]
 
 duplicatesSpec :: ([Int] -> [Int]) -> [Bool]
-duplicatesSpec duplicates  =  -- TODO: return list of tests instead of holds
-  [ holds 360 $ \x xs -> (count (x ==) xs > 1) == elem x (duplicates xs)
-  , holds 360 $ \x xs -> count (x ==) (duplicates xs) <= 1
+duplicatesSpec duplicates  =  properties
+  [ property $ \x xs -> (count (x ==) xs > 1) == elem x (duplicates xs)
+  , property $ \x xs -> count (x ==) (duplicates xs) <= 1
   ]  where  count p  =  length . filter p
 
 positionsFrom :: Int -> Int -> [Int] -> [Int]
@@ -69,7 +69,9 @@ main = do
     , prif (undefined :: [Int])
     ]
 
-  conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec
+  -- TODO: we need 720 here now because there are two properties, 360 + 360
+  --       Should we encode the Spec as [[Bool]] or [Property]?
+  conjureFromSpecWith args{maxSize=18, maxTests=720} "duplicates" duplicatesSpec
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)

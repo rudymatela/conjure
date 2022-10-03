@@ -194,19 +194,19 @@ main = do
   -- properties?
 
 beforeSpec :: (Int -> Tree -> Tree) -> [Bool]
-beforeSpec before  =  -- TODO: return list of tests instead of holds
-  [ holds n $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
-  ] where n = 360
+beforeSpec before  =  properties
+  [ property $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
+  ]
 
 beyondSpec :: (Int -> Tree -> Tree) -> [Bool]
-beyondSpec beyond  =  -- TODO: return list of tests instead of holds
-  [ holds n $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
-  ] where n = 360
+beyondSpec beyond  =  properties
+  [ property $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
+  ]
 
 -- unionSpec :: (Int -> Tree -> Tree) -> Bool
--- unionSpec union  =  and
---   [ holds n $ \t1 t2 -> ordered t ==> inorder (union t1 t2) == merge (inorder t1) (inorder t2)
---   ] where n = 360
+-- unionSpec union  =  properties
+--   [ property $ \t1 t2 -> ordered t ==> inorder (union t1 t2) == merge (inorder t1) (inorder t2)
+--   ]
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree

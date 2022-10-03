@@ -31,6 +31,8 @@ module Conjure.Engine
   , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
+  , property
+  , properties
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -123,14 +125,14 @@ conjure  =  conjureWith args
 -- This allows users to specify QuickCheck-style properties,
 -- here is an example using LeanCheck:
 --
--- > import Test.LeanCheck (holds, exists)
+-- > import Test.LeanCheck (exists)
 -- >
 -- > squarePropertySpec :: (Int -> Int) -> [Bool]
 -- > squarePropertySpec square  =  and
--- >   [ holds n $ \x -> square x >= x
--- >   , holds n $ \x -> square x >= 0
--- >   , exists n $ \x -> square x > x
--- >   ]  where  n = 60
+-- >   [ property $ \x -> square x >= x
+-- >   , property $ \x -> square x >= 0
+-- >   , property $ exists 60 $ \x -> square x > x
+-- >   ]
 conjureFromSpec :: Conjurable f => String -> (f -> [Bool]) -> [Prim] -> IO ()
 conjureFromSpec  =  conjureFromSpecWith args
 
@@ -649,3 +651,11 @@ delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
 
 foldAppProducts :: Expr -> [ [[Expr]] ] -> [[Expr]]
 foldAppProducts ef  =  delayedProductsWith (foldApp . (ef:))
+
+-- | Encodes a higher order property into a list of boolean results
+property :: Testable a => a -> [Bool]
+property  =  map snd . results
+
+-- | Combines several 'property' results.
+properties :: [[Bool]] -> [Bool]
+properties  =  concat . transpose

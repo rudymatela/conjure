@@ -21,11 +21,11 @@ squarePrimitives  =
   ]
 
 squarePropertySpec :: (Int -> Int) -> [Bool]
-squarePropertySpec square  =  -- TODO: return list of tests instead of holds/exists
-  [ holds n $ \x -> square x >= x
-  , holds n $ \x -> square x >= 0
-  , exists n $ \x -> square x > x
-  ]  where  n = 60
+squarePropertySpec square  =  properties
+  [ property $ \x -> square x >= x
+  , property $ \x -> square x >= 0
+  , property $ exists 60 $ \x -> square x > x
+  ]
 
 
 sumSpec :: ([Int] -> Int) -> [Bool]
