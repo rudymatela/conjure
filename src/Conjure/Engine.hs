@@ -290,7 +290,7 @@ conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, test
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
-                 && errorToFalse (and $ p (cevl maxEvalRecursions fx))
+                 && errorToFalse (and $ take maxTests $ p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
                $  take maxSize candidatesTT
   (candidatesTT, thy)  =  candidateDefns args nm f es
