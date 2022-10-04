@@ -64,11 +64,11 @@ before :: Int -> Tree -> Tree
 -- looking through 0 candidates of size 6
 -- looking through 36 candidates of size 7
 -- looking through 0 candidates of size 8
--- looking through 84 candidates of size 9
--- looking through 432 candidates of size 10
+-- looking through 114 candidates of size 9
+-- looking through 441 candidates of size 10
 -- looking through 144 candidates of size 11
--- looking through 2088 candidates of size 12
--- tested 2790 candidates
+-- looking through 2394 candidates of size 12
+-- tested 3135 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -82,10 +82,10 @@ before :: Int -> Tree -> Tree
 -- looking through 36 candidates of size 7
 -- looking through 0 candidates of size 8
 -- looking through 72 candidates of size 9
--- looking through 432 candidates of size 10
--- looking through 0 candidates of size 11
--- looking through 1800 candidates of size 12
--- tested 2346 candidates
+-- looking through 480 candidates of size 10
+-- looking through 72 candidates of size 11
+-- looking through 2016 candidates of size 12
+-- tested 2682 candidates
 cannot conjure
 
 beyond :: Int -> Tree -> Tree
@@ -99,10 +99,10 @@ beyond :: Int -> Tree -> Tree
 -- looking through 36 candidates of size 7
 -- looking through 0 candidates of size 8
 -- looking through 72 candidates of size 9
--- looking through 432 candidates of size 10
--- looking through 0 candidates of size 11
--- looking through 1800 candidates of size 12
--- tested 2346 candidates
+-- looking through 468 candidates of size 10
+-- looking through 24 candidates of size 11
+-- looking through 2016 candidates of size 12
+-- tested 2622 candidates
 cannot conjure
 
 union :: Tree -> Tree -> Tree
