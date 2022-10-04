@@ -431,7 +431,8 @@ candidateDefnsC Args{..} nm f p ps  =  (concatMapT fillingsFor fss,thy)
   inoffensive  =  and . map errorToTrue . take maxTests . p . cevl maxEvalRecursions
 
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT isRedundantDefn
+  ps2fss pats  =  filterT inoffensive
+               .  discardT isRedundantDefn
                .  discardT (allEqual . map snd)
                .  products
                $  map p2eess pats
@@ -441,7 +442,8 @@ candidateDefnsC Args{..} nm f p ps  =  (concatMapT fillingsFor fss,thy)
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
     p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
-    p2eess pat  =  mapT (pat,)
+    p2eess pat  =  filterT (inoffensive . (:[]))
+                .  mapT (pat,)
                 .  appsWith pat
                 .  tail
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]

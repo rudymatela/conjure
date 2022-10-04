@@ -59,13 +59,13 @@ cannot conjure
 
 gps4 :: [Char] -> [Char]
 -- pruning with 13/20 rules
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 22 candidates of size 4
--- looking through 54 candidates of size 5
--- looking through 124 candidates of size 6
--- tested 214 candidates
+-- looking through 0 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 7 candidates of size 4
+-- looking through 22 candidates of size 5
+-- looking through 47 candidates of size 6
+-- tested 80 candidates
 cannot conjure
 
 gps5 :: Int -> [Int]
@@ -77,17 +77,17 @@ cannot conjure
 
 tell :: [Int] -> Int -> [Int]
 -- pruning with 0/0 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 60 candidates of size 6
--- looking through 26 candidates of size 7
--- looking through 538 candidates of size 8
--- looking through 134 candidates of size 9
--- looking through 5296 candidates of size 10
--- tested 2698 candidates
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 20 candidates of size 6
+-- looking through 4 candidates of size 7
+-- looking through 200 candidates of size 8
+-- looking through 44 candidates of size 9
+-- looking through 2168 candidates of size 10
+-- tested 1855 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -275,26 +275,26 @@ cannot conjure
 spin :: [Char] -> [Char]
 -- pruning with 6/6 rules
 -- reasoning produced 1 incorrect properties, please re-run with more tests for faster results
--- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
--- looking through 4 candidates of size 8
--- tested 3 candidates
+-- looking through 1 candidates of size 8
+-- tested 1 candidates
 spin cs  =  if length cs >= 5 then reverse cs else cs
 
 gps21_spinwords :: [Char] -> [Char]
 -- pruning with 16/16 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
--- looking through 1 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 5 candidates of size 5
--- tested 12 candidates
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 1 candidates of size 5
+-- tested 1 candidates
 gps21_spinwords cs  =  unwords (map spin (words cs))
 
 digits :: Int -> [Int]
@@ -323,37 +323,37 @@ cannot conjure
 
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules
--- looking through 3 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 9 candidates of size 3
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 162 candidates of size 5
--- looking through 612 candidates of size 6
+-- looking through 324 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 0 candidates of size 8
--- looking through 3168 candidates of size 9
+-- looking through 2592 candidates of size 9
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 5184 candidates of size 12
--- tested 9143 candidates
+-- tested 8262 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
 -- pruning with 4/8 rules
 -- reasoning produced 4 incorrect properties, please re-run with more tests for faster results
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 8 candidates of size 3
--- looking through 7 candidates of size 4
--- looking through 4 candidates of size 5
--- looking through 5 candidates of size 6
--- looking through 10 candidates of size 7
--- looking through 48 candidates of size 8
--- looking through 138 candidates of size 9
--- looking through 232 candidates of size 10
--- looking through 322 candidates of size 11
--- looking through 483 candidates of size 12
--- tested 936 candidates
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 9 candidates of size 9
+-- looking through 11 candidates of size 10
+-- looking through 15 candidates of size 11
+-- looking through 21 candidates of size 12
+-- tested 57 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs then Tweet (length (c:cs)) else TooMany
 

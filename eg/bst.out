@@ -56,53 +56,53 @@ cannot conjure
 
 before :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 21 candidates of size 5
+-- looking through 6 candidates of size 4
+-- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 118 candidates of size 7
--- looking through 239 candidates of size 8
--- looking through 216 candidates of size 9
--- looking through 2204 candidates of size 10
--- looking through 3651 candidates of size 11
--- looking through 8280 candidates of size 12
--- tested 14743 candidates
+-- looking through 36 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 84 candidates of size 9
+-- looking through 432 candidates of size 10
+-- looking through 144 candidates of size 11
+-- looking through 2088 candidates of size 12
+-- tested 2790 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
 -- pruning with 2/4 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 21 candidates of size 5
+-- looking through 6 candidates of size 4
+-- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 94 candidates of size 7
--- looking through 287 candidates of size 8
+-- looking through 36 candidates of size 7
+-- looking through 0 candidates of size 8
 -- looking through 72 candidates of size 9
--- looking through 1784 candidates of size 10
--- looking through 5103 candidates of size 11
--- looking through 3312 candidates of size 12
--- tested 10687 candidates
+-- looking through 432 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 1800 candidates of size 12
+-- tested 2346 candidates
 cannot conjure
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 2/4 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 21 candidates of size 5
+-- looking through 6 candidates of size 4
+-- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 94 candidates of size 7
--- looking through 287 candidates of size 8
+-- looking through 36 candidates of size 7
+-- looking through 0 candidates of size 8
 -- looking through 72 candidates of size 9
--- looking through 1784 candidates of size 10
--- looking through 5103 candidates of size 11
--- looking through 3312 candidates of size 12
--- tested 10687 candidates
+-- looking through 432 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 1800 candidates of size 12
+-- tested 2346 candidates
 cannot conjure
 
 union :: Tree -> Tree -> Tree
