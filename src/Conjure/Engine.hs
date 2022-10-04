@@ -428,7 +428,7 @@ candidateDefnsC Args{..} nm f p ps  =  (concatMapT fillingsFor fss,thy)
 
   -- Defn either passes the tests or fails with an error
   inoffensive :: Defn -> Bool
-  inoffensive  =  and . map errorToTrue . take 60 . p . cevl maxEvalRecursions
+  inoffensive  =  and . map errorToTrue . take maxTests . p . cevl maxEvalRecursions
 
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundantDefn
