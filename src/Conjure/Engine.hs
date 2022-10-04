@@ -295,7 +295,7 @@ conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, test
                  && errorToFalse (and $ take maxTests $ p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
                $  take maxSize candidatesTT
-  (candidatesTT, thy)  =  candidateDefns args nm f es
+  (candidatesTT, thy)  =  candidateDefns args nm f p es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
@@ -330,7 +330,7 @@ conjureTheoryWith args nm f es  =  do
 
 
 -- | Return apparently unique candidate definitions.
-candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateDefns :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], Thy)
 candidateDefns args  =  candidateDefns' args
   where
   candidateDefns'  =  if usePatterns args
@@ -354,8 +354,8 @@ nubCandidates Args{..} nm f  =  discardLaterT (===)
 
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
-candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns1 args nm f ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
+candidateDefns1 :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], Thy)
+candidateDefns1 args nm f _ ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
   where
   mapFst f (x,y)  =  (f x, y)
   efxs  =  conjureVarApplication nm f
@@ -410,8 +410,8 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
-candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
+candidateDefnsC :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], Thy)
+candidateDefnsC Args{..} nm f p ps  =  (concatMapT fillingsFor fss,thy)
   where
   pats  =  conjurePats es nm f
   fss  =  concatMapT ps2fss pats
@@ -425,6 +425,10 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
 
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh keep $ vs ++ es
+
+  -- Defn either passes the tests or fails with an error
+  inoffensive :: Defn -> Bool
+  inoffensive  =  and . map errorToTrue . take 60 . p . cevl maxEvalRecursions
 
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundantDefn
