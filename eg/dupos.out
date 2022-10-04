@@ -33,15 +33,15 @@ duplicates :: [Int] -> [Int]
 -- looking through 0 candidates of size 7
 -- looking through 2 candidates of size 8
 -- looking through 5 candidates of size 9
--- looking through 11 candidates of size 10
+-- looking through 12 candidates of size 10
 -- looking through 13 candidates of size 11
 -- looking through 25 candidates of size 12
 -- looking through 51 candidates of size 13
 -- looking through 140 candidates of size 14
--- looking through 274 candidates of size 15
--- looking through 551 candidates of size 16
--- looking through 929 candidates of size 17
--- tested 1204 candidates
+-- looking through 293 candidates of size 15
+-- looking through 571 candidates of size 16
+-- looking through 979 candidates of size 17
+-- tested 1244 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 
