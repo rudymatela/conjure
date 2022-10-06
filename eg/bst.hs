@@ -193,20 +193,20 @@ main = do
   -- maybe with invariant following test data there will be more pruning
   -- properties?
 
-beforeSpec :: (Int -> Tree -> Tree) -> Bool
-beforeSpec before  =  and
-  [ holds n $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
-  ] where n = 360
+beforeSpec :: (Int -> Tree -> Tree) -> [Bool]
+beforeSpec before  =  properties
+  [ property $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
+  ]
 
-beyondSpec :: (Int -> Tree -> Tree) -> Bool
-beyondSpec beyond  =  and
-  [ holds n $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
-  ] where n = 360
+beyondSpec :: (Int -> Tree -> Tree) -> [Bool]
+beyondSpec beyond  =  properties
+  [ property $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
+  ]
 
 -- unionSpec :: (Int -> Tree -> Tree) -> Bool
--- unionSpec union  =  and
---   [ holds n $ \t1 t2 -> ordered t ==> inorder (union t1 t2) == merge (inorder t1) (inorder t2)
---   ] where n = 360
+-- unionSpec union  =  properties
+--   [ property $ \t1 t2 -> ordered t ==> inorder (union t1 t2) == merge (inorder t1) (inorder t2)
+--   ]
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree

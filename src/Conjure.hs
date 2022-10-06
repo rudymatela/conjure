@@ -62,6 +62,8 @@ module Conjure
 -- * Conjuring from a specification
   , conjureFromSpec
   , conjureFromSpecWith
+  , property
+  , properties
 
 -- * When using custom types
   , Conjurable (conjureExpress, conjureEquality, conjureTiers, conjureCases, conjureSubTypes, conjureSize)

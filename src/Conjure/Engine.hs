@@ -31,6 +31,8 @@ module Conjure.Engine
   , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
+  , property
+  , properties
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -104,10 +106,11 @@ conjure  =  conjureWith args
 --
 -- For example, given:
 --
--- > squareSpec :: (Int -> Int) -> Bool
--- > squareSpec square  =  square 0 == 0
--- >                    && square 1 == 1
--- >                    && square 2 == 4
+-- > squareSpec :: (Int -> Int) -> [Bool]
+-- > squareSpec square  =  [ square 0 == 0
+-- >                       , square 1 == 1
+-- >                       , square 2 == 4
+-- >                       ]
 --
 -- Then:
 --
@@ -122,15 +125,15 @@ conjure  =  conjureWith args
 -- This allows users to specify QuickCheck-style properties,
 -- here is an example using LeanCheck:
 --
--- > import Test.LeanCheck (holds, exists)
+-- > import Test.LeanCheck (exists)
 -- >
--- > squarePropertySpec :: (Int -> Int) -> Bool
+-- > squarePropertySpec :: (Int -> Int) -> [Bool]
 -- > squarePropertySpec square  =  and
--- >   [ holds n $ \x -> square x >= x
--- >   , holds n $ \x -> square x >= 0
--- >   , exists n $ \x -> square x > x
--- >   ]  where  n = 60
-conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
+-- >   [ property $ \x -> square x >= x
+-- >   , property $ \x -> square x >= 0
+-- >   , property $ exists 60 $ \x -> square x > x
+-- >   ]
+conjureFromSpec :: Conjurable f => String -> (f -> [Bool]) -> [Prim] -> IO ()
 conjureFromSpec  =  conjureFromSpecWith args
 
 
@@ -138,7 +141,7 @@ conjureFromSpec  =  conjureFromSpecWith args
 --   function specification.
 --
 --   This works like the functions 'conjure' and 'conjureFromSpec' combined.
-conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0 :: Conjurable f => String -> f -> (f -> [Bool]) -> [Prim] -> IO ()
 conjure0  =  conjure0With args
 
 
@@ -201,16 +204,16 @@ args = Args
 --
 -- > conjureWith args{maxSize = 11} "function" function [...]
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
-conjureWith args nm f  =  conjure0With args nm f (const True)
+conjureWith args nm f  =  conjure0With args nm f (const [])
 
 -- | Like 'conjureFromSpec' but allows setting options through 'Args'/'args'.
 --
 -- > conjureFromSpecWith args{maxSize = 11} "function" spec [...]
-conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> [Bool]) -> [Prim] -> IO ()
 conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
 -- | Like 'conjure0' but allows setting options through 'Args'/'args'.
-conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0With :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
   when (length ts > 0) $
@@ -261,19 +264,19 @@ conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr]
 conjpure =  conjpureWith args
 
 -- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpec :: Conjurable f => String -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureFromSpec  =  conjpureFromSpecWith args
 
 -- | Like 'conjure0' but in the pure world.  (cf. 'conjpure')
-conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0 :: Conjurable f => String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0 =  conjpure0With args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
 conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
-conjpureWith args nm f  =  conjpure0With args nm f (const True)
+conjpureWith args nm f  =  conjpure0With args nm f (const [])
 
 -- | Like 'conjureFromSpecWith' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
@@ -282,17 +285,17 @@ conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 -- 'conjpure', 'conjpureWith', 'conjpureFromSpec', 'conjpureFromSpecWith',
 -- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
 -- 'conjure0' all refer to this.
-conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0With :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
 conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
-                 && errorToFalse (p (cevl maxEvalRecursions fx))
+                 && errorToFalse (and $ take maxTests $ p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
                $  take maxSize candidatesTT
-  (candidatesTT, thy)  =  candidateDefns args nm f es
+  (candidatesTT, thy)  =  candidateDefns args nm f p es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
   (rrff:xxs)  =  unfoldApp vffxx
@@ -327,7 +330,7 @@ conjureTheoryWith args nm f es  =  do
 
 
 -- | Return apparently unique candidate definitions.
-candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
+candidateDefns :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], Thy)
 candidateDefns args  =  candidateDefns' args
   where
   candidateDefns'  =  if usePatterns args
@@ -351,8 +354,8 @@ nubCandidates Args{..} nm f  =  discardLaterT (===)
 
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
-candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns1 args nm f ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
+candidateDefns1 :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], Thy)
+candidateDefns1 args nm f _ ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
   where
   mapFst f (x,y)  =  (f x, y)
   efxs  =  conjureVarApplication nm f
@@ -407,8 +410,8 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
-candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
+candidateDefnsC :: Conjurable f => Args -> String -> f -> (f -> [Bool]) -> [Prim] -> ([[Defn]], Thy)
+candidateDefnsC Args{..} nm f p ps  =  (concatMapT fillingsFor fss,thy)
   where
   pats  =  conjurePats es nm f
   fss  =  concatMapT ps2fss pats
@@ -423,8 +426,13 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh keep $ vs ++ es
 
+  -- Defn either passes the tests or fails with an error
+  inoffensive :: Defn -> Bool
+  inoffensive  =  and . map errorToTrue . take 12 . p . cevl maxEvalRecursions
+
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT isRedundantDefn
+  ps2fss pats  =  filterT inoffensive
+               .  discardT isRedundantDefn
                .  discardT (allEqual . map snd)
                .  products
                $  map p2eess pats
@@ -434,7 +442,8 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
     p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
-    p2eess pat  =  mapT (pat,)
+    p2eess pat  =  filterT (inoffensive . (:[]))
+                .  mapT (pat,)
                 .  appsWith pat
                 .  tail
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
@@ -648,3 +657,11 @@ delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
 
 foldAppProducts :: Expr -> [ [[Expr]] ] -> [[Expr]]
 foldAppProducts ef  =  delayedProductsWith (foldApp . (ef:))
+
+-- | Encodes a higher order property into a list of boolean results
+property :: Testable a => a -> [Bool]
+property  =  map snd . results
+
+-- | Combines several 'property' results.
+properties :: [[Bool]] -> [Bool]
+properties  =  concat . transpose
