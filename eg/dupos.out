@@ -25,23 +25,23 @@ duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplic
 duplicates :: [Int] -> [Int]
 -- pruning with 21/26 rules
 -- looking through 0 candidates of size 1
--- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 5 candidates of size 8
--- looking through 7 candidates of size 9
--- looking through 14 candidates of size 10
+-- looking through 0 candidates of size 7
+-- looking through 3 candidates of size 8
+-- looking through 6 candidates of size 9
+-- looking through 13 candidates of size 10
 -- looking through 13 candidates of size 11
--- looking through 35 candidates of size 12
--- looking through 85 candidates of size 13
--- looking through 202 candidates of size 14
--- looking through 412 candidates of size 15
--- looking through 705 candidates of size 16
--- looking through 1310 candidates of size 17
--- tested 1621 candidates
+-- looking through 27 candidates of size 12
+-- looking through 61 candidates of size 13
+-- looking through 157 candidates of size 14
+-- looking through 332 candidates of size 15
+-- looking through 611 candidates of size 16
+-- looking through 1076 candidates of size 17
+-- tested 1359 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
 
