@@ -442,6 +442,14 @@ candidateDefnsC Args{..} nm f p ps  =  (concatMapT fillingsFor fss,thy)
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
     p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
+    -- TODO: the "inoffensive" filter here should not be used for patterns that
+    --       can be overridden by other patterns, e.g.:
+    --
+    --       > foo 0 = ...
+    --       > foo x = ...
+    --
+    --       In the above case, the second pattern is never used for zero
+    --       so whatever zero value is not offending to the property.
     p2eess pat  =  filterT (inoffensive . (:[]))
                 .  mapT (pat,)
                 .  appsWith pat
