@@ -21,11 +21,7 @@ A non-exhaustive list of things TO DO for Conjure.
 
 ### for later
 
-* allow specifying properties that need to be true
-
-* allow recursion under any lazy functions (discover them by testing!)
-
-* pretty-print top-level ifs?
+* pretty-print top-level if and case expressions?
 
 * exclude magic numbers?  e.g.: `1+1`?
 
