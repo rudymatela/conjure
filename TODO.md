@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* test `conjureCases` from `deriveConjurable`;
-
-* consider not breaking in some cases (increased crossproduct of patterns)
-
 * reduce the number of `deconstructions` considered:
 
 	1. place a `traceShowId` in `deconstructions :: [Expr]`
@@ -22,6 +18,10 @@ A non-exhaustive list of things TO DO for Conjure.
 ### for later
 
 * pretty-print top-level if and case expressions?
+
+* consider not breaking arguments in some cases
+  (increased crossproduct of patterns).
+  but which cases?
 
 * exclude magic numbers?  e.g.: `1+1`?
 
