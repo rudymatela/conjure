@@ -466,7 +466,7 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
     deconstructions  =  filter (conjureIsDeconstruction f maxTests)
                      $  concatMap candidateDeconstructionsFrom
                      $  concat . take maxDeconstructionSize
-                     $  concatMapT (`appsWith` vars ep) [hs]
+                     $  concatMapT (`appsWith` tail (vars ep)) [hs]
       where
       hs  =  nub $ conjureArgumentHoles f
   recs ep  =  filterT (keepR ep)
