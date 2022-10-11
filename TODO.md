@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* check why gps13 result is different on 8a9053bd236f99d36bc42238728880a76afc2d32;
-
 * test `conjureCases` from `deriveConjurable`;
 
 * consider not breaking in some cases (increased crossproduct of patterns)

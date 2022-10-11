@@ -440,7 +440,8 @@ gps12c  =  do
 
 gps13p :: [Rational] -> Rational
 gps13p [0,2]  =  1
-gps13p [1,2,3]  =  2
+gps13p [1,3]  =  2
+gps13p [1,2,3]  =  2  -- not hit, but nvm
 gps13p [0,0,2,2]  =  1
 
 gps13g :: [Rational] -> Rational
