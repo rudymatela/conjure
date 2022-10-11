@@ -452,7 +452,6 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
   fillingsFor :: Defn -> [[Defn]]
   fillingsFor  =  products . map fillingsFor1
 
-  ds  =  filter (conjureIsDeconstructor f maxTests) es
   keepR ep | requireDescent  =  descends isDecOf ep
            | otherwise       =  const True
     where
