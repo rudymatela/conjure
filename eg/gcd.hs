@@ -23,5 +23,16 @@ main = conjure "gcd a b" gcd'
   , prim "`mod`" (mod :: Int -> Int -> Int)
   ]
   -- desired function:
-  -- gcd a b  =  if b == 0 then a else gcd b (a `mod` b)
-  --             1  2 3  4      5      6   7  8  9   10
+  -- gcd x 0  =  x
+  -- gcd x y  =  gcd y (x `mod` y)
+
+-- Degenerate case:
+-- The number of candidates in this example is big,
+-- if we set showTheory = True we can see why:
+-- no properties are discovered.
+--
+-- Since
+-- 0 `mod` 0 = undefined
+-- Speculate has no way of discovering that
+-- x `mod` x = 0
+-- in all other cases.

@@ -9642,3 +9642,2413 @@ p &| q  =  q && p || not p
 p &| q  =  q && p || not q
 
 
+Candidates for: gcd :: Int -> Int -> Int
+  pruning with 0/0 rules
+  [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
+  [3,7,18,60,150,469,1221,3812,10346] pattern candidates, 0 duplicates
+
+no rules.
+
+direct candidates:
+
+gcd x y  =  x
+
+gcd x y  =  y
+
+gcd x y  =  0
+
+gcd x y  =  x `mod` x
+
+gcd x y  =  x `mod` y
+
+gcd x y  =  x `mod` 0
+
+gcd x y  =  y `mod` x
+
+gcd x y  =  y `mod` y
+
+gcd x y  =  y `mod` 0
+
+gcd x y  =  0 `mod` x
+
+gcd x y  =  0 `mod` y
+
+gcd x y  =  0 `mod` 0
+
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd x y  =  (0 `mod` 0) `mod` 0
+
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd x y  =  x `mod` (0 `mod` 0)
+
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd x y  =  y `mod` (0 `mod` 0)
+
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x y  =  0 `mod` (0 `mod` 0)
+
+
+pattern candidates:
+
+gcd x y  =  x
+
+gcd x y  =  y
+
+gcd x y  =  0
+
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 x  =  x
+gcd x y  =  0
+
+gcd 0 x  =  0
+gcd x y  =  x
+
+gcd 0 x  =  0
+gcd x y  =  y
+
+gcd x y  =  x `mod` x
+
+gcd x y  =  x `mod` y
+
+gcd x y  =  x `mod` 0
+
+gcd x y  =  y `mod` x
+
+gcd x y  =  y `mod` y
+
+gcd x y  =  y `mod` 0
+
+gcd x y  =  0 `mod` x
+
+gcd x y  =  0 `mod` y
+
+gcd x y  =  0 `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd x 0  =  x
+gcd x y  =  x `mod` x
+
+gcd x 0  =  x
+gcd x y  =  x `mod` y
+
+gcd x 0  =  x
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  y `mod` x
+
+gcd x 0  =  x
+gcd x y  =  y `mod` y
+
+gcd x 0  =  x
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  x `mod` x
+
+gcd x 0  =  0
+gcd x y  =  x `mod` y
+
+gcd x 0  =  0
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  y `mod` x
+
+gcd x 0  =  0
+gcd x y  =  y `mod` y
+
+gcd x 0  =  0
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` 0
+
+gcd x 0  =  x `mod` x
+gcd x y  =  x
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y
+
+gcd x 0  =  x `mod` x
+gcd x y  =  0
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` 0
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  0
+
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd x y  =  (0 `mod` 0) `mod` 0
+
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd x y  =  x `mod` (0 `mod` 0)
+
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd x y  =  y `mod` (0 `mod` 0)
+
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x y  =  0 `mod` (0 `mod` 0)
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  x `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  x `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  x `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  y `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  y `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  y `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  0 `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  0 `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  0 `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  x `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  x `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  x `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  y `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  y `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  y `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  0 `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  0 `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  0 `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x `mod` x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x `mod` x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x `mod` x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x `mod` 0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x `mod` 0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  x `mod` 0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0 `mod` x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0 `mod` x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0 `mod` x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0 `mod` 0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0 `mod` 0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x
+gcd x 0  =  0 `mod` 0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  x `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  x `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  x `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  y `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  y `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  y `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  0 `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  0 `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  0 `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  x `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  x `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  x `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  y `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  y `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  y `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  0 `mod` x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  0 `mod` y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  0 `mod` 0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x `mod` x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x `mod` x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x `mod` x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x `mod` 0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x `mod` 0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  x `mod` 0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0 `mod` x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0 `mod` x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0 `mod` x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0 `mod` 0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0 `mod` 0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0
+gcd x 0  =  0 `mod` 0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` x
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` x
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` x
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` x
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` x
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` x
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` 0
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` 0
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` 0
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` 0
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` 0
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  x `mod` 0
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` x
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` x
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` x
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` x
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` x
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` x
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` 0
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` 0
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` 0
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` 0
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` 0
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 0  =  0
+gcd 0 x  =  0 `mod` 0
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  x
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  y
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  y
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  0
+gcd x y  =  0
+
+gcd x 0  =  x
+gcd x y  =  gcd x (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd x (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  gcd x (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd x (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd y (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd y (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  gcd y (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd y (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd 0 (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd 0 (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  gcd 0 (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd 0 (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  gcd (x `mod` x) x
+
+gcd x 0  =  x
+gcd x y  =  gcd (x `mod` x) y
+
+gcd x 0  =  x
+gcd x y  =  gcd (x `mod` x) 0
+
+gcd x 0  =  x
+gcd x y  =  gcd (x `mod` y) x
+
+gcd x 0  =  x
+gcd x y  =  gcd (x `mod` y) y
+
+gcd x 0  =  x
+gcd x y  =  gcd (x `mod` y) 0
+
+gcd x 0  =  x
+gcd x y  =  gcd (y `mod` x) x
+
+gcd x 0  =  x
+gcd x y  =  gcd (y `mod` x) y
+
+gcd x 0  =  x
+gcd x y  =  gcd (y `mod` x) 0
+
+gcd x 0  =  x
+gcd x y  =  gcd (0 `mod` x) x
+
+gcd x 0  =  x
+gcd x y  =  gcd (0 `mod` x) y
+
+gcd x 0  =  x
+gcd x y  =  gcd (0 `mod` x) 0
+
+gcd x 0  =  0
+gcd x y  =  gcd x (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd x (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  gcd x (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd x (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd y (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd y (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  gcd y (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd y (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd 0 (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd 0 (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  gcd 0 (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd 0 (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  gcd (x `mod` x) x
+
+gcd x 0  =  0
+gcd x y  =  gcd (x `mod` x) y
+
+gcd x 0  =  0
+gcd x y  =  gcd (x `mod` x) 0
+
+gcd x 0  =  0
+gcd x y  =  gcd (x `mod` y) x
+
+gcd x 0  =  0
+gcd x y  =  gcd (x `mod` y) y
+
+gcd x 0  =  0
+gcd x y  =  gcd (x `mod` y) 0
+
+gcd x 0  =  0
+gcd x y  =  gcd (y `mod` x) x
+
+gcd x 0  =  0
+gcd x y  =  gcd (y `mod` x) y
+
+gcd x 0  =  0
+gcd x y  =  gcd (y `mod` x) 0
+
+gcd x 0  =  0
+gcd x y  =  gcd (0 `mod` x) x
+
+gcd x 0  =  0
+gcd x y  =  gcd (0 `mod` x) y
+
+gcd x 0  =  0
+gcd x y  =  gcd (0 `mod` x) 0
+
+gcd 0 x  =  x
+gcd x y  =  gcd x (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd x (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  gcd x (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd x (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd y (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd y (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  gcd y (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd y (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd 0 (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd 0 (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  gcd 0 (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd 0 (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  gcd (x `mod` x) x
+
+gcd 0 x  =  x
+gcd x y  =  gcd (x `mod` x) y
+
+gcd 0 x  =  x
+gcd x y  =  gcd (x `mod` x) 0
+
+gcd 0 x  =  x
+gcd x y  =  gcd (x `mod` y) x
+
+gcd 0 x  =  x
+gcd x y  =  gcd (x `mod` y) y
+
+gcd 0 x  =  x
+gcd x y  =  gcd (x `mod` y) 0
+
+gcd 0 x  =  x
+gcd x y  =  gcd (y `mod` x) x
+
+gcd 0 x  =  x
+gcd x y  =  gcd (y `mod` x) y
+
+gcd 0 x  =  x
+gcd x y  =  gcd (y `mod` x) 0
+
+gcd 0 x  =  x
+gcd x y  =  gcd (0 `mod` x) x
+
+gcd 0 x  =  x
+gcd x y  =  gcd (0 `mod` x) y
+
+gcd 0 x  =  x
+gcd x y  =  gcd (0 `mod` x) 0
+
+gcd 0 x  =  0
+gcd x y  =  gcd x (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd x (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  gcd x (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd x (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd y (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd y (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  gcd y (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd y (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd 0 (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd 0 (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  gcd 0 (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd 0 (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  gcd (x `mod` x) x
+
+gcd 0 x  =  0
+gcd x y  =  gcd (x `mod` x) y
+
+gcd 0 x  =  0
+gcd x y  =  gcd (x `mod` x) 0
+
+gcd 0 x  =  0
+gcd x y  =  gcd (x `mod` y) x
+
+gcd 0 x  =  0
+gcd x y  =  gcd (x `mod` y) y
+
+gcd 0 x  =  0
+gcd x y  =  gcd (x `mod` y) 0
+
+gcd 0 x  =  0
+gcd x y  =  gcd (y `mod` x) x
+
+gcd 0 x  =  0
+gcd x y  =  gcd (y `mod` x) y
+
+gcd 0 x  =  0
+gcd x y  =  gcd (y `mod` x) 0
+
+gcd 0 x  =  0
+gcd x y  =  gcd (0 `mod` x) x
+
+gcd 0 x  =  0
+gcd x y  =  gcd (0 `mod` x) y
+
+gcd 0 x  =  0
+gcd x y  =  gcd (0 `mod` x) 0
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` 0) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (0 `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (0 `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (0 `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (0 `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (0 `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (0 `mod` 0)
+
+gcd x 0  =  x `mod` x
+gcd x y  =  x `mod` y
+
+gcd x 0  =  x `mod` x
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y `mod` x
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y `mod` y
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  x `mod` x
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  x `mod` x
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  x `mod` x
+gcd x y  =  0 `mod` 0
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  x `mod` x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  x `mod` y
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y `mod` x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y `mod` y
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  0 `mod` 0
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x `mod` x
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x `mod` y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  y `mod` x
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  y `mod` y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  0 `mod` 0
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  x `mod` x
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  x `mod` y
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  y `mod` x
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  y `mod` y
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  0 `mod` 0
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  (0 `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (0 `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (0 `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (0 `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (0 `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (0 `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (0 `mod` 0)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (0 `mod` 0)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (0 `mod` 0)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (0 `mod` 0)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (0 `mod` 0)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (0 `mod` 0)
+gcd x y  =  0
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` 0) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (0 `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (0 `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (0 `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (0 `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (0 `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (0 `mod` 0)
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  0 `mod` 0
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  0 `mod` 0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  0 `mod` 0
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  0 `mod` 0
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (0 `mod` 0)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (0 `mod` 0)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (0 `mod` 0)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (0 `mod` 0)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (0 `mod` 0)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (0 `mod` 0)
+gcd x y  =  0
+
+

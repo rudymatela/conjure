@@ -75,3 +75,13 @@ main  =  do
     , prim "||" (||)
     , prim "not" not
     ]
+
+  -- Degenerate case:
+  -- lots of redundancy, since 0 `mod` 0 = undefined
+  -- Speculate is not able to discover that x `mod` x = 0
+  -- nevertheless useful for observing candidate filtering
+  -- through other means
+  printCandidates 9 6 "gcd" (undefined :: Int -> Int -> Int)
+    [ pr (0::Int)
+    , prim "`mod`" (mod :: Int -> Int -> Int)
+    ]
