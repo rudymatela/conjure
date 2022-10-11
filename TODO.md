@@ -21,43 +21,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 ### for later
 
-* use feedback from testing to prune candidates,
-	there are a few ways of doing this:
-
-	1. inspect what happens after the fact and restart enumeration with some
-		pattern results fixed.
-
-	2. replace the Spec interface by something that returns a list of booleans
-		instead of a single boolean:
-
-			conjureFromSpec :: Conjurable f => String -> (f -> [Bool]) -> [Prim] -> IO ()
-
-		It is hard to reason about the result of tests if the spec is just `f
-		-> Bool`.  Having it granulated with several booleans is beneficial,
-		because for each boolean we can compute its three results:
-
-			False
-			True
-			error/bottom/undefined
-
-		From a specific pattern result (ps2fss/p2eess, near copyBindings) we
-		can build a partial definition with just the value for that single
-		pattern defined:
-
-			factorial 1  =  3
-			factorial x  =  undefined
-
-		If we test this function using the Spec and we get a single proper
-		`False` result, this means that the pattern cannot appear in the
-		desired definition.  If we get no False, but only True or undefined
-		values there's nothing we can say about the pattern and it is kept in
-		the enumeration.
-
-		This should reduce the search space specially on the `eg/bst, union`
-		example.  For reference, if I manually prune the search space by
-		limiting ourselves with functions with less than 2 patterns the desired
-		union definition is found.
-
 * allow specifying properties that need to be true
 
 * allow recursion under any lazy functions (discover them by testing!)
