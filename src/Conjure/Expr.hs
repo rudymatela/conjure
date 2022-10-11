@@ -29,6 +29,7 @@ module Conjure.Expr
   , revaluate
   , reval
   , useMatches
+  , deholings
 
   , enumerateAppsFor
   , enumerateFillings
@@ -430,6 +431,27 @@ rehole :: Expr -> Expr
 rehole (e1 :$ e2)    = rehole e1 :$ rehole e2
 rehole e | isVar e   = "" `varAsTypeOf` e
          | otherwise = e
+
+-- | Takes two expressions and returns all possible ways
+--   in which the first expression can appear once in
+--   one of the holes of the second expression.
+--
+-- > > deholings zero (i_ -+- i_ -+- i_)
+-- > [ (0 + _) + _ :: Int
+-- > , (_ + 0) + _ :: Int
+-- > , (_ + _) + 0 :: Int
+-- > ]
+--
+-- > > deholings zero (i_ -+- one -+- ord' c_)
+-- > [(0 + 1) + ord _ :: Int]
+deholings :: Expr -> Expr -> [Expr]
+deholings e'  =  deh
+  where
+  deh (e1 :$ e2)  =  map (:$ e2) (deh e1)
+                  ++ map (e1 :$) (deh e2)
+  deh e  =  if typ e == typ e' && isHole e
+            then [e']
+            else []
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

@@ -320,6 +320,19 @@ tests n  =
   , candidateDeconstructionsFrom (div' xx xx) == []
   , candidateDeconstructionsFrom ((xx -+- xx) -+- yy) == [(xx -+- xx) -+- i_]
 
+  , candidateDeconstructionsFromHoled (div' i_ i_) == [ div' i_ xx
+                                                      , div' xx i_
+                                                      ]
+  , candidateDeconstructionsFromHoled (div' xx yy) == []
+  , candidateDeconstructionsFromHoled ((i_ -+- i_) -+- i_) ==
+      [ (i_ -+- xx) -+- yy
+      , (i_ -+- xx) -+- xx
+      , (xx -+- i_) -+- yy
+      , (xx -+- i_) -+- xx
+      , (xx -+- yy) -+- i_
+      , (xx -+- xx) -+- i_
+      ]
+
   , fromDynamic (conjureDynamicEq ((+) :: Int -> Int -> Int) `dynApp` toDyn (1::Int) `dynApp` toDyn (2::Int))
     == Just False
   , fromDynamic (conjureDynamicEq ((+) :: Int -> Int -> Int) `dynApp` toDyn (1::Int) `dynApp` toDyn (1::Int))

@@ -460,13 +460,18 @@ candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
                     [  ()
                     |  d <- deconstructions
                     ,  m <- maybeToList (e `match` d)
-                    ,  filter (uncurry (/=)) m == [(holeAsTypeOf e', e')]
+                       -- h (_) is bound to e'
+                    ,  lookup h m == Just e'
+                       -- other than (h,e') we only accept (var,var)
+                    ,  all (\(e1,e2) -> e1 == h || isVar e2) m
                     ]
+      where
+      h = holeAsTypeOf e'
     deconstructions :: [Expr]
     deconstructions  =  filter (conjureIsDeconstruction f maxTests)
-                     $  concatMap candidateDeconstructionsFrom
+                     $  concatMap candidateDeconstructionsFromHoled
                      $  concat . take maxDeconstructionSize
-                     $  concatMapT (`appsWith` tail (vars ep)) [hs]
+                     $  concatMapT (`appsWith` hs) [hs]
       where
       hs  =  nub $ conjureArgumentHoles f
   recs ep  =  filterT (keepR ep)

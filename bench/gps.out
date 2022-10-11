@@ -91,9 +91,9 @@ gps6 :: Int -> Int
 -- looking through 3 candidates of size 2
 -- looking through 27 candidates of size 3
 -- looking through 32 candidates of size 4
--- looking through 505 candidates of size 5
--- looking through 529 candidates of size 6
--- tested 1100 candidates
+-- looking through 506 candidates of size 5
+-- looking through 530 candidates of size 6
+-- tested 1102 candidates
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -243,8 +243,8 @@ odd :: Int -> Bool
 -- looking through 0 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 7 candidates of size 4
--- looking through 82 candidates of size 5
--- tested 28 candidates
+-- looking through 83 candidates of size 5
+-- tested 29 candidates
 odd x  =  x `mod` 2 /= 0
 
 gps14 :: [Int] -> Int

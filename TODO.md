@@ -3,17 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* reduce the number of `deconstructions` considered:
-
-	1. place a `traceShowId` in `deconstructions :: [Expr]`
-	2. run the GCD example
-
-		[_ `mod` y :: Int,x `mod` _ :: Int,_ `mod` x :: Int,y `mod` _ :: Int,0 `mod` _ :: Int,0 `mod` _ :: Int]
-
-	3. there's no need to go variable by variable.  Just generating expressions
-	   with a _single hole_ should be enough.
-
-
 
 ### for later
 

@@ -9645,7 +9645,7 @@ p &| q  =  q && p || not q
 Candidates for: gcd :: Int -> Int -> Int
   pruning with 0/0 rules
   [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
-  [3,7,18,60,150,469,1221,3812,10346] pattern candidates, 0 duplicates
+  [3,7,18,60,150,469,1245,3812,10634] pattern candidates, 0 duplicates
 
 no rules.
 

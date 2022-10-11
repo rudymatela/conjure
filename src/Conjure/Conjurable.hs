@@ -29,6 +29,7 @@ module Conjure.Conjurable
   , conjureIsDeconstructor
   , conjureIsDeconstruction
   , candidateDeconstructionsFrom
+  , candidateDeconstructionsFromHoled
   , conjureIsUnbreakable
   , conjureReification
   , conjureReification1
@@ -361,11 +362,18 @@ conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                $  e `match` ed
   err  =  error "conjureIsDeconstructor: the impossible happened"
 
+
 -- | Compute candidate deconstructions from an 'Expr'.
 --
--- This is used in the implementation of
--- 'Conjure.Engine.candidateDefnsC' and 'Conjure.Engine.candidateExprs'
+-- This is used in the implementation of 'Conjure.Engine.candidateDefnsC'
 -- followed by 'conjureIsDeconstruction'.
+--
+-- > > candidateDeconstructionsFrom (xx `mod'` yy)
+-- > [ _ `mod` y
+-- > , x `mod` _
+-- > ]
+--
+-- To be constrasted with 'candidateDeconstructionsFromHoled'.
 candidateDeconstructionsFrom :: Expr -> [Expr]
 candidateDeconstructionsFrom e  =
   [ e'
@@ -374,6 +382,31 @@ candidateDeconstructionsFrom e  =
   , let e' = e //- [(v, holeAsTypeOf v)]
   , length (holes e') == 1
   ]
+
+-- | Compute candidate deconstructions from an 'Expr'.
+--
+-- This is used in the implementation of 'Conjure.Engine.candidateExprs'
+-- followed by 'conjureIsDeconstruction'.
+--
+-- This is similar to 'canonicalVariations'
+-- but always leaves a hole
+-- of the same return type as the given expression.
+--
+-- > > candidateDeconstructionsFrom (i_ `mod'` i_)
+-- > [ _ `mod` x
+-- > , x `mod` _
+-- > ]
+--
+-- To be contrasted with 'candidateDeconstructionsFrom'
+candidateDeconstructionsFromHoled :: Expr -> [Expr]
+candidateDeconstructionsFromHoled e  =  map (//- [(v, h)])
+                                     $  concatMap canonicalVariations
+                                     $  deholings v e
+  where
+  h  =  holeAsTypeOf e
+  v  =  "_#_" `varAsTypeOf` e  -- a marker variable with an invalid name
+  -- at some point I should get rid of candidateDeconstructionsFrom in favour
+  -- of this one
 
 -- | Checks if an 'Expr' is of an unbreakable type.
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
