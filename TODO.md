@@ -45,5 +45,5 @@ A non-exhaustive list of things TO DO for Conjure.
 
 
 This file is part of Conjure,
-(C) 2021 Rudy Matela,
+(C) 2021-2022 Rudy Matela,
 Distribued under the 3-Clause BSD license.
