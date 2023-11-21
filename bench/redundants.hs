@@ -16,16 +16,7 @@ import Data.Express.Fixtures
 classifyCandidates :: Conjurable f => String -> f -> [Defn] -> [[Defn]]
 classifyCandidates nm f  =  classifyBy (===)
   where
-  err  =  error "nubCandidates: unexpected evaluation error."
-  eq  =  conjureDynamicEq f
-  d1 === d2  =  all are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
-    where
-    are :: Expr -> Bool
-    are e  =  errorToFalse -- silences errors, ok here since we are interested in uniqueness modulo testing
-           $  (`fromDyn` err)
-           $  eq `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d1 e)
-                 `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d2 e)
-  -- some hardcoded values
+  (===)  =  equalModuloTesting maxTests maxEvalRecursions nm f
   maxEvalRecursions = 60
   maxTests = 360
 

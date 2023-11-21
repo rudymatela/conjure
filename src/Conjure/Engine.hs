@@ -31,6 +31,7 @@ module Conjure.Engine
   , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
+  , equalModuloTesting
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -336,7 +337,12 @@ candidateDefns args  =  candidateDefns' args
 
 
 nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
-nubCandidates Args{..} nm f  =  discardLaterT (===)
+nubCandidates Args{..} nm f  =
+  discardLaterT $ equalModuloTesting maxTests maxEvalRecursions nm f
+
+
+equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
+equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   where
   err  =  error "nubCandidates: unexpected evaluation error."
   eq  =  conjureDynamicEq f
