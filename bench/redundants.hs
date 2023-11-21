@@ -3,11 +3,11 @@
 -- Copyright (C) 2023 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
+
+-- This script needs some internal utilities of Conjure:
 import Conjure.Engine
 import Conjure.Defn
 import Conjure.Utils
-import Data.Dynamic (fromDyn, dynApp)
-import Data.Express.Fixtures
 
 
 printRedundantCandidates :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
