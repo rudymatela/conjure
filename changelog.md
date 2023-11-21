@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.6
+------
 
 * `Conjure` module: no main API changes
 * `Conjure.Engine`: add `equalModuloTesting`
