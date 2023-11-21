@@ -2,8 +2,21 @@ Changelog for (Code) Conjure
 ============================
 
 
-0.5.2
------
+upcoming
+--------
+
+This has been the "dev" version after v0.5.2
+for almost a couple of years:
+
+* report invalid theories-from-testing
+* weed-out some redundant candidates:
+	- add and use `isRedundantDefn`
+	- update how deconstructions are handled
+* add (but not use) `conjureSize` to `Conjurable`
+
+
+v0.5.2
+------
 
 * show number of tested candidates
 * complete `Conjurable` derivation functions
