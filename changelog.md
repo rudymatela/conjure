@@ -2,6 +2,15 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* `Conjure` module: no main API changes
+* `Conjure.Engine`: add `equalModuloTesting`
+* `Conjure.Utils`: add some misc functions
+* add `bench/redundants` that reports groups of redundant candidates
+
+
 v0.5.4
 ------
 
