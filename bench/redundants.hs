@@ -10,6 +10,14 @@ import Conjure.Defn
 import Conjure.Utils
 
 
+-- | This function prints redundant candidates.
+--
+-- The arguments are, in their respective order:
+--
+-- * maximum candidate size (5 = few seconds, 7 = few minutes);
+-- * function name (for pretty-printing purposes);
+-- * proxy value to indicate the type of functions to generate;
+-- * list of primitives, in Conjure-compatible form.
 printRedundantCandidates :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
 printRedundantCandidates n nm f ps  =  do
   putStrLn $ "Redundant candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
@@ -33,17 +41,22 @@ printRedundantCandidates n nm f ps  =  do
   maxTests       = 360
   maxEvalRecursions = 60
 
-
--- shows a class of candidates
-showClass :: [Defn] -> String
-showClass cs  =  unlines $ heading : map (indent . showDefn) cs
-  where
-  heading  =  "class of " ++ show (length cs) ++ " equivalent candidates:\n"
+  -- shows a class of candidates
+  showClass :: [Defn] -> String
+  showClass cs  =  unlines $ heading : map (indent . showDefn) cs
+    where
+    heading  =  "class of " ++ show (length cs) ++ " equivalent candidates:\n"
 
 
 main :: IO ()
 main  =  do
+
+  -- This N value limits the maximum size of candidates,
+  -- increase it to print redundant candidates of bigger size.
   let n = 5
+  -- this should take a few minutes to run with n = 7
+  -- and generate a ~300K text file.
+  -- We can also customize the n per-function below:
 
   printRedundantCandidates n "foo" (undefined :: Int -> Int)
     [ pr (0 :: Int)
