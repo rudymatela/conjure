@@ -34,6 +34,9 @@ module Conjure.Utils
   , foldr0
   , indent
   , indentBy
+  , classify   -- from LeanCheck.Stats
+  , classifyBy -- from LeanCheck.Stats
+  , classifyOn -- from LeanCheck.Stats
   )
 where
 
@@ -45,6 +48,8 @@ import Data.Tuple
 import Data.Typeable
 
 import System.IO.Unsafe
+
+import Test.LeanCheck.Stats (classify, classifyBy, classifyOn)
 
 -- | Checks if all elements of a list are equal.
 --

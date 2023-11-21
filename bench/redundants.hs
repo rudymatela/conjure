@@ -5,20 +5,9 @@
 import Conjure
 import Conjure.Engine
 import Conjure.Defn
-import Conjure.Conjurable
 import Conjure.Utils
-import Test.LeanCheck.Stats (classifyBy)
-import Test.LeanCheck.Error (errorToFalse)
 import Data.Dynamic (fromDyn, dynApp)
 import Data.Express.Fixtures
-
-
-classifyCandidates :: Conjurable f => String -> f -> [Defn] -> [[Defn]]
-classifyCandidates nm f  =  classifyBy (===)
-  where
-  (===)  =  equalModuloTesting maxTests maxEvalRecursions nm f
-  maxEvalRecursions = 60
-  maxTests = 360
 
 
 printRedundantCandidates :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
@@ -30,22 +19,26 @@ printRedundantCandidates n nm f ps  =  do
   putStrLn $ "  " ++ show numRedundant ++ "/" ++ show numCandidates ++ " redundant candidates"
   putStrLn ""
   printThy thy
-  putStrLn $ unlines . map (showClass) $ filter (\xs -> length xs > 1) $ classes
+  putStrLn $ unlines . map showClass $ filter (\xs -> length xs > 1) $ classes
   where
-  numCandidates  =  length cs
+  numCandidates  =  length candidates
   numUnique      =  length classes
   numRedundant   =  numCandidates - numUnique
-  classes  =  classifyCandidates nm f cs
-  cs       =  concat css
-  css      =  take n css'
-  (css', thy)    =  candidateDefnsC args nm f ps
-  nRules  =  length (rules thy)
-  nREs  =  length (equations thy) + nRules
+  classes        =  classifyBy (equalModuloTesting maxTests maxEvalRecursions nm f) candidates
+  candidates     =  concat css
+  css            =  take n css'
+  (css', thy)    =  candidateDefnsC args nm f ps  -- Conjure uses this for listing candidates
+  nRules         =  length (rules thy)
+  nREs           =  length (equations thy) + nRules
+  maxTests       = 360
+  maxEvalRecursions = 60
+
 
 -- shows a class of candidates
 showClass :: [Defn] -> String
-showClass cs  =  "class of " ++ show (length cs) ++ " equivalent candidates:\n\n"
-              ++ unlines (map (indent . showDefn) cs)
+showClass cs  =  unlines $ heading : map (indent . showDefn) cs
+  where
+  heading  =  "class of " ++ show (length cs) ++ " equivalent candidates:\n"
 
 
 main :: IO ()
