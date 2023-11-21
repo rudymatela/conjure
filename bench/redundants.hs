@@ -6,6 +6,7 @@ import Conjure
 import Conjure.Engine
 import Conjure.Defn
 import Conjure.Conjurable
+import Conjure.Utils
 import Test.LeanCheck.Stats (classifyBy)
 import Test.LeanCheck.Error (errorToFalse)
 import Data.Dynamic (fromDyn, dynApp)
@@ -38,7 +39,7 @@ printRedundantCandidates n nm f ps  =  do
   putStrLn $ "  " ++ show numRedundant ++ "/" ++ show numCandidates ++ " redundant candidates"
   putStrLn ""
   printThy thy
-  putStrLn $ unlines . map (showClass) $ filter isntUnit $ classes
+  putStrLn $ unlines . map (showClass) $ filter (\xs -> length xs > 1) $ classes
   where
   numCandidates  =  length cs
   numUnique      =  length classes
@@ -49,13 +50,6 @@ printRedundantCandidates n nm f ps  =  do
   (css', thy)    =  candidateDefnsC args nm f ps
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
-
-isntUnit :: [a] -> Bool
-isntUnit [_]  =  False
-isntUnit _    =  True
-
-indent :: String -> String
-indent  =  unlines . map ("   " ++) . lines
 
 -- shows a class of candidates
 showClass :: [Defn] -> String

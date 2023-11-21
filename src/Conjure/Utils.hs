@@ -32,6 +32,8 @@ module Conjure.Utils
   , choices
   , choicesThat
   , foldr0
+  , indent
+  , indentBy
   )
 where
 
@@ -134,3 +136,11 @@ choicesThat (?)  =  filter (uncurry (?)) . choices
 foldr0 :: (a -> a -> a) -> a -> [a] -> a
 foldr0 f z xs | null xs   = z
               | otherwise = foldr1 f xs
+
+-- | Indents a block of text by 4 spaces
+indent :: String -> String
+indent  =  indentBy 4
+
+-- | Indents a block of text with the provided amount of spaces
+indentBy :: Int -> String -> String
+indentBy n  =  unlines . map (replicate n ' ' ++) . lines
