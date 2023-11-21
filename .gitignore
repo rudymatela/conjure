@@ -56,6 +56,7 @@ bench/lots
 bench/p12
 bench/p30
 bench/candidates
+bench/redundants
 bench/gps
 bench/gps2
 bench/lowtests

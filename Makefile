@@ -31,6 +31,7 @@ EG = \
   eg/tree \
   eg/bst \
   bench/candidates \
+  bench/redundants \
   bench/ill-hit \
   bench/longshot \
   bench/lowtests \

@@ -107,6 +107,19 @@ bench/p30.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/p30.hs
+bench/redundants: \
+  bench/redundants.hs \
+  mk/toplibs
+bench/redundants.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/redundants.hs
 bench/self: \
   bench/self.hs \
   mk/toplibs
