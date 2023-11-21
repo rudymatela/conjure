@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.4
+------
 
 This has been the "dev" version after v0.5.2
 for almost a couple of years:
