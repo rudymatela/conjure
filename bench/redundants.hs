@@ -38,8 +38,8 @@ printRedundantCandidates n nm f ps  =  do
   (css', thy)    =  candidateDefnsC args nm f ps  -- Conjure uses this for listing candidates
   nRules         =  length (rules thy)
   nREs           =  length (equations thy) + nRules
-  maxTests       = 360
-  maxEvalRecursions = 60
+  maxTests       =  360 -- a hardcoded value probably will not hurt in this simple benchmark
+  maxEvalRecursions  =  60
 
   -- shows a class of candidates
   showClass :: [Defn] -> String
@@ -54,8 +54,9 @@ main  =  do
   -- This N value limits the maximum size of candidates,
   -- increase it to print redundant candidates of bigger size.
   let n = 5
-  -- this should take a few minutes to run with n = 7
-  -- and generate a ~300K text file.
+  -- With n = 5, this should run in a few seconds.
+  -- With n = 7 and -O2 optimization,
+  -- this should take a few minutes to run and generate a ~300K text file.
   -- We can also customize the n per-function below:
 
   printRedundantCandidates n "foo" (undefined :: Int -> Int)
