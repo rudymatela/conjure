@@ -289,6 +289,10 @@ tests n  =
   , isDecon (tail' is_)          == True
   , isDecon (init' is_)          == True
 
+  -- counter-intuitive but true: x `mod` y is a deconstruction of y:
+  -- x `mod` y < y  for  y > 0
+  , isDecon (mod' xx i_)         == True
+
   , isDecon (mod' i_ two)        == False -- does not deconstruct 1
   , isDecon (mod' i_ xx)         == False -- may not deconstruct 1
   , isDecon (div' xx yy)         == False -- must have a hole to indicate the value being deconstructed
