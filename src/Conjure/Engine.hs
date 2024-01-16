@@ -386,7 +386,6 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
   keep  =  isRootNormalE thy . fastMostGeneralVariation
-  ds  =  filter (conjureIsDeconstructor f maxTests) es
   keepR | requireDescent  =  descends isDecOf efxs
         | otherwise       =  const True
     where

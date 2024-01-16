@@ -26,7 +26,6 @@ module Conjure.Conjurable
   , conjureAreEqual
   , conjureMkEquation
   , A, B, C, D, E, F
-  , conjureIsDeconstructor
   , conjureIsDeconstruction
   , candidateDeconstructionsFrom
   , candidateDeconstructionsFromHoled
@@ -316,24 +315,6 @@ conjureNamesFor f e  =  head
 conjureMostGeneralCanonicalVariation :: Conjurable f => f -> Expr -> Expr
 conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
                                         .  fastMostGeneralVariation
-
--- | Checks if an unary function encoded as an 'Expr' is a deconstructor.
---
--- (cf. 'conjureIsDeconstruction')
-conjureIsDeconstructor :: Conjurable f => f -> Int -> Expr -> Bool
-conjureIsDeconstructor f maxTests e  =  case as of
-  [] -> False
-  (h:_) -> isDec h
-  where
-  as  =  [h | h <- hs, isWellTyped (e:$h), typ (e:$h) == typ h]
-  hs  =  conjureArgumentHoles f
-  isDec h  =  count is gs >= length gs `div` 2
-    where
-    gs  =  take maxTests $ grounds (conjureTiersFor f) h
-    sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
-                    , isWellTyped (sz :$ h)]
-    esz e  =  eval (0::Int) (sz :$ e)
-    is e'  =  errorToFalse $ esz (e :$ e') < esz e'
 
 -- | Checks if an expression is a deconstruction.
 --

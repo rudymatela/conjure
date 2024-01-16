@@ -283,24 +283,6 @@ tests n  =
          ]
        ]
 
-  , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "dec" (subtract 1 :: Int -> Int))
-    == True
-
-  , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "halve" ((`div` 2) :: Int -> Int))
-    == True
-
-  , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "double" ((*2) :: Int -> Int))
-    == False
-
-  , conjureIsDeconstructor (undefined :: Int -> Int) 60 (value "inc" ((+1) :: Int -> Int))
-    == False -- _almost_ converges half the time
-
-  , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "tail" (tail :: [Int] -> [Int]))
-    == True
-
-  , conjureIsDeconstructor (undefined :: [Int] -> Int) 60 (value "prep" ((0:) :: [Int] -> [Int]))
-    == False
-
   , isDecon (minus :$ i_ :$ one) == True
   , isDecon (minusOne -+- i_)    == True
   , isDecon (div' i_ two)        == True
