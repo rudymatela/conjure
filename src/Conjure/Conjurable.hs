@@ -429,13 +429,18 @@ instance Conjurable Int where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  abs
+  conjureSize      =  size            where  size  =  abs
+
+-- allows easy modification of the global size function for integer values
+-- duplicated above in the Int instance for performance reasons
+integralSize :: Integral a => a -> Int
+integralSize  =  fromIntegral . size  where  size  =  abs
 
 instance Conjurable Integer where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Char where
   conjureExpress   =  reifyExpress
@@ -695,55 +700,55 @@ instance Conjurable Int8 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Int16 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Int32 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Int64 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Word where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Word8 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Word16 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Word32 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable Word64 where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance (Integral a, Conjurable a, Listable a, Show a, Eq a, Express a) => Conjurable (Ratio a) where
   conjureExpress   =  reifyExpress
@@ -769,37 +774,37 @@ instance Conjurable A where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable B where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable C where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable D where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable E where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 instance Conjurable F where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  fromIntegral . abs
+  conjureSize      =  integralSize
 
 
 -- Conjurable tuples --
