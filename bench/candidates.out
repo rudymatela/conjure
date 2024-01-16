@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 15/35 rules
   [3,0,7,0,20,0,75,0,297] direct candidates, 0 duplicates
-  [3,4,12,32,54,139,287,691,1713] pattern candidates, 0 duplicates
+  [3,4,12,32,56,141,311,711,1882] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -262,10 +262,16 @@ foo 0  =  0
 foo x  =  foo (x - 1)
 
 foo 0  =  0
+foo x  =  foo (0 - x)
+
+foo 0  =  0
 foo x  =  foo (1 - x)
 
 foo 0  =  1
 foo x  =  foo (x - 1)
+
+foo 0  =  1
+foo x  =  foo (0 - x)
 
 foo 0  =  1
 foo x  =  foo (1 - x)
@@ -396,10 +402,16 @@ foo 1  =  0
 foo x  =  foo (x - 1)
 
 foo 1  =  0
+foo x  =  foo (0 - x)
+
+foo 1  =  0
 foo x  =  foo (1 - x)
 
 foo 1  =  1
 foo x  =  foo (x - 1)
+
+foo 1  =  1
+foo x  =  foo (0 - x)
 
 foo 1  =  1
 foo x  =  foo (1 - x)
@@ -869,7 +881,7 @@ foo x  =  1
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,10,40,116,338,953,2702,7505,20728] pattern candidates, 0 duplicates
+  [3,10,40,116,338,953,2726,7617,21220] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -8963,7 +8975,7 @@ ton True  =  False
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,4,8,32,128,468,1576,4924] direct candidates, 0 duplicates
+  [4,2,4,8,32,128,564,1992,6556] direct candidates, 0 duplicates
   [4,14,26,8,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
@@ -9645,7 +9657,7 @@ p &| q  =  q && p || not q
 Candidates for: gcd :: Int -> Int -> Int
   pruning with 0/0 rules
   [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
-  [3,7,18,60,150,469,1245,3812,10634] pattern candidates, 0 duplicates
+  [3,7,18,60,150,445,1221,3576,10326] pattern candidates, 0 duplicates
 
 no rules.
 
@@ -10648,9 +10660,6 @@ gcd x 0  =  x
 gcd x y  =  gcd x (x `mod` y)
 
 gcd x 0  =  x
-gcd x y  =  gcd x (y `mod` x)
-
-gcd x 0  =  x
 gcd x y  =  gcd x (y `mod` y)
 
 gcd x 0  =  x
@@ -10660,9 +10669,6 @@ gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
 gcd x 0  =  x
-gcd x y  =  gcd y (y `mod` x)
-
-gcd x 0  =  x
 gcd x y  =  gcd y (y `mod` y)
 
 gcd x 0  =  x
@@ -10670,9 +10676,6 @@ gcd x y  =  gcd y (0 `mod` y)
 
 gcd x 0  =  x
 gcd x y  =  gcd 0 (x `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  gcd 0 (y `mod` x)
 
 gcd x 0  =  x
 gcd x y  =  gcd 0 (y `mod` y)
@@ -10688,15 +10691,6 @@ gcd x y  =  gcd (x `mod` x) y
 
 gcd x 0  =  x
 gcd x y  =  gcd (x `mod` x) 0
-
-gcd x 0  =  x
-gcd x y  =  gcd (x `mod` y) x
-
-gcd x 0  =  x
-gcd x y  =  gcd (x `mod` y) y
-
-gcd x 0  =  x
-gcd x y  =  gcd (x `mod` y) 0
 
 gcd x 0  =  x
 gcd x y  =  gcd (y `mod` x) x
@@ -10720,9 +10714,6 @@ gcd x 0  =  0
 gcd x y  =  gcd x (x `mod` y)
 
 gcd x 0  =  0
-gcd x y  =  gcd x (y `mod` x)
-
-gcd x 0  =  0
 gcd x y  =  gcd x (y `mod` y)
 
 gcd x 0  =  0
@@ -10732,9 +10723,6 @@ gcd x 0  =  0
 gcd x y  =  gcd y (x `mod` y)
 
 gcd x 0  =  0
-gcd x y  =  gcd y (y `mod` x)
-
-gcd x 0  =  0
 gcd x y  =  gcd y (y `mod` y)
 
 gcd x 0  =  0
@@ -10742,9 +10730,6 @@ gcd x y  =  gcd y (0 `mod` y)
 
 gcd x 0  =  0
 gcd x y  =  gcd 0 (x `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  gcd 0 (y `mod` x)
 
 gcd x 0  =  0
 gcd x y  =  gcd 0 (y `mod` y)
@@ -10760,15 +10745,6 @@ gcd x y  =  gcd (x `mod` x) y
 
 gcd x 0  =  0
 gcd x y  =  gcd (x `mod` x) 0
-
-gcd x 0  =  0
-gcd x y  =  gcd (x `mod` y) x
-
-gcd x 0  =  0
-gcd x y  =  gcd (x `mod` y) y
-
-gcd x 0  =  0
-gcd x y  =  gcd (x `mod` y) 0
 
 gcd x 0  =  0
 gcd x y  =  gcd (y `mod` x) x
@@ -10792,9 +10768,6 @@ gcd 0 x  =  x
 gcd x y  =  gcd x (x `mod` y)
 
 gcd 0 x  =  x
-gcd x y  =  gcd x (y `mod` x)
-
-gcd 0 x  =  x
 gcd x y  =  gcd x (y `mod` y)
 
 gcd 0 x  =  x
@@ -10804,9 +10777,6 @@ gcd 0 x  =  x
 gcd x y  =  gcd y (x `mod` y)
 
 gcd 0 x  =  x
-gcd x y  =  gcd y (y `mod` x)
-
-gcd 0 x  =  x
 gcd x y  =  gcd y (y `mod` y)
 
 gcd 0 x  =  x
@@ -10814,9 +10784,6 @@ gcd x y  =  gcd y (0 `mod` y)
 
 gcd 0 x  =  x
 gcd x y  =  gcd 0 (x `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  gcd 0 (y `mod` x)
 
 gcd 0 x  =  x
 gcd x y  =  gcd 0 (y `mod` y)
@@ -10832,15 +10799,6 @@ gcd x y  =  gcd (x `mod` x) y
 
 gcd 0 x  =  x
 gcd x y  =  gcd (x `mod` x) 0
-
-gcd 0 x  =  x
-gcd x y  =  gcd (x `mod` y) x
-
-gcd 0 x  =  x
-gcd x y  =  gcd (x `mod` y) y
-
-gcd 0 x  =  x
-gcd x y  =  gcd (x `mod` y) 0
 
 gcd 0 x  =  x
 gcd x y  =  gcd (y `mod` x) x
@@ -10864,9 +10822,6 @@ gcd 0 x  =  0
 gcd x y  =  gcd x (x `mod` y)
 
 gcd 0 x  =  0
-gcd x y  =  gcd x (y `mod` x)
-
-gcd 0 x  =  0
 gcd x y  =  gcd x (y `mod` y)
 
 gcd 0 x  =  0
@@ -10876,9 +10831,6 @@ gcd 0 x  =  0
 gcd x y  =  gcd y (x `mod` y)
 
 gcd 0 x  =  0
-gcd x y  =  gcd y (y `mod` x)
-
-gcd 0 x  =  0
 gcd x y  =  gcd y (y `mod` y)
 
 gcd 0 x  =  0
@@ -10886,9 +10838,6 @@ gcd x y  =  gcd y (0 `mod` y)
 
 gcd 0 x  =  0
 gcd x y  =  gcd 0 (x `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  gcd 0 (y `mod` x)
 
 gcd 0 x  =  0
 gcd x y  =  gcd 0 (y `mod` y)
@@ -10904,15 +10853,6 @@ gcd x y  =  gcd (x `mod` x) y
 
 gcd 0 x  =  0
 gcd x y  =  gcd (x `mod` x) 0
-
-gcd 0 x  =  0
-gcd x y  =  gcd (x `mod` y) x
-
-gcd 0 x  =  0
-gcd x y  =  gcd (x `mod` y) y
-
-gcd 0 x  =  0
-gcd x y  =  gcd (x `mod` y) 0
 
 gcd 0 x  =  0
 gcd x y  =  gcd (y `mod` x) x

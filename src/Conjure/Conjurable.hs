@@ -320,23 +320,23 @@ conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
 --
 -- There should be a single 'hole' in the expression.
 --
--- 1. The result does not increase the size for at least half the time.
--- 2. The result decreases in size for at least a third of the time.
+-- It should decrease the size of all arguments that have
+-- a size greater than 0.
 --
 -- (cf. 'conjureIsDeconstructor')
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
                                        && typ h == typ ed
-                                       && count is gs >= length gs `div` 2
-                                       && count iz gs >= length gs `div` 3
+                                       && all is gs
   where
   gs  =  take maxTests $ grounds (conjureTiersFor f) ed
   [h]  =  holes ed
   sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
                   , isWellTyped (sz :$ h)]
   esz e  =  eval (0::Int) (sz :$ e)
-  is e  =  errorToFalse $ esz e <= esz (holeValue e)
-  iz e  =  errorToFalse $ esz e < esz (holeValue e)
+  x << 0  =  True
+  x << y  =  x < y
+  is e  =  errorToFalse $ esz e << esz (holeValue e)
   holeValue e  =  fromMaybe err
                .  lookup h
                .  fromMaybe err
@@ -410,12 +410,14 @@ instance Conjurable Int where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
   conjureTiers     =  reifyTiers
-  conjureSize      =  size            where  size  =  abs
+  conjureSize      =  size            where  size x | x < 0      =  0
+                                                    | otherwise  =  x
 
 -- allows easy modification of the global size function for integer values
 -- duplicated above in the Int instance for performance reasons
 integralSize :: Integral a => a -> Int
-integralSize  =  fromIntegral . size  where  size  =  abs
+integralSize  =  fromIntegral . size  where  size x | x < 0      =  0
+                                                    | otherwise  =  x
 
 instance Conjurable Integer where
   conjureExpress   =  reifyExpress

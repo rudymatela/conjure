@@ -84,10 +84,10 @@ tell :: [Int] -> Int -> [Int]
 -- looking through 6 candidates of size 5
 -- looking through 60 candidates of size 6
 -- looking through 26 candidates of size 7
--- looking through 538 candidates of size 8
+-- looking through 522 candidates of size 8
 -- looking through 134 candidates of size 9
--- looking through 5296 candidates of size 10
--- tested 2698 candidates
+-- looking through 5152 candidates of size 10
+-- tested 2538 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -163,8 +163,8 @@ gcd :: Int -> Int -> Int
 -- looking through 18 candidates of size 3
 -- looking through 60 candidates of size 4
 -- looking through 150 candidates of size 5
--- looking through 469 candidates of size 6
--- tested 243 candidates
+-- looking through 445 candidates of size 6
+-- tested 242 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
@@ -304,15 +304,15 @@ digits :: Int -> [Int]
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 17 candidates of size 5
+-- looking through 14 candidates of size 5
 -- looking through 14 candidates of size 6
--- looking through 103 candidates of size 7
+-- looking through 94 candidates of size 7
 -- looking through 104 candidates of size 8
--- looking through 901 candidates of size 9
+-- looking through 856 candidates of size 9
 -- looking through 935 candidates of size 10
--- looking through 9226 candidates of size 11
+-- looking through 8914 candidates of size 11
 -- looking through 9686 candidates of size 12
--- tested 20992 candidates
+-- tested 20623 candidates
 cannot conjure
 
 gps22 :: Int -> [Char]

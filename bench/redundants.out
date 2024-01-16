@@ -1,8 +1,8 @@
 Redundant candidates for: foo :: Int -> Int
   pruning with 15/35 rules
-  [3,4,12,32,54] candidates
-  68/105 unique candidates
-  37/105 redundant candidates
+  [3,4,12,32,56] candidates
+  70/107 unique candidates
+  37/107 redundant candidates
 
 rules:
 x * y == x + y

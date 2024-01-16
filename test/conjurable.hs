@@ -288,9 +288,9 @@ tests n  =
   , isDecon (div' i_ two)        == True
   , isDecon (tail' is_)          == True
   , isDecon (init' is_)          == True
-  , isDecon (mod' i_ two)        == True
-  , isDecon (mod' i_ xx)         == True
 
+  , isDecon (mod' i_ two)        == False -- does not deconstruct 1
+  , isDecon (mod' i_ xx)         == False -- may not deconstruct 1
   , isDecon (div' xx yy)         == False -- must have a hole to indicate the value being deconstructed
   , isDecon (div' i_ i_)         == False -- two holes are not allowed
   , isDecon (head' is_)          == False -- must deconstruct to the same type
