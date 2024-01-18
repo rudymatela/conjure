@@ -21,6 +21,7 @@ module Conjure.Defn
   , showDefn
   , defnApparentlyTerminates
   , isRedundantDefn
+  , isCompleteDefn
   , module Conjure.Expr
   )
 where
@@ -215,7 +216,7 @@ defnApparentlyTerminates _  =  True
 -- If the given expression is incomplete ('hasHole')
 -- this function returns 'True' as nothing can be said.
 isRedundantDefn :: Defn -> Bool
-isRedundantDefn d  =  all isComplete (map snd d)
+isRedundantDefn d  =  isCompleteDefn d
                    && any isRedundant1 (unfoldDefnArgs d)
   where
   isRedundant1 :: [(Expr,Expr)] -> Bool
@@ -233,3 +234,8 @@ isRedundantDefn d  =  all isComplete (map snd d)
     unfoldBndnArgs (p,r)  =  map (\a -> (a,r)) as
       where
       (_:as)  =  unfoldApp p
+
+-- | Returns whether the definition is complete,
+--   i.e., whether it does not have any holes in the RHS.
+isCompleteDefn :: Defn -> Bool
+isCompleteDefn d  =  all isComplete (map snd d)
