@@ -513,7 +513,7 @@ instance (Conjurable a, Listable a, Show a, Express a) => Conjurable (Maybe a) w
                       , value "Just" (Just ->: mx) :$ hole x
                       ]
     where
-    x  =  Just undefined -: mx
+    Just x  =  undefined -: mx
   conjureEquality mx  =  from <$> conjureEquality x
     where
     x  =  fromJust mx
