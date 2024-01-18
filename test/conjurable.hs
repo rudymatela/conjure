@@ -114,12 +114,17 @@ tests n  =
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Unit,Bool))
   , isNothing $ conjureEquality (undefined :: (Bool,Bool,Bool,Bool,Bool,Bool,Unit))
 
+  , conjureArgumentHoles (undefined :: Bool -> Int -> Bool -> ()) == [b_, i_, b_]
+
   , length (conjureCases (undefined :: ()))      == 1
   , length (conjureCases (undefined :: Bool))    == 2
   , length (conjureCases (undefined :: Int))     == 0
   , length (conjureCases (undefined :: Integer)) == 0
   , length (conjureCases (undefined :: [Int]))   == 2
   , length (conjureCases (undefined :: [Bool]))  == 2
+
+  , map length (conjureArgumentCases (undefined :: () -> Bool -> Int -> [Int] -> [Bool] -> ()))
+    == [1, 2, 0, 2, 2]
 
   , conjurePats [zero, one] "f" (undefined :: Int -> Int)
     == [ [ [ ff xx
