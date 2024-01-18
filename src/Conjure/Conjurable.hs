@@ -38,6 +38,7 @@ module Conjure.Conjurable
   , cevl
   , Name (..)
   , Express (..)
+  , conjureArgumentPats
   )
 where
 
@@ -649,10 +650,24 @@ conjurePats es nm f  =  mapT (map mkApp . prods) $ cs
          .  conjureMostGeneralCanonicalVariation f
          .  fold
   ef  =  var (head $ words nm) f  -- TODO: take the tail into account
-  cs  =  products $ zipWith mk (conjureArgumentHoles f) (conjureArgumentCases f)
-  mk h []  =  mapT (++ [h]) $ setsOf [[e] | e <- es, typ e == typ h]
-  mk h cs  =  [[[h]], [cs]]
+  cs  =  products $ conjureArgumentPats es f
   tiersFor  =  conjureTiersFor f
+
+-- | Returns a list of tiers of possible patterns for each argument.
+--
+-- The outer list has the same number of elements as the number of arguments
+-- of the given function.
+--
+-- This function is internal and only used in the implementation of 'conjurePats'.
+-- It may be removed from the API without further notice.
+-- It has been temporarily promoted to public to help refactor 'conjurePats'.
+conjureArgumentPats :: Conjurable f => [Expr] -> f -> [ [[ [Expr] ]] ]
+conjureArgumentPats es f = zipWith mk (conjureArgumentHoles f) (conjureArgumentCases f)
+  where
+  -- deal with types that have no cases such as ints.
+  mk h []  =  mapT (++ [h]) $ setsOf [[e] | e <- es, typ e == typ h]
+  -- deal with types that have cases, such as lists, maybes, etc.
+  mk h cs  =  [[[h]], [cs]]
 
 prods :: [[a]] -> [[a]]
 prods  =  foldr (productWith (:)) [[]]
