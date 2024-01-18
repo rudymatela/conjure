@@ -123,6 +123,11 @@ tests n  =
   , length (conjureCases (undefined :: [Int]))   == 2
   , length (conjureCases (undefined :: [Bool]))  == 2
 
+  , conjureCases (undefined :: Bool) == [false, true]
+  , conjureCases (undefined :: Int) == []
+  , conjureCases (undefined :: [Int]) == [nil, i_ -:- is_]
+  , conjureCases (undefined :: [Bool]) == [nilBool, b_ -:- bs_]
+
   , map length (conjureArgumentCases (undefined :: () -> Bool -> Int -> [Int] -> [Bool] -> ()))
     == [1, 2, 0, 2, 2]
 
