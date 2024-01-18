@@ -89,6 +89,9 @@ tests n  =
   , isRedundantDefn and1Defn   == False
   , isRedundantDefn or1Defn    == False
   , isRedundantDefn appendDefn == False
+
+  , isRedundantDefn redundantDefn1
+  , isRedundantDefn canonicalDefn1 == False
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -159,6 +162,28 @@ appendDefn :: Defn
 appendDefn  =  [ nil -++- xxs  =-  xxs
                , (xx -:- xxs) -++- yys  =-  xx -:- (xxs -++- yys)
                ]  where  exs -++- eys  =  appendV :$ exs :$ eys
+
+-- Here is an example of a redundant 'Defn':
+--
+-- > 0 ? 0  =  0
+-- > 0 ? x  =  0
+-- > x ? 0  =  x
+-- > x ? y  =  x
+redundantDefn1 :: Defn
+redundantDefn1  =  [ zero -?- zero  =-  zero
+                   , zero -?- xx    =-  zero
+                   , xx   -?- zero  =-  xx
+                   , xx   -?- yy    =-  xx
+                   ]
+
+-- The above is redundant because it is equivalent to:
+--
+-- > 0 ? _  =  0
+-- > x ? _  =  x
+canonicalDefn1 :: Defn
+canonicalDefn1  =  [ zero -?- xx  =-  zero
+                   , xx   -?- yy  =-  xx
+                   ]
 
 (=-) = (,)
 infixr 0 =-
