@@ -95,6 +95,7 @@ tests n  =
 
   , isRedundantDefn redundantDefn1
   , isRedundantDefn canonicalDefn1 == False
+  , isRedundantDefn redundantDefn2
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -194,6 +195,15 @@ redundantDefn1  =  [ zero -?- zero  =-  zero
 canonicalDefn1 :: Defn
 canonicalDefn1  =  [ zero -?- xx  =-  zero
                    , xx   -?- yy  =-  xx
+                   ]
+
+-- same as redundantDefn1 but with arguments swapped
+-- (mind the alpha-renaming)
+redundantDefn2 :: Defn
+redundantDefn2  =  [ zero -?- zero  =-  zero
+                   , zero -?- xx    =-  xx
+                   , xx   -?- zero  =-  zero
+                   , xx   -?- yy    =-  yy
                    ]
 
 (=-) = (,)
