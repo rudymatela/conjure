@@ -177,32 +177,32 @@ const0RedundantDefn  =  [ zero  =-  zero
 
 -- Here is an example of a redundant 'Defn':
 --
--- > 0 ? 0  =  0
--- > 0 ? x  =  0
+-- > 0 ? 0  =  1
+-- > 0 ? x  =  1
 -- > x ? 0  =  x
 -- > x ? y  =  x
 redundantDefn1 :: Defn
-redundantDefn1  =  [ zero -?- zero  =-  zero
-                   , zero -?- xx    =-  zero
+redundantDefn1  =  [ zero -?- zero  =-  one
+                   , zero -?- xx    =-  one
                    , xx   -?- zero  =-  xx
                    , xx   -?- yy    =-  xx
                    ]
 
 -- The above is redundant because it is equivalent to:
 --
--- > 0 ? _  =  0
+-- > 0 ? _  =  1
 -- > x ? _  =  x
 canonicalDefn1 :: Defn
-canonicalDefn1  =  [ zero -?- xx  =-  zero
+canonicalDefn1  =  [ zero -?- xx  =-  one
                    , xx   -?- yy  =-  xx
                    ]
 
 -- same as redundantDefn1 but with arguments swapped
 -- (mind the alpha-renaming)
 redundantDefn2 :: Defn
-redundantDefn2  =  [ zero -?- zero  =-  zero
+redundantDefn2  =  [ zero -?- zero  =-  one
                    , zero -?- xx    =-  xx
-                   , xx   -?- zero  =-  zero
+                   , xx   -?- zero  =-  one
                    , xx   -?- yy    =-  yy
                    ]
 

@@ -202,14 +202,14 @@ defnApparentlyTerminates _  =  True
 --
 -- Here is an example of a redundant 'Defn':
 --
--- > 0 ? 0  =  0
--- > 0 ? x  =  0
+-- > 0 ? 0  =  1
+-- > 0 ? x  =  1
 -- > x ? 0  =  x
 -- > x ? y  =  x
 --
 -- It is redundant because it is equivalent to:
 --
--- > 0 ? _  =  0
+-- > 0 ? _  =  1
 -- > x ? _  =  x
 --
 -- If the given expression is incomplete ('hasHole')
