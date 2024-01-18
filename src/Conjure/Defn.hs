@@ -22,6 +22,7 @@ module Conjure.Defn
   , defnApparentlyTerminates
   , isRedundantDefn
   , isCompleteDefn
+  , simplifyDefn
   , module Conjure.Expr
   )
 where
@@ -239,3 +240,18 @@ isRedundantDefn d  =  isCompleteDefn d
 --   i.e., whether it does not have any holes in the RHS.
 isCompleteDefn :: Defn -> Bool
 isCompleteDefn d  =  all isComplete (map snd d)
+
+-- | Simplifies a definition by removing redundant patterns
+--
+-- This may be useful in the following case:
+--
+-- > 0 ^^^ 0  =  0
+-- > 0 ^^^ x  =  x
+-- > x ^^^ 0  =  x
+-- > _ ^^^ _  =  0
+--
+-- The first pattern is subsumed by the last pattern.
+simplifyDefn :: Defn -> Defn
+simplifyDefn []  =  []
+simplifyDefn (b:bs)  =  [b | none (foldPair b `isInstanceOf`) $ map foldPair bs]
+                     ++ simplifyDefn bs

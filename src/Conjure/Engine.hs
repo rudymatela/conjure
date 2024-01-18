@@ -243,7 +243,8 @@ conjure0With args nm f p es  =  do
       []     ->  pr (n+1) (t+nc) rs
       (i:_)  ->  do let nc' = fromMaybe nc (findIndex (i==) cs)
                     putStrLn $ "-- tested " ++ show (t+nc'+1) ++ " candidates"
-                    putStrLn $ showDefn i
+                    putStrLn $ showDefn $ simplifyDefn i
+                    -- beware: the use of simplifyDefn obfuscates some product candidates
   rs  =  zip iss css
   (iss, css, ts, thy)  =  conjpure0With args nm f p es
   nRules  =  length (rules thy)

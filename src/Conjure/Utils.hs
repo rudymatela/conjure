@@ -37,6 +37,7 @@ module Conjure.Utils
   , classify   -- from LeanCheck.Stats
   , classifyBy -- from LeanCheck.Stats
   , classifyOn -- from LeanCheck.Stats
+  , none
   )
 where
 
@@ -149,3 +150,6 @@ indent  =  indentBy 4
 -- | Indents a block of text with the provided amount of spaces
 indentBy :: Int -> String -> String
 indentBy n  =  unlines . map (replicate n ' ' ++) . lines
+
+none :: (a -> Bool) -> [a] -> Bool
+none p  =  not . any p
