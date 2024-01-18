@@ -77,6 +77,18 @@ tests n  =
   , isNothing (cevaluate 60 sumDefn :: Maybe ([Bool] -> Bool))
   , isNothing (cevaluate 60 andDefn :: Maybe ([Int] -> Int))
   , isNothing (cevaluate 60 nullDefn :: Maybe ([Int] -> Int))
+
+  , isRedundantDefn sumDefn    == False
+  , isRedundantDefn factDefn   == False
+  , isRedundantDefn fact1Defn  == False
+  , isRedundantDefn nullDefn   == False
+  , isRedundantDefn isZeroDefn == False
+  , isRedundantDefn isOneDefn  == False
+  , isRedundantDefn andDefn    == False
+  , isRedundantDefn orDefn     == False
+  , isRedundantDefn and1Defn   == False
+  , isRedundantDefn or1Defn    == False
+  , isRedundantDefn appendDefn == False
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
