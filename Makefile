@@ -42,6 +42,7 @@ EG = \
   bench/gps \
   bench/gps2 \
   bench/terpret \
+  bench/weird \
   proto/u-conjure
 
 TESTS = \

@@ -159,6 +159,19 @@ bench/terpret.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/terpret.hs
+bench/weird: \
+  bench/weird.hs \
+  mk/toplibs
+bench/weird.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/weird.hs
 eg/arith: \
   eg/arith.hs \
   mk/toplibs
