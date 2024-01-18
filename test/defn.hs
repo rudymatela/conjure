@@ -93,6 +93,10 @@ tests n  =
   , isRedundantDefn const0Defn == False
   , isRedundantDefn const0RedundantDefn == False -- TODO: detect this redundancy!
 
+  , isRedundantDefn constDefn == False
+  , isRedundantDefn constRedundantDefn == False -- TODO: detect this redundancy!
+  , isRedundantDefn constRedundantRedundantDefn
+
   , isRedundantDefn redundantDefn1
   , isRedundantDefn canonicalDefn1 == False
   , isRedundantDefn redundantDefn2
@@ -174,6 +178,21 @@ const0RedundantDefn :: Defn
 const0RedundantDefn  =  [ zero  =-  zero
                         , xx    =-  zero
                         ]
+
+constDefn :: Defn
+constDefn  =  [ const' xx yy  =-  xx ]
+
+constRedundantDefn :: Defn
+constRedundantDefn  =  [ const' zero xx  =-  zero
+                       , const' xx   yy  =-  xx
+                       ]
+
+constRedundantRedundantDefn :: Defn
+constRedundantRedundantDefn  =  [ const' zero zero  =-  zero
+                                , const' zero xx    =-  zero
+                                , const' xx   zero  =-  xx
+                                , const' xx   yy    =-  xx
+                                ]
 
 -- Here is an example of a redundant 'Defn':
 --
