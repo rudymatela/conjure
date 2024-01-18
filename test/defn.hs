@@ -90,6 +90,9 @@ tests n  =
   , isRedundantDefn or1Defn    == False
   , isRedundantDefn appendDefn == False
 
+  , isRedundantDefn const0Defn == False
+  , isRedundantDefn const0RedundantDefn == False -- TODO: detect this redundancy!
+
   , isRedundantDefn redundantDefn1
   , isRedundantDefn canonicalDefn1 == False
   ]
@@ -162,6 +165,14 @@ appendDefn :: Defn
 appendDefn  =  [ nil -++- xxs  =-  xxs
                , (xx -:- xxs) -++- yys  =-  xx -:- (xxs -++- yys)
                ]  where  exs -++- eys  =  appendV :$ exs :$ eys
+
+const0Defn :: Defn
+const0Defn  =  [ xx  =-  zero ]
+
+const0RedundantDefn :: Defn
+const0RedundantDefn  =  [ zero  =-  zero
+                        , xx    =-  zero
+                        ]
 
 -- Here is an example of a redundant 'Defn':
 --
