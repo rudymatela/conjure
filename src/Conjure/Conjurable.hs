@@ -39,6 +39,7 @@ module Conjure.Conjurable
   , Name (..)
   , Express (..)
   , conjureArgumentPats
+  , conjureMostGeneralCanonicalVariation
   )
 where
 
@@ -638,6 +639,7 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
   where
   (nf:nas)  =  words nm ++ repeat ""
 
+
 -- | Computes tiers of sets of patterns for the given function.
 --
 -- > > conjurePats [zero] "f" (undefined :: Int -> Int)
@@ -651,7 +653,63 @@ conjurePats es nm f  =  mapT (map mkApp . prods) $ cs
          .  fold
   ef  =  var (head $ words nm) f  -- TODO: take the tail into account
   cs  =  products $ conjureArgumentPats es f
-  tiersFor  =  conjureTiersFor f
+
+
+-- | Computes tiers of sets of patterns for the given function.
+--
+-- > > conjurePats [zero] "f" (undefined :: Int -> Int)
+-- > [[[f x :: Int]],[[f 0 :: Int,f x :: Int]]]
+newConjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
+newConjurePats es nm f  =  mapT (map mkApp)
+                        $  combinePatternOptions
+                        $  conjureArgumentPats es f
+  where
+  mkApp  =  foldApp . (ef:)
+         .  unfold
+         .  conjureMostGeneralCanonicalVariation f
+         .  fold
+  ef  =  var (head $ words nm) f  -- TODO: take the tail into account
+
+  -- What a horrible enumeration hack below...
+  -- Good luck to anyone who plans to refactor this.
+
+  -- after application of mkApp, we end up w/  [[ [Pat   ] ]]
+  combinePatternOptions :: [ [[ [Expr] ]] ] -> [[ [[Expr]] ]]
+  combinePatternOptions []            =  [[[[]]]]
+  combinePatternOptions (esss:essss)  =  concatPrefixesWithT esss
+                                      $  combinePatternOptions essss
+
+  -- The three functions below are all transformations over the same type
+  -- [[ [[Expr]] ]]
+  -- That's tiers of complete LHS of function definitions.
+  -- We proceed right to left building all possible patterns.
+
+  -- concatenates all of the possibilities of prefixing
+  -- from tiers of possibilities
+  concatPrefixesWithT :: [[[Expr]]] -> [[ [[Expr]] ]] -> [[ [[Expr]] ]]
+  concatPrefixesWithT esss r  =  concatMapT (`concatPrefixesWith` r) esss
+
+  -- concatenates the possibilities of prefixing from a list of prefixes
+  concatPrefixesWith :: [Expr] -> [[ [[Expr]] ]] -> [[ [[Expr]] ]]
+  concatPrefixesWith es r  =  mapT concat $ products [prefixWith e r | e <- es]
+
+  -- prefixes with the given expression
+  prefixWith :: Expr -> [[ [[Expr]] ]] -> [[ [[Expr]] ]]
+  prefixWith e  =  mapT (map (e:))
+
+  -- this was useful in figuring out the implementations
+  -- of the local functions above
+  --
+  -- > prefixWith2 :: Expr -> Expr -> [[Bs]] -> [[Bs]]
+  -- > prefixWith2 e1 e2 r  =  productWith (++) (mapT (map (e1:)) r)
+  -- >                                          (mapT (map (e2:)) r)
+  --
+  -- A prefixWith3 would follow similarly.
+
+  -- To debug the above function use:
+  -- > import Test.LeanCheck.Tiers (printTiers)
+  -- > printTiers 100 $ newConjurePats [zero] "f" (undefined :: Int -> Int -> Int)
+
 
 -- | Returns a list of tiers of possible patterns for each argument.
 --
@@ -668,6 +726,7 @@ conjureArgumentPats es f = zipWith mk (conjureArgumentHoles f) (conjureArgumentC
   mk h []  =  mapT (++ [h]) $ setsOf [[e] | e <- es, typ e == typ h]
   -- deal with types that have cases, such as lists, maybes, etc.
   mk h cs  =  [[[h]], [cs]]
+
 
 prods :: [[a]] -> [[a]]
 prods  =  foldr (productWith (:)) [[]]
