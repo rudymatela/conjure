@@ -3,6 +3,13 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* add `first` and `second` to utils
+
+* add `printDefn` to `Conjure.Defn`
+
+* add `canonicalizePair` to `Conjure.Defn`
+
+* move `digApp` to `Conjure.Expr`
 
 * Review `bench/redundants.out` and prune redundant candidates.
   See sections below for ideas.
