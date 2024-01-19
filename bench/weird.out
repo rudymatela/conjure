@@ -5,6 +5,7 @@
 -- looking through 17 candidates of size 2
 -- looking through 61 candidates of size 3
 -- tested 46 candidates
+0 ^^^ 0  =  0
 0 ^^^ x  =  x
 x ^^^ 0  =  x
 x ^^^ y  =  0

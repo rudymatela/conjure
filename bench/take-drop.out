@@ -11,6 +11,7 @@ drop :: Int -> [A] -> [A]
 -- looking through 139 candidates of size 8
 -- looking through 490 candidates of size 9
 -- tested 536 candidates
+drop 0 []  =  []
 drop 0 (x:xs)  =  x:xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
@@ -28,6 +29,7 @@ take :: Int -> [A] -> [A]
 -- looking through 139 candidates of size 8
 -- looking through 490 candidates of size 9
 -- tested 523 candidates
+take 0 []  =  []
 take 0 (x:xs)  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
