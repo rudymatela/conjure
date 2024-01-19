@@ -200,7 +200,7 @@ defnApparentlyTerminates [(efxs, e)]  =  apparentlyTerminates efxs e
 defnApparentlyTerminates _  =  True
 
 -- | Returns whether the given 'Defn' is redundant
---   with regards to its patterns.
+--   with regards to repetitions on RHSs.
 --
 -- Here is an example of a redundant 'Defn':
 --
@@ -217,7 +217,27 @@ defnApparentlyTerminates _  =  True
 -- If the given expression is incomplete ('hasHole')
 -- this function returns 'True' as nothing can be said.
 isRedundantDefn :: Defn -> Bool
-isRedundantDefn d  =  isCompleteDefn d
+isRedundantDefn  =  isRedundantByRepetition
+
+-- | Returns whether the given 'Defn' is redundant
+--   with regards to repetitions on RHSs.
+--
+-- Here is an example of a redundant 'Defn':
+--
+-- > 0 ? 0  =  1
+-- > 0 ? x  =  1
+-- > x ? 0  =  x
+-- > x ? y  =  x
+--
+-- It is redundant because it is equivalent to:
+--
+-- > 0 ? _  =  1
+-- > x ? _  =  x
+--
+-- If the given expression is incomplete ('hasHole')
+-- this function returns 'True' as nothing can be said.
+isRedundantByRepetition :: Defn -> Bool
+isRedundantByRepetition d  =  isCompleteDefn d
                    && any isRedundant1 (unfoldDefnArgs d)
   where
   isRedundant1 :: [(Expr,Expr)] -> Bool
