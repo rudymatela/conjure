@@ -110,13 +110,13 @@ union :: Tree -> Tree -> Tree
 -- pruning with 6/8 rules
 -- looking through 3 candidates of size 1
 -- looking through 11 candidates of size 2
--- looking through 39 candidates of size 3
--- looking through 124 candidates of size 4
--- looking through 535 candidates of size 5
--- looking through 1506 candidates of size 6
--- looking through 5462 candidates of size 7
--- looking through 22083 candidates of size 8
--- looking through 60674 candidates of size 9
--- tested 90437 candidates
+-- looking through 32 candidates of size 3
+-- looking through 96 candidates of size 4
+-- looking through 529 candidates of size 5
+-- looking through 1354 candidates of size 6
+-- looking through 5078 candidates of size 7
+-- looking through 21747 candidates of size 8
+-- looking through 56652 candidates of size 9
+-- tested 85502 candidates
 cannot conjure
 

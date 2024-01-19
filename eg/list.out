@@ -29,11 +29,11 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
--- looking through 15 candidates of size 3
--- looking through 53 candidates of size 4
--- looking through 123 candidates of size 5
--- looking through 196 candidates of size 6
--- tested 255 candidates
+-- looking through 11 candidates of size 3
+-- looking through 45 candidates of size 4
+-- looking through 120 candidates of size 5
+-- looking through 162 candidates of size 6
+-- tested 240 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -42,9 +42,9 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- pruning with 2/2 rules
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
--- looking through 15 candidates of size 3
--- looking through 57 candidates of size 4
--- tested 60 candidates
+-- looking through 11 candidates of size 3
+-- looking through 49 candidates of size 4
+-- tested 56 candidates
 xs ++ ys  =  foldr (:) ys xs
 
 (\/) :: [Int] -> [Int] -> [Int]
@@ -52,11 +52,11 @@ xs ++ ys  =  foldr (:) ys xs
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
--- looking through 15 candidates of size 3
--- looking through 53 candidates of size 4
--- looking through 123 candidates of size 5
--- looking through 196 candidates of size 6
--- tested 257 candidates
+-- looking through 11 candidates of size 3
+-- looking through 45 candidates of size 4
+-- looking through 120 candidates of size 5
+-- looking through 162 candidates of size 6
+-- tested 242 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
@@ -84,15 +84,15 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 14 candidates of size 4
+-- looking through 12 candidates of size 4
 -- looking through 22 candidates of size 5
--- looking through 36 candidates of size 6
--- looking through 82 candidates of size 7
--- looking through 124 candidates of size 8
+-- looking through 34 candidates of size 6
+-- looking through 81 candidates of size 7
+-- looking through 120 candidates of size 8
 -- looking through 282 candidates of size 9
--- looking through 584 candidates of size 10
--- looking through 1398 candidates of size 11
--- looking through 2854 candidates of size 12
--- tested 5402 candidates
+-- looking through 580 candidates of size 10
+-- looking through 1397 candidates of size 11
+-- looking through 2842 candidates of size 12
+-- tested 5376 candidates
 cannot conjure
 

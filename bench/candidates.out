@@ -5145,7 +5145,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,19,75,168,505,1325,3462,9921] pattern candidates, 0 duplicates
+  [3,7,15,67,161,451,1298,3234,9858] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -5239,14 +5239,6 @@ xs ?? ys  =  ys ++ ys
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys
@@ -5274,14 +5266,6 @@ xs ?? ys  =  ys ++ ys
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? ys  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? xs
@@ -5484,47 +5468,7 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
@@ -6119,34 +6063,6 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 (x:xs) ?? ys  =  ys ++ ys
 
 [] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  x:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  x:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  [x]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  xs ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  xs ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  ys ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  ys ++ ys
-
-[] ?? []  =  []
 [] ?? (x:xs)  =  x:xs
 (x:xs) ?? ys  =  xs
 
@@ -7657,63 +7573,8 @@ xs ?? (x:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [x]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [y]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
@@ -7728,11 +7589,6 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
@@ -7743,162 +7599,7 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [x]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [y]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [x]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [y]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  x:xs
@@ -7911,26 +7612,6 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
 [] ?? (x:xs)  =  [x]
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys
@@ -7941,26 +7622,6 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys
@@ -7968,21 +7629,6 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
 (x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  []
 
 
@@ -8118,7 +7764,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,32,128,564,1992,6556] direct candidates, 0 duplicates
-  [4,14,36,26,4,48,60,280,592] pattern candidates, 0 duplicates
+  [4,14,28,14,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -8627,19 +8273,11 @@ True &| p  =  True
 
 False &| p  =  p
 True &| False  =  False
-True &| True  =  False
-
-False &| p  =  p
-True &| False  =  False
 True &| True  =  True
 
 False &| p  =  p
 True &| False  =  True
 True &| True  =  False
-
-False &| p  =  p
-True &| False  =  True
-True &| True  =  True
 
 False &| p  =  False
 True &| False  =  False
@@ -8649,14 +8287,6 @@ False &| p  =  False
 True &| False  =  True
 True &| True  =  False
 
-False &| p  =  False
-True &| False  =  True
-True &| True  =  True
-
-False &| p  =  True
-True &| False  =  False
-True &| True  =  False
-
 False &| p  =  True
 True &| False  =  False
 True &| True  =  True
@@ -8664,14 +8294,6 @@ True &| True  =  True
 False &| p  =  True
 True &| False  =  True
 True &| True  =  False
-
-False &| False  =  False
-False &| True  =  False
-True &| p  =  p
-
-False &| False  =  False
-False &| True  =  False
-True &| p  =  True
 
 False &| False  =  False
 False &| True  =  True
@@ -8696,14 +8318,6 @@ True &| p  =  False
 False &| False  =  True
 False &| True  =  False
 True &| p  =  True
-
-False &| False  =  True
-False &| True  =  True
-True &| p  =  p
-
-False &| False  =  True
-False &| True  =  True
-True &| p  =  False
 
 p &| q  =  not p && q
 
@@ -8723,24 +8337,12 @@ p &| q  =  q || not p
 
 False &| p  =  not p
 True &| False  =  False
-True &| True  =  False
-
-False &| p  =  not p
-True &| False  =  False
 True &| True  =  True
 
 False &| p  =  not p
 True &| False  =  True
 True &| True  =  False
 
-False &| p  =  not p
-True &| False  =  True
-True &| True  =  True
-
-False &| False  =  False
-False &| True  =  False
-True &| p  =  not p
-
 False &| False  =  False
 False &| True  =  True
 True &| p  =  not p
@@ -8749,59 +8351,15 @@ False &| False  =  True
 False &| True  =  False
 True &| p  =  not p
 
-False &| False  =  True
-False &| True  =  True
-True &| p  =  not p
-
-False &| False  =  False
-False &| True  =  False
-True &| False  =  False
-True &| True  =  True
-
-False &| False  =  False
-False &| True  =  False
-True &| False  =  True
-True &| True  =  False
-
-False &| False  =  False
-False &| True  =  True
-True &| False  =  False
-True &| True  =  False
-
 False &| False  =  False
 False &| True  =  True
 True &| False  =  True
-True &| True  =  False
-
-False &| False  =  False
-False &| True  =  True
-True &| False  =  True
-True &| True  =  True
-
-False &| False  =  True
-False &| True  =  False
-True &| False  =  False
 True &| True  =  False
 
 False &| False  =  True
 False &| True  =  False
 True &| False  =  False
 True &| True  =  True
-
-False &| False  =  True
-False &| True  =  False
-True &| False  =  True
-True &| True  =  True
-
-False &| False  =  True
-False &| True  =  True
-True &| False  =  False
-True &| True  =  True
-
-False &| False  =  True
-False &| True  =  True
-True &| False  =  True
-True &| True  =  False
 
 p &| q  =  not p && not q
 

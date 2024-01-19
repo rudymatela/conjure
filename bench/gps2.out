@@ -33,9 +33,9 @@ gps1 :: Int -> [Int] -> Int
 -- pruning with 8/9 rules
 -- looking through 4 candidates of size 1
 -- looking through 24 candidates of size 2
--- looking through 98 candidates of size 3
--- looking through 389 candidates of size 4
--- tested 515 candidates
+-- looking through 81 candidates of size 3
+-- looking through 334 candidates of size 4
+-- tested 443 candidates
 cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
@@ -250,11 +250,11 @@ gps18_price :: [Double] -> [Double] -> Double
 -- pruning with 26/35 rules
 -- looking through 2 candidates of size 1
 -- looking through 8 candidates of size 2
--- looking through 40 candidates of size 3
--- looking through 134 candidates of size 4
--- looking through 479 candidates of size 5
--- looking through 1870 candidates of size 6
--- tested 2533 candidates
+-- looking through 32 candidates of size 3
+-- looking through 90 candidates of size 4
+-- looking through 457 candidates of size 5
+-- looking through 1346 candidates of size 6
+-- tested 1935 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -331,17 +331,17 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 5 candidates of size 2
--- looking through 37 candidates of size 3
--- looking through 59 candidates of size 4
--- looking through 243 candidates of size 5
--- looking through 747 candidates of size 6
--- looking through 1700 candidates of size 7
+-- looking through 28 candidates of size 3
+-- looking through 34 candidates of size 4
+-- looking through 185 candidates of size 5
+-- looking through 707 candidates of size 6
+-- looking through 1680 candidates of size 7
 -- looking through 2304 candidates of size 8
 -- looking through 3756 candidates of size 9
 -- looking through 8826 candidates of size 10
 -- looking through 15048 candidates of size 11
 -- looking through 14220 candidates of size 12
--- tested 46948 candidates
+-- tested 46796 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
@@ -370,10 +370,10 @@ gps25 :: [Double] -> [Double] -> Double
 -- pruning with 31/59 rules
 -- looking through 2 candidates of size 1
 -- looking through 9 candidates of size 2
--- looking through 57 candidates of size 3
--- looking through 267 candidates of size 4
--- looking through 1269 candidates of size 5
--- looking through 6273 candidates of size 6
--- tested 7877 candidates
+-- looking through 49 candidates of size 3
+-- looking through 216 candidates of size 4
+-- looking through 1140 candidates of size 5
+-- looking through 5371 candidates of size 6
+-- tested 6787 candidates
 cannot conjure
 

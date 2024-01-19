@@ -100,6 +100,8 @@ tests n  =
   , isRedundantDefn redundantDefn1
   , isRedundantDefn canonicalDefn1 == False
   , isRedundantDefn redundantDefn2
+
+  , isRedundantDefn constBoolRedundantDefn
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -193,6 +195,13 @@ constRedundantRedundantDefn  =  [ const' zero zero  =-  zero
                                 , const' xx   zero  =-  xx
                                 , const' xx   yy    =-  xx
                                 ]
+
+constBoolRedundantDefn :: Defn
+constBoolRedundantDefn  =  [ const' false false  =-  false
+                           , const' false true   =-  false
+                           , const' true false   =-  true
+                           , const' true true    =-  true
+                           ]
 
 -- Here is an example of a redundant 'Defn':
 --

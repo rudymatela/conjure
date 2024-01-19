@@ -911,9 +911,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,19,75,168] candidates
-  164/272 unique candidates
-  108/272 redundant candidates
+  [3,7,15,67,161] candidates
+  162/253 unique candidates
+  91/253 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -921,7 +921,7 @@ xs ++ [] == xs
 (xs ++ ys) ++ zs == xs ++ (ys ++ zs)
 (x:xs) ++ ys == x:(xs ++ ys)
 
-class of 5 equivalent candidates:
+class of 4 equivalent candidates:
 
     xs ?? ys  =  xs
 
@@ -932,10 +932,6 @@ class of 5 equivalent candidates:
     xs ?? (x:ys)  =  xs ?? []
 
     [] ?? xs  =  []
-    (x:xs) ?? ys  =  x:xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
     (x:xs) ?? ys  =  x:xs
 
 
@@ -1144,14 +1140,10 @@ class of 3 equivalent candidates:
     (x:xs) ?? ys  =  [] ?? ys
 
 
-class of 12 equivalent candidates:
+class of 11 equivalent candidates:
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  []
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  []
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  xs ?? xs
@@ -1191,17 +1183,9 @@ class of 12 equivalent candidates:
     (x:xs) ?? ys  =  []
 
 
-class of 4 equivalent candidates:
+class of 2 equivalent candidates:
 
     [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
     (x:xs) ?? ys  =  xs
 
     [] ?? []  =  []
@@ -1209,13 +1193,9 @@ class of 4 equivalent candidates:
     (x:xs) ?? ys  =  xs
 
 
-class of 5 equivalent candidates:
+class of 4 equivalent candidates:
 
     [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
     (x:xs) ?? ys  =  ys
 
     [] ?? []  =  []
@@ -1295,26 +1275,9 @@ class of 3 equivalent candidates:
     (x:xs) ?? (y:ys)  =  [] ?? ys
 
 
-class of 2 equivalent candidates:
+class of 5 equivalent candidates:
 
     [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys
-
-
-class of 6 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  []
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
     (x:xs) ?? []  =  xs
     (x:xs) ?? (y:ys)  =  []
 
@@ -1335,14 +1298,9 @@ class of 6 equivalent candidates:
     (x:xs) ?? (y:ys)  =  [] ?? ys
 
 
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
     (x:xs) ?? []  =  []
     (x:xs) ?? (y:ys)  =  xs
 
@@ -1355,14 +1313,9 @@ class of 4 equivalent candidates:
     (x:xs) ?? (y:ys)  =  xs
 
 
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
     (x:xs) ?? []  =  []
     (x:xs) ?? (y:ys)  =  ys
 
@@ -1373,18 +1326,6 @@ class of 4 equivalent candidates:
     [] ?? xs  =  []
     (x:xs) ?? []  =  [] ?? xs
     (x:xs) ?? (y:ys)  =  ys
-
-
-class of 2 equivalent candidates:
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
-    (x:xs) ?? ys  =  xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs
 
 
 class of 2 equivalent candidates:
@@ -1398,16 +1339,11 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  ys
 
 
-class of 5 equivalent candidates:
+class of 4 equivalent candidates:
 
     [] ?? []  =  []
     [] ?? (x:xs)  =  xs
     (x:xs) ?? ys  =  []
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  []
 
     [] ?? []  =  []
     [] ?? (x:xs)  =  xs
@@ -1448,66 +1384,6 @@ class of 4 equivalent candidates:
     [] ?? []  =  []
     [] ?? (x:xs)  =  x:xs
     (x:xs) ?? ys  =  xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  x:ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  x:ys
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  [x]
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  [x]
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ++ xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  xs ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ++ ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  xs ++ ys
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ++ xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ++ ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  ys ++ ys
 
 
 class of 2 equivalent candidates:
@@ -1599,9 +1475,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,14,36,26,4] candidates
-  16/84 unique candidates
-  68/84 redundant candidates
+  [4,14,28,14,4] candidates
+  16/64 unique candidates
+  48/64 redundant candidates
 
 rules:
 not False == True
@@ -1655,19 +1531,11 @@ r || (q || p) == p || (q || r)
 (r || q) && p == p && (q || r)
 r && q || p == p || q && r
 
-class of 4 equivalent candidates:
+class of 2 equivalent candidates:
 
     p &| q  =  p
 
     False &| p  =  False
-    True &| p  =  True
-
-    False &| p  =  False
-    True &| False  =  True
-    True &| True  =  True
-
-    False &| False  =  False
-    False &| True  =  False
     True &| p  =  True
 
 
@@ -1687,19 +1555,11 @@ class of 4 equivalent candidates:
     True &| p  =  p
 
 
-class of 4 equivalent candidates:
+class of 2 equivalent candidates:
 
     p &| q  =  not p
 
     False &| p  =  True
-    True &| p  =  False
-
-    False &| p  =  True
-    True &| False  =  False
-    True &| True  =  False
-
-    False &| False  =  True
-    False &| True  =  True
     True &| p  =  False
 
 
@@ -1719,7 +1579,7 @@ class of 4 equivalent candidates:
     True &| p  =  not p
 
 
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     p &| False  =  p
     p &| True  =  False
@@ -1735,17 +1595,8 @@ class of 7 equivalent candidates:
 
     p &| q  =  p && not q
 
-    False &| False  =  False
-    False &| True  =  False
-    True &| p  =  not p
 
-    False &| False  =  False
-    False &| True  =  False
-    True &| False  =  True
-    True &| True  =  False
-
-
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     p &| False  =  p
     p &| True  =  True
@@ -1757,21 +1608,12 @@ class of 7 equivalent candidates:
 
     p &| q  =  q || p
 
-    False &| p  =  p
-    True &| False  =  True
-    True &| True  =  True
-
     False &| False  =  False
     False &| True  =  True
     True &| p  =  True
 
-    False &| False  =  False
-    False &| True  =  True
-    True &| False  =  True
-    True &| True  =  True
 
-
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     p &| False  =  False
     p &| True  =  p
@@ -1787,17 +1629,8 @@ class of 7 equivalent candidates:
     True &| False  =  False
     True &| True  =  True
 
-    False &| False  =  False
-    False &| True  =  False
-    True &| p  =  p
 
-    False &| False  =  False
-    False &| True  =  False
-    True &| False  =  False
-    True &| True  =  True
-
-
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     p &| False  =  True
     p &| True  =  p
@@ -1813,27 +1646,14 @@ class of 7 equivalent candidates:
 
     p &| q  =  p || not q
 
-    False &| p  =  not p
-    True &| False  =  True
-    True &| True  =  True
 
-    False &| False  =  True
-    False &| True  =  False
-    True &| False  =  True
-    True &| True  =  True
-
-
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     False &| p  =  p
     True &| p  =  False
 
     p &| False  =  False
     p &| True  =  not p
-
-    False &| p  =  p
-    True &| False  =  False
-    True &| True  =  False
 
     False &| False  =  False
     False &| True  =  True
@@ -1843,13 +1663,8 @@ class of 7 equivalent candidates:
 
     p &| q  =  q && not p
 
-    False &| False  =  False
-    False &| True  =  True
-    True &| False  =  False
-    True &| True  =  False
 
-
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     False &| p  =  True
     True &| p  =  p
@@ -1861,18 +1676,9 @@ class of 7 equivalent candidates:
     True &| False  =  False
     True &| True  =  True
 
-    False &| False  =  True
-    False &| True  =  True
-    True &| p  =  p
-
     p &| q  =  not p || q
 
     p &| q  =  q || not p
-
-    False &| False  =  True
-    False &| True  =  True
-    True &| False  =  False
-    True &| True  =  True
 
 
 class of 5 equivalent candidates:
@@ -1897,7 +1703,7 @@ class of 5 equivalent candidates:
     True &| True  =  False
 
 
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     p &| False  =  True
     p &| True  =  not p
@@ -1906,15 +1712,6 @@ class of 7 equivalent candidates:
     True &| p  =  not p
 
     False &| p  =  True
-    True &| False  =  True
-    True &| True  =  False
-
-    False &| False  =  True
-    False &| True  =  True
-    True &| p  =  not p
-
-    False &| False  =  True
-    False &| True  =  True
     True &| False  =  True
     True &| True  =  False
 
@@ -1945,7 +1742,7 @@ class of 5 equivalent candidates:
     True &| True  =  True
 
 
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     p &| False  =  not p
     p &| True  =  False
@@ -1956,15 +1753,6 @@ class of 7 equivalent candidates:
     False &| False  =  True
     False &| True  =  False
     True &| p  =  False
-
-    False &| p  =  not p
-    True &| False  =  False
-    True &| True  =  False
-
-    False &| False  =  True
-    False &| True  =  False
-    True &| False  =  False
-    True &| True  =  False
 
     p &| q  =  not p && not q
 

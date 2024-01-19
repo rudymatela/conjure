@@ -268,7 +268,7 @@ isRedundantByRepetition2 d  =  isCompleteDefn d
                             && is
   where
   is  =  any anyAllEqual shovels
-  nArgs  =  length . tail . unfoldApp . snd . head $ d
+  nArgs  =  length . tail . unfoldApp . fst . head $ d
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
