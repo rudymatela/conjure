@@ -253,10 +253,9 @@ isRedundantDefn d  =  isRedundantBySubsumption d
 -- > 0 ? _  =  1
 -- > x ? _  =  x
 isRedundantByRepetition :: Defn -> Bool
-isRedundantByRepetition d  =  is
+isRedundantByRepetition d  =  any anyAllEqual shovels
   where
-  is  =  any anyAllEqual shovels
-  nArgs  =  length . tail . unfoldApp . fst . head $ d
+  nArgs  =  length . tail . unfoldApp . fst $ head d
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
