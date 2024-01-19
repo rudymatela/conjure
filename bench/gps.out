@@ -37,7 +37,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- looking through 0 candidates of size 5
 -- looking through 1536 candidates of size 6
 -- looking through 0 candidates of size 7
--- looking through 26835 candidates of size 8
+-- looking through 26747 candidates of size 8
 -- tested 19480 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
@@ -67,9 +67,9 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- looking through 0 candidates of size 7
 -- looking through 0 candidates of size 8
 -- looking through 162 candidates of size 9
--- looking through 30 candidates of size 10
+-- looking through 16 candidates of size 10
 -- looking through 30 candidates of size 11
--- tested 201 candidates
+-- tested 187 candidates
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
@@ -313,15 +313,15 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 2/6 rules
 -- looking through 3 candidates of size 1
--- looking through 8 candidates of size 2
+-- looking through 7 candidates of size 2
 -- looking through 15 candidates of size 3
--- looking through 55 candidates of size 4
+-- looking through 53 candidates of size 4
 -- looking through 123 candidates of size 5
 -- looking through 208 candidates of size 6
 -- looking through 644 candidates of size 7
--- looking through 1011 candidates of size 8
+-- looking through 1007 candidates of size 8
 -- looking through 3152 candidates of size 9
--- tested 3856 candidates
+-- tested 3849 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -330,10 +330,10 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 2/7 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 12 candidates of size 4
--- tested 15 candidates
+-- tested 14 candidates
 gps18 xs ys  =  zipWith (+) xs ys
 
 gps19 :: Int -> [Char] -> [Char]

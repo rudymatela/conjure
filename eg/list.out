@@ -28,12 +28,12 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 8 candidates of size 2
+-- looking through 7 candidates of size 2
 -- looking through 15 candidates of size 3
--- looking through 55 candidates of size 4
+-- looking through 53 candidates of size 4
 -- looking through 123 candidates of size 5
 -- looking through 196 candidates of size 6
--- tested 258 candidates
+-- tested 255 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -41,22 +41,22 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- testing 360 combinations of argument values
 -- pruning with 2/2 rules
 -- looking through 3 candidates of size 1
--- looking through 8 candidates of size 2
+-- looking through 7 candidates of size 2
 -- looking through 15 candidates of size 3
--- looking through 59 candidates of size 4
--- tested 61 candidates
+-- looking through 57 candidates of size 4
+-- tested 60 candidates
 xs ++ ys  =  foldr (:) ys xs
 
 (\/) :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 8 candidates of size 2
+-- looking through 7 candidates of size 2
 -- looking through 15 candidates of size 3
--- looking through 55 candidates of size 4
+-- looking through 53 candidates of size 4
 -- looking through 123 candidates of size 5
 -- looking through 196 candidates of size 6
--- tested 260 candidates
+-- tested 257 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
@@ -82,7 +82,7 @@ merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
 -- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 14 candidates of size 4
 -- looking through 22 candidates of size 5
@@ -93,6 +93,6 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 584 candidates of size 10
 -- looking through 1398 candidates of size 11
 -- looking through 2854 candidates of size 12
--- tested 5403 candidates
+-- tested 5402 candidates
 cannot conjure
 

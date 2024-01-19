@@ -5145,7 +5145,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,8,19,77,170,506,1327,3468,9925] pattern candidates, 0 duplicates
+  [3,7,19,75,170,505,1327,3462,9925] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -5207,9 +5207,6 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  ys
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  ys
-
-[] ?? xs  =  xs
 (x:xs) ?? ys  =  []
 
 [] ?? xs  =  []
@@ -5507,17 +5504,7 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
@@ -7616,9 +7603,6 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  ys ++ xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  ys ++ ys
 
 [] ?? xs  =  xs ++ (xs ++ xs)
 (x:xs) ?? ys  =  xs
@@ -8142,7 +8126,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,32,128,564,1992,6556] direct candidates, 0 duplicates
-  [4,14,36,30,4,48,60,280,592] pattern candidates, 0 duplicates
+  [4,14,36,26,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -8788,19 +8772,9 @@ True &| False  =  True
 True &| True  =  False
 
 False &| False  =  False
-False &| True  =  False
-True &| False  =  True
-True &| True  =  True
-
-False &| False  =  False
 False &| True  =  True
 True &| False  =  False
 True &| True  =  False
-
-False &| False  =  False
-False &| True  =  True
-True &| False  =  False
-True &| True  =  True
 
 False &| False  =  False
 False &| True  =  True
@@ -8825,17 +8799,7 @@ True &| True  =  True
 False &| False  =  True
 False &| True  =  False
 True &| False  =  True
-True &| True  =  False
-
-False &| False  =  True
-False &| True  =  False
-True &| False  =  True
 True &| True  =  True
-
-False &| False  =  True
-False &| True  =  True
-True &| False  =  False
-True &| True  =  False
 
 False &| False  =  True
 False &| True  =  True
