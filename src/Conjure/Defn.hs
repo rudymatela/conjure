@@ -276,7 +276,12 @@ isRedundantBySubsumption d  =  isCompleteDefn d && is (map foldPair d)
 -- | Returns whether the definition is complete,
 --   i.e., whether it does not have any holes in the RHS.
 isCompleteDefn :: Defn -> Bool
-isCompleteDefn d  =  all isComplete (map snd d)
+isCompleteDefn  =  all isCompleteBndn
+
+-- | Returns whether the binding is complete,
+--   i.e., whether it does not have any holes in the RHS.
+isCompleteBndn :: Bndn -> Bool
+isCompleteBndn (_,rhs)  =  isComplete rhs
 
 -- | Simplifies a definition by removing redundant patterns
 --
