@@ -236,6 +236,12 @@ isRedundantDefn d  =  isCompleteDefn d
       where
       (_:as)  =  unfoldApp p
 
+isRedundantBySubsumption :: Defn -> Bool
+isRedundantBySubsumption d  =  isCompleteDefn d && is (map foldPair d)
+  where
+  is []  =  False
+  is (b:bs)  =  any (b `isInstanceOf`) bs || is bs
+
 -- | Returns whether the definition is complete,
 --   i.e., whether it does not have any holes in the RHS.
 isCompleteDefn :: Defn -> Bool
