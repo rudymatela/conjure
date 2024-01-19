@@ -264,9 +264,8 @@ isRedundantByRepetition d  =  isCompleteDefn d
   anyAllEqual :: (Expr -> Expr) -> Bool
   anyAllEqual shovel  =  any allEqual
                       .  classifyOn fst
-                      .  map (canonicalizeBndn . mapFst shovel)
+                      .  map (canonicalizeBndn . first shovel)
                       $  d
-  mapFst f (x,y)  =  (f x, y)
 
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption d  =  isCompleteDefn d && is (map foldPair d)

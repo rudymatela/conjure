@@ -39,6 +39,8 @@ module Conjure.Utils
   , classifyOn -- from LeanCheck.Stats
   , none
   , updateAt
+  , first
+  , second
   )
 where
 
@@ -131,9 +133,9 @@ headOr _ (x:xs)  =  x
 -- | Lists choices of values.
 choices :: [a] -> [(a,[a])]
 choices []  =  []
-choices (x:xs)  =  (x,xs) : map (mapSnd (x:)) (choices xs)
+choices (x:xs)  =  (x,xs) : map (second (x:)) (choices xs)
   where
-  mapSnd f (x,y)  =  (x,f y)
+  second f (x,y)  =  (x,f y)
 
 -- | Lists choices of values that follow a property.
 choicesThat :: (a -> [a] -> Bool) -> [a] -> [(a,[a])]
@@ -163,3 +165,19 @@ updateAt :: Int -> (a -> a) -> [a] -> [a]
 updateAt _ _ []  =  []
 updateAt 0 f (x:xs)  =  f x : xs
 updateAt n f (x:xs)  =  x : updateAt (n-1) f xs
+
+-- | Applies a function to the first element of a pair.
+--   Often known on the wild as @mapFst@.
+--
+-- > > first (*10) (1,2)
+-- > (10,2)
+first :: (a -> a') -> (a,b) -> (a',b)
+first f (x,y)  =  (f x, y)
+
+-- | Applies a function to the second element of a pair.
+--   Often known on the wild as @mapSnd@.
+--
+-- > > second (*100) (1,2)
+-- > (1,200)
+second :: (b -> b') -> (a,b) -> (a,b')
+second f (x,y)  =  (x, f y)

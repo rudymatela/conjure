@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add `first` and `second` to utils
-
 * Review `bench/redundants.out` and prune redundant candidates.
   See sections below for ideas.
 

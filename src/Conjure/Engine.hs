@@ -358,9 +358,8 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
 candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefns1 args nm f ps  =  mapFst (mapT toDefn) $ candidateExprs args nm f ps
+candidateDefns1 args nm f ps  =  first (mapT toDefn) $ candidateExprs args nm f ps
   where
-  mapFst f (x,y)  =  (f x, y)
   efxs  =  conjureVarApplication nm f
   toDefn e  =  [(efxs, e)]
 
