@@ -35,6 +35,7 @@ module Conjure.Expr
   , enumerateFillings
 
   , digApp
+  , ($!!)
 
   , module Conjure.Utils
   )
@@ -464,6 +465,16 @@ deholings e'  =  deh
 -- 1 + _ :: Int
 digApp :: Int -> Expr -> Expr
 digApp n  =  foldApp . updateAt n holeAsTypeOf . unfoldApp
+
+-- | Extracts the argument of a function application at the given position.
+--
+-- > (one -+- two) $!! 1
+-- 1 :: Int
+--
+-- > (one -+- two) $!! 2
+-- 2 :: Int
+($!!) :: Expr -> Int -> Expr
+e $!! i  =  unfoldApp e !! i
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val
