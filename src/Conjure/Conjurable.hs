@@ -645,7 +645,12 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
 -- > > conjurePats [zero] "f" (undefined :: Int -> Int)
 -- > [[[f x :: Int]],[[f 0 :: Int,f x :: Int]]]
 conjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
-conjurePats es nm f  =  mapT (map mkApp . prods) $ cs
+conjurePats  =  oldConjurePats
+  -- TODO: decide between old/newConjurePats and remove either
+
+
+oldConjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
+oldConjurePats es nm f  =  mapT (map mkApp . prods) $ cs
   where
   mkApp  =  foldApp . (ef:)
          .  unfold
@@ -655,10 +660,6 @@ conjurePats es nm f  =  mapT (map mkApp . prods) $ cs
   cs  =  products $ conjureArgumentPats es f
 
 
--- | Computes tiers of sets of patterns for the given function.
---
--- > > conjurePats [zero] "f" (undefined :: Int -> Int)
--- > [[[f x :: Int]],[[f 0 :: Int,f x :: Int]]]
 newConjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
 newConjurePats es nm f  =  mapT (map mkApp)
                         $  combinePatternOptions
