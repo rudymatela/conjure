@@ -224,7 +224,7 @@ defnApparentlyTerminates _  =  True
 -- this function returns 'True' as nothing can be said.
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
-                   || isRedundantByRepetition2 d
+                   || isRedundantByRepetition d
 
 -- | Returns whether the given 'Defn' is redundant
 --   with regards to repetitions on RHSs.
@@ -245,26 +245,7 @@ isRedundantDefn d  =  isRedundantBySubsumption d
 -- this function returns 'True' as nothing can be said.
 isRedundantByRepetition :: Defn -> Bool
 isRedundantByRepetition d  =  isCompleteDefn d
-                           && any isRedundant1 (unfoldDefnArgs d)
-  where
-  isRedundant1 :: [(Expr,Expr)] -> Bool
-  isRedundant1  =  all (allEqual . map snd)
-                .  classifyOn fst
-                .  map (unfoldPair . canonicalize . foldPair)
-
-  -- Returns a list of degenerate 'Defn'
-  -- whose patterns have been "lensed" on each argument.
-  unfoldDefnArgs :: Defn -> [[(Expr,Expr)]]
-  unfoldDefnArgs  =  transpose . map unfoldBndnArgs
-    where
-    unfoldBndnArgs :: Bndn -> [(Expr,Expr)]
-    unfoldBndnArgs (p,r)  =  map (\a -> (a,r)) as
-      where
-      (_:as)  =  unfoldApp p
-
-isRedundantByRepetition2 :: Defn -> Bool
-isRedundantByRepetition2 d  =  isCompleteDefn d
-                            && is
+                           && is
   where
   is  =  any anyAllEqual shovels
   nArgs  =  length . tail . unfoldApp . fst . head $ d
