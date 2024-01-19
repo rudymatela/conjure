@@ -264,6 +264,36 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
                       .  map (canonicalizeBndn . first shovel)
                       $  d
 
+-- TODO: fix the following
+-- it is a bit too general and prunes some
+-- candidates that it shouldn't prune.
+isRedundantByIntroduction :: Defn -> Bool
+isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
+  where
+  nArgs  =  length . tail . unfoldApp . fst $ head d
+  anyAllEqual :: Int -> Bool
+  anyAllEqual i  =  any (\bs -> allEqual bs && isCompleteDefn bs)
+                 .  classifyOn fst
+                 .  map (canonicalizeBndn . introduceVariableAt i)
+                 $  d
+
+-- | Introduces a hole at a given position in the binding:
+--
+-- > introduceVariableAt 1 (one -+- two, three -+- two)
+-- (_ + 2 :: Int,3 + 2 :: Int)
+--
+-- > introduceVariableAt 2 (one -+- two, three -+- two)
+-- (1 + _ :: Int,3 + _ :: Int)
+--
+-- Relevant occurrences are replaced.
+--
+-- TODO: find better examples for this comment
+introduceVariableAt :: Int -> Bndn -> Bndn
+introduceVariableAt i b  =  unfoldPair (foldPair b // [(p,"introduced_var" `varAsTypeOf` p)])
+  where
+  p  =  fst b $!! i
+-- TODO: replace "introduced_var" by something proper
+
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
   where

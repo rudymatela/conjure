@@ -56,6 +56,8 @@ is also possible when all other pattern arguments are the same
 and the results would be the same.
 This is straightforward, but tricky to implement.
 
+See `isRedundantByIntroduction`.
+
 
 ## Prune modulo symbolic execution
 
