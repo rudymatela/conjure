@@ -225,6 +225,7 @@ defnApparentlyTerminates _  =  True
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
                    || isRedundantByRepetition d
+                   || isRedundantByRepetition2 d
 
 -- | Returns whether the given 'Defn' is redundant
 --   with regards to repetitions on RHSs.
@@ -262,6 +263,31 @@ isRedundantByRepetition d  =  isCompleteDefn d
     unfoldBndnArgs (p,r)  =  map (\a -> (a,r)) as
       where
       (_:as)  =  unfoldApp p
+
+isRedundantByRepetition2 :: Defn -> Bool
+isRedundantByRepetition2 d  =  isCompleteDefn d
+                            && is
+  where
+  nArgs  =  length . tail . unfoldApp . snd . head $ d
+  shovels :: [Expr -> Expr]
+  shovels  =  [digApp n | n <- [1..nArgs]]
+  is  =  any anyAllEqual shovels
+  anyAllEqual :: (Expr -> Expr) -> Bool
+  anyAllEqual shovel  =  any allEqual
+                      .  map (map snd)
+                      .  filter (\bs -> length bs > 1)
+                      .  classifyOn (shovel . fst)
+                      $  d
+
+-- | Dig a hole in a function application at the given position
+--
+-- > digApp 1 (one -+- two)
+-- _ + 2 :: Int
+--
+-- > digApp 2 (one -+- two)
+-- 1 + _ :: Int
+digApp :: Int -> Expr -> Expr
+digApp n  =  foldApp . updateAt n holeAsTypeOf . unfoldApp
 
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption d  =  isCompleteDefn d && is (map foldPair d)

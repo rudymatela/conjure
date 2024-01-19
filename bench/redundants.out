@@ -911,9 +911,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,19,75,170] candidates
-  164/274 unique candidates
-  110/274 redundant candidates
+  [3,7,19,75,168] candidates
+  164/272 unique candidates
+  108/272 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -1508,26 +1508,6 @@ class of 2 equivalent candidates:
     [] ?? []  =  []
     [] ?? (x:xs)  =  []
     (x:xs) ?? ys  =  ys ++ ys
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs ++ xs
-    (x:xs) ?? ys  =  xs
-
-    [] ?? xs  =  xs ++ xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs ++ xs
-    (x:xs) ?? ys  =  []
-
-    [] ?? xs  =  xs ++ xs
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  []
 
 
 class of 2 equivalent candidates:

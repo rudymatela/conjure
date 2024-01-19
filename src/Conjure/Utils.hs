@@ -38,6 +38,7 @@ module Conjure.Utils
   , classifyBy -- from LeanCheck.Stats
   , classifyOn -- from LeanCheck.Stats
   , none
+  , updateAt
   )
 where
 
@@ -153,3 +154,12 @@ indentBy n  =  unlines . map (replicate n ' ' ++) . lines
 
 none :: (a -> Bool) -> [a] -> Bool
 none p  =  not . any p
+
+-- | Updates the value in a list at a given position.
+--
+-- > > updateAt 2 (*10) [1,2,3,4]
+-- > [1,2,30,4]
+updateAt :: Int -> (a -> a) -> [a] -> [a]
+updateAt _ _ []  =  []
+updateAt 0 f (x:xs)  =  f x : xs
+updateAt n f (x:xs)  =  x : updateAt (n-1) f xs

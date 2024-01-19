@@ -29,26 +29,6 @@ One possible path would be to replace 0 in the second equation
 then use the Theory to discover x + 0 is equal to 0.
 
 
-## Improve pruning of repetitions
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ++ xs
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  []
-    (x:xs) ?? ys  =  ys ++ xs
-
-The above should not be hard to detect.
-Functionality could be added to
-`isRedundantByRepetition`.
-For each pattern argument,
-we check that results are equal
-for all cases when other pattern arguments
-are kept the same.
-
-
 ## Prune modulo variable introduction
 
 The following is redundant:

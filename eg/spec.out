@@ -32,7 +32,7 @@ sum (x:xs)  =  x + sum xs
 -- looking through 11 candidates of size 3
 -- looking through 33 candidates of size 4
 -- looking through 102 candidates of size 5
--- looking through 246 candidates of size 6
+-- looking through 245 candidates of size 6
 -- tested 237 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)

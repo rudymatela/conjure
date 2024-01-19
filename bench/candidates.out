@@ -5145,7 +5145,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,19,75,170,505,1327,3462,9925] pattern candidates, 0 duplicates
+  [3,7,19,75,168,505,1325,3462,9921] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -6076,10 +6076,6 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys
 
 [] ?? xs  =  xs ++ xs
@@ -6093,10 +6089,6 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
