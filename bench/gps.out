@@ -318,12 +318,12 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 45 candidates of size 4
--- looking through 120 candidates of size 5
--- looking through 174 candidates of size 6
--- looking through 634 candidates of size 7
--- looking through 879 candidates of size 8
--- looking through 3140 candidates of size 9
--- tested 3662 candidates
+-- looking through 112 candidates of size 5
+-- looking through 126 candidates of size 6
+-- looking through 569 candidates of size 7
+-- looking through 503 candidates of size 8
+-- looking through 2817 candidates of size 9
+-- tested 2858 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys

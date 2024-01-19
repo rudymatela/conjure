@@ -31,9 +31,9 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 45 candidates of size 4
--- looking through 120 candidates of size 5
--- looking through 162 candidates of size 6
--- tested 240 candidates
+-- looking through 112 candidates of size 5
+-- looking through 114 candidates of size 6
+-- tested 232 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -54,9 +54,9 @@ xs ++ ys  =  foldr (:) ys xs
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 45 candidates of size 4
--- looking through 120 candidates of size 5
--- looking through 162 candidates of size 6
--- tested 242 candidates
+-- looking through 112 candidates of size 5
+-- looking through 114 candidates of size 6
+-- tested 234 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
@@ -86,13 +86,13 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 3
 -- looking through 12 candidates of size 4
 -- looking through 22 candidates of size 5
--- looking through 34 candidates of size 6
--- looking through 81 candidates of size 7
--- looking through 120 candidates of size 8
--- looking through 282 candidates of size 9
--- looking through 580 candidates of size 10
--- looking through 1397 candidates of size 11
--- looking through 2842 candidates of size 12
--- tested 5376 candidates
+-- looking through 32 candidates of size 6
+-- looking through 77 candidates of size 7
+-- looking through 108 candidates of size 8
+-- looking through 262 candidates of size 9
+-- looking through 520 candidates of size 10
+-- looking through 1341 candidates of size 11
+-- looking through 2632 candidates of size 12
+-- tested 5012 candidates
 cannot conjure
 

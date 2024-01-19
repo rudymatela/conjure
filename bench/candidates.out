@@ -796,7 +796,7 @@ foo x  =  0
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,8,34,93,277,810,2380,6662,18862] pattern candidates, 0 duplicates
+  [3,8,34,93,277,810,2380,6662,18802] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -5025,7 +5025,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,15,67,161,451,1298,3234,9858] pattern candidates, 0 duplicates
+  [3,7,15,67,153,403,1189,2586,8970] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -5618,38 +5618,6 @@ xs ?? (x:ys)  =  []
 [] ?? (x:xs)  =  [] ?? xs
 (x:xs) ?? ys  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  xs ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  xs ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  xs ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  ys ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  ys ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? ys  =  [] ?? ys
-
 xs ?? ys  =  xs ++ (xs ++ xs)
 
 xs ?? ys  =  xs ++ (xs ++ ys)
@@ -6816,21 +6784,6 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? xs
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
@@ -6844,61 +6797,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys
@@ -6927,176 +6825,6 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? (x:xs)  =  [] ?? xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:x:xs

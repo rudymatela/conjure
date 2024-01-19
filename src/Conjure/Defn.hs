@@ -252,19 +252,15 @@ isRedundantDefn d  =  isRedundantBySubsumption d
 --
 -- > 0 ? _  =  1
 -- > x ? _  =  x
---
--- If the given expression is incomplete ('hasHole')
--- this function returns 'True' as nothing can be said.
 isRedundantByRepetition :: Defn -> Bool
-isRedundantByRepetition d  =  isCompleteDefn d
-                           && is
+isRedundantByRepetition d  =  is
   where
   is  =  any anyAllEqual shovels
   nArgs  =  length . tail . unfoldApp . fst . head $ d
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any allEqual
+  anyAllEqual shovel  =  any (\bs -> allEqual bs && isCompleteDefn bs)
                       .  classifyOn fst
                       .  map (canonicalizeBndn . first shovel)
                       $  d
