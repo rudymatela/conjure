@@ -246,11 +246,10 @@ isRedundantDefn d  =  isRedundantBySubsumption d
 -- this function returns 'True' as nothing can be said.
 isRedundantByRepetition :: Defn -> Bool
 isRedundantByRepetition d  =  isCompleteDefn d
-                   && any isRedundant1 (unfoldDefnArgs d)
+                           && any isRedundant1 (unfoldDefnArgs d)
   where
   isRedundant1 :: [(Expr,Expr)] -> Bool
-  isRedundant1  =  all allEqual
-                .  map (map snd)
+  isRedundant1  =  all (allEqual . map snd)
                 .  classifyOn fst
                 .  map (unfoldPair . canonicalize . foldPair)
 
@@ -268,14 +267,12 @@ isRedundantByRepetition2 :: Defn -> Bool
 isRedundantByRepetition2 d  =  isCompleteDefn d
                             && is
   where
+  is  =  any anyAllEqual shovels
   nArgs  =  length . tail . unfoldApp . snd . head $ d
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
-  is  =  any anyAllEqual shovels
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any allEqual
-                      .  map (map snd)
-                      .  filter (\bs -> length bs > 1)
+  anyAllEqual shovel  =  any (allEqual . map snd)
                       .  classifyOn (shovel . fst)
                       $  d
 
