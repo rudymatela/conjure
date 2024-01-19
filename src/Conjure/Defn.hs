@@ -19,6 +19,7 @@ module Conjure.Defn
   , devl
   , devalFast
   , showDefn
+  , printDefn
   , defnApparentlyTerminates
   , isRedundantDefn
   , isCompleteDefn
@@ -71,6 +72,14 @@ showDefn  =  unlines . map show1
                                               lhseqs  =  showExpr lhs ++ "  =  "
                                               spaces  =  map (const ' ') lhseqs
   show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
+
+-- | Pretty-prints a 'Defn' to the screen.
+--
+-- > > printDefn sumDefn
+-- > sum []  =  0
+-- > sum (x:xs)  =  x + sum xs
+printDefn :: Defn -> IO ()
+printDefn  =  putStr . showDefn
 
 type Memo  =  [(Expr, Maybe Dynamic)]
 
