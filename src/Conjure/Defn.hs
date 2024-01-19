@@ -63,6 +63,12 @@ type Bndn  =  (Expr,Expr)
 showDefn :: Defn -> String
 showDefn  =  unlines . map show1
   where
+  show1 (lhs,Value "if" _ :$ c :$ t :$ e)  =  lhseqs ++ "if " ++ showExpr c
+                                   ++ "\n" ++ spaces ++ "then " ++ showExpr t
+                                   ++ "\n" ++ spaces ++ "else " ++ showExpr e
+                                              where
+                                              lhseqs  =  showExpr lhs ++ "  =  "
+                                              spaces  =  map (const ' ') lhseqs
   show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
 
 type Memo  =  [(Expr, Maybe Dynamic)]

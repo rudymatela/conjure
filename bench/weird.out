@@ -23,5 +23,7 @@ x ^^^ y  =  0
 -- looking through 2421 candidates of size 9
 -- looking through 32068 candidates of size 10
 -- tested 17443 candidates
-x ^^^ y  =  if 0 == x * y then x + y else 0
+x ^^^ y  =  if 0 == x * y
+            then x + y
+            else 0
 

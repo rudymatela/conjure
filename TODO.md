@@ -6,8 +6,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 ### for later
 
-* pretty-print top-level if and case expressions?
-
 * consider not breaking arguments in some cases
   (increased crossproduct of patterns).
   but which cases?

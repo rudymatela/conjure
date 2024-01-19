@@ -60,7 +60,9 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 27432 candidates of size 10
 -- looking through 174839 candidates of size 11
 -- tested 137576 candidates
-cshift (p,q,r)  =  if p then (p,r,q) else (p,q,r)
+cshift (p,q,r)  =  if p
+                   then (p,r,q)
+                   else (p,q,r)
 
 cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values

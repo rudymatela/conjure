@@ -20,7 +20,9 @@ duplicates :: [Int] -> [Int]
 -- looking through 2189 candidates of size 17
 -- tested 2599 candidates
 duplicates []  =  []
-duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
+duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
+                      then x:duplicates xs
+                      else duplicates xs
 
 duplicates :: [Int] -> [Int]
 -- pruning with 21/26 rules
@@ -43,7 +45,9 @@ duplicates :: [Int] -> [Int]
 -- looking through 2189 candidates of size 17
 -- tested 2599 candidates
 duplicates []  =  []
-duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
+duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
+                      then x:duplicates xs
+                      else duplicates xs
 
 positionsFrom :: Int -> A -> [A] -> [Int]
 -- testing 360 combinations of argument values

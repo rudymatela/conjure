@@ -25,7 +25,9 @@ gps2 :: Int -> Maybe [Char]
 -- looking through 512 candidates of size 12
 -- looking through 1792 candidates of size 13
 -- tested 1203 candidates
-gps2 x  =  if 2000 <= x then Just "large" else (if x < 1000 then Just "small" else Nothing)
+gps2 x  =  if 2000 <= x
+           then Just "large"
+           else if x < 1000 then Just "small" else Nothing
 
 gps3 :: Int -> Int -> Int -> [Int]
 -- testing 2 combinations of argument values
@@ -396,7 +398,9 @@ pig1 :: [Char] -> [Char]
 -- looking through 20409 candidates of size 14
 -- tested 27901 candidates
 pig1 ""  =  "ay"
-pig1 (c:cs)  =  if isVowel c then (c:cs) ++ "ay" else cs ++ (c:"ay")
+pig1 (c:cs)  =  if isVowel c
+                then (c:cs) ++ "ay"
+                else cs ++ (c:"ay")
 
 gps20c :: [Char] -> [Char]
 -- pruning with 1/1 rules
@@ -490,7 +494,9 @@ gps27 :: Int -> Int -> Int -> Int
 -- looking through 180 candidates of size 10
 -- looking through 2592 candidates of size 11
 -- tested 1579 candidates
-gps27 x y z  =  if x < y then (if y < z then y else z) else x
+gps27 x y z  =  if x < y
+                then if y < z then y else z
+                else x
 
 gps27b :: Int -> Int -> Int -> Int
 -- testing 3 combinations of argument values

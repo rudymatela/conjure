@@ -196,7 +196,9 @@ gps13_leaders :: [Int] -> [Int]
 -- looking through 67 candidates of size 12
 -- tested 83 candidates
 gps13_leaders []  =  []
-gps13_leaders (x:xs)  =  if all (x >) xs then x:gps13_leaders xs else gps13_leaders xs
+gps13_leaders (x:xs)  =  if all (x >) xs
+                         then x:gps13_leaders xs
+                         else gps13_leaders xs
 
 gps14_luhn :: [Int] -> Int
 -- pruning with 0/0 rules
@@ -228,7 +230,9 @@ gps16_middle :: [Char] -> [Char]
 -- looking through 6293 candidates of size 12
 -- tested 3977 candidates
 gps16_middle ""  =  ""
-gps16_middle (c:cs)  =  if length cs <= 1 then c:cs else gps16_middle (init cs)
+gps16_middle (c:cs)  =  if length cs <= 1
+                        then c:cs
+                        else gps16_middle (init cs)
 
 gps17_pds :: [Int] -> Int
 -- testing 5 combinations of argument values
@@ -284,7 +288,9 @@ spin :: [Char] -> [Char]
 -- looking through 0 candidates of size 7
 -- looking through 4 candidates of size 8
 -- tested 3 candidates
-spin cs  =  if length cs >= 5 then reverse cs else cs
+spin cs  =  if length cs >= 5
+            then reverse cs
+            else cs
 
 gps21_spinwords :: [Char] -> [Char]
 -- pruning with 16/16 rules
@@ -355,7 +361,9 @@ gps24 :: [Char] -> Twitter
 -- looking through 483 candidates of size 12
 -- tested 936 candidates
 gps24 ""  =  Empty
-gps24 (c:cs)  =  if 140 > length cs then Tweet (length (c:cs)) else TooMany
+gps24 (c:cs)  =  if 140 > length cs
+                 then Tweet (length (c:cs))
+                 else TooMany
 
 gps25 :: [Double] -> [Double] -> Double
 -- testing 6 combinations of argument values
