@@ -23,6 +23,7 @@ module Conjure.Defn
   , defnApparentlyTerminates
   , isRedundantDefn
   , isCompleteDefn
+  , isCompleteBndn
   , simplifyDefn
   , canonicalizeBndn
   , module Conjure.Expr
