@@ -86,8 +86,12 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 9 candidates of size 3
--- looking through 19 candidates of size 4
--- tested 28 candidates
+-- looking through 18 candidates of size 4
+-- looking through 45 candidates of size 5
+-- looking through 108 candidates of size 6
+-- looking through 308 candidates of size 7
+-- looking through 849 candidates of size 8
+-- tested 1337 candidates
 fadder False False False  =  (False,False)
 fadder False False True  =  (False,True)
 fadder False True False  =  (False,True)
@@ -131,10 +135,9 @@ access :: [A] -> Int -> A
 -- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 18 candidates of size 5
--- looking through 25 candidates of size 6
--- looking through 74 candidates of size 7
--- tested 72 candidates
-[] `access` 0  =  undefined
+-- looking through 41 candidates of size 6
+-- looking through 115 candidates of size 7
+-- tested 88 candidates
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
 (x:xs) `access` y  =  xs `access` (y - 1)

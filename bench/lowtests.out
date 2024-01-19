@@ -20,12 +20,12 @@ xs `isSubsequenceOf` sort xs == True
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 12 candidates of size 7
--- looking through 21 candidates of size 8
+-- looking through 22 candidates of size 8
 -- looking through 8 candidates of size 9
--- looking through 0 candidates of size 10
--- looking through 0 candidates of size 11
--- looking through 0 candidates of size 12
--- tested 47 candidates
+-- looking through 6 candidates of size 10
+-- looking through 30 candidates of size 11
+-- looking through 45 candidates of size 12
+-- tested 129 candidates
 cannot conjure
 
 subset :: [Int] -> [Int] -> Bool

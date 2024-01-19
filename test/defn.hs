@@ -91,10 +91,10 @@ tests n  =
   , isRedundantDefn appendDefn == False
 
   , isRedundantDefn const0Defn == False
-  , isRedundantDefn const0RedundantDefn == False -- TODO: detect this redundancy!
+  , isRedundantDefn const0RedundantDefn
 
   , isRedundantDefn constDefn == False
-  , isRedundantDefn constRedundantDefn == False -- TODO: detect this redundancy!
+  , isRedundantDefn constRedundantDefn
   , isRedundantDefn constRedundantRedundantDefn
 
   , isRedundantDefn redundantDefn1

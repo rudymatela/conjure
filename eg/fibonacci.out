@@ -3,17 +3,17 @@ fibonacci :: Int -> Int
 -- pruning with 21/44 rules
 -- looking through 4 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 14 candidates of size 3
--- looking through 17 candidates of size 4
--- looking through 59 candidates of size 5
--- looking through 70 candidates of size 6
--- looking through 370 candidates of size 7
+-- looking through 13 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 56 candidates of size 5
+-- looking through 67 candidates of size 6
+-- looking through 367 candidates of size 7
 -- looking through 402 candidates of size 8
 -- looking through 2358 candidates of size 9
 -- looking through 2598 candidates of size 10
 -- looking through 16077 candidates of size 11
 -- looking through 17973 candidates of size 12
--- tested 22486 candidates
+-- tested 22474 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

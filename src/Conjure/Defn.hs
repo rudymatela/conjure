@@ -217,7 +217,7 @@ defnApparentlyTerminates _  =  True
 -- If the given expression is incomplete ('hasHole')
 -- this function returns 'True' as nothing can be said.
 isRedundantDefn :: Defn -> Bool
-isRedundantDefn  =  isRedundantByRepetition
+isRedundantDefn  =  isRedundantBySubsumption
 
 -- | Returns whether the given 'Defn' is redundant
 --   with regards to repetitions on RHSs.

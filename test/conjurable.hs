@@ -161,7 +161,7 @@ tests n  =
          ]
        ]
 
-  , take 4 (conjurePats [zero, one] "?" (undefined :: Int -> Int -> Int))
+  , take 3 (conjurePats [zero, one] "?" (undefined :: Int -> Int -> Int))
     == [ [ [ xx -?- yy
            ]
          ]
@@ -175,105 +175,26 @@ tests n  =
        , [ [ xx -?- one
            , xx -?- yy
            ]
+         , [ zero -?- xx
+           , xx -?- zero
+           , xx -?- yy
+           ]
          , [ zero -?- zero
            , zero -?- xx
-           , xx -?- zero
            , xx -?- yy
            ]
          , [ one -?- xx
            , xx -?- yy
            ]
          ]
-       , [ [ xx -?- zero
-           , xx -?- one
-           , xx -?- yy
-           ]
-         , [ zero -?- one
-           , zero -?- xx
-           , xx -?- one
-           , xx -?- yy
-           ]
-         , [ one -?- zero
-           , one -?- xx
-           , xx -?- zero
-           , xx -?- yy
-           ]
-         , [ zero -?- xx
-           , one -?- xx
-           , xx -?- yy
-           ]
-         ]
        ]
 
-  , concat (conjurePats [zero, one] "foo" (undefined :: [Int] -> Int -> Int))
-    == [ [ ffoo xxs xx
-         ]
-       , [ ffoo xxs zero
-         , ffoo xxs xx
-         ]
-       , [ ffoo nil xx
-         , ffoo (xx -:- xxs) yy
-         ]
-       , [ ffoo xxs one
-         , ffoo xxs xx
-         ]
-       , [ ffoo nil zero
-         , ffoo nil xx
-         , ffoo (xx -:- xxs) zero
-         , ffoo (xx -:- xxs) yy
-         ]
-       , [ ffoo xxs zero
-         , ffoo xxs one
-         , ffoo xxs xx
-         ]
-       , [ ffoo nil one
-         , ffoo nil xx
-         , ffoo (xx -:- xxs) one
-         , ffoo (xx -:- xxs) yy
-         ]
-       , [ ffoo nil zero
-         , ffoo nil one
-         , ffoo nil xx
-         , ffoo (xx -:- xxs) zero
-         , ffoo (xx -:- xxs) one
-         , ffoo (xx -:- xxs) yy
-         ]
-       ]
+  , mapT length (conjurePats [zero, one] "foo" (undefined :: [Int] -> Int -> Int))
+    == [[1],[2,2],[2,3,3],[3,3,4,3],[4,4,4,4],[5,4,5],[5,5],[6]]
 
-  , concat (conjurePats [zero, one] "foo" (undefined :: Int -> [Int] -> Int))
-    == [ [ ffoo xx xxs
-         ]
-       , [ ffoo xx nil
-         , ffoo xx (yy -:- xxs)
-         ]
-       , [ ffoo zero xxs
-         , ffoo xx xxs
-         ]
-       , [ ffoo zero nil
-         , ffoo zero (xx -:- xxs)
-         , ffoo xx nil
-         , ffoo xx (yy -:- xxs)
-         ]
-       , [ ffoo one xxs
-         , ffoo xx xxs
-         ]
-       , [ ffoo one nil
-         , ffoo one (xx -:- xxs)
-         , ffoo xx nil
-         , ffoo xx (yy -:- xxs)
-         ]
-       , [ ffoo zero xxs
-         , ffoo one xxs
-         , ffoo xx xxs
-         ]
-       , [ ffoo zero nil
-         , ffoo zero (xx -:- xxs)
-         , ffoo one nil
-         , ffoo one (xx -:- xxs)
-         , ffoo xx nil
-         , ffoo xx (yy -:- xxs)
-         ]
-       ]
+
+  , mapT length (conjurePats [zero, one] "foo" (undefined :: Int -> [Int] -> Int))
+    == [[1],[2,2],[3,3,2],[4,3,3,3],[4,4,4,4],[5,5,5],[6]]
 
   , conjurePats [] "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo xxs ccs
@@ -283,6 +204,15 @@ tests n  =
            , ffoo xxs (cc -:- ccs)
            ]
          , [ ffoo nilInt       ccs
+           , ffoo (xx -:- xxs) ccs
+           ]
+         ]
+       , [ [ ffoo nilInt ccs
+           , ffoo (xx -:- xxs) emptyString
+           , ffoo (xx -:- xxs) (cc -:- ccs)
+           ]
+         , [ ffoo nilInt emptyString
+           , ffoo nilInt (cc -:- ccs)
            , ffoo (xx -:- xxs) ccs
            ]
          ]

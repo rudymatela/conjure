@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 15/35 rules
   [3,0,7,0,20,0,75,0,297] direct candidates, 0 duplicates
-  [3,4,12,32,56,141,311,711,1882] pattern candidates, 0 duplicates
+  [3,3,11,25,56,128,307,675,1882] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -113,9 +113,6 @@ foo x  =  0
 foo x  =  1
 
 foo 0  =  0
-foo x  =  x
-
-foo 0  =  0
 foo x  =  1
 
 foo 0  =  1
@@ -145,9 +142,6 @@ foo x  =  x
 
 foo 1  =  0
 foo x  =  1
-
-foo 1  =  1
-foo x  =  x
 
 foo 1  =  1
 foo x  =  0
@@ -220,38 +214,10 @@ foo x  =  1
 
 foo 0  =  0
 foo 1  =  0
-foo x  =  x
-
-foo 0  =  0
-foo 1  =  0
-foo x  =  1
-
-foo 0  =  0
-foo 1  =  1
-foo x  =  x
-
-foo 0  =  0
-foo 1  =  1
-foo x  =  0
-
-foo 0  =  0
-foo 1  =  1
 foo x  =  1
 
 foo 0  =  1
 foo 1  =  0
-foo x  =  x
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  0
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  1
-
-foo 0  =  1
-foo 1  =  1
 foo x  =  x
 
 foo 0  =  1
@@ -618,9 +584,6 @@ foo 0  =  0 - 1
 foo x  =  1 + 1
 
 foo 0  =  0 - 1
-foo x  =  x - 1
-
-foo 0  =  0 - 1
 foo x  =  0 - x
 
 foo 0  =  0 - 1
@@ -719,23 +682,7 @@ foo x  =  1 - x
 
 foo 0  =  0
 foo 1  =  1 + 1
-foo x  =  x
-
-foo 0  =  0
-foo 1  =  1 + 1
-foo x  =  0
-
-foo 0  =  0
-foo 1  =  1 + 1
 foo x  =  1
-
-foo 0  =  0
-foo 1  =  0 - 1
-foo x  =  x
-
-foo 0  =  0
-foo 1  =  0 - 1
-foo x  =  0
 
 foo 0  =  0
 foo 1  =  0 - 1
@@ -814,10 +761,6 @@ foo 1  =  1 + 1
 foo x  =  0
 
 foo 0  =  1
-foo 1  =  1 + 1
-foo x  =  1
-
-foo 0  =  1
 foo 1  =  0 - 1
 foo x  =  x
 
@@ -825,33 +768,17 @@ foo 0  =  1
 foo 1  =  0 - 1
 foo x  =  0
 
-foo 0  =  1
-foo 1  =  0 - 1
-foo x  =  1
-
 foo 0  =  1 + 1
 foo 1  =  0
 foo x  =  x
 
 foo 0  =  1 + 1
 foo 1  =  0
-foo x  =  0
-
-foo 0  =  1 + 1
-foo 1  =  0
 foo x  =  1
 
 foo 0  =  1 + 1
 foo 1  =  1
-foo x  =  x
-
-foo 0  =  1 + 1
-foo 1  =  1
 foo x  =  0
-
-foo 0  =  1 + 1
-foo 1  =  1
-foo x  =  1
 
 foo 0  =  0 - 1
 foo 1  =  0
@@ -859,29 +786,17 @@ foo x  =  x
 
 foo 0  =  0 - 1
 foo 1  =  0
-foo x  =  0
-
-foo 0  =  0 - 1
-foo 1  =  0
 foo x  =  1
 
 foo 0  =  0 - 1
 foo 1  =  1
-foo x  =  x
-
-foo 0  =  0 - 1
-foo 1  =  1
 foo x  =  0
-
-foo 0  =  0 - 1
-foo 1  =  1
-foo x  =  1
 
 
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,10,40,116,338,953,2726,7617,21220] pattern candidates, 0 duplicates
+  [3,8,34,93,277,840,2516,7283,21002] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1061,14 +976,8 @@ x ? y  =  0
 x ? 0  =  0
 x ? y  =  x
 
-x ? 0  =  0
-x ? y  =  y
-
 0 ? x  =  x
 x ? y  =  0
-
-0 ? x  =  0
-x ? y  =  x
 
 0 ? x  =  0
 x ? y  =  y
@@ -1159,49 +1068,16 @@ x ? y  =  y
 0 ? x  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  0
 x ? y  =  y
 
 x ? y  =  dec x + x
@@ -1285,9 +1161,6 @@ x ? y  =  dec 0
 x ? 0  =  dec 0
 x ? y  =  dec x
 
-x ? 0  =  dec 0
-x ? y  =  dec y
-
 x ? 0  =  x + x
 x ? y  =  x
 
@@ -1361,9 +1234,6 @@ x ? y  =  dec (dec 0)
 x ? y  =  dec 0
 
 0 ? x  =  dec 0
-x ? y  =  dec x
-
-0 ? x  =  dec 0
 x ? y  =  dec y
 
 0 ? x  =  x + x
@@ -1393,245 +1263,113 @@ x ? y  =  y
 0 ? x  =  dec (dec 0)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec 0
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  0
-x ? y  =  y
+x ? y  =  x
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  0
 x ? y  =  0
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x
 x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  0
 
 x ? 0  =  x
 x ? y  =  x ? dec y
@@ -2195,705 +1933,324 @@ x ? y  =  y
 0 ? x  =  x + dec 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  dec x
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  dec x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  dec 0
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x + x
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec x)
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec (dec x)
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec x)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec 0)
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec (dec 0)
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec 0)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  dec x
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x + x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x + x
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x + x
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec x)
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec x)
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec x)
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec 0)
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec 0)
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec 0)
-x ? y  =  0
-
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec x
 
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  dec y
-
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  dec x
-
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  dec y
 
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  dec 0
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
-0 ? x  =  x + x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x + x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  x + x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec (dec x)
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  dec (dec x)
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec (dec x)
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec (dec 0)
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  0
 x ? y  =  x
 
 0 ? 0  =  0
-0 ? x  =  dec (dec 0)
-x ? 0  =  0
-x ? y  =  y
+0 ? x  =  dec x
+x ? y  =  dec x
 
 0 ? 0  =  0
-0 ? x  =  dec (dec 0)
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x
+0 ? x  =  dec x
 x ? y  =  dec 0
 
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
+0 ? 0  =  0
+0 ? x  =  dec 0
 x ? y  =  dec y
 
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  y
-
 0 ? 0  =  dec (dec 0)
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  x
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  0
 x ? y  =  0
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  0
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
+0 ? 0  =  dec 0
+0 ? x  =  x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
+0 ? 0  =  dec 0
+0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  dec (dec 0)
+0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  0
+x ? 0  =  x
 x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  0
 
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
@@ -3171,244 +2528,268 @@ x ? y  =  dec x ? y
 0 ? x  =  dec 0
 x ? y  =  dec x ? 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x ? dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y ? dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  0 ? dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x ? x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x ? y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x ? 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x ? x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x ? 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x ? x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x ? 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x ? x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x ? 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x ? dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y ? dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  0 ? dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x ? x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x ? y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x ? 0
 
-0 ? 0  =  0
 0 ? x  =  x ? dec x
 x ? 0  =  x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  0 ? dec x
 x ? 0  =  x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  x ? dec x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  0 ? dec x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x ? dec x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0 ? dec x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x ? dec x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  0 ? dec x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  x ? dec x
 x ? 0  =  0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  0 ? dec x
 x ? 0  =  0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x ? dec x
 x ? 0  =  0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0 ? dec x
 x ? 0  =  0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x ? dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y ? dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  0 ? dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x ? x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x ? y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x ? 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x ? x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x ? 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x ? x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x ? 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x ? x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x ? 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x ? dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y ? dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  0 ? dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x ? x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x ? y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
+x ? y  =  dec x ? 0
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? y  =  y ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? y  =  0 ? dec y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? y  =  dec x ? x
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? y  =  dec x ? y
+
+0 ? 0  =  0
+0 ? x  =  x
+x ? y  =  dec x ? 0
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? y  =  y
+
+0 ? 0  =  0
+0 ? x  =  x ? dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0 ? dec x
+x ? y  =  0
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? y  =  y ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? y  =  0 ? dec y
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? y  =  dec x ? x
+
+0 ? 0  =  0
+0 ? x  =  0
+x ? y  =  dec x ? y
+
+0 ? 0  =  0
+0 ? x  =  0
 x ? y  =  dec x ? 0
 
 x ? y  =  dec (dec (dec x)) + x
@@ -3882,9 +3263,6 @@ x ? y  =  y + y
 x ? 0  =  dec (dec 0)
 x ? y  =  dec (dec x)
 
-x ? 0  =  dec (dec 0)
-x ? y  =  dec (dec y)
-
 x ? 0  =  dec x + x
 x ? y  =  dec x
 
@@ -4363,9 +3741,6 @@ x ? y  =  y + x
 x ? y  =  y + y
 
 0 ? x  =  dec (dec 0)
-x ? y  =  dec (dec x)
-
-0 ? x  =  dec (dec 0)
 x ? y  =  dec (dec y)
 
 0 ? x  =  dec x + x
@@ -4521,2105 +3896,1172 @@ x ? y  =  y
 0 ? x  =  dec 0 + dec 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec y + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec y + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec 0 + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec 0 + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec (dec x))
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec (dec y))
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec (dec 0))
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x + dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x + dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x + dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y + dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y + dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y + dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec y + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec y + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec 0 + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec 0 + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec (dec x))
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec (dec y))
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec (dec 0))
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x + dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y + dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y + dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y + dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec x)
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec x)
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec x)
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec 0)
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec 0)
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec 0)
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x + x
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec x + x
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec x + x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0 + x
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec 0 + x
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec 0 + x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec (dec x))
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec (dec (dec x))
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec (dec x))
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec (dec 0))
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  dec (dec (dec 0))
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  dec (dec (dec 0))
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + dec x
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x + dec x
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + dec 0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x
-x ? 0  =  x + dec 0
-x ? y  =  y
-
-0 ? 0  =  0
 0 ? x  =  x
 x ? 0  =  x + dec 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec y + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec y + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec 0 + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec 0 + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec (dec x))
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec (dec y))
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec (dec 0))
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x + dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x + dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x + dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y + dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y + dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y + dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec y + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec y + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec 0 + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec 0 + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec (dec (dec x))
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec (dec (dec y))
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec (dec (dec 0))
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y + dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y + dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  y + dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x + x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x + x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x + x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec x)
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec x)
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec x)
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec 0)
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec 0)
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec 0)
 x ? y  =  dec 0
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec x + x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec x + x
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec x + x
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec 0 + x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec 0 + x
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec 0 + x
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec (dec x))
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec (dec x))
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec (dec x))
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec (dec 0))
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  dec (dec (dec 0))
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  dec (dec (dec 0))
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x + dec x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x + dec x
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x + dec x
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x + dec 0
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  0
 x ? 0  =  x + dec 0
 x ? y  =  y
 
-0 ? 0  =  0
-0 ? x  =  0
-x ? 0  =  x + dec 0
-x ? y  =  0
-
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  dec x
-x ? y  =  dec x
-
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  dec x
-x ? y  =  dec y
-
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec 0
 x ? y  =  dec x
 
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  dec 0
-x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  dec x
-x ? 0  =  dec 0
-x ? y  =  dec 0
-
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x + x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x + x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  x + x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec (dec x)
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec (dec x)
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec (dec x)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec (dec 0)
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec (dec 0)
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x
 x ? 0  =  dec (dec 0)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  x + x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  x + y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  y + x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  y + y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  dec (dec x)
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  dec (dec y)
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  0
 x ? y  =  dec (dec 0)
 
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  dec x
-x ? y  =  dec x
-
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec x
 x ? y  =  dec y
 
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  dec x
-x ? y  =  dec 0
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  dec 0
-x ? y  =  dec x
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  dec 0
-x ? y  =  dec y
-
-0 ? 0  =  0
-0 ? x  =  dec 0
-x ? 0  =  dec 0
-x ? y  =  dec 0
-
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x + x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x + x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  x + x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec (dec x)
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec (dec x)
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec (dec x)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec (dec 0)
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec (dec 0)
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0
 x ? 0  =  dec (dec 0)
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  0
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  0
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  0
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  dec x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  dec x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  dec 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  dec 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x + x
 x ? 0  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  0
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  0
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  0
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  dec x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  dec x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  dec 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  dec 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec x)
 x ? 0  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  x
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  x
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  x
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  0
 x ? y  =  dec x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  0
 x ? y  =  dec y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  0
 x ? y  =  dec 0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  dec x
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  dec x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  dec x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  dec 0
 x ? y  =  x
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  dec 0
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec 0)
 x ? 0  =  dec 0
 x ? y  =  0
 
-0 ? 0  =  0
-0 ? x  =  dec x + x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec x + x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec x + x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec x + x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  dec x + x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec x + x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec 0 + x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec 0 + x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec 0 + x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec 0 + x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  dec 0 + x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec 0 + x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec (dec (dec x))
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec (dec (dec x))
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec (dec x))
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec (dec x))
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  dec (dec (dec x))
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec (dec (dec x))
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  dec (dec (dec 0))
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  dec (dec (dec 0))
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  dec (dec (dec 0))
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  dec (dec (dec 0))
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  dec (dec (dec 0))
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  dec (dec (dec 0))
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  x + dec x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  x + dec x
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x + dec x
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x + dec x
 x ? 0  =  0
 x ? y  =  x
 
-0 ? 0  =  0
-0 ? x  =  x + dec x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  0
-0 ? x  =  x + dec x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  0
-0 ? x  =  x + dec 0
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  0
 0 ? x  =  x + dec 0
 x ? 0  =  x
 x ? y  =  y
 
-0 ? 0  =  0
 0 ? x  =  x + dec 0
 x ? 0  =  x
 x ? y  =  0
 
-0 ? 0  =  0
 0 ? x  =  x + dec 0
 x ? 0  =  0
 x ? y  =  x
 
 0 ? 0  =  0
-0 ? x  =  x + dec 0
-x ? 0  =  0
-x ? y  =  y
+0 ? x  =  dec x
+x ? y  =  x + x
 
 0 ? 0  =  0
-0 ? x  =  x + dec 0
-x ? 0  =  0
-x ? y  =  0
+0 ? x  =  dec x
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  x + x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  x + y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  y + x
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  y + y
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  dec (dec x)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  dec (dec y)
+
+0 ? 0  =  0
+0 ? x  =  dec 0
+x ? y  =  dec (dec 0)
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  x + x
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec x)
+x ? y  =  dec 0
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? y  =  dec x
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? y  =  dec y
+
+0 ? 0  =  0
+0 ? x  =  dec (dec 0)
+x ? y  =  dec 0
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  x + x
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  x + y
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  y + x
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  y + y
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec (dec x)
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec (dec y)
 
 0 ? 0  =  dec 0
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec (dec 0)
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  x + x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  x + y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  y + x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  y + y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec (dec x)
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec (dec y)
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec (dec 0)
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x + x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x + x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  x + x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec (dec x)
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec (dec x)
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec (dec x)
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec (dec 0)
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec (dec 0)
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x
-x ? 0  =  dec (dec 0)
-x ? y  =  0
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  x + x
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  x + y
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  y + x
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  y + y
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec (dec x)
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec (dec y)
 
 0 ? 0  =  dec 0
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec (dec 0)
 
 0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  x + x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  x + y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  y + x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  y + y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec (dec x)
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec (dec y)
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec (dec 0)
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x + x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x + x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  x + x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec (dec x)
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec (dec x)
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec (dec x)
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec (dec 0)
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec (dec 0)
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  0
-x ? 0  =  dec (dec 0)
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec x
-x ? 0  =  dec 0
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  x
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  dec y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  dec 0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec 0
-x ? 0  =  dec 0
-x ? y  =  0
-
-0 ? 0  =  dec 0
 0 ? x  =  x + x
-x ? 0  =  x
 x ? y  =  x
 
 0 ? 0  =  dec 0
 0 ? x  =  x + x
-x ? 0  =  x
 x ? y  =  y
 
 0 ? 0  =  dec 0
 0 ? x  =  x + x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  x + x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  x + x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  x + x
-x ? 0  =  0
 x ? y  =  0
 
 0 ? 0  =  dec 0
 0 ? x  =  dec (dec x)
-x ? 0  =  x
 x ? y  =  x
 
 0 ? 0  =  dec 0
 0 ? x  =  dec (dec x)
-x ? 0  =  x
 x ? y  =  y
 
 0 ? 0  =  dec 0
 0 ? x  =  dec (dec x)
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec (dec x)
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec (dec x)
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec (dec x)
-x ? 0  =  0
 x ? y  =  0
 
 0 ? 0  =  dec 0
 0 ? x  =  dec (dec 0)
-x ? 0  =  x
 x ? y  =  x
 
 0 ? 0  =  dec 0
 0 ? x  =  dec (dec 0)
-x ? 0  =  x
 x ? y  =  y
 
 0 ? 0  =  dec 0
 0 ? x  =  dec (dec 0)
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec 0
-0 ? x  =  dec (dec 0)
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec 0
-0 ? x  =  dec (dec 0)
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec 0
-0 ? x  =  dec (dec 0)
-x ? 0  =  0
 x ? y  =  0
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec x
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec y
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec 0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec 0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  x
-x ? 0  =  dec 0
-x ? y  =  0
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec x
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec y
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec 0
 
 0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec 0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  dec x
-x ? y  =  0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  0
-x ? 0  =  dec 0
-x ? y  =  0
-
-0 ? 0  =  dec (dec 0)
 0 ? x  =  dec x
-x ? 0  =  x
 x ? y  =  x
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  dec x
-x ? 0  =  x
 x ? y  =  y
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  dec x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  dec x
-x ? 0  =  0
 x ? y  =  0
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  dec 0
-x ? 0  =  x
 x ? y  =  x
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  dec 0
-x ? 0  =  x
 x ? y  =  y
 
 0 ? 0  =  dec (dec 0)
 0 ? x  =  dec 0
+x ? y  =  0
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? y  =  x
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  x
+x ? y  =  0
+
+0 ? 0  =  dec (dec (dec 0))
+0 ? x  =  0
+x ? y  =  y
+
+0 ? 0  =  dec (dec 0)
+0 ? x  =  x
 x ? 0  =  x
 x ? y  =  0
 
 0 ? 0  =  dec (dec 0)
-0 ? x  =  dec 0
+0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x
 
 0 ? 0  =  dec (dec 0)
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec (dec 0)
-0 ? x  =  dec 0
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  0
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  x
-
-0 ? 0  =  dec (dec (dec 0))
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  0
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  x
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  y
-
-0 ? 0  =  dec (dec (dec 0))
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  0
 
 
 Candidates for: goo :: [Int] -> [Int]
@@ -6703,7 +5145,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,13,66,152,361,1394,2084,11820] pattern candidates, 0 duplicates
+  [3,8,19,77,170,506,1327,3468,9925] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -6765,6 +5207,9 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  ys
 
 [] ?? xs  =  xs
+(x:xs) ?? ys  =  ys
+
+[] ?? xs  =  xs
 (x:xs) ?? ys  =  []
 
 [] ?? xs  =  []
@@ -6781,50 +5226,65 @@ xs ?? ys  =  ys ++ xs
 
 xs ?? ys  =  ys ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? xs
@@ -7027,342 +5487,357 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ?? ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ?? []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  [] ?? xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [] ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs ?? []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys ?? []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  [] ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? ys
+(x:xs) ?? ys  =  [] ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [] ?? xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? xs
+(x:xs) ?? ys  =  xs ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? ys
+(x:xs) ?? ys  =  xs ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? []
+(x:xs) ?? ys  =  xs ?? []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? xs
+(x:xs) ?? ys  =  ys ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? ys
+(x:xs) ?? ys  =  ys ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? []
+(x:xs) ?? ys  =  ys ?? []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? xs
+(x:xs) ?? ys  =  [] ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? ys
+(x:xs) ?? ys  =  [] ?? ys
 
 xs ?? ys  =  xs ++ (xs ++ xs)
 
@@ -7380,385 +5855,353 @@ xs ?? ys  =  ys ++ (ys ++ xs)
 
 xs ?? ys  =  ys ++ (ys ++ ys)
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  x:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  x:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  [x]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  y:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  y:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  [y]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  x:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  x:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [x]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  y:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  y:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [y]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  xs ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  xs ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs
 (x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  x:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  x:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  [x]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  y:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  y:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  [y]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  x:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  x:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [x]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  y:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  y:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [y]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  xs ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  xs ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  x:xs
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  []
+[] ?? xs  =  []
 (x:xs) ?? []  =  xs ++ xs
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs
+(x:xs) ?? ys  =  xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
+(x:xs) ?? ys  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  (x:xs) ?? xs
@@ -8540,6 +6983,346 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  [] ?? ys
 
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [] ?? xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [] ?? xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [] ?? xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [] ?? xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [] ?? xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [] ?? xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ?? []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  [] ?? xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [] ?? ys
+
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:x:xs
 
@@ -8834,6 +7617,9 @@ xs ?? (x:ys)  =  []
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  ys ++ xs
 
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  ys ++ ys
+
 [] ?? xs  =  xs ++ (xs ++ xs)
 (x:xs) ?? ys  =  xs
 
@@ -8842,6 +7628,386 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs ++ (xs ++ xs)
 (x:xs) ?? ys  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  []
 
 
 Candidates for: ton :: Bool -> Bool
@@ -8976,7 +8142,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,32,128,564,1992,6556] direct candidates, 0 duplicates
-  [4,14,26,8,4,48,60,280,592] pattern candidates, 0 duplicates
+  [4,14,36,30,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -9483,55 +8649,85 @@ True &| p  =  False
 False &| p  =  not p
 True &| p  =  True
 
-False &| False  =  False
-False &| True  =  False
+False &| p  =  p
+True &| False  =  False
+True &| True  =  False
+
+False &| p  =  p
 True &| False  =  False
 True &| True  =  True
 
-False &| False  =  False
-False &| True  =  False
+False &| p  =  p
+True &| False  =  True
+True &| True  =  False
+
+False &| p  =  p
+True &| False  =  True
+True &| True  =  True
+
+False &| p  =  False
+True &| False  =  False
+True &| True  =  True
+
+False &| p  =  False
+True &| False  =  True
+True &| True  =  False
+
+False &| p  =  False
+True &| False  =  True
+True &| True  =  True
+
+False &| p  =  True
+True &| False  =  False
+True &| True  =  False
+
+False &| p  =  True
+True &| False  =  False
+True &| True  =  True
+
+False &| p  =  True
 True &| False  =  True
 True &| True  =  False
 
 False &| False  =  False
-False &| True  =  True
-True &| False  =  False
-True &| True  =  False
+False &| True  =  False
+True &| p  =  p
+
+False &| False  =  False
+False &| True  =  False
+True &| p  =  True
 
 False &| False  =  False
 False &| True  =  True
-True &| False  =  True
-True &| True  =  False
+True &| p  =  p
 
 False &| False  =  False
 False &| True  =  True
-True &| False  =  True
-True &| True  =  True
+True &| p  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| p  =  True
 
 False &| False  =  True
 False &| True  =  False
-True &| False  =  False
-True &| True  =  False
+True &| p  =  p
 
 False &| False  =  True
 False &| True  =  False
-True &| False  =  False
-True &| True  =  True
+True &| p  =  False
 
 False &| False  =  True
 False &| True  =  False
-True &| False  =  True
-True &| True  =  True
+True &| p  =  True
 
 False &| False  =  True
 False &| True  =  True
-True &| False  =  False
-True &| True  =  True
+True &| p  =  p
 
 False &| False  =  True
 False &| True  =  True
-True &| False  =  True
-True &| True  =  False
+True &| p  =  False
 
 p &| q  =  not p && q
 
@@ -9548,6 +8744,108 @@ p &| q  =  q && not p
 p &| q  =  p || not q
 
 p &| q  =  q || not p
+
+False &| p  =  not p
+True &| False  =  False
+True &| True  =  False
+
+False &| p  =  not p
+True &| False  =  False
+True &| True  =  True
+
+False &| p  =  not p
+True &| False  =  True
+True &| True  =  False
+
+False &| p  =  not p
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  False
+True &| p  =  not p
+
+False &| False  =  False
+False &| True  =  True
+True &| p  =  not p
+
+False &| False  =  True
+False &| True  =  False
+True &| p  =  not p
+
+False &| False  =  True
+False &| True  =  True
+True &| p  =  not p
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  False
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  False
+True &| False  =  True
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  False
+True &| True  =  False
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  False
+True &| True  =  True
+
+False &| False  =  True
+False &| True  =  True
+True &| False  =  True
+True &| True  =  False
 
 p &| q  =  not p && not q
 
@@ -9657,7 +8955,7 @@ p &| q  =  q && p || not q
 Candidates for: gcd :: Int -> Int -> Int
   pruning with 0/0 rules
   [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
-  [3,7,18,60,150,445,1221,3576,10326] pattern candidates, 0 duplicates
+  [3,5,12,60,117,438,1074,3702,9960] pattern candidates, 0 duplicates
 
 no rules.
 
@@ -9813,14 +9111,8 @@ gcd x y  =  0
 gcd x 0  =  0
 gcd x y  =  x
 
-gcd x 0  =  0
-gcd x y  =  y
-
 gcd 0 x  =  x
 gcd x y  =  0
-
-gcd 0 x  =  0
-gcd x y  =  x
 
 gcd 0 x  =  0
 gcd x y  =  y
@@ -9843,49 +9135,16 @@ gcd x y  =  0 `mod` y
 
 gcd x y  =  0 `mod` 0
 
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  x
-gcd x y  =  y
-
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  0
-gcd x y  =  0
-
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
-gcd x y  =  y
-
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  x
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  0
-gcd x y  =  x
-
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  0
 gcd x y  =  y
 
 gcd x 0  =  x
@@ -10176,485 +9435,257 @@ gcd x y  =  0 `mod` (0 `mod` y)
 
 gcd x y  =  0 `mod` (0 `mod` 0)
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  x `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  x `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  x `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  y `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  y `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  y `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  0 `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  0 `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x
 gcd x y  =  0 `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  x `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  x `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  x `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  y `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  y `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  y `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  0 `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  0 `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  0 `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x `mod` x
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  x `mod` x
-gcd x y  =  y
-
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x `mod` x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x `mod` 0
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  x `mod` 0
-gcd x y  =  y
-
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  x `mod` 0
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0 `mod` x
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  0 `mod` x
-gcd x y  =  y
-
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0 `mod` x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0 `mod` 0
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x
-gcd x 0  =  0 `mod` 0
-gcd x y  =  y
-
-gcd 0 0  =  0
 gcd 0 x  =  x
 gcd x 0  =  0 `mod` 0
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  x `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  x `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  x `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  y `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  y `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  y `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  0 `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  0 `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x
 gcd x y  =  0 `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  x `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  x `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  x `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  y `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  y `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  y `mod` 0
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  0 `mod` x
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  0 `mod` y
 
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0
 gcd x y  =  0 `mod` 0
 
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  x `mod` x
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x `mod` x
 gcd x y  =  y
 
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  x `mod` x
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  x `mod` 0
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  x `mod` 0
 gcd x y  =  y
 
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  x `mod` 0
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  0 `mod` x
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0 `mod` x
 gcd x y  =  y
 
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  0 `mod` x
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  0 `mod` 0
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  0
 gcd x 0  =  0 `mod` 0
 gcd x y  =  y
 
-gcd 0 0  =  0
-gcd 0 x  =  0
-gcd x 0  =  0 `mod` 0
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  x `mod` x
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  x `mod` x
 gcd x 0  =  x
 gcd x y  =  y
 
-gcd 0 0  =  0
 gcd 0 x  =  x `mod` x
 gcd x 0  =  x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  x `mod` x
 gcd x 0  =  0
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x `mod` x
-gcd x 0  =  0
-gcd x y  =  y
-
-gcd 0 0  =  0
-gcd 0 x  =  x `mod` x
-gcd x 0  =  0
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  x `mod` 0
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  x `mod` 0
 gcd x 0  =  x
 gcd x y  =  y
 
-gcd 0 0  =  0
 gcd 0 x  =  x `mod` 0
 gcd x 0  =  x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  x `mod` 0
 gcd x 0  =  0
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  x `mod` 0
-gcd x 0  =  0
-gcd x y  =  y
-
-gcd 0 0  =  0
-gcd 0 x  =  x `mod` 0
-gcd x 0  =  0
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  0 `mod` x
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  0 `mod` x
 gcd x 0  =  x
 gcd x y  =  y
 
-gcd 0 0  =  0
 gcd 0 x  =  0 `mod` x
 gcd x 0  =  x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  0 `mod` x
 gcd x 0  =  0
 gcd x y  =  x
 
-gcd 0 0  =  0
-gcd 0 x  =  0 `mod` x
-gcd x 0  =  0
-gcd x y  =  y
-
-gcd 0 0  =  0
-gcd 0 x  =  0 `mod` x
-gcd x 0  =  0
-gcd x y  =  0
-
-gcd 0 0  =  0
-gcd 0 x  =  0 `mod` 0
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0
 gcd 0 x  =  0 `mod` 0
 gcd x 0  =  x
 gcd x y  =  y
 
-gcd 0 0  =  0
 gcd 0 x  =  0 `mod` 0
 gcd x 0  =  x
 gcd x y  =  0
 
-gcd 0 0  =  0
 gcd 0 x  =  0 `mod` 0
-gcd x 0  =  0
-gcd x y  =  x
-
-gcd 0 0  =  0
-gcd 0 x  =  0 `mod` 0
-gcd x 0  =  0
-gcd x y  =  y
-
-gcd 0 0  =  0
-gcd 0 x  =  0 `mod` 0
-gcd x 0  =  0
-gcd x y  =  0
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  x
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  x
-gcd x 0  =  x
-gcd x y  =  y
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  x
-gcd x 0  =  x
-gcd x y  =  0
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  x
 gcd x 0  =  0
 gcd x y  =  x
 
 gcd 0 0  =  0 `mod` 0
 gcd 0 x  =  x
-gcd x 0  =  0
-gcd x y  =  y
+gcd x y  =  x
 
 gcd 0 0  =  0 `mod` 0
 gcd 0 x  =  x
-gcd x 0  =  0
 gcd x y  =  0
 
 gcd 0 0  =  0 `mod` 0
 gcd 0 x  =  0
-gcd x 0  =  x
-gcd x y  =  x
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  0
-gcd x 0  =  x
 gcd x y  =  y
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  0
-gcd x 0  =  x
-gcd x y  =  0
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  0
-gcd x 0  =  0
-gcd x y  =  x
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  0
-gcd x 0  =  0
-gcd x y  =  y
-
-gcd 0 0  =  0 `mod` 0
-gcd 0 x  =  0
-gcd x 0  =  0
-gcd x y  =  0
 
 gcd x 0  =  x
 gcd x y  =  gcd x (x `mod` y)
@@ -11224,9 +10255,6 @@ gcd x 0  =  x `mod` 0
 gcd x y  =  x `mod` x
 
 gcd x 0  =  x `mod` 0
-gcd x y  =  x `mod` y
-
-gcd x 0  =  x `mod` 0
 gcd x y  =  y `mod` x
 
 gcd x 0  =  x `mod` 0
@@ -11254,9 +10282,6 @@ gcd x 0  =  0 `mod` x
 gcd x y  =  x `mod` 0
 
 gcd x 0  =  0 `mod` x
-gcd x y  =  y `mod` x
-
-gcd x 0  =  0 `mod` x
 gcd x y  =  y `mod` y
 
 gcd x 0  =  0 `mod` x
@@ -11281,16 +10306,7 @@ gcd x 0  =  0 `mod` 0
 gcd x y  =  y `mod` x
 
 gcd x 0  =  0 `mod` 0
-gcd x y  =  y `mod` y
-
-gcd x 0  =  0 `mod` 0
-gcd x y  =  y `mod` 0
-
-gcd x 0  =  0 `mod` 0
 gcd x y  =  0 `mod` x
-
-gcd x 0  =  0 `mod` 0
-gcd x y  =  0 `mod` y
 
 gcd x 0  =  (x `mod` x) `mod` x
 gcd x y  =  x
@@ -11788,9 +10804,6 @@ gcd 0 x  =  x `mod` 0
 gcd x y  =  x `mod` y
 
 gcd 0 x  =  x `mod` 0
-gcd x y  =  y `mod` x
-
-gcd 0 x  =  x `mod` 0
 gcd x y  =  y `mod` y
 
 gcd 0 x  =  x `mod` 0
@@ -11806,9 +10819,6 @@ gcd 0 x  =  0 `mod` x
 gcd x y  =  x `mod` x
 
 gcd 0 x  =  0 `mod` x
-gcd x y  =  x `mod` y
-
-gcd 0 x  =  0 `mod` x
 gcd x y  =  x `mod` 0
 
 gcd 0 x  =  0 `mod` x
@@ -11824,13 +10834,7 @@ gcd 0 x  =  0 `mod` x
 gcd x y  =  0 `mod` 0
 
 gcd 0 x  =  0 `mod` 0
-gcd x y  =  x `mod` x
-
-gcd 0 x  =  0 `mod` 0
 gcd x y  =  x `mod` y
-
-gcd 0 x  =  0 `mod` 0
-gcd x y  =  x `mod` 0
 
 gcd 0 x  =  0 `mod` 0
 gcd x y  =  y `mod` x
@@ -11840,9 +10844,6 @@ gcd x y  =  y `mod` y
 
 gcd 0 x  =  0 `mod` 0
 gcd x y  =  y `mod` 0
-
-gcd 0 x  =  0 `mod` 0
-gcd x y  =  0 `mod` x
 
 gcd 0 x  =  0 `mod` 0
 gcd x y  =  0 `mod` y
@@ -11990,5 +10991,20 @@ gcd x y  =  y
 
 gcd 0 x  =  0 `mod` (0 `mod` 0)
 gcd x y  =  0
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  x
+gcd x y  =  0
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  x
+gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 0  =  0 `mod` 0
+gcd 0 x  =  0
+gcd x 0  =  x
+gcd x y  =  y
 
 

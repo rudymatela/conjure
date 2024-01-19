@@ -2,18 +2,18 @@
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
--- looking through 17 candidates of size 2
--- looking through 80 candidates of size 3
--- tested 23 candidates
+-- looking through 15 candidates of size 2
+-- looking through 63 candidates of size 3
+-- tested 21 candidates
 x ? y  =  x + y
 
 (?) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
--- looking through 17 candidates of size 2
--- looking through 80 candidates of size 3
--- tested 39 candidates
+-- looking through 15 candidates of size 2
+-- looking through 63 candidates of size 3
+-- tested 37 candidates
 x ? y  =  x * y
 
 i :: Int -> Int

@@ -1,17 +1,17 @@
 square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 9 candidates of size 3
--- tested 12 candidates
+-- looking through 3 candidates of size 2
+-- looking through 8 candidates of size 3
+-- tested 11 candidates
 square x  =  x * x
 
 square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 9 candidates of size 3
--- tested 12 candidates
+-- looking through 3 candidates of size 2
+-- looking through 8 candidates of size 3
+-- tested 11 candidates
 square x  =  x * x
 
 sum :: [Int] -> Int
@@ -28,12 +28,12 @@ sum (x:xs)  =  x + sum xs
 (++) :: [Int] -> [Int] -> [Int]
 -- pruning with 3/3 rules
 -- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 10 candidates of size 3
--- looking through 27 candidates of size 4
--- looking through 78 candidates of size 5
--- looking through 171 candidates of size 6
--- tested 194 candidates
+-- looking through 4 candidates of size 2
+-- looking through 11 candidates of size 3
+-- looking through 34 candidates of size 4
+-- looking through 102 candidates of size 5
+-- looking through 247 candidates of size 6
+-- tested 239 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

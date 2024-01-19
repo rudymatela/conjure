@@ -45,17 +45,17 @@ merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
 -- looking through 3 candidates of size 1
--- looking through 7 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 44 candidates of size 4
--- looking through 116 candidates of size 5
--- looking through 80 candidates of size 6
--- looking through 715 candidates of size 7
--- looking through 164 candidates of size 8
--- looking through 3360 candidates of size 9
--- looking through 1448 candidates of size 10
--- looking through 12901 candidates of size 11
--- looking through 15208 candidates of size 12
--- tested 34055 candidates
+-- looking through 8 candidates of size 2
+-- looking through 15 candidates of size 3
+-- looking through 55 candidates of size 4
+-- looking through 123 candidates of size 5
+-- looking through 196 candidates of size 6
+-- looking through 572 candidates of size 7
+-- looking through 883 candidates of size 8
+-- looking through 2114 candidates of size 9
+-- looking through 4688 candidates of size 10
+-- looking through 7685 candidates of size 11
+-- looking through 24957 candidates of size 12
+-- tested 41299 candidates
 cannot conjure
 

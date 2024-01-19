@@ -3,16 +3,13 @@ drop :: Int -> [A] -> [A]
 -- pruning with 4/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 14 candidates of size 4
--- looking through 26 candidates of size 5
--- looking through 45 candidates of size 6
--- looking through 138 candidates of size 7
--- looking through 139 candidates of size 8
--- looking through 490 candidates of size 9
--- tested 536 candidates
-drop 0 []  =  []
-drop 0 (x:xs)  =  x:xs
+-- looking through 5 candidates of size 3
+-- looking through 11 candidates of size 4
+-- looking through 23 candidates of size 5
+-- looking through 53 candidates of size 6
+-- looking through 120 candidates of size 7
+-- tested 104 candidates
+drop 0 xs  =  xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
 
@@ -21,16 +18,15 @@ take :: Int -> [A] -> [A]
 -- pruning with 14/21 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 14 candidates of size 4
--- looking through 26 candidates of size 5
--- looking through 45 candidates of size 6
--- looking through 138 candidates of size 7
--- looking through 139 candidates of size 8
--- looking through 490 candidates of size 9
--- tested 523 candidates
-take 0 []  =  []
-take 0 (x:xs)  =  []
+-- looking through 5 candidates of size 3
+-- looking through 11 candidates of size 4
+-- looking through 23 candidates of size 5
+-- looking through 53 candidates of size 6
+-- looking through 120 candidates of size 7
+-- looking through 249 candidates of size 8
+-- looking through 400 candidates of size 9
+-- tested 590 candidates
+take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
 

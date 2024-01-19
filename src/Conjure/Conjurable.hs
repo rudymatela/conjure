@@ -645,7 +645,7 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
 -- > > conjurePats [zero] "f" (undefined :: Int -> Int)
 -- > [[[f x :: Int]],[[f 0 :: Int,f x :: Int]]]
 conjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
-conjurePats  =  oldConjurePats
+conjurePats  =  newConjurePats
   -- TODO: decide between old/newConjurePats and remove either
 
 
