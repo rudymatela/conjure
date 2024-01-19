@@ -136,10 +136,10 @@ access :: [A] -> Int -> A
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 5 candidates of size 4
--- looking through 17 candidates of size 5
--- looking through 41 candidates of size 6
--- looking through 115 candidates of size 7
--- tested 85 candidates
+-- looking through 13 candidates of size 5
+-- looking through 25 candidates of size 6
+-- looking through 66 candidates of size 7
+-- tested 59 candidates
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
 (x:xs) `access` y  =  xs `access` (y - 1)

@@ -231,8 +231,9 @@ defnApparentlyTerminates _  =  True
 -- > 0 ? _  =  1
 -- > x ? _  =  x
 --
--- If the given expression is incomplete ('hasHole')
--- this function returns 'True' as nothing can be said.
+-- This function safely handles holes on the RHSs
+-- by being conservative in cases these are found:
+-- nothing can be said before their fillings.
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
                    || isRedundantByRepetition d
@@ -269,7 +270,7 @@ isRedundantByRepetition d  =  isCompleteDefn d
                       $  d
 
 isRedundantBySubsumption :: Defn -> Bool
-isRedundantBySubsumption d  =  isCompleteDefn d && is (map foldPair d)
+isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
   where
   is []  =  False
   is (b:bs)  =  any (b `isInstanceOf`) bs || is bs
