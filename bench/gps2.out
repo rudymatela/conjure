@@ -261,12 +261,12 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
 -- pruning with 6/19 rules
 -- looking through 3 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 24 candidates of size 3
--- looking through 150 candidates of size 4
+-- looking through 4 candidates of size 2
+-- looking through 28 candidates of size 3
+-- looking through 154 candidates of size 4
 -- looking through 546 candidates of size 5
--- looking through 3396 candidates of size 6
--- tested 4119 candidates
+-- looking through 3458 candidates of size 6
+-- tested 4193 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
@@ -330,18 +330,18 @@ cannot conjure
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 28 candidates of size 3
--- looking through 34 candidates of size 4
--- looking through 185 candidates of size 5
--- looking through 707 candidates of size 6
+-- looking through 9 candidates of size 2
+-- looking through 31 candidates of size 3
+-- looking through 36 candidates of size 4
+-- looking through 187 candidates of size 5
+-- looking through 708 candidates of size 6
 -- looking through 1680 candidates of size 7
 -- looking through 2304 candidates of size 8
 -- looking through 3756 candidates of size 9
 -- looking through 8826 candidates of size 10
 -- looking through 15048 candidates of size 11
 -- looking through 14220 candidates of size 12
--- tested 46796 candidates
+-- tested 46808 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter

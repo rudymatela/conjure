@@ -224,7 +224,6 @@ defnApparentlyTerminates _  =  True
 -- this function returns 'True' as nothing can be said.
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
-                   || isRedundantByRepetition d
                    || isRedundantByRepetition2 d
 
 -- | Returns whether the given 'Defn' is redundant
