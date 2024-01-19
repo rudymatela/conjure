@@ -187,10 +187,10 @@ ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 -- | Creates a case 'Expr' of the type of the given proxy.
 --
 -- > > caseForOrd (undefined :: Int)
--- > case :: Bool -> Int -> Int -> Int -> Int
+-- > case :: Ordering -> Int -> Int -> Int -> Int
 --
 -- > > caseForOrd (undefined :: String)
--- > case :: Bool -> [Char] -> [Char] -> [Char] -> [Char]
+-- > case :: Ordering -> [Char] -> [Char] -> [Char] -> [Char]
 caseForOrd :: Typeable a => a -> Expr
 caseForOrd a  =  value "case" (\o x y z -> case o of LT -> x; EQ -> y; GT -> z `asTypeOf` a)
 
