@@ -272,9 +272,11 @@ isRedundantByRepetition2 d  =  isCompleteDefn d
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any (allEqual . map snd)
-                      .  classifyOn (shovel . fst)
+  anyAllEqual shovel  =  any allEqual
+                      .  classifyOn fst
+                      .  map (unfoldPair . canonicalize . foldPair . mapFst shovel)
                       $  d
+  mapFst f (x,y)  =  (f x, y)
 
 -- | Dig a hole in a function application at the given position
 --
