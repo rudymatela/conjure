@@ -34,6 +34,8 @@ module Conjure.Expr
   , enumerateAppsFor
   , enumerateFillings
 
+  , digApp
+
   , module Conjure.Utils
   )
 where
@@ -452,6 +454,16 @@ deholings e'  =  deh
   deh e  =  if typ e == typ e' && isHole e
             then [e']
             else []
+
+-- | Dig a hole in a function application at the given position
+--
+-- > digApp 1 (one -+- two)
+-- _ + 2 :: Int
+--
+-- > digApp 2 (one -+- two)
+-- 1 + _ :: Int
+digApp :: Int -> Expr -> Expr
+digApp n  =  foldApp . updateAt n holeAsTypeOf . unfoldApp
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

@@ -268,16 +268,6 @@ isRedundantByRepetition d  =  isCompleteDefn d
                       $  d
   mapFst f (x,y)  =  (f x, y)
 
--- | Dig a hole in a function application at the given position
---
--- > digApp 1 (one -+- two)
--- _ + 2 :: Int
---
--- > digApp 2 (one -+- two)
--- 1 + _ :: Int
-digApp :: Int -> Expr -> Expr
-digApp n  =  foldApp . updateAt n holeAsTypeOf . unfoldApp
-
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption d  =  isCompleteDefn d && is (map foldPair d)
   where

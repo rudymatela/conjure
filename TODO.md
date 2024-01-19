@@ -5,8 +5,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * add `first` and `second` to utils
 
-* move `digApp` to `Conjure.Expr`
-
 * Review `bench/redundants.out` and prune redundant candidates.
   See sections below for ideas.
 
