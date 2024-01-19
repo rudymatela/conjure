@@ -23,6 +23,7 @@ module Conjure.Defn
   , isRedundantDefn
   , isCompleteDefn
   , simplifyDefn
+  , canonicalizeBndn
   , module Conjure.Expr
   )
 where
@@ -254,7 +255,7 @@ isRedundantByRepetition d  =  isCompleteDefn d
   anyAllEqual :: (Expr -> Expr) -> Bool
   anyAllEqual shovel  =  any allEqual
                       .  classifyOn fst
-                      .  map (unfoldPair . canonicalize . foldPair . mapFst shovel)
+                      .  map (canonicalizeBndn . mapFst shovel)
                       $  d
   mapFst f (x,y)  =  (f x, y)
 
@@ -293,3 +294,6 @@ simplifyDefn :: Defn -> Defn
 simplifyDefn []  =  []
 simplifyDefn (b:bs)  =  [b | none (foldPair b `isInstanceOf`) $ map foldPair bs]
                      ++ simplifyDefn bs
+
+canonicalizeBndn :: Bndn -> Bndn
+canonicalizeBndn  =  unfoldPair . canonicalize . foldPair

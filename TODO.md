@@ -7,8 +7,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * add `printDefn` to `Conjure.Defn`
 
-* add `canonicalizePair` to `Conjure.Defn`
-
 * move `digApp` to `Conjure.Expr`
 
 * Review `bench/redundants.out` and prune redundant candidates.
