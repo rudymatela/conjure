@@ -3,6 +3,23 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* In `Conjure.Defn`,
+  add and use `isUndefinedBndn`, `isUndefinedDefn`
+  which check whether a `Bndn` or a `Defn` has
+  undefined variables (those not present in patterns).
+  These functions will be particularly useful
+  in `isRedundantByRepetition` and `isRedundantByDefn`.
+  In the case of `isRedundantByRepetition` it may even
+  "unprune" some candidates that should not have
+  been pruned in the first place.
+
+* Sweep some "easy" TODO markings scattered throughout the code
+
+* properly document why isRedundantByIntroduction
+  is does not pay-off to use and remove idea section here.
+  While doing this, commit-and-revert to record the effect
+  on `*.out` files and runtimes.
+
 * Review `bench/redundants.out` and prune redundant candidates.
   See sections below for ideas.
 
