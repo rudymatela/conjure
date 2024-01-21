@@ -264,9 +264,6 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
                       .  map (canonicalizeBndn . first shovel)
                       $  d
 
--- TODO: fix the following
--- it is a bit too general and prunes some
--- candidates that it shouldn't prune.
 isRedundantByIntroduction :: Defn -> Bool
 isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
   where
@@ -289,9 +286,15 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
 --
 -- TODO: find better examples for this comment
 introduceVariableAt :: Int -> Bndn -> Bndn
-introduceVariableAt i b  =  unfoldPair (foldPair b // [(p,"introduced_var" `varAsTypeOf` p)])
+introduceVariableAt i b@(l,r)  =
+  if isVar p
+  then b -- already a variable!
+  else if any (`elem` vars (snd b')) (vars p)
+  then (l, holeAsTypeOf r) -- cannot introduce, mark with hole
+  else b'
   where
-  p  =  fst b $!! i
+  p  =  l $!! i
+  b'  =  unfoldPair (foldPair b // [(p,"introduced_var" `varAsTypeOf` p)])
 -- TODO: replace "introduced_var" by something proper
 
 isRedundantBySubsumption :: Defn -> Bool
