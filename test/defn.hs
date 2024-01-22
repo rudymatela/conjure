@@ -128,7 +128,8 @@ tests n  =
 
   , isRedundantBySubsumption  constNilRedundantDefn == False
   , isRedundantByRepetition   constNilRedundantDefn
-  , isRedundantByIntroduction constNilRedundantDefn == False -- TODO: shouldn't this be True?
+  , isRedundantByIntroduction constNilRedundantDefn == False
+    -- ^ only caught if the isGround guard is active, see code
 
   , isRedundantBySubsumption  constFalseRedundantDefn == False
   , isRedundantByRepetition   constFalseRedundantDefn

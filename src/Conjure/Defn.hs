@@ -317,10 +317,12 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
 introduceVariableAt :: Int -> Bndn -> Bndn
 introduceVariableAt i b@(l,r)
   | isVar p    =  b -- already a variable
+-- | isGround p  =  (newVar, r)  -- enabling catches a different set of candidates
   | otherwise  =  unfoldPair
-               $  foldPair b // [(p,newName `varAsTypeOf` p)]
+               $  foldPair b // [(p,newVar)]
   where
   p  =  l $!! i
+  newVar  =  newName `varAsTypeOf` p
   newName  =  head $ variableNamesFromTemplate "x" \\ varnames l
   varnames :: Expr -> [String]
   varnames e  =  [n | Value ('_':n) _ <- vars e]
