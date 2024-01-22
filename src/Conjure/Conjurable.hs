@@ -1003,6 +1003,56 @@ instance ( Conjurable a, Listable a, Show a, Express a
                                                         && u1 .....==. u2
                                                         && t1 ......== t2
 
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
+         , Conjurable f, Listable f, Show f, Express f
+         , Conjurable g, Listable g, Show g, Express g
+         , Conjurable h, Listable h, Show h, Express h
+         ) => Conjurable (a,b,c,d,e,f,g,h) where
+  conjureExpress   =  reifyExpress
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwvuts  =  conjureType x
+                            .  conjureType y
+                            .  conjureType z
+                            .  conjureType w
+                            .  conjureType v
+                            .  conjureType u
+                            .  conjureType t
+                            .  conjureType s
+                          where (x,y,z,w,v,u,t,s) = xyzwvuts
+  conjureEquality xyzwvuts  =  from
+                           <$> conjureEquality x
+                           <*> conjureEquality y
+                           <*> conjureEquality z
+                           <*> conjureEquality w
+                           <*> conjureEquality v
+                           <*> conjureEquality u
+                           <*> conjureEquality t
+                           <*> conjureEquality s
+    where
+    (x,y,z,w,v,u,t,s)  =  xyzwvuts
+    from e1 e2 e3 e4 e5 e6 e7 e8  =  value "==" (==)
+      where
+      (==.......)  =  evl e1 ==: x
+      (.==......)  =  evl e2 ==: y
+      (..==.....)  =  evl e3 ==: z
+      (...==....)  =  evl e4 ==: w
+      (....==...)  =  evl e5 ==: v
+      (.....==..)  =  evl e6 ==: u
+      (......==.)  =  evl e7 ==: t
+      (.......==)  =  evl e8 ==: s
+      (x1,y1,z1,w1,v1,u1,t1,s1) == (x2,y2,z2,w2,v2,u2,t2,s2)  =  x1 ==....... x2
+                                                              && y1 .==...... y2
+                                                              && z1 ..==..... z2
+                                                              && w1 ...==.... w2
+                                                              && v1 ....==... v2
+                                                              && u1 .....==.. u2
+                                                              && t1 ......==. t2
+                                                              && s1 .......== s2
+
 -- TODO: go up to 12-tuples
 
 instance Name A
