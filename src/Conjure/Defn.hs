@@ -281,6 +281,15 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
                       .  map (canonicalizeBndn . first shovel)
                       $  d
 
+-- | Returns whether the given 'Defn' is redundant
+--   with regards to case elimination
+--
+-- The following is redundant according to this criterium:
+--
+-- > foo []  =  []
+-- > foo (x:xs)  =  x:xs
+--
+-- Both cases can be transformed into @foo xs = xs@.
 isRedundantByIntroduction :: Defn -> Bool
 isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
   where
@@ -311,6 +320,13 @@ introduceVariableAt i b@(l,r)
   varnames :: Expr -> [String]
   varnames e  =  [n | Value ('_':n) _ <- vars e]
 
+-- | Returns whether the given 'Defn' is redundant
+--   with regards to subsumption by latter patterns
+--
+-- Here is an example of a redundant 'Defn' by this criterium:
+--
+-- > foo 0  =  0
+-- > foo x  =  x
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
   -- above, we could have used noUnbound instead of isCompleteBndn
