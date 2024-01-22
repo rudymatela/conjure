@@ -78,6 +78,14 @@ tests n  =
   , isNothing (cevaluate 60 andDefn :: Maybe ([Int] -> Int))
   , isNothing (cevaluate 60 nullDefn :: Maybe ([Int] -> Int))
 
+  , noUnbound (xx -:- xxs, xxs)
+  , hasUnbound (xx -:- xxs, yys)
+  , isDefined sumDefn
+  , isDefined andDefn
+  , isDefined nullDefn
+  , isDefined [(nil, nil), (xx -:- xxs, xxs)]
+  , isUndefined [(nil, xxs), (xx -:- xxs, yys)]
+
   , isRedundantDefn sumDefn    == False
   , isRedundantDefn factDefn   == False
   , isRedundantDefn fact1Defn  == False

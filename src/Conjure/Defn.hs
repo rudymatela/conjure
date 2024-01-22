@@ -27,6 +27,7 @@ module Conjure.Defn
   , simplifyDefn
   , canonicalizeBndn
   , hasUnbound
+  , noUnbound
   , isUndefined
   , isDefined
   , module Conjure.Expr
@@ -349,10 +350,10 @@ canonicalizeBndn  =  unfoldPair . canonicalize . foldPair
 --
 -- For 'Defn's, use 'isUndefined'.
 hasUnbound :: Bndn -> Bool
-hasUnbound (lhs,rhs)  =  all (`elem` nubVars lhs) (vars rhs)
+hasUnbound  =  not . noUnbound
 
 noUnbound :: Bndn -> Bool
-noUnbound  =  not . hasUnbound
+noUnbound (lhs,rhs)  =  all (`elem` nubVars lhs) (vars rhs)
 
 -- | Returns whether a 'Defn' has undefined variables,
 --   i.e.,
