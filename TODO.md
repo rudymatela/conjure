@@ -5,11 +5,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Sweep some "easy" TODO markings scattered throughout the code
 
-* properly document why isRedundantByIntroduction
-  is does not pay-off to use and remove idea section here.
-  While doing this, commit-and-revert to record the effect
-  on `*.out` files and runtimes.
-
 * Review `bench/redundants.out` and prune redundant candidates.
   See sections below for ideas.
 
