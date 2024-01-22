@@ -306,20 +306,32 @@ gps9c  =  conjure "gps" gps9p []
 
 
 gps10p :: [Int] -> Int
+gps10p [0]  =  -2
+gps10p [3]  =  -1
+gps10p [6]  =  0
+gps10p [9]  =  1
+gps10p [0,3]  =  -3
+gps10p [3,0]  =  -3
+gps10p [3,2,1]  =  -5
 gps10p [1,2,3]  =  -5
 gps10p [10,20,30]  =  13
 
 -- does not do rounding
 gps10g :: [Int] -> Int
-gps10g xs  =  sum $ map (\x -> x `div` 3 - 2) xs
--- TODO: reachable with explicit fold?
--- gps10g []  =  0
--- gps10g (x:xs)  =  x`div`3 - 2 : gps10g xs
--- ??
+gps10g []  =  0
+gps10g (x:xs)  =  (x `div` 3 - 2) + gps10g xs
 
 -- unreachable due to lambda
 gps10c :: IO ()
-gps10c  =  conjure "gps" gps9p []
+gps10c  =  conjure "gps10" gps10p
+  [ pr (0 :: Int)
+  , pr (1 :: Int)
+  , pr (2 :: Int)
+  , pr (3 :: Int)
+  , prim "`div`" (div :: Int -> Int -> Int)
+  , prim "+" ((+) :: Int -> Int -> Int)
+  , prim "-" ((-) :: Int -> Int -> Int)
+  ]
 
 
 gps11p :: Int -> Int -> Int

@@ -148,12 +148,21 @@ gps :: Int -> [Char]
 -- tested 0 candidates
 cannot conjure
 
-gps :: Int -> [Char]
+gps10 :: [Int] -> Int
 -- testing 7 combinations of argument values
--- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- tested 0 candidates
-cannot conjure
+-- pruning with 67/100 rules
+-- looking through 4 candidates of size 1
+-- looking through 16 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 144 candidates of size 4
+-- looking through 172 candidates of size 5
+-- looking through 2268 candidates of size 6
+-- looking through 3347 candidates of size 7
+-- looking through 46919 candidates of size 8
+-- looking through 77202 candidates of size 9
+-- tested 55938 candidates
+gps10 []  =  0
+gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
 gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
