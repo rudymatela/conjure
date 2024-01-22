@@ -306,6 +306,8 @@ introduceVariableAt i b@(l,r)  =
 
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
+  -- above, we could have used noUnbound instead of isCompleteBndn
+  -- we use isCompleteBndn as it is faster
   where
   is []  =  False
   is (b:bs)  =  any (b `isInstanceOf`) bs || is bs
