@@ -252,6 +252,9 @@ isRedundantDefn d  =  isRedundantBySubsumption d
 --
 -- > 0 ? _  =  1
 -- > x ? _  =  x
+--
+-- @1@ and @x@ are repeated in the results for when
+-- the first arguments are @0@ and @x@.
 isRedundantByRepetition :: Defn -> Bool
 isRedundantByRepetition d  =  any anyAllEqual shovels
   where
