@@ -1097,7 +1097,7 @@ instance ( Conjurable a, Listable a, Show a, Express a
       (.....==...)  =  evl e6 ==: u
       (......==..)  =  evl e7 ==: t
       (.......==.)  =  evl e8 ==: s
-      (........==)  =  evl e9 ==: s
+      (........==)  =  evl e9 ==: r
       (x1,y1,z1,w1,v1,u1,t1,s1,r1) == (x2,y2,z2,w2,v2,u2,t2,s2,r2)  =  x1 ==........ x2
                                                                     && y1 .==....... y2
                                                                     && z1 ..==...... z2
@@ -1107,6 +1107,66 @@ instance ( Conjurable a, Listable a, Show a, Express a
                                                                     && t1 ......==.. t2
                                                                     && s1 .......==. s2
                                                                     && r1 ........== r2
+
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
+         , Conjurable f, Listable f, Show f, Express f
+         , Conjurable g, Listable g, Show g, Express g
+         , Conjurable h, Listable h, Show h, Express h
+         , Conjurable i, Listable i, Show i, Express i
+         , Conjurable j, Listable j, Show j, Express j
+         ) => Conjurable (a,b,c,d,e,f,g,h,i,j) where
+  conjureExpress   =  reifyExpress
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwvutsrq  =  conjureType x
+                              .  conjureType y
+                              .  conjureType z
+                              .  conjureType w
+                              .  conjureType v
+                              .  conjureType u
+                              .  conjureType t
+                              .  conjureType s
+                              .  conjureType r
+                              .  conjureType q
+                              where (x,y,z,w,v,u,t,s,r,q) = xyzwvutsrq
+  conjureEquality xyzwvutsrq  =  from
+                             <$> conjureEquality x
+                             <*> conjureEquality y
+                             <*> conjureEquality z
+                             <*> conjureEquality w
+                             <*> conjureEquality v
+                             <*> conjureEquality u
+                             <*> conjureEquality t
+                             <*> conjureEquality s
+                             <*> conjureEquality r
+                             <*> conjureEquality q
+    where
+    (x,y,z,w,v,u,t,s,r,q)  =  xyzwvutsrq
+    from e1 e2 e3 e4 e5 e6 e7 e8 e9 e10  =  value "==" (==)
+      where
+      (==.........)  =  evl e1  ==: x
+      (.==........)  =  evl e2  ==: y
+      (..==.......)  =  evl e3  ==: z
+      (...==......)  =  evl e4  ==: w
+      (....==.....)  =  evl e5  ==: v
+      (.....==....)  =  evl e6  ==: u
+      (......==...)  =  evl e7  ==: t
+      (.......==..)  =  evl e8  ==: s
+      (........==.)  =  evl e9  ==: r
+      (.........==)  =  evl e10 ==: q
+      (x1,y1,z1,w1,v1,u1,t1,s1,r1,q1) == (x2,y2,z2,w2,v2,u2,t2,s2,r2,q2)  =  x1 ==......... x2
+                                                                          && y1 .==........ y2
+                                                                          && z1 ..==....... z2
+                                                                          && w1 ...==...... w2
+                                                                          && v1 ....==..... v2
+                                                                          && u1 .....==.... u2
+                                                                          && t1 ......==... t2
+                                                                          && s1 .......==.. s2
+                                                                          && r1 ........==. r2
+                                                                          && q1 .........== q2
 
 -- TODO: go up to 12-tuples
 
