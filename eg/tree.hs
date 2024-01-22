@@ -3,27 +3,14 @@
 -- Copyright (C) 2021 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 {-# LANGUAGE CPP, TemplateHaskell #-}
-#if __GLASGOW_HASKELL__ == 708
-{-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
-import Data.Typeable (Typeable)
-#endif
 
 import Conjure
 import Test.LeanCheck
 import Data.Express hiding (height,size)
 
--- TODO: remove the following import
--- and fix build on GHC 7.10 and 7.8
--- the generation of -: and ->>>: somehow fails.
-import Test.LeanCheck.Utils
-
 data Tree  =  Leaf
            |  Node Tree Int Tree
   deriving (Eq, Ord, Show, Read)
-
-#if __GLASGOW_HASKELL__ == 708
-deriving instance Typeable Tree
-#endif
 
 deriveExpress ''Tree
 
