@@ -260,9 +260,11 @@ reifyTiers  =  Just . mkExprTiers
 -- >   conjureExpress  =  reifyExpress
 -- >   ...
 reifyExpress :: (Express a, Show a) => a -> Expr -> Expr
-reifyExpress a e  =  case value "expr" (expr -:> a) $$ e of
-  Nothing -> e         -- TODO: consider throwing an error
-  Just e' -> eval e e' -- TODO: consider throwing an error
+reifyExpress a e  =  case exprE $$ e of
+  Nothing -> error $ "reifyExpress: cannot apply " ++ show exprE ++ " to " ++ show e
+  Just e' -> eval (error $ "reifyExpress: cannot eval " ++ show e') e'
+  where
+  exprE  =  value "expr" (expr -:> a)
 
 mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
