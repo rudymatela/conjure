@@ -280,7 +280,7 @@ gps8g x xs  =  head [(y,z) | y <- xs, z <- xs, y + z == x]
 -- gps8g x xs  =  head $ filter ((x ==) . uncurry (+)) $ liftA2 (,) xs xs
 
 gps8c :: IO ()
-gps8c  =  conjure "gps" gps8p []
+gps8c  =  conjure "gps8" gps8p []
 
 
 -- GPSB#9: Fizz Buzz (CW)
@@ -302,7 +302,7 @@ gps9g x
 
 -- probably unreachable performance-wise
 gps9c :: IO ()
-gps9c  =  conjure "gps" gps9p []
+gps9c  =  conjure "gps9" gps9p []
 
 
 gps10p :: [Int] -> Int
