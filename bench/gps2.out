@@ -62,10 +62,10 @@ gps4 :: [Char] -> [Char]
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 9 candidates of size 3
--- looking through 21 candidates of size 4
+-- looking through 22 candidates of size 4
 -- looking through 54 candidates of size 5
 -- looking through 124 candidates of size 6
--- tested 213 candidates
+-- tested 214 candidates
 cannot conjure
 
 gps5 :: Int -> [Int]
@@ -80,14 +80,14 @@ tell :: [Int] -> Int -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 9 candidates of size 4
+-- looking through 10 candidates of size 4
 -- looking through 6 candidates of size 5
 -- looking through 60 candidates of size 6
 -- looking through 26 candidates of size 7
--- looking through 521 candidates of size 8
+-- looking through 522 candidates of size 8
 -- looking through 134 candidates of size 9
 -- looking through 5152 candidates of size 10
--- tested 2536 candidates
+-- tested 2538 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -185,7 +185,7 @@ gps13_leaders :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 1 candidates of size 4
+-- looking through 2 candidates of size 4
 -- looking through 1 candidates of size 5
 -- looking through 2 candidates of size 6
 -- looking through 1 candidates of size 7
@@ -194,7 +194,7 @@ gps13_leaders :: [Int] -> [Int]
 -- looking through 21 candidates of size 10
 -- looking through 34 candidates of size 11
 -- looking through 67 candidates of size 12
--- tested 82 candidates
+-- tested 83 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs
                          then x:gps13_leaders xs
@@ -219,16 +219,16 @@ gps16_middle :: [Char] -> [Char]
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
--- looking through 11 candidates of size 4
+-- looking through 12 candidates of size 4
 -- looking through 21 candidates of size 5
--- looking through 33 candidates of size 6
+-- looking through 34 candidates of size 6
 -- looking through 61 candidates of size 7
--- looking through 125 candidates of size 8
+-- looking through 126 candidates of size 8
 -- looking through 307 candidates of size 9
--- looking through 823 candidates of size 10
+-- looking through 824 candidates of size 10
 -- looking through 2282 candidates of size 11
--- looking through 6292 candidates of size 12
--- tested 3973 candidates
+-- looking through 6293 candidates of size 12
+-- tested 3977 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
                         then c:cs
@@ -354,12 +354,12 @@ gps24 :: [Char] -> Twitter
 -- looking through 4 candidates of size 5
 -- looking through 5 candidates of size 6
 -- looking through 10 candidates of size 7
--- looking through 47 candidates of size 8
+-- looking through 48 candidates of size 8
 -- looking through 138 candidates of size 9
 -- looking through 232 candidates of size 10
 -- looking through 322 candidates of size 11
 -- looking through 483 candidates of size 12
--- tested 935 candidates
+-- tested 936 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs
                  then Tweet (length (c:cs))

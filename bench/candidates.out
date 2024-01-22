@@ -4947,7 +4947,7 @@ x ? y  =  y
 Candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
   [2,0,1,0,1,0,1,0,1] direct candidates, 0 duplicates
-  [2,1,2,2,4,7,10,17,26] pattern candidates, 0 duplicates
+  [2,1,2,3,4,7,10,17,26] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -4979,6 +4979,9 @@ goo []  =  []
 goo (x:xs)  =  goo xs
 
 goo xs  =  xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  x:xs
 
 goo []  =  []
 goo (x:xs)  =  [x]
@@ -5022,7 +5025,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,15,65,151,403,1188,2586,8967] pattern candidates, 0 duplicates
+  [3,7,15,67,153,403,1189,2586,8970] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -5265,6 +5268,9 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  x:xs
 
 xs ?? []  =  []
+xs ?? (x:ys)  =  x:ys
+
+xs ?? []  =  []
 xs ?? (x:ys)  =  [x]
 
 xs ?? []  =  []
@@ -5308,6 +5314,9 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  x:xs
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  x:ys
@@ -5683,6 +5692,10 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [y]
 
 [] ?? xs  =  xs
@@ -5792,6 +5805,10 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 [] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  []
@@ -7226,7 +7243,7 @@ xs ?? (x:ys)  =  []
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
   [3,1,0,2,6,14,38,68,140] direct candidates, 0 duplicates
-  [3,2,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
+  [3,3,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -7345,6 +7362,9 @@ ton p  =  True
 
 ton p  =  not p
 
+ton False  =  False
+ton True  =  True
+
 ton False  =  True
 ton True  =  False
 
@@ -7352,7 +7372,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,4,8,32,128,564,1992,6556] direct candidates, 0 duplicates
-  [4,12,28,14,4,48,60,280,592] pattern candidates, 0 duplicates
+  [4,14,28,14,4,48,60,280,592] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -7788,6 +7808,9 @@ p &| True  =  True
 p &| False  =  False
 p &| True  =  p
 
+p &| False  =  False
+p &| True  =  True
+
 p &| False  =  True
 p &| True  =  p
 
@@ -7802,6 +7825,9 @@ True &| p  =  True
 
 False &| p  =  False
 True &| p  =  p
+
+False &| p  =  False
+True &| p  =  True
 
 False &| p  =  True
 True &| p  =  p
