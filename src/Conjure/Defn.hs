@@ -33,6 +33,7 @@ module Conjure.Defn
   , noUnbound
   , isUndefined
   , isDefined
+  , introduceVariableAt
   , module Conjure.Expr
   )
 where
@@ -292,15 +293,13 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
 
 -- | Introduces a hole at a given position in the binding:
 --
--- > introduceVariableAt 1 (one -+- two, three -+- two)
--- (_ + 2 :: Int,3 + 2 :: Int)
+-- > > introduceVariableAt 1 (xxs -?- (yy -:- yys), (yy -:- yys) -++- (yy -:- yys))
+-- > (xs ? (y:ys) :: [Int],(y:ys) ++ (y:ys) :: [Int])
 --
--- > introduceVariableAt 2 (one -+- two, three -+- two)
--- (1 + _ :: Int,3 + _ :: Int)
+-- > > introduceVariableAt 2 (xxs -?- (yy -:- yys), (yy -:- yys) -++- (yy -:- yys))
+-- > (xs ? x :: [Int],x ++ x :: [Int])
 --
 -- Relevant occurrences are replaced.
---
--- TODO: find better examples for this comment
 introduceVariableAt :: Int -> Bndn -> Bndn
 introduceVariableAt i b@(l,r)
   | isVar p    =  b -- already a variable

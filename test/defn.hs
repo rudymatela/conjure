@@ -129,6 +129,9 @@ tests n  =
   , isRedundantBySubsumption  constNilRedundantDefn == False
   , isRedundantByRepetition   constNilRedundantDefn
   , isRedundantByIntroduction constNilRedundantDefn == False -- TODO: shouldn't this be True?
+
+  , canonicalizeBndn (introduceVariableAt 2 (const' xxs (yy -:- yys), (yy -:- yys) -++- (yy -:- yys)))
+    == (const' xxs yys, yys -++- yys)
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
