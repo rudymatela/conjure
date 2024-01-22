@@ -1168,7 +1168,143 @@ instance ( Conjurable a, Listable a, Show a, Express a
                                                                           && r1 ........==. r2
                                                                           && q1 .........== q2
 
--- TODO: go up to 12-tuples
+
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
+         , Conjurable f, Listable f, Show f, Express f
+         , Conjurable g, Listable g, Show g, Express g
+         , Conjurable h, Listable h, Show h, Express h
+         , Conjurable i, Listable i, Show i, Express i
+         , Conjurable j, Listable j, Show j, Express j
+         , Conjurable k, Listable k, Show k, Express k
+         ) => Conjurable (a,b,c,d,e,f,g,h,i,j,k) where
+  conjureExpress   =  reifyExpress
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwvutsrqp  =  conjureType x
+                               .  conjureType y
+                               .  conjureType z
+                               .  conjureType w
+                               .  conjureType v
+                               .  conjureType u
+                               .  conjureType t
+                               .  conjureType s
+                               .  conjureType r
+                               .  conjureType q
+                               .  conjureType p
+                               where (x,y,z,w,v,u,t,s,r,q,p) = xyzwvutsrqp
+  conjureEquality xyzwvutsrqp  =  from
+                              <$> conjureEquality x
+                              <*> conjureEquality y
+                              <*> conjureEquality z
+                              <*> conjureEquality w
+                              <*> conjureEquality v
+                              <*> conjureEquality u
+                              <*> conjureEquality t
+                              <*> conjureEquality s
+                              <*> conjureEquality r
+                              <*> conjureEquality q
+                              <*> conjureEquality p
+    where
+    (x,y,z,w,v,u,t,s,r,q,p)  =  xyzwvutsrqp
+    from e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11  =  value "==" (==)
+      where
+      (==..........)  =  evl e1  ==: x
+      (.==.........)  =  evl e2  ==: y
+      (..==........)  =  evl e3  ==: z
+      (...==.......)  =  evl e4  ==: w
+      (....==......)  =  evl e5  ==: v
+      (.....==.....)  =  evl e6  ==: u
+      (......==....)  =  evl e7  ==: t
+      (.......==...)  =  evl e8  ==: s
+      (........==..)  =  evl e9  ==: r
+      (.........==.)  =  evl e10 ==: q
+      (..........==)  =  evl e11 ==: p
+      (x1,y1,z1,w1,v1,u1,t1,s1,r1,q1,p1) == (x2,y2,z2,w2,v2,u2,t2,s2,r2,q2,p2)  =  x1 ==.......... x2
+                                                                                && y1 .==......... y2
+                                                                                && z1 ..==........ z2
+                                                                                && w1 ...==....... w2
+                                                                                && v1 ....==...... v2
+                                                                                && u1 .....==..... u2
+                                                                                && t1 ......==.... t2
+                                                                                && s1 .......==... s2
+                                                                                && r1 ........==.. r2
+                                                                                && q1 .........==. q2
+                                                                                && p1 ..........== p2
+
+
+instance ( Conjurable a, Listable a, Show a, Express a
+         , Conjurable b, Listable b, Show b, Express b
+         , Conjurable c, Listable c, Show c, Express c
+         , Conjurable d, Listable d, Show d, Express d
+         , Conjurable e, Listable e, Show e, Express e
+         , Conjurable f, Listable f, Show f, Express f
+         , Conjurable g, Listable g, Show g, Express g
+         , Conjurable h, Listable h, Show h, Express h
+         , Conjurable i, Listable i, Show i, Express i
+         , Conjurable j, Listable j, Show j, Express j
+         , Conjurable k, Listable k, Show k, Express k
+         , Conjurable l, Listable l, Show l, Express l
+         ) => Conjurable (a,b,c,d,e,f,g,h,i,j,k,l) where
+  conjureExpress   =  reifyExpress
+  conjureTiers     =  reifyTiers
+  conjureSubTypes xyzwvutsrqpo  =  conjureType x
+                                .  conjureType y
+                                .  conjureType z
+                                .  conjureType w
+                                .  conjureType v
+                                .  conjureType u
+                                .  conjureType t
+                                .  conjureType s
+                                .  conjureType r
+                                .  conjureType q
+                                .  conjureType p
+                                .  conjureType o
+                                where (x,y,z,w,v,u,t,s,r,q,p,o) = xyzwvutsrqpo
+  conjureEquality xyzwvutsrqpo  =  from
+                               <$> conjureEquality x
+                               <*> conjureEquality y
+                               <*> conjureEquality z
+                               <*> conjureEquality w
+                               <*> conjureEquality v
+                               <*> conjureEquality u
+                               <*> conjureEquality t
+                               <*> conjureEquality s
+                               <*> conjureEquality r
+                               <*> conjureEquality q
+                               <*> conjureEquality p
+                               <*> conjureEquality o
+    where
+    (x,y,z,w,v,u,t,s,r,q,p,o)  =  xyzwvutsrqpo
+    from e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12  =  value "==" (==)
+      where
+      (==...........)  =  evl e1  ==: x
+      (.==..........)  =  evl e2  ==: y
+      (..==.........)  =  evl e3  ==: z
+      (...==........)  =  evl e4  ==: w
+      (....==.......)  =  evl e5  ==: v
+      (.....==......)  =  evl e6  ==: u
+      (......==.....)  =  evl e7  ==: t
+      (.......==....)  =  evl e8  ==: s
+      (........==...)  =  evl e9  ==: r
+      (.........==..)  =  evl e10 ==: q
+      (..........==.)  =  evl e11 ==: p
+      (...........==)  =  evl e12 ==: o
+      (x1,y1,z1,w1,v1,u1,t1,s1,r1,q1,p1,o1) == (x2,y2,z2,w2,v2,u2,t2,s2,r2,q2,p2,o2)  =  x1 ==........... x2
+                                                                                      && y1 .==.......... y2
+                                                                                      && z1 ..==......... z2
+                                                                                      && w1 ...==........ w2
+                                                                                      && v1 ....==....... v2
+                                                                                      && u1 .....==...... u2
+                                                                                      && t1 ......==..... t2
+                                                                                      && s1 .......==.... s2
+                                                                                      && r1 ........==... r2
+                                                                                      && q1 .........==.. q2
+                                                                                      && p1 ..........==. p2
+                                                                                      && o1 ...........== o2
+
 
 instance Name A
 instance Name B
