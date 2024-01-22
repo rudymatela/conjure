@@ -645,25 +645,9 @@ conjureWhatApplication what nm f  =  mostGeneralCanonicalVariation . foldApp
 -- > > conjurePats [zero] "f" (undefined :: Int -> Int)
 -- > [[[f x :: Int]],[[f 0 :: Int,f x :: Int]]]
 conjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
-conjurePats  =  newConjurePats
-  -- TODO: decide between old/newConjurePats and remove either
-
-
-oldConjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
-oldConjurePats es nm f  =  mapT (map mkApp . prods) $ cs
-  where
-  mkApp  =  foldApp . (ef:)
-         .  unfold
-         .  conjureMostGeneralCanonicalVariation f
-         .  fold
-  ef  =  var (head $ words nm) f  -- TODO: take the tail into account
-  cs  =  products $ conjureArgumentPats es f
-
-
-newConjurePats :: Conjurable f => [Expr] -> String -> f -> [[ [Expr] ]]
-newConjurePats es nm f  =  mapT (map mkApp)
-                        $  combinePatternOptions
-                        $  conjureArgumentPats es f
+conjurePats  es nm f  =  mapT (map mkApp)
+                      $  combinePatternOptions
+                      $  conjureArgumentPats es f
   where
   mkApp  =  foldApp . (ef:)
          .  unfold
