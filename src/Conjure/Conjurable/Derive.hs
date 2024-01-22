@@ -127,10 +127,6 @@ reallyDeriveConjurable t  =  do
                    conjureTiers     =  reifyTiers |]
   -- withTheReturnTypeOfs |++| (cxt |=>| inst)
   cxt |=>| inst `addFun` deriveSize t `mergeI` deriveSubTypes t `mergeI` deriveCases t
--- TODO: derive conjureCases, e.g.:
--- conjureCases mx  =  [ value "Nothing" (Nothing -: mx)
---                     , value "Just" (Just ->: mx) :$ hole x
---                     ]
 
 deriveCases :: Name -> DecsQ
 deriveCases t  =  do
