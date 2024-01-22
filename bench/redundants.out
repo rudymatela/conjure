@@ -879,9 +879,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,1,2,3,4] candidates
-  9/12 unique candidates
-  3/12 redundant candidates
+  [2,1,2,2,4] candidates
+  9/11 unique candidates
+  2/11 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -889,12 +889,9 @@ xs ++ [] == xs
 (xs ++ ys) ++ zs == xs ++ (ys ++ zs)
 (x:xs) ++ ys == x:(xs ++ ys)
 
-class of 3 equivalent candidates:
+class of 2 equivalent candidates:
 
     goo xs  =  xs
-
-    goo []  =  []
-    goo (x:xs)  =  x:xs
 
     goo []  =  []
     goo (x:xs)  =  x:goo xs
@@ -911,9 +908,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,67,153] candidates
-  161/245 unique candidates
-  84/245 redundant candidates
+  [3,7,15,65,151] candidates
+  161/241 unique candidates
+  80/241 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -921,7 +918,7 @@ xs ++ [] == xs
 (xs ++ ys) ++ zs == xs ++ (ys ++ zs)
 (x:xs) ++ ys == x:(xs ++ ys)
 
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     xs ?? ys  =  xs
 
@@ -931,11 +928,8 @@ class of 4 equivalent candidates:
     xs ?? []  =  xs
     xs ?? (x:ys)  =  xs ?? []
 
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  x:xs
 
-
-class of 6 equivalent candidates:
+class of 4 equivalent candidates:
 
     xs ?? ys  =  ys
 
@@ -944,13 +938,6 @@ class of 6 equivalent candidates:
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  [] ?? ys
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  x:ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  y:ys
 
     [] ?? []  =  []
     [] ?? (x:xs)  =  x:xs
@@ -1165,7 +1152,7 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  xs
 
 
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     [] ?? xs  =  []
     (x:xs) ?? ys  =  ys
@@ -1177,10 +1164,6 @@ class of 4 equivalent candidates:
     [] ?? []  =  []
     [] ?? (x:xs)  =  [] ?? xs
     (x:xs) ?? ys  =  ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  y:ys
 
 
 class of 3 equivalent candidates:
@@ -1372,9 +1355,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,3,0,0,0] candidates
-  4/6 unique candidates
-  2/6 redundant candidates
+  [3,2,0,0,0] candidates
+  4/5 unique candidates
+  1/5 redundant candidates
 
 rules:
 not False == True
@@ -1427,14 +1410,6 @@ r || (p || q) == p || (q || r)
 r || (q || p) == p || (q || r)
 (r || q) && p == p && (q || r)
 r && q || p == p || q && r
-
-class of 2 equivalent candidates:
-
-    ton p  =  p
-
-    ton False  =  False
-    ton True  =  True
-
 
 class of 2 equivalent candidates:
 
@@ -1447,9 +1422,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,14,28,14,4] candidates
-  16/64 unique candidates
-  48/64 redundant candidates
+  [4,12,28,14,4] candidates
+  16/62 unique candidates
+  46/62 redundant candidates
 
 rules:
 not False == True
@@ -1503,20 +1478,9 @@ r || (q || p) == p || (q || r)
 (r || q) && p == p && (q || r)
 r && q || p == p || q && r
 
-class of 2 equivalent candidates:
-
-    p &| q  =  p
-
-    False &| p  =  False
-    True &| p  =  True
-
-
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     p &| q  =  q
-
-    p &| False  =  False
-    p &| True  =  True
 
     False &| p  =  p
     True &| False  =  False

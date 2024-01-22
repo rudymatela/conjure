@@ -41,12 +41,12 @@ replicates :: [Char] -> Int -> [Char]
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
--- looking through 24 candidates of size 4
+-- looking through 23 candidates of size 4
 -- looking through 64 candidates of size 5
 -- looking through 161 candidates of size 6
 -- looking through 469 candidates of size 7
 -- looking through 1303 candidates of size 8
--- tested 791 candidates
+-- tested 790 candidates
 replicates "" x  =  ""
 replicates (c:cs) x  =  replicate x c ++ replicates cs x
 

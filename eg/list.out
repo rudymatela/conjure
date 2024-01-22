@@ -16,11 +16,11 @@ reverse :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 4
 -- looking through 4 candidates of size 5
 -- looking through 7 candidates of size 6
 -- looking through 10 candidates of size 7
--- tested 27 candidates
+-- tested 26 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ [x]
 
@@ -30,10 +30,10 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 45 candidates of size 4
--- looking through 112 candidates of size 5
+-- looking through 43 candidates of size 4
+-- looking through 110 candidates of size 5
 -- looking through 114 candidates of size 6
--- tested 232 candidates
+-- tested 228 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -43,7 +43,7 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 49 candidates of size 4
+-- looking through 47 candidates of size 4
 -- tested 56 candidates
 xs ++ ys  =  foldr (:) ys xs
 
@@ -53,10 +53,10 @@ xs ++ ys  =  foldr (:) ys xs
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 45 candidates of size 4
--- looking through 112 candidates of size 5
+-- looking through 43 candidates of size 4
+-- looking through 110 candidates of size 5
 -- looking through 114 candidates of size 6
--- tested 234 candidates
+-- tested 230 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 

@@ -245,7 +245,7 @@ defnApparentlyTerminates _  =  True
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
                    || isRedundantByRepetition d
---                 || isRedundantByIntroduction d
+                   || isRedundantByIntroduction d
 -- we do not use isRedundantByIntroduction above
 -- as it does not pay off in terms of runtime vs number of pruned candidates
 --
