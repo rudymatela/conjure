@@ -26,6 +26,8 @@ module Conjure.Defn
   , isCompleteBndn
   , simplifyDefn
   , canonicalizeBndn
+  , hasUnbound
+  , isUndefined
   , module Conjure.Expr
   )
 where
@@ -333,3 +335,31 @@ simplifyDefn (b:bs)  =  [b | none (foldPair b `isInstanceOf`) $ map foldPair bs]
 
 canonicalizeBndn :: Bndn -> Bndn
 canonicalizeBndn  =  unfoldPair . canonicalize . foldPair
+
+-- | Returns whether a binding has undefined variables,
+--   i.e.,
+--   there are variables in the RHS that are not declared in the LHS.
+--
+-- > > hasUnbound (xx -:- xxs, xxs)
+-- > False
+--
+-- > > hasUnbound (xx -:- xxs, yys)
+-- > True
+--
+-- For 'Defn's, use 'isUndefined'
+hasUnbound :: Bndn -> Bool
+hasUnbound (lhs,rhs)  =  all (`elem` vars rhs) (vars lhs)
+
+-- | Returns whether a 'Defn' has undefined variables,
+--   i.e.,
+--   there are variables in the RHSs that are not declared in the LHSs.
+--
+-- > > isUndefined [(nil, nil), (xx -:- xxs, xxs)]
+-- > False
+--
+-- > > isUndefined [(nil, xxs), (xx -:- xxs, yys)]
+-- > True
+--
+-- For single 'Bndn's, use 'hasUnbound'
+isUndefined :: Defn -> Bool
+isUndefined  =  any hasUnbound
