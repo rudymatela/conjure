@@ -265,7 +265,7 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any (\bs -> allEqual bs && isDefined bs)
+  anyAllEqual shovel  =  any (\bs -> allEqual bs && isCompleteDefn bs)
                       .  classifyOn fst
                       .  map (canonicalizeBndn . first shovel)
                       $  d
@@ -349,7 +349,10 @@ canonicalizeBndn  =  unfoldPair . canonicalize . foldPair
 --
 -- For 'Defn's, use 'isUndefined'.
 hasUnbound :: Bndn -> Bool
-hasUnbound (lhs,rhs)  =  all (`elem` vars rhs) (vars lhs)
+hasUnbound (lhs,rhs)  =  all (`elem` nubVars lhs) (vars rhs)
+
+noUnbound :: Bndn -> Bool
+noUnbound  =  not . hasUnbound
 
 -- | Returns whether a 'Defn' has undefined variables,
 --   i.e.,
