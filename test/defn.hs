@@ -125,6 +125,10 @@ tests n  =
   , isRedundantBySubsumption  idListRedundantDefn == False
   , isRedundantByRepetition   idListRedundantDefn == False
   , isRedundantByIntroduction idListRedundantDefn
+
+  , isRedundantBySubsumption  constNilRedundantDefn == False
+  , isRedundantByRepetition   constNilRedundantDefn
+  , isRedundantByIntroduction constNilRedundantDefn == False -- TODO: shouldn't this be True?
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -227,9 +231,14 @@ constBoolRedundantDefn  =  [ const' false false  =-  false
                            ]
 
 idListRedundantDefn :: Defn
-idListRedundantDefn  =  [ id' nil  =-  nil
+idListRedundantDefn  =  [ id' nil           =-  nil
                         , id' (xx -:- xxs)  =-  xx -:- xxs
                         ]
+
+constNilRedundantDefn :: Defn
+constNilRedundantDefn  =  [ id' nil           =-  nil
+                          , id' (xx -:- xxs)  =-  nil
+                          ]
 
 -- Here is an example of a redundant 'Defn':
 --
