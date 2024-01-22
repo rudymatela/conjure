@@ -22,6 +22,9 @@ module Conjure.Defn
   , printDefn
   , defnApparentlyTerminates
   , isRedundantDefn
+  , isRedundantBySubsumption
+  , isRedundantByRepetition
+  , isRedundantByIntroduction
   , isCompleteDefn
   , isCompleteBndn
   , simplifyDefn
