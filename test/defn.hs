@@ -130,6 +130,10 @@ tests n  =
   , isRedundantByRepetition   constNilRedundantDefn
   , isRedundantByIntroduction constNilRedundantDefn == False -- TODO: shouldn't this be True?
 
+  , isRedundantBySubsumption  constFalseRedundantDefn == False
+  , isRedundantByRepetition   constFalseRedundantDefn
+  , isRedundantByIntroduction constFalseRedundantDefn == True
+
   , canonicalizeBndn (introduceVariableAt 2 (const' xxs (yy -:- yys), (yy -:- yys) -++- (yy -:- yys)))
     == (const' xxs yys, yys -++- yys)
   ]
@@ -242,6 +246,11 @@ constNilRedundantDefn :: Defn
 constNilRedundantDefn  =  [ id' nil           =-  nil
                           , id' (xx -:- xxs)  =-  nil
                           ]
+
+constFalseRedundantDefn :: Defn
+constFalseRedundantDefn  =  [ id' nil           =-  false
+                            , id' (xx -:- xxs)  =-  false
+                            ]
 
 -- Here is an example of a redundant 'Defn':
 --
