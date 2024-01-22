@@ -28,6 +28,7 @@ module Conjure.Defn
   , canonicalizeBndn
   , hasUnbound
   , isUndefined
+  , isDefined
   , module Conjure.Expr
   )
 where
@@ -264,7 +265,7 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any (\bs -> allEqual bs && isCompleteDefn bs)
+  anyAllEqual shovel  =  any (\bs -> allEqual bs && isDefined bs)
                       .  classifyOn fst
                       .  map (canonicalizeBndn . first shovel)
                       $  d
@@ -346,7 +347,7 @@ canonicalizeBndn  =  unfoldPair . canonicalize . foldPair
 -- > > hasUnbound (xx -:- xxs, yys)
 -- > True
 --
--- For 'Defn's, use 'isUndefined'
+-- For 'Defn's, use 'isUndefined'.
 hasUnbound :: Bndn -> Bool
 hasUnbound (lhs,rhs)  =  all (`elem` vars rhs) (vars lhs)
 
@@ -360,6 +361,9 @@ hasUnbound (lhs,rhs)  =  all (`elem` vars rhs) (vars lhs)
 -- > > isUndefined [(nil, xxs), (xx -:- xxs, yys)]
 -- > True
 --
--- For single 'Bndn's, use 'hasUnbound'
+-- For single 'Bndn's, use 'hasUnbound'.
 isUndefined :: Defn -> Bool
 isUndefined  =  any hasUnbound
+
+isDefined :: Defn -> Bool
+isDefined  =  not . isUndefined
