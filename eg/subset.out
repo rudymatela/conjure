@@ -7,9 +7,9 @@ subset :: [Int] -> [Int] -> Bool
 -- looking through 42 candidates of size 4
 -- looking through 100 candidates of size 5
 -- looking through 40 candidates of size 6
--- looking through 126 candidates of size 7
--- looking through 940 candidates of size 8
--- tested 1008 candidates
+-- looking through 174 candidates of size 7
+-- looking through 1036 candidates of size 8
+-- tested 1152 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  elem x ys && subset xs ys
 

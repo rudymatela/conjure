@@ -266,7 +266,7 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any (\bs -> allEqual bs && isCompleteDefn bs)
+  anyAllEqual shovel  =  any (\bs -> allEqual bs && isDefined bs)
                       .  classifyOn fst
                       .  map (canonicalizeBndn . first shovel)
                       $  d
