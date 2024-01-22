@@ -648,11 +648,11 @@ isRootNormalE thy e  =  isRootNormal thy e
 
 productsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 productsWith f  =  mapT f . products
--- TODO: move to LeanCheck?
+-- TODO: move productsWith to LeanCheck?
 
 delayedProductsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
--- TODO: move to LeanCheck?
+-- TODO: move delayedProductsWith to LeanCheck?
 
 foldAppProducts :: Expr -> [ [[Expr]] ] -> [[Expr]]
 foldAppProducts ef  =  delayedProductsWith (foldApp . (ef:))
