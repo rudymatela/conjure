@@ -244,6 +244,12 @@ defnApparentlyTerminates _  =  True
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
                    || isRedundantByRepetition d
+--                 || isRedundantByIntroduction d
+-- we do not use isRedundantByIntroduction above
+-- as it does not pay off in terms of runtime vs number of pruned candidates
+--
+-- The number of candidates is reduced usually by less than 1%
+-- and the runtime increases by 50% or sometimes 100%.
 
 -- | Returns whether the given 'Defn' is redundant
 --   with regards to repetitions on RHSs.
@@ -279,7 +285,7 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
   where
   nArgs  =  length . tail . unfoldApp . fst $ head d
   anyAllEqual :: Int -> Bool
-  anyAllEqual i  =  any (\bs -> allEqual bs && isCompleteDefn bs)
+  anyAllEqual i  =  any (\bs -> allEqual bs && isDefined bs)
                  .  classifyOn fst
                  .  map (canonicalizeBndn . introduceVariableAt i)
                  $  d
@@ -296,15 +302,12 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
 --
 -- TODO: find better examples for this comment
 introduceVariableAt :: Int -> Bndn -> Bndn
-introduceVariableAt i b@(l,r)  =
-  if isVar p
-  then b -- already a variable!
-  else if any (`elem` vars (snd b')) (vars p)
-  then (l, holeAsTypeOf r) -- cannot introduce, mark with hole
-  else b'
+introduceVariableAt i b@(l,r)
+  | isVar p    =  b -- already a variable
+  | otherwise  =  unfoldPair
+               $  foldPair b // [(p,"introduced_var" `varAsTypeOf` p)]
   where
   p  =  l $!! i
-  b'  =  unfoldPair (foldPair b // [(p,"introduced_var" `varAsTypeOf` p)])
 -- TODO: replace "introduced_var" by something proper
 
 isRedundantBySubsumption :: Defn -> Bool
