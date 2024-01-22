@@ -305,10 +305,12 @@ introduceVariableAt :: Int -> Bndn -> Bndn
 introduceVariableAt i b@(l,r)
   | isVar p    =  b -- already a variable
   | otherwise  =  unfoldPair
-               $  foldPair b // [(p,"introduced_var" `varAsTypeOf` p)]
+               $  foldPair b // [(p,newName `varAsTypeOf` p)]
   where
   p  =  l $!! i
--- TODO: replace "introduced_var" by something proper
+  newName  =  head $ variableNamesFromTemplate "x" \\ varnames l
+  varnames :: Expr -> [String]
+  varnames e  =  [n | Value ('_':n) _ <- vars e]
 
 isRedundantBySubsumption :: Defn -> Bool
 isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
