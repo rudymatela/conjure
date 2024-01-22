@@ -289,12 +289,22 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
 -- > foo []  =  []
 -- > foo (x:xs)  =  x:xs
 --
+-- It is equivalent to:
+--
+-- > foo xs = xs
+--
 -- The following is also redundant:
 --
 -- > [] ?? xs  =  []
 -- > (x:xs) ?? ys  =  x:xs
 --
--- Both cases can be transformed into @foo xs = xs@.
+-- as it is equivalent to:
+--
+-- > xs ?? ys == xs
+--
+-- This function is not used as one of the criteria in 'isRedundantDefn'
+-- because it does not pay-off
+-- in terms of runtime vs number of pruned candidates.
 isRedundantByIntroduction :: Defn -> Bool
 isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
   where

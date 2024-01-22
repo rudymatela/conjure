@@ -7,37 +7,6 @@ A non-exhaustive list of things TO DO for Conjure.
   See sections below for ideas.
 
 
-## Prune modulo variable introduction
-
-The following is redundant:
-
-	goo []  =  []
-	goo (x:xs)  =  x:xs
-
-It is equivalent to:
-
-	goo xs  =  xs
-
-The following is also redundant:
-
-	[] ?? xs  =  []
-	(x:xs) ?? ys  =  x:xs
-
-It is equivalent to:
-
-	xs ?? ys  =  xs
-
-One possible path would be to,
-for each pattern argument,
-we check if variable introduction is possible.
-If it is, we check that variable introduction
-is also possible when all other pattern arguments are the same
-and the results would be the same.
-This is straightforward, but tricky to implement.
-
-See `isRedundantByIntroduction`.
-
-
 ## Prune modulo rewriting
 
 The following is redundant, as only the second equation is necessary:
