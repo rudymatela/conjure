@@ -4,6 +4,7 @@
 import Test
 import Conjure.Defn
 import Test.LeanCheck.Error (errorToLeft)
+import Test.LeanCheck.Function ()
 import Data.Express.Fixtures
 
 main :: IO ()
@@ -72,6 +73,11 @@ tests n  =
   , holds n $ cevl 60 isOneDefn  === ((==1) :: Int -> Bool)
   , holds n $ cevl 60 nullDefn   === (null :: [Int] -> Bool)
   , holds n $ cevl 60 appendDefn ==== ((++) :: [Int] -> [Int] -> [Int])
+
+  , holds n $ cevl 60 idDefn     === (id :: Int -> Int)
+  , holds n $ cevl 60 constDefn  ==== (const :: Int -> Int -> Int)
+--, holds n $ cevl 60 appDefn     ==== (($) :: (Int->Int) -> Int -> Int)  -- TODO: make this work
+--, holds n $ cevl 60 composeDefn ==== (($) :: (Int->Int) -> (Int->Int) -> Int)  -- TODO: make this work
 
   -- evaluating at the incorrect types should return Nothing
   , isNothing (cevaluate 60 sumDefn :: Maybe ([Bool] -> Bool))
@@ -221,8 +227,17 @@ const0RedundantDefn  =  [ zero  =-  zero
                         , xx    =-  zero
                         ]
 
+idDefn :: Defn
+idDefn  =  [ id' xx  =-  xx ]
+
 constDefn :: Defn
 constDefn  =  [ const' xx yy  =-  xx ]
+
+appDefn :: Defn
+appDefn  =  [ ffE -$- xx  =-  ff xx ]
+
+composeDefn :: Defn
+composeDefn  =  [ (ffE -.- ggE) :$ xx  =-  ff (gg xx) ]
 
 constRedundantDefn :: Defn
 constRedundantDefn  =  [ const' zero xx  =-  zero
