@@ -643,13 +643,15 @@ isRootNormal thy e  =  null $ T.lookup e trie
   where
   trie  =  T.fromList (rules thy)
 
+-- the logic of this function is a bit twisted for performance
+-- but nevertheless correct
 isRootNormalC :: Thy -> Expr -> Bool
 isRootNormalC thy e | not (isRootNormal thy e)  =  False
 isRootNormalC thy (ef :$ ex :$ ey)
   | ex <= ey  =  True
   | not (isCommutative thy ef)  =  True
   | isRootNormal thy (ef :$ ey :$ ex)  =  False
-isRootNormalC _ _                                          =  True
+isRootNormalC _ _  =  True
 
 isRootNormalE :: Thy -> Expr -> Bool
 isRootNormalE thy e  =  isRootNormal thy e
