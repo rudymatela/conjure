@@ -41,6 +41,7 @@ module Conjure.Utils
   , updateAt
   , first
   , second
+  , both
   )
 where
 
@@ -181,3 +182,6 @@ first f (x,y)  =  (f x, y)
 -- > (1,200)
 second :: (b -> b') -> (a,b) -> (a,b')
 second f (x,y)  =  (x, f y)
+
+both :: (a -> b) -> (a,a) -> (b,b)
+both f (x,y)  =  (f x, f y)

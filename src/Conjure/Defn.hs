@@ -25,6 +25,7 @@ module Conjure.Defn
   , isRedundantBySubsumption
   , isRedundantByRepetition
   , isRedundantByIntroduction
+  , hasRedundantRecursion
   , isCompleteDefn
   , isCompleteBndn
   , simplifyDefn
@@ -34,6 +35,9 @@ module Conjure.Defn
   , isUndefined
   , isDefined
   , introduceVariableAt
+  , isBaseCase
+  , isRecursiveCase
+  , isRecursiveDefn
   , module Conjure.Expr
   )
 where
@@ -315,6 +319,22 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
                  .  map (canonicalizeBndn . introduceVariableAt i)
                  $  d
 
+-- | Returns whether the given 'Defn' is redundant
+--   with regards to recursions
+--
+-- The following is redundant:
+--
+-- > xs ?? []  =  []
+-- > xs ?? (x:ys)  =  xs ?? []
+--
+-- The LHS of a base-case pattern, matches the RHS of a recursive pattern.
+-- The second RHS may be replaced by simply @[]@ which makes it redundant.
+hasRedundantRecursion :: Defn -> Bool
+hasRedundantRecursion d  =  not (null rs) && any matchesRHS bs
+  where
+  (bs,rs)  =  partition isBaseCase d
+  matchesRHS (lhs,_)  =  any ((`hasAppInstanceOf` lhs) . snd) rs
+
 -- | Introduces a hole at a given position in the binding:
 --
 -- > > introduceVariableAt 1 (xxs -?- (yy -:- yys), (yy -:- yys) -++- (yy -:- yys))
@@ -413,3 +433,35 @@ isUndefined  =  any hasUnbound
 
 isDefined :: Defn -> Bool
 isDefined  =  not . isUndefined
+
+-- | Returns whether a binding is a base case.
+--
+-- > > isBaseCase (ff (xx -:- nil), xx)
+-- > True
+--
+-- > > isBaseCase (ff (xx -:- xxs), ff xxs)
+-- > False
+--
+-- (cf. 'isRecursiveCase')
+isBaseCase :: Bndn -> Bool
+isBaseCase (lhs,rhs)  =  f `notElem` values rhs
+  where
+  (f:_)  =  unfoldApp lhs
+
+-- | Returns whether a binding is a base case.
+--
+-- > > isRecursiveCase (ff (xx -:- nil), xx)
+-- > False
+--
+-- > > isRecursiveCase (ff (xx -:- xxs), ff xxs)
+-- > True
+--
+-- (cf. 'isBaseCase')
+isRecursiveCase :: Bndn -> Bool
+isRecursiveCase (lhs,rhs)  =  f `elem` values rhs
+  where
+  (f:_)  =  unfoldApp lhs
+
+-- | Returns whether a definition is recursive
+isRecursiveDefn :: Defn -> Bool
+isRecursiveDefn  =  any isRecursiveCase

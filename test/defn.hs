@@ -137,6 +137,11 @@ tests n  =
 
   , canonicalizeBndn (introduceVariableAt 2 (const' xxs (yy -:- yys), (yy -:- yys) -++- (yy -:- yys)))
     == (const' xxs yys, yys -++- yys)
+
+  ,       isBaseCase      (ff (xx -:- nil), xx)
+  , not $ isBaseCase      (ff (xx -:- xxs), ff xxs)
+  ,       isRecursiveCase (ff (xx -:- xxs), ff xxs)
+  , not $ isRecursiveCase (ff (xx -:- nil), xx)
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a

@@ -4,12 +4,12 @@ elem :: Int -> [Int] -> Bool
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 28 candidates of size 4
--- looking through 73 candidates of size 5
--- looking through 124 candidates of size 6
--- looking through 305 candidates of size 7
--- looking through 999 candidates of size 8
--- tested 826 candidates
+-- looking through 24 candidates of size 4
+-- looking through 67 candidates of size 5
+-- looking through 118 candidates of size 6
+-- looking through 274 candidates of size 7
+-- looking through 817 candidates of size 8
+-- tested 663 candidates
 elem x []  =  False
 elem x (y:xs)  =  x == y || elem x xs
 

@@ -796,7 +796,7 @@ foo x  =  0
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,4,10,17,26,54,93,162] direct candidates, 0 duplicates
-  [3,8,34,93,277,810,2380,6662,18802] pattern candidates, 0 duplicates
+  [3,8,34,93,273,778,2198,5927,16157] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1386,9 +1386,6 @@ x ? y  =  dec x ? x
 x ? 0  =  x
 x ? y  =  dec x ? y
 
-x ? 0  =  x
-x ? y  =  dec x ? 0
-
 x ? 0  =  0
 x ? y  =  x ? dec y
 
@@ -1404,17 +1401,11 @@ x ? y  =  dec x ? x
 x ? 0  =  0
 x ? y  =  dec x ? y
 
-x ? 0  =  0
-x ? y  =  dec x ? 0
-
 0 ? x  =  x
 x ? y  =  x ? dec y
 
 0 ? x  =  x
 x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? y  =  0 ? dec y
 
 0 ? x  =  x
 x ? y  =  dec x ? x
@@ -1430,9 +1421,6 @@ x ? y  =  x ? dec y
 
 0 ? x  =  0
 x ? y  =  y ? dec y
-
-0 ? x  =  0
-x ? y  =  0 ? dec y
 
 0 ? x  =  0
 x ? y  =  dec x ? x
@@ -2282,9 +2270,6 @@ x ? y  =  dec (dec x) ? x
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
 
-x ? 0  =  x
-x ? y  =  dec (dec x) ? 0
-
 x ? 0  =  0
 x ? y  =  x ? dec (dec y)
 
@@ -2315,17 +2300,11 @@ x ? y  =  dec (dec x) ? x
 x ? 0  =  0
 x ? y  =  dec (dec x) ? y
 
-x ? 0  =  0
-x ? y  =  dec (dec x) ? 0
-
 0 ? x  =  x
 x ? y  =  x ? dec (dec y)
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec y)
-
-0 ? x  =  x
-x ? y  =  0 ? dec (dec y)
 
 0 ? x  =  x
 x ? y  =  dec x ? dec x
@@ -2356,9 +2335,6 @@ x ? y  =  x ? dec (dec y)
 
 0 ? x  =  0
 x ? y  =  y ? dec (dec y)
-
-0 ? x  =  0
-x ? y  =  0 ? dec (dec y)
 
 0 ? x  =  0
 x ? y  =  dec x ? dec x
@@ -2399,9 +2375,6 @@ x ? y  =  dec (dec x ? x)
 x ? 0  =  x
 x ? y  =  dec (dec x ? y)
 
-x ? 0  =  x
-x ? y  =  dec (dec x ? 0)
-
 x ? 0  =  0
 x ? y  =  dec (x ? dec y)
 
@@ -2417,9 +2390,6 @@ x ? y  =  dec (dec x ? x)
 x ? 0  =  0
 x ? y  =  dec (dec x ? y)
 
-x ? 0  =  0
-x ? y  =  dec (dec x ? 0)
-
 x ? 0  =  dec x
 x ? y  =  x ? dec y
 
@@ -2435,9 +2405,6 @@ x ? y  =  dec x ? x
 x ? 0  =  dec x
 x ? y  =  dec x ? y
 
-x ? 0  =  dec x
-x ? y  =  dec x ? 0
-
 x ? 0  =  dec 0
 x ? y  =  x ? dec y
 
@@ -2452,18 +2419,12 @@ x ? y  =  dec x ? x
 
 x ? 0  =  dec 0
 x ? y  =  dec x ? y
-
-x ? 0  =  dec 0
-x ? y  =  dec x ? 0
 
 0 ? x  =  x
 x ? y  =  dec (x ? dec y)
 
 0 ? x  =  x
 x ? y  =  dec (y ? dec y)
-
-0 ? x  =  x
-x ? y  =  dec (0 ? dec y)
 
 0 ? x  =  x
 x ? y  =  dec (dec x ? x)
@@ -2481,9 +2442,6 @@ x ? y  =  dec (x ? dec y)
 x ? y  =  dec (y ? dec y)
 
 0 ? x  =  0
-x ? y  =  dec (0 ? dec y)
-
-0 ? x  =  0
 x ? y  =  dec (dec x ? x)
 
 0 ? x  =  0
@@ -2499,9 +2457,6 @@ x ? y  =  x ? dec y
 x ? y  =  y ? dec y
 
 0 ? x  =  dec x
-x ? y  =  0 ? dec y
-
-0 ? x  =  dec x
 x ? y  =  dec x ? x
 
 0 ? x  =  dec x
@@ -2517,9 +2472,6 @@ x ? y  =  x ? dec y
 x ? y  =  y ? dec y
 
 0 ? x  =  dec 0
-x ? y  =  0 ? dec y
-
-0 ? x  =  dec 0
 x ? y  =  dec x ? x
 
 0 ? x  =  dec 0
@@ -2538,35 +2490,11 @@ x ? y  =  y ? dec y
 
 0 ? x  =  x
 x ? 0  =  x
-x ? y  =  0 ? dec y
-
-0 ? x  =  x
-x ? 0  =  x
 x ? y  =  dec x ? x
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec x ? y
-
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec x ? 0
-
-0 ? x  =  x
-x ? 0  =  dec x ? x
-x ? y  =  x
-
-0 ? x  =  x
-x ? 0  =  dec x ? 0
-x ? y  =  x
-
-0 ? x  =  x
-x ? 0  =  dec x ? x
-x ? y  =  0
-
-0 ? x  =  x
-x ? 0  =  dec x ? 0
-x ? y  =  0
 
 0 ? x  =  x
 x ? 0  =  0
@@ -2578,43 +2506,11 @@ x ? y  =  y ? dec y
 
 0 ? x  =  x
 x ? 0  =  0
-x ? y  =  0 ? dec y
-
-0 ? x  =  x
-x ? 0  =  0
 x ? y  =  dec x ? x
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec x ? y
-
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec x ? 0
-
-0 ? x  =  x ? dec x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? x  =  0 ? dec x
-x ? 0  =  x
-x ? y  =  y
-
-0 ? x  =  x ? dec x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? x  =  0 ? dec x
-x ? 0  =  x
-x ? y  =  0
-
-0 ? x  =  x ? dec x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? x  =  0 ? dec x
-x ? 0  =  0
-x ? y  =  x
 
 0 ? x  =  0
 x ? 0  =  x
@@ -2626,27 +2522,11 @@ x ? y  =  y ? dec y
 
 0 ? x  =  0
 x ? 0  =  x
-x ? y  =  0 ? dec y
-
-0 ? x  =  0
-x ? 0  =  x
 x ? y  =  dec x ? x
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec x ? y
-
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec x ? 0
-
-0 ? x  =  0
-x ? 0  =  dec x ? x
-x ? y  =  y
-
-0 ? x  =  0
-x ? 0  =  dec x ? 0
-x ? y  =  y
 
 0 ? x  =  0
 x ? 0  =  0
@@ -2658,19 +2538,11 @@ x ? y  =  y ? dec y
 
 0 ? x  =  0
 x ? 0  =  0
-x ? y  =  0 ? dec y
-
-0 ? x  =  0
-x ? 0  =  0
 x ? y  =  dec x ? x
 
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  dec x ? y
-
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec x ? 0
 
 x ? y  =  dec (dec (dec x)) + x
 
@@ -5025,7 +4897,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,15,67,153,403,1189,2586,8970] pattern candidates, 0 duplicates
+  [3,7,15,59,139,331,987,2016,6970] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -5154,16 +5026,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  [] ?? xs
@@ -5178,16 +5044,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  xs ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  xs ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  [] ?? xs
@@ -5213,12 +5073,6 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ?? []
 
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? ys
-
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? xs
 
@@ -5236,12 +5090,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ?? []
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs
@@ -5375,14 +5223,6 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  ys ?? []
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? ys
-
-[] ?? xs  =  xs
 (x:xs) ?? []  =  xs ?? xs
 (x:xs) ?? (y:ys)  =  xs
 
@@ -5391,19 +5231,11 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  xs
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs
 (x:xs) ?? []  =  xs ?? xs
 (x:xs) ?? (y:ys)  =  ys
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  [] ?? xs
 (x:xs) ?? (y:ys)  =  ys
 
 [] ?? xs  =  xs
@@ -5412,10 +5244,6 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  [] ?? xs
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? xs  =  xs
@@ -5442,14 +5270,6 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ?? []
 
-[] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? ys
-
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ?? xs
@@ -5475,14 +5295,6 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  ys ?? []
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [] ?? ys
-
-[] ?? xs  =  []
 (x:xs) ?? []  =  xs ?? xs
 (x:xs) ?? (y:ys)  =  xs
 
@@ -5491,19 +5303,11 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  xs
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  [] ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  []
 (x:xs) ?? []  =  xs ?? xs
 (x:xs) ?? (y:ys)  =  ys
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  [] ?? xs
 (x:xs) ?? (y:ys)  =  ys
 
 [] ?? xs  =  []
@@ -5512,10 +5316,6 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs ?? []
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  [] ?? xs
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? xs  =  []
@@ -5541,14 +5341,6 @@ xs ?? (x:ys)  =  []
 [] ?? xs  =  []
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [] ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
@@ -5953,16 +5745,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  (x:xs) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  (x:xs) ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  (x:ys) ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  (x:ys) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (x:ys) ?? []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  [x] ?? xs
@@ -5971,16 +5757,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  [x] ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  [x] ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  (xs ++ xs) ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  (xs ++ xs) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (xs ++ xs) ?? []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  (xs ++ ys) ?? xs
@@ -5989,25 +5769,16 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  (xs ++ ys) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  (xs ++ ys) ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  (ys ++ xs) ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  (ys ++ xs) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  (ys ++ xs) ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  (ys ++ ys) ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  (ys ++ ys) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (ys ++ ys) ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  (x:xs) ?? xs
@@ -6016,16 +5787,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  (x:xs) ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  (x:xs) ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  (x:ys) ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  (x:ys) ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  (x:ys) ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  [x] ?? xs
@@ -6034,16 +5799,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  [x] ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  [x] ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  (xs ++ xs) ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  (xs ++ xs) ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  (xs ++ xs) ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  (xs ++ ys) ?? xs
@@ -6052,16 +5811,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  (xs ++ ys) ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  (xs ++ ys) ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  (ys ++ xs) ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  (ys ++ xs) ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  (ys ++ xs) ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  (ys ++ ys) ?? xs
@@ -6069,9 +5822,6 @@ xs ?? (x:ys)  =  (ys ++ ys) ?? xs
 xs ?? []  =  []
 xs ?? (x:ys)  =  (ys ++ ys) ?? ys
 
-xs ?? []  =  []
-xs ?? (x:ys)  =  (ys ++ ys) ?? []
-
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? (x:xs)
 
@@ -6114,27 +5864,6 @@ xs ?? (x:ys)  =  (ys ++ ys) ?? []
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ?? (ys ++ ys)
 
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? (x:xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? (x:ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? [x]
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? (xs ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? (xs ++ ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? (ys ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? (ys ++ ys)
-
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? (x:xs)
 
@@ -6176,27 +5905,6 @@ xs ?? (x:ys)  =  (ys ++ ys) ?? []
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ?? (ys ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? (x:xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? (x:ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? [x]
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? (xs ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? (xs ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? (ys ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? (ys ++ ys)
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs ?? xs
@@ -6205,16 +5913,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:xs ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  x:ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:ys ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  x:ys ?? []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  [x,] ?? xs
@@ -6229,16 +5931,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ++ xs ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ xs ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ++ ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ++ ys ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ ys ?? []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ++ [] ?? xs
@@ -6253,16 +5949,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ++ xs ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ xs ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ++ ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ++ ys ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ ys ?? []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ++ [] ?? xs
@@ -6277,16 +5967,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? ys ++ xs
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ?? [] ++ xs
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? xs ++ xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? ys ++ xs
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? [] ++ xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  [] ?? xs ++ xs
@@ -6301,16 +5985,10 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? ys ++ ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ?? [] ++ ys
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? xs ++ ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? ys ++ ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? [] ++ ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  [] ?? xs ++ ys
@@ -6325,16 +6003,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  x:xs ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  x:xs ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  x:ys ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  x:ys ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:ys ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  [x,] ?? xs
@@ -6349,16 +6021,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  xs ++ xs ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ xs ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  xs ++ ys ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  xs ++ ys ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ ys ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  xs ++ [] ?? xs
@@ -6373,16 +6039,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  ys ++ xs ?? ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ xs ?? []
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  ys ++ ys ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys ++ ys ?? ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ ys ?? []
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys ++ [] ?? xs
@@ -6397,16 +6057,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  xs ?? ys ++ xs
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  xs ?? [] ++ xs
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? xs ++ xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? ys ++ xs
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ?? [] ++ xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  [] ?? xs ++ xs
@@ -6421,16 +6075,10 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  xs ?? ys ++ ys
 
 xs ?? []  =  []
-xs ?? (x:ys)  =  xs ?? [] ++ ys
-
-xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? xs ++ ys
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? ys ++ ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ?? [] ++ ys
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  [] ?? xs ++ ys
@@ -6445,16 +6093,10 @@ xs ?? []  =  xs ++ xs
 xs ?? (x:ys)  =  xs ?? ys
 
 xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  xs ?? []
-
-xs ?? []  =  xs ++ xs
 xs ?? (x:ys)  =  ys ?? xs
 
 xs ?? []  =  xs ++ xs
 xs ?? (x:ys)  =  ys ?? ys
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  ys ?? []
 
 xs ?? []  =  xs ++ xs
 xs ?? (x:ys)  =  [] ?? xs
@@ -6481,12 +6123,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  x:ys ?? []
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  [x,] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [x,] ?? ys
-
-[] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ++ xs ?? xs
 
 [] ?? xs  =  xs
@@ -6503,12 +6139,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ++ ys ?? []
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ [] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ++ xs ?? xs
@@ -6529,12 +6159,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  ys ++ ys ?? []
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ [] ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ [] ?? ys
-
-[] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? xs ++ xs
 
 [] ?? xs  =  xs
@@ -6553,12 +6177,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  ys ?? [] ++ xs
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? xs ++ xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? ys ++ xs
-
-[] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? xs ++ ys
 
 [] ?? xs  =  xs
@@ -6575,12 +6193,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ?? [] ++ ys
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? xs ++ ys
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  [] ?? ys ++ ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  x:xs ?? xs
@@ -6601,12 +6213,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  x:ys ?? []
 
 [] ?? xs  =  []
-(x:xs) ?? ys  =  [x,] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [x,] ?? ys
-
-[] ?? xs  =  []
 (x:xs) ?? ys  =  xs ++ xs ?? xs
 
 [] ?? xs  =  []
@@ -6623,12 +6229,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ++ ys ?? []
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ [] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ++ xs ?? xs
@@ -6649,12 +6249,6 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  ys ++ ys ?? []
 
 [] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ [] ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ [] ?? ys
-
-[] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? xs ++ xs
 
 [] ?? xs  =  []
@@ -6671,12 +6265,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ?? [] ++ xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? xs ++ xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? ys ++ xs
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? xs ++ ys
@@ -6696,12 +6284,6 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ?? [] ++ ys
 
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? xs ++ ys
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [] ?? ys ++ ys
-
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  xs ?? xs
 
@@ -6719,12 +6301,6 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  ys ?? []
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  [] ?? ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
@@ -8077,7 +7653,7 @@ p &| q  =  q && p || not q
 Candidates for: gcd :: Int -> Int -> Int
   pruning with 0/0 rules
   [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
-  [3,5,12,60,117,438,1002,3582,9438] pattern candidates, 0 duplicates
+  [3,5,12,60,117,426,954,3486,8748] pattern candidates, 0 duplicates
 
 no rules.
 
@@ -8843,25 +8419,16 @@ gcd x 0  =  x
 gcd x y  =  gcd (x `mod` x) y
 
 gcd x 0  =  x
-gcd x y  =  gcd (x `mod` x) 0
-
-gcd x 0  =  x
 gcd x y  =  gcd (y `mod` x) x
 
 gcd x 0  =  x
 gcd x y  =  gcd (y `mod` x) y
 
 gcd x 0  =  x
-gcd x y  =  gcd (y `mod` x) 0
-
-gcd x 0  =  x
 gcd x y  =  gcd (0 `mod` x) x
 
 gcd x 0  =  x
 gcd x y  =  gcd (0 `mod` x) y
-
-gcd x 0  =  x
-gcd x y  =  gcd (0 `mod` x) 0
 
 gcd x 0  =  0
 gcd x y  =  gcd x (x `mod` y)
@@ -8897,25 +8464,16 @@ gcd x 0  =  0
 gcd x y  =  gcd (x `mod` x) y
 
 gcd x 0  =  0
-gcd x y  =  gcd (x `mod` x) 0
-
-gcd x 0  =  0
 gcd x y  =  gcd (y `mod` x) x
 
 gcd x 0  =  0
 gcd x y  =  gcd (y `mod` x) y
 
 gcd x 0  =  0
-gcd x y  =  gcd (y `mod` x) 0
-
-gcd x 0  =  0
 gcd x y  =  gcd (0 `mod` x) x
 
 gcd x 0  =  0
 gcd x y  =  gcd (0 `mod` x) y
-
-gcd x 0  =  0
-gcd x y  =  gcd (0 `mod` x) 0
 
 gcd 0 x  =  x
 gcd x y  =  gcd x (x `mod` y)
@@ -8934,15 +8492,6 @@ gcd x y  =  gcd y (y `mod` y)
 
 gcd 0 x  =  x
 gcd x y  =  gcd y (0 `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  gcd 0 (x `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  gcd 0 (y `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  gcd 0 (0 `mod` y)
 
 gcd 0 x  =  x
 gcd x y  =  gcd (x `mod` x) x
@@ -8988,15 +8537,6 @@ gcd x y  =  gcd y (y `mod` y)
 
 gcd 0 x  =  0
 gcd x y  =  gcd y (0 `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  gcd 0 (x `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  gcd 0 (y `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  gcd 0 (0 `mod` y)
 
 gcd 0 x  =  0
 gcd x y  =  gcd (x `mod` x) x

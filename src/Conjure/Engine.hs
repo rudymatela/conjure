@@ -412,7 +412,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
 candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefnsC Args{..} nm f ps  =  (concatMapT fillingsFor fss,thy)
+candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMapT fillingsFor fss,thy)
   where
   pats  =  conjurePats es nm f
   fss  =  concatMapT ps2fss pats

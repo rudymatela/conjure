@@ -30,6 +30,8 @@ module Conjure.Expr
   , reval
   , useMatches
   , deholings
+  , varToConst
+  , hasAppInstanceOf
 
   , enumerateAppsFor
   , enumerateFillings
@@ -96,6 +98,19 @@ compareSimplicity  =  (compare `on` length . values)
 funToVar :: Expr -> Expr
 funToVar (ef :$ ex)  =  funToVar ef :$ ex
 funToVar ef@(Value nm _)  =  nm `varAsTypeOf` ef
+
+-- | Given a variable, returns a constant with the same name
+varToConst :: Expr -> Expr
+varToConst (Value ('_':nm) dyn)  =  Value nm dyn
+varToConst _  =  error "varToConst: can only be applied to variables"
+
+-- | Returns whether the first 'Expr'
+--   has an application instance of the second 'Expr'.
+hasAppInstanceOf :: Expr -> Expr -> Bool
+e `hasAppInstanceOf` efxs  =  constApp e `hasInstanceOf` constApp efxs
+  where
+  constApp e  =  e //- [(ef,varToConst ef)]
+  (ef:_)  =  unfoldApp efxs
 
 -- | Expands recursive calls on an expression
 --   until the given size limit is reached.
