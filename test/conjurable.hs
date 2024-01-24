@@ -264,10 +264,19 @@ tests n  =
     == Just False
   , fromDynamic (conjureDynamicEq ((+) :: Int -> Int -> Int) `dynApp` toDyn (1::Int) `dynApp` toDyn (1::Int))
     == Just True
+
+  , isNumeric one
+  , isNumeric (val (1 :: Integer))
+  , isNumeric bee == False
+  , isNumeric (expr [0::Int]) == False
+  , isNumeric true == False
   ]
 
 isDecon :: Expr -> Bool
 isDecon =  conjureIsDeconstruction (undefined :: [Int] -> [Char] -> [Bool]) 60
+
+isNumeric :: Expr -> Bool
+isNumeric  =  conjureIsNumeric (undefined :: [Int] -> [Char] -> [Bool] -> [Integer])
 
 ffs :: Expr -> Expr
 ffs e  =  ffE :$ e

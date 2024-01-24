@@ -33,6 +33,7 @@ module Conjure.Conjurable
   , conjureReification
   , conjureReification1
   , conjureDynamicEq
+  , conjureIsNumeric
   , cevaluate
   , ceval
   , cevl
@@ -309,6 +310,13 @@ conjureTiersFor f e  =  tf allTiers
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
+
+conjureIsNumeric :: Conjurable f => f -> Expr -> Bool
+conjureIsNumeric f e  =  case concat $ conjureTiersFor f e of
+                         -- We assume tiers of numeric values start with 0
+                         -- not so unfair...
+                         (Value "0" _):_ -> True
+                         _ -> False
 
 -- | Compute variable names for the given 'Expr' type.
 conjureNamesFor :: Conjurable f => f -> Expr -> [String]
