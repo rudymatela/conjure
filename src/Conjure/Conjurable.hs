@@ -261,7 +261,7 @@ reifyTiers  =  Just . mkExprTiers
 -- >   ...
 reifyExpress :: (Express a, Show a) => a -> Expr -> Expr
 reifyExpress a e  =  case exprE $$ e of
-  Nothing -> error $ "reifyExpress: cannot apply " ++ show exprE ++ " to " ++ show e
+  Nothing -> e -- identity needed for types such as functions
   Just e' -> eval (error $ "reifyExpress: cannot eval " ++ show e') e'
   where
   exprE  =  value "expr" (expr -:> a)

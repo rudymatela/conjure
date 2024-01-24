@@ -74,10 +74,10 @@ tests n  =
   , holds n $ cevl 60 nullDefn   === (null :: [Int] -> Bool)
   , holds n $ cevl 60 appendDefn ==== ((++) :: [Int] -> [Int] -> [Int])
 
-  , holds n $ cevl 60 idDefn     === (id :: Int -> Int)
-  , holds n $ cevl 60 constDefn  ==== (const :: Int -> Int -> Int)
---, holds n $ cevl 60 appDefn     ==== (($) :: (Int->Int) -> Int -> Int)  -- TODO: make this work
---, holds n $ cevl 60 composeDefn ==== (($) :: (Int->Int) -> (Int->Int) -> Int)  -- TODO: make this work
+  , holds n $ cevl 60 idDefn      === (id :: Int -> Int)
+  , holds n $ cevl 60 constDefn   ==== (const :: Int -> Int -> Int)
+  , holds n $ cevl 60 appDefn     ==== (($) :: (Int->Int) -> Int -> Int)
+  , holds n $ \f g x -> cevl 60 composeDefn f g x == ((.) :: (Int->Int) -> (Int->Int) -> Int->Int) f g x
 
   -- evaluating at the incorrect types should return Nothing
   , isNothing (cevaluate 60 sumDefn :: Maybe ([Bool] -> Bool))
