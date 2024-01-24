@@ -4,9 +4,9 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 16 candidates of size 5
--- tested 17 candidates
+-- looking through 9 candidates of size 4
+-- looking through 18 candidates of size 5
+-- tested 18 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -15,9 +15,9 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 14 candidates of size 4
--- looking through 28 candidates of size 5
--- tested 27 candidates
+-- looking through 15 candidates of size 4
+-- looking through 31 candidates of size 5
+-- tested 28 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 

@@ -16,9 +16,9 @@ duplicates :: [Int] -> [Int]
 -- looking through 141 candidates of size 13
 -- looking through 322 candidates of size 14
 -- looking through 644 candidates of size 15
--- looking through 1185 candidates of size 16
--- looking through 2153 candidates of size 17
--- tested 2595 candidates
+-- looking through 1189 candidates of size 16
+-- looking through 2189 candidates of size 17
+-- tested 2599 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
                       then x:duplicates xs
@@ -41,9 +41,9 @@ duplicates :: [Int] -> [Int]
 -- looking through 141 candidates of size 13
 -- looking through 322 candidates of size 14
 -- looking through 644 candidates of size 15
--- looking through 1185 candidates of size 16
--- looking through 2153 candidates of size 17
--- tested 2595 candidates
+-- looking through 1189 candidates of size 16
+-- looking through 2189 candidates of size 17
+-- tested 2599 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
                       then x:duplicates xs

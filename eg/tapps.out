@@ -4,8 +4,8 @@ third :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 14 candidates of size 4
--- tested 16 candidates
+-- looking through 15 candidates of size 4
+-- tested 17 candidates
 third xs  =  head (tail (tail xs))
 
 product :: [Int] -> Int
@@ -14,9 +14,9 @@ product :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 14 candidates of size 4
--- looking through 28 candidates of size 5
--- tested 37 candidates
+-- looking through 15 candidates of size 4
+-- looking through 31 candidates of size 5
+-- tested 38 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
 
@@ -26,7 +26,7 @@ product :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 17 candidates of size 4
--- tested 18 candidates
+-- looking through 18 candidates of size 4
+-- tested 19 candidates
 product xs  =  foldr (*) 1 xs
 

@@ -8,12 +8,12 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
--- looking through 56 candidates of size 8
--- looking through 116 candidates of size 9
+-- looking through 60 candidates of size 8
+-- looking through 120 candidates of size 9
 -- looking through 0 candidates of size 10
--- looking through 424 candidates of size 11
--- looking through 360 candidates of size 12
--- tested 671 candidates
+-- looking through 452 candidates of size 11
+-- looking through 424 candidates of size 12
+-- tested 707 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 

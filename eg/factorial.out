@@ -3,12 +3,12 @@ factorial :: Int -> Int
 -- pruning with 27/65 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 13 candidates of size 4
--- looking through 29 candidates of size 5
--- looking through 52 candidates of size 6
--- looking through 149 candidates of size 7
--- tested 136 candidates
+-- looking through 8 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 51 candidates of size 5
+-- looking through 93 candidates of size 6
+-- looking through 421 candidates of size 7
+-- tested 219 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -17,10 +17,10 @@ factorial :: Int -> Int
 -- pruning with 32/72 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 13 candidates of size 4
--- looking through 29 candidates of size 5
--- looking through 92 candidates of size 6
--- tested 82 candidates
+-- looking through 8 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 51 candidates of size 5
+-- looking through 133 candidates of size 6
+-- tested 108 candidates
 factorial x  =  foldr (*) 1 [1..x]
 

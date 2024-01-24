@@ -1,8 +1,8 @@
 Redundant candidates for: foo :: Int -> Int
   pruning with 15/35 rules
-  [3,3,8,13,28] candidates
-  40/55 unique candidates
-  15/55 redundant candidates
+  [3,3,9,15,39] candidates
+  46/69 unique candidates
+  23/69 redundant candidates
 
 rules:
 x * y == x + y
@@ -71,7 +71,7 @@ class of 2 equivalent candidates:
     foo x  =  x - 1
 
 
-class of 3 equivalent candidates:
+class of 5 equivalent candidates:
 
     foo x  =  0 - x
 
@@ -79,6 +79,25 @@ class of 3 equivalent candidates:
     foo x  =  0 - x
 
     foo x  =  x - (x + x)
+
+    foo x  =  1 - (x + 1)
+
+    foo x  =  1 - (1 + x)
+
+
+class of 5 equivalent candidates:
+
+    foo x  =  1 - x
+
+    foo 0  =  1
+    foo x  =  1 - x
+
+    foo x  =  (0 - x) + 1
+
+    foo x  =  1 + (0 - x)
+
+    foo 1  =  0
+    foo x  =  1 - x
 
 
 class of 2 equivalent candidates:
@@ -88,6 +107,20 @@ class of 2 equivalent candidates:
 
     foo 0  =  0
     foo x  =  1 + x
+
+
+class of 2 equivalent candidates:
+
+    foo x  =  (x - 1) + x
+
+    foo x  =  x + (x - 1)
+
+
+class of 2 equivalent candidates:
+
+    foo x  =  (1 - x) + 1
+
+    foo x  =  1 + (1 - x)
 
 
 class of 3 equivalent candidates:
@@ -141,9 +174,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,21,43,104] candidates
-  136/178 unique candidates
-  42/178 redundant candidates
+  [3,7,23,61,164] candidates
+  192/258 unique candidates
+  66/258 redundant candidates
 
 rules:
 x * y == x + y
@@ -214,6 +247,13 @@ class of 2 equivalent candidates:
     x ? y  =  y + y
 
 
+class of 2 equivalent candidates:
+
+    x ? y  =  dec x + x
+
+    x ? y  =  x + dec x
+
+
 class of 4 equivalent candidates:
 
     x ? y  =  dec x + y
@@ -227,6 +267,13 @@ class of 4 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    x ? y  =  dec y + y
+
+    x ? y  =  y + dec y
+
+
+class of 2 equivalent candidates:
+
     x ? 0  =  x
     x ? y  =  x + x
 
@@ -297,6 +344,39 @@ class of 2 equivalent candidates:
     0 ? x  =  0
     x ? 0  =  0
     x ? y  =  y + y
+
+
+class of 3 equivalent candidates:
+
+    x ? y  =  dec (dec x) + x
+
+    x ? y  =  x + dec (dec x)
+
+    x ? y  =  dec x + dec x
+
+
+class of 6 equivalent candidates:
+
+    x ? y  =  dec (dec x) + y
+
+    x ? y  =  dec (dec y) + x
+
+    x ? y  =  x + dec (dec y)
+
+    x ? y  =  y + dec (dec x)
+
+    x ? y  =  dec x + dec y
+
+    x ? y  =  dec y + dec x
+
+
+class of 3 equivalent candidates:
+
+    x ? y  =  dec (dec y) + y
+
+    x ? y  =  y + dec (dec y)
+
+    x ? y  =  dec y + dec y
 
 
 class of 3 equivalent candidates:
@@ -319,9 +399,11 @@ class of 3 equivalent candidates:
 
 class of 2 equivalent candidates:
 
-    x ? y  =  dec x + dec y
+    x ? 0  =  x
+    x ? y  =  dec x + x
 
-    x ? y  =  dec y + dec x
+    x ? 0  =  x
+    x ? y  =  x + dec x
 
 
 class of 4 equivalent candidates:
@@ -337,6 +419,24 @@ class of 4 equivalent candidates:
 
     x ? 0  =  x
     x ? y  =  y + dec x
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  x
+    x ? y  =  dec y + y
+
+    x ? 0  =  x
+    x ? y  =  y + dec y
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  0
+    x ? y  =  dec x + x
+
+    x ? 0  =  0
+    x ? y  =  x + dec x
 
 
 class of 4 equivalent candidates:
@@ -356,11 +456,56 @@ class of 4 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    x ? 0  =  0
+    x ? y  =  dec y + y
+
+    x ? 0  =  0
+    x ? y  =  y + dec y
+
+
+class of 2 equivalent candidates:
+
     x ? 0  =  dec x
     x ? y  =  x + y
 
     x ? 0  =  dec x
     x ? y  =  y + x
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  dec x + x
+    x ? y  =  x
+
+    x ? 0  =  x + dec x
+    x ? y  =  x
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  dec x + x
+    x ? y  =  y
+
+    x ? 0  =  x + dec x
+    x ? y  =  y
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  dec x + x
+    x ? y  =  0
+
+    x ? 0  =  x + dec x
+    x ? y  =  0
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  x
+    x ? y  =  dec x + x
+
+    0 ? x  =  x
+    x ? y  =  x + dec x
 
 
 class of 4 equivalent candidates:
@@ -376,6 +521,24 @@ class of 4 equivalent candidates:
 
     0 ? x  =  x
     x ? y  =  y + dec x
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  x
+    x ? y  =  dec y + y
+
+    0 ? x  =  x
+    x ? y  =  y + dec y
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  0
+    x ? y  =  dec x + x
+
+    0 ? x  =  0
+    x ? y  =  x + dec x
 
 
 class of 4 equivalent candidates:
@@ -395,11 +558,47 @@ class of 4 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    0 ? x  =  0
+    x ? y  =  dec y + y
+
+    0 ? x  =  0
+    x ? y  =  y + dec y
+
+
+class of 2 equivalent candidates:
+
     0 ? x  =  dec x
     x ? y  =  x + y
 
     0 ? x  =  dec x
     x ? y  =  y + x
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  dec x + x
+    x ? y  =  x
+
+    0 ? x  =  x + dec x
+    x ? y  =  x
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  dec x + x
+    x ? y  =  y
+
+    0 ? x  =  x + dec x
+    x ? y  =  y
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  dec x + x
+    x ? y  =  0
+
+    0 ? x  =  x + dec x
+    x ? y  =  0
 
 
 class of 2 equivalent candidates:
