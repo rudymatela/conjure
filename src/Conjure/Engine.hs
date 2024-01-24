@@ -646,9 +646,9 @@ isRootNormal thy e  =  null $ T.lookup e trie
 isRootNormalC :: Thy -> Expr -> Bool
 isRootNormalC thy e | not (isRootNormal thy e)  =  False
 isRootNormalC thy (ef :$ ex :$ ey)
-  | ex == ey  =  True
+  | ex <= ey  =  True
   | not (isCommutative thy ef)  =  True
-  | isRootNormal thy (ef :$ ey :$ ex)  =  ex < ey
+  | isRootNormal thy (ef :$ ey :$ ex)  =  False
 isRootNormalC _ _                                          =  True
 
 isRootNormalE :: Thy -> Expr -> Bool
