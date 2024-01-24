@@ -14,8 +14,8 @@ triple :: Int -> Int
 -- looking through 1 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 5 candidates of size 4
--- looking through 18 candidates of size 5
--- tested 20 candidates
+-- looking through 15 candidates of size 5
+-- tested 17 candidates
 triple x  =  x + (x + x)
 
 add :: Int -> Int -> Int
@@ -43,8 +43,8 @@ cube :: Int -> Int
 -- looking through 1 candidates of size 2
 -- looking through 5 candidates of size 3
 -- looking through 4 candidates of size 4
--- looking through 18 candidates of size 5
--- tested 27 candidates
+-- looking through 15 candidates of size 5
+-- tested 24 candidates
 cube x  =  x * (x * x)
 
 tnpo :: Int -> Int
@@ -54,9 +54,9 @@ tnpo :: Int -> Int
 -- looking through 2 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 6 candidates of size 4
--- looking through 18 candidates of size 5
--- looking through 18 candidates of size 6
--- looking through 79 candidates of size 7
--- tested 76 candidates
+-- looking through 15 candidates of size 5
+-- looking through 15 candidates of size 6
+-- looking through 46 candidates of size 7
+-- tested 50 candidates
 tnpo x  =  x + (x + (x + 1))
 

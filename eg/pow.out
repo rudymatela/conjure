@@ -5,11 +5,11 @@ pow :: Int -> Int -> Int
 -- looking through 15 candidates of size 2
 -- looking through 46 candidates of size 3
 -- looking through 174 candidates of size 4
--- looking through 531 candidates of size 5
--- looking through 1940 candidates of size 6
--- looking through 6383 candidates of size 7
--- looking through 22302 candidates of size 8
--- tested 9934 candidates
+-- looking through 499 candidates of size 5
+-- looking through 1668 candidates of size 6
+-- looking through 4905 candidates of size 7
+-- looking through 15014 candidates of size 8
+-- tested 8152 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)
 
@@ -19,9 +19,9 @@ pow :: Int -> Int -> Int
 -- looking through 4 candidates of size 1
 -- looking through 17 candidates of size 2
 -- looking through 60 candidates of size 3
--- looking through 201 candidates of size 4
--- looking through 664 candidates of size 5
--- looking through 2105 candidates of size 6
--- tested 3051 candidates
+-- looking through 199 candidates of size 4
+-- looking through 640 candidates of size 5
+-- looking through 1969 candidates of size 6
+-- tested 2889 candidates
 cannot conjure
 

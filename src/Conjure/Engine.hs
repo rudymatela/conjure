@@ -424,7 +424,7 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
 
-  keep  =  isRootNormal thy . fastMostGeneralVariation
+  keep  =  isRootNormalE thy . fastMostGeneralVariation
 
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es

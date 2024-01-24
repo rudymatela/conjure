@@ -45,9 +45,9 @@ gps2 :: Double -> Double -> Int -> Double
 -- looking through 2 candidates of size 2
 -- looking through 18 candidates of size 3
 -- looking through 66 candidates of size 4
--- looking through 316 candidates of size 5
--- looking through 1376 candidates of size 6
--- tested 1780 candidates
+-- looking through 310 candidates of size 5
+-- looking through 1352 candidates of size 6
+-- tested 1750 candidates
 cannot conjure
 
 gps3 :: [Char] -> Int
@@ -154,15 +154,15 @@ gps10 :: [Int] -> Int
 -- looking through 4 candidates of size 1
 -- looking through 16 candidates of size 2
 -- looking through 4 candidates of size 3
--- looking through 72 candidates of size 4
--- looking through 88 candidates of size 5
--- looking through 1224 candidates of size 6
--- looking through 1848 candidates of size 7
--- looking through 25084 candidates of size 8
--- looking through 45700 candidates of size 9
--- tested 31064 candidates
+-- looking through 68 candidates of size 4
+-- looking through 84 candidates of size 5
+-- looking through 788 candidates of size 6
+-- looking through 1316 candidates of size 7
+-- looking through 11324 candidates of size 8
+-- looking through 24116 candidates of size 9
+-- tested 19387 candidates
 gps10 []  =  0
-gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
+gps10 (x:xs)  =  x `div` 3 + (gps10 xs - 2)
 
 gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
@@ -261,9 +261,9 @@ gps18_price :: [Double] -> [Double] -> Double
 -- looking through 8 candidates of size 2
 -- looking through 32 candidates of size 3
 -- looking through 90 candidates of size 4
--- looking through 449 candidates of size 5
--- looking through 1282 candidates of size 6
--- tested 1863 candidates
+-- looking through 445 candidates of size 5
+-- looking through 1138 candidates of size 6
+-- tested 1715 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -273,9 +273,9 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- looking through 4 candidates of size 2
 -- looking through 28 candidates of size 3
 -- looking through 154 candidates of size 4
--- looking through 546 candidates of size 5
--- looking through 3458 candidates of size 6
--- tested 4193 candidates
+-- looking through 489 candidates of size 5
+-- looking through 3116 candidates of size 6
+-- tested 3794 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
@@ -379,10 +379,10 @@ gps25 :: [Double] -> [Double] -> Double
 -- pruning with 31/59 rules
 -- looking through 2 candidates of size 1
 -- looking through 9 candidates of size 2
--- looking through 49 candidates of size 3
--- looking through 216 candidates of size 4
--- looking through 1132 candidates of size 5
--- looking through 5299 candidates of size 6
--- tested 6707 candidates
+-- looking through 48 candidates of size 3
+-- looking through 202 candidates of size 4
+-- looking through 1010 candidates of size 5
+-- looking through 4371 candidates of size 6
+-- tested 5642 candidates
 cannot conjure
 

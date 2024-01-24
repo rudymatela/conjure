@@ -6,10 +6,10 @@ elem :: Int -> [Int] -> Bool
 -- looking through 5 candidates of size 3
 -- looking through 24 candidates of size 4
 -- looking through 65 candidates of size 5
--- looking through 112 candidates of size 6
--- looking through 265 candidates of size 7
--- looking through 794 candidates of size 8
--- tested 623 candidates
+-- looking through 107 candidates of size 6
+-- looking through 237 candidates of size 7
+-- looking through 690 candidates of size 8
+-- tested 590 candidates
 elem x []  =  False
 elem x (y:xs)  =  x == y || elem x xs
 
@@ -21,10 +21,10 @@ set :: [Int] -> Bool
 -- looking through 5 candidates of size 3
 -- looking through 11 candidates of size 4
 -- looking through 20 candidates of size 5
--- looking through 47 candidates of size 6
--- looking through 136 candidates of size 7
--- looking through 348 candidates of size 8
--- tested 256 candidates
+-- looking through 45 candidates of size 6
+-- looking through 124 candidates of size 7
+-- looking through 295 candidates of size 8
+-- tested 242 candidates
 set []  =  True
 set (x:xs)  =  not (elem x xs) && set xs
 
