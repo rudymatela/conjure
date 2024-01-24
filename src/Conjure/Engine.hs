@@ -424,7 +424,7 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
 
-  keep  =  isRootNormal thy . fastMostGeneralVariation
+  keep  =  isRootNormalC thy . fastMostGeneralVariation
 
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
@@ -643,12 +643,31 @@ isRootNormal thy e  =  null $ T.lookup e trie
   where
   trie  =  T.fromList (rules thy)
 
+isRootNormalC :: Thy -> Expr -> Bool
+isRootNormalC thy e | not (isRootNormal thy e)  =  False
+isRootNormalC thy (ef :$ ex :$ ey)
+  | ex == ey  =  True
+  | not (isCommutative thy ef)  =  True
+  | isRootNormal thy (ef :$ ey :$ ex)  =  ex < ey
+isRootNormalC _ _                                          =  True
+
 isRootNormalE :: Thy -> Expr -> Bool
 isRootNormalE thy e  =  isRootNormal thy e
                     &&  null (filter (e ->-) [e2 //- bs | (_,bs,e2) <- T.lookup e trie])
   where
   trie  =  T.fromList $ equations thy ++ map swap (equations thy)
   (->-)  =  canReduceTo thy
+
+isCommutative :: Thy -> Expr -> Bool
+isCommutative thy eo  =  eo `elem` commutativeOperators thy
+
+commutativeOperators :: Thy -> [Expr]
+commutativeOperators thy  =  [ ef
+                             | (ef :$ ex :$ ey, ef' :$ ey' :$ ex') <- equations thy
+                             , ef == ef'
+                             , ex == ex'
+                             , ey == ey'
+                             ]
 
 
 --- tiers utils ---

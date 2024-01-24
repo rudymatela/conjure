@@ -23,9 +23,9 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 12 candidates of size 5
--- tested 17 candidates
+-- looking through 6 candidates of size 4
+-- looking through 6 candidates of size 5
+-- tested 15 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -35,9 +35,9 @@ product :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 12 candidates of size 5
--- tested 27 candidates
+-- looking through 6 candidates of size 4
+-- looking through 6 candidates of size 5
+-- tested 20 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
 
@@ -47,7 +47,7 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 11 candidates of size 4
+-- looking through 9 candidates of size 4
 -- tested 9 candidates
 sum xs  =  foldr (+) 0 xs
 
@@ -57,7 +57,7 @@ product :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 11 candidates of size 4
+-- looking through 9 candidates of size 4
 -- tested 11 candidates
 product xs  =  foldr (*) 1 xs
 

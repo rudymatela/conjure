@@ -8,10 +8,10 @@ subset :: [Int] -> [Int] -> Bool
 -- looking through 88 candidates of size 5
 -- looking through 40 candidates of size 6
 -- looking through 138 candidates of size 7
--- looking through 748 candidates of size 8
--- tested 838 candidates
+-- looking through 644 candidates of size 8
+-- tested 790 candidates
 subset [] xs  =  True
-subset (x:xs) ys  =  elem x ys && subset xs ys
+subset (x:xs) ys  =  subset xs ys && elem x ys
 
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values

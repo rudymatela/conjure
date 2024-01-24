@@ -4,14 +4,14 @@ elem :: Int -> [Int] -> Bool
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 24 candidates of size 4
--- looking through 65 candidates of size 5
--- looking through 112 candidates of size 6
--- looking through 265 candidates of size 7
--- looking through 794 candidates of size 8
--- tested 623 candidates
+-- looking through 20 candidates of size 4
+-- looking through 48 candidates of size 5
+-- looking through 75 candidates of size 6
+-- looking through 149 candidates of size 7
+-- looking through 368 candidates of size 8
+-- tested 396 candidates
 elem x []  =  False
-elem x (y:xs)  =  x == y || elem x xs
+elem x (y:xs)  =  elem x xs || x == y
 
 set :: [Int] -> Bool
 -- testing 360 combinations of argument values
@@ -21,10 +21,10 @@ set :: [Int] -> Bool
 -- looking through 5 candidates of size 3
 -- looking through 11 candidates of size 4
 -- looking through 20 candidates of size 5
--- looking through 47 candidates of size 6
--- looking through 136 candidates of size 7
--- looking through 348 candidates of size 8
--- tested 256 candidates
+-- looking through 41 candidates of size 6
+-- looking through 100 candidates of size 7
+-- looking through 234 candidates of size 8
+-- tested 200 candidates
 set []  =  True
-set (x:xs)  =  not (elem x xs) && set xs
+set (x:xs)  =  set xs && not (elem x xs)
 

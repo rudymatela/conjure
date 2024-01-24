@@ -4,18 +4,18 @@ mem :: Int -> Tree -> Bool
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 7 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
--- looking through 60 candidates of size 8
--- looking through 120 candidates of size 9
+-- looking through 31 candidates of size 8
+-- looking through 92 candidates of size 9
 -- looking through 0 candidates of size 10
--- looking through 452 candidates of size 11
--- looking through 424 candidates of size 12
--- tested 707 candidates
+-- looking through 304 candidates of size 11
+-- looking through 199 candidates of size 12
+-- tested 501 candidates
 mem x Leaf  =  False
-mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
+mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
@@ -45,13 +45,13 @@ insert :: Int -> Tree -> Tree
 -- looking through 8 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 92 candidates of size 7
+-- looking through 86 candidates of size 7
 -- looking through 239 candidates of size 8
--- looking through 128 candidates of size 9
--- looking through 1744 candidates of size 10
--- looking through 3571 candidates of size 11
--- looking through 5120 candidates of size 12
--- tested 10927 candidates
+-- looking through 104 candidates of size 9
+-- looking through 1558 candidates of size 10
+-- looking through 3555 candidates of size 11
+-- looking through 4028 candidates of size 12
+-- tested 9603 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -62,13 +62,13 @@ before :: Int -> Tree -> Tree
 -- looking through 8 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 92 candidates of size 7
+-- looking through 86 candidates of size 7
 -- looking through 239 candidates of size 8
--- looking through 128 candidates of size 9
--- looking through 1744 candidates of size 10
--- looking through 3571 candidates of size 11
--- looking through 5120 candidates of size 12
--- tested 10927 candidates
+-- looking through 104 candidates of size 9
+-- looking through 1558 candidates of size 10
+-- looking through 3555 candidates of size 11
+-- looking through 4028 candidates of size 12
+-- tested 9603 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree

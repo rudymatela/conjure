@@ -54,12 +54,12 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 10 candidates of size 4
 -- looking through 125 candidates of size 5
 -- looking through 225 candidates of size 6
--- looking through 1075 candidates of size 7
--- looking through 2457 candidates of size 8
--- looking through 8154 candidates of size 9
--- looking through 27432 candidates of size 10
--- looking through 174839 candidates of size 11
--- tested 137576 candidates
+-- looking through 625 candidates of size 7
+-- looking through 1242 candidates of size 8
+-- looking through 3087 candidates of size 9
+-- looking through 8937 candidates of size 10
+-- looking through 102875 candidates of size 11
+-- tested 40385 candidates
 cshift (p,q,r)  =  if p
                    then (p,r,q)
                    else (p,q,r)
@@ -73,10 +73,10 @@ cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- looking through 0 candidates of size 3
 -- looking through 125 candidates of size 4
 -- looking through 225 candidates of size 5
--- looking through 1035 candidates of size 6
--- looking through 2457 candidates of size 7
--- looking through 20250 candidates of size 8
--- tested 22191 candidates
+-- looking through 585 candidates of size 6
+-- looking through 1242 candidates of size 7
+-- looking through 15183 candidates of size 8
+-- tested 15459 candidates
 cshift False p q  =  (False,p,q)
 cshift True p q  =  (True,q,p)
 
@@ -89,11 +89,11 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- looking through 0 candidates of size 2
 -- looking through 9 candidates of size 3
 -- looking through 18 candidates of size 4
--- looking through 45 candidates of size 5
--- looking through 108 candidates of size 6
--- looking through 308 candidates of size 7
--- looking through 849 candidates of size 8
--- tested 1337 candidates
+-- looking through 27 candidates of size 5
+-- looking through 72 candidates of size 6
+-- looking through 245 candidates of size 7
+-- looking through 663 candidates of size 8
+-- tested 1034 candidates
 fadder False False False  =  (False,False)
 fadder False False True  =  (False,True)
 fadder False True False  =  (False,True)

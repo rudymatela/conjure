@@ -3,10 +3,10 @@ fib01 :: Int -> Int -> Int -> Int
 -- pruning with 6/10 rules
 -- looking through 4 candidates of size 1
 -- looking through 24 candidates of size 2
--- looking through 118 candidates of size 3
--- looking through 512 candidates of size 4
--- looking through 1903 candidates of size 5
--- tested 2561 candidates
+-- looking through 115 candidates of size 3
+-- looking through 470 candidates of size 4
+-- looking through 1657 candidates of size 5
+-- tested 2270 candidates
 cannot conjure
 
 fib01 :: Int -> Int -> Int -> Int

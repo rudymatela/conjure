@@ -4,9 +4,9 @@ length :: [Int] -> Int
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 4 candidates of size 5
--- tested 11 candidates
+-- looking through 2 candidates of size 4
+-- looking through 2 candidates of size 5
+-- tested 9 candidates
 length []  =  0
 length (x:xs)  =  length xs + 1
 
@@ -85,15 +85,15 @@ ordered :: [Int] -> Bool
 -- looking through 3 candidates of size 3
 -- looking through 3 candidates of size 4
 -- looking through 4 candidates of size 5
--- looking through 16 candidates of size 6
--- looking through 28 candidates of size 7
--- looking through 48 candidates of size 8
--- looking through 100 candidates of size 9
--- looking through 226 candidates of size 10
--- looking through 482 candidates of size 11
--- tested 616 candidates
+-- looking through 12 candidates of size 6
+-- looking through 20 candidates of size 7
+-- looking through 30 candidates of size 8
+-- looking through 56 candidates of size 9
+-- looking through 114 candidates of size 10
+-- looking through 216 candidates of size 11
+-- tested 333 candidates
 ordered []  =  True
-ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
+ordered (x:xs)  =  ordered xs && (null xs || x <= head xs)
 
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values

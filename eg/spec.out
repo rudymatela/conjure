@@ -2,16 +2,16 @@ square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- tested 10 candidates
+-- looking through 6 candidates of size 3
+-- tested 9 candidates
 square x  =  x * x
 
 square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- tested 10 candidates
+-- looking through 6 candidates of size 3
+-- tested 9 candidates
 square x  =  x * x
 
 sum :: [Int] -> Int
@@ -20,7 +20,7 @@ sum :: [Int] -> Int
 -- looking through 2 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 4 candidates of size 4
--- looking through 7 candidates of size 5
+-- looking through 5 candidates of size 5
 -- tested 11 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
