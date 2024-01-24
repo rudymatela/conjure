@@ -14,14 +14,14 @@ fib01 :: Int -> Int -> Int -> Int
 -- pruning with 18/37 rules
 -- looking through 4 candidates of size 1
 -- looking through 4 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 21 candidates of size 4
--- looking through 43 candidates of size 5
--- looking through 84 candidates of size 6
--- looking through 192 candidates of size 7
--- looking through 391 candidates of size 8
--- looking through 840 candidates of size 9
--- looking through 6414 candidates of size 10
--- tested 8002 candidates
+-- looking through 10 candidates of size 3
+-- looking through 16 candidates of size 4
+-- looking through 44 candidates of size 5
+-- looking through 92 candidates of size 6
+-- looking through 234 candidates of size 7
+-- looking through 544 candidates of size 8
+-- looking through 1332 candidates of size 9
+-- looking through 7796 candidates of size 10
+-- tested 10076 candidates
 cannot conjure
 

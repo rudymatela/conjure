@@ -14,15 +14,15 @@ x ^^^ y  =  0
 -- pruning with 56/91 rules
 -- looking through 4 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 13 candidates of size 3
+-- looking through 9 candidates of size 3
 -- looking through 0 candidates of size 4
--- looking through 63 candidates of size 5
--- looking through 120 candidates of size 6
--- looking through 379 candidates of size 7
--- looking through 2312 candidates of size 8
--- looking through 2421 candidates of size 9
--- looking through 32068 candidates of size 10
--- tested 17443 candidates
+-- looking through 39 candidates of size 5
+-- looking through 60 candidates of size 6
+-- looking through 225 candidates of size 7
+-- looking through 1056 candidates of size 8
+-- looking through 1488 candidates of size 9
+-- looking through 13020 candidates of size 10
+-- tested 7148 candidates
 x ^^^ y  =  if 0 == x * y
             then x + y
             else 0
