@@ -1,0 +1,69 @@
+($) :: (Int -> Int) -> Int -> Int
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- tested 2 candidates
+f $ x  =  f x
+
+(.) :: (Int -> Int) -> (Int -> Int) -> Int -> Int
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 4 candidates of size 3
+-- tested 5 candidates
+(f . g) x  =  f (g x)
+
+flip :: (Int -> Int -> Int) -> Int -> Int -> Int
+-- pruning with 3/3 rules
+-- looking through 2 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 4 candidates of size 3
+-- tested 5 candidates
+flip f x y  =  f y x
+
+map :: (Int -> Int) -> [Int] -> [Int]
+-- pruning with 3/3 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 6 candidates of size 6
+-- looking through 9 candidates of size 7
+-- tested 17 candidates
+map f []  =  []
+map f (x:xs)  =  f x:map f xs
+
+fold :: (Int -> Int -> Int) -> Int -> [Int] -> Int
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 4 candidates of size 5
+-- looking through 23 candidates of size 6
+-- looking through 26 candidates of size 7
+-- tested 45 candidates
+fold f x []  =  x
+fold f x (y:xs)  =  fold f (f x y) xs
+
+filter :: (Int -> Bool) -> [Int] -> [Int]
+-- pruning with 3/3 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 6 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 22 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 65 candidates of size 10
+-- looking through 0 candidates of size 11
+-- looking through 219 candidates of size 12
+-- tested 166 candidates
+filter f []  =  []
+filter f (x:xs)  =  if f x
+                    then x:filter f xs
+                    else filter f xs
+

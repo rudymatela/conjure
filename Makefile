@@ -17,6 +17,7 @@ EG = \
   eg/factorial \
   eg/fibonacci \
   eg/fib01 \
+  eg/higher \
   eg/id \
   eg/ints \
   eg/bools \
