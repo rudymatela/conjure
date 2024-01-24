@@ -1,0 +1,14 @@
+id :: Int -> Int
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- tested 1 candidates
+id x  =  x
+
+const :: Int -> Int -> Int
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- tested 1 candidates
+const x y  =  x
+
