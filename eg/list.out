@@ -47,6 +47,23 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- tested 48 candidates
 xs ++ ys  =  foldr (:) ys xs
 
+zip :: [Int] -> [Int] -> [(Int,Int)]
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 6 candidates of size 5
+-- looking through 2 candidates of size 6
+-- looking through 14 candidates of size 7
+-- looking through 9 candidates of size 8
+-- looking through 31 candidates of size 9
+-- tested 50 candidates
+zip [] xs  =  []
+zip (x:xs) []  =  []
+zip (x:xs) (y:ys)  =  (x,y):zip xs ys
+
 (\/) :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules

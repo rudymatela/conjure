@@ -52,6 +52,12 @@ ordered' [x]  =  True
 ordered' [x,y]  =  x <= y
 ordered' [x,y,z]  =  x <= y && y <= z
 
+zip' :: [Int] -> [Int] -> [(Int,Int)]
+zip' [] []  =  []
+zip' [x] [a]  =  [(x,a)]
+zip' [x,y] [a,b]  =  [(x,a),(y,b)]
+zip' [x,y,z] [a,b,c]  =  [(x,a),(y,b),(z,c)]
+
 main :: IO ()
 main = do
   conjure "length" length'
@@ -75,6 +81,12 @@ main = do
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
+  conjure "zip" (zip')
+    [ pr ([] :: [(Int,Int)])
+    , prim ":" ((:) :: (Int,Int) -> [(Int,Int)] -> [(Int,Int)])
+    , prim "," ((,) :: Int -> Int -> (Int,Int))
     ]
 
   conjure "\\/" (\/)
