@@ -166,6 +166,7 @@ data Args = Args
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
+  , atomicNumbers         :: Bool -- ^ restrict constant/ground numeric expressions to atoms
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
   }
@@ -193,6 +194,7 @@ args = Args
   , requireDescent         =  True
   , usePatterns            =  True
   , copyBindings           =  True
+  , atomicNumbers          =  True
   , showTheory             =  False
   , uniqueCandidates       =  False
   }
@@ -425,7 +427,12 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   keep  =  isRootNormal thy . fastMostGeneralVariation
 
   appsWith :: Expr -> [Expr] -> [[Expr]]
-  appsWith eh vs  =  enumerateAppsFor eh keep $ vs ++ es
+  appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
+    where
+    k | atomicNumbers && conjureIsNumeric f eh  =  \e -> keepNumeric e && keep e
+      | otherwise                               =  keep
+    -- discards non-atomic numeric ground expressions such as 1 + 1
+    keepNumeric e  =  isFun e || isConst e || not (isGround e)
 
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundantDefn

@@ -3,8 +3,8 @@
 -- pruning with 56/91 rules
 -- looking through 4 candidates of size 1
 -- looking through 15 candidates of size 2
--- looking through 44 candidates of size 3
--- tested 41 candidates
+-- looking through 43 candidates of size 3
+-- tested 40 candidates
 0 ^^^ x  =  x
 x ^^^ 0  =  x
 x ^^^ y  =  0

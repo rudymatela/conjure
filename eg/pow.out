@@ -3,13 +3,13 @@ pow :: Int -> Int -> Int
 -- pruning with 14/30 rules
 -- looking through 4 candidates of size 1
 -- looking through 15 candidates of size 2
--- looking through 47 candidates of size 3
--- looking through 188 candidates of size 4
--- looking through 595 candidates of size 5
--- looking through 2235 candidates of size 6
--- looking through 7476 candidates of size 7
--- looking through 26500 candidates of size 8
--- tested 11437 candidates
+-- looking through 46 candidates of size 3
+-- looking through 174 candidates of size 4
+-- looking through 531 candidates of size 5
+-- looking through 1940 candidates of size 6
+-- looking through 6383 candidates of size 7
+-- looking through 22302 candidates of size 8
+-- tested 9934 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)
 

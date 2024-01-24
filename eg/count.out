@@ -14,16 +14,16 @@ count :: A -> [A] -> Int
 -- pruning with 8/13 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 9 candidates of size 5
--- looking through 24 candidates of size 6
--- looking through 46 candidates of size 7
--- looking through 114 candidates of size 8
--- looking through 272 candidates of size 9
--- looking through 648 candidates of size 10
--- looking through 1549 candidates of size 11
--- tested 1751 candidates
+-- looking through 0 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 8 candidates of size 5
+-- looking through 18 candidates of size 6
+-- looking through 38 candidates of size 7
+-- looking through 82 candidates of size 8
+-- looking through 198 candidates of size 9
+-- looking through 476 candidates of size 10
+-- looking through 1146 candidates of size 11
+-- tested 1375 candidates
 count x []  =  0
 count x (y:xs)  =  (if x == y then 1 else 0) + count x xs
 

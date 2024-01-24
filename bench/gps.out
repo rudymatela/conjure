@@ -91,11 +91,11 @@ gps6 :: Int -> Int
 -- pruning with 16/18 rules
 -- looking through 4 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 26 candidates of size 3
--- looking through 29 candidates of size 4
--- looking through 500 candidates of size 5
--- looking through 524 candidates of size 6
--- tested 1085 candidates
+-- looking through 18 candidates of size 3
+-- looking through 21 candidates of size 4
+-- looking through 340 candidates of size 5
+-- looking through 356 candidates of size 6
+-- tested 741 candidates
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -213,16 +213,16 @@ gps12 :: [Int] -> Int
 -- pruning with 13/27 rules
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 16 candidates of size 4
--- looking through 26 candidates of size 5
--- looking through 71 candidates of size 6
--- looking through 160 candidates of size 7
--- looking through 432 candidates of size 8
--- looking through 1166 candidates of size 9
--- looking through 3187 candidates of size 10
--- looking through 9282 candidates of size 11
--- tested 10413 candidates
+-- looking through 4 candidates of size 3
+-- looking through 11 candidates of size 4
+-- looking through 22 candidates of size 5
+-- looking through 51 candidates of size 6
+-- looking through 133 candidates of size 7
+-- looking through 318 candidates of size 8
+-- looking through 938 candidates of size 9
+-- looking through 2418 candidates of size 10
+-- looking through 7229 candidates of size 11
+-- tested 8246 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -265,12 +265,12 @@ gps14 :: [Int] -> Int
 -- pruning with 39/58 rules
 -- looking through 3 candidates of size 1
 -- looking through 9 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 58 candidates of size 4
--- looking through 66 candidates of size 5
--- looking through 600 candidates of size 6
--- looking through 1034 candidates of size 7
--- tested 749 candidates
+-- looking through 3 candidates of size 3
+-- looking through 30 candidates of size 4
+-- looking through 36 candidates of size 5
+-- looking through 321 candidates of size 6
+-- looking through 705 candidates of size 7
+-- tested 408 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x `mod` 2 + gps14 xs
 
@@ -300,14 +300,14 @@ gps17 :: Int -> Int
 -- pruning with 27/65 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 10 candidates of size 3
--- looking through 25 candidates of size 4
--- looking through 62 candidates of size 5
--- looking through 141 candidates of size 6
--- looking through 527 candidates of size 7
--- looking through 1100 candidates of size 8
--- looking through 4922 candidates of size 9
--- tested 1872 candidates
+-- looking through 8 candidates of size 3
+-- looking through 15 candidates of size 4
+-- looking through 51 candidates of size 5
+-- looking through 93 candidates of size 6
+-- looking through 421 candidates of size 7
+-- looking through 731 candidates of size 8
+-- looking through 3724 candidates of size 9
+-- tested 1326 candidates
 gps17 0  =  0
 gps17 x  =  x * x + gps17 (x - 1)
 
@@ -526,14 +526,14 @@ gps29 :: [Char] -> Int
 -- pruning with 7/11 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 10 candidates of size 6
--- looking through 18 candidates of size 7
--- looking through 33 candidates of size 8
--- looking through 65 candidates of size 9
--- tested 86 candidates
+-- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 4 candidates of size 5
+-- looking through 6 candidates of size 6
+-- looking through 12 candidates of size 7
+-- looking through 16 candidates of size 8
+-- looking through 46 candidates of size 9
+-- tested 52 candidates
 gps29 ""  =  0
 gps29 (c:cs)  =  (if isVowel c then 1 else 0) + gps29 cs
 

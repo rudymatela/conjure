@@ -3,7 +3,7 @@ double :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 8 candidates of size 3
+-- looking through 7 candidates of size 3
 -- tested 5 candidates
 double x  =  x + x
 
@@ -12,10 +12,10 @@ triple :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 8 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 21 candidates of size 5
--- tested 22 candidates
+-- looking through 7 candidates of size 3
+-- looking through 5 candidates of size 4
+-- looking through 18 candidates of size 5
+-- tested 20 candidates
 triple x  =  x + (x + x)
 
 add :: Int -> Int -> Int
@@ -23,7 +23,7 @@ add :: Int -> Int -> Int
 -- pruning with 14/25 rules
 -- looking through 4 candidates of size 1
 -- looking through 15 candidates of size 2
--- looking through 44 candidates of size 3
+-- looking through 43 candidates of size 3
 -- tested 21 candidates
 add x y  =  x + y
 
@@ -32,8 +32,8 @@ square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 6 candidates of size 3
--- tested 9 candidates
+-- looking through 5 candidates of size 3
+-- tested 8 candidates
 square x  =  x * x
 
 cube :: Int -> Int
@@ -41,10 +41,10 @@ cube :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 5 candidates of size 4
--- looking through 21 candidates of size 5
--- tested 31 candidates
+-- looking through 5 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 18 candidates of size 5
+-- tested 27 candidates
 cube x  =  x * (x * x)
 
 tnpo :: Int -> Int
@@ -52,11 +52,11 @@ tnpo :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 8 candidates of size 3
--- looking through 7 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 21 candidates of size 6
--- looking through 90 candidates of size 7
--- tested 86 candidates
+-- looking through 7 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 18 candidates of size 5
+-- looking through 18 candidates of size 6
+-- looking through 79 candidates of size 7
+-- tested 76 candidates
 tnpo x  =  x + (x + (x + 1))
 

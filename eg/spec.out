@@ -2,16 +2,16 @@ square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 8 candidates of size 3
--- tested 11 candidates
+-- looking through 7 candidates of size 3
+-- tested 10 candidates
 square x  =  x * x
 
 square :: Int -> Int
 -- pruning with 14/25 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 8 candidates of size 3
--- tested 11 candidates
+-- looking through 7 candidates of size 3
+-- tested 10 candidates
 square x  =  x * x
 
 sum :: [Int] -> Int

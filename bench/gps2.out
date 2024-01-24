@@ -33,9 +33,9 @@ gps1 :: Int -> [Int] -> Int
 -- pruning with 8/9 rules
 -- looking through 4 candidates of size 1
 -- looking through 24 candidates of size 2
--- looking through 81 candidates of size 3
--- looking through 334 candidates of size 4
--- tested 443 candidates
+-- looking through 77 candidates of size 3
+-- looking through 270 candidates of size 4
+-- tested 375 candidates
 cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
@@ -153,14 +153,14 @@ gps10 :: [Int] -> Int
 -- pruning with 67/100 rules
 -- looking through 4 candidates of size 1
 -- looking through 16 candidates of size 2
--- looking through 12 candidates of size 3
--- looking through 144 candidates of size 4
--- looking through 172 candidates of size 5
--- looking through 2268 candidates of size 6
--- looking through 3347 candidates of size 7
--- looking through 46919 candidates of size 8
--- looking through 77202 candidates of size 9
--- tested 55938 candidates
+-- looking through 4 candidates of size 3
+-- looking through 72 candidates of size 4
+-- looking through 88 candidates of size 5
+-- looking through 1224 candidates of size 6
+-- looking through 1848 candidates of size 7
+-- looking through 25084 candidates of size 8
+-- looking through 45700 candidates of size 9
+-- tested 31064 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
@@ -169,11 +169,11 @@ gcd :: Int -> Int -> Int
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 5 candidates of size 2
--- looking through 12 candidates of size 3
--- looking through 60 candidates of size 4
--- looking through 117 candidates of size 5
--- looking through 426 candidates of size 6
--- tested 201 candidates
+-- looking through 11 candidates of size 3
+-- looking through 50 candidates of size 4
+-- looking through 98 candidates of size 5
+-- looking through 359 candidates of size 6
+-- tested 171 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 

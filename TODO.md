@@ -28,11 +28,6 @@ One possible path would be to replace 0 in the second equation
 then use the Theory to discover x + 0 is equal to 0.
 
 
-## Prune magic
-
-Consider excluding non-atomic magic numbers?  e.g.: `1+1`?
-
-
 This file is part of Conjure,
 (C) 2021-2024 Rudy Matela,
 Distribued under the 3-Clause BSD license.

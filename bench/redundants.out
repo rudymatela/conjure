@@ -1,8 +1,8 @@
 Redundant candidates for: foo :: Int -> Int
   pruning with 15/35 rules
-  [3,3,11,25,56] candidates
-  70/98 unique candidates
-  28/98 redundant candidates
+  [3,3,9,15,39] candidates
+  46/69 unique candidates
+  23/69 redundant candidates
 
 rules:
 x * y == x + y
@@ -63,13 +63,9 @@ class of 4 equivalent candidates:
     foo x  =  1 + x
 
 
-class of 4 equivalent candidates:
+class of 2 equivalent candidates:
 
     foo x  =  x - 1
-
-    foo x  =  (0 - 1) + x
-
-    foo x  =  x + (0 - 1)
 
     foo 1  =  0
     foo x  =  x - 1
@@ -87,17 +83,6 @@ class of 5 equivalent candidates:
     foo x  =  1 - (x + 1)
 
     foo x  =  1 - (1 + x)
-
-
-class of 4 equivalent candidates:
-
-    foo x  =  0 - 1
-
-    foo x  =  x - (x + 1)
-
-    foo x  =  x - (1 + x)
-
-    foo x  =  1 - (1 + 1)
 
 
 class of 5 equivalent candidates:
@@ -147,13 +132,18 @@ class of 3 equivalent candidates:
     foo x  =  1 + (x + x)
 
 
-class of 3 equivalent candidates:
-
-    foo x  =  x + (1 + 1)
+class of 2 equivalent candidates:
 
     foo x  =  1 + (x + 1)
 
     foo x  =  1 + (1 + x)
+
+
+class of 2 equivalent candidates:
+
+    foo x  =  x - (x + 1)
+
+    foo x  =  x - (1 + x)
 
 
 class of 2 equivalent candidates:
@@ -184,9 +174,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,8,34,93,273] candidates
-  302/411 unique candidates
-  109/411 redundant candidates
+  [3,7,23,61,164] candidates
+  192/258 unique candidates
+  66/258 redundant candidates
 
 rules:
 x * y == x + y
@@ -213,24 +203,6 @@ y + dec (dec x) == x + dec (dec y)
 dec (dec x) + y == x + dec (dec y)
 x + dec (dec 0) == dec (dec x)
 dec (dec 0) + x == dec (dec x)
-
-class of 3 equivalent candidates:
-
-    x ? y  =  dec x
-
-    x ? y  =  dec 0 + x
-
-    x ? y  =  x + dec 0
-
-
-class of 3 equivalent candidates:
-
-    x ? y  =  dec y
-
-    x ? y  =  dec 0 + y
-
-    x ? y  =  y + dec 0
-
 
 class of 2 equivalent candidates:
 
@@ -273,207 +245,6 @@ class of 2 equivalent candidates:
 
     x ? 0  =  0
     x ? y  =  y + y
-
-
-class of 5 equivalent candidates:
-
-    x ? y  =  dec (dec x)
-
-    x ? y  =  dec (dec 0) + x
-
-    x ? y  =  x + dec (dec 0)
-
-    x ? y  =  dec x + dec 0
-
-    x ? y  =  dec 0 + dec x
-
-
-class of 5 equivalent candidates:
-
-    x ? y  =  dec (dec y)
-
-    x ? y  =  dec (dec 0) + y
-
-    x ? y  =  y + dec (dec 0)
-
-    x ? y  =  dec y + dec 0
-
-    x ? y  =  dec 0 + dec y
-
-
-class of 2 equivalent candidates:
-
-    x ? y  =  dec (dec 0)
-
-    x ? y  =  dec 0 + dec 0
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  x
-    x ? y  =  dec x
-
-    x ? 0  =  x
-    x ? y  =  dec 0 + x
-
-    x ? 0  =  x
-    x ? y  =  x + dec 0
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  x
-    x ? y  =  dec y
-
-    x ? 0  =  x
-    x ? y  =  dec 0 + y
-
-    x ? 0  =  x
-    x ? y  =  y + dec 0
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  0
-    x ? y  =  dec x
-
-    x ? 0  =  0
-    x ? y  =  dec 0 + x
-
-    x ? 0  =  0
-    x ? y  =  x + dec 0
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  0
-    x ? y  =  dec y
-
-    x ? 0  =  0
-    x ? y  =  dec 0 + y
-
-    x ? 0  =  0
-    x ? y  =  y + dec 0
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  dec x
-    x ? y  =  x
-
-    x ? 0  =  dec 0 + x
-    x ? y  =  x
-
-    x ? 0  =  x + dec 0
-    x ? y  =  x
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  dec x
-    x ? y  =  y
-
-    x ? 0  =  dec 0 + x
-    x ? y  =  y
-
-    x ? 0  =  x + dec 0
-    x ? y  =  y
-
-
-class of 3 equivalent candidates:
-
-    x ? 0  =  dec x
-    x ? y  =  0
-
-    x ? 0  =  dec 0 + x
-    x ? y  =  0
-
-    x ? 0  =  x + dec 0
-    x ? y  =  0
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  x
-    x ? y  =  dec x
-
-    0 ? x  =  x
-    x ? y  =  dec 0 + x
-
-    0 ? x  =  x
-    x ? y  =  x + dec 0
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  x
-    x ? y  =  dec y
-
-    0 ? x  =  x
-    x ? y  =  dec 0 + y
-
-    0 ? x  =  x
-    x ? y  =  y + dec 0
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  0
-    x ? y  =  dec x
-
-    0 ? x  =  0
-    x ? y  =  dec 0 + x
-
-    0 ? x  =  0
-    x ? y  =  x + dec 0
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  0
-    x ? y  =  dec y
-
-    0 ? x  =  0
-    x ? y  =  dec 0 + y
-
-    0 ? x  =  0
-    x ? y  =  y + dec 0
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  dec x
-    x ? y  =  x
-
-    0 ? x  =  dec 0 + x
-    x ? y  =  x
-
-    0 ? x  =  x + dec 0
-    x ? y  =  x
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  dec x
-    x ? y  =  y
-
-    0 ? x  =  dec 0 + x
-    x ? y  =  y
-
-    0 ? x  =  x + dec 0
-    x ? y  =  y
-
-
-class of 3 equivalent candidates:
-
-    0 ? x  =  dec x
-    x ? y  =  0
-
-    0 ? x  =  dec 0 + x
-    x ? y  =  0
-
-    0 ? x  =  x + dec 0
-    x ? y  =  0
 
 
 class of 2 equivalent candidates:
@@ -703,15 +474,6 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
-    x ? 0  =  dec 0
-    x ? y  =  x + y
-
-    x ? 0  =  dec 0
-    x ? y  =  y + x
-
-
-class of 2 equivalent candidates:
-
     x ? 0  =  dec x + x
     x ? y  =  x
 
@@ -809,15 +571,6 @@ class of 2 equivalent candidates:
     x ? y  =  x + y
 
     0 ? x  =  dec x
-    x ? y  =  y + x
-
-
-class of 2 equivalent candidates:
-
-    0 ? x  =  dec 0
-    x ? y  =  x + y
-
-    0 ? x  =  dec 0
     x ? y  =  y + x
 
 

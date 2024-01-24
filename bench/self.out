@@ -3,7 +3,7 @@
 -- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
 -- looking through 15 candidates of size 2
--- looking through 63 candidates of size 3
+-- looking through 55 candidates of size 3
 -- tested 21 candidates
 x ? y  =  x + y
 
@@ -12,8 +12,8 @@ x ? y  =  x + y
 -- pruning with 0/0 rules
 -- looking through 4 candidates of size 1
 -- looking through 15 candidates of size 2
--- looking through 63 candidates of size 3
--- tested 37 candidates
+-- looking through 55 candidates of size 3
+-- tested 33 candidates
 x ? y  =  x * y
 
 i :: Int -> Int
@@ -21,7 +21,7 @@ i :: Int -> Int
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 21 candidates of size 3
+-- looking through 13 candidates of size 3
 -- tested 8 candidates
 i x  =  x + 1
 
@@ -30,7 +30,7 @@ d :: Int -> Int
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 20 candidates of size 3
--- tested 26 candidates
+-- looking through 12 candidates of size 3
+-- tested 18 candidates
 cannot conjure
 
