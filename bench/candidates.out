@@ -2325,7 +2325,7 @@ x ? y  =  dec y
 Candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
   [2,0,1,0,1,0,1,0,1] direct candidates, 0 duplicates
-  [2,1,2,2,4,7,10,17,26] pattern candidates, 0 duplicates
+  [2,1,2,3,4,7,10,17,26] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -2357,6 +2357,9 @@ goo []  =  []
 goo (x:xs)  =  goo xs
 
 goo xs  =  xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  x:xs
 
 goo []  =  []
 goo (x:xs)  =  [x]
@@ -2400,7 +2403,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,15,57,134,327,971,1949,6888] pattern candidates, 0 duplicates
+  [3,7,15,59,139,331,987,2016,6970] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -2619,6 +2622,9 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  x:xs
 
 xs ?? []  =  []
+xs ?? (x:ys)  =  x:ys
+
+xs ?? []  =  []
 xs ?? (x:ys)  =  [x]
 
 xs ?? []  =  []
@@ -2662,6 +2668,9 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  x:xs
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  x:ys
@@ -2981,6 +2990,10 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [y]
 
 [] ?? xs  =  xs
@@ -3093,6 +3106,10 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  [y]
 
 [] ?? xs  =  []
@@ -3190,6 +3207,18 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? ys  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [x]
@@ -4234,6 +4263,16 @@ xs ?? (x:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  [x]
 (x:xs) ?? (y:ys)  =  xs
 
@@ -4250,6 +4289,16 @@ xs ?? (x:ys)  =  []
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
@@ -4276,7 +4325,7 @@ xs ?? (x:ys)  =  []
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
   [3,1,0,2,6,10,22,40,76] direct candidates, 0 duplicates
-  [3,2,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
+  [3,3,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -4387,6 +4436,9 @@ ton p  =  True
 
 ton p  =  not p
 
+ton False  =  False
+ton True  =  True
+
 ton False  =  True
 ton True  =  False
 
@@ -4394,7 +4446,7 @@ ton True  =  False
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,2,2,4,30,112,342,1032,2852] direct candidates, 0 duplicates
-  [4,12,20,6,2,16,18,60,120] pattern candidates, 0 duplicates
+  [4,14,26,10,2,16,18,60,120] pattern candidates, 0 duplicates
 
 rules:
 not False == True
@@ -4782,6 +4834,9 @@ p &| True  =  True
 p &| False  =  False
 p &| True  =  p
 
+p &| False  =  False
+p &| True  =  True
+
 p &| False  =  True
 p &| True  =  p
 
@@ -4796,6 +4851,9 @@ True &| p  =  True
 
 False &| p  =  False
 True &| p  =  p
+
+False &| p  =  False
+True &| p  =  True
 
 False &| p  =  True
 True &| p  =  p
@@ -4844,16 +4902,40 @@ False &| p  =  not p
 True &| p  =  True
 
 False &| p  =  p
+True &| False  =  False
+True &| True  =  True
+
+False &| p  =  p
 True &| False  =  True
 True &| True  =  False
+
+False &| p  =  False
+True &| False  =  False
+True &| True  =  True
 
 False &| p  =  False
 True &| False  =  True
 True &| True  =  False
 
 False &| p  =  True
+True &| False  =  False
+True &| True  =  True
+
+False &| p  =  True
 True &| False  =  True
 True &| True  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| p  =  p
+
+False &| False  =  False
+False &| True  =  True
+True &| p  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| p  =  True
 
 False &| False  =  True
 False &| True  =  False
@@ -4876,12 +4958,30 @@ p &| q  =  p || not q
 p &| q  =  q || not p
 
 False &| p  =  not p
+True &| False  =  False
+True &| True  =  True
+
+False &| p  =  not p
+True &| False  =  True
+True &| True  =  False
+
+False &| False  =  False
+False &| True  =  True
+True &| p  =  not p
+
+False &| False  =  True
+False &| True  =  False
+True &| p  =  not p
+
+False &| False  =  False
+False &| True  =  True
 True &| False  =  True
 True &| True  =  False
 
 False &| False  =  True
 False &| True  =  False
-True &| p  =  not p
+True &| False  =  False
+True &| True  =  True
 
 p &| q  =  not p && not q
 

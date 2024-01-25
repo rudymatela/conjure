@@ -8,7 +8,7 @@ pow :: Int -> Int -> Int
 -- looking through 491 candidates of size 5
 -- looking through 1729 candidates of size 6
 -- looking through 5420 candidates of size 7
--- looking through 17930 candidates of size 8
+-- looking through 17952 candidates of size 8
 -- tested 8593 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)

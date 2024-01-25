@@ -43,15 +43,15 @@ insert :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 20 candidates of size 5
+-- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 86 candidates of size 7
 -- looking through 239 candidates of size 8
 -- looking through 104 candidates of size 9
 -- looking through 1558 candidates of size 10
--- looking through 3553 candidates of size 11
+-- looking through 3555 candidates of size 11
 -- looking through 4028 candidates of size 12
--- tested 9600 candidates
+-- tested 9603 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -60,15 +60,15 @@ before :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 20 candidates of size 5
+-- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 86 candidates of size 7
 -- looking through 239 candidates of size 8
 -- looking through 104 candidates of size 9
 -- looking through 1558 candidates of size 10
--- looking through 3553 candidates of size 11
+-- looking through 3555 candidates of size 11
 -- looking through 4028 candidates of size 12
--- tested 9600 candidates
+-- tested 9603 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -77,15 +77,15 @@ before :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 20 candidates of size 5
+-- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 68 candidates of size 7
 -- looking through 287 candidates of size 8
 -- looking through 32 candidates of size 9
 -- looking through 1216 candidates of size 10
--- looking through 5101 candidates of size 11
+-- looking through 5103 candidates of size 11
 -- looking through 1472 candidates of size 12
--- tested 8208 candidates
+-- tested 8211 candidates
 cannot conjure
 
 beyond :: Int -> Tree -> Tree
@@ -94,15 +94,15 @@ beyond :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 20 candidates of size 5
+-- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 68 candidates of size 7
 -- looking through 287 candidates of size 8
 -- looking through 32 candidates of size 9
 -- looking through 1216 candidates of size 10
--- looking through 5101 candidates of size 11
+-- looking through 5103 candidates of size 11
 -- looking through 1472 candidates of size 12
--- tested 8208 candidates
+-- tested 8211 candidates
 cannot conjure
 
 union :: Tree -> Tree -> Tree
@@ -112,11 +112,11 @@ union :: Tree -> Tree -> Tree
 -- looking through 11 candidates of size 2
 -- looking through 32 candidates of size 3
 -- looking through 84 candidates of size 4
--- looking through 468 candidates of size 5
--- looking through 1068 candidates of size 6
--- looking through 4072 candidates of size 7
--- looking through 16352 candidates of size 8
--- looking through 41070 candidates of size 9
--- tested 63160 candidates
+-- looking through 470 candidates of size 5
+-- looking through 1074 candidates of size 6
+-- looking through 4088 candidates of size 7
+-- looking through 16373 candidates of size 8
+-- looking through 41366 candidates of size 9
+-- tested 63501 candidates
 cannot conjure
 
