@@ -174,4 +174,9 @@ tests n  =
   , zero $$   zero  ==  Nothing
   , zero $$|< zero  ==  Nothing
   , zero $$** zero  ==  Just (zero :$ zero)
+
+  , conflicts (one -+- two) (three -+- four) == [(one,three), (two,four)]
+  , conflicts (xx -:- nil) (xx -:- yy -:- yys) == [(nil, yy -:- yys)]
+  , conflicts (one -:- one -:- nil) (zero -:- zero -:- xx -:- xxs)
+    == [(one,zero), (nil,xx -:- xxs)]
   ]

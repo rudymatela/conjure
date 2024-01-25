@@ -39,6 +39,8 @@ module Conjure.Expr
   , digApp
   , ($!!)
 
+  , conflicts
+
   , module Conjure.Utils
   )
 where
@@ -473,13 +475,28 @@ deholings e'  =  deh
 
 -- | Dig a hole in a function application at the given position
 --
--- > digApp 1 (one -+- two)
--- _ + 2 :: Int
+-- > > digApp 1 (one -+- two)
+-- > _ + 2 :: Int
 --
--- > digApp 2 (one -+- two)
--- 1 + _ :: Int
+-- > > digApp 2 (one -+- two)
+-- > 1 + _ :: Int
 digApp :: Int -> Expr -> Expr
 digApp n  =  foldApp . updateAt n holeAsTypeOf . unfoldApp
+
+-- | Lists conflicts between two expressions
+--
+-- > > conflicts (one -+- two) (three -+- four)
+-- > [(1 :: Int,3 :: Int), (2 :: Int,4 :: Int)]
+--
+-- > > conflicts (xx -:- nil) (xx -:- yy -:- yys)
+-- > [(nil, yy -:- yys)]
+--
+-- > > conflicts  (one -:- one -:- nil) (zero -:- zero -:- xx -:- xxs)
+-- > [(1 :: Int,0 :: Int),([] :: [Int],x:xs :: [Int])]
+conflicts :: Expr -> Expr -> [(Expr,Expr)]
+conflicts e1 e2 | typ e1 /= typ e2  =  [(e1,e2)]
+conflicts (ef :$ ex) (eg :$ ey)     =  conflicts ef eg +++ conflicts ex ey
+conflicts e1 e2                     =  [(e1,e2) | e1 /= e2]
 
 -- | Extracts the argument of a function application at the given position.
 --

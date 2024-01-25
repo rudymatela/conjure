@@ -42,6 +42,7 @@ module Conjure.Utils
   , first
   , second
   , both
+  , (+++)
   )
 where
 
@@ -185,3 +186,20 @@ second f (x,y)  =  (x, f y)
 
 both :: (a -> b) -> (a,a) -> (b,b)
 both f (x,y)  =  (f x, f y)
+
+nubMergeBy :: (a -> a -> Ordering) -> [a] -> [a] -> [a]
+nubMergeBy cmp (x:xs) (y:ys) = case x `cmp` y of
+                                 LT -> x:nubMergeBy cmp xs (y:ys)
+                                 GT -> y:nubMergeBy cmp (x:xs) ys
+                                 EQ -> x:nubMergeBy cmp xs ys
+nubMergeBy _ xs ys = xs ++ ys
+
+nubMergeOn :: Ord b => (a -> b) -> [a] -> [a] -> [a]
+nubMergeOn f = nubMergeBy (compare `on` f)
+
+nubMerge :: Ord a => [a] -> [a] -> [a]
+nubMerge = nubMergeBy compare
+
+(+++) :: Ord a => [a] -> [a] -> [a]
+(+++) = nubMerge
+infixr 5 +++
