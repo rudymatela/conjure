@@ -179,4 +179,11 @@ tests n  =
   , conflicts (xx -:- nil) (xx -:- yy -:- yys) == [(nil, yy -:- yys)]
   , conflicts (one -:- one -:- nil) (zero -:- zero -:- xx -:- xxs)
     == [(one,zero), (nil,xx -:- xxs)]
+  , listConflicts [(one -+- one), (two -+- two), (three -+- three)] == [[one,two,three]]
+  , listConflicts [(one -+- zz), (two -+- yy), (three -+- xx)] == [[zz,yy,xx],[one,two,three]]
+
+  , holds n $ \e1 e2 -> map listPair (conflicts e1 e2) == listConflicts [e1,e2]
   ]
+
+listPair :: (a,a) -> [a]
+listPair (x,y)  =  [x,y]

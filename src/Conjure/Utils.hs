@@ -29,6 +29,7 @@ module Conjure.Utils
   , sets
   , headOr
   , allEqual
+  , allEqualOn
   , allEqual2
   , choices
   , choicesThat
@@ -63,6 +64,10 @@ import Test.LeanCheck.Stats (classify, classifyBy, classifyOn)
 allEqual :: Eq a => [a] -> Bool
 allEqual (x:y:etc)  =  x == y && allEqual (y:etc)
 allEqual _          =  True
+
+
+allEqualOn :: Eq b => (a -> b) -> [a] -> Bool
+allEqualOn f  =  allEqual . map f
 
 
 -- | Checks if all elements of a list are equal.

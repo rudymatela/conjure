@@ -40,6 +40,7 @@ module Conjure.Expr
   , ($!!)
 
   , conflicts
+  , listConflicts
 
   , module Conjure.Utils
   )
@@ -497,6 +498,16 @@ conflicts :: Expr -> Expr -> [(Expr,Expr)]
 conflicts e1 e2 | typ e1 /= typ e2  =  [(e1,e2)]
 conflicts (ef :$ ex) (eg :$ ey)     =  conflicts ef eg +++ conflicts ex ey
 conflicts e1 e2                     =  [(e1,e2) | e1 /= e2]
+
+listConflicts :: [Expr] -> [[Expr]]
+listConflicts es
+  | not (allEqualOn typ es)  =  [es]
+  | all isApp es             =  listConflicts [ef | ef :$ _ <- es]
+                            +++ listConflicts [ex | _ :$ ex <- es]
+  | otherwise                =  [es | not (allEqual es)]
+  where
+  fun (ef :$ _)  =  ef
+  arg (_ :$ ex)  =  ex
 
 -- | Extracts the argument of a function application at the given position.
 --
