@@ -134,8 +134,7 @@ tests n  =
 
   , isRedundantBySubsumption  constNilRedundantDefn == False
   , isRedundantByRepetition   constNilRedundantDefn
-  , isRedundantByIntroduction constNilRedundantDefn == False
-    -- ^ only caught if the isGround guard is active, see code
+  , isRedundantByIntroduction constNilRedundantDefn
 
   , isRedundantBySubsumption  constFalseRedundantDefn == False
   , isRedundantByRepetition   constFalseRedundantDefn

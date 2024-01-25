@@ -315,10 +315,15 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
   where
   nArgs  =  length . tail . unfoldApp . fst $ head d
   anyAllEqual :: Int -> Bool
-  anyAllEqual i  =  any (\bs -> allEqual2 bs && isDefined bs)
-                 .  classifyOn fst
-                 .  map (canonicalizeBndn . introduceVariableAt i)
+  anyAllEqual i  =  any (\bs -> length bs >= 2 && isDefined bs && noConflicts i bs)
+                 .  classifyOn (digApp i . fst)
+                 .  map (canonicalizeBndnLast i)
                  $  d
+  noConflicts :: Int -> [Bndn] -> Bool
+  noConflicts i bs  =  case listConflicts (map snd bs) of
+                       [] -> True
+                       [es] -> es == [efxs $!! i | (efxs,_) <- bs]
+                       _ -> False
 
 -- | Returns whether the given 'Defn' is redundant
 --   with regards to recursions
