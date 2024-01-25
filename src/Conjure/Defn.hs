@@ -30,6 +30,7 @@ module Conjure.Defn
   , isCompleteBndn
   , simplifyDefn
   , canonicalizeBndn
+  , canonicalizeBndnLast
   , hasUnbound
   , noUnbound
   , isUndefined
@@ -399,6 +400,12 @@ simplifyDefn (b:bs)  =  [b | none (foldPair b `isInstanceOf`) $ map foldPair bs]
 
 canonicalizeBndn :: Bndn -> Bndn
 canonicalizeBndn  =  unfoldPair . canonicalize . foldPair
+
+canonicalizeBndnLast :: Int -> Bndn -> Bndn
+canonicalizeBndnLast i (lhs,rhs)  =  (updateAppAt i (const ex') lhs', rhs')
+  where
+  (lhs_, ex)  =  extractApp i lhs
+  (lhs', ex', rhs')  =  unfoldTrio . canonicalize . foldTrio $ (lhs_, ex, rhs)
 
 -- | Returns whether a binding has undefined variables,
 --   i.e.,

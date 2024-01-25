@@ -144,6 +144,12 @@ tests n  =
   , canonicalizeBndn (introduceVariableAt 2 (const' xxs (yy -:- yys), (yy -:- yys) -++- (yy -:- yys)))
     == (const' xxs yys, yys -++- yys)
 
+  , canonicalizeBndnLast 1 (introduceVariableAt 2 (const' xxs (yy -:- yys), (yy -:- yys) -++- (yy -:- yys)))
+    == (const' zzs yys, yys -++- yys)
+
+  , canonicalizeBndnLast 2 (introduceVariableAt 2 (const' xxs (yy -:- yys), (yy -:- yys) -++- (yy -:- yys)))
+    == (const' xxs zzs, zzs -++- zzs)
+
   ,       isBaseCase      (ff (xx -:- nil), xx)
   , not $ isBaseCase      (ff (xx -:- xxs), ff xxs)
   ,       isRecursiveCase (ff (xx -:- xxs), ff xxs)
