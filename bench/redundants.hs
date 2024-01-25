@@ -8,6 +8,7 @@ import Conjure
 import Conjure.Engine
 import Conjure.Defn
 import Conjure.Utils
+import Test.LeanCheck.Tiers (discardT)
 
 
 -- | This function prints redundant candidates.
@@ -34,7 +35,9 @@ printRedundantCandidates n nm f ps  =  do
   numRedundant   =  numCandidates - numUnique
   classes        =  classifyBy (equalModuloTesting maxTests maxEvalRecursions nm f) candidates
   candidates     =  concat css
-  css            =  take n css'
+  css            =  take n
+                 .  discardT isRedundantByIntroduction -- additional pruning rule
+                 $  css'
   (css', thy)    =  candidateDefnsC args nm f ps  -- Conjure uses this for listing candidates
   nRules         =  length (rules thy)
   nREs           =  length (equations thy) + nRules
