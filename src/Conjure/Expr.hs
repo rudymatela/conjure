@@ -38,6 +38,7 @@ module Conjure.Expr
 
   , digApp
   , extractApp
+  , updateAppAt
   , ($!!)
 
   , conflicts
@@ -483,7 +484,10 @@ deholings e'  =  deh
 -- > > digApp 2 (one -+- two)
 -- > 1 + _ :: Int
 digApp :: Int -> Expr -> Expr
-digApp i  =  foldApp . updateAt i holeAsTypeOf . unfoldApp
+digApp i  =  updateAppAt i holeAsTypeOf
+
+updateAppAt :: Int -> (Expr -> Expr) -> Expr -> Expr
+updateAppAt i f  =  foldApp . updateAt i f . unfoldApp
 
 -- | Extracts the argument of a function application at the given position.
 --
