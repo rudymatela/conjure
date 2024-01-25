@@ -29,6 +29,7 @@ module Conjure.Utils
   , sets
   , headOr
   , allEqual
+  , allEqual2
   , choices
   , choicesThat
   , foldr0
@@ -57,14 +58,23 @@ import System.IO.Unsafe
 
 import Test.LeanCheck.Stats (classify, classifyBy, classifyOn)
 
+
+-- | Checks if all elements of a list are equal.
+allEqual :: Eq a => [a] -> Bool
+allEqual (x:y:etc)  =  x == y && allEqual (y:etc)
+allEqual _          =  True
+
+
 -- | Checks if all elements of a list are equal.
 --
 -- Exceptionally this function returns false for an empty or unit list.
-allEqual :: Eq a => [a] -> Bool
-allEqual []  =  False
-allEqual [x]  =  False
-allEqual [x,y]  =  x == y
-allEqual (x:y:xs)  =  x == y && allEqual (y:xs)
+--
+-- This returns true when all elements are equal and the list
+-- has a length greater than or equal to two.
+allEqual2 :: Eq a => [a] -> Bool
+allEqual2 []  =  False
+allEqual2 [_]  =  False
+allEqual2 xs  =  allEqual xs
 
 -- | Counts the number of occurrences on a list.
 count :: (a -> Bool) -> [a] -> Int

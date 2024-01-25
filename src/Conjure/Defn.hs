@@ -280,7 +280,7 @@ isRedundantByRepetition d  =  any anyAllEqual shovels
   shovels :: [Expr -> Expr]
   shovels  =  [digApp n | n <- [1..nArgs]]
   anyAllEqual :: (Expr -> Expr) -> Bool
-  anyAllEqual shovel  =  any (\bs -> allEqual bs && isDefined bs)
+  anyAllEqual shovel  =  any (\bs -> allEqual2 bs && isDefined bs)
                       .  classifyOn fst
                       .  map (canonicalizeBndn . first shovel)
                       $  d
@@ -314,7 +314,7 @@ isRedundantByIntroduction d  =  any anyAllEqual [1..nArgs]
   where
   nArgs  =  length . tail . unfoldApp . fst $ head d
   anyAllEqual :: Int -> Bool
-  anyAllEqual i  =  any (\bs -> allEqual bs && isDefined bs)
+  anyAllEqual i  =  any (\bs -> allEqual2 bs && isDefined bs)
                  .  classifyOn fst
                  .  map (canonicalizeBndn . introduceVariableAt i)
                  $  d
