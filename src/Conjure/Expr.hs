@@ -37,6 +37,7 @@ module Conjure.Expr
   , enumerateFillings
 
   , digApp
+  , extractApp
   , ($!!)
 
   , conflicts
@@ -482,7 +483,30 @@ deholings e'  =  deh
 -- > > digApp 2 (one -+- two)
 -- > 1 + _ :: Int
 digApp :: Int -> Expr -> Expr
-digApp n  =  foldApp . updateAt n holeAsTypeOf . unfoldApp
+digApp i  =  foldApp . updateAt i holeAsTypeOf . unfoldApp
+
+-- | Extracts the argument of a function application at the given position.
+--
+-- > (one -+- two) $!! 1
+-- 1 :: Int
+--
+-- > (one -+- two) $!! 2
+-- 2 :: Int
+($!!) :: Expr -> Int -> Expr
+e $!! i  =  unfoldApp e !! i
+
+-- | Extracts a value in a function application at the given position
+--
+-- > > extractApp 1 (one -+- two)
+-- > (_ + 2 :: Int, 1 :: Int)
+--
+-- > > extractApp 2 (one -+- two)
+-- > (1 + _ :: Int, 2 :: Int)
+extractApp :: Int -> Expr -> (Expr,Expr)
+extractApp i efxs  =  (foldApp $ updateAt i holeAsTypeOf es, es !! i)
+  where
+  es  =  unfoldApp efxs
+
 
 -- | Lists conflicts between two expressions
 --
@@ -508,16 +532,6 @@ listConflicts es
   where
   fun (ef :$ _)  =  ef
   arg (_ :$ ex)  =  ex
-
--- | Extracts the argument of a function application at the given position.
---
--- > (one -+- two) $!! 1
--- 1 :: Int
---
--- > (one -+- two) $!! 2
--- 2 :: Int
-($!!) :: Expr -> Int -> Expr
-e $!! i  =  unfoldApp e !! i
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val
