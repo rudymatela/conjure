@@ -26,11 +26,11 @@ map :: (Int -> Int) -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 4
 -- looking through 2 candidates of size 5
 -- looking through 6 candidates of size 6
 -- looking through 9 candidates of size 7
--- tested 17 candidates
+-- tested 16 candidates
 map f []  =  []
 map f (x:xs)  =  f x:map f xs
 
@@ -52,7 +52,7 @@ filter :: (Int -> Bool) -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 6 candidates of size 6
 -- looking through 0 candidates of size 7
@@ -61,7 +61,7 @@ filter :: (Int -> Bool) -> [Int] -> [Int]
 -- looking through 65 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 219 candidates of size 12
--- tested 166 candidates
+-- tested 165 candidates
 filter f []  =  []
 filter f (x:xs)  =  if f x
                     then x:filter f xs

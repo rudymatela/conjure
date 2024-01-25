@@ -250,12 +250,7 @@ defnApparentlyTerminates _  =  True
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
                    || isRedundantByRepetition d
---                 || isRedundantByIntroduction d
--- we do not use isRedundantByIntroduction above
--- as it does not pay off in terms of runtime vs number of pruned candidates
---
--- The number of candidates is reduced usually by less than 1%
--- and the runtime increases by 50% or sometimes 100%.
+                   || isRedundantByIntroduction d
 
 -- | Returns whether the given 'Defn' is redundant
 --   with regards to repetitions on RHSs.

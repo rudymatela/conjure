@@ -26,7 +26,7 @@ qsort :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 4
 -- looking through 6 candidates of size 5
 -- looking through 9 candidates of size 6
 -- looking through 22 candidates of size 7
@@ -37,7 +37,7 @@ qsort :: [Int] -> [Int]
 -- looking through 767 candidates of size 12
 -- looking through 1600 candidates of size 13
 -- looking through 3499 candidates of size 14
--- tested 3668 candidates
+-- tested 3667 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
@@ -47,15 +47,15 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 37 candidates of size 4
--- looking through 98 candidates of size 5
--- looking through 94 candidates of size 6
--- looking through 383 candidates of size 7
--- looking through 375 candidates of size 8
--- looking through 1263 candidates of size 9
--- looking through 2252 candidates of size 10
--- looking through 4090 candidates of size 11
--- looking through 13481 candidates of size 12
--- tested 22094 candidates
+-- looking through 35 candidates of size 4
+-- looking through 93 candidates of size 5
+-- looking through 90 candidates of size 6
+-- looking through 372 candidates of size 7
+-- looking through 322 candidates of size 8
+-- looking through 1244 candidates of size 9
+-- looking through 2038 candidates of size 10
+-- looking through 4043 candidates of size 11
+-- looking through 12641 candidates of size 12
+-- tested 20899 candidates
 cannot conjure
 

@@ -6,10 +6,10 @@ invert :: [Bool] -> [Bool]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 10 candidates of size 4
+-- looking through 9 candidates of size 4
 -- looking through 17 candidates of size 5
 -- looking through 41 candidates of size 6
--- tested 36 candidates
+-- tested 35 candidates
 invert []  =  []
 invert (p:ps)  =  not p:invert ps
 
@@ -32,13 +32,13 @@ decrement :: [Bool] -> [Bool]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 5 candidates of size 3
--- looking through 10 candidates of size 4
+-- looking through 9 candidates of size 4
 -- looking through 17 candidates of size 5
 -- looking through 41 candidates of size 6
 -- looking through 86 candidates of size 7
--- looking through 202 candidates of size 8
+-- looking through 200 candidates of size 8
 -- looking through 487 candidates of size 9
--- tested 418 candidates
+-- tested 415 candidates
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
@@ -75,8 +75,8 @@ cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- looking through 225 candidates of size 5
 -- looking through 585 candidates of size 6
 -- looking through 1242 candidates of size 7
--- looking through 15183 candidates of size 8
--- tested 15459 candidates
+-- looking through 15000 candidates of size 8
+-- tested 15317 candidates
 cshift False p q  =  (False,p,q)
 cshift True p q  =  (True,q,p)
 
@@ -91,17 +91,15 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- looking through 18 candidates of size 4
 -- looking through 27 candidates of size 5
 -- looking through 72 candidates of size 6
--- looking through 245 candidates of size 7
--- looking through 663 candidates of size 8
--- tested 1034 candidates
-fadder False False False  =  (False,False)
-fadder False False True  =  (False,True)
-fadder False True False  =  (False,True)
-fadder False True True  =  (True,False)
-fadder True False False  =  (False,True)
-fadder True False True  =  (True,False)
-fadder True True False  =  (True,False)
-fadder True True True  =  (True,True)
+-- looking through 237 candidates of size 7
+-- looking through 638 candidates of size 8
+-- looking through 1661 candidates of size 9
+-- looking through 3525 candidates of size 10
+-- looking through 7607 candidates of size 11
+-- tested 10300 candidates
+fadder p q r  =  if p == q
+                 then (p,r)
+                 else (r,not r)
 
 TerpreT benchmark #6: 2-bit adder
 
@@ -152,11 +150,11 @@ decrelements :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 7 candidates of size 4
+-- looking through 6 candidates of size 4
 -- looking through 9 candidates of size 5
 -- looking through 29 candidates of size 6
 -- looking through 41 candidates of size 7
--- tested 53 candidates
+-- tested 52 candidates
 decrelements []  =  []
 decrelements (x:xs)  =  x - 1:decrelements xs
 
@@ -166,7 +164,7 @@ decrelements :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 7 candidates of size 4
 -- tested 8 candidates
 decrelements xs  =  map (subtract 1) xs
 

@@ -16,11 +16,11 @@ reverse :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 2 candidates of size 3
--- looking through 3 candidates of size 4
+-- looking through 2 candidates of size 4
 -- looking through 4 candidates of size 5
 -- looking through 7 candidates of size 6
 -- looking through 10 candidates of size 7
--- tested 27 candidates
+-- tested 26 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ [x]
 
@@ -30,10 +30,10 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 37 candidates of size 4
--- looking through 98 candidates of size 5
--- looking through 94 candidates of size 6
--- tested 194 candidates
+-- looking through 35 candidates of size 4
+-- looking through 93 candidates of size 5
+-- looking through 90 candidates of size 6
+-- tested 187 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -43,7 +43,7 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 41 candidates of size 4
+-- looking through 39 candidates of size 4
 -- tested 48 candidates
 xs ++ ys  =  foldr (:) ys xs
 
@@ -70,10 +70,10 @@ zip (x:xs) (y:ys)  =  (x,y):zip xs ys
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 37 candidates of size 4
--- looking through 98 candidates of size 5
--- looking through 94 candidates of size 6
--- tested 196 candidates
+-- looking through 35 candidates of size 4
+-- looking through 93 candidates of size 5
+-- looking through 90 candidates of size 6
+-- tested 189 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
@@ -102,14 +102,14 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
 -- looking through 12 candidates of size 4
--- looking through 22 candidates of size 5
--- looking through 32 candidates of size 6
--- looking through 75 candidates of size 7
--- looking through 108 candidates of size 8
--- looking through 256 candidates of size 9
--- looking through 520 candidates of size 10
--- looking through 1329 candidates of size 11
--- looking through 2632 candidates of size 12
--- tested 4992 candidates
+-- looking through 20 candidates of size 5
+-- looking through 30 candidates of size 6
+-- looking through 69 candidates of size 7
+-- looking through 88 candidates of size 8
+-- looking through 246 candidates of size 9
+-- looking through 432 candidates of size 10
+-- looking through 1309 candidates of size 11
+-- looking through 2278 candidates of size 12
+-- tested 4490 candidates
 cannot conjure
 

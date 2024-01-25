@@ -80,10 +80,10 @@ gps5 :: [Char] -> [Char]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 6 candidates of size 4
+-- looking through 5 candidates of size 4
 -- looking through 5 candidates of size 5
 -- looking through 13 candidates of size 6
--- tested 30 candidates
+-- tested 29 candidates
 cannot conjure
 
 gps6 :: Int -> Int
@@ -317,13 +317,13 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 37 candidates of size 4
--- looking through 98 candidates of size 5
--- looking through 106 candidates of size 6
--- looking through 440 candidates of size 7
--- looking through 428 candidates of size 8
--- looking through 1950 candidates of size 9
--- tested 2031 candidates
+-- looking through 35 candidates of size 4
+-- looking through 93 candidates of size 5
+-- looking through 102 candidates of size 6
+-- looking through 429 candidates of size 7
+-- looking through 375 candidates of size 8
+-- looking through 1928 candidates of size 9
+-- tested 1950 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -418,14 +418,14 @@ gps21 :: [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 6 candidates of size 4
+-- looking through 5 candidates of size 4
 -- looking through 5 candidates of size 5
 -- looking through 13 candidates of size 6
 -- looking through 9 candidates of size 7
--- looking through 30 candidates of size 8
+-- looking through 29 candidates of size 8
 -- looking through 25 candidates of size 9
 -- looking through 65 candidates of size 10
--- tested 96 candidates
+-- tested 94 candidates
 gps21 []  =  []
 gps21 (x:xs)  =  (if x < 0 then 0 else x):gps21 xs
 

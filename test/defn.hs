@@ -116,9 +116,7 @@ tests n  =
   , isRedundantDefn redundantDefn2
 
   , isRedundantDefn constBoolRedundantDefn
-  , isRedundantDefn idListRedundantDefn == False
-    -- NOTE: ^ ByIntroduction is not an active check
-    --         as it does not pay-off in terms of performance
+  , isRedundantDefn idListRedundantDefn
 
   , isRedundantBySubsumption  constRedundantDefn
   , isRedundantByRepetition   constRedundantDefn == False
