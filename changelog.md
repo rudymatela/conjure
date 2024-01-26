@@ -2,6 +2,18 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* prune redundant mutants using a few new rules
+* rework numeric recursion criteria
+* improve pretty-printing
+* improve error handling
+* refactor and lint throughout
+* Conjurable tuples up to 12-tuples
+* bump Express requirement to v1.0.14 (bugfix)
+
+
 v0.5.6
 ------
 
