@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.8
+------
 
 * prune redundant mutants using a few new rules
 * rework numeric recursion criteria
