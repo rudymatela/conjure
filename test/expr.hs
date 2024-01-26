@@ -35,38 +35,6 @@ tests n  =
   , apparentlyTerminates ffE (if' pp (ff xx) zero) == False
   , apparentlyTerminates ffE (if' (odd' (ff xx)) zero zero) == False
 
-  , [false, true, zero, one] >$$< [notE, andE, orE, plus, times] == []
-  , [notE, andE, orE, plus, times] >$$< [false, true, zero, one]
-    == [ not' false
-       , not' true
-       , andE :$ false
-       , andE :$ true
-       , orE :$ false
-       , orE :$ true
-       , plus :$ zero
-       , plus :$ one
-       , times :$ zero
-       , times :$ one
-       ]
-  , [notE, andE, orE, plus, times] >$$< [false, true, zero, one] >$$< [false, true, zero, one]
-    == [ false -&&- false
-       , false -&&- true
-       , true -&&- false
-       , true -&&- true
-       , false -||- false
-       , false -||- true
-       , true -||- false
-       , true -||- true
-       , zero -+- zero
-       , zero -+- one
-       , one -+- zero
-       , one -+- one
-       , zero -*- zero
-       , zero -*- one
-       , one -*- zero
-       , one -*- one
-       ]
-
   , holds n $ \e -> sort (valuesBFS e) == sort (values e)
   , holds n $ \e -> holesBFS e == filter isHole (valuesBFS e)
   , valuesBFS false == [false]

@@ -12,7 +12,6 @@ module Conjure.Expr
   , module Data.Express.Fixtures
 
   , rehole
-  , (>$$<)
   , funToVar
   , recursexpr
   , apparentlyTerminates
@@ -216,11 +215,6 @@ ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 -- > case :: Ordering -> [Char] -> [Char] -> [Char] -> [Char]
 caseForOrd :: Typeable a => a -> Expr
 caseForOrd a  =  value "case" (\o x y z -> case o of LT -> x; EQ -> y; GT -> z `asTypeOf` a)
-
--- | Application cross-product between lists of Exprs
-(>$$<) :: [Expr] -> [Expr] -> [Expr]
-exs >$$< eys  =  catMaybes [ex $$ ey | ex <- exs, ey <- eys]
--- TODO: move >$$< into Data.Express?
 
 -- | Lists terminal values in BFS order.
 --
