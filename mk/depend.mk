@@ -341,6 +341,19 @@ eg/list.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/list.hs
+eg/maybe: \
+  eg/maybe.hs \
+  mk/toplibs
+eg/maybe.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/maybe.hs
 eg/pow: \
   eg/pow.hs \
   mk/toplibs
