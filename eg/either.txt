@@ -1,0 +1,36 @@
+isLeft :: Either A A -> Bool
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- tested 4 candidates
+isLeft (Left x)  =  True
+isLeft (Right x)  =  False
+
+isRight :: Either A A -> Bool
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- tested 3 candidates
+isRight (Left x)  =  False
+isRight (Right x)  =  True
+
+fromLeft :: A -> Either A A -> A
+-- testing 5 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- tested 3 candidates
+fromLeft x (Left y)  =  y
+fromLeft x (Right y)  =  x
+
+fromLeft :: A -> Either A A -> A
+-- testing 5 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 2 candidates of size 2
+-- tested 2 candidates
+fromLeft x (Left y)  =  x
+fromLeft x (Right y)  =  y
+
