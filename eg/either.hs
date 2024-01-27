@@ -30,12 +30,21 @@ fromRight' 1 (Left 0)  =  1
 fromRight' 0 (Right 1)  =  1
 fromRight' 1 (Right 0)  =  0
 
+eitherSpec :: ((A -> A) -> (A -> A) -> Either A A -> A) -> Bool
+eitherSpec either  =  and
+  [ either (+1) (+2) (Left 0) == 1
+  , either (+1) (+2) (Right 0) == 2
+  , either (*10) (*100) (Left 1) == 10
+  , either (*10) (*100) (Right 2) == 200
+  ]
+
 main :: IO ()
 main = do
   conjure "isLeft" isLeft' primitives
   conjure "isRight" isRight' primitives
   conjure "fromLeft" fromLeft' primitives
   conjure "fromLeft" fromRight' primitives
+  conjureFromSpec "either" eitherSpec primitives
 
 primitives :: [Prim]
 primitives  =

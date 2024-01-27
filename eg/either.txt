@@ -34,3 +34,13 @@ fromLeft :: A -> Either A A -> A
 fromLeft x (Left y)  =  x
 fromLeft x (Right y)  =  y
 
+either :: (A -> A) -> (A -> A) -> Either A A -> A
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 4 candidates of size 3
+-- looking through 10 candidates of size 4
+-- tested 9 candidates
+either f g (Left x)  =  f x
+either f g (Right x)  =  g x
+
