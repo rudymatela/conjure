@@ -551,8 +551,8 @@ instance ( Conjurable a, Listable a, Show a, Express a
                        , value "Right" (Right ->: exy) :$ hole y
                        ]
     where
-    x  =  Left undefined -: exy
-    y  =  Right undefined -: exy
+    Left x  =  Left undefined -: exy
+    Right y  =  Right undefined -: exy
   conjureEquality elr  =  from <$> conjureEquality l <*> conjureEquality r
     where
     Left l   =  elr

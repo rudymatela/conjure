@@ -61,8 +61,10 @@ conjurableOK x  =  and
   [ holds 60 $ (-==-) ==== (==)
   , holds 60 $ expr' === expr
   , tiers =| 6 |= (tiers -: [[x]])
+  , all isWellTyped cases'
   ]
   where
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
   tiers'  =  mapT evl (fromJust $ conjureTiers x) -: [[x]]
   expr'  =  (conjureExpress x . val) -:> x
+  cases'  =  conjureCases x
