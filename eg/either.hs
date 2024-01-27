@@ -38,6 +38,13 @@ eitherSpec either  =  and
   , either (*10) (*100) (Right 2) == 200
   ]
 
+lefts' :: [Either A A] -> [A]
+lefts' []  =  []
+lefts' [Right 0]  =  []
+lefts' [Left 0, Right 1]  =  [0]
+lefts' [Right 0, Left 1]  =  [1]
+lefts' [Left 0, Left 1]  =  [0,1]
+
 main :: IO ()
 main = do
   conjure "isLeft" isLeft' primitives
@@ -45,6 +52,7 @@ main = do
   conjure "fromLeft" fromLeft' primitives
   conjure "fromLeft" fromRight' primitives
   conjureFromSpec "either" eitherSpec primitives
+  conjure "lefts" lefts' primitives
 
 primitives :: [Prim]
 primitives  =

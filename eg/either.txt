@@ -44,3 +44,12 @@ either :: (A -> A) -> (A -> A) -> Either A A -> A
 either f g (Left x)  =  f x
 either f g (Right x)  =  g x
 
+lefts :: [Either A A] -> [A]
+-- testing 5 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+-- tested 2 candidates
+cannot conjure
+
