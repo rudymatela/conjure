@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-v0.5.8
-------
+v0.5.8 (January 2024)
+---------------------
 
 * prune redundant mutants using a few new rules
 * rework numeric recursion criteria
@@ -14,8 +14,8 @@ v0.5.8
 * bump Express requirement to v1.0.14 (bugfix)
 
 
-v0.5.6
-------
+v0.5.6 (November 2023)
+----------------------
 
 * `Conjure` module: no main API changes
 * `Conjure.Engine`: add `equalModuloTesting`
@@ -23,8 +23,8 @@ v0.5.6
 * add `bench/redundants` that reports groups of redundant candidates
 
 
-v0.5.4
-------
+v0.5.4 (November 2023)
+----------------------
 
 This has been the "dev" version after v0.5.2
 for almost a couple of years:
@@ -36,8 +36,8 @@ for almost a couple of years:
 * add (but not use) `conjureSize` to `Conjurable`
 
 
-v0.5.2
-------
+v0.5.2 (March 2022)
+-------------------
 
 * show number of tested candidates
 * complete `Conjurable` derivation functions
@@ -46,8 +46,8 @@ v0.5.2
   to allow computing the near upper/lower limit on pruning
 
 
-v0.5.0
-------
+v0.5.0 (September 2021)
+-----------------------
 
 * allow synthesizing/conjuring from properties with `conjureFromSpec`;
 * complete Haddock documentation;
@@ -56,8 +56,8 @@ v0.5.0
 * Makefile: add targets to run GPS(2) and TerpreT benches.
 
 
-v0.4.4
-------
+v0.4.4 (September 2021)
+-----------------------
 
 * remove need for explicit deconstructions:
 	- use `-` and `1` instead of `dec`;
@@ -68,8 +68,8 @@ v0.4.4
 * minor fixes in the README.
 
 
-v0.4.2
-------
+v0.4.2 (August 2021)
+--------------------
 
 * default to using top-level patterns on generated functions;
 * memoize function evaluation;
@@ -81,8 +81,8 @@ v0.4.2
 * improve tests and benchmarks.
 
 
-v0.4.0
-------
+v0.4.0 (July 2021)
+------------------
 
 * background primitives are now provided with `pr` and `prim`.
 * report number of rules used in pruning
@@ -94,8 +94,8 @@ v0.4.0
 * cleanup unused code
 
 
-v0.3.6
-------
+v0.3.6 (June 2021)
+------------------
 
 * add switch for descending recursions
   to allow generation of `gcd`
@@ -105,8 +105,8 @@ v0.3.6
   at this point, the old names were misnomers.
 
 
-v0.3.4
-------
+v0.3.4 (June 2021)
+------------------
 
 * reallow recursions under `&&` and `||`
   (simplifies the generated `or`, `and`, `set` and `elem` functions)
@@ -117,8 +117,8 @@ v0.3.4
 * add 4 new benchmarks: `count`, `gcd`, `tree` and `setelem`
 
 
-v0.3.2
-------
+v0.3.2 (June 2021)
+------------------
 
 * significant runtime reduction in several benchmarks, e.g.:
 	- take is now reachable in about 5 seconds
@@ -136,30 +136,30 @@ v0.3.2
 	- add stub `Conjure.Constructors` module
 
 
-v0.3.0
-------
+v0.3.0 (May 2021)
+-----------------
 
 * only automatically include an `if` for the return type of the given function
 * add the `take-drop` benchmark
 * make bottom-up enumeration more type directed
 
 
-v0.2.8
-------
+v0.2.8 (May 2021)
+-----------------
 
 * export the `A`, `B`, `C`, `D`, `E` and `F` helper types
 
 
-v0.2.6
-------
+v0.2.6 (May 2021)
+-----------------
 
 * require Express v0.1.10 due to `hasHole` being now exported there
 * require Eq result on `conjure1`, `conjure2` and `conjure3`
 * code cleanup and more tests
 
 
-v0.2.4
-------
+v0.2.4 (May 2021)
+-----------------
 
 * allow conjuring from specifications in addition to partial definitions
   (`conjure1`, `conjure2`, `conjure3` and related functions)
@@ -170,21 +170,21 @@ v0.2.4
 * add code-optional candidate nubbing and debug functions
 
 
-v0.2.2
-------
+v0.2.2 (May 2021)
+-----------------
 
 * by default, search for 60 argument combinations
   among 100000 enumerated combinations
 
 
-v0.2.0
-------
+v0.2.0 (May 2021)
+-----------------
 
 * search until 100% match is found and exit
 * other misc changes
 
 
-v0.1.2
-------
+v0.1.2 (April 2021)
+-------------------
 
 For the changelog of earlier versions, check the git commit history.
