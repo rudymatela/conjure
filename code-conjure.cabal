@@ -26,11 +26,11 @@ extra-source-files: .gitignore
                   , Makefile
                   , bench/bench
                   , bench/*.hs
-                  , bench/*.out
+                  , bench/*.txt
                   , eg/*.hs
-                  , eg/*.out
+                  , eg/*.txt
                   , proto/*.hs
-                  , proto/*.out
+                  , proto/*.txt
                   , mk/All.hs
                   , mk/Toplibs.hs
                   , mk/depend.mk

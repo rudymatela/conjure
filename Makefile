@@ -73,9 +73,11 @@ ghci: src/Conjure.ghci
 	python3 -c 'print("%.1f" % float(input()))' | \
 	tee bench/runtime/$$HOSTNAME/$<.runtime
 
-diff-test: $(EG) $(patsubst %,%.diff-test,$(EG))
+diff-test: $(EG) $(patsubst %,%.diff,$(EG))
 
-out: $(EG) $(patsubst %,%.out,$(EG))
+out: txt
+
+txt: $(EG) $(patsubst %,%.txt,$(EG))
 
 test-sdist:
 	./test/sdist
@@ -97,15 +99,15 @@ full-clean: clean clean-cabal clean-stack
 %.run: %
 	./$<
 
-%.out: %
-	./$< >$<.out
+%.txt: %
+	./$< >$<.txt
 
-%.diff-test: %
-	./$< | diff -rud $<.out -
+%.diff: %
+	./$< | diff -rud $<.txt -
 
 # lists files missing copyright notices
 list-missing-copyright:
-	grep -LRE '(Copyright|\(C\))' `git ls-tree -r master --name-only | grep -vE '(\.(runtime|out)|versions|toplibs|(Toplibs|All)\.hs|depend.mk)$$'` || true
+	grep -LRE '(Copyright|\(C\))' `git ls-tree -r master --name-only | grep -vE '(\.(runtime|txt)|versions|toplibs|(Toplibs|All)\.hs|depend.mk)$$'` || true
 
 # NOTE: (very hacky!) the following target allows parallel compilation (-jN) of
 # eg and test programs so long as they don't share dependencies _not_ stored

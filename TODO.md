@@ -3,9 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* rename `*.out` to `*.txt`
-
-* Review `bench/redundants.out` and prune redundant candidates.
+* Review `bench/redundants.txt` and prune redundant candidates.
   See sections below for ideas.
 
 
