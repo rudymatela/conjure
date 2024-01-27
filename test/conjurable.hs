@@ -270,6 +270,61 @@ tests n  =
   , isNumeric bee == False
   , isNumeric (expr [0::Int]) == False
   , isNumeric true == False
+
+  -- the following conjurableOK calls take 5 seconds to compile!
+  , conjurableOK (undefined :: ())
+  , conjurableOK (undefined :: Bool)
+  , conjurableOK (undefined :: Int)
+  , conjurableOK (undefined :: Char)
+  , conjurableOK (undefined :: Integer)
+  , conjurableOK (undefined :: Ordering)
+  , conjurableOK (undefined :: Float)
+  , conjurableOK (undefined :: Double)
+  , conjurableOK (undefined :: Rational)
+
+  , conjurableOK (undefined :: A)
+  , conjurableOK (undefined :: B)
+  , conjurableOK (undefined :: C)
+  , conjurableOK (undefined :: D)
+  , conjurableOK (undefined :: E)
+  , conjurableOK (undefined :: F)
+
+  , conjurableOK (undefined :: [()])
+  , conjurableOK (undefined :: [Bool])
+  , conjurableOK (undefined :: [Int])
+  , conjurableOK (undefined :: String)
+
+  , conjurableOK (undefined :: ((),()))
+  , conjurableOK (undefined :: (Bool,Bool))
+  , conjurableOK (undefined :: (Int,Int))
+  , conjurableOK (undefined :: (Char,String))
+  , conjurableOK (undefined :: (Bool,[Int]))
+
+  , conjurableOK (undefined :: (Int,Int,Int))
+  , conjurableOK (undefined :: (Bool,Int,Char))
+  , conjurableOK (undefined :: ([Int],[Bool],String))
+
+  , conjurableOK (undefined :: Maybe ())
+  , conjurableOK (undefined :: Maybe Bool)
+  , conjurableOK (undefined :: Maybe Int)
+  , conjurableOK (undefined :: Maybe Char)
+  , conjurableOK (undefined :: Maybe String)
+
+  , conjurableOK (undefined :: Either () ())
+  , conjurableOK (undefined :: Either Bool Bool)
+  , conjurableOK (undefined :: Either Int Int)
+  , conjurableOK (undefined :: Either String Int)
+  , conjurableOK (undefined :: Either String Char)
+
+  , conjurableOK (undefined :: (Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
+  , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
   ]
 
 isDecon :: Expr -> Bool

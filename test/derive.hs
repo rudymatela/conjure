@@ -152,20 +152,6 @@ tests n  =
   ]
 
 
--- checks if the functions conjureEquality, conjureExpress and conjureTiers
--- were correctly generated.
-conjurableOK :: (Eq a, Show a, Express a, Listable a, Conjurable a) => a -> Bool
-conjurableOK x  =  and
-  [ holds 60 $ (-==-) ==== (==)
-  , holds 60 $ expr' === expr
-  , tiers =| 6 |= (tiers -: [[x]])
-  ]
-  where
-  (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
-  tiers'  =  mapT evl (fromJust $ conjureTiers x) -: [[x]]
-  expr'  =  (conjureExpress x . val) -:> x
-
-
 -- proxies --
 choice :: Choice
 choice  =  undefined
