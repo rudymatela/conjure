@@ -58,6 +58,11 @@ zip' [x] [a]  =  [(x,a)]
 zip' [x,y] [a,b]  =  [(x,a),(y,b)]
 zip' [x,y,z] [a,b,c]  =  [(x,a),(y,b),(z,c)]
 
+last' :: [Int] -> Int
+last' [x]  =  x
+last' [x,y]  =  y
+last' [x,y,z]  =  z
+
 main :: IO ()
 main = do
   conjure "length" length'
@@ -81,6 +86,14 @@ main = do
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
+  conjure "last" last'
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "null" (null :: [Int] -> Bool)
+    , prif (undefined :: Int)
+    , prim "undefined" (undefined :: Int)
     ]
 
   conjure "zip" (zip')
