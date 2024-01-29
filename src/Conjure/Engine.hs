@@ -352,11 +352,10 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
     where
     -- silences errors, ok since this is for optional measuring of optimal pruning
     are :: Expr -> Bool
-    are e  =  errorToFalse
-           $  (`fromDyn` err)
-           $  eq `dynApp` evalDyn d1 e
-                 `dynApp` evalDyn d2 e
+    are e  =  errorToFalse $ evalEqual d1 d2 e
   evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
+  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
+                           `dynApp` evalDyn d2 e `fromDyn` False
 
 
 
