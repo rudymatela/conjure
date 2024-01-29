@@ -3,6 +3,9 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* make `equalModuloTesting` be modulo errors as well:
+  failing for the same cases should yield equality!
+
 * consider non top-level cases
 
 * consider pruning earlier with `productsLaterThat`
@@ -25,34 +28,6 @@ Perhaps the negative runtime impact would not be so great
 given the delayed tiers enumeration,
 and we would avoid some `prif` hacks
 needed to conjure some functions.
-
-
-## Prune root-recursion
-
-Two of the following are redundant:
-
-	xs ?? ys  =  []
-
-	xs ?? []  =  []
-	xs ?? (x:ys)  =  xs ?? ys
-
-	xs ?? []  =  []
-	xs ?? (x:ys)  =  ys ?? xs
-
-So is the second of the following:
-
-	xs ?? ys  =  ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  xs ?? ys
-
-In the examples above,
-recursive calls on the root eventually
-lead to a final fixed base-case value.
-
-When all base-cases yield the same result,
-and all the recursive cases are root recursions,
-the candidates can be discarded as redundant.
 
 
 This file is part of Conjure,
