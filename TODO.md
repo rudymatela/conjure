@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* make `bench/err.hs` that lists functions that return errors or run forever
+* discard erroneous candidates from `bench/erroneous.txt` somehow
 
 * consider non top-level cases
 
