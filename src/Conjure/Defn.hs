@@ -389,6 +389,7 @@ isRedundantModuloRewriting normalize  =  is
   where
   is []  =  False
   is (b:bs)  =  any (subsumedWith normalize b) bs
+             || is bs
 
 -- | Returns whether the definition is complete,
 --   i.e., whether it does not have any holes in the RHS.

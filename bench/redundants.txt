@@ -68,9 +68,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,22,49,125] candidates
-  192/206 unique candidates
-  14/206 redundant candidates
+  [3,7,22,49,122] candidates
+  192/203 unique candidates
+  11/203 redundant candidates
 
 rules:
 x * y == x + y
@@ -103,36 +103,6 @@ class of 2 equivalent candidates:
     x ? y  =  x + dec y
 
     x ? y  =  y + dec x
-
-
-class of 2 equivalent candidates:
-
-    0 ? x  =  x
-    x ? y  =  y + y
-
-    0 ? x  =  x
-    x ? 0  =  0
-    x ? y  =  y + y
-
-
-class of 2 equivalent candidates:
-
-    0 ? x  =  0
-    x ? y  =  x + y
-
-    0 ? x  =  0
-    x ? 0  =  x
-    x ? y  =  x + y
-
-
-class of 2 equivalent candidates:
-
-    0 ? x  =  0
-    x ? y  =  y + y
-
-    0 ? x  =  0
-    x ? 0  =  0
-    x ? y  =  y + y
 
 
 class of 2 equivalent candidates:

@@ -112,9 +112,9 @@ gps5 :: Int -> [Int]
 -- looking through 428 candidates of size 7
 -- looking through 882 candidates of size 8
 -- looking through 4350 candidates of size 9
--- looking through 9236 candidates of size 10
--- looking through 43850 candidates of size 11
--- tested 32294 candidates
+-- looking through 9232 candidates of size 10
+-- looking through 43847 candidates of size 11
+-- tested 32290 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps6 :: [Int] -> Int

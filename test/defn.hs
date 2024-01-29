@@ -169,6 +169,20 @@ tests n  =
   , isRedundantModuloRewriting  (// [(zero -+- zero, zero)]) [(zero -?- xx, zero),(xx -?- yy, xx -+- zero)] == True
   , isRedundantModuloRewriting  (// [(zero -+- zero, zero)]) [(zero -?- xx, zero),(xx -?- yy, xx -+- one)] == False
   , isRedundantModuloRewriting  (// [(zero -+- zero, zero)]) [(zero -?- xx, zero),(xx -?- yy, xx -+- yy)] == False
+
+  , isRedundantModuloRewriting (// [(xx -+- zero, xx)])
+      [ (zero -?- xx, xx)
+      , (xx -?- zero, xx)
+      , (xx -?- yy, xx -+- xx)
+      ] == False
+
+  , subsumedWith (// [(xx -+- zero, xx)]) (xx -?- zero, xx) (xx -?- yy, xx -+- yy) == True
+
+  , isRedundantModuloRewriting (// [(xx -+- zero, xx)])
+      [ (zero -?- xx, xx)
+      , (xx -?- zero, xx)
+      , (xx -?- yy, xx -+- yy)
+      ] == True
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a

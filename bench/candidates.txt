@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 15/35 rules
   [3,0,7,0,19,0,90,0,454] direct candidates, 0 duplicates
-  [3,3,8,9,27,36,136,166,617] pattern candidates, 0 duplicates
+  [3,3,8,9,27,33,136,161,617] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -313,14 +313,6 @@ foo 1  =  0
 foo x  =  x + 1
 
 foo 0  =  0
-foo 1  =  0
-foo x  =  x - 1
-
-foo 0  =  0
-foo 1  =  0
-foo x  =  1 - x
-
-foo 0  =  0
 foo 1  =  1
 foo x  =  x + 1
 
@@ -335,10 +327,6 @@ foo x  =  1 - x
 foo 0  =  1
 foo 1  =  0
 foo x  =  x + x
-
-foo 0  =  1
-foo 1  =  0
-foo x  =  x - 1
 
 foo 0  =  1
 foo 1  =  0
@@ -360,7 +348,7 @@ foo x  =  0 - x
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,6,9,21,39,87,180,390] direct candidates, 0 duplicates
-  [3,7,22,49,125,298,729,1687,3975] pattern candidates, 0 duplicates
+  [3,7,22,49,122,296,717,1679,3940] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -1073,10 +1061,6 @@ x ? y  =  x + x
 
 0 ? x  =  x
 x ? 0  =  0
-x ? y  =  y + y
-
-0 ? x  =  x
-x ? 0  =  0
 x ? y  =  dec (dec x)
 
 0 ? x  =  x
@@ -1105,10 +1089,6 @@ x ? y  =  0
 
 0 ? x  =  0
 x ? 0  =  x
-x ? y  =  x + y
-
-0 ? x  =  0
-x ? 0  =  x
 x ? y  =  y + y
 
 0 ? x  =  0
@@ -1122,10 +1102,6 @@ x ? y  =  dec (dec y)
 0 ? x  =  0
 x ? 0  =  0
 x ? y  =  x + y
-
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  y + y
 
 0 ? x  =  0
 x ? 0  =  0
@@ -2013,10 +1989,6 @@ x ? y  =  x + x
 
 0 ? x  =  dec x
 x ? 0  =  x
-x ? y  =  x + y
-
-0 ? x  =  dec x
-x ? 0  =  x
 x ? y  =  y + y
 
 0 ? x  =  dec x
@@ -2034,10 +2006,6 @@ x ? y  =  x + x
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x + y
-
-0 ? x  =  dec x
-x ? 0  =  0
-x ? y  =  y + y
 
 0 ? x  =  dec x
 x ? 0  =  0
