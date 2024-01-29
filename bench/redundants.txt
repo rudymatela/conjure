@@ -689,9 +689,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,45,123,299] candidates
-  339/492 unique candidates
-  153/492 redundant candidates
+  [3,7,15,39,117,218] candidates
+  297/399 unique candidates
+  102/399 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -699,7 +699,7 @@ xs ++ [] == xs
 (xs ++ ys) ++ zs == xs ++ (ys ++ zs)
 (x:xs) ++ ys == x:(xs ++ ys)
 
-class of 9 equivalent candidates:
+class of 7 equivalent candidates:
 
     xs ?? ys  =  xs
 
@@ -707,13 +707,7 @@ class of 9 equivalent candidates:
     xs ?? (x:ys)  =  xs ?? ys
 
     xs ?? []  =  xs
-    xs ?? (x:ys)  =  xs ++ [] ?? xs
-
-    xs ?? []  =  xs
     xs ?? (x:ys)  =  xs ++ [] ?? ys
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  [] ?? xs ++ xs
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  [] ?? ys ++ xs
@@ -728,7 +722,7 @@ class of 9 equivalent candidates:
     (x:xs) ?? ys  =  x:xs ?? []
 
 
-class of 9 equivalent candidates:
+class of 7 equivalent candidates:
 
     xs ?? ys  =  ys
 
@@ -748,25 +742,16 @@ class of 9 equivalent candidates:
     (x:xs) ?? ys  =  ys ++ xs ?? []
 
     [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ++ ys ?? []
-
-    [] ?? xs  =  xs
     (x:xs) ?? ys  =  xs ?? [] ++ ys
 
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? [] ++ ys
 
-
-class of 6 equivalent candidates:
+class of 5 equivalent candidates:
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  []
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  ys ?? ys
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  [] ?? xs
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  [] ?? ys
@@ -779,7 +764,7 @@ class of 6 equivalent candidates:
     xs ?? (x:ys)  =  (ys ++ ys) ?? ys
 
 
-class of 6 equivalent candidates:
+class of 4 equivalent candidates:
 
     xs ?? []  =  []
     xs ?? (x:ys)  =  xs
@@ -789,13 +774,7 @@ class of 6 equivalent candidates:
     (x:xs) ?? (y:ys)  =  x:xs
 
     xs ?? []  =  []
-    xs ?? (x:ys)  =  xs ++ [] ?? xs
-
-    xs ?? []  =  []
     xs ?? (x:ys)  =  xs ++ [] ?? ys
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  [] ?? xs ++ xs
 
     xs ?? []  =  []
     xs ?? (x:ys)  =  [] ?? ys ++ xs
@@ -815,7 +794,7 @@ class of 3 equivalent candidates:
     (x:xs) ?? ys  =  [] ?? ys
 
 
-class of 11 equivalent candidates:
+class of 10 equivalent candidates:
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  []
@@ -825,9 +804,6 @@ class of 11 equivalent candidates:
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  xs ?? []
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? []
 
     [] ?? xs  =  xs
     (x:xs) ?? []  =  xs ?? xs
@@ -867,7 +843,7 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  xs
 
 
-class of 7 equivalent candidates:
+class of 5 equivalent candidates:
 
     [] ?? xs  =  []
     (x:xs) ?? ys  =  ys
@@ -884,13 +860,7 @@ class of 7 equivalent candidates:
     (x:xs) ?? ys  =  ys ++ xs ?? []
 
     [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ++ ys ?? []
-
-    [] ?? xs  =  []
     (x:xs) ?? ys  =  xs ?? [] ++ ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? [] ++ ys
 
 
 class of 2 equivalent candidates:
@@ -1044,7 +1014,7 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  ys
 
 
-class of 6 equivalent candidates:
+class of 5 equivalent candidates:
 
     [] ?? []  =  []
     [] ?? (x:xs)  =  xs
@@ -1060,10 +1030,6 @@ class of 6 equivalent candidates:
 
     [] ?? []  =  []
     [] ?? (x:xs)  =  xs
-    (x:xs) ?? ys  =  ys ?? []
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
     (x:xs) ?? []  =  xs ?? xs
     (x:xs) ?? (y:ys)  =  []
 
@@ -1071,46 +1037,6 @@ class of 6 equivalent candidates:
     [] ?? (x:xs)  =  xs
     (x:xs) ?? []  =  xs ?? []
     (x:xs) ?? (y:ys)  =  []
-
-
-class of 4 equivalent candidates:
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  xs ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  (xs ++ xs) ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  xs ++ xs ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  xs ?? xs ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? xs
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs ?? ys
-
-
-class of 4 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? (ys ++ ys)
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ++ ys ?? ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? ys ++ ys
 
 
 class of 3 equivalent candidates:
@@ -1125,16 +1051,13 @@ class of 3 equivalent candidates:
     xs ?? (x:ys)  =  x:[] ?? ys
 
 
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     xs ?? []  =  xs ++ xs
     xs ?? (x:ys)  =  []
 
     xs ?? []  =  xs ++ xs
     xs ?? (x:ys)  =  ys ?? ys
-
-    xs ?? []  =  xs ++ xs
-    xs ?? (x:ys)  =  [] ?? xs
 
     xs ?? []  =  xs ++ xs
     xs ?? (x:ys)  =  [] ?? ys
@@ -1152,7 +1075,7 @@ class of 3 equivalent candidates:
     (x:xs) ?? ys  =  x:xs ?? []
 
 
-class of 4 equivalent candidates:
+class of 3 equivalent candidates:
 
     [] ?? xs  =  xs ++ xs
     (x:xs) ?? ys  =  []
@@ -1162,9 +1085,6 @@ class of 4 equivalent candidates:
 
     [] ?? xs  =  xs ++ xs
     (x:xs) ?? ys  =  xs ?? []
-
-    [] ?? xs  =  xs ++ xs
-    (x:xs) ?? ys  =  ys ?? []
 
 
 class of 3 equivalent candidates:
@@ -1198,30 +1118,6 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys ?? xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys ?? []
-
-
-class of 3 equivalent candidates:
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
-    (x:xs) ?? ys  =  ys ?? ys
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  ys ++ xs ?? xs
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  xs ?? xs ++ ys
-
-
-class of 2 equivalent candidates:
-
     [] ?? []  =  []
     [] ?? (x:xs)  =  xs ?? xs
     (x:xs) ?? ys  =  xs
@@ -1231,7 +1127,7 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  xs
 
 
-class of 4 equivalent candidates:
+class of 2 equivalent candidates:
 
     [] ?? xs  =  xs
     (x:xs) ?? []  =  xs
@@ -1240,12 +1136,6 @@ class of 4 equivalent candidates:
     [] ?? xs  =  xs
     (x:xs) ?? []  =  xs
     (x:xs) ?? (y:ys)  =  ys ++ xs
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  xs ++ ys ?? []
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? [] ++ xs
 
 
 class of 2 equivalent candidates:
@@ -1259,7 +1149,7 @@ class of 2 equivalent candidates:
     (x:xs) ?? (y:ys)  =  ys ++ xs
 
 
-class of 4 equivalent candidates:
+class of 2 equivalent candidates:
 
     [] ?? xs  =  []
     (x:xs) ?? []  =  xs
@@ -1268,12 +1158,6 @@ class of 4 equivalent candidates:
     [] ?? xs  =  []
     (x:xs) ?? []  =  xs
     (x:xs) ?? (y:ys)  =  ys ++ xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ++ ys ?? []
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? [] ++ xs
 
 
 class of 2 equivalent candidates:
@@ -1285,27 +1169,6 @@ class of 2 equivalent candidates:
     [] ?? xs  =  []
     (x:xs) ?? []  =  []
     (x:xs) ?? (y:ys)  =  ys ++ xs
-
-
-class of 3 equivalent candidates:
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  (x:xs) ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  [x] ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  x:xs ?? xs
-
-
-class of 2 equivalent candidates:
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  (x:ys) ?? xs
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? (x:xs)
 
 
 class of 2 equivalent candidates:
@@ -1315,21 +1178,6 @@ class of 2 equivalent candidates:
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  [x] ?? ys
-
-
-class of 4 equivalent candidates:
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  (xs ++ ys) ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  (ys ++ xs) ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  ys ++ xs ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  xs ?? xs ++ ys
 
 
 class of 2 equivalent candidates:
@@ -1377,42 +1225,6 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  ys ++ xs ?? xs
 
 
-class of 3 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? (x:ys)
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? [x]
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  x:ys ?? ys
-
-
-class of 4 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? (xs ++ ys)
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? (ys ++ xs)
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  xs ++ ys ?? ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  x:ys ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  x:(xs ++ ys)
-
-
 class of 2 equivalent candidates:
 
     xs ?? []  =  xs
@@ -1420,15 +1232,6 @@ class of 2 equivalent candidates:
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  xs ?? ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  ys ++ ys ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  ys ?? xs ++ ys
 
 
 class of 2 equivalent candidates:
@@ -1443,34 +1246,10 @@ class of 2 equivalent candidates:
 class of 2 equivalent candidates:
 
     xs ?? []  =  xs
-    xs ?? (x:ys)  =  ys ++ [] ?? xs
-
-    xs ?? []  =  xs
-    xs ?? (x:ys)  =  [] ?? xs ++ ys
-
-
-class of 2 equivalent candidates:
-
-    xs ?? []  =  xs
     xs ?? (x:ys)  =  ys ?? ys ++ ys
 
     xs ?? []  =  xs
     xs ?? (x:ys)  =  [] ?? ys ++ ys
-
-
-class of 4 equivalent candidates:
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  xs ++ xs ?? xs
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  xs ?? xs ++ xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ++ ys ?? ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? ys ++ ys
 
 
 class of 2 equivalent candidates:
@@ -1494,24 +1273,6 @@ class of 3 equivalent candidates:
     xs ?? (x:ys)  =  ys ++ [] ?? ys
 
 
-class of 2 equivalent candidates:
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  ys ++ ys ?? xs
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  ys ?? xs ++ ys
-
-
-class of 2 equivalent candidates:
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  ys ++ [] ?? xs
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  [] ?? xs ++ ys
-
-
 class of 3 equivalent candidates:
 
     xs ?? []  =  []
@@ -1527,28 +1288,10 @@ class of 3 equivalent candidates:
 class of 2 equivalent candidates:
 
     [] ?? xs  =  xs
-    (x:xs) ?? ys  =  x:ys ?? xs
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  x:(ys ++ xs)
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs
     (x:xs) ?? ys  =  xs ++ xs ?? xs
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  xs ++ xs ?? []
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  xs ++ ys ?? xs
-
-    [] ?? xs  =  xs
-    (x:xs) ?? ys  =  ys ?? xs ++ xs
 
 
 class of 2 equivalent candidates:
@@ -1584,24 +1327,6 @@ class of 3 equivalent candidates:
 class of 2 equivalent candidates:
 
     [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ++ ys ?? xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? xs ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ++ ys ?? ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
     (x:xs) ?? ys  =  ys ++ xs ?? ys
 
     [] ?? xs  =  []
@@ -1618,19 +1343,6 @@ class of 3 equivalent candidates:
 
     [] ?? xs  =  []
     (x:xs) ?? ys  =  xs ?? [] ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs ?? ys
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys ?? xs
 
 
 class of 2 equivalent candidates:

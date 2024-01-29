@@ -260,9 +260,9 @@ gps18_price :: [Double] -> [Double] -> Double
 -- looking through 8 candidates of size 2
 -- looking through 32 candidates of size 3
 -- looking through 70 candidates of size 4
--- looking through 400 candidates of size 5
--- looking through 1056 candidates of size 6
--- tested 1568 candidates
+-- looking through 388 candidates of size 5
+-- looking through 968 candidates of size 6
+-- tested 1468 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -341,15 +341,15 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- looking through 9 candidates of size 2
 -- looking through 31 candidates of size 3
 -- looking through 36 candidates of size 4
--- looking through 187 candidates of size 5
--- looking through 627 candidates of size 6
--- looking through 944 candidates of size 7
--- looking through 863 candidates of size 8
--- looking through 951 candidates of size 9
--- looking through 3902 candidates of size 10
--- looking through 6758 candidates of size 11
--- looking through 3276 candidates of size 12
--- tested 17587 candidates
+-- looking through 79 candidates of size 5
+-- looking through 321 candidates of size 6
+-- looking through 576 candidates of size 7
+-- looking through 555 candidates of size 8
+-- looking through 327 candidates of size 9
+-- looking through 1256 candidates of size 10
+-- looking through 2660 candidates of size 11
+-- looking through 1560 candidates of size 12
+-- tested 7413 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
@@ -380,8 +380,8 @@ gps25 :: [Double] -> [Double] -> Double
 -- looking through 9 candidates of size 2
 -- looking through 49 candidates of size 3
 -- looking through 195 candidates of size 4
--- looking through 1043 candidates of size 5
--- looking through 4661 candidates of size 6
--- tested 5959 candidates
+-- looking through 1023 candidates of size 5
+-- looking through 4510 candidates of size 6
+-- tested 5788 candidates
 cannot conjure
 

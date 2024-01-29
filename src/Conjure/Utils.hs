@@ -45,6 +45,7 @@ module Conjure.Utils
   , second
   , both
   , (+++)
+  , isSubsetOf
   )
 where
 
@@ -57,6 +58,7 @@ import Data.Typeable
 
 import System.IO.Unsafe
 
+import Data.Express.Utils.List (isSubsetOf)
 import Test.LeanCheck.Stats (classify, classifyBy, classifyOn)
 
 

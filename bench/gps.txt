@@ -68,10 +68,10 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 0 candidates of size 8
--- looking through 162 candidates of size 9
+-- looking through 54 candidates of size 9
 -- looking through 26 candidates of size 10
 -- looking through 15 candidates of size 11
--- tested 197 candidates
+-- tested 89 candidates
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
@@ -317,13 +317,13 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 25 candidates of size 4
--- looking through 87 candidates of size 5
--- looking through 94 candidates of size 6
--- looking through 390 candidates of size 7
--- looking through 395 candidates of size 8
--- looking through 1803 candidates of size 9
--- tested 1766 candidates
+-- looking through 19 candidates of size 4
+-- looking through 81 candidates of size 5
+-- looking through 75 candidates of size 6
+-- looking through 330 candidates of size 7
+-- looking through 329 candidates of size 8
+-- looking through 1420 candidates of size 9
+-- tested 1293 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -334,8 +334,8 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 11 candidates of size 4
--- tested 14 candidates
+-- looking through 7 candidates of size 4
+-- tested 10 candidates
 gps18 xs ys  =  zipWith (+) xs ys
 
 gps19 :: Int -> [Char] -> [Char]

@@ -600,7 +600,7 @@ descends isDecOf e' e  =  any d1 ss
   (_:exs)  =  unfoldApp e'
   (_:eys)  =  unfoldApp e
   isDeconstruction (p,e) | isVar p    =  e `isDecOf` p
-                         | otherwise  =  size e < size p
+                         | otherwise  =  size e < size p && vars e `isSubsetOf` vars p
     where
     cs  =  consts e
   isNotConstruction (p,e) | isVar p    =  e == p || e `isDecOf` p

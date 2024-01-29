@@ -30,10 +30,10 @@ sum (x:xs)  =  x + sum xs
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 32 candidates of size 4
--- looking through 100 candidates of size 5
--- looking through 244 candidates of size 6
--- tested 234 candidates
+-- looking through 28 candidates of size 4
+-- looking through 85 candidates of size 5
+-- looking through 201 candidates of size 6
+-- tested 183 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

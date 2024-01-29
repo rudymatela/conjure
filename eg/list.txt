@@ -30,10 +30,10 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 25 candidates of size 4
--- looking through 87 candidates of size 5
--- looking through 82 candidates of size 6
--- tested 159 candidates
+-- looking through 19 candidates of size 4
+-- looking through 81 candidates of size 5
+-- looking through 63 candidates of size 6
+-- tested 135 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -43,8 +43,8 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 29 candidates of size 4
--- tested 36 candidates
+-- looking through 23 candidates of size 4
+-- tested 30 candidates
 xs ++ ys  =  foldr (:) ys xs
 
 last :: [Int] -> Int
@@ -73,9 +73,9 @@ zip :: [Int] -> [Int] -> [(Int,Int)]
 -- looking through 0 candidates of size 5
 -- looking through 2 candidates of size 6
 -- looking through 6 candidates of size 7
--- looking through 8 candidates of size 8
--- looking through 31 candidates of size 9
--- tested 27 candidates
+-- looking through 4 candidates of size 8
+-- looking through 24 candidates of size 9
+-- tested 22 candidates
 zip [] xs  =  []
 zip (x:xs) []  =  []
 zip (x:xs) (y:ys)  =  (x,y):zip xs ys
@@ -86,12 +86,16 @@ zip (x:xs) (y:ys)  =  (x,y):zip xs ys
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 25 candidates of size 4
--- looking through 87 candidates of size 5
--- looking through 82 candidates of size 6
--- tested 161 candidates
+-- looking through 19 candidates of size 4
+-- looking through 81 candidates of size 5
+-- looking through 63 candidates of size 6
+-- looking through 273 candidates of size 7
+-- looking through 258 candidates of size 8
+-- looking through 841 candidates of size 9
+-- tested 1086 candidates
 [] \/ xs  =  xs
-(x:xs) \/ ys  =  x:ys \/ xs
+(x:xs) \/ []  =  xs
+(x:xs) \/ (y:ys)  =  x:y:xs \/ ys
 
 ordered :: [Int] -> Bool
 -- testing 360 combinations of argument values
@@ -117,15 +121,15 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 3 candidates of size 3
--- looking through 12 candidates of size 4
--- looking through 22 candidates of size 5
--- looking through 32 candidates of size 6
--- looking through 71 candidates of size 7
--- looking through 108 candidates of size 8
--- looking through 248 candidates of size 9
--- looking through 520 candidates of size 10
--- looking through 1317 candidates of size 11
--- looking through 2632 candidates of size 12
--- tested 4968 candidates
+-- looking through 8 candidates of size 4
+-- looking through 19 candidates of size 5
+-- looking through 23 candidates of size 6
+-- looking through 54 candidates of size 7
+-- looking through 84 candidates of size 8
+-- looking through 182 candidates of size 9
+-- looking through 379 candidates of size 10
+-- looking through 973 candidates of size 11
+-- looking through 1776 candidates of size 12
+-- tested 3504 candidates
 cannot conjure
 

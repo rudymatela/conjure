@@ -47,15 +47,15 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 25 candidates of size 4
--- looking through 87 candidates of size 5
--- looking through 82 candidates of size 6
--- looking through 333 candidates of size 7
--- looking through 354 candidates of size 8
--- looking through 1154 candidates of size 9
--- looking through 2156 candidates of size 10
--- looking through 3897 candidates of size 11
--- looking through 12973 candidates of size 12
--- tested 21082 candidates
+-- looking through 19 candidates of size 4
+-- looking through 81 candidates of size 5
+-- looking through 63 candidates of size 6
+-- looking through 273 candidates of size 7
+-- looking through 306 candidates of size 8
+-- looking through 853 candidates of size 9
+-- looking through 1860 candidates of size 10
+-- looking through 2736 candidates of size 11
+-- looking through 10205 candidates of size 12
+-- tested 16417 candidates
 cannot conjure
 
