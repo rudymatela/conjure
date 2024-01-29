@@ -3,8 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* make `equalModuloTesting` be modulo errors as well:
-  failing for the same cases should yield equality!
+* make `bench/err.hs` that lists functions that return errors or run forever
 
 * consider non top-level cases
 
