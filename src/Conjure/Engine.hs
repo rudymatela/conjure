@@ -350,8 +350,9 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   eq  =  conjureDynamicEq f
   d1 === d2  =  all are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
     where
+    -- silences errors, ok since this is for optional measuring of optimal pruning
     are :: Expr -> Bool
-    are e  =  errorToFalse -- silences errors, ok since this is for optional measuring of optimal pruning
+    are e  =  errorToFalse
            $  (`fromDyn` err)
            $  eq `dynApp` evalDyn d1 e
                  `dynApp` evalDyn d2 e
