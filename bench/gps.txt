@@ -68,10 +68,10 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 0 candidates of size 8
--- looking through 54 candidates of size 9
+-- looking through 114 candidates of size 9
 -- looking through 26 candidates of size 10
 -- looking through 15 candidates of size 11
--- tested 89 candidates
+-- tested 149 candidates
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
@@ -216,13 +216,13 @@ gps12 :: [Int] -> Int
 -- looking through 2 candidates of size 3
 -- looking through 9 candidates of size 4
 -- looking through 22 candidates of size 5
--- looking through 51 candidates of size 6
--- looking through 133 candidates of size 7
--- looking through 318 candidates of size 8
--- looking through 938 candidates of size 9
--- looking through 2418 candidates of size 10
--- looking through 7229 candidates of size 11
--- tested 8242 candidates
+-- looking through 41 candidates of size 6
+-- looking through 125 candidates of size 7
+-- looking through 262 candidates of size 8
+-- looking through 816 candidates of size 9
+-- looking through 1996 candidates of size 10
+-- looking through 5925 candidates of size 11
+-- tested 6320 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -317,13 +317,13 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 19 candidates of size 4
--- looking through 81 candidates of size 5
--- looking through 75 candidates of size 6
--- looking through 330 candidates of size 7
--- looking through 329 candidates of size 8
--- looking through 1420 candidates of size 9
--- tested 1293 candidates
+-- looking through 21 candidates of size 4
+-- looking through 84 candidates of size 5
+-- looking through 80 candidates of size 6
+-- looking through 378 candidates of size 7
+-- looking through 355 candidates of size 8
+-- looking through 1620 candidates of size 9
+-- tested 1534 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -334,8 +334,8 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 7 candidates of size 4
--- tested 10 candidates
+-- looking through 9 candidates of size 4
+-- tested 12 candidates
 gps18 xs ys  =  zipWith (+) xs ys
 
 gps19 :: Int -> [Char] -> [Char]

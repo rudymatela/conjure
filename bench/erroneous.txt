@@ -78,8 +78,8 @@ Erroneous candidates for: goo :: [Int] -> [Int]
 
 Erroneous candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,39,117,218] candidates
-  0/399 erroneous candidates
+  [3,7,15,41,120,241] candidates
+  0/427 erroneous candidates
 
 
 Erroneous candidates for: ton :: Bool -> Bool

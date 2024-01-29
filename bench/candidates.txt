@@ -2084,7 +2084,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,15,41,122,222,791,1287,5189] pattern candidates, 0 duplicates
+  [3,7,15,43,125,245,865,1435,5854] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -2210,6 +2210,9 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? ys
 
 xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs
+
+xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? ys
 
 xs ?? []  =  xs
@@ -2223,6 +2226,9 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs
@@ -2345,6 +2351,10 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? ys
 
 [] ?? xs  =  xs
@@ -2389,6 +2399,10 @@ xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ?? ys
 
 [] ?? xs  =  xs
@@ -2406,6 +2420,10 @@ xs ?? (x:ys)  =  []
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
@@ -2445,11 +2463,11 @@ xs ?? (x:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? ys  =  [] ?? xs
+(x:xs) ?? ys  =  ys ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? ys  =  [] ?? ys
+(x:xs) ?? ys  =  [] ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ?? xs
@@ -2849,6 +2867,9 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs ?? ys
 
 xs ?? []  =  xs
+xs ?? (x:ys)  =  x:ys ?? xs
+
+xs ?? []  =  xs
 xs ?? (x:ys)  =  x:ys ?? ys
 
 xs ?? []  =  xs
@@ -2856,6 +2877,9 @@ xs ?? (x:ys)  =  x:[] ?? ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ++ xs ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ++ ys ?? ys
@@ -2867,6 +2891,9 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ++ xs ?? ys
 
 xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ ys ?? xs
+
+xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ++ ys ?? ys
 
 xs ?? []  =  xs
@@ -2876,6 +2903,9 @@ xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? ys ++ xs
 
 xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs ++ xs
+
+xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? ys ++ xs
 
 xs ?? []  =  xs
@@ -2883,6 +2913,9 @@ xs ?? (x:ys)  =  [] ?? ys ++ xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  xs ?? ys ++ ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs ++ ys
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  ys ?? ys ++ ys
@@ -2894,6 +2927,9 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  x:xs ?? ys
 
 xs ?? []  =  []
+xs ?? (x:ys)  =  x:ys ?? xs
+
+xs ?? []  =  []
 xs ?? (x:ys)  =  x:ys ?? ys
 
 xs ?? []  =  []
@@ -2901,6 +2937,9 @@ xs ?? (x:ys)  =  x:[] ?? ys
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  xs ++ xs ?? ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ ys ?? xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  xs ++ ys ?? ys
@@ -2912,6 +2951,9 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  ys ++ xs ?? ys
 
 xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ ys ?? xs
+
+xs ?? []  =  []
 xs ?? (x:ys)  =  ys ++ ys ?? ys
 
 xs ?? []  =  []
@@ -2919,6 +2961,9 @@ xs ?? (x:ys)  =  ys ++ [] ?? ys
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  xs ?? ys ++ xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ?? xs ++ xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? ys ++ xs
@@ -2930,6 +2975,9 @@ xs ?? []  =  []
 xs ?? (x:ys)  =  xs ?? ys ++ ys
 
 xs ?? []  =  []
+xs ?? (x:ys)  =  ys ?? xs ++ ys
+
+xs ?? []  =  []
 xs ?? (x:ys)  =  ys ?? ys ++ ys
 
 xs ?? []  =  []
@@ -2937,6 +2985,9 @@ xs ?? (x:ys)  =  [] ?? ys ++ ys
 
 xs ?? []  =  xs ++ xs
 xs ?? (x:ys)  =  xs ?? ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  ys ?? xs
 
 xs ?? []  =  xs ++ xs
 xs ?? (x:ys)  =  ys ?? ys
@@ -2954,6 +3005,9 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  x:xs ?? []
 
 [] ?? xs  =  xs
+(x:xs) ?? ys  =  x:ys ?? xs
+
+[] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ++ xs ?? xs
 
 [] ?? xs  =  xs
@@ -2961,6 +3015,9 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ++ xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ++ ys ?? xs
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  ys ++ xs ?? xs
@@ -2972,6 +3029,9 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  ys ++ xs ?? []
 
 [] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ++ ys ?? xs
+
+[] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? xs ++ xs
 
 [] ?? xs  =  xs
@@ -2981,6 +3041,9 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  xs ?? [] ++ xs
 
 [] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? xs ++ xs
+
+[] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? xs ++ ys
 
 [] ?? xs  =  xs
@@ -2988,6 +3051,9 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  xs ?? [] ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? xs ++ ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  x:xs ?? xs
@@ -2999,6 +3065,9 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  x:xs ?? []
 
 [] ?? xs  =  []
+(x:xs) ?? ys  =  x:ys ?? xs
+
+[] ?? xs  =  []
 (x:xs) ?? ys  =  xs ++ xs ?? xs
 
 [] ?? xs  =  []
@@ -3006,6 +3075,9 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ++ xs ?? []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ++ ys ?? xs
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  ys ++ xs ?? xs
@@ -3017,6 +3089,9 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? ys  =  ys ++ xs ?? []
 
 [] ?? xs  =  []
+(x:xs) ?? ys  =  ys ++ ys ?? xs
+
+[] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? xs ++ xs
 
 [] ?? xs  =  []
@@ -3024,6 +3099,9 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? [] ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ?? xs ++ xs
 
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? xs ++ ys
@@ -3034,6 +3112,9 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? xs  =  []
 (x:xs) ?? ys  =  xs ?? [] ++ ys
 
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ?? xs ++ ys
+
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  xs ?? xs
 
@@ -3042,6 +3123,9 @@ xs ?? (x:ys)  =  [] ?? ys
 
 [] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  ys ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
@@ -3057,6 +3141,11 @@ xs ?? (x:ys)  =  [] ?? ys
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
@@ -3554,7 +3643,7 @@ xs ?? (x:ys)  =  []
 
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,1,0,2,6,10,22,40,76] direct candidates, 0 duplicates
+  [3,1,0,0,2,4,6,12,16] direct candidates, 0 duplicates
   [3,3,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
 
 rules:
@@ -3619,21 +3708,9 @@ ton p  =  True
 
 ton p  =  not p
 
-ton p  =  p && ton p
-
-ton p  =  p || ton p
-
 ton p  =  p && ton (not p)
 
 ton p  =  p || ton (not p)
-
-ton p  =  p && not (ton p)
-
-ton p  =  not p && ton p
-
-ton p  =  p || not (ton p)
-
-ton p  =  not p || ton p
 
 ton p  =  p && not (ton (not p))
 
@@ -3642,18 +3719,6 @@ ton p  =  not p && ton (not p)
 ton p  =  p || not (ton (not p))
 
 ton p  =  not p || ton (not p)
-
-ton p  =  p && (p && ton p)
-
-ton p  =  p && (p || ton p)
-
-ton p  =  not p && not (ton p)
-
-ton p  =  p || p && ton p
-
-ton p  =  p || (p || ton p)
-
-ton p  =  not p || not (ton p)
 
 
 pattern candidates:
@@ -3675,7 +3740,7 @@ ton True  =  False
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,2,4,30,112,342,1032,2852] direct candidates, 0 duplicates
+  [4,2,2,4,2,48,158,564,1456] direct candidates, 0 duplicates
   [4,14,26,10,2,16,18,60,120] pattern candidates, 0 duplicates
 
 rules:
@@ -3760,62 +3825,6 @@ p &| q  =  not p && not q
 
 p &| q  =  not p || not q
 
-p &| q  =  p && p &| p
-
-p &| q  =  p && p &| q
-
-p &| q  =  p && p &| False
-
-p &| q  =  p && p &| True
-
-p &| q  =  p && q &| q
-
-p &| q  =  p && False &| q
-
-p &| q  =  p && True &| q
-
-p &| q  =  q && p &| p
-
-p &| q  =  q && p &| q
-
-p &| q  =  q && p &| False
-
-p &| q  =  q && p &| True
-
-p &| q  =  q && q &| q
-
-p &| q  =  q && False &| q
-
-p &| q  =  q && True &| q
-
-p &| q  =  p || p &| p
-
-p &| q  =  p || p &| q
-
-p &| q  =  p || p &| False
-
-p &| q  =  p || p &| True
-
-p &| q  =  p || q &| q
-
-p &| q  =  p || False &| q
-
-p &| q  =  p || True &| q
-
-p &| q  =  q || p &| p
-
-p &| q  =  q || p &| q
-
-p &| q  =  q || p &| False
-
-p &| q  =  q || p &| True
-
-p &| q  =  q || q &| q
-
-p &| q  =  q || False &| q
-
-p &| q  =  q || True &| q
-
 p &| q  =  p && (q && not p)
 
 p &| q  =  p && (q || not p)
@@ -3848,8 +3857,6 @@ p &| q  =  not q || p && q
 
 p &| q  =  not q || (p || q)
 
-p &| q  =  p && p &| not p
-
 p &| q  =  p && p &| not q
 
 p &| q  =  p && q &| not q
@@ -3865,10 +3872,6 @@ p &| q  =  p && not p &| q
 p &| q  =  p && not p &| False
 
 p &| q  =  p && not p &| True
-
-p &| q  =  p && not q &| q
-
-p &| q  =  q && p &| not p
 
 p &| q  =  q && p &| not q
 
@@ -3886,10 +3889,6 @@ p &| q  =  q && not p &| False
 
 p &| q  =  q && not p &| True
 
-p &| q  =  q && not q &| q
-
-p &| q  =  p || p &| not p
-
 p &| q  =  p || p &| not q
 
 p &| q  =  p || q &| not q
@@ -3906,10 +3905,6 @@ p &| q  =  p || not p &| False
 
 p &| q  =  p || not p &| True
 
-p &| q  =  p || not q &| q
-
-p &| q  =  q || p &| not p
-
 p &| q  =  q || p &| not q
 
 p &| q  =  q || q &| not q
@@ -3925,120 +3920,6 @@ p &| q  =  q || not p &| q
 p &| q  =  q || not p &| False
 
 p &| q  =  q || not p &| True
-
-p &| q  =  q || not q &| q
-
-p &| q  =  p && not (p &| p)
-
-p &| q  =  p && not (p &| q)
-
-p &| q  =  p && not (p &| False)
-
-p &| q  =  p && not (p &| True)
-
-p &| q  =  p && not (q &| q)
-
-p &| q  =  p && not (False &| q)
-
-p &| q  =  p && not (True &| q)
-
-p &| q  =  q && not (p &| p)
-
-p &| q  =  q && not (p &| q)
-
-p &| q  =  q && not (p &| False)
-
-p &| q  =  q && not (p &| True)
-
-p &| q  =  q && not (q &| q)
-
-p &| q  =  q && not (False &| q)
-
-p &| q  =  q && not (True &| q)
-
-p &| q  =  not p && p &| p
-
-p &| q  =  not p && p &| q
-
-p &| q  =  not p && p &| False
-
-p &| q  =  not p && p &| True
-
-p &| q  =  not p && q &| q
-
-p &| q  =  not p && False &| q
-
-p &| q  =  not p && True &| q
-
-p &| q  =  not q && p &| p
-
-p &| q  =  not q && p &| q
-
-p &| q  =  not q && p &| False
-
-p &| q  =  not q && p &| True
-
-p &| q  =  not q && q &| q
-
-p &| q  =  not q && False &| q
-
-p &| q  =  not q && True &| q
-
-p &| q  =  p || not (p &| p)
-
-p &| q  =  p || not (p &| q)
-
-p &| q  =  p || not (p &| False)
-
-p &| q  =  p || not (p &| True)
-
-p &| q  =  p || not (q &| q)
-
-p &| q  =  p || not (False &| q)
-
-p &| q  =  p || not (True &| q)
-
-p &| q  =  q || not (p &| p)
-
-p &| q  =  q || not (p &| q)
-
-p &| q  =  q || not (p &| False)
-
-p &| q  =  q || not (p &| True)
-
-p &| q  =  q || not (q &| q)
-
-p &| q  =  q || not (False &| q)
-
-p &| q  =  q || not (True &| q)
-
-p &| q  =  not p || p &| p
-
-p &| q  =  not p || p &| q
-
-p &| q  =  not p || p &| False
-
-p &| q  =  not p || p &| True
-
-p &| q  =  not p || q &| q
-
-p &| q  =  not p || False &| q
-
-p &| q  =  not p || True &| q
-
-p &| q  =  not q || p &| p
-
-p &| q  =  not q || p &| q
-
-p &| q  =  not q || p &| False
-
-p &| q  =  not q || p &| True
-
-p &| q  =  not q || q &| q
-
-p &| q  =  not q || False &| q
-
-p &| q  =  not q || True &| q
 
 
 pattern candidates:

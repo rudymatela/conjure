@@ -563,20 +563,30 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
 -- see if any projects the same variables while only using deconstructions
 -- and where there is at least a single deconstruction.
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends isDecOf e' e  =  any d1 ss
+descends isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
   where
-  desc  =  any d1 . uncurry useMatches . unzip
-  d1 exys  =  all isNotConstruction exys
-           && any isDeconstruction exys
   ss  =  init $ sets exys
   exys  =  zip exs eys
   (_:exs)  =  unfoldApp e'
   (_:eys)  =  unfoldApp e
-  isDeconstruction (p,e) | isVar p    =  e `isDecOf` p
-                         | otherwise  =  size e < size p && vars e `isSubsetOf` vars p
-  isNotConstruction (p,e) | isVar p    =  e == p || e `isDecOf` p
-                          | otherwise  =  size e <= size p -- TODO: allow filter and id somehow
--- TODO: improve this function with better isNotConstruction
+
+-- > > isDescent [xx -:- xxs, yys]  [yys, xxs]
+-- > True
+--
+-- > > isDescent [xx -:- xxs, yys]  [yys, xx -:- xxs]
+-- > False
+isDescent :: (Expr -> Expr -> Bool) -> [Expr] -> [Expr] -> Bool
+isDescent isDecOf ps es  =  any is es
+                         && all iz es
+  where
+  is e | isVar e    =  any (\p -> 1 {-size e-} < size p && e `elem` vars p) ps
+       | otherwise  =  any (e `isDecOf`) $ concatMap vars ps
+  iz e | isVar e    =  True
+       | otherwise  =  all (\p -> e `isDecOf` p || size e <= size p) ps
+-- TODO: closely review isDescent and descends
+-- TODO: after sets, filter sets of values of the same type
+-- TODO: improve "iz" a.k.a. isNotConstruction
+-- TODO: create test/engine.hs and thoroughly test descends and isDescent
 
 
 -- | Checks if the given pattern is a ground pattern.
