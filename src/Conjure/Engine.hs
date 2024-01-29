@@ -346,15 +346,17 @@ nubCandidates Args{..} nm f  =
 equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
 equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   where
-  err  =  error "nubCandidates: unexpected evaluation error."
+  err  =  error "equalModuloTesting: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
   d1 === d2  =  all are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
     where
     are :: Expr -> Bool
     are e  =  errorToFalse -- silences errors, ok since this is for optional measuring of optimal pruning
            $  (`fromDyn` err)
-           $  eq `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d1 e)
-                 `dynApp` fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d2 e)
+           $  eq `dynApp` evalDyn d1 e
+                 `dynApp` evalDyn d2 e
+  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
+
 
 
 -- | Return apparently unique candidate definitions
