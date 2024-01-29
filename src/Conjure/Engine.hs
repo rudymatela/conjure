@@ -367,7 +367,8 @@ erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
 erroneousCandidate maxTests maxEvalRecursions nm f d  =
   any is testGrounds
   where
-  testGrounds  =  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+  testGrounds  =  filter (none isNegative . unfoldApp)
+               $  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
   err  =  error "erroneousCandidate: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
   is :: Expr -> Bool
@@ -377,6 +378,8 @@ erroneousCandidate maxTests maxEvalRecursions nm f d  =
   evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
                            `dynApp` evalDyn d2 e `fromDyn` err
   isError  =  isNothing . errorToNothing
+  isNegative (Value ('-':_) _)  =  True
+  isNegative _  =  False
 
 
 

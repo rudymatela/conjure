@@ -7,37 +7,13 @@ Erroneous candidates for: foo :: Int -> Int
 Erroneous candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,7,22,49,112,276] candidates
-  68/469 erroneous candidates
-
-x ? 0  =  x
-x ? y  =  x ? dec y
-
-x ? 0  =  x
-x ? y  =  y ? dec y
-
-x ? 0  =  x
-x ? y  =  0 ? dec y
-
-x ? 0  =  x
-x ? y  =  dec x ? x
+  20/469 erroneous candidates
 
 x ? 0  =  x
 x ? y  =  dec x ? y
 
 0 ? x  =  x
 x ? y  =  x ? dec y
-
-0 ? x  =  x
-x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? y  =  dec x ? x
-
-0 ? x  =  x
-x ? y  =  dec x ? y
-
-0 ? x  =  x
-x ? y  =  dec x ? 0
 
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
@@ -52,12 +28,6 @@ x ? 0  =  x
 x ? y  =  dec x ? dec x
 
 x ? 0  =  x
-x ? y  =  dec x ? dec y
-
-x ? 0  =  x
-x ? y  =  dec y ? dec y
-
-x ? 0  =  x
 x ? y  =  dec (dec x) ? x
 
 x ? 0  =  x
@@ -68,12 +38,6 @@ x ? y  =  x ? dec (dec y)
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec y)
-
-0 ? x  =  x
-x ? y  =  dec x ? dec x
-
-0 ? x  =  x
-x ? y  =  dec x ? dec y
 
 0 ? x  =  x
 x ? y  =  dec y ? dec y
@@ -88,46 +52,10 @@ x ? y  =  dec (dec x) ? y
 x ? y  =  dec (dec x) ? 0
 
 x ? 0  =  x
-x ? y  =  dec (x ? dec y)
-
-x ? 0  =  x
-x ? y  =  dec (y ? dec y)
-
-x ? 0  =  x
-x ? y  =  dec (0 ? dec y)
-
-x ? 0  =  x
-x ? y  =  dec (dec x ? x)
-
-x ? 0  =  x
 x ? y  =  dec (dec x ? y)
 
 x ? 0  =  0
-x ? y  =  dec (x ? dec y)
-
-x ? 0  =  0
-x ? y  =  dec (y ? dec y)
-
-x ? 0  =  0
-x ? y  =  dec (0 ? dec y)
-
-x ? 0  =  0
-x ? y  =  dec (dec x ? x)
-
-x ? 0  =  0
 x ? y  =  dec (dec x ? y)
-
-x ? 0  =  dec x
-x ? y  =  x ? dec y
-
-x ? 0  =  dec x
-x ? y  =  y ? dec y
-
-x ? 0  =  dec x
-x ? y  =  0 ? dec y
-
-x ? 0  =  dec x
-x ? y  =  dec x ? x
 
 x ? 0  =  dec x
 x ? y  =  dec x ? y
@@ -135,95 +63,11 @@ x ? y  =  dec x ? y
 0 ? x  =  x
 x ? y  =  dec (x ? dec y)
 
-0 ? x  =  x
-x ? y  =  dec (y ? dec y)
-
-0 ? x  =  x
-x ? y  =  dec (dec x ? x)
-
-0 ? x  =  x
-x ? y  =  dec (dec x ? y)
-
-0 ? x  =  x
-x ? y  =  dec (dec x ? 0)
-
 0 ? x  =  0
 x ? y  =  dec (x ? dec y)
 
-0 ? x  =  0
-x ? y  =  dec (y ? dec y)
-
-0 ? x  =  0
-x ? y  =  dec (dec x ? x)
-
-0 ? x  =  0
-x ? y  =  dec (dec x ? y)
-
-0 ? x  =  0
-x ? y  =  dec (dec x ? 0)
-
 0 ? x  =  dec x
 x ? y  =  x ? dec y
-
-0 ? x  =  dec x
-x ? y  =  y ? dec y
-
-0 ? x  =  dec x
-x ? y  =  dec x ? x
-
-0 ? x  =  dec x
-x ? y  =  dec x ? y
-
-0 ? x  =  dec x
-x ? y  =  dec x ? 0
-
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  x ? dec y
-
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec x ? x
-
-0 ? x  =  x
-x ? 0  =  x
-x ? y  =  dec x ? y
-
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  x ? dec y
-
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec x ? x
-
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec x ? y
-
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  x ? dec y
-
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  y ? dec y
-
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec x ? x
-
-0 ? x  =  0
-x ? 0  =  x
-x ? y  =  dec x ? y
 
 
 Erroneous candidates for: goo :: [Int] -> [Int]
