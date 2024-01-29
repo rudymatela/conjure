@@ -601,8 +601,6 @@ descends isDecOf e' e  =  any d1 ss
   (_:eys)  =  unfoldApp e
   isDeconstruction (p,e) | isVar p    =  e `isDecOf` p
                          | otherwise  =  size e < size p && vars e `isSubsetOf` vars p
-    where
-    cs  =  consts e
   isNotConstruction (p,e) | isVar p    =  e == p || e `isDecOf` p
                           | otherwise  =  size e <= size p -- TODO: allow filter and id somehow
 -- TODO: improve this function with better isNotConstruction
