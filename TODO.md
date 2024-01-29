@@ -50,6 +50,10 @@ In the examples above,
 recursive calls on the root eventually
 lead to a final fixed base-case value.
 
+When all base-cases yield the same result,
+and all the recursive cases are root recursions,
+the candidates can be discarded as redundant.
+
 
 This file is part of Conjure,
 (C) 2021-2024 Rudy Matela,
