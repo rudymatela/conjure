@@ -202,9 +202,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,45,134] candidates
-  158/204 unique candidates
-  46/204 redundant candidates
+  [3,7,15,45,123] candidates
+  158/193 unique candidates
+  35/193 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -226,55 +226,6 @@ class of 2 equivalent candidates:
 
     [] ?? xs  =  xs
     (x:xs) ?? ys  =  xs ?? ys
-
-
-class of 12 equivalent candidates:
-
-    xs ?? ys  =  []
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs ?? xs
-    (x:xs) ?? (y:ys)  =  []
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs ?? []
-    (x:xs) ?? (y:ys)  =  []
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  xs ?? xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  xs ?? ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  xs ?? []
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  ys ?? xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  ys ?? ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  ys ?? []
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs ?? xs
-    (x:xs) ?? ys  =  []
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  xs ?? []
-    (x:xs) ?? ys  =  []
-
-    [] ?? []  =  []
-    [] ?? (x:xs)  =  [] ?? xs
-    (x:xs) ?? ys  =  []
 
 
 class of 5 equivalent candidates:

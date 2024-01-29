@@ -8,7 +8,7 @@ replicate :: Int -> Char -> [Char]
 -- looking through 3 candidates of size 5
 -- looking through 3 candidates of size 6
 -- looking through 5 candidates of size 7
--- looking through 9 candidates of size 8
+-- looking through 6 candidates of size 8
 -- tested 15 candidates
 replicate 0 c  =  ""
 replicate x c  =  c:replicate (x - 1) c

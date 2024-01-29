@@ -304,10 +304,10 @@ gps17 :: Int -> Int
 -- looking through 8 candidates of size 4
 -- looking through 28 candidates of size 5
 -- looking through 35 candidates of size 6
--- looking through 216 candidates of size 7
+-- looking through 213 candidates of size 7
 -- looking through 233 candidates of size 8
 -- looking through 1408 candidates of size 9
--- tested 567 candidates
+-- tested 564 candidates
 gps17 0  =  0
 gps17 x  =  gps17 (x - 1) + x * x
 
@@ -318,12 +318,12 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 25 candidates of size 4
--- looking through 98 candidates of size 5
+-- looking through 87 candidates of size 5
 -- looking through 94 candidates of size 6
--- looking through 416 candidates of size 7
--- looking through 404 candidates of size 8
--- looking through 1891 candidates of size 9
--- tested 1900 candidates
+-- looking through 390 candidates of size 7
+-- looking through 395 candidates of size 8
+-- looking through 1803 candidates of size 9
+-- tested 1766 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys

@@ -364,6 +364,7 @@ hasRedundantRecursion d  =  not (null rs) && any matchesRHS bs
 isRedundantByRootRecursions :: Defn -> Bool
 isRedundantByRootRecursions d  =  case partition isGround $ map snd d of
   ([b], rs@(_:_))  ->  all isHole rs
+  (bs@(_:_), rs@(_:_))  -> all isHole rs && all isGround bs && allEqual bs
   _  -> False
 
 -- | Introduces a hole at a given position in the binding:

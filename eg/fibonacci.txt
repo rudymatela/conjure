@@ -7,13 +7,13 @@ fibonacci :: Int -> Int
 -- looking through 9 candidates of size 4
 -- looking through 30 candidates of size 5
 -- looking through 30 candidates of size 6
--- looking through 178 candidates of size 7
+-- looking through 174 candidates of size 7
 -- looking through 177 candidates of size 8
 -- looking through 929 candidates of size 9
 -- looking through 919 candidates of size 10
 -- looking through 5163 candidates of size 11
 -- looking through 5338 candidates of size 12
--- tested 7773 candidates
+-- tested 7769 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

@@ -260,9 +260,9 @@ gps18_price :: [Double] -> [Double] -> Double
 -- looking through 8 candidates of size 2
 -- looking through 32 candidates of size 3
 -- looking through 70 candidates of size 4
--- looking through 412 candidates of size 5
+-- looking through 400 candidates of size 5
 -- looking through 1056 candidates of size 6
--- tested 1580 candidates
+-- tested 1568 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -380,8 +380,8 @@ gps25 :: [Double] -> [Double] -> Double
 -- looking through 9 candidates of size 2
 -- looking through 49 candidates of size 3
 -- looking through 195 candidates of size 4
--- looking through 1055 candidates of size 5
+-- looking through 1043 candidates of size 5
 -- looking through 4661 candidates of size 6
--- tested 5971 candidates
+-- tested 5959 candidates
 cannot conjure
 
