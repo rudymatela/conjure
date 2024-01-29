@@ -5,11 +5,11 @@ invert :: [Bool] -> [Bool]
 -- pruning with 41/51 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 4 candidates of size 3
 -- looking through 10 candidates of size 4
--- looking through 17 candidates of size 5
+-- looking through 15 candidates of size 5
 -- looking through 41 candidates of size 6
--- tested 36 candidates
+-- tested 33 candidates
 invert []  =  []
 invert (p:ps)  =  not p:invert ps
 
@@ -20,8 +20,8 @@ prependZero :: [Bool] -> [Bool]
 -- pruning with 41/51 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 5 candidates of size 3
--- tested 5 candidates
+-- looking through 4 candidates of size 3
+-- tested 4 candidates
 prependZero ps  =  False:ps
 
 TerpreT benchmark #3: binary decrement
@@ -31,14 +31,14 @@ decrement :: [Bool] -> [Bool]
 -- pruning with 41/51 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 4 candidates of size 3
 -- looking through 10 candidates of size 4
--- looking through 17 candidates of size 5
+-- looking through 15 candidates of size 5
 -- looking through 41 candidates of size 6
--- looking through 86 candidates of size 7
+-- looking through 82 candidates of size 7
 -- looking through 202 candidates of size 8
--- looking through 487 candidates of size 9
--- tested 418 candidates
+-- looking through 479 candidates of size 9
+-- tested 411 candidates
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
@@ -135,11 +135,11 @@ access :: [A] -> Int -> A
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 4 candidates of size 4
+-- looking through 1 candidates of size 4
 -- looking through 9 candidates of size 5
--- looking through 17 candidates of size 6
--- looking through 46 candidates of size 7
--- tested 46 candidates
+-- looking through 8 candidates of size 6
+-- looking through 34 candidates of size 7
+-- tested 28 candidates
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
 (x:xs) `access` y  =  xs `access` (y - 1)
@@ -151,12 +151,12 @@ decrelements :: [Int] -> [Int]
 -- pruning with 3/23 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 3
 -- looking through 7 candidates of size 4
--- looking through 9 candidates of size 5
+-- looking through 8 candidates of size 5
 -- looking through 29 candidates of size 6
--- looking through 41 candidates of size 7
--- tested 53 candidates
+-- looking through 39 candidates of size 7
+-- tested 51 candidates
 decrelements []  =  []
 decrelements (x:xs)  =  x - 1:decrelements xs
 
@@ -165,8 +165,8 @@ decrelements :: [Int] -> [Int]
 -- pruning with 5/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 3
 -- looking through 8 candidates of size 4
--- tested 8 candidates
+-- tested 7 candidates
 decrelements xs  =  map (subtract 1) xs
 

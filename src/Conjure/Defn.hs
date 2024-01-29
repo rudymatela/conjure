@@ -252,6 +252,7 @@ defnApparentlyTerminates _  =  True
 isRedundantDefn :: Defn -> Bool
 isRedundantDefn d  =  isRedundantBySubsumption d
                    || isRedundantByRepetition d
+                   || isRedundantByRootRecursions d
 --                 || isRedundantByIntroduction d
 -- we do not use isRedundantByIntroduction above
 -- as it does not pay off in terms of runtime vs number of pruned candidates
@@ -342,6 +343,28 @@ hasRedundantRecursion d  =  not (null rs) && any matchesRHS bs
   where
   (bs,rs)  =  partition isBaseCase d
   matchesRHS (lhs,_)  =  any ((`hasAppInstanceOf` lhs) . snd) rs
+
+-- | Returns whether a given 'Defn' is redundant
+--   with regards to root recursions.
+--
+-- When there is a single base case and all recursive calls
+-- are at the root: we have a redundant function.
+-- (Modulo error functions, which are undesired anyway.)
+--
+-- > xs ? []  =  []
+-- > xs ? (x:ys)  =  xs ? ys
+--
+-- Above it does not really pays off to follow the recursive calls,
+-- at the end we always reach an empty list.
+--
+-- The same goes for the following:
+--
+-- > xs ? []  =  xs
+-- > xs ? (x:ys)  =  xs ? ys
+isRedundantByRootRecursions :: Defn -> Bool
+isRedundantByRootRecursions d  =  case partition isGround $ map snd d of
+  ([b], rs@(_:_))  ->  all isHole rs
+  _  -> False
 
 -- | Introduces a hole at a given position in the binding:
 --

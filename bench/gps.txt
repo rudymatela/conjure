@@ -79,11 +79,11 @@ gps5 :: [Char] -> [Char]
 -- pruning with 2/3 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
--- looking through 5 candidates of size 5
+-- looking through 4 candidates of size 5
 -- looking through 13 candidates of size 6
--- tested 30 candidates
+-- tested 28 candidates
 cannot conjure
 
 gps6 :: Int -> Int
@@ -93,9 +93,9 @@ gps6 :: Int -> Int
 -- looking through 2 candidates of size 2
 -- looking through 14 candidates of size 3
 -- looking through 14 candidates of size 4
--- looking through 188 candidates of size 5
--- looking through 167 candidates of size 6
--- tested 389 candidates
+-- looking through 186 candidates of size 5
+-- looking through 165 candidates of size 6
+-- tested 385 candidates
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -198,13 +198,13 @@ gps11 :: [[Char]] -> [Int]
 -- pruning with 4/4 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 1 candidates of size 5
 -- looking through 2 candidates of size 6
 -- looking through 0 candidates of size 7
 -- looking through 2 candidates of size 8
--- tested 6 candidates
+-- tested 5 candidates
 gps11 []  =  []
 gps11 (cs:css)  =  gps11 css ++ [length cs]
 
@@ -213,8 +213,8 @@ gps12 :: [Int] -> Int
 -- pruning with 13/27 rules
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 11 candidates of size 4
+-- looking through 2 candidates of size 3
+-- looking through 9 candidates of size 4
 -- looking through 22 candidates of size 5
 -- looking through 51 candidates of size 6
 -- looking through 133 candidates of size 7
@@ -222,7 +222,7 @@ gps12 :: [Int] -> Int
 -- looking through 938 candidates of size 9
 -- looking through 2418 candidates of size 10
 -- looking through 7229 candidates of size 11
--- tested 8246 candidates
+-- tested 8242 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -230,13 +230,13 @@ gps13 :: [Ratio Integer] -> Ratio Integer
 -- pruning with 4/8 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 3
 -- looking through 10 candidates of size 4
--- looking through 14 candidates of size 5
+-- looking through 13 candidates of size 5
 -- looking through 51 candidates of size 6
--- looking through 105 candidates of size 7
+-- looking through 103 candidates of size 7
 -- looking through 365 candidates of size 8
--- tested 271 candidates
+-- tested 267 candidates
 gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 
 odd :: Int -> Bool
@@ -246,8 +246,8 @@ odd :: Int -> Bool
 -- looking through 0 candidates of size 2
 -- looking through 4 candidates of size 3
 -- looking through 3 candidates of size 4
--- looking through 43 candidates of size 5
--- tested 24 candidates
+-- looking through 39 candidates of size 5
+-- tested 20 candidates
 odd x  =  0 /= x `mod` 2
 
 gps14 :: [Int] -> Int
@@ -265,12 +265,12 @@ gps14 :: [Int] -> Int
 -- pruning with 39/58 rules
 -- looking through 3 candidates of size 1
 -- looking through 9 candidates of size 2
--- looking through 3 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 27 candidates of size 4
 -- looking through 30 candidates of size 5
 -- looking through 258 candidates of size 6
 -- looking through 474 candidates of size 7
--- tested 381 candidates
+-- tested 378 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x + gps14 xs `mod` 2
 
@@ -302,12 +302,12 @@ gps17 :: Int -> Int
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 34 candidates of size 5
--- looking through 38 candidates of size 6
+-- looking through 28 candidates of size 5
+-- looking through 35 candidates of size 6
 -- looking through 216 candidates of size 7
 -- looking through 233 candidates of size 8
 -- looking through 1408 candidates of size 9
--- tested 576 candidates
+-- tested 567 candidates
 gps17 0  =  0
 gps17 x  =  gps17 (x - 1) + x * x
 
@@ -317,13 +317,13 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 37 candidates of size 4
+-- looking through 25 candidates of size 4
 -- looking through 98 candidates of size 5
--- looking through 106 candidates of size 6
--- looking through 440 candidates of size 7
--- looking through 428 candidates of size 8
--- looking through 1950 candidates of size 9
--- tested 2031 candidates
+-- looking through 94 candidates of size 6
+-- looking through 416 candidates of size 7
+-- looking through 404 candidates of size 8
+-- looking through 1891 candidates of size 9
+-- tested 1900 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -384,19 +384,19 @@ pig1 :: [Char] -> [Char]
 -- pruning with 5/5 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 5 candidates of size 3
+-- looking through 4 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 14 candidates of size 5
+-- looking through 13 candidates of size 5
 -- looking through 28 candidates of size 6
--- looking through 47 candidates of size 7
+-- looking through 46 candidates of size 7
 -- looking through 126 candidates of size 8
--- looking through 201 candidates of size 9
+-- looking through 200 candidates of size 9
 -- looking through 631 candidates of size 10
--- looking through 1069 candidates of size 11
+-- looking through 1068 candidates of size 11
 -- looking through 3495 candidates of size 12
--- looking through 6382 candidates of size 13
+-- looking through 6381 candidates of size 13
 -- looking through 20409 candidates of size 14
--- tested 27901 candidates
+-- tested 27895 candidates
 pig1 ""  =  "ay"
 pig1 (c:cs)  =  if isVowel c
                 then (c:cs) ++ "ay"
@@ -417,15 +417,15 @@ gps21 :: [Int] -> [Int]
 -- pruning with 4/4 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
--- looking through 5 candidates of size 5
+-- looking through 4 candidates of size 5
 -- looking through 13 candidates of size 6
--- looking through 9 candidates of size 7
+-- looking through 8 candidates of size 7
 -- looking through 30 candidates of size 8
--- looking through 25 candidates of size 9
+-- looking through 24 candidates of size 9
 -- looking through 65 candidates of size 10
--- tested 96 candidates
+-- tested 92 candidates
 gps21 []  =  []
 gps21 (x:xs)  =  (if x < 0 then 0 else x):gps21 xs
 
@@ -433,11 +433,11 @@ gps22 :: [Char] -> Int
 -- pruning with 5/9 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 1 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 3 candidates of size 6
--- tested 5 candidates
+-- tested 4 candidates
 gps22 ""  =  0
 gps22 (c:cs)  =  gps22 cs + scrabble1 c
 
@@ -453,15 +453,15 @@ gps24 :: [Char] -> Char
 -- pruning with 15/19 rules
 -- looking through 1 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 3 candidates of size 4
+-- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 4
 -- looking through 8 candidates of size 5
--- looking through 15 candidates of size 6
--- looking through 31 candidates of size 7
--- looking through 77 candidates of size 8
--- looking through 203 candidates of size 9
--- looking through 487 candidates of size 10
--- tested 485 candidates
+-- looking through 13 candidates of size 6
+-- looking through 30 candidates of size 7
+-- looking through 75 candidates of size 8
+-- looking through 195 candidates of size 9
+-- looking through 474 candidates of size 10
+-- tested 457 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]
@@ -526,14 +526,14 @@ gps29 :: [Char] -> Int
 -- pruning with 7/11 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 2 candidates of size 5
 -- looking through 6 candidates of size 6
 -- looking through 10 candidates of size 7
 -- looking through 10 candidates of size 8
 -- looking through 24 candidates of size 9
--- tested 40 candidates
+-- tested 38 candidates
 gps29 ""  =  0
 gps29 (c:cs)  =  gps29 cs + (if isVowel c then 1 else 0)
 

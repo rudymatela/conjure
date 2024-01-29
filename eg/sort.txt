@@ -3,10 +3,10 @@ sort :: [Int] -> [Int]
 -- pruning with 6/7 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 12 candidates of size 4
+-- looking through 4 candidates of size 3
+-- looking through 11 candidates of size 4
 -- looking through 23 candidates of size 5
--- tested 24 candidates
+-- tested 22 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
@@ -15,9 +15,9 @@ sort :: [Int] -> [Int]
 -- pruning with 1/2 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 4 candidates of size 4
--- tested 6 candidates
+-- tested 5 candidates
 sort xs  =  foldr insert [] xs
 
 qsort :: [Int] -> [Int]
@@ -25,7 +25,7 @@ qsort :: [Int] -> [Int]
 -- pruning with 8/8 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 1 candidates of size 3
 -- looking through 3 candidates of size 4
 -- looking through 6 candidates of size 5
 -- looking through 9 candidates of size 6
@@ -37,7 +37,7 @@ qsort :: [Int] -> [Int]
 -- looking through 767 candidates of size 12
 -- looking through 1600 candidates of size 13
 -- looking through 3499 candidates of size 14
--- tested 3668 candidates
+-- tested 3667 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
@@ -47,15 +47,15 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 3 candidates of size 1
 -- looking through 7 candidates of size 2
 -- looking through 11 candidates of size 3
--- looking through 37 candidates of size 4
+-- looking through 25 candidates of size 4
 -- looking through 98 candidates of size 5
--- looking through 94 candidates of size 6
--- looking through 383 candidates of size 7
--- looking through 375 candidates of size 8
--- looking through 1263 candidates of size 9
--- looking through 2252 candidates of size 10
--- looking through 4090 candidates of size 11
--- looking through 13481 candidates of size 12
--- tested 22094 candidates
+-- looking through 82 candidates of size 6
+-- looking through 359 candidates of size 7
+-- looking through 363 candidates of size 8
+-- looking through 1204 candidates of size 9
+-- looking through 2240 candidates of size 10
+-- looking through 3995 candidates of size 11
+-- looking through 13469 candidates of size 12
+-- tested 21856 candidates
 cannot conjure
 

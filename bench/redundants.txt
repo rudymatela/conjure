@@ -1,8 +1,8 @@
 Redundant candidates for: foo :: Int -> Int
   pruning with 15/35 rules
-  [3,3,8,9,27] candidates
-  46/50 unique candidates
-  4/50 redundant candidates
+  [3,3,8,9,21] candidates
+  40/44 unique candidates
+  4/44 redundant candidates
 
 rules:
 x * y == x + y
@@ -68,9 +68,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,22,49,122] candidates
-  192/203 unique candidates
-  11/203 redundant candidates
+  [3,7,22,49,112] candidates
+  182/193 unique candidates
+  11/193 redundant candidates
 
 rules:
 x * y == x + y
@@ -181,9 +181,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,1,2,2,4] candidates
-  9/11 unique candidates
-  2/11 redundant candidates
+  [2,1,1,2,4] candidates
+  9/10 unique candidates
+  1/10 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -199,20 +199,12 @@ class of 2 equivalent candidates:
     goo (x:xs)  =  x:goo xs
 
 
-class of 2 equivalent candidates:
-
-    goo xs  =  []
-
-    goo []  =  []
-    goo (x:xs)  =  goo xs
-
-
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,57,134] candidates
-  160/216 unique candidates
-  56/216 redundant candidates
+  [3,7,15,45,134] candidates
+  158/204 unique candidates
+  46/204 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -236,39 +228,9 @@ class of 2 equivalent candidates:
     (x:xs) ?? ys  =  xs ?? ys
 
 
-class of 22 equivalent candidates:
+class of 12 equivalent candidates:
 
     xs ?? ys  =  []
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  xs ?? ys
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  ys ?? xs
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  ys ?? ys
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  [] ?? xs
-
-    xs ?? []  =  []
-    xs ?? (x:ys)  =  [] ?? ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ?? xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ?? ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  xs ?? []
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? xs
-
-    [] ?? xs  =  []
-    (x:xs) ?? ys  =  ys ?? []
 
     [] ?? xs  =  []
     (x:xs) ?? []  =  xs ?? xs

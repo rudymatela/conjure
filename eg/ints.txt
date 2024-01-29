@@ -22,10 +22,10 @@ sum :: [Int] -> Int
 -- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 6 candidates of size 5
--- tested 15 candidates
+-- tested 13 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -34,10 +34,10 @@ product :: [Int] -> Int
 -- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 6 candidates of size 5
--- tested 20 candidates
+-- tested 18 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
 
@@ -46,9 +46,9 @@ sum :: [Int] -> Int
 -- pruning with 15/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 9 candidates of size 4
--- tested 9 candidates
+-- tested 7 candidates
 sum xs  =  foldr (+) 0 xs
 
 product :: [Int] -> Int
@@ -56,8 +56,8 @@ product :: [Int] -> Int
 -- pruning with 15/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 4 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 9 candidates of size 4
--- tested 11 candidates
+-- tested 9 candidates
 product xs  =  foldr (*) 1 xs
 

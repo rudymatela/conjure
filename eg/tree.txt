@@ -3,12 +3,12 @@ leftmost :: Tree -> Int
 -- pruning with 3/3 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 4 candidates of size 6
 -- looking through 16 candidates of size 7
--- tested 9 candidates
+-- tested 7 candidates
 leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)  =  if nil t1
                             then x
@@ -19,12 +19,12 @@ rightmost :: Tree -> Int
 -- pruning with 3/3 rules
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 4 candidates of size 6
 -- looking through 16 candidates of size 7
--- tested 18 candidates
+-- tested 16 candidates
 rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)  =  if nil t2
                              then x
@@ -35,13 +35,13 @@ size :: Tree -> Int
 -- pruning with 4/8 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 2 candidates of size 4
 -- looking through 4 candidates of size 5
 -- looking through 8 candidates of size 6
 -- looking through 12 candidates of size 7
 -- looking through 24 candidates of size 8
--- tested 42 candidates
+-- tested 40 candidates
 size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
@@ -50,13 +50,13 @@ height :: Tree -> Int
 -- pruning with 49/65 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 14 candidates of size 5
 -- looking through 34 candidates of size 6
 -- looking through 98 candidates of size 7
 -- looking through 283 candidates of size 8
--- tested 202 candidates
+-- tested 200 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 
@@ -66,7 +66,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 5 candidates of size 4
+-- looking through 1 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
@@ -75,7 +75,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 96 candidates of size 12
--- tested 92 candidates
+-- tested 88 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 
@@ -84,7 +84,7 @@ ordered :: Tree -> Bool
 -- pruning with 29/39 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 0 candidates of size 4
 -- looking through 10 candidates of size 5
 -- looking through 20 candidates of size 6
@@ -94,7 +94,7 @@ ordered :: Tree -> Bool
 -- looking through 56 candidates of size 10
 -- looking through 450 candidates of size 11
 -- looking through 708 candidates of size 12
--- tested 1361 candidates
+-- tested 1359 candidates
 cannot conjure
 
 ordered :: Tree -> Bool
@@ -102,8 +102,8 @@ ordered :: Tree -> Bool
 -- pruning with 0/0 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 3 candidates of size 3
--- tested 3 candidates
+-- looking through 1 candidates of size 3
+-- tested 1 candidates
 ordered t1  =  strictlyOrdered (inorder t1)
 
 preorder :: Tree -> [Int]
@@ -111,13 +111,13 @@ preorder :: Tree -> [Int]
 -- pruning with 4/4 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 1 candidates of size 4
 -- looking through 2 candidates of size 5
 -- looking through 5 candidates of size 6
 -- looking through 4 candidates of size 7
 -- looking through 9 candidates of size 8
--- tested 17 candidates
+-- tested 15 candidates
 preorder Leaf  =  []
 preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
 
@@ -126,13 +126,13 @@ inorder :: Tree -> [Int]
 -- pruning with 4/4 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 1 candidates of size 4
 -- looking through 2 candidates of size 5
 -- looking through 5 candidates of size 6
 -- looking through 4 candidates of size 7
 -- looking through 9 candidates of size 8
--- tested 21 candidates
+-- tested 19 candidates
 inorder Leaf  =  []
 inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
 
@@ -141,7 +141,7 @@ posorder :: Tree -> [Int]
 -- pruning with 4/4 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 1 candidates of size 4
 -- looking through 2 candidates of size 5
 -- looking through 5 candidates of size 6
@@ -149,7 +149,7 @@ posorder :: Tree -> [Int]
 -- looking through 9 candidates of size 8
 -- looking through 14 candidates of size 9
 -- looking through 17 candidates of size 10
--- tested 52 candidates
+-- tested 50 candidates
 posorder Leaf  =  []
 posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])
 

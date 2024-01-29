@@ -4,7 +4,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 7 candidates of size 4
+-- looking through 3 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 0 candidates of size 7
@@ -13,7 +13,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 10
 -- looking through 304 candidates of size 11
 -- looking through 199 candidates of size 12
--- tested 501 candidates
+-- tested 497 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 
@@ -23,7 +23,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 4 candidates of size 4
+-- looking through 0 candidates of size 4
 -- looking through 0 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 6 candidates of size 7
@@ -32,7 +32,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 192 candidates of size 10
 -- looking through 0 candidates of size 11
 -- looking through 384 candidates of size 12
--- tested 375 candidates
+-- tested 371 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  case x `compare` y of LT -> mem x t1; EQ -> True; GT -> mem x t2
 
@@ -42,7 +42,7 @@ insert :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 4 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 86 candidates of size 7
@@ -51,7 +51,7 @@ insert :: Int -> Tree -> Tree
 -- looking through 1558 candidates of size 10
 -- looking through 3555 candidates of size 11
 -- looking through 4028 candidates of size 12
--- tested 9603 candidates
+-- tested 9599 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -59,7 +59,7 @@ before :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 4 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 86 candidates of size 7
@@ -68,7 +68,7 @@ before :: Int -> Tree -> Tree
 -- looking through 1558 candidates of size 10
 -- looking through 3555 candidates of size 11
 -- looking through 4028 candidates of size 12
--- tested 9603 candidates
+-- tested 9599 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -76,7 +76,7 @@ before :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 4 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 68 candidates of size 7
@@ -85,7 +85,7 @@ before :: Int -> Tree -> Tree
 -- looking through 1216 candidates of size 10
 -- looking through 5103 candidates of size 11
 -- looking through 1472 candidates of size 12
--- tested 8211 candidates
+-- tested 8207 candidates
 cannot conjure
 
 beyond :: Int -> Tree -> Tree
@@ -93,7 +93,7 @@ beyond :: Int -> Tree -> Tree
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 8 candidates of size 4
+-- looking through 4 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 68 candidates of size 7
@@ -102,7 +102,7 @@ beyond :: Int -> Tree -> Tree
 -- looking through 1216 candidates of size 10
 -- looking through 5103 candidates of size 11
 -- looking through 1472 candidates of size 12
--- tested 8211 candidates
+-- tested 8207 candidates
 cannot conjure
 
 union :: Tree -> Tree -> Tree
@@ -111,12 +111,12 @@ union :: Tree -> Tree -> Tree
 -- looking through 3 candidates of size 1
 -- looking through 11 candidates of size 2
 -- looking through 32 candidates of size 3
--- looking through 84 candidates of size 4
+-- looking through 60 candidates of size 4
 -- looking through 470 candidates of size 5
--- looking through 1074 candidates of size 6
--- looking through 4088 candidates of size 7
--- looking through 16373 candidates of size 8
--- looking through 41366 candidates of size 9
--- tested 63501 candidates
+-- looking through 990 candidates of size 6
+-- looking through 3872 candidates of size 7
+-- looking through 16301 candidates of size 8
+-- looking through 39950 candidates of size 9
+-- tested 61689 candidates
 cannot conjure
 

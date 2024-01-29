@@ -3,10 +3,10 @@ sum :: [Int] -> Int
 -- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 7 candidates of size 4
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
 -- looking through 11 candidates of size 5
--- tested 16 candidates
+-- tested 14 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -14,10 +14,10 @@ sum :: [Int] -> Int
 -- pruning with 14/25 rules
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 12 candidates of size 4
+-- looking through 3 candidates of size 3
+-- looking through 10 candidates of size 4
 -- looking through 18 candidates of size 5
--- tested 25 candidates
+-- tested 21 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 

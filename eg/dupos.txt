@@ -3,7 +3,7 @@ duplicates :: [Int] -> [Int]
 -- pruning with 21/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 2 candidates of size 4
 -- looking through 1 candidates of size 5
 -- looking through 2 candidates of size 6
@@ -18,7 +18,7 @@ duplicates :: [Int] -> [Int]
 -- looking through 602 candidates of size 15
 -- looking through 1116 candidates of size 16
 -- looking through 2031 candidates of size 17
--- tested 2451 candidates
+-- tested 2450 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
                       then x:duplicates xs
@@ -28,7 +28,7 @@ duplicates :: [Int] -> [Int]
 -- pruning with 21/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 3
 -- looking through 2 candidates of size 4
 -- looking through 1 candidates of size 5
 -- looking through 2 candidates of size 6
@@ -43,7 +43,7 @@ duplicates :: [Int] -> [Int]
 -- looking through 602 candidates of size 15
 -- looking through 1116 candidates of size 16
 -- looking through 2031 candidates of size 17
--- tested 2451 candidates
+-- tested 2450 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
                       then x:duplicates xs
@@ -56,17 +56,17 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- looking through 0 candidates of size 2
 -- looking through 2 candidates of size 3
 -- looking through 5 candidates of size 4
--- looking through 13 candidates of size 5
+-- looking through 9 candidates of size 5
 -- looking through 18 candidates of size 6
--- looking through 47 candidates of size 7
+-- looking through 43 candidates of size 7
 -- looking through 77 candidates of size 8
--- looking through 193 candidates of size 9
+-- looking through 185 candidates of size 9
 -- looking through 293 candidates of size 10
--- looking through 738 candidates of size 11
+-- looking through 722 candidates of size 11
 -- looking through 1173 candidates of size 12
--- looking through 2879 candidates of size 13
+-- looking through 2847 candidates of size 13
 -- looking through 4537 candidates of size 14
--- tested 5610 candidates
+-- tested 5546 candidates
 positionsFrom x y []  =  []
 positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
 
