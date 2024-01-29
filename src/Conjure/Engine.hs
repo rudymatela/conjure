@@ -365,8 +365,9 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
 
 erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
 erroneousCandidate maxTests maxEvalRecursions nm f d  =
-  any is $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+  any is testGrounds
   where
+  testGrounds  =  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
   err  =  error "erroneousCandidate: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
   is :: Expr -> Bool
