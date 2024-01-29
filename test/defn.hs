@@ -153,6 +153,22 @@ tests n  =
   , not $ isBaseCase      (ff (xx -:- xxs), ff xxs)
   ,       isRecursiveCase (ff (xx -:- xxs), ff xxs)
   , not $ isRecursiveCase (ff (xx -:- nil), xx)
+
+  , subsumedWith (/= zero -+- zero) (ff zero, zero) (ff xx, xx -+- xx) == True
+  , subsumedWith (/= zero -+- zero) (ff zero, zero) (ff xx, xx -+- zero) == True
+  , subsumedWith (/= zero -+- zero) (ff zero, zero) (ff xx, xx -+- one) == False
+  , subsumedWith (/= zero -+- zero) (zero -?- xx, zero) (xx -?- yy, xx -+- xx) == True
+  , subsumedWith (/= zero -+- zero) (zero -?- xx, zero) (xx -?- yy, xx -+- zero) == True
+  , subsumedWith (/= zero -+- zero) (zero -?- xx, zero) (xx -?- yy, xx -+- one) == False
+  , subsumedWith (/= zero -+- zero) (zero -?- xx, zero) (xx -?- yy, xx -+- yy) == False
+
+  , isRedundantModuloRewriting (/= zero -+- zero) [(ff zero, zero),(ff xx, xx -+- xx)] == True
+  , isRedundantModuloRewriting (/= zero -+- zero) [(ff zero, zero),(ff xx, xx -+- zero)] == True
+  , isRedundantModuloRewriting (/= zero -+- zero) [(ff zero, zero),(ff xx, xx -+- one)] == False
+  , isRedundantModuloRewriting (/= zero -+- zero) [(zero -?- xx, zero),(xx -?- yy, xx -+- xx)] == True
+  , isRedundantModuloRewriting (/= zero -+- zero) [(zero -?- xx, zero),(xx -?- yy, xx -+- zero)] == True
+  , isRedundantModuloRewriting (/= zero -+- zero) [(zero -?- xx, zero),(xx -?- yy, xx -+- one)] == False
+  , isRedundantModuloRewriting (/= zero -+- zero) [(zero -?- xx, zero),(xx -?- yy, xx -+- yy)] == False
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a

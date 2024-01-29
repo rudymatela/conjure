@@ -39,6 +39,8 @@ module Conjure.Defn
   , isBaseCase
   , isRecursiveCase
   , isRecursiveDefn
+  , subsumedWith
+  , isRedundantModuloRewriting
   , module Conjure.Expr
   )
 where
@@ -378,6 +380,14 @@ isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
   is []  =  False
   is (b:bs)  =  any (b `isInstanceOf`) bs || is bs
 
+-- | Returns whether the given 'Defn' is redundant modulo
+--   subsumption and rewriting.
+isRedundantModuloRewriting :: (Expr -> Bool) -> Defn -> Bool
+isRedundantModuloRewriting isNormal  =  is
+  where
+  is []  =  False
+  is (b:bs)  =  any (subsumedWith isNormal b) bs
+
 -- | Returns whether the definition is complete,
 --   i.e., whether it does not have any holes in the RHS.
 isCompleteDefn :: Defn -> Bool
@@ -477,3 +487,19 @@ isRecursiveCase (lhs,rhs)  =  f `elem` values rhs
 -- | Returns whether a definition is recursive
 isRecursiveDefn :: Defn -> Bool
 isRecursiveDefn  =  any isRecursiveCase
+
+-- | Returns whether a binding is subsumed by another modulo rewriting
+--
+-- > > subsumedWith isNormal (ff zero, zero) (ff xx, xx -+- xx)
+-- > True
+--
+-- > > subsumedWith isNormal (ff zero, zero) (ff xx, xx -+- one)
+-- > False
+--
+-- > > subsumedWith isNormal (zero -?- xx, zero) (xx -?- yy, xx -+- xx)
+-- > True
+subsumedWith :: (Expr -> Bool) -> Bndn -> Bndn -> Bool
+subsumedWith isNormal (lhs1,rhs1) (lhs2,rhs2)  =
+  case lhs1 `match` lhs2 of
+  Nothing -> False
+  Just bs -> not . isNormal $ rhs2 //- bs
