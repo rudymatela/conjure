@@ -4,11 +4,11 @@ factorial :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
--- looking through 13 candidates of size 4
--- looking through 35 candidates of size 5
--- looking through 61 candidates of size 6
--- looking through 219 candidates of size 7
--- tested 153 candidates
+-- looking through 3 candidates of size 4
+-- looking through 32 candidates of size 5
+-- looking through 31 candidates of size 6
+-- looking through 210 candidates of size 7
+-- tested 110 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -18,9 +18,9 @@ factorial :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
--- looking through 13 candidates of size 4
--- looking through 35 candidates of size 5
--- looking through 101 candidates of size 6
--- tested 89 candidates
+-- looking through 3 candidates of size 4
+-- looking through 32 candidates of size 5
+-- looking through 71 candidates of size 6
+-- tested 76 candidates
 factorial x  =  foldr (*) 1 [1..x]
 

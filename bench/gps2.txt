@@ -34,8 +34,8 @@ gps1 :: Int -> [Int] -> Int
 -- looking through 4 candidates of size 1
 -- looking through 24 candidates of size 2
 -- looking through 75 candidates of size 3
--- looking through 234 candidates of size 4
--- tested 337 candidates
+-- looking through 225 candidates of size 4
+-- tested 328 candidates
 cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
@@ -108,13 +108,13 @@ gps5 :: Int -> [Int]
 -- looking through 5 candidates of size 3
 -- looking through 9 candidates of size 4
 -- looking through 45 candidates of size 5
--- looking through 82 candidates of size 6
--- looking through 428 candidates of size 7
--- looking through 887 candidates of size 8
--- looking through 4354 candidates of size 9
--- looking through 9260 candidates of size 10
--- looking through 43875 candidates of size 11
--- tested 32327 candidates
+-- looking through 75 candidates of size 6
+-- looking through 422 candidates of size 7
+-- looking through 845 candidates of size 8
+-- looking through 4315 candidates of size 9
+-- looking through 9037 candidates of size 10
+-- looking through 43698 candidates of size 11
+-- tested 32010 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps6 :: [Int] -> Int

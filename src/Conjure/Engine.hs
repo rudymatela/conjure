@@ -435,7 +435,8 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
 
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT isRedundantDefn
+  ps2fss pats  =  discardT (isRedundantModuloRewriting $ isRootNormal thy)
+               .  discardT isRedundantDefn
                .  discardT (allEqual2 . map snd)
                .  products
                $  map p2eess pats

@@ -499,7 +499,8 @@ isRecursiveDefn  =  any isRecursiveCase
 -- > > subsumedWith isNormal (zero -?- xx, zero) (xx -?- yy, xx -+- xx)
 -- > True
 subsumedWith :: (Expr -> Bool) -> Bndn -> Bndn -> Bool
-subsumedWith isNormal (lhs1,rhs1) (lhs2,rhs2)  =
-  case lhs1 `match` lhs2 of
-  Nothing -> False
-  Just bs -> not . isNormal $ rhs2 //- bs
+subsumedWith isNormal (lhs1,rhs1) (lhs2,rhs2)
+  | hasHole rhs2  =  False
+  | otherwise  =  case lhs1 `match` lhs2 of
+                  Nothing -> False
+                  Just bs -> not . isNormal $ rhs2 //- bs
