@@ -62,6 +62,7 @@ conjurableOK x  =  and
   , holds 60 $ expr' === expr
   , tiers =| 6 |= (tiers -: [[x]])
   , all isWellTyped cases'
+  , all (\c -> typ c == typeOf x) cases'
   ]
   where
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
