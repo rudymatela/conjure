@@ -41,8 +41,8 @@ printRedundantCandidates n nm f ps  =  do
   (css', thy)    =  candidateDefnsC args nm f ps  -- Conjure uses this for listing candidates
   nRules         =  length (rules thy)
   nREs           =  length (equations thy) + nRules
-  maxTests       =  360 -- a hardcoded value probably will not hurt in this simple benchmark
-  maxEvalRecursions  =  60
+  maxTests       =  60 -- a hardcoded value probably will not hurt in this simple benchmark
+  maxEvalRecursions  =  30
 
   -- shows a class of candidates
   showClass :: [Defn] -> String
