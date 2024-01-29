@@ -56,8 +56,8 @@ main  =  do
 
   -- This N value limits the maximum size of candidates,
   -- increase it to print redundant candidates of bigger size.
-  let n = 5
-  -- With n = 5, this should run in a few seconds.
+  let n = 6
+  -- With n = 6, this should run in a few seconds.
   -- With n = 7 and -O2 optimization,
   -- this should take a few minutes to run and generate a ~300K text file.
   -- We can also customize the n per-function below:
