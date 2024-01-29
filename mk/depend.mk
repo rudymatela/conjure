@@ -16,6 +16,19 @@ bench/candidates.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/candidates.hs
+bench/erroneous: \
+  bench/erroneous.hs \
+  mk/toplibs
+bench/erroneous.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/erroneous.hs
 bench/gps2: \
   bench/gps2.hs \
   mk/toplibs
