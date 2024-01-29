@@ -382,11 +382,13 @@ isRedundantBySubsumption  =  is . map foldPair . filter isCompleteBndn
 
 -- | Returns whether the given 'Defn' is redundant modulo
 --   subsumption and rewriting.
-isRedundantModuloRewriting :: (Expr -> Bool) -> Defn -> Bool
-isRedundantModuloRewriting isNormal  =  is
+--
+-- (cf. 'subsumedWith')
+isRedundantModuloRewriting :: (Expr -> Expr) -> Defn -> Bool
+isRedundantModuloRewriting normalize  =  is
   where
   is []  =  False
-  is (b:bs)  =  any (subsumedWith isNormal b) bs
+  is (b:bs)  =  any (subsumedWith normalize b) bs
 
 -- | Returns whether the definition is complete,
 --   i.e., whether it does not have any holes in the RHS.
@@ -490,17 +492,21 @@ isRecursiveDefn  =  any isRecursiveCase
 
 -- | Returns whether a binding is subsumed by another modulo rewriting
 --
--- > > subsumedWith isNormal (ff zero, zero) (ff xx, xx -+- xx)
+-- > > let normalize = (// [(zero -+- zero, zero)])
+-- > > subsumedWith normalize (ff zero, zero) (ff xx, xx -+- xx)
 -- > True
 --
--- > > subsumedWith isNormal (ff zero, zero) (ff xx, xx -+- one)
+-- > > subsumedWith normalize (ff zero, zero) (ff xx, xx -+- one)
 -- > False
 --
--- > > subsumedWith isNormal (zero -?- xx, zero) (xx -?- yy, xx -+- xx)
+-- > > subsumedWith normalize (zero -?- xx, zero) (xx -?- yy, xx -+- xx)
 -- > True
-subsumedWith :: (Expr -> Bool) -> Bndn -> Bndn -> Bool
-subsumedWith isNormal (lhs1,rhs1) (lhs2,rhs2)
+--
+-- (cf. 'isRedundantModuloRewriting')
+subsumedWith :: (Expr -> Expr) -> Bndn -> Bndn -> Bool
+subsumedWith normalize (lhs1,rhs1) (lhs2,rhs2)
   | hasHole rhs2  =  False
   | otherwise  =  case lhs1 `match` lhs2 of
                   Nothing -> False
-                  Just bs -> not . isNormal $ rhs2 //- bs
+                  Just bs -> snd (canonicalizeBndn (lhs2, normalize $ rhs2 //- bs))
+                          == snd (canonicalizeBndn (lhs1, rhs1))

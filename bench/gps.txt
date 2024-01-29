@@ -18,13 +18,13 @@ gps2 :: Int -> Maybe [Char]
 -- looking through 2 candidates of size 5
 -- looking through 0 candidates of size 6
 -- looking through 32 candidates of size 7
--- looking through 48 candidates of size 8
+-- looking through 32 candidates of size 8
 -- looking through 48 candidates of size 9
--- looking through 48 candidates of size 10
+-- looking through 32 candidates of size 10
 -- looking through 16 candidates of size 11
 -- looking through 512 candidates of size 12
--- looking through 1792 candidates of size 13
--- tested 1203 candidates
+-- looking through 1408 candidates of size 13
+-- tested 1171 candidates
 gps2 x  =  if 2000 <= x
            then Just "large"
            else if x < 1000 then Just "small" else Nothing
@@ -92,10 +92,10 @@ gps6 :: Int -> Int
 -- looking through 4 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 14 candidates of size 3
--- looking through 7 candidates of size 4
--- looking through 179 candidates of size 5
--- looking through 160 candidates of size 6
--- tested 366 candidates
+-- looking through 14 candidates of size 4
+-- looking through 188 candidates of size 5
+-- looking through 167 candidates of size 6
+-- tested 389 candidates
 cannot conjure
 
 gps7 :: [Char] -> ([Char],Int)
@@ -134,11 +134,11 @@ gps9 :: Int -> [Int]
 -- looking through 4 candidates of size 4
 -- looking through 10 candidates of size 5
 -- looking through 21 candidates of size 6
--- looking through 34 candidates of size 7
--- looking through 80 candidates of size 8
--- looking through 142 candidates of size 9
--- looking through 252 candidates of size 10
--- tested 321 candidates
+-- looking through 30 candidates of size 7
+-- looking through 77 candidates of size 8
+-- looking through 134 candidates of size 9
+-- looking through 245 candidates of size 10
+-- tested 306 candidates
 gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
 wallisNext :: Ratio Integer -> Ratio Integer
@@ -245,9 +245,9 @@ odd :: Int -> Bool
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
 -- looking through 4 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 42 candidates of size 5
--- tested 22 candidates
+-- looking through 3 candidates of size 4
+-- looking through 43 candidates of size 5
+-- tested 24 candidates
 odd x  =  0 /= x `mod` 2
 
 gps14 :: [Int] -> Int
@@ -301,13 +301,13 @@ gps17 :: Int -> Int
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 32 candidates of size 5
--- looking through 31 candidates of size 6
--- looking through 210 candidates of size 7
--- looking through 232 candidates of size 8
--- looking through 1399 candidates of size 9
--- tested 555 candidates
+-- looking through 8 candidates of size 4
+-- looking through 34 candidates of size 5
+-- looking through 39 candidates of size 6
+-- looking through 216 candidates of size 7
+-- looking through 238 candidates of size 8
+-- looking through 1408 candidates of size 9
+-- tested 582 candidates
 gps17 0  =  0
 gps17 x  =  gps17 (x - 1) + x * x
 

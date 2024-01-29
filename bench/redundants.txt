@@ -1,8 +1,8 @@
 Redundant candidates for: foo :: Int -> Int
   pruning with 15/35 rules
-  [3,3,8,5,25] candidates
-  40/44 unique candidates
-  4/44 redundant candidates
+  [3,3,8,9,27] candidates
+  46/50 unique candidates
+  4/50 redundant candidates
 
 rules:
 x * y == x + y
@@ -68,9 +68,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,22,45,109] candidates
-  177/186 unique candidates
-  9/186 redundant candidates
+  [3,7,22,49,125] candidates
+  192/206 unique candidates
+  14/206 redundant candidates
 
 rules:
 x * y == x + y
@@ -118,6 +118,16 @@ class of 2 equivalent candidates:
 class of 2 equivalent candidates:
 
     0 ? x  =  0
+    x ? y  =  x + y
+
+    0 ? x  =  0
+    x ? 0  =  x
+    x ? y  =  x + y
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  0
     x ? y  =  y + y
 
     0 ? x  =  0
@@ -160,6 +170,42 @@ class of 2 equivalent candidates:
     x ? y  =  y + dec (dec y)
 
     x ? y  =  dec y + dec y
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  x
+    x ? y  =  x + dec y
+
+    x ? 0  =  x
+    x ? y  =  y + dec x
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  0
+    x ? y  =  x + dec y
+
+    x ? 0  =  0
+    x ? y  =  y + dec x
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  x
+    x ? y  =  x + dec y
+
+    0 ? x  =  x
+    x ? y  =  y + dec x
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  0
+    x ? y  =  x + dec y
+
+    0 ? x  =  0
+    x ? y  =  y + dec x
 
 
 

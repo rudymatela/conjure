@@ -52,7 +52,7 @@ import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 import Test.LeanCheck.Utils (classifyOn)
 
-import Test.Speculate.Reason (Thy, rules, equations, invalid, canReduceTo, printThy, closureLimit, doubleCheck)
+import Test.Speculate.Reason (Thy, rules, equations, invalid, canReduceTo, printThy, closureLimit, doubleCheck, normalize)
 import Test.Speculate.Engine (theoryFromAtoms, grounds, groundBinds, boolTy)
 
 import Conjure.Expr
@@ -435,7 +435,7 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
 
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT (isRedundantModuloRewriting $ isRootNormal thy)
+  ps2fss pats  =  discardT (isRedundantModuloRewriting $ normalize thy)
                .  discardT isRedundantDefn
                .  discardT (allEqual2 . map snd)
                .  products

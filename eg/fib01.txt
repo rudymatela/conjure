@@ -4,9 +4,9 @@ fib01 :: Int -> Int -> Int -> Int
 -- looking through 4 candidates of size 1
 -- looking through 24 candidates of size 2
 -- looking through 115 candidates of size 3
--- looking through 443 candidates of size 4
--- looking through 1489 candidates of size 5
--- tested 2075 candidates
+-- looking through 461 candidates of size 4
+-- looking through 1597 candidates of size 5
+-- tested 2201 candidates
 cannot conjure
 
 fib01 :: Int -> Int -> Int -> Int
