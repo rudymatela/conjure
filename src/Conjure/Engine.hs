@@ -32,6 +32,7 @@ module Conjure.Engine
   , conjureTheory
   , conjureTheoryWith
   , equalModuloTesting
+  , erroneousCandidate
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -360,6 +361,23 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
                            `dynApp` evalDyn d2 e `fromDyn` False
   isError  =  isNothing . errorToNothing
+
+
+erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
+erroneousCandidate maxTests maxEvalRecursions nm f  =  is
+  where
+  err  =  error "erroneousCandidate: evaluation error (silenced)"
+  eq  =  conjureDynamicEq f
+  is d  =  any are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+    where
+    are :: Expr -> Bool
+    are e  =  isError (evalEqual d d e)
+  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
+  evalEqual :: Defn -> Defn -> Expr -> Bool
+  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
+                           `dynApp` evalDyn d2 e `fromDyn` err
+  isError  =  isNothing . errorToNothing
+
 
 
 
