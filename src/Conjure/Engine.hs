@@ -536,33 +536,6 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   errRV  =  error "candidateDefnsC: unexpected variables.  You have found a bug, please report it."
 
 
--- | Returns whether the given recursive call
---   deconstructs one of its arguments.
---
--- > > deconstructs1 ... (factorial' (dec' xx))
--- > True
---
--- > > deconstructs1 ... (factorial' (xx -+- one))
--- > False
---
--- > > deconstructs1 ... (xxs -++- yys)
--- > False
---
--- > > deconstructs1 ... (xxs -++- tail' yys)
--- > True
---
--- > > deconstructs1 ... (zero-:-xxs -++- tail' yys)
--- > True
---
--- 'deconstructs1' implies 'descends'.
-deconstructs1 :: (Expr -> Bool) -> Expr -> Expr -> Bool
-deconstructs1 isDec _ e  =  any isDeconstruction exs
-  where
-  (ef:exs)  =  unfoldApp e
-  isDeconstruction e  =  not (null cs) && all isDec cs
-    where
-    cs  =  consts e
-
 -- | Returns whether a non-empty subset of arguments
 --   descends arguments by deconstruction.
 --
