@@ -3,7 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* discard erroneous candidates from `bench/erroneous.txt` somehow
+* Discard erroneous candidates from `bench/erroneous.txt` somehow.
+  See sections below for ideas.
 
 * consider non top-level cases
 
@@ -12,6 +13,24 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Review `bench/redundants.txt` and prune redundant candidates.
   See sections below for ideas.
+
+
+## Erroneous recursions
+
+The `descends` function still lets some invalid functions pass through:
+
+	[] ?? xs  =  xs
+	(x:xs) ?? []  =  xs
+	(x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+	-- [0] ?? [0,0]  =  bottom
+
+	[] ?? xs  =  xs
+	(x:xs) ?? []  =  xs
+	(x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+	-- [0] ?? [0,0]  =  bottom
+
+In both of these functions, nothing is being deconstructed.
+We have to catch and prune these.
 
 
 ## Non top-level cases
