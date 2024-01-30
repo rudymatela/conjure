@@ -5,103 +5,135 @@ Erroneous candidates for: foo :: Int -> Int
 
 foo 0  =  0
 foo x  =  x + foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  x + foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo x  =  foo (0 - x) + 1
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  foo (1 - x) + 1
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo x  =  x - foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  x - foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo x  =  foo (0 - x) - x
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  foo (1 - x) - x
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo x  =  foo (0 - x) - 1
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  foo (1 - x) - 1
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo x  =  0 - foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  0 - foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo x  =  1 - foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  0
 foo x  =  1 - foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  x + foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  x + foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  foo (0 - x) + 1
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  foo (1 - x) + 1
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  x - foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  x - foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  foo (0 - x) - x
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  foo (1 - x) - x
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  foo (0 - x) - 1
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  foo (1 - x) - 1
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  0 - foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  0 - foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo x  =  1 - foo (0 - x)
+-- foo 1  =  bottom
 
 foo 0  =  1
 foo x  =  1 - foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo 1  =  1
 foo x  =  foo (0 - x)
+-- foo 2  =  bottom
 
 foo 0  =  0
 foo 1  =  1
 foo x  =  foo (1 - x)
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo 1  =  0
 foo x  =  foo (0 - x)
+-- foo 2  =  bottom
 
 foo 0  =  1
 foo 1  =  0
 foo x  =  foo (1 - x)
+-- foo 2  =  bottom
 
 
 Erroneous candidates for: ? :: Int -> Int -> Int
@@ -111,343 +143,452 @@ Erroneous candidates for: ? :: Int -> Int -> Int
 
 x ? 0  =  x
 x ? y  =  dec x ? y
+-- 0 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom
 
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  y ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  0 ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec x ? dec x
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec x) ? x
+-- 1 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
+-- 0 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  x ? dec (dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec y ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? x
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? 0
+-- 1 ? 0  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec x ? y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (dec x ? y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  dec x ? y
+-- 0 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (x ? dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (x ? dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom
 
 x ? 0  =  x
 x ? y  =  x ? dec (dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  y ? dec (dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  0 ? dec (dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec x ? (x + y)
+-- 1 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec x ? (y + y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec x ? dec (dec x)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec x ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec y ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec x) ? dec x
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x)) ? x
+-- 1 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x)) ? y
+-- 0 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  x ? dec (dec (dec y))
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec (dec y))
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec y ? dec (dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  (x + x) ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  (x + y) ? dec y
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? dec x
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec y) ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x)) ? x
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x)) ? y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x)) ? 0
+-- 1 ? 0  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (x ? dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (y ? dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (0 ? dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec x ? dec x)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x) ? x)
+-- 1 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x) ? y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (x ? dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (y ? dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (0 ? dec (dec y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (dec x ? dec x)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec x) ? x)
+-- 1 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec x) ? y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  x ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  y ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  0 ? dec (dec y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  dec x ? dec x
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  dec (dec x) ? x
+-- 1 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  dec (dec x) ? y
+-- 0 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (x ? dec (dec y))
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (y ? dec (dec y))
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec y ? dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x) ? x)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x) ? y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x) ? 0)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (x ? dec (dec y))
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (y ? dec (dec y))
+-- 1 ? 1  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (dec y ? dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec x) ? x)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec x) ? y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec x) ? 0)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  x ? dec (dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  y ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  dec y ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  dec (dec x) ? x
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  dec (dec x) ? y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  dec (dec x) ? 0
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec x) ? x
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec x) ? x
+-- 1 ? 1  =  bottom
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec x) ? y
+-- 1 ? 1  =  bottom
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y ? dec (dec y)
+-- 1 ? 1  =  bottom
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec x) ? x
+-- 1 ? 1  =  bottom
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
+-- 1 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  x + dec x ? y
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec x ? y + y
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x ? y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  x + dec x ? y
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec x ? y + y
+-- 0 ? 1  =  bottom
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec x ? y))
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec x
 x ? y  =  dec (dec x ? y)
+-- 0 ? 1  =  bottom
 
 x ? 0  =  x + x
 x ? y  =  dec x ? y
+-- 0 ? 1  =  bottom
 
 x ? 0  =  dec (dec x)
 x ? y  =  dec x ? y
+-- 0 ? 1  =  bottom
 
 0 ? x  =  x
 x ? y  =  x + x ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  x ? dec y + y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x
 x ? y  =  dec (dec (x ? dec y))
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  x + x ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  x ? dec y + y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  0
 x ? y  =  dec (dec (x ? dec y))
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec x
 x ? y  =  dec (x ? dec y)
+-- 1 ? 0  =  bottom
 
 0 ? x  =  x + x
 x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? x  =  dec (dec x)
 x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom
 
 0 ? 0  =  0
 0 ? x  =  dec x
 x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom
 
 
 Erroneous candidates for: goo :: [Int] -> [Int]
@@ -464,74 +605,92 @@ Erroneous candidates for: ?? :: [Int] -> [Int] -> [Int]
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? (ys ++ ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  (x:xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  (y:xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  (xs ++ xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  ys ?? (ys ++ ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  (x:xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  (y:xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  []
 (x:xs) ?? (y:ys)  =  (xs ++ xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  ys ?? (ys ++ ys)
+-- [0] ?? [0,0]  =  bottom
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  (x:xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  (y:xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 [] ?? xs  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  (xs ++ xs) ?? xs
+-- [0,0] ?? [0]  =  bottom
 
 
 Erroneous candidates for: ton :: Bool -> Bool

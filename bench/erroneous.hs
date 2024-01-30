@@ -27,11 +27,11 @@ printRedundantCandidates n nm f ps  =  do
   putStrLn $ "  " ++ show numErroneous ++ "/" ++ show numCandidates ++ " erroneous candidates"
   putStrLn ""
 --printThy thy
-  putStrLn $ unlines . map showDefn $ erroneous
+  putStrLn $ unlines . map showDefnWithError $ erroneous
   where
   numCandidates  =  length candidates
   numErroneous   =  length erroneous
-  erroneous      =  filter (\c -> erroneousCandidate maxTests maxEvalRecursions nm f c) candidates
+  erroneous      =  [(c, e) | c <- candidates, Just e <- [findError c]]
   candidates     =  concat css
   css            =  take n
                  .  discardT isRedundantByIntroduction -- additional pruning rule
@@ -41,6 +41,9 @@ printRedundantCandidates n nm f ps  =  do
   nREs           =  length (equations thy) + nRules
   maxTests       =  60 -- a hardcoded value probably will not hurt in this simple benchmark
   maxEvalRecursions  =  60
+  findError      =  findDefnError maxTests maxEvalRecursions nm f
+  showDefnWithError (d,e)  =  showDefn d
+                           ++ "-- " ++ showExpr e ++ "  =  bottom\n"
 
 
 main :: IO ()
