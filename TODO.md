@@ -8,9 +8,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * consider non top-level cases
 
-* Review `bench/redundants.txt` and prune redundant candidates.
-  See sections below for ideas.
-
 
 ## Erroneous recursions
 
