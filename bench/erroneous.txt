@@ -1,13 +1,113 @@
 Erroneous candidates for: foo :: Int -> Int
   pruning with 15/35 rules
-  [3,3,8,9,21,27] candidates
-  0/71 erroneous candidates
+  [3,3,8,9,21,27,130] candidates
+  32/201 erroneous candidates
+
+foo 0  =  0
+foo x  =  x + foo (0 - x)
+
+foo 0  =  0
+foo x  =  x + foo (1 - x)
+
+foo 0  =  0
+foo x  =  foo (0 - x) + 1
+
+foo 0  =  0
+foo x  =  foo (1 - x) + 1
+
+foo 0  =  0
+foo x  =  x - foo (0 - x)
+
+foo 0  =  0
+foo x  =  x - foo (1 - x)
+
+foo 0  =  0
+foo x  =  foo (0 - x) - x
+
+foo 0  =  0
+foo x  =  foo (1 - x) - x
+
+foo 0  =  0
+foo x  =  foo (0 - x) - 1
+
+foo 0  =  0
+foo x  =  foo (1 - x) - 1
+
+foo 0  =  0
+foo x  =  0 - foo (0 - x)
+
+foo 0  =  0
+foo x  =  0 - foo (1 - x)
+
+foo 0  =  0
+foo x  =  1 - foo (0 - x)
+
+foo 0  =  0
+foo x  =  1 - foo (1 - x)
+
+foo 0  =  1
+foo x  =  x + foo (0 - x)
+
+foo 0  =  1
+foo x  =  x + foo (1 - x)
+
+foo 0  =  1
+foo x  =  foo (0 - x) + 1
+
+foo 0  =  1
+foo x  =  foo (1 - x) + 1
+
+foo 0  =  1
+foo x  =  x - foo (0 - x)
+
+foo 0  =  1
+foo x  =  x - foo (1 - x)
+
+foo 0  =  1
+foo x  =  foo (0 - x) - x
+
+foo 0  =  1
+foo x  =  foo (1 - x) - x
+
+foo 0  =  1
+foo x  =  foo (0 - x) - 1
+
+foo 0  =  1
+foo x  =  foo (1 - x) - 1
+
+foo 0  =  1
+foo x  =  0 - foo (0 - x)
+
+foo 0  =  1
+foo x  =  0 - foo (1 - x)
+
+foo 0  =  1
+foo x  =  1 - foo (0 - x)
+
+foo 0  =  1
+foo x  =  1 - foo (1 - x)
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo (0 - x)
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  foo (1 - x)
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo (0 - x)
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  foo (1 - x)
 
 
 Erroneous candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,22,49,112,276] candidates
-  20/469 erroneous candidates
+  [3,7,22,49,112,276,676] candidates
+  109/1145 erroneous candidates
 
 x ? 0  =  x
 x ? y  =  dec x ? y
@@ -69,28 +169,380 @@ x ? y  =  dec (x ? dec y)
 0 ? x  =  dec x
 x ? y  =  x ? dec y
 
+x ? 0  =  x
+x ? y  =  x ? dec (dec (dec y))
+
+x ? 0  =  x
+x ? y  =  y ? dec (dec (dec y))
+
+x ? 0  =  x
+x ? y  =  0 ? dec (dec (dec y))
+
+x ? 0  =  x
+x ? y  =  dec x ? (x + y)
+
+x ? 0  =  x
+x ? y  =  dec x ? (y + y)
+
+x ? 0  =  x
+x ? y  =  dec x ? dec (dec x)
+
+x ? 0  =  x
+x ? y  =  dec x ? dec (dec y)
+
+x ? 0  =  x
+x ? y  =  dec y ? dec (dec y)
+
+x ? 0  =  x
+x ? y  =  dec (dec x) ? dec x
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x)) ? x
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x)) ? y
+
+0 ? x  =  x
+x ? y  =  x ? dec (dec (dec y))
+
+0 ? x  =  x
+x ? y  =  y ? dec (dec (dec y))
+
+0 ? x  =  x
+x ? y  =  dec y ? dec (dec y)
+
+0 ? x  =  x
+x ? y  =  (x + x) ? dec y
+
+0 ? x  =  x
+x ? y  =  (x + y) ? dec y
+
+0 ? x  =  x
+x ? y  =  dec (dec x) ? dec x
+
+0 ? x  =  x
+x ? y  =  dec (dec x) ? dec y
+
+0 ? x  =  x
+x ? y  =  dec (dec y) ? dec y
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x)) ? x
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x)) ? y
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x)) ? 0
+
+x ? 0  =  x
+x ? y  =  dec (x ? dec (dec y))
+
+x ? 0  =  x
+x ? y  =  dec (y ? dec (dec y))
+
+x ? 0  =  x
+x ? y  =  dec (0 ? dec (dec y))
+
+x ? 0  =  x
+x ? y  =  dec (dec x ? dec x)
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x) ? x)
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x) ? y)
+
+x ? 0  =  0
+x ? y  =  dec (x ? dec (dec y))
+
+x ? 0  =  0
+x ? y  =  dec (y ? dec (dec y))
+
+x ? 0  =  0
+x ? y  =  dec (0 ? dec (dec y))
+
+x ? 0  =  0
+x ? y  =  dec (dec x ? dec x)
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec x) ? x)
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec x) ? y)
+
+x ? 0  =  dec x
+x ? y  =  x ? dec (dec y)
+
+x ? 0  =  dec x
+x ? y  =  y ? dec (dec y)
+
+x ? 0  =  dec x
+x ? y  =  0 ? dec (dec y)
+
+x ? 0  =  dec x
+x ? y  =  dec x ? dec x
+
+x ? 0  =  dec x
+x ? y  =  dec (dec x) ? x
+
+x ? 0  =  dec x
+x ? y  =  dec (dec x) ? y
+
+0 ? x  =  x
+x ? y  =  dec (x ? dec (dec y))
+
+0 ? x  =  x
+x ? y  =  dec (y ? dec (dec y))
+
+0 ? x  =  x
+x ? y  =  dec (dec y ? dec y)
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x) ? x)
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x) ? y)
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x) ? 0)
+
+0 ? x  =  0
+x ? y  =  dec (x ? dec (dec y))
+
+0 ? x  =  0
+x ? y  =  dec (y ? dec (dec y))
+
+0 ? x  =  0
+x ? y  =  dec (dec y ? dec y)
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec x) ? x)
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec x) ? y)
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec x) ? 0)
+
+0 ? x  =  dec x
+x ? y  =  x ? dec (dec y)
+
+0 ? x  =  dec x
+x ? y  =  y ? dec (dec y)
+
+0 ? x  =  dec x
+x ? y  =  dec y ? dec y
+
+0 ? x  =  dec x
+x ? y  =  dec (dec x) ? x
+
+0 ? x  =  dec x
+x ? y  =  dec (dec x) ? y
+
+0 ? x  =  dec x
+x ? y  =  dec (dec x) ? 0
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x ? dec (dec y)
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y ? dec (dec y)
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec x) ? x
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec x) ? y
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x ? dec (dec y)
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  y ? dec (dec y)
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec x) ? x
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec x) ? y
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  x ? dec (dec y)
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y ? dec (dec y)
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec x) ? x
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec x) ? y
+
+x ? 0  =  x
+x ? y  =  x + dec x ? y
+
+x ? 0  =  x
+x ? y  =  dec x ? y + y
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x ? y))
+
+x ? 0  =  0
+x ? y  =  x + dec x ? y
+
+x ? 0  =  0
+x ? y  =  dec x ? y + y
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec x ? y))
+
+x ? 0  =  dec x
+x ? y  =  dec (dec x ? y)
+
+x ? 0  =  x + x
+x ? y  =  dec x ? y
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec x ? y
+
+0 ? x  =  x
+x ? y  =  x + x ? dec y
+
+0 ? x  =  x
+x ? y  =  x ? dec y + y
+
+0 ? x  =  x
+x ? y  =  dec (dec (x ? dec y))
+
+0 ? x  =  0
+x ? y  =  x + x ? dec y
+
+0 ? x  =  0
+x ? y  =  x ? dec y + y
+
+0 ? x  =  0
+x ? y  =  dec (dec (x ? dec y))
+
+0 ? x  =  dec x
+x ? y  =  dec (x ? dec y)
+
+0 ? x  =  x + x
+x ? y  =  x ? dec y
+
+0 ? x  =  dec (dec x)
+x ? y  =  x ? dec y
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  x ? dec y
+
 
 Erroneous candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,1,1,2,4,7] candidates
-  0/17 erroneous candidates
+  [2,1,1,2,4,7,10] candidates
+  0/27 erroneous candidates
 
 
 Erroneous candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,41,120,241] candidates
-  0/427 erroneous candidates
+  [3,7,15,41,120,241,852] candidates
+  18/1279 erroneous candidates
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? (ys ++ ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  (x:xs) ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  (y:xs) ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  (xs ++ xs) ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? (ys ++ ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  (x:xs) ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  (y:xs) ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  (xs ++ xs) ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? (x:ys)
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? (y:ys)
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? (ys ++ ys)
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  (x:xs) ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  (y:xs) ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  (xs ++ xs) ?? xs
 
 
 Erroneous candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,2,0,0,0,0] candidates
+  [3,2,0,0,0,0,0] candidates
   0/5 erroneous candidates
 
 
 Erroneous candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,12,20,6,2,16] candidates
-  0/60 erroneous candidates
+  [4,12,20,6,2,16,18] candidates
+  0/78 erroneous candidates
 
 

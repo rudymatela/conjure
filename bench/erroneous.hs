@@ -40,19 +40,15 @@ printRedundantCandidates n nm f ps  =  do
   nRules         =  length (rules thy)
   nREs           =  length (equations thy) + nRules
   maxTests       =  60 -- a hardcoded value probably will not hurt in this simple benchmark
-  maxEvalRecursions  =  30
+  maxEvalRecursions  =  60
 
 
 main :: IO ()
 main  =  do
 
   -- This N value limits the maximum size of candidates,
-  -- increase it to print redundant candidates of bigger size.
-  let n = 6
-  -- With n = 6, this should run in a few seconds.
-  -- With n = 7 and -O2 optimization,
-  -- this should take a few minutes to run and generate a ~300K text file.
-  -- We can also customize the n per-function below:
+  -- increase it to print erroneous candidates of bigger size.
+  let n = 7
 
   printRedundantCandidates n "foo" (undefined :: Int -> Int)
     [ pr (0 :: Int)
