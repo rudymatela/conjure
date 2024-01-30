@@ -250,7 +250,7 @@ defnApparentlyTerminates _  =  True
 -- by being conservative in cases these are found:
 -- nothing can be said before their fillings.
 isRedundantDefn :: Defn -> Bool
-isRedundantDefn d  =  isRedundantBySubsumption d
+isRedundantDefn d  =  False -- isRedundantBySubsumption d
                    || isRedundantByRepetition d
                    || isRedundantByRootRecursions d
 --                 || isRedundantByIntroduction d

@@ -477,7 +477,7 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   ps2fss pats  =  discardT (isRedundantModuloRewriting $ normalize thy)
                .  discardT isRedundantDefn
                .  discardT (allEqual2 . map snd)
-               .  products
+               .  productsThat (\b bs -> none ((foldPair b `isInstanceOf`) . foldPair) $ filter isCompleteBndn bs)
                $  map p2eess pats
     where
     p2eess :: Expr -> [[Bndn]]
