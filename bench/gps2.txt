@@ -82,12 +82,12 @@ tell :: [Int] -> Int -> [Int]
 -- looking through 2 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 6 candidates of size 5
--- looking through 38 candidates of size 6
+-- looking through 39 candidates of size 6
 -- looking through 26 candidates of size 7
 -- looking through 328 candidates of size 8
 -- looking through 134 candidates of size 9
--- looking through 3226 candidates of size 10
--- tested 782 candidates
+-- looking through 3229 candidates of size 10
+-- tested 783 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -167,12 +167,12 @@ gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 5 candidates of size 2
+-- looking through 6 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 50 candidates of size 4
 -- looking through 98 candidates of size 5
--- looking through 329 candidates of size 6
--- tested 171 candidates
+-- looking through 332 candidates of size 6
+-- tested 172 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
@@ -269,12 +269,12 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
 -- pruning with 6/19 rules
 -- looking through 3 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 22 candidates of size 3
--- looking through 118 candidates of size 4
+-- looking through 6 candidates of size 2
+-- looking through 24 candidates of size 3
+-- looking through 120 candidates of size 4
 -- looking through 318 candidates of size 5
--- looking through 1936 candidates of size 6
--- tested 2401 candidates
+-- looking through 1944 candidates of size 6
+-- tested 2415 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
@@ -338,8 +338,8 @@ cannot conjure
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules
 -- looking through 3 candidates of size 1
--- looking through 9 candidates of size 2
--- looking through 31 candidates of size 3
+-- looking through 12 candidates of size 2
+-- looking through 33 candidates of size 3
 -- looking through 36 candidates of size 4
 -- looking through 139 candidates of size 5
 -- looking through 564 candidates of size 6
@@ -349,7 +349,7 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- looking through 3285 candidates of size 10
 -- looking through 6044 candidates of size 11
 -- looking through 3064 candidates of size 12
--- tested 15592 candidates
+-- tested 15597 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter

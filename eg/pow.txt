@@ -2,14 +2,14 @@ pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- pruning with 14/30 rules
 -- looking through 4 candidates of size 1
--- looking through 15 candidates of size 2
--- looking through 45 candidates of size 3
--- looking through 158 candidates of size 4
+-- looking through 16 candidates of size 2
+-- looking through 46 candidates of size 3
+-- looking through 159 candidates of size 4
 -- looking through 433 candidates of size 5
--- looking through 1402 candidates of size 6
--- looking through 4282 candidates of size 7
+-- looking through 1406 candidates of size 6
+-- looking through 4286 candidates of size 7
 -- looking through 14622 candidates of size 8
--- tested 6832 candidates
+-- tested 6843 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)
 
@@ -17,11 +17,11 @@ pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- pruning with 15/19 rules
 -- looking through 4 candidates of size 1
--- looking through 17 candidates of size 2
--- looking through 57 candidates of size 3
--- looking through 172 candidates of size 4
--- looking through 480 candidates of size 5
--- looking through 1339 candidates of size 6
--- tested 2069 candidates
+-- looking through 18 candidates of size 2
+-- looking through 58 candidates of size 3
+-- looking through 174 candidates of size 4
+-- looking through 481 candidates of size 5
+-- looking through 1341 candidates of size 6
+-- tested 2076 candidates
 cannot conjure
 

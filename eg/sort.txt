@@ -45,7 +45,7 @@ merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
 -- looking through 3 candidates of size 1
--- looking through 7 candidates of size 2
+-- looking through 8 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 21 candidates of size 4
 -- looking through 84 candidates of size 5
@@ -56,6 +56,6 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 1962 candidates of size 10
 -- looking through 3190 candidates of size 11
 -- looking through 11207 candidates of size 12
--- tested 18239 candidates
+-- tested 18240 candidates
 cannot conjure
 

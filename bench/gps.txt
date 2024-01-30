@@ -39,7 +39,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- looking through 0 candidates of size 5
 -- looking through 1248 candidates of size 6
 -- looking through 0 candidates of size 7
--- looking through 18627 candidates of size 8
+-- looking through 18672 candidates of size 8
 -- tested 12358 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
@@ -69,9 +69,9 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- looking through 0 candidates of size 7
 -- looking through 0 candidates of size 8
 -- looking through 114 candidates of size 9
--- looking through 26 candidates of size 10
+-- looking through 30 candidates of size 10
 -- looking through 15 candidates of size 11
--- tested 149 candidates
+-- tested 153 candidates
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
@@ -315,7 +315,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 2/6 rules
 -- looking through 3 candidates of size 1
--- looking through 7 candidates of size 2
+-- looking through 8 candidates of size 2
 -- looking through 11 candidates of size 3
 -- looking through 21 candidates of size 4
 -- looking through 84 candidates of size 5
@@ -323,7 +323,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 378 candidates of size 7
 -- looking through 355 candidates of size 8
 -- looking through 1620 candidates of size 9
--- tested 1534 candidates
+-- tested 1535 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -332,10 +332,10 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 2/7 rules
 -- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 2
 -- looking through 1 candidates of size 3
 -- looking through 9 candidates of size 4
--- tested 12 candidates
+-- tested 13 candidates
 gps18 xs ys  =  zipWith (+) xs ys
 
 gps19 :: Int -> [Char] -> [Char]

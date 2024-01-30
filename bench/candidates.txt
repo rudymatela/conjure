@@ -312,7 +312,7 @@ foo x  =  0 - x
 Candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
   [3,3,6,9,21,39,87,180,390] direct candidates, 0 duplicates
-  [3,7,22,49,112,276,676,1617,3817] pattern candidates, 0 duplicates
+  [3,8,22,50,112,278,676,1619,3817] pattern candidates, 0 duplicates
 
 rules:
 x * y == x + y
@@ -527,6 +527,9 @@ x ? 0  =  0
 x ? y  =  x
 
 0 ? x  =  x
+x ? y  =  x
+
+0 ? x  =  x
 x ? y  =  0
 
 0 ? x  =  0
@@ -676,6 +679,9 @@ x ? y  =  dec (dec x)
 
 0 ? x  =  0
 x ? y  =  dec (dec y)
+
+0 ? x  =  dec x
+x ? y  =  dec x
 
 0 ? x  =  x + x
 x ? y  =  x
@@ -1604,6 +1610,9 @@ x ? y  =  y + dec x
 x ? y  =  y + dec y
 
 0 ? x  =  x + x
+x ? y  =  x + x
+
+0 ? x  =  x + x
 x ? y  =  x + y
 
 0 ? x  =  x + x
@@ -1620,6 +1629,9 @@ x ? y  =  x + y
 
 0 ? x  =  dec (dec x)
 x ? y  =  y + y
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec (dec x)
 
 0 ? x  =  dec (dec (dec x))
 x ? y  =  dec x
@@ -2084,7 +2096,7 @@ goo (x:xs)  =  xs ++ (xs ++ xs)
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
-  [3,7,15,43,125,245,865,1435,5854] pattern candidates, 0 duplicates
+  [3,8,15,43,125,246,865,1435,5854] pattern candidates, 0 duplicates
 
 rules:
 xs ++ [] == xs
@@ -2144,6 +2156,9 @@ xs ?? (x:ys)  =  xs
 
 xs ?? []  =  []
 xs ?? (x:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs
 
 [] ?? xs  =  xs
 (x:xs) ?? ys  =  []
@@ -3516,6 +3531,9 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? ys  =  [x]
 
 [] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  xs ++ ys
 
 [] ?? xs  =  xs ++ xs
@@ -4134,7 +4152,7 @@ p &| q  =  not q || (p || q)
 Candidates for: gcd :: Int -> Int -> Int
   pruning with 0/0 rules
   [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
-  [3,5,11,50,98,329,774,2758,6684] pattern candidates, 0 duplicates
+  [3,6,11,50,98,332,774,2758,6684] pattern candidates, 0 duplicates
 
 no rules.
 
@@ -4288,6 +4306,9 @@ gcd x 0  =  x
 gcd x y  =  0
 
 gcd x 0  =  0
+gcd x y  =  x
+
+gcd 0 x  =  x
 gcd x y  =  x
 
 gcd 0 x  =  x
@@ -5602,6 +5623,9 @@ gcd 0 x  =  0
 gcd x y  =  0 `mod` (0 `mod` y)
 
 gcd 0 x  =  x `mod` x
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  x `mod` x
 gcd x y  =  x `mod` y
 
 gcd 0 x  =  x `mod` x
@@ -5626,6 +5650,9 @@ gcd 0 x  =  x `mod` 0
 gcd x y  =  x `mod` y
 
 gcd 0 x  =  x `mod` 0
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  x `mod` 0
 gcd x y  =  y `mod` y
 
 gcd 0 x  =  x `mod` 0
@@ -5648,6 +5675,9 @@ gcd x y  =  y `mod` y
 
 gcd 0 x  =  0 `mod` x
 gcd x y  =  y `mod` 0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  0 `mod` x
 
 gcd 0 x  =  (x `mod` x) `mod` x
 gcd x y  =  x

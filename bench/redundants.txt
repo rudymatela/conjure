@@ -98,9 +98,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,22,49,112,276] candidates
-  395/469 unique candidates
-  74/469 redundant candidates
+  [3,8,22,50,112,278] candidates
+  399/473 unique candidates
+  74/473 redundant candidates
 
 rules:
 x * y == x + y
@@ -689,9 +689,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,41,120,241] candidates
-  317/427 unique candidates
-  110/427 redundant candidates
+  [3,8,15,41,120,242] candidates
+  319/429 unique candidates
+  110/429 redundant candidates
 
 rules:
 xs ++ [] == xs

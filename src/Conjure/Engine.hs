@@ -476,7 +476,6 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT (isRedundantModuloRewriting $ normalize thy)
                .  discardT isRedundantDefn
-               .  discardT (allEqual2 . map snd)
                .  products
                $  map p2eess pats
     where
