@@ -8,9 +8,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * consider non top-level cases
 
-* consider pruning earlier with `productsLaterThat`
-  replacing the call to `products` in `Conjure.Engine`
-
 * Review `bench/redundants.txt` and prune redundant candidates.
   See sections below for ideas.
 
