@@ -11,7 +11,9 @@ import Conjure.Utils
 import Test.LeanCheck.Tiers (discardT)
 
 
--- | This function prints redundant candidates.
+-- | This function prints erroneous candidates,
+--   i.e.: candidates that yield errors or loop indefinitely
+--         even if for just a single combination of argument values.
 --
 -- The arguments are, in their respective order:
 --
@@ -19,8 +21,8 @@ import Test.LeanCheck.Tiers (discardT)
 -- * function name (for pretty-printing purposes);
 -- * proxy value to indicate the type of functions to generate;
 -- * list of primitives, in Conjure-compatible form.
-printRedundantCandidates :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
-printRedundantCandidates n nm f ps  =  do
+printErroneousCandidates :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
+printErroneousCandidates n nm f ps  =  do
   putStrLn $ "Erroneous candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
   putStrLn $ "  pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   putStrLn $ "  " ++ show (map length css) ++ " candidates"
@@ -53,7 +55,7 @@ main  =  do
   -- increase it to print erroneous candidates of bigger size.
   let n = 7
 
-  printRedundantCandidates n "foo" (undefined :: Int -> Int)
+  printErroneousCandidates n "foo" (undefined :: Int -> Int)
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
@@ -61,26 +63,26 @@ main  =  do
     , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
-  printRedundantCandidates n "?" (undefined :: Int -> Int -> Int)
+  printErroneousCandidates n "?" (undefined :: Int -> Int -> Int)
     [ pr (0 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
     ]
 
-  printRedundantCandidates n "goo" (undefined :: [Int] -> [Int])
+  printErroneousCandidates n "goo" (undefined :: [Int] -> [Int])
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
-  printRedundantCandidates n "??" (undefined :: [Int] -> [Int] -> [Int])
+  printErroneousCandidates n "??" (undefined :: [Int] -> [Int] -> [Int])
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
-  printRedundantCandidates n "ton" (undefined :: Bool -> Bool)
+  printErroneousCandidates n "ton" (undefined :: Bool -> Bool)
     [ pr False
     , pr True
     , prim "&&" (&&)
@@ -88,7 +90,7 @@ main  =  do
     , prim "not" not
     ]
 
-  printRedundantCandidates n "&|" (undefined :: Bool -> Bool -> Bool)
+  printErroneousCandidates n "&|" (undefined :: Bool -> Bool -> Bool)
     [ pr False
     , pr True
     , prim "&&" (&&)
@@ -102,7 +104,7 @@ main  =  do
   -- nevertheless useful for observing candidate filtering
   -- through other means
   {-
-  printRedundantCandidates n "gcd" (undefined :: Int -> Int -> Int)
+  printErroneousCandidates n "gcd" (undefined :: Int -> Int -> Int)
     [ pr (0::Int)
     , prim "`mod`" (mod :: Int -> Int -> Int)
     ]
