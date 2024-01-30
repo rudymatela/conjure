@@ -33,6 +33,7 @@ module Conjure.Engine
   , conjureTheoryWith
   , equalModuloTesting
   , erroneousCandidate
+  , findDefnError
   , module Data.Express
   , module Data.Express.Fixtures
   , module Test.Speculate.Engine
@@ -363,9 +364,22 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   isError  =  isNothing . errorToNothing
 
 
+-- | For debugging purposes.
+--
+-- This may be taken out of the API at any moment.
 erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
-erroneousCandidate maxTests maxEvalRecursions nm f d  =
-  any is testGrounds
+erroneousCandidate maxTests maxEvalRecursions nm f  =
+  isJust . findDefnError maxTests maxEvalRecursions nm f
+
+
+-- | For debugging purposes,
+--   finds a set of arguments that triggers an error in the candidate 'Defn'.
+--
+-- Warning: this is an experimental function
+-- which may be taken out of the API at any moment.
+findDefnError :: Conjurable f => Int -> Int -> String -> f -> Defn -> Maybe Expr
+findDefnError maxTests maxEvalRecursions nm f d  =
+  find is testGrounds
   where
   testGrounds  =  filter (none isNegative . unfoldApp)
                $  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
@@ -380,8 +394,6 @@ erroneousCandidate maxTests maxEvalRecursions nm f d  =
   isError  =  isNothing . errorToNothing
   isNegative (Value ('-':_) _)  =  True
   isNegative _  =  False
-
-
 
 
 -- | Return apparently unique candidate definitions
