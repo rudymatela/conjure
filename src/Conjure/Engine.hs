@@ -609,9 +609,7 @@ nubCandidates Args{..} nm f  =
 equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
 equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   where
-  testGrounds  =  filter (none isNegative . unfoldApp)
-               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
-  eq  =  conjureDynamicEq f
+  testGrounds  =  nonNegativeAppGrounds maxTests maxEvalRecursions nm f
   d1 === d2  =  all are $ testGrounds
     where
     -- silences errors, ok since this is for optional measuring of optimal pruning
@@ -639,10 +637,16 @@ findDefnError :: Conjurable f => Int -> Int -> String -> f -> Defn -> Maybe Expr
 findDefnError maxTests maxEvalRecursions nm f d  =
   find is testGrounds
   where
-  testGrounds  =  filter (none isNegative . unfoldApp)
-               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
+  testGrounds  =  nonNegativeAppGrounds maxTests maxEvalRecursions nm f
   is :: Expr -> Bool
   is e  =  isError (devlEqual maxEvalRecursions f d d e)
+
+
+nonNegativeAppGrounds :: Conjurable f => Int -> Int -> String -> f -> [Expr]
+nonNegativeAppGrounds maxTests maxEvalRecursions nm f
+  =  filter (none isNegative . unfoldApp)
+  $  take maxTests
+  $  conjureGrounds f (conjureVarApplication nm f)
 
 
 devlEqual :: Conjurable f => Int -> f -> Defn -> Defn -> Expr -> Bool
