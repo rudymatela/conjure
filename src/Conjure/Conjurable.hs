@@ -344,10 +344,12 @@ conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
 -- (cf. 'conjureIsDeconstructor')
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed
-  =  length (holes ed) == 1
-  && typ h == typ ed
-  && all is gs
-  && not (all iz gs)
+  =  length (holes ed) == 1  -- Well formed deconstruction, single hole.
+  && typ h == typ ed         -- We can only deconstruct to the same type.
+  && all is gs               -- Do we always reduce size?
+  && not (all iz gs)         -- Disallow always mapping to values of size 0.
+                             -- In this case, we are better off not recursing
+                             -- and returning a constant value!
   where
   -- grounds here is needed as the deconstruction may contain variables!
   gs  =  take maxTests $ grounds (conjureTiersFor f) ed
