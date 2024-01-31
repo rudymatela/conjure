@@ -657,6 +657,9 @@ devlEqual maxEvalRecursions f d1 d2 e  =
   evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
   eq  =  conjureDynamicEq f
   err  =  error "Conjure.devlEqual: evaluation error"
+  -- We cannot use conjureMkEquation here because
+  -- we need different Defns at each side of the equation
+  -- so they have to be evaluated independently.
 
 -- | Is the argument value an error value?
 isError :: a -> Bool
