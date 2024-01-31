@@ -63,12 +63,16 @@ all-all: all $(EG) $(TESTS)
 
 test: test-makefile $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
+ghci: src/Conjure.ghci
+
+# Disclaimer: This bench target is not intended to generate paper-grade runtime
+#             datapoints as it runs each benchmark just once.  This target is
+#             meant to track large runtime changes across different git
+#             versions.
 .PHONY: bench
 bench: $(EG) $(patsubst %,%.bench,$(EG))
 	@mkdir -p bench/runtime/$$HOSTNAME
 	./bench/versions | tee bench/runtime/$$HOSTNAME/versions
-
-ghci: src/Conjure.ghci
 
 %.bench: %
 	@mkdir -p bench/runtime/$$HOSTNAME/`dirname $<`
