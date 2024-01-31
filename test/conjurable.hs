@@ -224,22 +224,62 @@ tests n  =
          ]
        ]
 
+  -- tests of conjureIsDeconstruction --
+
+  -- obvious deconstructions
   , isDecon (minus :$ i_ :$ one) == True
-  , isDecon (minusOne -+- i_)    == True
-  , isDecon (div' i_ two)        == True
-  , isDecon (tail' is_)          == True
-  , isDecon (init' is_)          == True
+  , isDecon (minus :$ i_ :$ two) == True
+  , isDecon (div' i_ two) == True
+  , isDecon (tail' is_) == True
+  , isDecon (init' is_) == True
+  -- TODO: add drop' to Data.Express.Fixtures
+  -- , isDecon (drop' one is_) == True
+
+  -- obvious constructions
+  , isDecon (i_ -+- one) == False
+  , isDecon (i_ -+- two) == False
+  , isDecon (i_ -*- two)  == False
+  , isDecon (xx -:- is_) == False
+  , isDecon (is_ -++- unit xx) == False
+
+  -- doing nothing is not deconstructing
+  , isDecon (i_) == False
+  , isDecon (is_) == False
+
+  -- double deconstructions & constructions
+  , isDecon (minusOne -+- i_) == True
+  , isDecon (minus :$ (minus :$ i_ :$ one) :$ one) == True
+  , isDecon (minus :$ i_ :$ three) == True
+  , isDecon (minus :$ i_ :$ four) == True
+  , isDecon (minus :$ i_ :$ five) == True
+  , isDecon (minus :$ i_ :$ six) == True
+
+  , isDecon (tail' (tail' is_)) == False -- does not deconstruct [1]
+  , isDecon (init' (init' is_)) == False -- does not deconstruct [1]
+  , isDecon (init' (tail' is_)) == False -- does not deconstruct [1]
 
   -- counter-intuitive but true: x `mod` y is a deconstruction of y:
   -- x `mod` y < y  for  y > 0
-  , isDecon (mod' xx i_)         == True
+  , isDecon (mod' xx i_) == True
 
-  , isDecon (mod' i_ two)        == False -- does not deconstruct 1
-  , isDecon (mod' i_ xx)         == False -- may not deconstruct 1
-  , isDecon (div' xx yy)         == False -- must have a hole to indicate the value being deconstructed
-  , isDecon (div' i_ i_)         == False -- two holes are not allowed
-  , isDecon (head' is_)          == False -- must deconstruct to the same type
-  , isDecon (i_ -*- two)         == False -- increases the size
+  , isDecon (mod' i_ two) == False -- does not deconstruct 1
+  , isDecon (mod' i_ xx)  == False -- may not deconstruct 1
+  , isDecon (div' xx yy)  == False -- must have a hole to indicate the value being deconstructed
+  , isDecon (div' i_ i_)  == False -- two holes are not allowed
+  , isDecon (head' is_)   == False -- must deconstruct to the same type
+
+  -- constant "deconstructions"
+  , isDecon (const' zero i_) == True -- TODO: disallow?
+  , isDecon (const' nil is_) == True -- TODO: disallow?
+  , isDecon (const' one i_)  == False -- does not deconstruct 1
+
+  -- negative "deconstructions"
+  , isDecon (minus :$ zero :$ i_) == True -- TODO: disallow?
+  , isDecon (minus :$ one :$ i_)  == True -- TODO: disallow?
+
+  -- boolean "deconstructions"
+  , isDecon (not' b_) == True -- TODO: disallow?
+  , isDecon (false -||- b_) == True -- TODO: disallow?
 
   , candidateDeconstructionsFrom (div' xx yy) == [ div' i_ yy
                                                  , div' xx i_
