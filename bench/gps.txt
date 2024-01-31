@@ -304,10 +304,10 @@ gps17 :: Int -> Int
 -- looking through 8 candidates of size 4
 -- looking through 28 candidates of size 5
 -- looking through 35 candidates of size 6
--- looking through 213 candidates of size 7
--- looking through 233 candidates of size 8
--- looking through 1408 candidates of size 9
--- tested 564 candidates
+-- looking through 179 candidates of size 7
+-- looking through 217 candidates of size 8
+-- looking through 1196 candidates of size 9
+-- tested 492 candidates
 gps17 0  =  0
 gps17 x  =  gps17 (x - 1) + x * x
 

@@ -277,17 +277,17 @@ tests n  =
   , isDecon (head' is_)   == False -- must deconstruct to the same type
 
   -- constant "deconstructions"
-  , isDecon (const' zero i_) == True -- TODO: disallow?
-  , isDecon (const' nil is_) == True -- TODO: disallow?
+  , isDecon (const' zero i_) == False -- always mapping to size 0 is not allowed!
+  , isDecon (const' nil is_) == False -- always mapping to size 0 is not allowed!
   , isDecon (const' one i_)  == False -- does not deconstruct 1
 
   -- negative "deconstructions"
-  , isDecon (minus :$ zero :$ i_) == True -- TODO: disallow?
-  , isDecon (minus :$ one :$ i_)  == True -- TODO: disallow?
+  , isDecon (minus :$ zero :$ i_) == False
+  , isDecon (minus :$ one :$ i_)  == False
 
   -- boolean "deconstructions"
-  , isDecon (not' b_) == True -- TODO: disallow?
-  , isDecon (false -||- b_) == True -- TODO: disallow?
+  , isDecon (not' b_) == False -- always mapping to size 0 is not allowed!
+  , isDecon (false -||- b_) == False -- always mapping to size 0 is not allowed!
 
   , candidateDeconstructionsFrom (div' xx yy) == [ div' i_ yy
                                                  , div' xx i_

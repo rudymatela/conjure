@@ -347,6 +347,7 @@ conjureIsDeconstruction f maxTests ed
   =  length (holes ed) == 1
   && typ h == typ ed
   && all is gs
+  && not (all iz gs)
   where
   -- grounds here is needed as the deconstruction may contain variables!
   gs  =  take maxTests $ grounds (conjureTiersFor f) ed
@@ -357,6 +358,7 @@ conjureIsDeconstruction f maxTests ed
   x << 0  =  True
   x << y  =  x < y
   is e  =  errorToFalse $ esz e << esz (holeValue e)
+  iz e  =  errorToFalse $ esz e == 0 || esz (holeValue e) == 0
   holeValue e  =  fromMaybe err
                .  lookup h
                .  fromMaybe err

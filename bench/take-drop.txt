@@ -6,9 +6,9 @@ drop :: Int -> [A] -> [A]
 -- looking through 4 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 8 candidates of size 5
--- looking through 17 candidates of size 6
--- looking through 38 candidates of size 7
--- tested 47 candidates
+-- looking through 13 candidates of size 6
+-- looking through 24 candidates of size 7
+-- tested 39 candidates
 drop 0 xs  =  xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
@@ -21,11 +21,11 @@ take :: Int -> [A] -> [A]
 -- looking through 4 candidates of size 3
 -- looking through 6 candidates of size 4
 -- looking through 8 candidates of size 5
--- looking through 17 candidates of size 6
--- looking through 38 candidates of size 7
--- looking through 55 candidates of size 8
--- looking through 105 candidates of size 9
--- tested 165 candidates
+-- looking through 13 candidates of size 6
+-- looking through 24 candidates of size 7
+-- looking through 31 candidates of size 8
+-- looking through 59 candidates of size 9
+-- tested 111 candidates
 take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
