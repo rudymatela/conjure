@@ -65,6 +65,9 @@ test: test-makefile $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
 ghci: src/Conjure.ghci
 
+tags: src test/Test.hs
+	hasktags $^
+
 # Disclaimer: This bench target is not intended to generate paper-grade runtime
 #             datapoints as it runs each benchmark just once.  This target is
 #             meant to track large runtime changes across different git
