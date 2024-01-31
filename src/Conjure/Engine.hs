@@ -340,66 +340,6 @@ candidateDefns args  =  candidateDefns' args
                       else candidateDefns1
 
 
-nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
-nubCandidates Args{..} nm f  =
-  discardLaterT $ equalModuloTesting maxTests maxEvalRecursions nm f
-
-
-equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
-equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
-  where
-  testGrounds  =  filter (none isNegative . unfoldApp)
-               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
-  err  =  error "equalModuloTesting: evaluation error (silenced)"
-  eq  =  conjureDynamicEq f
-  d1 === d2  =  all are $ testGrounds
-    where
-    -- silences errors, ok since this is for optional measuring of optimal pruning
-    are :: Expr -> Bool
-    are e  =  isError (evalEqual d1 d1 e)
-           && isError (evalEqual d2 d2 e)
-           || errorToFalse (evalEqual d1 d2 e)
-  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
-  evalEqual :: Defn -> Defn -> Expr -> Bool
-  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
-                           `dynApp` evalDyn d2 e `fromDyn` False
-  isError  =  isNothing . errorToNothing
-  isNegative (Value ('-':_) _)  =  True
-  isNegative _  =  False
-
-
--- | For debugging purposes.
---
--- This may be taken out of the API at any moment.
-erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
-erroneousCandidate maxTests maxEvalRecursions nm f  =
-  isJust . findDefnError maxTests maxEvalRecursions nm f
-
-
--- | For debugging purposes,
---   finds a set of arguments that triggers an error in the candidate 'Defn'.
---
--- Warning: this is an experimental function
--- which may be taken out of the API at any moment.
-findDefnError :: Conjurable f => Int -> Int -> String -> f -> Defn -> Maybe Expr
-findDefnError maxTests maxEvalRecursions nm f d  =
-  find is testGrounds
-  where
-  testGrounds  =  filter (none isNegative . unfoldApp)
-               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
-  err  =  error "erroneousCandidate: evaluation error (silenced)"
-  eq  =  conjureDynamicEq f
-  is :: Expr -> Bool
-  is e  =  isError (evalEqual d d e)
-  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
-  evalEqual :: Defn -> Defn -> Expr -> Bool
-  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
-                           `dynApp` evalDyn d2 e `fromDyn` err
-  isError  =  isNothing . errorToNothing
-  isNegative (Value ('-':_) _)  =  True
-  isNegative _  =  False
-
-
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
 candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
@@ -657,6 +597,68 @@ keepIf (Value "if" _ :$ ep :$ ex :$ ey)
                                      | isVar e2   =  Just (e2,e1)
   binding _                                       =  Nothing
 keepIf _  =  error "Conjure.Engine.keepIf: not an if"
+
+
+-- equality between candidates
+
+nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
+nubCandidates Args{..} nm f  =
+  discardLaterT $ equalModuloTesting maxTests maxEvalRecursions nm f
+
+
+equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
+equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
+  where
+  testGrounds  =  filter (none isNegative . unfoldApp)
+               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
+  err  =  error "equalModuloTesting: evaluation error (silenced)"
+  eq  =  conjureDynamicEq f
+  d1 === d2  =  all are $ testGrounds
+    where
+    -- silences errors, ok since this is for optional measuring of optimal pruning
+    are :: Expr -> Bool
+    are e  =  isError (evalEqual d1 d1 e)
+           && isError (evalEqual d2 d2 e)
+           || errorToFalse (evalEqual d1 d2 e)
+  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
+  evalEqual :: Defn -> Defn -> Expr -> Bool
+  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
+                           `dynApp` evalDyn d2 e `fromDyn` False
+  isError  =  isNothing . errorToNothing
+  isNegative (Value ('-':_) _)  =  True
+  isNegative _  =  False
+
+
+-- | For debugging purposes.
+--
+-- This may be taken out of the API at any moment.
+erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
+erroneousCandidate maxTests maxEvalRecursions nm f  =
+  isJust . findDefnError maxTests maxEvalRecursions nm f
+
+
+-- | For debugging purposes,
+--   finds a set of arguments that triggers an error in the candidate 'Defn'.
+--
+-- Warning: this is an experimental function
+-- which may be taken out of the API at any moment.
+findDefnError :: Conjurable f => Int -> Int -> String -> f -> Defn -> Maybe Expr
+findDefnError maxTests maxEvalRecursions nm f d  =
+  find is testGrounds
+  where
+  testGrounds  =  filter (none isNegative . unfoldApp)
+               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
+  err  =  error "erroneousCandidate: evaluation error (silenced)"
+  eq  =  conjureDynamicEq f
+  is :: Expr -> Bool
+  is e  =  isError (evalEqual d d e)
+  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
+  evalEqual :: Defn -> Defn -> Expr -> Bool
+  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
+                           `dynApp` evalDyn d2 e `fromDyn` err
+  isError  =  isNothing . errorToNothing
+  isNegative (Value ('-':_) _)  =  True
+  isNegative _  =  False
 
 
 
