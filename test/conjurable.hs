@@ -232,8 +232,7 @@ tests n  =
   , isDecon (div' i_ two) == True
   , isDecon (tail' is_) == True
   , isDecon (init' is_) == True
-  -- TODO: add drop' to Data.Express.Fixtures
-  -- , isDecon (drop' one is_) == True
+  , isDecon (drop' one is_) == True
 
   -- obvious constructions
   , isDecon (i_ -+- one) == False
@@ -253,10 +252,19 @@ tests n  =
   , isDecon (minus :$ i_ :$ four) == True
   , isDecon (minus :$ i_ :$ five) == True
   , isDecon (minus :$ i_ :$ six) == True
+  , isDecon (drop' two is_) == True
+  , isDecon (drop' three is_) == True
+  , isDecon (drop' xx is_) == False -- may not deconstruct!
 
   , isDecon (tail' (tail' is_)) == False -- does not deconstruct [1]
   , isDecon (init' (init' is_)) == False -- does not deconstruct [1]
   , isDecon (init' (tail' is_)) == False -- does not deconstruct [1]
+
+  , isDecon (drop' one (drop' one is_)) == True
+  , isDecon (drop' one (tail' is_)) == True
+
+  , isDecon (take' one is_) == False -- does not deconstruct [1]
+  , isDecon (take' two is_) == False -- does not deconstruct [1,1]
 
   -- counter-intuitive but true: x `mod` y is a deconstruction of y:
   -- x `mod` y < y  for  y > 0
@@ -366,6 +374,12 @@ tests n  =
   , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
   , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
   ]
+  where
+  -- TODO: remove once these are available on Express.Fixtures
+  dropE  =  value "drop" (drop :: Int -> [Int] -> [Int])
+  takeE  =  value "take" (take :: Int -> [Int] -> [Int])
+  drop' en exs  =  dropE :$ en :$ exs
+  take' en exs  =  takeE :$ en :$ exs
 
 isDecon :: Expr -> Bool
 isDecon =  conjureIsDeconstruction (undefined :: [Int] -> [Char] -> [Bool]) 60
