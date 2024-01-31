@@ -337,9 +337,10 @@ conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
 --
 -- (cf. 'conjureIsDeconstructor')
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
-conjureIsDeconstruction f maxTests ed  =  length (holes ed) == 1
-                                       && typ h == typ ed
-                                       && all is gs
+conjureIsDeconstruction f maxTests ed
+  =  length (holes ed) == 1
+  && typ h == typ ed
+  && all is gs
   where
   gs  =  take maxTests $ grounds (conjureTiersFor f) ed
   [h]  =  holes ed
