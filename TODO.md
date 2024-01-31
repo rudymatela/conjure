@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* `conjureGrounds`?
+
 * Discard erroneous candidates from `bench/erroneous.txt` somehow.
   See sections below for ideas.
 

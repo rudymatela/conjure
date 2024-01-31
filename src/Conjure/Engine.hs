@@ -348,9 +348,11 @@ nubCandidates Args{..} nm f  =
 equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
 equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   where
+  testGrounds  =  filter (none isNegative . unfoldApp)
+               $  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
   err  =  error "equalModuloTesting: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
-  d1 === d2  =  all are $ take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+  d1 === d2  =  all are $ testGrounds
     where
     -- silences errors, ok since this is for optional measuring of optimal pruning
     are :: Expr -> Bool
@@ -362,6 +364,8 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
                            `dynApp` evalDyn d2 e `fromDyn` False
   isError  =  isNothing . errorToNothing
+  isNegative (Value ('-':_) _)  =  True
+  isNegative _  =  False
 
 
 -- | For debugging purposes.
