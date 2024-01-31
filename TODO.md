@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Refactor `conjureIsDeconstruction` to avoid the `holeValue` hack
-
 * Disregards deconstructions
   that always map to size 0 in `conjureIsDeconstruction`:
   `not (all iz gs) where iz e  =  errorToFalse $ esz e == 0 || esz (holeValue e) == 0`

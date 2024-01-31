@@ -348,6 +348,7 @@ conjureIsDeconstruction f maxTests ed
   && typ h == typ ed
   && all is gs
   where
+  -- grounds here is needed as the deconstruction may contain variables!
   gs  =  take maxTests $ grounds (conjureTiersFor f) ed
   [h]  =  holes ed
   sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
@@ -360,7 +361,7 @@ conjureIsDeconstruction f maxTests ed
                .  lookup h
                .  fromMaybe err
                $  e `match` ed
-  err  =  error "conjureIsDeconstructor: the impossible happened"
+  err  =  error "Conjure.conjureIsDeconstruction: the impossible happened"
 
 
 -- | Compute candidate deconstructions from an 'Expr'.
