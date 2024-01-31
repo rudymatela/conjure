@@ -39,8 +39,8 @@ listToMaybe :: [A] -> Maybe A
 -- pruning with 0/0 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
--- tested 3 candidates
+-- looking through 1 candidates of size 3
+-- tested 2 candidates
 listToMaybe []  =  Nothing
 listToMaybe (x:xs)  =  Just x
 
@@ -60,7 +60,6 @@ catMaybes :: [Maybe A] -> [A]
 -- pruning with 0/0 rules
 -- looking through 1 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 1 candidates of size 3
--- tested 2 candidates
+-- tested 1 candidates
 cannot conjure
 

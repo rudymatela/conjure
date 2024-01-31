@@ -14,6 +14,7 @@ EG = \
   eg/arith \
   eg/count \
   eg/dupos \
+  eg/either \
   eg/factorial \
   eg/fibonacci \
   eg/fib01 \
@@ -23,6 +24,7 @@ EG = \
   eg/bools \
   eg/gcd \
   eg/list \
+  eg/maybe \
   eg/pow \
   eg/replicate \
   eg/setelem \
@@ -34,6 +36,7 @@ EG = \
   eg/bst \
   bench/candidates \
   bench/redundants \
+  bench/erroneous \
   bench/ill-hit \
   bench/longshot \
   bench/lowtests \
@@ -51,6 +54,7 @@ TESTS = \
   test/expr \
   test/defn \
   test/conjurable \
+  test/derive \
   test/utils
 
 all: mk/toplibs

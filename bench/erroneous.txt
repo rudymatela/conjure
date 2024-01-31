@@ -138,8 +138,8 @@ foo x  =  foo (1 - x)
 
 Erroneous candidates for: ? :: Int -> Int -> Int
   pruning with 10/23 rules
-  [3,7,22,49,112,276,676] candidates
-  109/1145 erroneous candidates
+  [3,8,22,50,112,278,676] candidates
+  109/1149 erroneous candidates
 
 x ? 0  =  x
 x ? y  =  dec x ? y
@@ -599,8 +599,8 @@ Erroneous candidates for: goo :: [Int] -> [Int]
 
 Erroneous candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,7,15,41,120,241,852] candidates
-  18/1279 erroneous candidates
+  [3,8,15,41,120,242,852] candidates
+  18/1281 erroneous candidates
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
