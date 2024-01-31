@@ -31,6 +31,7 @@ module Conjure.Expr
   , deholings
   , varToConst
   , hasAppInstanceOf
+  , isNegative
 
   , enumerateAppsFor
   , enumerateFillings
@@ -530,6 +531,13 @@ listConflicts es
   where
   fun (ef :$ _)  =  ef
   arg (_ :$ ex)  =  ex
+
+-- | Is the expression encoding a negative number.
+--
+-- This function is sort of a hack.
+isNegative :: Expr -> Bool
+isNegative (Value ('-':_) _)  =  True
+isNegative _  =  False
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

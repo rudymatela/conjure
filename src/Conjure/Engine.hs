@@ -611,22 +611,15 @@ equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   where
   testGrounds  =  filter (none isNegative . unfoldApp)
                $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
-  err  =  error "equalModuloTesting: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
   d1 === d2  =  all are $ testGrounds
     where
     -- silences errors, ok since this is for optional measuring of optimal pruning
     are :: Expr -> Bool
-    are e  =  isError (evalEqual d1 d1 e)
-           && isError (evalEqual d2 d2 e)
-           || errorToFalse (evalEqual d1 d2 e)
-  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
-  evalEqual :: Defn -> Defn -> Expr -> Bool
-  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
-                           `dynApp` evalDyn d2 e `fromDyn` False
-  isError  =  isNothing . errorToNothing
-  isNegative (Value ('-':_) _)  =  True
-  isNegative _  =  False
+    are e  =  isError (ee d1 d1 e)
+           && isError (ee d2 d2 e)
+           || errorToFalse (ee d1 d2 e)
+           where  ee  =  devlEqual maxEvalRecursions f
 
 
 -- | For debugging purposes.
@@ -648,18 +641,24 @@ findDefnError maxTests maxEvalRecursions nm f d  =
   where
   testGrounds  =  filter (none isNegative . unfoldApp)
                $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
-  err  =  error "erroneousCandidate: evaluation error (silenced)"
-  eq  =  conjureDynamicEq f
   is :: Expr -> Bool
-  is e  =  isError (evalEqual d d e)
-  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
-  evalEqual :: Defn -> Defn -> Expr -> Bool
-  evalEqual d1 d2 e  =  eq `dynApp` evalDyn d1 e
-                           `dynApp` evalDyn d2 e `fromDyn` err
-  isError  =  isNothing . errorToNothing
-  isNegative (Value ('-':_) _)  =  True
-  isNegative _  =  False
+  is e  =  isError (devlEqual maxEvalRecursions f d d e)
 
+
+devlEqual :: Conjurable f => Int -> f -> Defn -> Defn -> Expr -> Bool
+devlEqual maxEvalRecursions f d1 d2 e  =
+  eq `dynApp` evalDyn d1 e
+     `dynApp` evalDyn d2 e `fromDyn` err
+  where
+  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
+  eq  =  conjureDynamicEq f
+  err  =  error "Conjure.devlEqual: evaluation error"
+
+-- | Is the argument value an error value?
+isError :: a -> Bool
+isError  =  isNothing . errorToNothing
+-- There should not be a problem if this ever appears in LeanCheck:
+-- imports are qualfied in this module.
 
 
 --- normality checks ---
