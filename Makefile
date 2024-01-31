@@ -57,7 +57,7 @@ all: mk/toplibs
 
 all-all: all $(EG) $(TESTS)
 
-test: $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
+test: test-makefile $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
 .PHONY: bench
 bench: $(EG) $(patsubst %,%.bench,$(EG))
@@ -81,6 +81,8 @@ txt: $(EG) $(patsubst %,%.txt,$(EG))
 
 test-sdist:
 	./test/sdist
+
+test-makefile: test/mk.run
 
 test-via-cabal:
 	cabal configure --enable-tests --enable-benchmarks --ghc-options="$(GHCFLAGS) -O0"
@@ -135,5 +137,10 @@ terpret-each: bench/terpret
 gps2-each: bench/gps2
 	for i in {1..25}; do ./bench/time ./bench/gps2 $$i; done
 
+ls-eg:
+	@for eg in $(EG); do echo $$eg; done
+
+ls-test:
+	@for test in $(TESTS); do echo $$test; done
 
 include mk/haskell.mk

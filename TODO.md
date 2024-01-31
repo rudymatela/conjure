@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Test that `Makefile` lists all available benchmarks and examples
+* Add missing benchmarks, examples and test scripts to the makefile
 
 * Refactor `conjureIsDeconstruction` to avoid the `holeValue` hack
 
