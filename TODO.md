@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* refactor `equalModuloTesting`, `erroneousCandidate` and `findDefnError`?
-
 * improve documentation of `conjureIsDeconstruction`.
   Document behaviour outside of function, not inside of it.
 
