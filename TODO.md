@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add and use `conjureGrounds` and `cjGrounds`?
-
 * refactor `equalModuloTesting`, `erroneousCandidate` and `findDefnError`?
 
 * improve documentation of `conjureIsDeconstruction`.

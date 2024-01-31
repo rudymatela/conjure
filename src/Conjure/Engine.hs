@@ -349,7 +349,7 @@ equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn 
 equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
   where
   testGrounds  =  filter (none isNegative . unfoldApp)
-               $  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
   err  =  error "equalModuloTesting: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
   d1 === d2  =  all are $ testGrounds
@@ -386,7 +386,7 @@ findDefnError maxTests maxEvalRecursions nm f d  =
   find is testGrounds
   where
   testGrounds  =  filter (none isNegative . unfoldApp)
-               $  take maxTests $ grounds (conjureTiersFor f) (conjureVarApplication nm f)
+               $  take maxTests $ conjureGrounds f (conjureVarApplication nm f)
   err  =  error "erroneousCandidate: evaluation error (silenced)"
   eq  =  conjureDynamicEq f
   is :: Expr -> Bool

@@ -91,7 +91,13 @@ cjAreEqual ps maxTests  =  (===)
   (-==-)  =  cjMkEquation ps
   e1 === e2  =  isTrue $ e1 -==- e2
   isTrue  =  all (errorToFalse . eval False) . gs
-  gs  =  take maxTests . grounds (cjTiersFor ps)
+  gs  =  take maxTests . cjGrounds ps
+
+-- | Given a list of 'Prim's,
+--   computes a grounds function that lists
+--   ground expressions of an 'Expr'.
+cjGrounds :: [Prim] -> Expr -> [Expr]
+cjGrounds  =  grounds . cjTiersFor
 
 -- | Given a list of 'Prim's,
 --   returns a function that given an 'Expr'

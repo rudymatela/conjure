@@ -24,6 +24,7 @@ module Conjure.Conjurable
   , conjureHoles
   , conjureTiersFor
   , conjureListFor
+  , conjureGrounds
   , conjureAreEqual
   , conjureMkEquation
   , A, B, C, D, E, F
@@ -298,7 +299,7 @@ conjureAreEqual f maxTests  =  (===)
   (-==-)  =  conjureMkEquation f
   e1 === e2  =  isTrue $ e1 -==- e2
   isTrue  =  all (errorToFalse . eval False) . gs
-  gs  =  take maxTests . grounds (conjureTiersFor f)
+  gs  =  take maxTests . conjureGrounds f
 
 -- | Compute 'tiers' of values encoded as 'Expr's
 --   of the type of the given 'Expr'.
@@ -312,13 +313,16 @@ conjureTiersFor f e  =  tf allTiers
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
 
+conjureGrounds :: Conjurable f => f -> Expr -> [Expr]
+conjureGrounds  =  grounds . conjureTiersFor
+
 -- | Compure a 'list' of values encoded as 'Expr's
 --   of the type of the given 'Expr'.
 conjureListFor :: Conjurable f => f -> Expr -> [Expr]
 conjureListFor f  =  concat . conjureTiersFor f
 
 conjureIsNumeric :: Conjurable f => f -> Expr -> Bool
-conjureIsNumeric f e  =  case concat $ conjureTiersFor f e of
+conjureIsNumeric f e  =  case conjureListFor f e of
                          -- We assume tiers of numeric values start with 0
                          -- not so unfair...
                          (Value "0" _):_ -> True
@@ -352,7 +356,7 @@ conjureIsDeconstruction f maxTests ed
                              -- and returning a constant value!
   where
   -- grounds here is needed as the deconstruction may contain variables!
-  gs  =  take maxTests $ grounds (conjureTiersFor f) ed
+  gs  =  take maxTests $ conjureGrounds f ed
   [h]  =  holes ed
   sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
                   , isWellTyped (sz :$ h)]
