@@ -3,7 +3,14 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* `conjureGrounds`?
+* add and use `conjureGrounds` and `cjGrounds`?
+
+* refactor `equalModuloTesting`, `erroneousCandidate` and `findDefnError`?
+
+* improve documentation of `conjureIsDeconstruction`.
+  Document behaviour outside of function, not inside of it.
+
+* refactor `conjureIsDeconstruction` to avoid evaluating expressions twice
 
 * Discard erroneous candidates from `bench/erroneous.txt` somehow.
   See sections below for ideas.
