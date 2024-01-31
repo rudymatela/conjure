@@ -373,6 +373,10 @@ tests n  =
   , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
   , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
   , conjurableOK (undefined :: (Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int))
+
+  -- little sanity check (conjurableOK should catch it anyway)
+  , take 6 (conjureListFor (undefined :: Int) i_)
+    == [zero, one, minusOne, two, minusTwo, three]
   ]
   where
   -- TODO: remove once these are available on Express.Fixtures

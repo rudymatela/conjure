@@ -23,6 +23,7 @@ module Conjure.Conjurable
   , conjurePats
   , conjureHoles
   , conjureTiersFor
+  , conjureListFor
   , conjureAreEqual
   , conjureMkEquation
   , A, B, C, D, E, F
@@ -310,6 +311,11 @@ conjureTiersFor f e  =  tf allTiers
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
+
+-- | Compure a 'list' of values encoded as 'Expr's
+--   of the type of the given 'Expr'.
+conjureListFor :: Conjurable f => f -> Expr -> [Expr]
+conjureListFor f  =  concat . conjureTiersFor f
 
 conjureIsNumeric :: Conjurable f => f -> Expr -> Bool
 conjureIsNumeric f e  =  case concat $ conjureTiersFor f e of
