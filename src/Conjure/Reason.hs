@@ -1,3 +1,16 @@
+-- |
+-- Module      : Conjure.Reason
+-- Copyright   : (c) 2021-2024 Rudy Matela
+-- License     : 3-Clause BSD  (see the file LICENSE)
+-- Maintainer  : Rudy Matela <rudy@matela.com.br>
+--
+-- An internal module of "Conjure",
+-- a library for Conjuring function implementations
+-- from tests or partial definitions.
+-- (a.k.a.: functional inductive programming)
+--
+-- This module re-exports some functions from "Test.Speculate"
+-- along with a few additional utilities.
 module Conjure.Reason
   ( Thy
   , rules
