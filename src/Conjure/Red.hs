@@ -78,12 +78,24 @@ conjureIsDeconstruction f maxTests ed
 -- see if any projects the same variables while only using deconstructions
 -- and where there is at least a single deconstruction.
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
+descends  =  descends2
+-- TODO: test the above with gcd and other interesting cases
+-- TODO: migrate back to descends1 after fixing argumentSubsets issues
+
+descends2 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+descends2 isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
   where
   ss  =  init $ sets exys
   exys  =  zip exs eys
   (_:exs)  =  unfoldApp e'
   (_:eys)  =  unfoldApp e
+
+-- the old descends
+descends1 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+descends1 isDecOf efxs  =  any desc . argumentSubsets efxs
+  where
+  desc exys  =  all (isNotConstruction isDecOf) exys
+             && any (isDeconstruction isDecOf) exys
 
 -- > > isDescent [xx -:- xxs, yys]  [yys, xxs]
 -- > True
@@ -131,6 +143,10 @@ argumentSubsets efxs efys  =
   where
   (_:exs)  =  unfoldApp efxs
   (_:eys)  =  unfoldApp efys
+-- TODO: allow mapping involving multiple variables (such as gcd)
+-- TODO: allow mapping arguments to constant values
+-- TODO: try to do maximum pairing in each set
+-- TODO: sort by smallest valid set and discard sets that contain it
 
 -- | Compute candidate deconstructions from an 'Expr'.
 --
