@@ -95,6 +95,15 @@ tests n  =
       , (xx -+- yy) -+- i_
       , (xx -+- xx) -+- i_
       ]
+
+  , argumentSubsets (ff xx) (ff (xx -+- one)) == [([xx],[xx -+- one])]
+  , argumentSubsets (ff xx) (ff yy) == [([xx],[yy])]
+
+  , argumentSubsets (xx -?- yy) (yy -?- xx)
+    == [([xx,yy],[yy,xx]),([xx],[yy]),([yy],[xx])]
+
+  , argumentSubsets (xx -:- xxs) (yy -:- yys)
+    == [([xx],[yy]),([xxs],[yys])]
   ]
   where
   -- TODO: remove once these are available on Express.Fixtures

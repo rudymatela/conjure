@@ -13,6 +13,8 @@ module Conjure.Red
   , isDescent
   , candidateDeconstructionsFrom
   , candidateDeconstructionsFromHoled
+  , argumentSubsets
+  , validArgumentSubsets
   )
 where
 
@@ -102,6 +104,36 @@ isDescent isDecOf ps es  =  any is es
 -- TODO: improve "iz" a.k.a. isNotConstruction
 -- TODO: create test/engine.hs and thoroughly test descends and isDescent
 
+
+-- | Lists pairs of argument subsets for the two given 'Expr's.
+--
+-- The listed sets are not empty and must have values of the same type.
+argumentSubsets :: Expr -> Expr -> [([Expr],[Expr])]
+argumentSubsets efxs efys  =
+  [ unzip aas
+  | aas <- sets $ zip exs eys
+  , not (null aas)
+  , allEqualOn (typ . fst) aas
+  ]
+  where
+  (_:exs)  =  unfoldApp efxs
+  (_:eys)  =  unfoldApp efys
+
+-- | WIP
+--
+-- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
+-- > [([x :: Int],[x :: Int]),([y :: Int,z :: Int],[y :: Int,z :: Int])]
+validArgumentSubsets :: Expr -> Expr -> [([Expr],[Expr])]
+validArgumentSubsets efxs efys
+  =  map (both $ sortOn rvars)
+  $  filter valid
+  $  argumentSubsets efxs efys
+  where
+  valid asas  =  case uncurry zip asas of
+    [(el,er)] -> rvars er `isSubsetOf` rvars el
+    aas -> none (\(el,er) -> rvars el == rvars er) aas
+    where
+    aas  =  uncurry zip asas
 
 -- | Compute candidate deconstructions from an 'Expr'.
 --
