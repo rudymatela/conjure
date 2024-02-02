@@ -14,7 +14,6 @@ module Conjure.Red
   , candidateDeconstructionsFrom
   , candidateDeconstructionsFromHoled
   , argumentSubsets
-  , validArgumentSubsets
   )
 where
 
@@ -108,40 +107,19 @@ isDescent isDecOf ps es  =  any is es
 -- | Lists pairs of argument subsets for the two given 'Expr's.
 --
 -- The listed sets are not empty and must have values of the same type.
-argumentSubsets :: Expr -> Expr -> [([Expr],[Expr])]
+argumentSubsets :: Expr -> Expr -> [[(Expr,Expr)]]
 argumentSubsets efxs efys  =
-  [ unzip aas
+  [ zip els ers
   | aas <- sets $ zip exs eys
   , not (null aas)
   , allEqualOn (typ . fst) aas
+  , length aas == 1 || none (\(el,er) -> rvars el == rvars er) aas
+  , let (els, ers) = both (sortOn rvars) $ unzip aas
+  , map rvars els == map rvars ers
   ]
   where
   (_:exs)  =  unfoldApp efxs
   (_:eys)  =  unfoldApp efys
-
--- | WIP
---
--- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
--- > [([x :: Int],[x :: Int]),([y :: Int,z :: Int],[y :: Int,z :: Int])]
---
--- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
--- > [[(x :: Int,x :: Int)],[(y :: Int,y :: Int),(z :: Int,z :: Int)]]
---
--- Doesn't work:
---
--- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zero) --..- yy)
--- > [[(x :: Int,x :: Int)],[(y :: Int,0 :: Int),(z :: Int,y :: Int)],[(y :: Int,0 :: Int)]]
-validArgumentSubsets :: Expr -> Expr -> [[(Expr,Expr)]]
-validArgumentSubsets efxs efys
-  =  map (uncurry zip . both (sortOn rvars))
-  $  filter valid
-  $  argumentSubsets efxs efys
-  where
-  valid asas  =  case uncurry zip asas of
-    [(el,er)] -> rvars er `isSubsetOf` rvars el
-    aas -> none (\(el,er) -> rvars el == rvars er) aas
-    where
-    aas  =  uncurry zip asas
 
 -- | Compute candidate deconstructions from an 'Expr'.
 --

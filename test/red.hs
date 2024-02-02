@@ -96,14 +96,20 @@ tests n  =
       , (xx -+- xx) -+- i_
       ]
 
-  , argumentSubsets (ff xx) (ff (xx -+- one)) == [([xx],[xx -+- one])]
-  , argumentSubsets (ff xx) (ff yy) == [([xx],[yy])]
+  , argumentSubsets (ff xx) (ff (xx -+- one)) == [[(xx,xx -+- one)]]
+  , argumentSubsets (ff xx) (ff yy) == []
 
-  , argumentSubsets (xx -?- yy) (yy -?- xx)
-    == [([xx,yy],[yy,xx]),([xx],[yy]),([yy],[xx])]
+  , argumentSubsets (xx -?- yy) (yy -?- xx) == [[(xx,xx),(yy,yy)]]
 
-  , argumentSubsets (xx -:- xxs) (yy -:- yys)
-    == [([xx],[yy]),([xxs],[yys])]
+  , argumentSubsets (xx -:- xxs) (yy -:- yys) == []
+
+  , argumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
+    == [ [(xx,xx)]
+       , [(yy,yy), (zz,zz)]
+       ]
+
+  , argumentSubsets ((xx,yy) --..- zz) ((zz,xx) --..- yy)
+    == [[(xx,xx), (yy,yy), (zz,zz)]]
   ]
   where
   -- TODO: remove once these are available on Express.Fixtures
