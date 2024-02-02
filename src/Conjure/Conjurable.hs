@@ -29,9 +29,6 @@ module Conjure.Conjurable
   , conjureAreEqual
   , conjureMkEquation
   , A, B, C, D, E, F
-  , conjureIsDeconstruction
-  , candidateDeconstructionsFrom
-  , candidateDeconstructionsFromHoled
   , conjureIsUnbreakable
   , conjureReification
   , conjureReification1
@@ -337,36 +334,6 @@ conjureMostGeneralCanonicalVariation :: Conjurable f => f -> Expr -> Expr
 conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
                                         .  fastMostGeneralVariation
 
--- | Checks if an expression is a deconstruction.
---
--- There should be a single 'hole' in the expression.
---
--- It should decrease the size of all arguments that have
--- a size greater than 0.
-conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
-conjureIsDeconstruction f maxTests ed
-  =  length (holes ed) == 1  -- Well formed deconstruction, single hole.
-  && typ h == typ ed         -- We can only deconstruct to the same type.
-  && all is sizes            -- Do we always reduce size?
-  && not (all iz sizes)      -- Disallow always mapping to values of size 0.
-                             -- In this case, we are better off not recursing
-                             -- and returning a constant value!
-  where
-  x << 0  =  True
-  x << y  =  x < y
-  is (sd,sx)  =  errorToFalse $ sd << sx
-  iz (sd,sx)  =  errorToFalse $ sd == 0 || sx == 0
-  -- We cannot simply conjureTiers for h here, because the deconstruction
-  -- expression may contain variables, e.g.: @x `mod` _@.
-  -- So conjureGrounds and the holeValue trick are required.
-  sizes  =  map evalSize2 . take maxTests $ conjureGrounds f ed
-  [h]  =  holes ed
-  evalSize2 e  =  (evalSize e, evalSize $ holeValue e)
-  evalSize e  =  eval (0::Int) (esize :$ e)
-  esize  =  conjureSizeFor f h
-  holeValue e  =  fromMaybe err . lookup h . fromMaybe err $ e `match` ed
-  err  =  error "Conjure.conjureIsDeconstruction: the impossible happened"
-
 
 -- | Conjures an 'Expr'-encoded size function for the given expression type.
 --
@@ -383,52 +350,6 @@ conjureSizeFor f eh  =
   case [esz | (_,_,_,_,_,esz) <- conjureReification f, isWellTyped (esz :$ eh)] of
   (esz:_) -> esz
   _ -> error $ "Conjure.conjureSizeFor: could not find size for " ++ show eh
-
-
--- | Compute candidate deconstructions from an 'Expr'.
---
--- This is used in the implementation of 'Conjure.Engine.candidateDefnsC'
--- followed by 'conjureIsDeconstruction'.
---
--- > > candidateDeconstructionsFrom (xx `mod'` yy)
--- > [ _ `mod` y
--- > , x `mod` _
--- > ]
---
--- To be constrasted with 'candidateDeconstructionsFromHoled'.
-candidateDeconstructionsFrom :: Expr -> [Expr]
-candidateDeconstructionsFrom e  =
-  [ e'
-  | v <- vars e
-  , typ v == typ e
-  , let e' = e //- [(v, holeAsTypeOf v)]
-  , length (holes e') == 1
-  ]
-
--- | Compute candidate deconstructions from an 'Expr'.
---
--- This is used in the implementation of 'Conjure.Engine.candidateExprs'
--- followed by 'conjureIsDeconstruction'.
---
--- This is similar to 'canonicalVariations'
--- but always leaves a hole
--- of the same return type as the given expression.
---
--- > > candidateDeconstructionsFrom (i_ `mod'` i_)
--- > [ _ `mod` x
--- > , x `mod` _
--- > ]
---
--- To be contrasted with 'candidateDeconstructionsFrom'
-candidateDeconstructionsFromHoled :: Expr -> [Expr]
-candidateDeconstructionsFromHoled e  =  map (//- [(v, h)])
-                                     $  concatMap canonicalVariations
-                                     $  deholings v e
-  where
-  h  =  holeAsTypeOf e
-  v  =  "_#_" `varAsTypeOf` e  -- a marker variable with an invalid name
-  -- at some point I should get rid of candidateDeconstructionsFrom in favour
-  -- of this one
 
 -- | Checks if an 'Expr' is of an unbreakable type.
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool

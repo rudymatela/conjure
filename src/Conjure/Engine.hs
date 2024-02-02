@@ -53,6 +53,7 @@ import Conjure.Prim
 import Conjure.Defn
 import Conjure.Defn.Redundancy
 import Conjure.Defn.Test
+import Conjure.Descent
 import Conjure.Reason
 
 
@@ -482,59 +483,6 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
   isUnbreakable  =  conjureIsUnbreakable f
   errRP  =  error "candidateDefnsC: unexpected pattern.  You have found a bug, please report it."
   errRV  =  error "candidateDefnsC: unexpected variables.  You have found a bug, please report it."
-
-
--- | Returns whether a non-empty subset of arguments
---   descends arguments by deconstruction.
---
--- > > descends isDec (xxs -++- yys) (xxs -++- tail' yys)
--- > True
---
--- > > descends isDec (xxs -++- yys) (xxs -++- yys)
--- > False
---
--- > > descends isDec (xxs -++- yys) (head' xxs -:- tail xxs  -++-  head' yys -:- tail yys)
--- > False
-
--- > > descends isDec (xxs -\/- yys) (yys -\/- tail' xxs)
--- > True
---
--- The following are not so obvious:
---
--- > > descends isDec (xxs -++- yys) (tail' yys -++- yys)
--- > False
---
--- > > descends isDec (xxs -++- yys) (xx-:-xxs -++- tail' yys)
--- > True
---
--- For all possible sets of arguments (2^n - 1 elements: 1 3 7 15 31),
--- see if any projects the same variables while only using deconstructions
--- and where there is at least a single deconstruction.
-descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
-  where
-  ss  =  init $ sets exys
-  exys  =  zip exs eys
-  (_:exs)  =  unfoldApp e'
-  (_:eys)  =  unfoldApp e
-
--- > > isDescent [xx -:- xxs, yys]  [yys, xxs]
--- > True
---
--- > > isDescent [xx -:- xxs, yys]  [yys, xx -:- xxs]
--- > False
-isDescent :: (Expr -> Expr -> Bool) -> [Expr] -> [Expr] -> Bool
-isDescent isDecOf ps es  =  any is es
-                         && all iz es
-  where
-  is e | isVar e    =  any (\p -> 1 {-size e-} < size p && e `elem` vars p) ps
-       | otherwise  =  any (e `isDecOf`) $ concatMap vars ps
-  iz e | isVar e    =  True
-       | otherwise  =  all (\p -> e `isDecOf` p || size e <= size p) ps
--- TODO: closely review isDescent and descends
--- TODO: after sets, filter sets of values of the same type
--- TODO: improve "iz" a.k.a. isNotConstruction
--- TODO: create test/engine.hs and thoroughly test descends and isDescent
 
 
 -- | Checks if the given pattern is a ground pattern.

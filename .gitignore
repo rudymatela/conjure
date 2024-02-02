@@ -74,3 +74,4 @@ test/utils
 test/cases
 test/defn
 test/derive
+test/descent
