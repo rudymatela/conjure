@@ -110,6 +110,9 @@ tests n  =
 
   , argumentSubsets ((xx,yy) --..- zz) ((zz,xx) --..- yy)
     == [[(xx,xx), (yy,yy), (zz,zz)]]
+
+  , argumentSubsets ((xx,yy) --..- zz) ((dec zz,xx) --..- yy)
+    == [[(xx,xx), (yy,yy), (zz,dec zz)]]
   ]
   where
   -- TODO: remove once these are available on Express.Fixtures
@@ -120,3 +123,6 @@ tests n  =
 
 isDecon :: Expr -> Bool
 isDecon =  conjureIsDeconstruction (undefined :: [Int] -> [Char] -> [Bool]) 60
+
+dec :: Expr -> Expr
+dec ex  =  minus :$ ex :$ one
