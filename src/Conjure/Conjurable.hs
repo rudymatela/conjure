@@ -350,21 +350,23 @@ conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed
   =  length (holes ed) == 1  -- Well formed deconstruction, single hole.
   && typ h == typ ed         -- We can only deconstruct to the same type.
-  && all is gs               -- Do we always reduce size?
-  && not (all iz gs)         -- Disallow always mapping to values of size 0.
+  && all is szs              -- Do we always reduce size?
+  && not (all iz szs)        -- Disallow always mapping to values of size 0.
                              -- In this case, we are better off not recursing
                              -- and returning a constant value!
   where
   -- grounds here is needed as the deconstruction may contain variables!
+  szs  =  map sz2 gs
   gs  =  take maxTests $ conjureGrounds f ed
   [h]  =  holes ed
   sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
                   , isWellTyped (sz :$ h)]
   esz e  =  eval (0::Int) (sz :$ e)
+  sz2 e  =  (esz e, esz $ holeValue e)
   x << 0  =  True
   x << y  =  x < y
-  is e  =  errorToFalse $ esz e << esz (holeValue e)
-  iz e  =  errorToFalse $ esz e == 0 || esz (holeValue e) == 0
+  is (sd,sx)  =  errorToFalse $ sd << sx
+  iz (sd,sx)  =  errorToFalse $ sd == 0 || sx == 0
   holeValue e  =  fromMaybe err
                .  lookup h
                .  fromMaybe err
