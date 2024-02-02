@@ -216,7 +216,6 @@ conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, n
 -- 'conjureMkEquation',
 -- 'conjureAreEqual',
 -- 'conjureTiersFor',
--- 'conjureIsDeconstructor',
 -- 'conjureNamesFor',
 -- 'conjureIsUnbreakable',
 -- etc.
@@ -344,8 +343,6 @@ conjureMostGeneralCanonicalVariation f  =  canonicalizeWith (conjureNamesFor f)
 --
 -- It should decrease the size of all arguments that have
 -- a size greater than 0.
---
--- (cf. 'conjureIsDeconstructor')
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed
   =  length (holes ed) == 1  -- Well formed deconstruction, single hole.
