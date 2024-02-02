@@ -24,6 +24,7 @@ module Conjure.Conjurable
   , conjureHoles
   , conjureTiersFor
   , conjureListFor
+  , conjureSizeFor
   , conjureGrounds
   , conjureAreEqual
   , conjureMkEquation
@@ -350,28 +351,42 @@ conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed
   =  length (holes ed) == 1  -- Well formed deconstruction, single hole.
   && typ h == typ ed         -- We can only deconstruct to the same type.
-  && all is szs              -- Do we always reduce size?
-  && not (all iz szs)        -- Disallow always mapping to values of size 0.
+  && all is sizes            -- Do we always reduce size?
+  && not (all iz sizes)      -- Disallow always mapping to values of size 0.
                              -- In this case, we are better off not recursing
                              -- and returning a constant value!
   where
-  -- grounds here is needed as the deconstruction may contain variables!
-  szs  =  map sz2 gs
-  gs  =  take maxTests $ conjureGrounds f ed
-  [h]  =  holes ed
-  sz  =  head [sz | (_, _, _, _, _, sz) <- conjureReification f
-                  , isWellTyped (sz :$ h)]
-  esz e  =  eval (0::Int) (sz :$ e)
-  sz2 e  =  (esz e, esz $ holeValue e)
   x << 0  =  True
   x << y  =  x < y
   is (sd,sx)  =  errorToFalse $ sd << sx
   iz (sd,sx)  =  errorToFalse $ sd == 0 || sx == 0
-  holeValue e  =  fromMaybe err
-               .  lookup h
-               .  fromMaybe err
-               $  e `match` ed
+  -- We cannot simply conjureTiers for h here, because the deconstruction
+  -- expression may contain variables, e.g.: @x `mod` _@.
+  -- So conjureGrounds and the holeValue trick are required.
+  sizes  =  map evalSize2 . take maxTests $ conjureGrounds f ed
+  [h]  =  holes ed
+  evalSize2 e  =  (evalSize e, evalSize $ holeValue e)
+  evalSize e  =  eval (0::Int) (esize :$ e)
+  esize  =  conjureSizeFor f h
+  holeValue e  =  fromMaybe err . lookup h . fromMaybe err $ e `match` ed
   err  =  error "Conjure.conjureIsDeconstruction: the impossible happened"
+
+
+-- | Conjures an 'Expr'-encoded size function for the given expression type.
+--
+-- > > conjureSizeFor (undefined :: [Int] -> [Bool]) i_
+-- > conjureSize :: Int -> Int
+--
+-- > > conjureSizeFor (undefined :: [Int] -> [Bool]) is_
+-- > conjureSize :: [Int] -> Int
+--
+-- > > conjureSizeFor (undefined :: [Int] -> [Bool]) bs_
+-- > conjureSize :: [Bool] -> Int
+conjureSizeFor :: Conjurable f => f -> Expr -> Expr
+conjureSizeFor f eh  =
+  case [esz | (_,_,_,_,_,esz) <- conjureReification f, isWellTyped (esz :$ eh)] of
+  (esz:_) -> esz
+  _ -> error $ "Conjure.conjureSizeFor: could not find size for " ++ show eh
 
 
 -- | Compute candidate deconstructions from an 'Expr'.
