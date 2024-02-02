@@ -8,6 +8,7 @@ bench/candidates: \
   mk/toplibs
 bench/candidates.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -22,6 +23,7 @@ bench/erroneous: \
   mk/toplibs
 bench/erroneous.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -36,6 +38,7 @@ bench/gps2: \
   mk/toplibs
 bench/gps2.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -50,6 +53,7 @@ bench/gps: \
   mk/toplibs
 bench/gps.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -64,6 +68,7 @@ bench/ill-hit: \
   mk/toplibs
 bench/ill-hit.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -78,6 +83,7 @@ bench/longshot: \
   mk/toplibs
 bench/longshot.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -92,6 +98,7 @@ bench/lowtests: \
   mk/toplibs
 bench/lowtests.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -106,6 +113,7 @@ bench/p12: \
   mk/toplibs
 bench/p12.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -120,6 +128,7 @@ bench/p30: \
   mk/toplibs
 bench/p30.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -134,6 +143,7 @@ bench/redundants: \
   mk/toplibs
 bench/redundants.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -148,6 +158,7 @@ bench/self: \
   mk/toplibs
 bench/self.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -162,6 +173,7 @@ bench/take-drop: \
   mk/toplibs
 bench/take-drop.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -176,6 +188,7 @@ bench/terpret: \
   mk/toplibs
 bench/terpret.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -190,6 +203,7 @@ bench/weird: \
   mk/toplibs
 bench/weird.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -204,6 +218,7 @@ eg/arith: \
   mk/toplibs
 eg/arith.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -218,6 +233,7 @@ eg/bools: \
   mk/toplibs
 eg/bools.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -232,6 +248,7 @@ eg/bst: \
   mk/toplibs
 eg/bst.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -246,6 +263,7 @@ eg/count: \
   mk/toplibs
 eg/count.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -260,6 +278,7 @@ eg/dupos: \
   mk/toplibs
 eg/dupos.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -274,6 +293,7 @@ eg/either: \
   mk/toplibs
 eg/either.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -288,6 +308,7 @@ eg/factorial: \
   mk/toplibs
 eg/factorial.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -302,6 +323,7 @@ eg/fib01: \
   mk/toplibs
 eg/fib01.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -316,6 +338,7 @@ eg/fibonacci: \
   mk/toplibs
 eg/fibonacci.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -330,6 +353,7 @@ eg/gcd: \
   mk/toplibs
 eg/gcd.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -344,6 +368,7 @@ eg/higher: \
   mk/toplibs
 eg/higher.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -358,6 +383,7 @@ eg/id: \
   mk/toplibs
 eg/id.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -372,6 +398,7 @@ eg/ints: \
   mk/toplibs
 eg/ints.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -386,6 +413,7 @@ eg/list: \
   mk/toplibs
 eg/list.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -400,6 +428,7 @@ eg/maybe: \
   mk/toplibs
 eg/maybe.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -414,6 +443,7 @@ eg/pow: \
   mk/toplibs
 eg/pow.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -428,6 +458,7 @@ eg/replicate: \
   mk/toplibs
 eg/replicate.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -442,6 +473,7 @@ eg/setelem: \
   mk/toplibs
 eg/setelem.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -456,6 +488,7 @@ eg/sort: \
   mk/toplibs
 eg/sort.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -470,6 +503,7 @@ eg/spec: \
   mk/toplibs
 eg/spec.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -484,6 +518,7 @@ eg/subset: \
   mk/toplibs
 eg/subset.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -498,6 +533,7 @@ eg/tapps: \
   mk/toplibs
 eg/tapps.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -512,6 +548,7 @@ eg/tree: \
   mk/toplibs
 eg/tree.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -523,6 +560,7 @@ eg/tree.o: \
   eg/tree.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -536,6 +574,7 @@ mk/Toplibs.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -567,6 +606,7 @@ src/Conjure/Defn.o: \
   src/Conjure/Defn.hs
 src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure/Expr.hs \
@@ -578,6 +618,7 @@ src/Conjure/Expr.o: \
   src/Conjure/Expr.hs
 src/Conjure.o: \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -596,6 +637,11 @@ src/Conjure/Reason.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Expr.hs
+src/Conjure/Redundancy.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Defn.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
 test/conjurable.o: \
@@ -603,6 +649,7 @@ test/conjurable.o: \
   test/Test/ListableExpr.hs \
   test/conjurable.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -621,6 +668,7 @@ test/defn.o: \
   test/Test/ListableExpr.hs \
   test/defn.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -639,6 +687,7 @@ test/derive.o: \
   test/Test/ListableExpr.hs \
   test/derive.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -657,6 +706,7 @@ test/expr.o: \
   test/Test/ListableExpr.hs \
   test/expr.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -676,6 +726,7 @@ test/Test.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \
@@ -693,6 +744,7 @@ test/utils.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \
   src/Conjure/Utils.hs \
+  src/Conjure/Redundancy.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure.hs \

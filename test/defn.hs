@@ -3,6 +3,7 @@
 
 import Test
 import Conjure.Defn
+import Conjure.Redundancy
 import Test.LeanCheck.Error (errorToLeft)
 import Test.LeanCheck.Function ()
 import Data.Express.Fixtures
