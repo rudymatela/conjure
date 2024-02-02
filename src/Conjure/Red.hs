@@ -104,6 +104,17 @@ isDescent isDecOf ps es  =  any is es
 -- TODO: create test/engine.hs and thoroughly test descends and isDescent
 
 
+isDeconstruction :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+isDeconstruction isDecOf el er
+  | isVar el   =  er `isDecOf` el
+  | otherwise  =  size er < size el
+
+isNotConstruction :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+isNotConstruction isDecOf el er
+  | isVar el   =  er == el || er `isDecOf` el
+  | otherwise  =  size er <= size el
+
+
 -- | Lists pairs of argument subsets for the two given 'Expr's.
 --
 -- The listed sets are not empty and must have values of the same type.
