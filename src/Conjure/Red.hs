@@ -1,13 +1,13 @@
 -- |
--- Module      : Conjure.Descent
+-- Module      : Conjure.Red
 -- Copyright   : (c) 2021-2024 Rudy Matela
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
 -- This module is part of "Conjure".
 --
--- This defines functions that relate to recursive descent.
-module Conjure.Descent
+-- This defines functions that deal with recursive descent and deconstructions
+module Conjure.Red
   ( conjureIsDeconstruction
   , descends
   , isDescent

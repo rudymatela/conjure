@@ -55,7 +55,7 @@ TESTS = \
   test/defn \
   test/conjurable \
   test/derive \
-  test/descent \
+  test/red \
   test/utils
 
 all: mk/toplibs

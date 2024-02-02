@@ -53,7 +53,7 @@ import Conjure.Prim
 import Conjure.Defn
 import Conjure.Defn.Redundancy
 import Conjure.Defn.Test
-import Conjure.Descent
+import Conjure.Red
 import Conjure.Reason
 
 
