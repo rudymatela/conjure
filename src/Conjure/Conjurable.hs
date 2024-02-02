@@ -52,7 +52,6 @@ import Test.LeanCheck.Utils
 import Test.LeanCheck.Error (errorToFalse)
 import Conjure.Expr hiding (application)
 import Conjure.Defn
-import Test.Speculate.Expr (grounds)
 import Data.Functor ((<$>))
 import Control.Applicative ((<*>))
 import Data.Dynamic

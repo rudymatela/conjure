@@ -44,6 +44,9 @@ module Conjure.Expr
   , conflicts
   , listConflicts
 
+  , grounds
+  , groundBinds
+
   , module Conjure.Utils
   )
 where
@@ -60,6 +63,8 @@ import Control.Applicative ((<$>)) -- for GHC <= 7.8
 import Test.LeanCheck (mapT, filterT, (\/), delay, productWith, productMaybeWith)
 import Test.LeanCheck.Tiers (products)
 import Test.LeanCheck.Utils.Types (A, B, C, D, E, F)
+
+import Test.Speculate.Expr (grounds, groundBinds)
 
 -- | /O(n)/.
 -- Compares the simplicity of two 'Expr's.

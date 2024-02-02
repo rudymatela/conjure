@@ -55,7 +55,7 @@ import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
 import Test.LeanCheck.Utils (classifyOn)
 
 import Test.Speculate.Reason (Thy, rules, equations, invalid, canReduceTo, printThy, closureLimit, doubleCheck, normalize)
-import Test.Speculate.Engine (theoryFromAtoms, grounds, groundBinds, boolTy)
+import Test.Speculate.Engine (theoryFromAtoms, boolTy)
 
 import Conjure.Expr
 import Conjure.Conjurable
