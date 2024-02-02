@@ -57,7 +57,7 @@ import Conjure.Conjurable
 import Conjure.Prim
 import Conjure.Defn
 import Conjure.Reason
-import Conjure.Redundancy
+import Conjure.Defn.Redundancy
 
 
 -- | Conjures an implementation of a partially defined function.

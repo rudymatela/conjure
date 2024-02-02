@@ -1,5 +1,5 @@
 -- |
--- Module      : Conjure.Redundancy
+-- Module      : Conjure.Defn.Redundancy
 -- Copyright   : (c) 2021-2024 Rudy Matela
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
@@ -9,7 +9,7 @@
 -- This module exports functions that check redundancy in 'Defn's.
 --
 -- You are probably better off importing "Conjure".
-module Conjure.Redundancy
+module Conjure.Defn.Redundancy
   ( isRedundantDefn
   , isRedundantBySubsumption
   , isRedundantByRepetition

@@ -7,7 +7,7 @@ import Conjure
 -- This script needs some internal utilities of Conjure:
 import Conjure.Engine
 import Conjure.Defn
-import Conjure.Redundancy (isRedundantByIntroduction)
+import Conjure.Defn.Redundancy (isRedundantByIntroduction)
 import Conjure.Utils
 import Test.LeanCheck.Tiers (discardT)
 
