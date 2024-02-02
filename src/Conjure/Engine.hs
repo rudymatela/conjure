@@ -31,9 +31,6 @@ module Conjure.Engine
   , candidateDefnsC
   , conjureTheory
   , conjureTheoryWith
-  , equalModuloTesting
-  , erroneousCandidate
-  , findDefnError
   , module Data.Express
   , module Data.Express.Fixtures
   , module Conjure.Reason
@@ -45,19 +42,18 @@ import Control.Monad (when)
 import Data.Express
 import Data.Express.Fixtures hiding ((-==-))
 
-import Data.Dynamic (fromDyn, dynApp)
-
 import Test.LeanCheck
 import Test.LeanCheck.Tiers
-import Test.LeanCheck.Error (errorToTrue, errorToFalse, errorToNothing)
+import Test.LeanCheck.Error (errorToFalse)
 import Test.LeanCheck.Utils (classifyOn)
 
 import Conjure.Expr
 import Conjure.Conjurable
 import Conjure.Prim
 import Conjure.Defn
-import Conjure.Reason
 import Conjure.Defn.Redundancy
+import Conjure.Defn.Test
+import Conjure.Reason
 
 
 -- | Conjures an implementation of a partially defined function.
@@ -601,68 +597,6 @@ keepIf _  =  error "Conjure.Engine.keepIf: not an if"
 nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
 nubCandidates Args{..} nm f  =
   discardLaterT $ equalModuloTesting maxTests maxEvalRecursions nm f
-
-
-equalModuloTesting :: Conjurable f => Int -> Int -> String -> f -> Defn -> Defn -> Bool
-equalModuloTesting maxTests maxEvalRecursions nm f  =  (===)
-  where
-  testGrounds  =  nonNegativeAppGrounds maxTests maxEvalRecursions nm f
-  d1 === d2  =  all are $ testGrounds
-    where
-    -- silences errors, ok since this is for optional measuring of optimal pruning
-    are :: Expr -> Bool
-    are e  =  isError (ee d1 d1 e)
-           && isError (ee d2 d2 e)
-           || errorToFalse (ee d1 d2 e)
-           where  ee  =  devlEqual maxEvalRecursions f
-
-
--- | For debugging purposes.
---
--- This may be taken out of the API at any moment.
-erroneousCandidate :: Conjurable f => Int -> Int -> String -> f -> Defn -> Bool
-erroneousCandidate maxTests maxEvalRecursions nm f  =
-  isJust . findDefnError maxTests maxEvalRecursions nm f
-
-
--- | For debugging purposes,
---   finds a set of arguments that triggers an error in the candidate 'Defn'.
---
--- Warning: this is an experimental function
--- which may be taken out of the API at any moment.
-findDefnError :: Conjurable f => Int -> Int -> String -> f -> Defn -> Maybe Expr
-findDefnError maxTests maxEvalRecursions nm f d  =
-  find is testGrounds
-  where
-  testGrounds  =  nonNegativeAppGrounds maxTests maxEvalRecursions nm f
-  is :: Expr -> Bool
-  is e  =  isError (devlEqual maxEvalRecursions f d d e)
-
-
-nonNegativeAppGrounds :: Conjurable f => Int -> Int -> String -> f -> [Expr]
-nonNegativeAppGrounds maxTests maxEvalRecursions nm f
-  =  filter (none isNegative . unfoldApp)
-  $  take maxTests
-  $  conjureGrounds f (conjureVarApplication nm f)
-
-
-devlEqual :: Conjurable f => Int -> f -> Defn -> Defn -> Expr -> Bool
-devlEqual maxEvalRecursions f d1 d2 e  =
-  eq `dynApp` evalDyn d1 e
-     `dynApp` evalDyn d2 e `fromDyn` err
-  where
-  evalDyn d e  =  fromMaybe err (toDynamicWithDefn (conjureExpress f) maxEvalRecursions d e)
-  eq  =  conjureDynamicEq f
-  err  =  error "Conjure.devlEqual: evaluation error"
-  -- We cannot use conjureMkEquation here because
-  -- we need different Defns at each side of the equation
-  -- so they have to be evaluated independently.
-
--- | Is the argument value an error value?
-isError :: a -> Bool
-isError  =  isNothing . errorToNothing
--- There should not be a problem if this ever appears in LeanCheck:
--- imports are qualfied in this module.
 
 
 --- tiers utils ---

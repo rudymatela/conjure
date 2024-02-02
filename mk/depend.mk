@@ -13,6 +13,7 @@ bench/candidates.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -28,6 +29,7 @@ bench/erroneous.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -43,6 +45,7 @@ bench/gps2.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -58,6 +61,7 @@ bench/gps.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -73,6 +77,7 @@ bench/ill-hit.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -88,6 +93,7 @@ bench/longshot.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -103,6 +109,7 @@ bench/lowtests.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -118,6 +125,7 @@ bench/p12.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -133,6 +141,7 @@ bench/p30.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -148,6 +157,7 @@ bench/redundants.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -163,6 +173,7 @@ bench/self.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -178,6 +189,7 @@ bench/take-drop.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -193,6 +205,7 @@ bench/terpret.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -208,6 +221,7 @@ bench/weird.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -223,6 +237,7 @@ eg/arith.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -238,6 +253,7 @@ eg/bools.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -253,6 +269,7 @@ eg/bst.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -268,6 +285,7 @@ eg/count.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -283,6 +301,7 @@ eg/dupos.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -298,6 +317,7 @@ eg/either.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -313,6 +333,7 @@ eg/factorial.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -328,6 +349,7 @@ eg/fib01.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -343,6 +365,7 @@ eg/fibonacci.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -358,6 +381,7 @@ eg/gcd.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -373,6 +397,7 @@ eg/higher.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -388,6 +413,7 @@ eg/id.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -403,6 +429,7 @@ eg/ints.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -418,6 +445,7 @@ eg/list.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -433,6 +461,7 @@ eg/maybe.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -448,6 +477,7 @@ eg/pow.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -463,6 +493,7 @@ eg/replicate.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -478,6 +509,7 @@ eg/setelem.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -493,6 +525,7 @@ eg/sort.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -508,6 +541,7 @@ eg/spec.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -523,6 +557,7 @@ eg/subset.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -538,6 +573,7 @@ eg/tapps.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -553,6 +589,7 @@ eg/tree.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -565,6 +602,7 @@ mk/All.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -579,6 +617,7 @@ mk/Toplibs.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -609,12 +648,19 @@ src/Conjure/Defn/Redundancy.o: \
   src/Conjure/Expr.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs
+src/Conjure/Defn/Test.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs
 src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Reason.hs \
   src/Conjure/Prim.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs
@@ -628,6 +674,7 @@ src/Conjure.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -654,6 +701,7 @@ test/conjurable.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -673,6 +721,7 @@ test/defn.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -692,6 +741,7 @@ test/derive.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -711,6 +761,7 @@ test/expr.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -731,6 +782,7 @@ test/Test.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
@@ -749,6 +801,7 @@ test/utils.o: \
   src/Conjure.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
   src/Conjure/Defn/Redundancy.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
