@@ -47,6 +47,8 @@ module Conjure.Expr
   , grounds
   , groundBinds
 
+  , rvars
+
   , module Conjure.Utils
   )
 where
@@ -543,6 +545,24 @@ listConflicts es
 isNegative :: Expr -> Bool
 isNegative (Value ('-':_) _)  =  True
 isNegative _  =  False
+
+-- | Lists all variables in an expression
+--   that are of the same type of the expression itself.
+--
+-- > > rvars (ff xx)
+-- > [x :: Int]
+--
+-- > > rvars (xx -:- xxs -++- yys)
+-- > [xs :: [Int], ys :: [Int]]
+--
+-- They are listed and without repetitions in 'Expr' order:
+--
+-- > > rvars (xx -:- yys -++- xxs -++- xxs)
+-- > [xs :: [Int],ys :: [Int]]
+--
+-- (cf. nubVars)
+rvars :: Expr -> [Expr]
+rvars e  =  [ex | ex <- nubVars e, typ ex == typ e]
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

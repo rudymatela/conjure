@@ -151,6 +151,22 @@ tests n  =
   , listConflicts [(one -+- zz), (two -+- yy), (three -+- xx)] == [[zz,yy,xx],[one,two,three]]
 
   , holds n $ \e1 e2 -> map listPair (conflicts e1 e2) == listConflicts [e1,e2]
+
+  , rvars xx == [xx]
+  , rvars (xx -?- yy) == [xx, yy]
+  , rvars (xx -?- yy -?- zz) == [xx, yy, zz]
+  , rvars (yy -?- yy -?- xx) == [xx, yy]
+
+  , rvars xxs == [xxs]
+  , rvars (xx -:- xxs) == [xxs]
+  , rvars (xx -:- yy -:- xxs) == [xxs]
+  , rvars (xxs -++- yys) == [xxs, yys]
+  , rvars (xx -:- xxs -++- yys) == [xxs, yys]
+  , rvars (xx -:- yys -++- xxs -++- xxs) == [xxs, yys]
+
+  , rvars (pp -&&- qq) == [pp, qq]
+  , rvars (qq -&&- pp) == [pp, qq]
+  , rvars (pp -||- qq -&&- pp) == [pp, qq]
   ]
 
 listPair :: (a,a) -> [a]
