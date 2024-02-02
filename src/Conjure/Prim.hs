@@ -27,7 +27,7 @@ import Conjure.Expr
 import Conjure.Utils
 import Test.LeanCheck.Error (errorToFalse)
 import Test.LeanCheck.Utils
-import Test.Speculate.Expr
+import Test.Speculate.Expr (grounds)
 
 
 -- | A primtive expression (paired with instance reification).
