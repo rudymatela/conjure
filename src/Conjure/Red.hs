@@ -123,9 +123,17 @@ argumentSubsets efxs efys  =
 --
 -- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
 -- > [([x :: Int],[x :: Int]),([y :: Int,z :: Int],[y :: Int,z :: Int])]
-validArgumentSubsets :: Expr -> Expr -> [([Expr],[Expr])]
+--
+-- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
+-- > [[(x :: Int,x :: Int)],[(y :: Int,y :: Int),(z :: Int,z :: Int)]]
+--
+-- Doesn't work:
+--
+-- > > validArgumentSubsets ((xx,yy) --..- zz) ((xx,zero) --..- yy)
+-- > [[(x :: Int,x :: Int)],[(y :: Int,0 :: Int),(z :: Int,y :: Int)],[(y :: Int,0 :: Int)]]
+validArgumentSubsets :: Expr -> Expr -> [[(Expr,Expr)]]
 validArgumentSubsets efxs efys
-  =  map (both $ sortOn rvars)
+  =  map (uncurry zip . both (sortOn rvars))
   $  filter valid
   $  argumentSubsets efxs efys
   where
