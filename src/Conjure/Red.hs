@@ -104,13 +104,13 @@ isDescent isDecOf ps es  =  any is es
 -- TODO: create test/engine.hs and thoroughly test descends and isDescent
 
 
-isDeconstruction :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-isDeconstruction isDecOf el er
+isDeconstruction :: (Expr -> Expr -> Bool) -> (Expr,Expr) -> Bool
+isDeconstruction isDecOf (el,er)
   | isVar el   =  er `isDecOf` el
   | otherwise  =  size er < size el
 
-isNotConstruction :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-isNotConstruction isDecOf el er
+isNotConstruction :: (Expr -> Expr -> Bool) -> (Expr,Expr) -> Bool
+isNotConstruction isDecOf (el,er)
   | isVar el   =  er == el || er `isDecOf` el
   | otherwise  =  size er <= size el
 
