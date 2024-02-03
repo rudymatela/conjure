@@ -123,18 +123,11 @@ tests n  =
 
   , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == False -- TODO: should be True
   ]
-  where
-  -- TODO: remove once these are available on Express.Fixtures
-  dropE  =  value "drop" (drop :: Int -> [Int] -> [Int])
-  takeE  =  value "take" (take :: Int -> [Int] -> [Int])
-  drop' en exs  =  dropE :$ en :$ exs
-  take' en exs  =  takeE :$ en :$ exs
 
 isDecOf :: Expr -> Expr -> Bool
 e1 `isDecOf` e2
-  | (e1 -?- e2) `isInstanceOf` (tail' xxs -?- xxs)  =  True
+  | (e1 -|- e2) `isInstanceOf` (tail' xxs -|- xxs)  =  True
   | otherwise                                       =  False
-  -- TODO: change -?- to pair once the new Express is released
 
 (-\/-) :: Expr -> Expr -> Expr
 exs -\/- eys  =  value "\\/" ((\/) :: [Int] -> [Int] -> [Int])
