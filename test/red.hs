@@ -114,6 +114,11 @@ tests n  =
   , argumentSubsets ((xx,yy) --..- zz) ((dec zz,xx) --..- yy)
     == [[(xx,xx), (yy,yy), (zz,dec zz)]]
 
+  , descends isDecOf (ff xx) (ff xx) == False
+  , descends isDecOf (ff xx) (ff (xx -+- one)) == False
+  , descends isDecOf (ff xx) (ff (dec xx)) == True
+  , descends isDecOf (ff xx) (ff (yy `mod'` xx)) == True
+
   , descends isDecOf (xxs -++- yys) (xxs -++- yys) == False
   , descends isDecOf (xxs -++- yys) (xxs -++- tail' yys) == True
 
@@ -132,8 +137,10 @@ tests n  =
 
 isDecOf :: Expr -> Expr -> Bool
 e1 `isDecOf` e2
-  | (e1 -|- e2) `isInstanceOf` (tail' xxs -|- xxs)  =  True
-  | otherwise                                       =  False
+  | (e1 -|- e2) `isInstanceOf` (tail' xxs -|- xxs)    =  True
+  | (e1 -|- e2) `isInstanceOf` (dec xx -|- xx)        =  True
+  | (e1 -|- e2) `isInstanceOf` (yy `mod'` xx -|- xx)  =  True
+  | otherwise                                         =  False
 
 (-\/-) :: Expr -> Expr -> Expr
 exs -\/- eys  =  interleaveE :$ exs :$ eys
