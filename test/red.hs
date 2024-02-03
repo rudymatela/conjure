@@ -126,6 +126,16 @@ tests n  =
   , descends isDecOf (ff (xx -:- xxs)) (ff xxs) == True
   , descends isDecOf (ff xxs) (ff (xxs -++- xxs)) == False
 
+  -- double integer descent
+  , descends isDecOf (ff2 xx yy) (ff2 xx yy) == False
+  , descends isDecOf (ff2 xx yy) (ff2 (xx -+- one) yy) == False
+  , descends isDecOf (ff2 xx yy) (ff2 (dec xx) yy) == True
+  , descends isDecOf (ff2 xx yy) (ff2 (dec yy) xx) == False -- TODO: should be True
+  , descends isDecOf (ff2 xx yy) (ff2 xx (dec yy)) == True
+  , descends isDecOf (ff2 xx yy) (ff2 yy (dec xx)) == False -- TODO: should be True
+  , descends isDecOf (ff2 xx yy) (ff2 (dec xx) (dec yy)) == True
+  , descends isDecOf (ff2 xx yy) (ff2 (dec yy) (dec xx)) == False -- TODO: should be True
+
   -- double list descent
   , descends isDecOf (xxs -++- yys) (xxs -++- yys) == False
   , descends isDecOf (xxs -++- yys) (xxs -++- tail' yys) == True
@@ -146,6 +156,10 @@ tests n  =
   , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == True
   , descends isDecOf (xxs -\/- (yy -:- yys)) (yys -\/- xxs) == True
   , descends isDecOf ((xx -:- xxs) -\/- (yy -:- yys)) (yys -\/- xxs) == True
+
+  -- disallowed descents
+  , descends isDecOf ((xx -:- xxs) -?- (yy -:- yys)) (yys -?- (xx -:- yys)) == True -- TODO: should be False
+  , descends isDecOf ((xx -:- xxs) -?- (yy -:- yys)) (yys -?- (yy -:- yys)) == True -- TODO: should be False
   ]
 
 isDecOf :: Expr -> Expr -> Bool
