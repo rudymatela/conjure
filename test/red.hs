@@ -121,7 +121,7 @@ tests n  =
   , descends isDecOf (xxs -++- yys) (tail' yys -++- yys) == False
   , descends isDecOf (xxs -++- yys) ((xx -:- xxs) -++- tail' yys) == True
 
-  , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == False -- TODO: should be True
+  , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == True
   ]
 
 isDecOf :: Expr -> Expr -> Bool
@@ -130,8 +130,9 @@ e1 `isDecOf` e2
   | otherwise                                       =  False
 
 (-\/-) :: Expr -> Expr -> Expr
-exs -\/- eys  =  value "\\/" ((\/) :: [Int] -> [Int] -> [Int])
+exs -\/- eys  =  interleaveE :$ exs :$ eys
   where
+  interleaveE  =  value "\\/" ((\/) :: [Int] -> [Int] -> [Int])
   [] \/ ys  =  ys
   (x:xs) \/ ys  =  x : (ys \/ xs)
 
