@@ -114,11 +114,19 @@ tests n  =
   , argumentSubsets ((xx,yy) --..- zz) ((dec zz,xx) --..- yy)
     == [[(xx,xx), (yy,yy), (zz,dec zz)]]
 
+  -- simple integer descent
   , descends isDecOf (ff xx) (ff xx) == False
   , descends isDecOf (ff xx) (ff (xx -+- one)) == False
   , descends isDecOf (ff xx) (ff (dec xx)) == True
   , descends isDecOf (ff xx) (ff (yy `mod'` xx)) == True
 
+  -- simple list descent
+  , descends isDecOf (ff xxs) (ff xxs) == False
+  , descends isDecOf (ff xxs) (ff (tail' xxs)) == True
+  , descends isDecOf (ff (xx -:- xxs)) (ff xxs) == True
+  , descends isDecOf (ff xxs) (ff (xxs -++- xxs)) == False
+
+  -- double list descent
   , descends isDecOf (xxs -++- yys) (xxs -++- yys) == False
   , descends isDecOf (xxs -++- yys) (xxs -++- tail' yys) == True
 
@@ -127,6 +135,7 @@ tests n  =
 
   , descends isDecOf (xxs -++- yys) (head' xxs -:- tail' xxs  -++-  head' yys -:- tail' yys) == False
 
+  -- interleave descent
   , descends isDecOf (xxs -\/- yys) (yys -\/- tail' xxs) == False -- TODO: should be True
   , descends isDecOf (xxs -\/- yys) (tail' yys -\/- xxs) == False -- TODO: should be True
   , descends isDecOf (xxs -\/- yys) (tail' yys -\/- tail' xxs) == False -- TODO: should be True
