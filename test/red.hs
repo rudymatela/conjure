@@ -113,6 +113,15 @@ tests n  =
 
   , argumentSubsets ((xx,yy) --..- zz) ((dec zz,xx) --..- yy)
     == [[(xx,xx), (yy,yy), (zz,dec zz)]]
+
+  , descends isDecOf (xxs -++- yys) (xxs -++- tail' yys) == True
+  , descends isDecOf (xxs -++- yys) (xxs -++- yys) == False
+  , descends isDecOf (xxs -++- yys) (head' xxs -:- tail' xxs  -++-  head' yys -:- tail' yys) == False
+  , descends isDecOf (xxs -\/- yys) (yys -\/- tail' xxs) == False -- TODO: should be True
+  , descends isDecOf (xxs -++- yys) (tail' yys -++- yys) == False
+  , descends isDecOf (xxs -++- yys) ((xx -:- xxs) -++- tail' yys) == True
+
+  , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == False -- TODO: should be True
   ]
   where
   -- TODO: remove once these are available on Express.Fixtures
@@ -120,6 +129,18 @@ tests n  =
   takeE  =  value "take" (take :: Int -> [Int] -> [Int])
   drop' en exs  =  dropE :$ en :$ exs
   take' en exs  =  takeE :$ en :$ exs
+
+isDecOf :: Expr -> Expr -> Bool
+e1 `isDecOf` e2
+  | (e1 -?- e2) `isInstanceOf` (tail' xxs -?- xxs)  =  True
+  | otherwise                                       =  False
+  -- TODO: change -?- to pair once the new Express is released
+
+(-\/-) :: Expr -> Expr -> Expr
+exs -\/- eys  =  value "\\/" ((\/) :: [Int] -> [Int] -> [Int])
+  where
+  [] \/ ys  =  ys
+  (x:xs) \/ ys  =  x : (ys \/ xs)
 
 isDecon :: Expr -> Bool
 isDecon =  conjureIsDeconstruction (undefined :: [Int] -> [Char] -> [Bool]) 60
