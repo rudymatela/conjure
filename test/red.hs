@@ -127,6 +127,7 @@ tests n  =
   , descends isDecOf (xxs -\/- yys) (tail' yys -\/- tail' xxs) == False -- TODO: should be True
   , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == True
   , descends isDecOf (xxs -\/- (yy -:- yys)) (yys -\/- xxs) == True
+  , descends isDecOf ((xx -:- xxs) -\/- (yy -:- yys)) (yys -\/- xxs) == True
   ]
 
 isDecOf :: Expr -> Expr -> Bool
