@@ -136,11 +136,11 @@ tests n  =
   ]
 
 isDecOf :: Expr -> Expr -> Bool
-e1 `isDecOf` e2
-  | (e1 -|- e2) `isInstanceOf` (tail' xxs -|- xxs)    =  True
-  | (e1 -|- e2) `isInstanceOf` (dec xx -|- xx)        =  True
-  | (e1 -|- e2) `isInstanceOf` (yy `mod'` xx -|- xx)  =  True
-  | otherwise                                         =  False
+e1 `isDecOf` e2  =  any ((e1 -|- e2) `isInstanceOf`)
+  [ tail' xxs -|- xxs
+  , dec xx -|- xx
+  , yy `mod'` xx -|- xx
+  ]
 
 (-\/-) :: Expr -> Expr -> Expr
 exs -\/- eys  =  interleaveE :$ exs :$ eys
