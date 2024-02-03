@@ -135,6 +135,10 @@ tests n  =
 
   , descends isDecOf (xxs -++- yys) (head' xxs -:- tail' xxs  -++-  head' yys -:- tail' yys) == False
 
+  -- gcd descent
+  , descends isDecOf (ff2 xx yy) (ff2 yy (xx `mod'` yy)) == True -- actual gcd descent
+  , descends isDecOf (ff2 xx yy) (ff2 yy (yy `mod'` yy)) == True -- other
+
   -- interleave descent
   , descends isDecOf (xxs -\/- yys) (yys -\/- tail' xxs) == False -- TODO: should be True
   , descends isDecOf (xxs -\/- yys) (tail' yys -\/- xxs) == False -- TODO: should be True
