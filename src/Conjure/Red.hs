@@ -148,6 +148,28 @@ argumentSubsets efxs efys  =
 -- TODO: try to do maximum pairing in each set
 -- TODO: sort by smallest valid set and discard sets that contain it
 
+descends3 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+descends3 isDecOf efls efrs  =  hasDeconstruction isDecOf (zip ls rs)
+  where
+  (_:ls)  =  unfoldApp efls
+  (_:rs)  =  unfoldApp efrs
+
+hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
+hasDeconstruction isDecOf  =  any (uncurry (*<<)) . choices
+  where
+  r << l  =  r `isDecOf` l || r `isStrictSubexprOf` l
+  r <<= l  =  r == l || r << l
+  (l,r) *<< bs  =  r << l
+                || or [ (l',r) *<<= bs'
+                      | ((l',r'),bs') <- choices bs
+                      , r' << l
+                      ]
+  (l,r) *<<= bs  =  r <<= l
+                 || or [ (l',r) *<<= bs'
+                       | ((l',r'),bs') <- choices bs
+                       , r' <<= l
+                       ]
+
 -- | Compute candidate deconstructions from an 'Expr'.
 --
 -- This is used in the implementation of 'Conjure.Engine.candidateDefnsC'
