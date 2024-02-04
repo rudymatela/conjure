@@ -90,13 +90,6 @@ descends2 isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
   (_:exs)  =  unfoldApp e'
   (_:eys)  =  unfoldApp e
 
--- the old descends
-descends1 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends1 isDecOf efxs  =  any desc . argumentSubsets efxs
-  where
-  desc exys  =  all (isNotConstruction isDecOf) exys
-             && any (isDeconstruction isDecOf) exys
-
 -- > > isDescent [xx -:- xxs, yys]  [yys, xxs]
 -- > True
 --
@@ -115,6 +108,13 @@ isDescent isDecOf ps es  =  any is es
 -- TODO: improve "iz" a.k.a. isNotConstruction
 -- TODO: create test/engine.hs and thoroughly test descends and isDescent
 
+
+-- the old descends
+descends1 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
+descends1 isDecOf efxs  =  any desc . argumentSubsets efxs
+  where
+  desc exys  =  all (isNotConstruction isDecOf) exys
+             && any (isDeconstruction isDecOf) exys
 
 isDeconstruction :: (Expr -> Expr -> Bool) -> (Expr,Expr) -> Bool
 isDeconstruction isDecOf (el,er)
