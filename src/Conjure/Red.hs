@@ -79,8 +79,6 @@ conjureIsDeconstruction f maxTests ed
 -- and where there is at least a single deconstruction.
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
 descends  =  descends3
--- TODO: test the above with gcd and other interesting cases
--- TODO: migrate back to descends1 after fixing argumentSubsets issues
 
 descends2 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
 descends2 isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
@@ -154,6 +152,7 @@ descends3 isDecOf efls efrs  =  hasDeconstruction isDecOf (zip ls rs)
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs
 -- TODO: classify the zipped values by type first
+-- TODO: cleanup this file of uneeded functions
 
 hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
 hasDeconstruction isDecOf  =  any (uncurry (*<<)) . choices
