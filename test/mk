@@ -11,9 +11,10 @@
 set -xe
 
 export LC_ALL=C  # consistent sort
+diff="diff --color -rud"
 
 tmp=`mktemp -d /tmp/test-mk-XXXXXXXXXX`
-diff="diff --color -rud"
+[ -d "$tmp" ] || exit 1
 
 rmhs() { sed -e 's/.hs$//'; }
 rmtarget() { sed -e 's/:.*//'; }
@@ -24,10 +25,11 @@ flt() {
 	grep -v '^.*/[A-Z].*$' # test/benchmark/example scripts begin with lowercase
 }
 
-make -s ls-eg ls-test                                   | sort >$tmp/ls-eg-mk
-find eg bench proto test -name '*.hs' -maxdepth 1 | flt | sort >$tmp/ls-eg-find
-grep -E "^[^/]*/[^.]*:" mk/depend.mk              | flt | sort >$tmp/ls-eg-depend
-grep -E "(eg|bench|proto|test)/" .gitignore       | flt | sort >$tmp/ls-eg-gitignore
-$diff $tmp/ls-eg-{mk,find}      # compares make variables with actual directory
-$diff $tmp/ls-eg-{mk,depend}    # compares make variables with mk/depend.mk
-$diff $tmp/ls-eg-{mk,gitignore} # compare make variables with .gitignore
+make -s ls-eg ls-test                                   | sort >$tmp/ls-mk
+find eg bench proto test -name '*.hs' -maxdepth 1 | flt | sort >$tmp/ls-find
+grep -E "^[^/]*/[^.]*:" mk/depend.mk              | flt | sort >$tmp/ls-depend
+grep -E "(eg|bench|proto|test)/" .gitignore       | flt | sort >$tmp/ls-gitignore
+$diff $tmp/ls-{mk,find}      # compares make variables with actual directory
+$diff $tmp/ls-{mk,depend}    # compares make variables with mk/depend.mk
+$diff $tmp/ls-{mk,gitignore} # compare make variables with .gitignore
+rm -r $tmp
