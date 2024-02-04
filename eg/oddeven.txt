@@ -1,0 +1,52 @@
+odd :: Int -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 21/44 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 2 candidates of size 7
+-- tested 8 candidates
+odd 0  =  False
+odd 1  =  True
+odd x  =  odd (x - 2)
+
+even :: Int -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 21/44 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 2 candidates of size 7
+-- tested 8 candidates
+even 0  =  True
+even 1  =  False
+even x  =  even (x - 2)
+
+odd :: Int -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 36/55 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 1 candidates of size 4
+-- looking through 50 candidates of size 5
+-- tested 35 candidates
+odd x  =  1 == x `mod` 2
+
+even :: Int -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 36/55 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 49 candidates of size 5
+-- tested 26 candidates
+even x  =  0 == x `mod` 2
+

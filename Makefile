@@ -25,6 +25,7 @@ EG = \
   eg/gcd \
   eg/list \
   eg/maybe \
+  eg/oddeven \
   eg/pow \
   eg/replicate \
   eg/setelem \
