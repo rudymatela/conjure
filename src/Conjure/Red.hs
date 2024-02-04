@@ -147,11 +147,11 @@ argumentSubsets efxs efys  =
 -- TODO: sort by smallest valid set and discard sets that contain it
 
 descends3 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends3 isDecOf efls efrs  =  hasDeconstruction isDecOf (zip ls rs)
+descends3 isDecOf efls efrs  = any (hasDeconstruction isDecOf)
+                             $ classifyOn (typ . fst) (zip ls rs)
   where
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs
--- TODO: classify the zipped values by type first
 -- TODO: cleanup this file of uneeded functions
 
 hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
