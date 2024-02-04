@@ -55,7 +55,7 @@ main  =  do
 
   -- This N value limits the maximum size of candidates,
   -- increase it to print erroneous candidates of bigger size.
-  let n = 7
+  let n = 6
 
   printErroneousCandidates n "foo" (undefined :: Int -> Int)
     [ pr (0 :: Int)
