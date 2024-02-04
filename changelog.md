@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.10 (February 2024)
+-----------------------
 
 * improve pruning of candidate functions;
 * `Conjure`: un-export experimental `equalModuloTesting`
