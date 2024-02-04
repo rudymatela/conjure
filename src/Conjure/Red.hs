@@ -83,18 +83,21 @@ descends isDecOf efls efrs  =  any hasDeconstruction
   (_:rs)  =  unfoldApp efrs
 
   hasDeconstruction :: [(Expr,Expr)] -> Bool
-  hasDeconstruction  =  any (uncurry (*<<)) . choices
+  hasDeconstruction lrs  =  or [b *<< bs | (b,bs) <- choices lrs]
 
   r << l  =  any (r `isDecOf`) (rvars l)
           || r `isStrictSubexprOf` l
           || isGround r && not (isGround l) && size r < size l
+
   r <<= l  =  r == l
            || r << l
+
   (l,r) *<< bs  =  r << l
                 || or [ (l',r) *<<= bs'
                       | ((l',r'),bs') <- choices bs
                       , r' << l
                       ]
+
   (l,r) *<<= bs  =  r <<= l
                  || or [ (l',r) *<<= bs'
                        | ((l',r'),bs') <- choices bs
