@@ -57,7 +57,6 @@ bench/self
 bench/longshot
 bench/ill-hit
 bench/take-drop
-bench/lots
 bench/p12
 bench/p30
 bench/candidates
@@ -72,7 +71,6 @@ proto/u-conjure
 test/expr
 test/conjurable
 test/utils
-test/cases
 test/defn
 test/derive
 test/red
