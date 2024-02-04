@@ -13,6 +13,7 @@ module Conjure.Defn.Test
   ( equalModuloTesting
   , erroneousCandidate
   , findDefnError
+  , listDefnErrors
   )
 where
 
@@ -52,9 +53,14 @@ erroneousCandidate maxTests maxEvalRecursions nm f  =
 -- Warning: this is an experimental function
 -- which may be taken out of the API at any moment.
 findDefnError :: Conjurable f => Int -> Int -> String -> f -> Defn -> Maybe Expr
-findDefnError maxTests maxEvalRecursions nm f d  =
-  find is testGrounds
+findDefnError maxTests maxEvalRecursions nm f  =
+  listToMaybe . listDefnErrors maxTests maxEvalRecursions nm f
+
+
+listDefnErrors :: Conjurable f => Int -> Int -> String -> f -> Defn -> [Expr]
+listDefnErrors maxTests maxEvalRecursions nm f d  =  filter is testGrounds
   where
+  testGrounds :: [Expr]
   testGrounds  =  nonNegativeAppGrounds maxTests maxEvalRecursions nm f
   is :: Expr -> Bool
   is e  =  isError (devlEqual maxEvalRecursions f d d e)
