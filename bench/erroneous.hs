@@ -31,11 +31,11 @@ printErroneousCandidates n nm f ps  =  do
   putStrLn $ "  " ++ show numErroneous ++ "/" ++ show numCandidates ++ " erroneous candidates"
   putStrLn ""
 --printThy thy
-  putStrLn $ unlines . map showDefnWithError $ erroneous
+  putStrLn $ unlines . map showDefnWithErrors $ erroneous
   where
   numCandidates  =  length candidates
   numErroneous   =  length erroneous
-  erroneous      =  [(c, e) | c <- candidates, Just e <- [findError c]]
+  erroneous      =  [(c, e, es) | c <- candidates, (e:es) <- [listErrors c]]
   candidates     =  concat css
   css            =  take n
                  .  discardT isRedundantByIntroduction -- additional pruning rule
@@ -45,9 +45,9 @@ printErroneousCandidates n nm f ps  =  do
   nREs           =  length (equations thy) + nRules
   maxTests       =  60 -- a hardcoded value probably will not hurt in this simple benchmark
   maxEvalRecursions  =  60
-  findError      =  findDefnError maxTests maxEvalRecursions nm f
-  showDefnWithError (d,e)  =  showDefn d
-                           ++ "-- " ++ showExpr e ++ "  =  bottom\n"
+  listErrors     =  listDefnErrors maxTests maxEvalRecursions nm f
+  showDefnWithErrors (d,e,es)  =  showDefn d
+                               ++ "-- " ++ showExpr e ++ "  =  bottom  -- and " ++ show (length es) ++ " other errors\n"
 
 
 main :: IO ()

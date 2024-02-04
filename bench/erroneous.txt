@@ -11,610 +11,610 @@ Erroneous candidates for: ? :: Int -> Int -> Int
 
 x ? 0  =  x
 x ? y  =  dec x ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  y ? dec (dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  x
 x ? y  =  y ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  0 ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec x ? dec x
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 4 other errors
 
 x ? 0  =  x
 x ? y  =  dec y ? dec x
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 5 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec x) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec y) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? y  =  x ? dec (dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? y  =  dec y ? dec x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 5 other errors
 
 0 ? x  =  x
 x ? y  =  dec y ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 4 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? 0
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec y) ? x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 6 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec x ? y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec x ? y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec x ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  dec (x ? dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  0
 x ? y  =  dec (x ? dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  dec x
 x ? y  =  x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  x ? dec (dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 13 other errors
 
 x ? 0  =  x
 x ? y  =  y ? dec (dec (dec x))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 11 other errors
 
 x ? 0  =  x
 x ? y  =  y ? dec (dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 13 other errors
 
 x ? 0  =  x
 x ? y  =  0 ? dec (dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 13 other errors
 
 x ? 0  =  x
 x ? y  =  dec x ? (x + y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 11 other errors
 
 x ? 0  =  x
 x ? y  =  dec x ? (y + y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  dec x ? dec (dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec x ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec y ? dec (dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 10 other errors
 
 x ? 0  =  x
 x ? y  =  dec y ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec x) ? dec x
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec y) ? dec x
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 8 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x)) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x)) ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec y)) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 7 other errors
 
 0 ? x  =  x
 x ? y  =  x ? dec (dec (dec y))
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec (dec x))
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 7 other errors
 
 0 ? x  =  x
 x ? y  =  y ? dec (dec (dec y))
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec y ? dec (dec x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 8 other errors
 
 0 ? x  =  x
 x ? y  =  dec y ? dec (dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  (x + x) ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  (x + y) ? dec y
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 12 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? dec x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec y) ? dec x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 10 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec y) ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 8 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x)) ? x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 13 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x)) ? y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 13 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x)) ? 0
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 13 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec y)) ? x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 11 other errors
 
 x ? 0  =  x
 x ? y  =  dec (x ? dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec (y ? dec (dec x))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  x
 x ? y  =  dec (y ? dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec (0 ? dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec x ? dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 4 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec y ? dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 5 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x) ? x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x) ? y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec y) ? x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 x ? 0  =  0
 x ? y  =  dec (x ? dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  0
 x ? y  =  dec (y ? dec (dec x))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  0
 x ? y  =  dec (y ? dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  0
 x ? y  =  dec (0 ? dec (dec y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec x ? dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 4 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec y ? dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 5 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec x) ? x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec x) ? y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec y) ? x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 x ? 0  =  dec x
 x ? y  =  x ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  dec x
 x ? y  =  y ? dec (dec x)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  dec x
 x ? y  =  y ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  dec x
 x ? y  =  0 ? dec (dec y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 9 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec x ? dec x
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 4 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec y ? dec x
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 5 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec (dec x) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec (dec x) ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec (dec y) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? y  =  dec (x ? dec (dec y))
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  dec (y ? dec (dec x))
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? y  =  dec (y ? dec (dec y))
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec y ? dec x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 5 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec y ? dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 4 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x) ? x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x) ? y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec x) ? 0)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (dec y) ? x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 6 other errors
 
 0 ? x  =  0
 x ? y  =  dec (x ? dec (dec y))
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  0
 x ? y  =  dec (y ? dec (dec x))
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  0
 x ? y  =  dec (y ? dec (dec y))
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec y ? dec x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 5 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec y ? dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 4 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec x) ? x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec x) ? y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec x) ? 0)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec (dec y) ? x)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 6 other errors
 
 0 ? x  =  dec x
 x ? y  =  x ? dec (dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  dec x
 x ? y  =  y ? dec (dec x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  dec x
 x ? y  =  y ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec y ? dec x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 5 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec y ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 4 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec (dec x) ? x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec (dec x) ? y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec (dec x) ? 0
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec (dec y) ? x
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y ? dec (dec x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  y ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec x) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  x
 x ? y  =  dec (dec y) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  x ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y ? dec (dec x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  y ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec x) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec x) ? y
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  x
 x ? 0  =  0
 x ? y  =  dec (dec y) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  x ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y ? dec (dec x)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y ? dec (dec y)
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec x) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec x) ? y
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 6 other errors
 
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  dec (dec y) ? x
--- 1 ? 1  =  bottom
+-- 1 ? 1  =  bottom  -- and 3 other errors
 
 x ? 0  =  x
 x ? y  =  x + dec x ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  dec x ? y + y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
 x ? y  =  dec (dec (dec x ? y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  0
 x ? y  =  x + dec x ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  0
 x ? y  =  dec x ? y + y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  0
 x ? y  =  dec (dec (dec x ? y))
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  dec x
 x ? y  =  dec (dec x ? y)
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x + x
 x ? y  =  dec x ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  dec (dec x)
 x ? y  =  dec x ? y
--- 0 ? 1  =  bottom
+-- 0 ? 1  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  x + x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  x ? dec y + y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec (x ? dec y))
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  0
 x ? y  =  x + x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  0
 x ? y  =  x ? dec y + y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  0
 x ? y  =  dec (dec (x ? dec y))
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  dec x
 x ? y  =  dec (x ? dec y)
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x + x
 x ? y  =  x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  dec (dec x)
 x ? y  =  x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? 0  =  0
 0 ? x  =  dec x
 x ? y  =  x ? dec y
--- 1 ? 0  =  bottom
+-- 1 ? 0  =  bottom  -- and 16 other errors
 
 
 Erroneous candidates for: goo :: [Int] -> [Int]
