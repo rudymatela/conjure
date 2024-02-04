@@ -65,7 +65,7 @@ main  =  do
   -- this should take a few minutes to run and generate a ~300K text file.
   -- We can also customize the n per-function below:
 
-  printRedundantCandidates n "foo" (undefined :: Int -> Int)
+  printRedundantCandidates (n+1) "foo" (undefined :: Int -> Int)
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
@@ -80,7 +80,7 @@ main  =  do
     , prim "dec" (subtract 1 :: Int -> Int)
     ]
 
-  printRedundantCandidates n "goo" (undefined :: [Int] -> [Int])
+  printRedundantCandidates (n+1) "goo" (undefined :: [Int] -> [Int])
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
@@ -92,7 +92,7 @@ main  =  do
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
-  printRedundantCandidates n "ton" (undefined :: Bool -> Bool)
+  printRedundantCandidates (n+1) "ton" (undefined :: Bool -> Bool)
     [ pr False
     , pr True
     , prim "&&" (&&)

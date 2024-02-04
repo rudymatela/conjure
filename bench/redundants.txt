@@ -1,8 +1,8 @@
 Redundant candidates for: foo :: Int -> Int
   pruning with 27/65 rules
-  [3,3,9,10,32] candidates
-  52/57 unique candidates
-  5/57 redundant candidates
+  [3,3,9,10,32,39] candidates
+  86/96 unique candidates
+  10/96 redundant candidates
 
 rules:
 x - x == 0
@@ -90,6 +90,27 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    foo 0  =  0
+    foo x  =  1 - x
+
+    foo 0  =  0
+    foo x  =  1 + (0 - x)
+
+
+class of 3 equivalent candidates:
+
+    foo 0  =  1
+    foo x  =  0 - x
+
+    foo 0  =  1
+    foo x  =  x - (x + x)
+
+    foo 0  =  1
+    foo x  =  1 - (x + 1)
+
+
+class of 2 equivalent candidates:
+
     foo x  =  x + (x + 1)
 
     foo x  =  1 + (x + x)
@@ -99,6 +120,24 @@ class of 2 equivalent candidates:
 
     foo x  =  x * (1 - x)
 
+    foo x  =  x - x * x
+
+
+class of 2 equivalent candidates:
+
+    foo 0  =  0
+    foo x  =  x + (x + 1)
+
+    foo 0  =  0
+    foo x  =  1 + (x + x)
+
+
+class of 2 equivalent candidates:
+
+    foo 0  =  1
+    foo x  =  x * (1 - x)
+
+    foo 0  =  1
     foo x  =  x - x * x
 
 
@@ -283,9 +322,9 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,1,1,2,4] candidates
-  9/10 unique candidates
-  1/10 redundant candidates
+  [2,1,1,2,4,7] candidates
+  15/17 unique candidates
+  2/17 redundant candidates
 
 rules:
 xs ++ [] == xs
@@ -299,6 +338,14 @@ class of 2 equivalent candidates:
 
     goo []  =  []
     goo (x:xs)  =  x:goo xs
+
+
+class of 2 equivalent candidates:
+
+    goo xs  =  []
+
+    goo []  =  []
+    goo (x:xs)  =  goo xs ++ goo xs
 
 
 
@@ -630,7 +677,7 @@ class of 2 equivalent candidates:
 
 Redundant candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,2,0,0,0] candidates
+  [3,2,0,0,0,0] candidates
   4/5 unique candidates
   1/5 redundant candidates
 
