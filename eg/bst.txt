@@ -111,12 +111,12 @@ union :: Tree -> Tree -> Tree
 -- looking through 3 candidates of size 1
 -- looking through 12 candidates of size 2
 -- looking through 32 candidates of size 3
--- looking through 56 candidates of size 4
--- looking through 430 candidates of size 5
--- looking through 914 candidates of size 6
--- looking through 3256 candidates of size 7
--- looking through 15016 candidates of size 8
--- looking through 33566 candidates of size 9
--- tested 53285 candidates
+-- looking through 58 candidates of size 4
+-- looking through 434 candidates of size 5
+-- looking through 922 candidates of size 6
+-- looking through 3088 candidates of size 7
+-- looking through 14022 candidates of size 8
+-- looking through 31810 candidates of size 9
+-- tested 50381 candidates
 cannot conjure
 

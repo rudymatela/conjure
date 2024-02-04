@@ -78,7 +78,7 @@ conjureIsDeconstruction f maxTests ed
 -- see if any projects the same variables while only using deconstructions
 -- and where there is at least a single deconstruction.
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends  =  descends2
+descends  =  descends3
 -- TODO: test the above with gcd and other interesting cases
 -- TODO: migrate back to descends1 after fixing argumentSubsets issues
 

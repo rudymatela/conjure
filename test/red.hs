@@ -130,11 +130,11 @@ tests n  =
   , descends isDecOf (ff2 xx yy) (ff2 xx yy) == False
   , descends isDecOf (ff2 xx yy) (ff2 (xx -+- one) yy) == False
   , descends isDecOf (ff2 xx yy) (ff2 (dec xx) yy) == True
-  , descends isDecOf (ff2 xx yy) (ff2 (dec yy) xx) == False -- TODO: should be True
+  , descends isDecOf (ff2 xx yy) (ff2 (dec yy) xx) == True
   , descends isDecOf (ff2 xx yy) (ff2 xx (dec yy)) == True
-  , descends isDecOf (ff2 xx yy) (ff2 yy (dec xx)) == False -- TODO: should be True
+  , descends isDecOf (ff2 xx yy) (ff2 yy (dec xx)) == True
   , descends isDecOf (ff2 xx yy) (ff2 (dec xx) (dec yy)) == True
-  , descends isDecOf (ff2 xx yy) (ff2 (dec yy) (dec xx)) == False -- TODO: should be True
+  , descends isDecOf (ff2 xx yy) (ff2 (dec yy) (dec xx)) == True
 
   -- double list descent
   , descends isDecOf (xxs -++- yys) (xxs -++- yys) == False
@@ -150,16 +150,16 @@ tests n  =
   , descends isDecOf (ff2 xx yy) (ff2 yy (yy `mod'` yy)) == True -- other
 
   -- interleave descent
-  , descends isDecOf (xxs -\/- yys) (yys -\/- tail' xxs) == False -- TODO: should be True
-  , descends isDecOf (xxs -\/- yys) (tail' yys -\/- xxs) == False -- TODO: should be True
-  , descends isDecOf (xxs -\/- yys) (tail' yys -\/- tail' xxs) == False -- TODO: should be True
+  , descends isDecOf (xxs -\/- yys) (yys -\/- tail' xxs) == True
+  , descends isDecOf (xxs -\/- yys) (tail' yys -\/- xxs) == True
+  , descends isDecOf (xxs -\/- yys) (tail' yys -\/- tail' xxs) == True
   , descends isDecOf ((xx -:- xxs) -\/- yys) (yys -\/- xxs) == True
   , descends isDecOf (xxs -\/- (yy -:- yys)) (yys -\/- xxs) == True
   , descends isDecOf ((xx -:- xxs) -\/- (yy -:- yys)) (yys -\/- xxs) == True
 
   -- disallowed descents
-  , descends isDecOf ((xx -:- xxs) -?- (yy -:- yys)) (yys -?- (xx -:- yys)) == True -- TODO: should be False
-  , descends isDecOf ((xx -:- xxs) -?- (yy -:- yys)) (yys -?- (yy -:- yys)) == True -- TODO: should be False
+  , descends isDecOf ((xx -:- xxs) -?- (yy -:- yys)) (yys -?- (xx -:- yys)) == False
+  , descends isDecOf ((xx -:- xxs) -?- (yy -:- yys)) (yys -?- (yy -:- yys)) == False
   ]
 
 isDecOf :: Expr -> Expr -> Bool

@@ -12,24 +12,6 @@ A non-exhaustive list of things TO DO for Conjure.
 * consider non top-level cases
 
 
-## Erroneous recursions
-
-The `descends` function still lets some invalid functions pass through:
-
-	[] ?? xs  =  xs
-	(x:xs) ?? []  =  xs
-	(x:xs) ?? (y:ys)  =  ys ?? (x:ys)
-	-- [0] ?? [0,0]  =  bottom
-
-	[] ?? xs  =  xs
-	(x:xs) ?? []  =  xs
-	(x:xs) ?? (y:ys)  =  ys ?? (y:ys)
-	-- [0] ?? [0,0]  =  bottom
-
-In both of these functions, nothing is being deconstructed.
-We have to catch and prune these.
-
-
 ## Non top-level cases
 
 Consider allowing non top-level cases,

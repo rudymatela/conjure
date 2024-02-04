@@ -171,8 +171,8 @@ gcd :: Int -> Int -> Int
 -- looking through 11 candidates of size 3
 -- looking through 50 candidates of size 4
 -- looking through 98 candidates of size 5
--- looking through 332 candidates of size 6
--- tested 172 candidates
+-- looking through 344 candidates of size 6
+-- tested 173 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 
@@ -341,15 +341,15 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- looking through 12 candidates of size 2
 -- looking through 33 candidates of size 3
 -- looking through 36 candidates of size 4
--- looking through 139 candidates of size 5
--- looking through 564 candidates of size 6
--- looking through 893 candidates of size 7
--- looking through 826 candidates of size 8
--- looking through 698 candidates of size 9
--- looking through 3285 candidates of size 10
--- looking through 6044 candidates of size 11
--- looking through 3064 candidates of size 12
--- tested 15597 candidates
+-- looking through 127 candidates of size 5
+-- looking through 507 candidates of size 6
+-- looking through 839 candidates of size 7
+-- looking through 784 candidates of size 8
+-- looking through 600 candidates of size 9
+-- looking through 2722 candidates of size 10
+-- looking through 5292 candidates of size 11
+-- looking through 2832 candidates of size 12
+-- tested 13787 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
