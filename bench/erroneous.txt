@@ -1,7 +1,127 @@
 Erroneous candidates for: foo :: Int -> Int
-  pruning with 27/65 rules
-  [3,3,9,10,32,39] candidates
-  0/96 erroneous candidates
+  pruning with 41/82 rules
+  [4,8,16,42,70,162,493] candidates
+  30/795 erroneous candidates
+
+foo 0  =  0
+foo x  =  x + foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  foo (x - 2) + 1
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  foo (x - 2) + 2
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  x * foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  x - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  foo (x - 2) - x
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  foo (x - 2) - 1
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  foo (x - 2) - 2
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  0 - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  0
+foo x  =  1 - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  x + foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  foo (x - 2) + 1
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  foo (x - 2) + 2
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  x * foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  x - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  foo (x - 2) - x
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  foo (x - 2) - 1
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  foo (x - 2) - 2
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  0 - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  1
+foo x  =  1 - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  x + foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  foo (x - 2) + 1
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  foo (x - 2) + 2
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  x * foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  x - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  foo (x - 2) - x
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  foo (x - 2) - 1
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  foo (x - 2) - 2
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  0 - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
+
+foo 0  =  2
+foo x  =  1 - foo (x - 2)
+-- foo 1  =  bottom  -- and 14 other errors
 
 
 Erroneous candidates for: ? :: Int -> Int -> Int
@@ -116,8 +236,8 @@ x ? y  =  x ? dec y
 
 Erroneous candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,1,1,2,4,7] candidates
-  0/17 erroneous candidates
+  [2,1,1,2,4,7,10] candidates
+  0/27 erroneous candidates
 
 
 Erroneous candidates for: ?? :: [Int] -> [Int] -> [Int]

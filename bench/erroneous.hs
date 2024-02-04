@@ -57,9 +57,10 @@ main  =  do
   -- increase it to print erroneous candidates of bigger size.
   let n = 6
 
-  printErroneousCandidates n "foo" (undefined :: Int -> Int)
+  printErroneousCandidates (n+1) "foo" (undefined :: Int -> Int)
     [ pr (0 :: Int)
     , pr (1 :: Int)
+    , pr (2 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "*" ((*) :: Int -> Int -> Int)
     , prim "-" ((-) :: Int -> Int -> Int)
@@ -72,7 +73,7 @@ main  =  do
     , prim "dec" (subtract 1 :: Int -> Int)
     ]
 
-  printErroneousCandidates n "goo" (undefined :: [Int] -> [Int])
+  printErroneousCandidates (n+1) "goo" (undefined :: [Int] -> [Int])
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
