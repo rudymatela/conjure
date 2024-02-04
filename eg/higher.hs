@@ -9,8 +9,6 @@ appSpec ($)  =  ((+1) $ 2) == 3
              && (abs $ (-2)) == 2
              && (negate $ 1) == -1
 
--- composeSpec :: ((Int->Int) -> (Int->Int) -> Int->Int) -> 
-
 composeSpec :: ((Int->Int) -> (Int->Int) -> Int->Int) -> Bool
 composeSpec (.)  =  ((*2) . (*3)) 1 == 6
                  && (abs . negate) 7 == 7
