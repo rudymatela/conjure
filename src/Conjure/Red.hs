@@ -76,11 +76,8 @@ conjureIsDeconstruction f maxTests ed
 -- see if any projects the same variables while only using deconstructions
 -- and where there is at least a single deconstruction.
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends  =  descends3
-
-descends3 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends3 isDecOf efls efrs  =  any (hasDeconstruction isDecOf)
-                             $  classifyOn (typ . fst) (zip ls rs)
+descends isDecOf efls efrs  =  any (hasDeconstruction isDecOf)
+                            $  classifyOn (typ . fst) (zip ls rs)
   where
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs
