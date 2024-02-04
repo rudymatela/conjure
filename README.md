@@ -347,7 +347,7 @@ __Program synthesis beyond Haskell.__
 [PushGP]: https://github.com/lspector/Clojush
 [G3P]: https://github.com/t-h-e/HeuristicLab.CFGGP
 
-[PushGP] (2002) and [G3P] (2017) are genetic programming systems 
+[PushGP] (2002) and [G3P] (2017) are genetic programming systems
 that are able to synthesize programs in Push and Python respectively.
 Differently from Conjure or MagicHaskeller,
 they require around a hundred tests for traning
