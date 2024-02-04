@@ -32,6 +32,7 @@ module Conjure.Expr
   , varToConst
   , hasAppInstanceOf
   , isNegative
+  , isStrictSubexprOf
 
   , enumerateAppsFor
   , enumerateFillings
@@ -563,6 +564,11 @@ isNegative _  =  False
 -- (cf. nubVars)
 rvars :: Expr -> [Expr]
 rvars e  =  [ex | ex <- nubVars e, typ ex == typ e]
+
+-- | Is this a /strict/ subexpression?
+isStrictSubexprOf :: Expr -> Expr -> Bool
+isStrictSubexprOf e1 e2  =  e1 /= e2
+                         && e1 `isSubexprOf` e2
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

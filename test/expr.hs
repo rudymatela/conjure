@@ -167,6 +167,11 @@ tests n  =
   , rvars (pp -&&- qq) == [pp, qq]
   , rvars (qq -&&- pp) == [pp, qq]
   , rvars (pp -||- qq -&&- pp) == [pp, qq]
+
+  , xx `isStrictSubexprOf` xx == False
+  , xx `isStrictSubexprOf` (xx -+- yy) == True
+  , xx `isStrictSubexprOf` (yy -+- yy) == False
+  , (xx -+- yy) `isStrictSubexprOf` (xx -+- yy) == False
   ]
 
 listPair :: (a,a) -> [a]
