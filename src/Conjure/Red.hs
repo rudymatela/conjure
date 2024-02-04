@@ -10,10 +10,8 @@
 module Conjure.Red
   ( conjureIsDeconstruction
   , descends
-  , isDescent
   , candidateDeconstructionsFrom
   , candidateDeconstructionsFromHoled
-  , argumentSubsets
   )
 where
 
@@ -80,75 +78,9 @@ conjureIsDeconstruction f maxTests ed
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
 descends  =  descends3
 
-descends2 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends2 isDecOf e' e  =  any (uncurry $ isDescent isDecOf) $ map unzip ss
-  where
-  ss  =  init $ sets exys
-  exys  =  zip exs eys
-  (_:exs)  =  unfoldApp e'
-  (_:eys)  =  unfoldApp e
-
--- > > isDescent [xx -:- xxs, yys]  [yys, xxs]
--- > True
---
--- > > isDescent [xx -:- xxs, yys]  [yys, xx -:- xxs]
--- > False
-isDescent :: (Expr -> Expr -> Bool) -> [Expr] -> [Expr] -> Bool
-isDescent isDecOf ps es  =  any is es
-                         && all iz es
-  where
-  is e | isVar e    =  any (\p -> 1 {-size e-} < size p && e `elem` vars p) ps
-       | otherwise  =  any (e `isDecOf`) $ concatMap vars ps
-  iz e | isVar e    =  True
-       | otherwise  =  all (\p -> e `isDecOf` p || size e <= size p) ps
--- TODO: closely review isDescent and descends
--- TODO: after sets, filter sets of values of the same type
--- TODO: improve "iz" a.k.a. isNotConstruction
--- TODO: create test/engine.hs and thoroughly test descends and isDescent
-
-
--- the old descends
-descends1 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends1 isDecOf efxs  =  any desc . argumentSubsets efxs
-  where
-  desc exys  =  all (isNotConstruction isDecOf) exys
-             && any (isDeconstruction isDecOf) exys
-
-isDeconstruction :: (Expr -> Expr -> Bool) -> (Expr,Expr) -> Bool
-isDeconstruction isDecOf (el,er)
-  | isVar el   =  er `isDecOf` el
-  | otherwise  =  size er < size el
-
-isNotConstruction :: (Expr -> Expr -> Bool) -> (Expr,Expr) -> Bool
-isNotConstruction isDecOf (el,er)
-  | isVar el   =  er == el || er `isDecOf` el
-  | otherwise  =  size er <= size el
-
-
--- | Lists pairs of argument subsets for the two given 'Expr's.
---
--- The listed sets are not empty and must have values of the same type.
-argumentSubsets :: Expr -> Expr -> [[(Expr,Expr)]]
-argumentSubsets efxs efys  =
-  [ zip els ers
-  | aas <- sets $ zip exs eys
-  , not (null aas)
-  , allEqualOn (typ . fst) aas
-  , length aas == 1 || none (\(el,er) -> rvars el == rvars er) aas
-  , let (els, ers) = both (sortOn rvars) $ unzip aas
-  , map rvars els == map rvars ers
-  ]
-  where
-  (_:exs)  =  unfoldApp efxs
-  (_:eys)  =  unfoldApp efys
--- TODO: allow mapping involving multiple variables (such as gcd)
--- TODO: allow mapping arguments to constant values
--- TODO: try to do maximum pairing in each set
--- TODO: sort by smallest valid set and discard sets that contain it
-
 descends3 :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends3 isDecOf efls efrs  = any (hasDeconstruction isDecOf)
-                             $ classifyOn (typ . fst) (zip ls rs)
+descends3 isDecOf efls efrs  =  any (hasDeconstruction isDecOf)
+                             $  classifyOn (typ . fst) (zip ls rs)
   where
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs

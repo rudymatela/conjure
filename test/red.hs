@@ -96,24 +96,6 @@ tests n  =
       , (xx -+- xx) -+- i_
       ]
 
-  , argumentSubsets (ff xx) (ff (xx -+- one)) == [[(xx,xx -+- one)]]
-  , argumentSubsets (ff xx) (ff yy) == []
-
-  , argumentSubsets (xx -?- yy) (yy -?- xx) == [[(xx,xx),(yy,yy)]]
-
-  , argumentSubsets (xx -:- xxs) (yy -:- yys) == []
-
-  , argumentSubsets ((xx,yy) --..- zz) ((xx,zz) --..- yy)
-    == [ [(xx,xx)]
-       , [(yy,yy), (zz,zz)]
-       ]
-
-  , argumentSubsets ((xx,yy) --..- zz) ((zz,xx) --..- yy)
-    == [[(xx,xx), (yy,yy), (zz,zz)]]
-
-  , argumentSubsets ((xx,yy) --..- zz) ((dec zz,xx) --..- yy)
-    == [[(xx,xx), (yy,yy), (zz,dec zz)]]
-
   -- simple integer descent
   , descends isDecOf (ff xx) (ff xx) == False
   , descends isDecOf (ff xx) (ff (xx -+- one)) == False
