@@ -2,6 +2,24 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* improve pruning of candidate functions;
+* `Conjure`: un-export experimental `equalModuloTesting`
+* `Conjure.Conjurable`: add `conjureListFor`, `conjureSizeFor` & `conjureGrounds`;
+* Reorganize internal modules
+* Add `Conjure.Defn.Redundancy` module for redundant candidates;
+* Add `Conjure.Defn.Test` module testing candidate definitions;
+* Add `Conjure.Reason` module for term-rewriting-based reasoning;
+* Add `Conjure.Red` module for recursive descent;
+* `Conjure.Expr`: add a few auxiliary functions
+* Move functions out of `Conjure.Engine` into new modules
+* add more examples and benchmarks;
+* improved testing of Conjure itself;
+* and several other improvements and fixes.
+
+
 v0.5.8 (January 2024)
 ---------------------
 
