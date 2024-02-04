@@ -76,15 +76,15 @@ conjureIsDeconstruction f maxTests ed
 -- see if any projects the same variables while only using deconstructions
 -- and where there is at least a single deconstruction.
 descends :: (Expr -> Expr -> Bool) -> Expr -> Expr -> Bool
-descends isDecOf efls efrs  =  any (hasDeconstruction isDecOf)
+descends isDecOf efls efrs  =  any hasDeconstruction
                             $  classifyOn (typ . fst) (zip ls rs)
   where
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs
 
-hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
-hasDeconstruction isDecOf  =  any (uncurry (*<<)) . choices
-  where
+  hasDeconstruction :: [(Expr,Expr)] -> Bool
+  hasDeconstruction  =  any (uncurry (*<<)) . choices
+
   r << l  =  any (r `isDecOf`) (rvars l)
           || r `isStrictSubexprOf` l
           || isGround r && not (isGround l) && size r < size l
