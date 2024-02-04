@@ -61,14 +61,14 @@ main  =  do
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
     , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
   printErroneousCandidates n "?" (undefined :: Int -> Int -> Int)
     [ pr (0 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((+) :: Int -> Int -> Int)
+    , prim "*" ((*) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
     ]
 

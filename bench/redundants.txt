@@ -1,16 +1,20 @@
 Redundant candidates for: foo :: Int -> Int
-  pruning with 15/35 rules
-  [3,3,8,9,21,27] candidates
-  63/71 unique candidates
-  8/71 redundant candidates
+  pruning with 27/65 rules
+  [3,3,9,10,32,39] candidates
+  86/96 unique candidates
+  10/96 redundant candidates
 
 rules:
-x * y == x + y
-x * y == y + x
 x - x == 0
+x * 0 == 0
+x * 1 == x
+0 * x == 0
+1 * x == x
 x + 0 == x
 0 + x == x
 x - 0 == x
+(x * y) * z == x * (y * z)
+(x * y) * z == y * (x * z)
 (x + y) + z == x + (y + z)
 (x + y) + z == y + (x + z)
 x - (y - z) == z + (x - y)
@@ -18,22 +22,44 @@ x - (y - z) == z + (x - y)
 (x - y) - z == x - (z + y)
 (x + y) - z == x + (y - z)
 (x + y) - z == y + (x - z)
+(x + x) * y == x * (y + y)
 x + (y - x) == y
 (x - y) + y == x
+x * y - x == x * (y - 1)
+x * y - y == y * (x - 1)
+x * (y + 1) == x + x * y
+x * (y + 1) == x * y + x
+(x + 1) * y == y + x * y
+0 - x * y == x * (0 - y)
+0 - x * y == y * (0 - x)
 equations:
+y * x == x * y
 y + x == x + y
+y * (x * z) == x * (y * z)
+z * (x * y) == x * (y * z)
+z * (y * x) == x * (y * z)
 y + (x + z) == x + (y + z)
 z + (x + y) == x + (y + z)
 z + (y + x) == x + (y + z)
+(z + y) * x == x * (y + z)
 y + (x - z) == x + (y - z)
+z * y + x == x + y * z
 (x - z) + y == x + (y - z)
 (z - y) + x == (x - y) + z
+y * (x + x) == x * (y + y)
 y - (x + y) == 0 - x
 y - (y + x) == 0 - x
 z - (y + z) == x - (x + y)
 z - (y + z) == x - (y + x)
 z - (z + y) == x - (x + y)
 z - (z + y) == x - (y + x)
+x * (1 - y) == x - x * y
+x * (1 - y) == x - y * x
+y * (0 - x) == x * (0 - y)
+(0 - x) * y == x * (0 - y)
+(0 - y) * x == (0 - x) * y
+(1 - y) * x == x - x * y
+(1 - y) * x == x - y * x
 x + (0 - y) == x - y
 (0 - y) + x == x - y
 x - (x + 1) == 0 - 1
@@ -41,6 +67,10 @@ x - (1 + x) == 0 - 1
 y - (y + 1) == x - (x + 1)
 y - (y + 1) == x - (1 + x)
 y - (1 + y) == x - (1 + x)
+x * (0 - 1) == 0 - x
+(0 - 1) * x == 0 - x
+(0 - 1) * y == x - (x + y)
+(0 - 1) * y == x - (y + x)
 
 class of 3 equivalent candidates:
 
@@ -88,41 +118,67 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    foo x  =  x * (1 - x)
+
+    foo x  =  x - x * x
+
+
+class of 2 equivalent candidates:
+
     foo 0  =  0
     foo x  =  x + (x + 1)
 
     foo 0  =  0
     foo x  =  1 + (x + x)
+
+
+class of 2 equivalent candidates:
+
+    foo 0  =  1
+    foo x  =  x * (1 - x)
+
+    foo 0  =  1
+    foo x  =  x - x * x
 
 
 
 Redundant candidates for: ? :: Int -> Int -> Int
-  pruning with 10/23 rules
-  [3,8,22,50,116,302] candidates
-  410/501 unique candidates
-  91/501 redundant candidates
+  pruning with 13/33 rules
+  [3,8,25,71,205,632] candidates
+  819/944 unique candidates
+  125/944 redundant candidates
 
 rules:
-x * y == x + y
-x * y == y + x
+x * 0 == 0
+0 * x == 0
 x + 0 == x
 0 + x == x
 dec (x + y) == x + dec y
 dec (x + y) == y + dec x
 dec (x + y) == dec x + y
 dec (x + y) == dec y + x
+(x * y) * z == x * (y * z)
+(x * y) * z == y * (x * z)
 (x + y) + z == x + (y + z)
 (x + y) + z == y + (x + z)
+(x + x) * y == x * (y + y)
 equations:
+y * x == x * y
 y + x == x + y
 y + dec x == x + dec y
 dec x + y == x + dec y
 dec y + x == dec x + y
 x + dec 0 == dec x
 dec 0 + x == dec x
+y * (x * z) == x * (y * z)
+z * (x * y) == x * (y * z)
+z * (y * x) == x * (y * z)
 y + (x + z) == x + (y + z)
 z + (x + y) == x + (y + z)
 z + (y + x) == x + (y + z)
+(z + y) * x == x * (y + z)
+z * y + x == x + y * z
+y * (x + x) == x * (y + y)
 y + dec (dec x) == x + dec (dec y)
 dec (dec x) + y == x + dec (dec y)
 x + dec (dec 0) == dec (dec x)
@@ -238,6 +294,29 @@ class of 6 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    x ? y  =  x * x
+
+    x ? y  =  x + x * dec x
+
+
+class of 3 equivalent candidates:
+
+    x ? y  =  x * y
+
+    x ? y  =  x + x * dec y
+
+    x ? y  =  y + y * dec x
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y * y
+
+    x ? y  =  y + y * dec y
+
+
+class of 2 equivalent candidates:
+
     x ? 0  =  dec x
     x ? y  =  0
 
@@ -326,6 +405,41 @@ class of 2 equivalent candidates:
     x ? y  =  y + dec (dec y)
 
     x ? y  =  dec y + dec y
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x * (y + y)
+
+    x ? y  =  y * (x + x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x * (x * y)
+
+    x ? y  =  y * (x * x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x * (y * y)
+
+    x ? y  =  y * (x * y)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x * dec (dec x)
+
+    x ? y  =  dec (dec x * dec x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y * dec (dec y)
+
+    x ? y  =  dec (dec y * dec y)
 
 
 class of 2 equivalent candidates:
@@ -419,6 +533,48 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    x ? y  =  dec (x * (y + y))
+
+    x ? y  =  dec (y * (x + x))
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  dec (x * (x * y))
+
+    x ? y  =  dec (y * (x * x))
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  dec (x * (y * y))
+
+    x ? y  =  dec (y * (x * y))
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x + dec (x * x)
+
+    x ? y  =  dec x + x * x
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x + dec (x * y)
+
+    x ? y  =  dec x + x * y
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x + dec (y * y)
+
+    x ? y  =  dec x + y * y
+
+
+class of 2 equivalent candidates:
+
     x ? y  =  x + dec (dec (dec x))
 
     x ? y  =  dec x + dec (dec x)
@@ -470,6 +626,27 @@ class of 5 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    x ? y  =  y + dec (x * x)
+
+    x ? y  =  dec y + x * x
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y + dec (x * y)
+
+    x ? y  =  dec y + x * y
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y + dec (y * y)
+
+    x ? y  =  dec y + y * y
+
+
+class of 2 equivalent candidates:
+
     x ? y  =  y + dec (dec (dec y))
 
     x ? y  =  dec y + dec (dec y)
@@ -484,6 +661,66 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    x ? y  =  x * (x + dec y)
+
+    x ? y  =  x * (y + dec x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x * (x * dec x)
+
+    x ? y  =  dec x * (x * x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x * (x * dec y)
+
+    x ? y  =  dec y * (x * x)
+
+
+class of 3 equivalent candidates:
+
+    x ? y  =  x * (y * dec x)
+
+    x ? y  =  y * (x * dec x)
+
+    x ? y  =  dec x * (x * y)
+
+
+class of 3 equivalent candidates:
+
+    x ? y  =  x * (y * dec y)
+
+    x ? y  =  y * (x * dec y)
+
+    x ? y  =  dec y * (x * y)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y * (x + dec y)
+
+    x ? y  =  y * (y + dec x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y * (y * dec x)
+
+    x ? y  =  dec x * (y * y)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  y * (y * dec y)
+
+    x ? y  =  dec y * (y * y)
+
+
+class of 2 equivalent candidates:
+
     x ? 0  =  x
     x ? y  =  x + (x + y)
 
@@ -519,6 +756,33 @@ class of 2 equivalent candidates:
 
     x ? 0  =  x
     x ? y  =  dec y + dec y
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  x
+    x ? y  =  x * (y + y)
+
+    x ? 0  =  x
+    x ? y  =  y * (x + x)
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  x
+    x ? y  =  x * (x * y)
+
+    x ? 0  =  x
+    x ? y  =  y * (x * x)
+
+
+class of 2 equivalent candidates:
+
+    x ? 0  =  x
+    x ? y  =  x * (y * y)
+
+    x ? 0  =  x
+    x ? y  =  y * (x * y)
 
 
 class of 2 equivalent candidates:
@@ -633,6 +897,33 @@ class of 2 equivalent candidates:
 
     0 ? x  =  x
     x ? y  =  dec y + dec y
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  x
+    x ? y  =  x * (y + y)
+
+    0 ? x  =  x
+    x ? y  =  y * (x + x)
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  x
+    x ? y  =  x * (x * y)
+
+    0 ? x  =  x
+    x ? y  =  y * (x * x)
+
+
+class of 2 equivalent candidates:
+
+    0 ? x  =  x
+    x ? y  =  x * (y * y)
+
+    0 ? x  =  x
+    x ? y  =  y * (x * y)
 
 
 class of 2 equivalent candidates:

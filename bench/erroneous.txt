@@ -1,13 +1,13 @@
 Erroneous candidates for: foo :: Int -> Int
-  pruning with 15/35 rules
-  [3,3,8,9,21,27,98] candidates
-  0/169 erroneous candidates
+  pruning with 27/65 rules
+  [3,3,9,10,32,39,197] candidates
+  0/293 erroneous candidates
 
 
 Erroneous candidates for: ? :: Int -> Int -> Int
-  pruning with 10/23 rules
-  [3,8,22,50,116,302,765] candidates
-  147/1266 erroneous candidates
+  pruning with 13/33 rules
+  [3,8,25,71,205,632,1976] candidates
+  159/2920 erroneous candidates
 
 x ? 0  =  x
 x ? y  =  dec x ? y
@@ -138,6 +138,10 @@ x ? y  =  dec x ? (y + y)
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
+x ? y  =  dec x ? (y * y)
+-- 0 ? 1  =  bottom  -- and 9 other errors
+
+x ? 0  =  x
 x ? y  =  dec x ? dec (dec x)
 -- 0 ? 1  =  bottom  -- and 9 other errors
 
@@ -200,6 +204,10 @@ x ? y  =  (x + x) ? dec y
 0 ? x  =  x
 x ? y  =  (x + y) ? dec y
 -- 1 ? 1  =  bottom  -- and 12 other errors
+
+0 ? x  =  x
+x ? y  =  (x * x) ? dec y
+-- 1 ? 0  =  bottom  -- and 9 other errors
 
 0 ? x  =  x
 x ? y  =  dec (dec x) ? dec x
@@ -548,6 +556,14 @@ x ? y  =  dec x ? y + y
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
+x ? y  =  x * dec x ? y
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  x
+x ? y  =  dec x ? y * y
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  x
 x ? y  =  dec (dec (dec x ? y))
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
@@ -560,6 +576,14 @@ x ? y  =  dec x ? y + y
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  0
+x ? y  =  x * dec x ? y
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  0
+x ? y  =  dec x ? y * y
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  0
 x ? y  =  dec (dec (dec x ? y))
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
@@ -568,6 +592,10 @@ x ? y  =  dec (dec x ? y)
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
 x ? 0  =  x + x
+x ? y  =  dec x ? y
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  x * x
 x ? y  =  dec x ? y
 -- 0 ? 1  =  bottom  -- and 16 other errors
 
@@ -584,6 +612,14 @@ x ? y  =  x ? dec y + y
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x
+x ? y  =  x * x ? dec y
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  x
+x ? y  =  x ? dec y * y
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  x
 x ? y  =  dec (dec (x ? dec y))
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
@@ -596,6 +632,14 @@ x ? y  =  x ? dec y + y
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  0
+x ? y  =  x * x ? dec y
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  0
+x ? y  =  x ? dec y * y
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  0
 x ? y  =  dec (dec (x ? dec y))
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
@@ -604,6 +648,10 @@ x ? y  =  dec (x ? dec y)
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
 0 ? x  =  x + x
+x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  x * x
 x ? y  =  x ? dec y
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
