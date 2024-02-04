@@ -6,8 +6,7 @@ A non-exhaustive list of things TO DO for Conjure.
 * improve documentation of `conjureIsDeconstruction`.
   Document behaviour outside of function, not inside of it.
 
-* Discard erroneous candidates from `bench/erroneous.txt` somehow.
-  See sections below for ideas.
+* `bench/erroneous`: report number of errors in addition to the example error
 
 * consider non top-level cases
 
