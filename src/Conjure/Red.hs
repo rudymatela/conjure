@@ -153,6 +153,7 @@ descends3 isDecOf efls efrs  =  hasDeconstruction isDecOf (zip ls rs)
   where
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs
+-- TODO: classify the zipped values by type first
 
 hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
 hasDeconstruction isDecOf  =  any (uncurry (*<<)) . choices
