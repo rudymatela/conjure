@@ -157,8 +157,11 @@ descends3 isDecOf efls efrs  =  hasDeconstruction isDecOf (zip ls rs)
 hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
 hasDeconstruction isDecOf  =  any (uncurry (*<<)) . choices
   where
-  r << l  =  r `isDecOf` l || r `isStrictSubexprOf` l
-  r <<= l  =  r == l || r << l
+  r << l  =  any (r `isDecOf`) (rvars l)
+          || r `isStrictSubexprOf` l
+          || isGround r && not (isGround l) && size r < size l
+  r <<= l  =  r == l
+           || r << l
   (l,r) *<< bs  =  r << l
                 || or [ (l',r) *<<= bs'
                       | ((l',r'),bs') <- choices bs
