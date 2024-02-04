@@ -1,4 +1,4 @@
--- Copyright (C) 2021 Rudy Matela
+-- Copyright (C) 2021-2024 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 
 {-# Language DeriveDataTypeable, StandaloneDeriving #-}  -- for GHC < 7.10

@@ -1,6 +1,6 @@
 -- list.hs: conjuring functions over lists (of ints)
 --
--- Copyright (C) 2021 Rudy Matela
+-- Copyright (C) 2021-2024 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
 
