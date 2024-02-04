@@ -81,7 +81,6 @@ descends isDecOf efls efrs  =  any (hasDeconstruction isDecOf)
   where
   (_:ls)  =  unfoldApp efls
   (_:rs)  =  unfoldApp efrs
--- TODO: cleanup this file of uneeded functions
 
 hasDeconstruction :: (Expr -> Expr -> Bool) -> [(Expr,Expr)] -> Bool
 hasDeconstruction isDecOf  =  any (uncurry (*<<)) . choices
