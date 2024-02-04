@@ -26,7 +26,7 @@ flt() {
 }
 
 make -s ls-eg ls-test                                   | sort >$tmp/ls-mk
-find eg bench proto test -name '*.hs' -maxdepth 1 | flt | sort >$tmp/ls-find
+find eg bench proto test -maxdepth 1 -name '*.hs' | flt | sort >$tmp/ls-find
 grep -E "^[^/]*/[^.]*:" mk/depend.mk              | flt | sort >$tmp/ls-depend
 grep -E "(eg|bench|proto|test)/" .gitignore       | flt | sort >$tmp/ls-gitignore
 $diff $tmp/ls-{mk,find}      # compares make variables with actual directory
