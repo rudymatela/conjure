@@ -16,12 +16,12 @@ x ^^^ 0  =  x
 _ ^^^ _  =  0
 
 main :: IO ()
-main = do
+main  =  do
   conjure "^^^" (^^^) primitives
   conjureWith args{usePatterns = False} "^^^" (^^^) primitives
 
 primitives :: [Prim]
-primitives =
+primitives  =
   [ pr (0::Int)
   , pr (1::Int)
   , prim "+" ((+) :: Int -> Int -> Int)
