@@ -43,11 +43,11 @@ gps2 :: Double -> Double -> Int -> Double
 -- pruning with 2/6 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
--- looking through 17 candidates of size 3
--- looking through 62 candidates of size 4
--- looking through 266 candidates of size 5
--- looking through 1154 candidates of size 6
--- tested 1503 candidates
+-- looking through 18 candidates of size 3
+-- looking through 66 candidates of size 4
+-- looking through 316 candidates of size 5
+-- looking through 1376 candidates of size 6
+-- tested 1780 candidates
 cannot conjure
 
 gps3 :: [Char] -> Int
@@ -259,10 +259,10 @@ gps18_price :: [Double] -> [Double] -> Double
 -- looking through 2 candidates of size 1
 -- looking through 8 candidates of size 2
 -- looking through 32 candidates of size 3
--- looking through 70 candidates of size 4
--- looking through 396 candidates of size 5
--- looking through 1016 candidates of size 6
--- tested 1524 candidates
+-- looking through 74 candidates of size 4
+-- looking through 433 candidates of size 5
+-- looking through 1218 candidates of size 6
+-- tested 1767 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -270,11 +270,11 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- pruning with 6/19 rules
 -- looking through 3 candidates of size 1
 -- looking through 6 candidates of size 2
--- looking through 24 candidates of size 3
--- looking through 120 candidates of size 4
--- looking through 318 candidates of size 5
--- looking through 1944 candidates of size 6
--- tested 2415 candidates
+-- looking through 27 candidates of size 3
+-- looking through 138 candidates of size 4
+-- looking through 435 candidates of size 5
+-- looking through 2715 candidates of size 6
+-- tested 3324 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
@@ -379,9 +379,9 @@ gps25 :: [Double] -> [Double] -> Double
 -- looking through 2 candidates of size 1
 -- looking through 9 candidates of size 2
 -- looking through 49 candidates of size 3
--- looking through 195 candidates of size 4
--- looking through 1035 candidates of size 5
--- looking through 4596 candidates of size 6
--- tested 5886 candidates
+-- looking through 200 candidates of size 4
+-- looking through 1104 candidates of size 5
+-- looking through 5170 candidates of size 6
+-- tested 6534 candidates
 cannot conjure
 

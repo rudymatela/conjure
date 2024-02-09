@@ -4,9 +4,9 @@ gps1 :: Int -> Float -> Float
 -- looking through 1 candidates of size 1
 -- looking through 1 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 1 candidates of size 4
+-- looking through 2 candidates of size 4
 -- tested 4 candidates
-gps1 x y  =  y + fromIntegral x
+gps1 x y  =  fromIntegral x + y
 
 gps2 :: Int -> Maybe [Char]
 -- testing 6 combinations of argument values
@@ -334,7 +334,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 1 candidates of size 3
--- looking through 9 candidates of size 4
+-- looking through 10 candidates of size 4
 -- tested 13 candidates
 gps18 xs ys  =  zipWith (+) xs ys
 

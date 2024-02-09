@@ -74,6 +74,10 @@ isCommutative thy eo  =  eo `elem` commutativeOperators thy
 commutativeOperators :: Thy -> [Expr]
 commutativeOperators thy  =  [ ef
                              | (ef :$ ex :$ ey, ef' :$ ey' :$ ex') <- equations thy
+                             , isConst ef
+                             , isVar ex
+                             , isVar ey
+                             , ex /= ey
                              , ef == ef'
                              , ex == ex'
                              , ey == ey'
