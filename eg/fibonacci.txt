@@ -1,19 +1,19 @@
 fibonacci :: Int -> Int
 -- testing 7 combinations of argument values
--- pruning with 21/44 rules
+-- pruning with 15/35 rules
 -- looking through 4 candidates of size 1
 -- looking through 3 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 9 candidates of size 4
--- looking through 30 candidates of size 5
--- looking through 30 candidates of size 6
--- looking through 156 candidates of size 7
--- looking through 157 candidates of size 8
--- looking through 813 candidates of size 9
--- looking through 797 candidates of size 10
--- looking through 4449 candidates of size 11
--- looking through 4438 candidates of size 12
--- tested 6539 candidates
+-- looking through 10 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 60 candidates of size 5
+-- looking through 56 candidates of size 6
+-- looking through 459 candidates of size 7
+-- looking through 446 candidates of size 8
+-- looking through 3843 candidates of size 9
+-- looking through 3752 candidates of size 10
+-- looking through 34277 candidates of size 11
+-- looking through 33905 candidates of size 12
+-- tested 43074 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

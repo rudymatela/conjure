@@ -210,7 +210,7 @@ gps11 (cs:css)  =  gps11 css ++ [length cs]
 
 gps12 :: [Int] -> Int
 -- testing 6 combinations of argument values
--- pruning with 13/27 rules
+-- pruning with 13/26 rules
 -- looking through 2 candidates of size 1
 -- looking through 5 candidates of size 2
 -- looking through 2 candidates of size 3
@@ -262,7 +262,7 @@ gps14 xs  =  length (filter odd xs)
 
 gps14 :: [Int] -> Int
 -- testing 3 combinations of argument values
--- pruning with 39/58 rules
+-- pruning with 37/56 rules
 -- looking through 3 candidates of size 1
 -- looking through 9 candidates of size 2
 -- looking through 0 candidates of size 3
@@ -297,17 +297,17 @@ gps16 cs ds  =  sort cs `isSubsequenceOf` sort ds
 
 gps17 :: Int -> Int
 -- testing 4 combinations of argument values
--- pruning with 27/65 rules
+-- pruning with 19/52 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 7 candidates of size 3
 -- looking through 8 candidates of size 4
--- looking through 28 candidates of size 5
--- looking through 35 candidates of size 6
--- looking through 179 candidates of size 7
--- looking through 217 candidates of size 8
--- looking through 1196 candidates of size 9
--- tested 492 candidates
+-- looking through 40 candidates of size 5
+-- looking through 51 candidates of size 6
+-- looking through 299 candidates of size 7
+-- looking through 383 candidates of size 8
+-- looking through 2460 candidates of size 9
+-- tested 826 candidates
 gps17 0  =  0
 gps17 x  =  gps17 (x - 1) + x * x
 
