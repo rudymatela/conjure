@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.12 (February 2024)
+-----------------------
 
 * bump Speculate requirement to v0.4.20
 * improve testing of Conjure itself
