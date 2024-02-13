@@ -10,6 +10,9 @@ HADDOCKFLAGS = \
   | grep -v "^Warning: Couldn't find .haddock for export [A-Z]$$"
 INSTALL_DEPS = leancheck express speculate template-haskell
 
+NJOBS := $(shell grep ^processor /proc/cpuinfo | head -n -1 | wc -l | sed 's/^0$$/1/')
+LONG := $(shell which long >/dev/null 2>/dev/null && echo long)
+
 EG = \
   eg/arith \
   eg/count \
@@ -104,6 +107,16 @@ test-via-cabal:
 
 test-via-stack:
 	stack test code-conjure:test:expr --ghc-options="$(GHCFLAGS) -O0" --system-ghc --no-install-ghc --no-terminal
+
+
+fastest:
+	$(LONG) make test -j$(NJOBS)
+
+fastestbench:
+	$(LONG) make test -j$(NJOBS) && $(LONG) make bench
+
+fastxtestbench:
+	$(LONG) make txt -j$(NJOBS) && $(LONG) make test -j$(NJOBS) && $(LONG) make bench
 
 clean: clean-hi-o clean-haddock
 	rm -f $(EG) $(TESTS) mk/toplibs
