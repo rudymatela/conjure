@@ -47,7 +47,7 @@ size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 
 height :: Tree -> Int
 -- testing 360 combinations of argument values
--- pruning with 51/67 rules
+-- pruning with 49/65 rules
 -- looking through 3 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 0 candidates of size 3

@@ -1,7 +1,7 @@
 Erroneous candidates for: foo :: Int -> Int
-  pruning with 31/67 rules
-  [4,8,17,44,106,251,986] candidates
-  33/1416 erroneous candidates
+  pruning with 41/82 rules
+  [4,8,16,42,70,162,493] candidates
+  30/795 erroneous candidates
 
 foo 0  =  0
 foo x  =  x + foo (x - 2)
@@ -41,10 +41,6 @@ foo x  =  0 - foo (x - 2)
 
 foo 0  =  0
 foo x  =  1 - foo (x - 2)
--- foo 1  =  bottom  -- and 14 other errors
-
-foo 0  =  0
-foo x  =  2 - foo (x - 2)
 -- foo 1  =  bottom  -- and 14 other errors
 
 foo 0  =  1
@@ -87,10 +83,6 @@ foo 0  =  1
 foo x  =  1 - foo (x - 2)
 -- foo 1  =  bottom  -- and 14 other errors
 
-foo 0  =  1
-foo x  =  2 - foo (x - 2)
--- foo 1  =  bottom  -- and 14 other errors
-
 foo 0  =  2
 foo x  =  x + foo (x - 2)
 -- foo 1  =  bottom  -- and 14 other errors
@@ -129,15 +121,11 @@ foo x  =  0 - foo (x - 2)
 
 foo 0  =  2
 foo x  =  1 - foo (x - 2)
--- foo 1  =  bottom  -- and 14 other errors
-
-foo 0  =  2
-foo x  =  2 - foo (x - 2)
 -- foo 1  =  bottom  -- and 14 other errors
 
 
 Erroneous candidates for: ? :: Int -> Int -> Int
-  pruning with 13/29 rules
+  pruning with 13/34 rules
   [3,8,25,71,205,632] candidates
   26/944 erroneous candidates
 

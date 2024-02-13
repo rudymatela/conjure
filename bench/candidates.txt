@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
-  pruning with 19/52 rules
-  [3,0,8,0,46,0,344,0,3050] direct candidates, 0 duplicates
-  [3,3,9,10,44,55,328,428,2681] pattern candidates, 0 duplicates
+  pruning with 27/65 rules
+  [3,0,8,0,30,0,194,0,1406] direct candidates, 0 duplicates
+  [3,3,9,10,32,39,197,247,1325] pattern candidates, 0 duplicates
 
 rules:
 x - x == 0
@@ -17,12 +17,20 @@ x - 0 == x
 (x + y) + z == x + (y + z)
 (x + y) + z == y + (x + z)
 x - (y - z) == z + (x - y)
+(x - y) - z == x - (y + z)
+(x - y) - z == x - (z + y)
+(x + y) - z == x + (y - z)
+(x + y) - z == y + (x - z)
 (x + x) * y == x * (y + y)
 x + (y - x) == y
 (x - y) + y == x
+x * y - x == x * (y - 1)
+x * y - y == y * (x - 1)
 x * (y + 1) == x + x * y
 x * (y + 1) == x * y + x
 (x + 1) * y == y + x * y
+0 - x * y == x * (0 - y)
+0 - x * y == y * (0 - x)
 equations:
 y * x == x * y
 y + x == x + y
@@ -49,10 +57,15 @@ x * (1 - y) == x - y * x
 y * (0 - x) == x * (0 - y)
 (0 - x) * y == x * (0 - y)
 (0 - y) * x == (0 - x) * y
+(1 - y) * x == x - x * y
+(1 - y) * x == x - y * x
 x + (0 - y) == x - y
 (0 - y) + x == x - y
 x - (x + 1) == 0 - 1
+x - (1 + x) == 0 - 1
 y - (y + 1) == x - (x + 1)
+y - (y + 1) == x - (1 + x)
+y - (1 + y) == x - (1 + x)
 x * (0 - 1) == 0 - x
 (0 - 1) * x == 0 - x
 (0 - 1) * y == x - (x + y)
@@ -82,37 +95,7 @@ foo x  =  0 - 1
 
 foo x  =  1 - x
 
-foo x  =  (x + x) - x
-
-foo x  =  (x + x) - 1
-
-foo x  =  (x + 1) - x
-
-foo x  =  (x + 1) - 1
-
-foo x  =  (1 + 1) - x
-
-foo x  =  (1 + 1) - 1
-
-foo x  =  x * x - x
-
 foo x  =  x * x - 1
-
-foo x  =  (x - 1) - x
-
-foo x  =  (x - 1) - 1
-
-foo x  =  (0 - x) - x
-
-foo x  =  (0 - x) - 1
-
-foo x  =  (0 - 1) - x
-
-foo x  =  (0 - 1) - 1
-
-foo x  =  (1 - x) - x
-
-foo x  =  (1 - x) - 1
 
 foo x  =  x + (x + x)
 
@@ -163,8 +146,6 @@ foo x  =  0 - (x + x)
 foo x  =  0 - (x + 1)
 
 foo x  =  0 - (1 + 1)
-
-foo x  =  0 - x * x
 
 foo x  =  1 - (x + x)
 
@@ -246,29 +227,7 @@ foo 0  =  1
 foo 1  =  1
 foo x  =  0
 
-foo x  =  (x + x) - x
-
-foo x  =  (x + x) - 1
-
-foo x  =  (x + 1) - x
-
-foo x  =  (x + 1) - 1
-
-foo x  =  x * x - x
-
 foo x  =  x * x - 1
-
-foo x  =  (x - 1) - x
-
-foo x  =  (x - 1) - 1
-
-foo x  =  (0 - x) - x
-
-foo x  =  (0 - x) - 1
-
-foo x  =  (1 - x) - x
-
-foo x  =  (1 - x) - 1
 
 foo x  =  x + (x + x)
 
@@ -307,8 +266,6 @@ foo x  =  x - x * x
 foo x  =  0 - (x + x)
 
 foo x  =  0 - (x + 1)
-
-foo x  =  0 - x * x
 
 foo x  =  1 - (x + x)
 
@@ -344,25 +301,7 @@ foo 1  =  1
 foo x  =  1 - x
 
 foo 0  =  0
-foo x  =  (x + x) - 1
-
-foo 0  =  0
-foo x  =  (x + 1) - x
-
-foo 0  =  0
 foo x  =  x * x - 1
-
-foo 0  =  0
-foo x  =  (x - 1) - x
-
-foo 0  =  0
-foo x  =  (x - 1) - 1
-
-foo 0  =  0
-foo x  =  (0 - x) - 1
-
-foo 0  =  0
-foo x  =  (1 - x) - x
 
 foo 0  =  0
 foo x  =  x + (x + 1)
@@ -398,34 +337,7 @@ foo 0  =  0
 foo x  =  1 - x * x
 
 foo 0  =  1
-foo x  =  (x + x) - x
-
-foo 0  =  1
-foo x  =  (x + x) - 1
-
-foo 0  =  1
-foo x  =  (x + 1) - 1
-
-foo 0  =  1
-foo x  =  x * x - x
-
-foo 0  =  1
 foo x  =  x * x - 1
-
-foo 0  =  1
-foo x  =  (x - 1) - x
-
-foo 0  =  1
-foo x  =  (x - 1) - 1
-
-foo 0  =  1
-foo x  =  (0 - x) - x
-
-foo 0  =  1
-foo x  =  (0 - x) - 1
-
-foo 0  =  1
-foo x  =  (1 - x) - 1
 
 foo 0  =  1
 foo x  =  x + (x + x)
@@ -471,9 +383,6 @@ foo x  =  0 - (x + x)
 
 foo 0  =  1
 foo x  =  0 - (x + 1)
-
-foo 0  =  1
-foo x  =  0 - x * x
 
 foo 0  =  1
 foo x  =  1 - (x + 1)
@@ -520,7 +429,7 @@ foo x  =  0 - x
 
 
 Candidates for: ? :: Int -> Int -> Int
-  pruning with 13/29 rules
+  pruning with 13/34 rules
   [3,3,9,18,60,162,516,1587,5148] direct candidates, 0 duplicates
   [3,8,25,71,205,632,1976,6067,19140] pattern candidates, 0 duplicates
 
@@ -555,6 +464,11 @@ z + (y + x) == x + (y + z)
 (z + y) * x == x * (y + z)
 z * y + x == x + y * z
 y * (x + x) == x * (y + y)
+y + dec (dec x) == x + dec (dec y)
+dec (dec x) + y == x + dec (dec y)
+dec (dec y) + x == dec (dec x) + y
+x + dec (dec 0) == dec (dec x)
+dec (dec 0) + x == dec (dec x)
 
 direct candidates:
 

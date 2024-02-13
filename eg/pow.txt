@@ -1,15 +1,15 @@
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
--- pruning with 12/28 rules
+-- pruning with 14/30 rules
 -- looking through 4 candidates of size 1
 -- looking through 16 candidates of size 2
 -- looking through 46 candidates of size 3
 -- looking through 159 candidates of size 4
--- looking through 436 candidates of size 5
--- looking through 1404 candidates of size 6
--- looking through 4267 candidates of size 7
--- looking through 13923 candidates of size 8
--- tested 6539 candidates
+-- looking through 433 candidates of size 5
+-- looking through 1382 candidates of size 6
+-- looking through 4156 candidates of size 7
+-- looking through 13406 candidates of size 8
+-- tested 6403 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)
 

@@ -58,7 +58,7 @@ gps3 :: [Char] -> Int
 cannot conjure
 
 gps4 :: [Char] -> [Char]
--- pruning with 13/19 rules
+-- pruning with 13/21 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
 -- looking through 8 candidates of size 3
@@ -149,19 +149,19 @@ cannot conjure
 
 gps10 :: [Int] -> Int
 -- testing 7 combinations of argument values
--- pruning with 43/75 rules
+-- pruning with 67/100 rules
 -- looking through 4 candidates of size 1
 -- looking through 16 candidates of size 2
 -- looking through 0 candidates of size 3
--- looking through 76 candidates of size 4
--- looking through 88 candidates of size 5
--- looking through 1476 candidates of size 6
--- looking through 2060 candidates of size 7
--- looking through 32384 candidates of size 8
--- looking through 54360 candidates of size 9
--- tested 41332 candidates
+-- looking through 68 candidates of size 4
+-- looking through 80 candidates of size 5
+-- looking through 1084 candidates of size 6
+-- looking through 1556 candidates of size 7
+-- looking through 20600 candidates of size 8
+-- looking through 35632 candidates of size 9
+-- tested 29538 candidates
 gps10 []  =  0
-gps10 (x:xs)  =  (gps10 xs + x `div` 3) - 2
+gps10 (x:xs)  =  gps10 xs + (x `div` 3 - 2)
 
 gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
@@ -255,14 +255,14 @@ cannot conjure
 
 gps18_price :: [Double] -> [Double] -> Double
 -- testing 4 combinations of argument values
--- pruning with 21/30 rules
+-- pruning with 26/35 rules
 -- looking through 2 candidates of size 1
 -- looking through 8 candidates of size 2
 -- looking through 32 candidates of size 3
 -- looking through 74 candidates of size 4
--- looking through 434 candidates of size 5
--- looking through 1240 candidates of size 6
--- tested 1790 candidates
+-- looking through 433 candidates of size 5
+-- looking through 1218 candidates of size 6
+-- tested 1767 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
@@ -375,13 +375,13 @@ gps24 (c:cs)  =  if 140 > length cs
 
 gps25 :: [Double] -> [Double] -> Double
 -- testing 6 combinations of argument values
--- pruning with 29/53 rules
+-- pruning with 31/59 rules
 -- looking through 2 candidates of size 1
 -- looking through 9 candidates of size 2
 -- looking through 49 candidates of size 3
 -- looking through 200 candidates of size 4
--- looking through 1105 candidates of size 5
--- looking through 5181 candidates of size 6
--- tested 6546 candidates
+-- looking through 1104 candidates of size 5
+-- looking through 5170 candidates of size 6
+-- tested 6534 candidates
 cannot conjure
 

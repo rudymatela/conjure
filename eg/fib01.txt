@@ -11,7 +11,7 @@ cannot conjure
 
 fib01 :: Int -> Int -> Int -> Int
 -- testing 8 combinations of argument values
--- pruning with 16/31 rules
+-- pruning with 18/38 rules
 -- looking through 4 candidates of size 1
 -- looking through 4 candidates of size 2
 -- looking through 10 candidates of size 3
