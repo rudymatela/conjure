@@ -16,25 +16,23 @@ mkStrategy s  =  args
   { rewriting         =  r
   , requireDescent    =  d
   , adHocRedundancy   =  a
-  , copyBindings      =  c
+  , copyBindings      =  a -- previously c
   , uniqueCandidates  =  u
   }
   where
   itob 0  =  False
   itob _  =  True
-  [r,d,a,c,u]  =  map itob $
+  [r,d,a,u]  =  map itob $
     case s of
-    "unique candidates" -> [1,1,1,1,1]
-    "default"           -> [1,1,1,1,0]
-    "without reasoning" -> [0,1,1,1,0]
-    "without descent"   -> [1,0,1,1,0]
-    "without ad-hoc"    -> [1,1,0,1,0]
-    "without copy"      -> [1,1,1,0,0]
-    "only reasoning"    -> [1,0,0,0,0]
-    "only descent"      -> [0,1,0,0,0]
-    "only ad-hoc"       -> [0,0,1,0,0]
-    "only copy"         -> [0,0,0,1,0]
-    "only typed"        -> [0,0,0,0,0]
+    "unique candidates" -> [1,1,1,1]
+    "default"           -> [1,1,1,0]
+    "without reasoning" -> [0,1,1,0]
+    "without descent"   -> [1,0,1,0]
+    "without ad-hoc"    -> [1,1,0,0]
+    "only reasoning"    -> [1,0,0,0]
+    "only descent"      -> [0,1,0,0]
+    "only ad-hoc"       -> [0,0,1,0]
+    "only typed"        -> [0,0,0,0]
     _                   -> error "unknown strategy"
 
 conjureStrategy :: Conjurable f => String -> String -> f -> [Prim] -> IO ()
@@ -49,11 +47,9 @@ strategies  =
   , "without reasoning"
   , "without descent"
   , "without ad-hoc"
-  , "without copy"
   , "only reasoning"
   , "only descent"
   , "only ad-hoc"
-  , "only copy"
   , "only typed"
   ]
 
