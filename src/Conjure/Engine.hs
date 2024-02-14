@@ -252,10 +252,11 @@ conjure0With args nm f p es  =  do
                     when (carryOn args) $ pr (n+1) (t+nc) rs
   pr1 t [] cs  =  return ()
   pr1 t (i:is) cs  =  do
-    let nc' = fromMaybe (length cs) (findIndex (i==) cs)
-    putStrLn $ "-- tested " ++ show (t+nc'+1) ++ " candidates"
+    let (cs',cs'') = break (i==) cs
+    let t' = t + length cs' + 1
+    putStrLn $ "-- tested " ++ show t' ++ " candidates"
     putStrLn $ showDefn i
-    when (carryOn args) $ pr1 (t+nc'+1) is (drop (nc'+1) cs)
+    when (carryOn args) $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
   (iss, css, ts, thy)  =  conjpure0With args nm f p es
   nRules  =  length (rules thy)
