@@ -1,0 +1,165 @@
+-- strategy: unique candidates
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 23 candidates of size 5
+-- looking through 30 candidates of size 6
+-- looking through 84 candidates of size 7
+-- tested 84 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: default
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 28 candidates of size 5
+-- looking through 35 candidates of size 6
+-- looking through 179 candidates of size 7
+-- tested 95 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: without reasoning
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 16 candidates of size 3
+-- looking through 17 candidates of size 4
+-- looking through 279 candidates of size 5
+-- looking through 313 candidates of size 6
+-- looking through 5763 candidates of size 7
+-- tested 656 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: without descent
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 7 candidates of size 3
+-- looking through 8 candidates of size 4
+-- looking through 28 candidates of size 5
+-- looking through 35 candidates of size 6
+-- looking through 264 candidates of size 7
+-- tested 148 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: without ad-hoc
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 6 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 18 candidates of size 4
+-- looking through 31 candidates of size 5
+-- looking through 59 candidates of size 6
+-- looking through 183 candidates of size 7
+-- tested 137 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: without copy
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 9 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 32 candidates of size 5
+-- looking through 39 candidates of size 6
+-- looking through 197 candidates of size 7
+-- tested 107 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: only reasoning
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 6 candidates of size 2
+-- looking through 12 candidates of size 3
+-- looking through 24 candidates of size 4
+-- looking through 47 candidates of size 5
+-- looking through 82 candidates of size 6
+-- looking through 354 candidates of size 7
+-- tested 284 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: only descent
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 6 candidates of size 2
+-- looking through 21 candidates of size 3
+-- looking through 42 candidates of size 4
+-- looking through 302 candidates of size 5
+-- looking through 602 candidates of size 6
+-- looking through 6115 candidates of size 7
+-- tested 1001 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: only ad-hoc
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 3 candidates of size 2
+-- looking through 18 candidates of size 3
+-- looking through 19 candidates of size 4
+-- looking through 289 candidates of size 5
+-- looking through 323 candidates of size 6
+-- looking through 6468 candidates of size 7
+-- tested 1028 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: only copy
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 6 candidates of size 2
+-- looking through 18 candidates of size 3
+-- looking through 36 candidates of size 4
+-- looking through 315 candidates of size 5
+-- looking through 585 candidates of size 6
+-- looking through 6915 candidates of size 7
+-- tested 1876 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+
+-- strategy: only typed
+factorial :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 27/65 rules
+-- looking through 3 candidates of size 1
+-- looking through 6 candidates of size 2
+-- looking through 21 candidates of size 3
+-- looking through 42 candidates of size 4
+-- looking through 330 candidates of size 5
+-- looking through 630 candidates of size 6
+-- looking through 7215 candidates of size 7
+-- tested 1945 candidates
+factorial 0  =  1
+factorial x  =  x * factorial (x - 1)
+

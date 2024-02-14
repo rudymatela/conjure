@@ -54,6 +54,7 @@ eg/sort
 eg/subset
 eg/spec
 bench/carry-on
+bench/strategies
 bench/self
 bench/longshot
 bench/ill-hit

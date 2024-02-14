@@ -207,6 +207,23 @@ bench/self.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/self.hs
+bench/strategies: \
+  bench/strategies.hs \
+  mk/toplibs
+bench/strategies.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/strategies.hs
 bench/take-drop: \
   bench/take-drop.hs \
   mk/toplibs

@@ -44,6 +44,7 @@ EG = \
   bench/ill-hit \
   bench/longshot \
   bench/lowtests \
+  bench/strategies \
   bench/self \
   bench/carry-on \
   bench/take-drop \
