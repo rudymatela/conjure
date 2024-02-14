@@ -159,8 +159,8 @@ data Args = Args
   , maxEquationSize       :: Int  -- ^ maximum size of equation operands
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
-  , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
+  , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
   , atomicNumbers         :: Bool -- ^ restrict constant/ground numeric expressions to atoms
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
