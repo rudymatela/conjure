@@ -159,6 +159,8 @@ data Args = Args
   , maxEquationSize       :: Int  -- ^ maximum size of equation operands
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
+
+  -- advanced options
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
@@ -187,8 +189,10 @@ args = Args
   , maxEquationSize        =   5
   , maxSearchTests         =  100000
   , maxDeconstructionSize  =   4
-  , requireDescent         =  True
+
+  -- advanced options
   , usePatterns            =  True
+  , requireDescent         =  True
   , copyBindings           =  True
   , atomicNumbers          =  True
   , showTheory             =  False
