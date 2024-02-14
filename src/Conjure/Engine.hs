@@ -422,7 +422,8 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
 
-  keep  =  isRootNormalC thy . fastMostGeneralVariation
+  keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
+       | otherwise  =  const True
 
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
