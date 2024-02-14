@@ -160,11 +160,12 @@ data Args = Args
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
 
-  -- advanced options
+  -- advanced options --
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
-
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
+
+  -- pruning options --
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , adHocRedundancy       :: Bool -- ^ ad-hoc redundancy checks
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
@@ -196,9 +197,9 @@ args = Args
   -- advanced options --
   , carryOn                =  False
   , showTheory             =  False
+  , usePatterns            =  True
 
   -- pruning options --
-  , usePatterns            =  True
   , requireDescent         =  True
   , adHocRedundancy        =  True
   , copyBindings           =  True
