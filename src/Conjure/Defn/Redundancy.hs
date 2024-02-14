@@ -141,7 +141,7 @@ hasRedundantRecursion d  =  not (null rs) && any matchesRHS bs
 -- | Returns whether a given 'Defn' is redundant
 --   with regards to root recursions.
 --
--- When there is a single base case and all recursive calls
+-- When there is a single constant base case and all recursive calls
 -- are at the root: we have a redundant function.
 -- (Modulo error functions, which are undesired anyway.)
 --
@@ -150,11 +150,6 @@ hasRedundantRecursion d  =  not (null rs) && any matchesRHS bs
 --
 -- Above it does not really pays off to follow the recursive calls,
 -- at the end we always reach an empty list.
---
--- The same goes for the following:
---
--- > xs ? []  =  xs
--- > xs ? (x:ys)  =  xs ? ys
 isRedundantByRootRecursions :: Defn -> Bool
 isRedundantByRootRecursions d  =  case partition isGround $ map snd d of
   ([b], rs@(_:_))  ->  all isHole rs
