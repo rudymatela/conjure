@@ -130,7 +130,7 @@ full-clean: clean clean-cabal clean-stack
 	./$<
 
 %.txt: %
-	./$< >$<.txt
+	./$< >$@
 
 %.tee: %
 	$(LONG) unbuffer ./$< | tee $<.txt
