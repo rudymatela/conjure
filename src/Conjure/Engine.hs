@@ -248,9 +248,14 @@ conjure0With args nm f p es  =  do
     -- when (n<=12) $ putStrLn $ unlines $ map showDefn cs
     case is of
       []     ->  pr (n+1) (t+nc) rs
-      (i:_)  ->  do let nc' = fromMaybe nc (findIndex (i==) cs)
-                    putStrLn $ "-- tested " ++ show (t+nc'+1) ++ " candidates"
-                    putStrLn $ showDefn i
+      (_:_)  ->  do pr1 t is cs
+                    when (carryOn args) $ pr (n+1) (t+nc) rs
+  pr1 t [] cs  =  return ()
+  pr1 t (i:is) cs  =  do
+    let nc' = fromMaybe (length cs) (findIndex (i==) cs)
+    putStrLn $ "-- tested " ++ show (t+nc'+1) ++ " candidates"
+    putStrLn $ showDefn i
+    when (carryOn args) $ pr1 (t+nc'+1) is (drop (nc'+1) cs)
   rs  =  zip iss css
   (iss, css, ts, thy)  =  conjpure0With args nm f p es
   nRules  =  length (rules thy)
