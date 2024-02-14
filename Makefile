@@ -45,6 +45,7 @@ EG = \
   bench/longshot \
   bench/lowtests \
   bench/self \
+  bench/carry-on \
   bench/take-drop \
   bench/p12 \
   bench/p30 \

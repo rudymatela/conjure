@@ -53,6 +53,7 @@ eg/setelem
 eg/sort
 eg/subset
 eg/spec
+bench/carry-on
 bench/self
 bench/longshot
 bench/ill-hit

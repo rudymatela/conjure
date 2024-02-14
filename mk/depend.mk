@@ -20,6 +20,23 @@ bench/candidates.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/candidates.hs
+bench/carry-on: \
+  bench/carry-on.hs \
+  mk/toplibs
+bench/carry-on.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/carry-on.hs
 bench/erroneous: \
   bench/erroneous.hs \
   mk/toplibs
