@@ -161,11 +161,13 @@ data Args = Args
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
 
   -- advanced options
+  , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
+  , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
+
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
   , atomicNumbers         :: Bool -- ^ restrict constant/ground numeric expressions to atoms
-  , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
   }
 
@@ -190,12 +192,15 @@ args = Args
   , maxSearchTests         =  100000
   , maxDeconstructionSize  =   4
 
-  -- advanced options
+  -- advanced options --
+  , carryOn                =  False
+  , showTheory             =  False
+
+  -- pruning options --
   , usePatterns            =  True
   , requireDescent         =  True
   , copyBindings           =  True
   , atomicNumbers          =  True
-  , showTheory             =  False
   , uniqueCandidates       =  False
   }
 
