@@ -74,6 +74,7 @@ main = do
   -- merge (x:xs) (y:ys)  =  if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
   --                         2  3 4  5      678     9 10 11 12  13 14 15  16 17 18 19
   -- OOM after size 17, out of reach performance wise
+  -- update: cannot reach at size 19 on lapmatrud OOM
   conjureWith args{maxSize=12} "merge" merge'
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
