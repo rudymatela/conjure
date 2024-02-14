@@ -18,6 +18,8 @@ mkStrategy s  =  args
   , adHocRedundancy   =  a
   , copyBindings      =  a -- previously c
   , uniqueCandidates  =  u
+--, carryOn  =  True
+--, maxSize  =  10
   }
   where
   itob 0  =  False
