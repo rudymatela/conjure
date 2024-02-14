@@ -166,6 +166,7 @@ data Args = Args
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
 
   -- pruning options --
+  , rewriting             :: Bool -- ^ unique-modulo-rewriting candidates
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , adHocRedundancy       :: Bool -- ^ ad-hoc redundancy checks
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
@@ -200,6 +201,7 @@ args = Args
   , usePatterns            =  True
 
   -- pruning options --
+  , rewriting              =  True
   , requireDescent         =  True
   , adHocRedundancy        =  True
   , copyBindings           =  True
@@ -381,7 +383,8 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
-  keep  =  isRootNormalC thy . fastMostGeneralVariation
+  keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
+       | otherwise  =  const True
   keepR | requireDescent  =  descends isDecOf efxs
         | otherwise       =  const True
     where
