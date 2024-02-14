@@ -166,6 +166,7 @@ data Args = Args
 
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
+  , adHocRedundancy       :: Bool -- ^ ad-hoc redundancy checks
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
   , atomicNumbers         :: Bool -- ^ restrict constant/ground numeric expressions to atoms
   , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
@@ -199,6 +200,7 @@ args = Args
   -- pruning options --
   , usePatterns            =  True
   , requireDescent         =  True
+  , adHocRedundancy        =  True
   , copyBindings           =  True
   , atomicNumbers          =  True
   , uniqueCandidates       =  False
@@ -406,7 +408,7 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
 candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy)
-candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMapT fillingsFor fss,thy)
+candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT fillingsFor fss,thy)
   where
   pats  =  conjurePats es nm f
   fss  =  concatMapT ps2fss pats
@@ -426,9 +428,14 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundantRecursion $ concatMap
     -- discards non-atomic numeric ground expressions such as 1 + 1
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
 
+  isRedundant | adHocRedundancy  =  \e -> isRedundantDefn e || isRedundantModuloRewriting (normalize thy) e
+              | otherwise        =  const False
+
+  hasRedundant | adHocRedundancy  =  hasRedundantRecursion
+               | otherwise        =  const False
+
   ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT (isRedundantModuloRewriting $ normalize thy)
-               .  discardT isRedundantDefn
+  ps2fss pats  =  discardT isRedundant
                .  products
                $  map p2eess pats
     where
