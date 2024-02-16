@@ -1,6 +1,7 @@
 Unique candidates for: foo :: Int -> Int
   pruning with 27/65 rules
   [3,3,9,10,32,39,197] candidates
+  [3,3,9,10,27,34,97] unique candidates
   183/293 unique candidates
   110/293 redundant candidates
 
@@ -558,6 +559,7 @@ foo x  =  1 - x * x
 Unique candidates for: ? :: Int -> Int -> Int
   pruning with 13/34 rules
   [3,8,25,71,205] candidates
+  [3,8,25,70,188] unique candidates
   294/312 unique candidates
   18/312 redundant candidates
 
@@ -1482,6 +1484,7 @@ x ? y  =  dec x
 Unique candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
   [2,1,1,2,4,7,10] candidates
+  [2,1,1,2,3,6,10] unique candidates
   25/27 unique candidates
   2/27 redundant candidates
 
@@ -1565,6 +1568,7 @@ goo xs  =  xs ++ (xs ++ (xs ++ xs))
 Unique candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
   [3,8,15,43,122] candidates
+  [3,8,15,35,89] unique candidates
   150/191 unique candidates
   41/191 redundant candidates
 
@@ -2107,6 +2111,7 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 Unique candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
   [3,2,0,0,0,0,0] candidates
+  [3,1,0,0,0,0,0] unique candidates
   4/5 unique candidates
   1/5 redundant candidates
 
@@ -2174,6 +2179,7 @@ ton p  =  not p
 Unique candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
   [4,12,20,6,2] candidates
+  [4,8,4,0,0] unique candidates
   16/44 unique candidates
   28/44 redundant candidates
 

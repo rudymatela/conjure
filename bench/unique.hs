@@ -29,6 +29,7 @@ printUniqueCandidates n nm f ps  =  do
   putStrLn $ "Unique candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
   putStrLn $ "  pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   putStrLn $ "  " ++ show (map length css) ++ " candidates"
+  putStrLn $ "  " ++ show (map length uss) ++ " unique candidates"
   putStrLn $ "  " ++ show numUnique ++ "/" ++ show numCandidates ++ " unique candidates"
   putStrLn $ "  " ++ show numRedundant ++ "/" ++ show numCandidates ++ " redundant candidates"
   putStrLn ""
