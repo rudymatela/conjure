@@ -1,9 +1,9 @@
 Unique candidates for: foo :: Int -> Int
   pruning with 27/65 rules
-  [3,3,9,10,32,39,197] candidates
-  [3,3,9,10,27,34,97] unique candidates
-  183/293 unique candidates
-  110/293 redundant candidates
+  [3,3,9,10,32,39,185] candidates
+  [3,3,9,10,27,34,95] unique candidates
+  181/281 unique candidates
+  100/281 redundant candidates
 
 rules:
 x - x == 0
@@ -458,13 +458,9 @@ foo x  =  1 - x * (x + x)
 
 foo x  =  1 - x * (x * x)
 
-foo x  =  (x - 1) * (x + x)
-
 foo x  =  (x - 1) * (x - 1)
 
 foo x  =  (x - 1) * (1 - x)
-
-foo x  =  (1 - x) * (x + x)
 
 foo x  =  x * x - (x + x)
 

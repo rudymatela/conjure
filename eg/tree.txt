@@ -55,7 +55,7 @@ height :: Tree -> Int
 -- looking through 14 candidates of size 5
 -- looking through 34 candidates of size 6
 -- looking through 98 candidates of size 7
--- looking through 283 candidates of size 8
+-- looking through 274 candidates of size 8
 -- tested 200 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  1 + max (height t1) (height t2)
@@ -74,7 +74,7 @@ mem :: Int -> Tree -> Bool
 -- looking through 0 candidates of size 9
 -- looking through 0 candidates of size 10
 -- looking through 0 candidates of size 11
--- looking through 96 candidates of size 12
+-- looking through 80 candidates of size 12
 -- tested 88 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
@@ -92,9 +92,9 @@ ordered :: Tree -> Bool
 -- looking through 32 candidates of size 8
 -- looking through 80 candidates of size 9
 -- looking through 56 candidates of size 10
--- looking through 450 candidates of size 11
--- looking through 708 candidates of size 12
--- tested 1359 candidates
+-- looking through 386 candidates of size 11
+-- looking through 596 candidates of size 12
+-- tested 1183 candidates
 cannot conjure
 
 ordered :: Tree -> Bool

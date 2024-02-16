@@ -18,11 +18,11 @@ x ^^^ y  =  0
 -- looking through 0 candidates of size 4
 -- looking through 39 candidates of size 5
 -- looking through 60 candidates of size 6
--- looking through 225 candidates of size 7
--- looking through 1056 candidates of size 8
--- looking through 1488 candidates of size 9
--- looking through 13020 candidates of size 10
--- tested 7148 candidates
+-- looking through 222 candidates of size 7
+-- looking through 996 candidates of size 8
+-- looking through 1266 candidates of size 9
+-- looking through 11700 candidates of size 10
+-- tested 6683 candidates
 x ^^^ y  =  if 0 == x * y
             then x + y
             else 0

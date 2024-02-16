@@ -155,11 +155,11 @@ gps10 :: [Int] -> Int
 -- looking through 0 candidates of size 3
 -- looking through 68 candidates of size 4
 -- looking through 80 candidates of size 5
--- looking through 1084 candidates of size 6
--- looking through 1556 candidates of size 7
--- looking through 20600 candidates of size 8
--- looking through 35632 candidates of size 9
--- tested 29538 candidates
+-- looking through 980 candidates of size 6
+-- looking through 1428 candidates of size 7
+-- looking through 17324 candidates of size 8
+-- looking through 30724 candidates of size 9
+-- tested 25024 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  gps10 xs + (x `div` 3 - 2)
 

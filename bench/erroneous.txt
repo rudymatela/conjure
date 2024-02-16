@@ -1,7 +1,7 @@
 Erroneous candidates for: foo :: Int -> Int
   pruning with 41/82 rules
-  [4,8,16,42,70,162,493] candidates
-  30/795 erroneous candidates
+  [4,8,16,42,65,150,417] candidates
+  30/702 erroneous candidates
 
 foo 0  =  0
 foo x  =  x + foo (x - 2)

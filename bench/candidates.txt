@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 27/65 rules
-  [3,0,8,0,30,0,194,0,1406] direct candidates, 0 duplicates
-  [3,3,9,10,32,39,197,247,1325] pattern candidates, 0 duplicates
+  [3,0,8,0,30,0,177,0,1203] direct candidates, 0 duplicates
+  [3,3,9,10,32,39,185,233,1169] pattern candidates, 0 duplicates
 
 rules:
 x - x == 0
@@ -430,8 +430,8 @@ foo x  =  0 - x
 
 Candidates for: ? :: Int -> Int -> Int
   pruning with 13/34 rules
-  [3,3,9,18,60,162,516,1587,5148] direct candidates, 0 duplicates
-  [3,8,25,71,205,632,1976,6067,19140] pattern candidates, 0 duplicates
+  [3,3,9,18,60,162,489,1475,4619] direct candidates, 0 duplicates
+  [3,8,25,71,205,632,1957,5906,18303] pattern candidates, 0 duplicates
 
 rules:
 x * 0 == 0
@@ -3394,8 +3394,8 @@ ton True  =  False
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,2,4,2,16,18,60,120] direct candidates, 0 duplicates
-  [4,14,26,10,2,16,18,60,120] pattern candidates, 0 duplicates
+  [4,2,2,4,2,16,17,56,110] direct candidates, 0 duplicates
+  [4,14,26,10,2,16,17,56,110] pattern candidates, 0 duplicates
 
 rules:
 not False == True

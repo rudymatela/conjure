@@ -105,9 +105,9 @@ ordered :: [Int] -> Bool
 -- looking through 20 candidates of size 7
 -- looking through 30 candidates of size 8
 -- looking through 56 candidates of size 9
--- looking through 114 candidates of size 10
--- looking through 216 candidates of size 11
--- tested 331 candidates
+-- looking through 112 candidates of size 10
+-- looking through 200 candidates of size 11
+-- tested 319 candidates
 ordered []  =  True
 ordered (x:xs)  =  ordered xs && (null xs || x <= head xs)
 

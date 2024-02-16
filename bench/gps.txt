@@ -151,8 +151,8 @@ wallisNext :: Ratio Integer -> Ratio Integer
 -- looking through 4 candidates of size 5
 -- looking through 86 candidates of size 6
 -- looking through 5 candidates of size 7
--- looking through 537 candidates of size 8
--- tested 588 candidates
+-- looking through 513 candidates of size 8
+-- tested 564 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 wallisNext :: Ratio Integer -> Ratio Integer
@@ -235,7 +235,7 @@ gps13 :: [Ratio Integer] -> Ratio Integer
 -- looking through 13 candidates of size 5
 -- looking through 51 candidates of size 6
 -- looking through 103 candidates of size 7
--- looking through 365 candidates of size 8
+-- looking through 360 candidates of size 8
 -- tested 267 candidates
 gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 
@@ -244,10 +244,10 @@ odd :: Int -> Bool
 -- pruning with 12/13 rules
 -- looking through 0 candidates of size 1
 -- looking through 0 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 39 candidates of size 5
--- tested 20 candidates
+-- looking through 3 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 37 candidates of size 5
+-- tested 17 candidates
 odd x  =  0 /= x `mod` 2
 
 gps14 :: [Int] -> Int
@@ -268,9 +268,9 @@ gps14 :: [Int] -> Int
 -- looking through 0 candidates of size 3
 -- looking through 27 candidates of size 4
 -- looking through 30 candidates of size 5
--- looking through 258 candidates of size 6
--- looking through 474 candidates of size 7
--- tested 378 candidates
+-- looking through 240 candidates of size 6
+-- looking through 453 candidates of size 7
+-- tested 353 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x + gps14 xs `mod` 2
 
@@ -304,10 +304,10 @@ gps17 :: Int -> Int
 -- looking through 8 candidates of size 4
 -- looking through 28 candidates of size 5
 -- looking through 35 candidates of size 6
--- looking through 179 candidates of size 7
--- looking through 217 candidates of size 8
--- looking through 1196 candidates of size 9
--- tested 492 candidates
+-- looking through 167 candidates of size 7
+-- looking through 203 candidates of size 8
+-- looking through 1048 candidates of size 9
+-- tested 466 candidates
 gps17 0  =  0
 gps17 x  =  gps17 (x - 1) + x * x
 
@@ -459,9 +459,9 @@ gps24 :: [Char] -> Char
 -- looking through 13 candidates of size 6
 -- looking through 30 candidates of size 7
 -- looking through 75 candidates of size 8
--- looking through 195 candidates of size 9
--- looking through 474 candidates of size 10
--- tested 457 candidates
+-- looking through 194 candidates of size 9
+-- looking through 470 candidates of size 10
+-- tested 456 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]

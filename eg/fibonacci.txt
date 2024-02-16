@@ -5,15 +5,15 @@ fibonacci :: Int -> Int
 -- looking through 3 candidates of size 2
 -- looking through 9 candidates of size 3
 -- looking through 9 candidates of size 4
--- looking through 30 candidates of size 5
--- looking through 30 candidates of size 6
--- looking through 156 candidates of size 7
--- looking through 157 candidates of size 8
--- looking through 813 candidates of size 9
--- looking through 797 candidates of size 10
--- looking through 4449 candidates of size 11
--- looking through 4438 candidates of size 12
--- tested 6539 candidates
+-- looking through 26 candidates of size 5
+-- looking through 27 candidates of size 6
+-- looking through 116 candidates of size 7
+-- looking through 120 candidates of size 8
+-- looking through 552 candidates of size 9
+-- looking through 540 candidates of size 10
+-- looking through 2663 candidates of size 11
+-- looking through 2675 candidates of size 12
+-- tested 4147 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

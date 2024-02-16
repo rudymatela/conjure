@@ -58,8 +58,8 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- looking through 1242 candidates of size 8
 -- looking through 3087 candidates of size 9
 -- looking through 8937 candidates of size 10
--- looking through 102875 candidates of size 11
--- tested 40385 candidates
+-- looking through 102200 candidates of size 11
+-- tested 39710 candidates
 cshift (p,q,r)  =  if p
                    then (p,r,q)
                    else (p,q,r)
