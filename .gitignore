@@ -69,6 +69,7 @@ bench/gps2
 bench/lowtests
 bench/terpret
 bench/weird
+bench/unique
 proto/u-conjure
 test/expr
 test/conjurable

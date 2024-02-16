@@ -258,6 +258,23 @@ bench/terpret.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/terpret.hs
+bench/unique: \
+  bench/unique.hs \
+  mk/toplibs
+bench/unique.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/unique.hs
 bench/weird: \
   bench/weird.hs \
   mk/toplibs

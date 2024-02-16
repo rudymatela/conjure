@@ -1,0 +1,2274 @@
+Unique candidates for: foo :: Int -> Int
+  pruning with 27/65 rules
+  [3,3,9,10,32,39,197] candidates
+  183/293 unique candidates
+  110/293 redundant candidates
+
+rules:
+x - x == 0
+x * 0 == 0
+x * 1 == x
+0 * x == 0
+1 * x == x
+x + 0 == x
+0 + x == x
+x - 0 == x
+(x * y) * z == x * (y * z)
+(x * y) * z == y * (x * z)
+(x + y) + z == x + (y + z)
+(x + y) + z == y + (x + z)
+x - (y - z) == z + (x - y)
+(x - y) - z == x - (y + z)
+(x - y) - z == x - (z + y)
+(x + y) - z == x + (y - z)
+(x + y) - z == y + (x - z)
+(x + x) * y == x * (y + y)
+x + (y - x) == y
+(x - y) + y == x
+x * y - x == x * (y - 1)
+x * y - y == y * (x - 1)
+x * (y + 1) == x + x * y
+x * (y + 1) == x * y + x
+(x + 1) * y == y + x * y
+0 - x * y == x * (0 - y)
+0 - x * y == y * (0 - x)
+equations:
+y * x == x * y
+y + x == x + y
+y * (x * z) == x * (y * z)
+z * (x * y) == x * (y * z)
+z * (y * x) == x * (y * z)
+y + (x + z) == x + (y + z)
+z + (x + y) == x + (y + z)
+z + (y + x) == x + (y + z)
+(z + y) * x == x * (y + z)
+y + (x - z) == x + (y - z)
+z * y + x == x + y * z
+(x - z) + y == x + (y - z)
+(z - y) + x == (x - y) + z
+y * (x + x) == x * (y + y)
+y - (x + y) == 0 - x
+y - (y + x) == 0 - x
+z - (y + z) == x - (x + y)
+z - (y + z) == x - (y + x)
+z - (z + y) == x - (x + y)
+z - (z + y) == x - (y + x)
+x * (1 - y) == x - x * y
+x * (1 - y) == x - y * x
+y * (0 - x) == x * (0 - y)
+(0 - x) * y == x * (0 - y)
+(0 - y) * x == (0 - x) * y
+(1 - y) * x == x - x * y
+(1 - y) * x == x - y * x
+x + (0 - y) == x - y
+(0 - y) + x == x - y
+x - (x + 1) == 0 - 1
+x - (1 + x) == 0 - 1
+y - (y + 1) == x - (x + 1)
+y - (y + 1) == x - (1 + x)
+y - (1 + y) == x - (1 + x)
+x * (0 - 1) == 0 - x
+(0 - 1) * x == 0 - x
+(0 - 1) * y == x - (x + y)
+(0 - 1) * y == x - (y + x)
+
+foo x  =  x
+
+foo x  =  0
+
+foo x  =  1
+
+foo 0  =  0
+foo x  =  1
+
+foo 0  =  1
+foo x  =  x
+
+foo 0  =  1
+foo x  =  0
+
+foo x  =  x + x
+
+foo x  =  x + 1
+
+foo x  =  x * x
+
+foo x  =  x - 1
+
+foo x  =  0 - x
+
+foo x  =  1 - x
+
+foo 1  =  0
+foo x  =  x
+
+foo 1  =  0
+foo x  =  1
+
+foo 1  =  1
+foo x  =  0
+
+foo 0  =  0
+foo x  =  x + 1
+
+foo 0  =  0
+foo x  =  x - 1
+
+foo 0  =  0
+foo x  =  1 - x
+
+foo 0  =  1
+foo x  =  x + x
+
+foo 0  =  1
+foo x  =  x * x
+
+foo 0  =  1
+foo x  =  x - 1
+
+foo 0  =  1
+foo x  =  0 - x
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  1
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  0
+
+foo x  =  x * x - 1
+
+foo x  =  x + (x + x)
+
+foo x  =  x + (x + 1)
+
+foo x  =  x + x * x
+
+foo x  =  x + (x - 1)
+
+foo x  =  1 + (x + 1)
+
+foo x  =  1 + x * x
+
+foo x  =  1 + (1 - x)
+
+foo x  =  x * (x + x)
+
+foo x  =  x * (x * x)
+
+foo x  =  x * (x - 1)
+
+foo x  =  x * (0 - x)
+
+foo x  =  x * (1 - x)
+
+foo x  =  x - (x + 1)
+
+foo x  =  0 - (x + x)
+
+foo x  =  0 - (x + 1)
+
+foo x  =  1 - (x + x)
+
+foo x  =  1 - x * x
+
+foo 1  =  0
+foo x  =  x + x
+
+foo 1  =  0
+foo x  =  x + 1
+
+foo 1  =  0
+foo x  =  x * x
+
+foo 1  =  0
+foo x  =  0 - x
+
+foo 1  =  1
+foo x  =  x + x
+
+foo 1  =  1
+foo x  =  x + 1
+
+foo 1  =  1
+foo x  =  x - 1
+
+foo 1  =  1
+foo x  =  0 - x
+
+foo 1  =  1
+foo x  =  1 - x
+
+foo 0  =  0
+foo x  =  x * x - 1
+
+foo 0  =  0
+foo x  =  x + (x + 1)
+
+foo 0  =  0
+foo x  =  x + (x - 1)
+
+foo 0  =  0
+foo x  =  1 + (x + 1)
+
+foo 0  =  0
+foo x  =  1 + x * x
+
+foo 0  =  0
+foo x  =  1 + (1 - x)
+
+foo 0  =  0
+foo x  =  x - (x + 1)
+
+foo 0  =  0
+foo x  =  0 - (x + 1)
+
+foo 0  =  0
+foo x  =  1 - (x + x)
+
+foo 0  =  0
+foo x  =  1 - x * x
+
+foo 0  =  1
+foo x  =  x * x - 1
+
+foo 0  =  1
+foo x  =  x + (x + x)
+
+foo 0  =  1
+foo x  =  x + x * x
+
+foo 0  =  1
+foo x  =  x + (x - 1)
+
+foo 0  =  1
+foo x  =  1 + (x + 1)
+
+foo 0  =  1
+foo x  =  1 + (1 - x)
+
+foo 0  =  1
+foo x  =  x * (x + x)
+
+foo 0  =  1
+foo x  =  x * (x * x)
+
+foo 0  =  1
+foo x  =  x * (x - 1)
+
+foo 0  =  1
+foo x  =  x * (0 - x)
+
+foo 0  =  1
+foo x  =  x * (1 - x)
+
+foo 0  =  1
+foo x  =  x - (x + 1)
+
+foo 0  =  1
+foo x  =  0 - (x + x)
+
+foo 0  =  1
+foo x  =  0 - (x + 1)
+
+foo 0  =  0
+foo 1  =  0
+foo x  =  x + 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  x + 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  x - 1
+
+foo 0  =  0
+foo 1  =  1
+foo x  =  1 - x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  x + x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  x * x
+
+foo 0  =  1
+foo 1  =  0
+foo x  =  0 - x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  x + x
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  x - 1
+
+foo 0  =  1
+foo 1  =  1
+foo x  =  0 - x
+
+foo 0  =  0
+foo x  =  x + foo (x - 1)
+
+foo 0  =  0
+foo x  =  foo (x - 1) + 1
+
+foo 0  =  0
+foo x  =  x * foo (x - 1)
+
+foo 0  =  0
+foo x  =  x - foo (x - 1)
+
+foo 0  =  0
+foo x  =  foo (x - 1) - x
+
+foo 0  =  0
+foo x  =  foo (x - 1) - 1
+
+foo 0  =  0
+foo x  =  1 - foo (x - 1)
+
+foo 0  =  1
+foo x  =  x + foo (x - 1)
+
+foo 0  =  1
+foo x  =  foo (x - 1) + 1
+
+foo 0  =  1
+foo x  =  x * foo (x - 1)
+
+foo 0  =  1
+foo x  =  x - foo (x - 1)
+
+foo 0  =  1
+foo x  =  foo (x - 1) - x
+
+foo 0  =  1
+foo x  =  foo (x - 1) - 1
+
+foo 0  =  1
+foo x  =  0 - foo (x - 1)
+
+foo 0  =  1
+foo x  =  1 - foo (x - 1)
+
+foo x  =  x * (x + x) - 1
+
+foo x  =  x * (x * x) - 1
+
+foo x  =  x * (x - 1) - 1
+
+foo x  =  x * (0 - x) - 1
+
+foo x  =  x * (1 - x) - 1
+
+foo x  =  x + (x * x - 1)
+
+foo x  =  x + (x + (x + x))
+
+foo x  =  x + (x + (x + 1))
+
+foo x  =  x + (x + x * x)
+
+foo x  =  x + (x + (x - 1))
+
+foo x  =  x + (1 + (x + 1))
+
+foo x  =  x + (1 + x * x)
+
+foo x  =  x + (1 + (1 - x))
+
+foo x  =  x + x * (x + x)
+
+foo x  =  x + x * (x * x)
+
+foo x  =  x + x * (1 - x)
+
+foo x  =  x + (1 - x * x)
+
+foo x  =  1 + (1 + (x + 1))
+
+foo x  =  1 + (1 + x * x)
+
+foo x  =  1 + (1 + (1 - x))
+
+foo x  =  1 + x * (x + x)
+
+foo x  =  1 + x * (x * x)
+
+foo x  =  1 + x * (x - 1)
+
+foo x  =  1 + (1 - (x + x))
+
+foo x  =  1 + (1 - x * x)
+
+foo x  =  x * (x * x - 1)
+
+foo x  =  x * (x + (x + x))
+
+foo x  =  x * (x + x * x)
+
+foo x  =  x * (x + (x - 1))
+
+foo x  =  x * (x * (x + x))
+
+foo x  =  x * (x * (x * x))
+
+foo x  =  x * (x * (x - 1))
+
+foo x  =  x * (x * (0 - x))
+
+foo x  =  x * (x * (1 - x))
+
+foo x  =  x * (0 - (x + x))
+
+foo x  =  x * (0 - (x + 1))
+
+foo x  =  x * (1 - (x + x))
+
+foo x  =  x * (1 - x * x)
+
+foo x  =  x - (1 + (x + 1))
+
+foo x  =  x - (1 + (1 - x))
+
+foo x  =  0 - (x + (x + x))
+
+foo x  =  0 - (x + (x + 1))
+
+foo x  =  0 - (1 + (x + 1))
+
+foo x  =  0 - (1 + (1 - x))
+
+foo x  =  1 - (x + (x + x))
+
+foo x  =  1 - (x + x * x)
+
+foo x  =  1 - x * (x + x)
+
+foo x  =  1 - x * (x * x)
+
+foo x  =  (x - 1) * (x + x)
+
+foo x  =  (x - 1) * (x - 1)
+
+foo x  =  (x - 1) * (1 - x)
+
+foo x  =  (1 - x) * (x + x)
+
+foo x  =  x * x - (x + x)
+
+foo 1  =  0
+foo x  =  x + (x + x)
+
+foo 1  =  0
+foo x  =  x + (x + 1)
+
+foo 1  =  0
+foo x  =  x + x * x
+
+foo 1  =  0
+foo x  =  x + (x - 1)
+
+foo 1  =  0
+foo x  =  1 + (x + 1)
+
+foo 1  =  0
+foo x  =  1 + x * x
+
+foo 1  =  0
+foo x  =  1 + (1 - x)
+
+foo 1  =  0
+foo x  =  x * (x + x)
+
+foo 1  =  0
+foo x  =  x * (x * x)
+
+foo 1  =  0
+foo x  =  x * (0 - x)
+
+foo 1  =  0
+foo x  =  x - (x + 1)
+
+foo 1  =  0
+foo x  =  0 - (x + x)
+
+foo 1  =  0
+foo x  =  0 - (x + 1)
+
+foo 1  =  0
+foo x  =  1 - (x + x)
+
+foo 1  =  1
+foo x  =  x * x - 1
+
+foo 1  =  1
+foo x  =  x + (x + x)
+
+foo 1  =  1
+foo x  =  x + (x + 1)
+
+foo 1  =  1
+foo x  =  x + x * x
+
+foo 1  =  1
+foo x  =  1 + (x + 1)
+
+foo 1  =  1
+foo x  =  1 + x * x
+
+foo 1  =  1
+foo x  =  x * (x + x)
+
+foo 1  =  1
+foo x  =  x * (x - 1)
+
+foo 1  =  1
+foo x  =  x * (0 - x)
+
+foo 1  =  1
+foo x  =  x * (1 - x)
+
+foo 1  =  1
+foo x  =  x - (x + 1)
+
+foo 1  =  1
+foo x  =  0 - (x + x)
+
+foo 1  =  1
+foo x  =  0 - (x + 1)
+
+foo 1  =  1
+foo x  =  1 - (x + x)
+
+foo 1  =  1
+foo x  =  1 - x * x
+
+
+Unique candidates for: ? :: Int -> Int -> Int
+  pruning with 13/34 rules
+  [3,8,25,71,205] candidates
+  294/312 unique candidates
+  18/312 redundant candidates
+
+rules:
+x * 0 == 0
+0 * x == 0
+x + 0 == x
+0 + x == x
+dec (x + y) == x + dec y
+dec (x + y) == y + dec x
+dec (x + y) == dec x + y
+dec (x + y) == dec y + x
+(x * y) * z == x * (y * z)
+(x * y) * z == y * (x * z)
+(x + y) + z == x + (y + z)
+(x + y) + z == y + (x + z)
+(x + x) * y == x * (y + y)
+equations:
+y * x == x * y
+y + x == x + y
+y + dec x == x + dec y
+dec x + y == x + dec y
+dec y + x == dec x + y
+x + dec 0 == dec x
+dec 0 + x == dec x
+y * (x * z) == x * (y * z)
+z * (x * y) == x * (y * z)
+z * (y * x) == x * (y * z)
+y + (x + z) == x + (y + z)
+z + (x + y) == x + (y + z)
+z + (y + x) == x + (y + z)
+(z + y) * x == x * (y + z)
+z * y + x == x + y * z
+y * (x + x) == x * (y + y)
+y + dec (dec x) == x + dec (dec y)
+dec (dec x) + y == x + dec (dec y)
+dec (dec y) + x == dec (dec x) + y
+x + dec (dec 0) == dec (dec x)
+dec (dec 0) + x == dec (dec x)
+
+x ? y  =  x
+
+x ? y  =  y
+
+x ? y  =  0
+
+x ? y  =  dec x
+
+x ? y  =  dec y
+
+x ? 0  =  x
+x ? y  =  y
+
+x ? 0  =  x
+x ? y  =  0
+
+x ? 0  =  0
+x ? y  =  x
+
+0 ? x  =  x
+x ? y  =  x
+
+0 ? x  =  x
+x ? y  =  0
+
+0 ? x  =  0
+x ? y  =  y
+
+x ? y  =  x + x
+
+x ? y  =  x + y
+
+x ? y  =  y + y
+
+x ? y  =  x * x
+
+x ? y  =  x * y
+
+x ? y  =  y * y
+
+x ? y  =  dec (dec x)
+
+x ? y  =  dec (dec y)
+
+x ? 0  =  x
+x ? y  =  dec x
+
+x ? 0  =  x
+x ? y  =  dec y
+
+x ? 0  =  0
+x ? y  =  dec x
+
+x ? 0  =  0
+x ? y  =  dec y
+
+x ? 0  =  dec x
+x ? y  =  x
+
+x ? 0  =  dec x
+x ? y  =  y
+
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  dec x
+
+0 ? x  =  x
+x ? y  =  dec y
+
+0 ? x  =  0
+x ? y  =  dec x
+
+0 ? x  =  0
+x ? y  =  dec y
+
+0 ? x  =  dec x
+x ? y  =  x
+
+0 ? x  =  dec x
+x ? y  =  y
+
+0 ? x  =  dec x
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y
+
+x ? y  =  dec (x * x)
+
+x ? y  =  dec (x * y)
+
+x ? y  =  dec (y * y)
+
+x ? y  =  dec (dec (dec x))
+
+x ? y  =  dec (dec (dec y))
+
+x ? y  =  x + dec x
+
+x ? y  =  x + dec y
+
+x ? y  =  y + dec y
+
+x ? y  =  x * dec x
+
+x ? y  =  x * dec y
+
+x ? y  =  y * dec x
+
+x ? y  =  y * dec y
+
+x ? 0  =  x
+x ? y  =  x + x
+
+x ? 0  =  x
+x ? y  =  y + y
+
+x ? 0  =  x
+x ? y  =  x * x
+
+x ? 0  =  x
+x ? y  =  x * y
+
+x ? 0  =  x
+x ? y  =  y * y
+
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+x ? 0  =  0
+x ? y  =  x + x
+
+x ? 0  =  0
+x ? y  =  x + y
+
+x ? 0  =  0
+x ? y  =  x * x
+
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+x ? 0  =  dec x
+x ? y  =  dec y
+
+x ? 0  =  x + x
+x ? y  =  x
+
+x ? 0  =  x + x
+x ? y  =  y
+
+x ? 0  =  x + x
+x ? y  =  0
+
+x ? 0  =  x * x
+x ? y  =  x
+
+x ? 0  =  x * x
+x ? y  =  y
+
+x ? 0  =  x * x
+x ? y  =  0
+
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  x + x
+
+0 ? x  =  x
+x ? y  =  y + y
+
+0 ? x  =  x
+x ? y  =  x * x
+
+0 ? x  =  x
+x ? y  =  x * y
+
+0 ? x  =  x
+x ? y  =  y * y
+
+0 ? x  =  x
+x ? y  =  dec (dec x)
+
+0 ? x  =  x
+x ? y  =  dec (dec y)
+
+0 ? x  =  0
+x ? y  =  x + y
+
+0 ? x  =  0
+x ? y  =  y + y
+
+0 ? x  =  0
+x ? y  =  y * y
+
+0 ? x  =  0
+x ? y  =  dec (dec x)
+
+0 ? x  =  0
+x ? y  =  dec (dec y)
+
+0 ? x  =  dec x
+x ? y  =  dec x
+
+0 ? x  =  x + x
+x ? y  =  x
+
+0 ? x  =  x + x
+x ? y  =  y
+
+0 ? x  =  x + x
+x ? y  =  0
+
+0 ? x  =  x * x
+x ? y  =  x
+
+0 ? x  =  x * x
+x ? y  =  y
+
+0 ? x  =  x * x
+x ? y  =  0
+
+0 ? x  =  dec (dec x)
+x ? y  =  x
+
+0 ? x  =  dec (dec x)
+x ? y  =  y
+
+0 ? x  =  dec (dec x)
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec y
+
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec y
+
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  x
+
+x ? 0  =  x
+x ? y  =  y ? dec x
+
+x ? 0  =  x
+x ? y  =  y ? dec y
+
+x ? 0  =  x
+x ? y  =  dec x ? x
+
+x ? 0  =  x
+x ? y  =  dec x ? y
+
+x ? 0  =  x
+x ? y  =  dec y ? x
+
+0 ? x  =  x
+x ? y  =  x ? dec y
+
+0 ? x  =  x
+x ? y  =  y ? dec x
+
+0 ? x  =  x
+x ? y  =  y ? dec y
+
+0 ? x  =  x
+x ? y  =  dec x ? x
+
+0 ? x  =  x
+x ? y  =  dec y ? x
+
+x ? y  =  dec (dec (x * x))
+
+x ? y  =  dec (dec (x * y))
+
+x ? y  =  dec (dec (y * y))
+
+x ? y  =  dec (dec (dec (dec x)))
+
+x ? y  =  dec (dec (dec (dec y)))
+
+x ? y  =  dec (x * dec x)
+
+x ? y  =  dec (x * dec y)
+
+x ? y  =  dec (y * dec x)
+
+x ? y  =  dec (y * dec y)
+
+x ? y  =  x + (x + x)
+
+x ? y  =  x + (x + y)
+
+x ? y  =  x + (y + y)
+
+x ? y  =  x + x * x
+
+x ? y  =  x + x * y
+
+x ? y  =  x + y * y
+
+x ? y  =  x + dec (dec x)
+
+x ? y  =  x + dec (dec y)
+
+x ? y  =  y + (y + y)
+
+x ? y  =  y + x * x
+
+x ? y  =  y + x * y
+
+x ? y  =  y + y * y
+
+x ? y  =  y + dec (dec y)
+
+x ? y  =  x * (x + x)
+
+x ? y  =  x * (x + y)
+
+x ? y  =  x * (y + y)
+
+x ? y  =  x * (x * x)
+
+x ? y  =  x * (x * y)
+
+x ? y  =  x * (y * y)
+
+x ? y  =  x * dec (dec x)
+
+x ? y  =  x * dec (dec y)
+
+x ? y  =  y * (x + y)
+
+x ? y  =  y * (y + y)
+
+x ? y  =  y * (y * y)
+
+x ? y  =  y * dec (dec x)
+
+x ? y  =  y * dec (dec y)
+
+x ? y  =  dec x * dec x
+
+x ? y  =  dec x * dec y
+
+x ? y  =  dec y * dec y
+
+x ? 0  =  x
+x ? y  =  dec (x * x)
+
+x ? 0  =  x
+x ? y  =  dec (x * y)
+
+x ? 0  =  x
+x ? y  =  dec (y * y)
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  x
+x ? y  =  x + dec x
+
+x ? 0  =  x
+x ? y  =  x + dec y
+
+x ? 0  =  x
+x ? y  =  y + dec y
+
+x ? 0  =  x
+x ? y  =  x * dec x
+
+x ? 0  =  x
+x ? y  =  x * dec y
+
+x ? 0  =  x
+x ? y  =  y * dec x
+
+x ? 0  =  x
+x ? y  =  y * dec y
+
+x ? 0  =  0
+x ? y  =  dec (x * x)
+
+x ? 0  =  0
+x ? y  =  dec (x * y)
+
+x ? 0  =  0
+x ? y  =  dec (y * y)
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  0
+x ? y  =  x + dec x
+
+x ? 0  =  0
+x ? y  =  x + dec y
+
+x ? 0  =  0
+x ? y  =  y + dec y
+
+x ? 0  =  0
+x ? y  =  x * dec x
+
+x ? 0  =  0
+x ? y  =  x * dec y
+
+x ? 0  =  dec x
+x ? y  =  x + x
+
+x ? 0  =  dec x
+x ? y  =  x + y
+
+x ? 0  =  dec x
+x ? y  =  y + y
+
+x ? 0  =  dec x
+x ? y  =  x * x
+
+x ? 0  =  dec x
+x ? y  =  x * y
+
+x ? 0  =  dec x
+x ? y  =  y * y
+
+x ? 0  =  dec x
+x ? y  =  dec (dec x)
+
+x ? 0  =  dec x
+x ? y  =  dec (dec y)
+
+x ? 0  =  x + x
+x ? y  =  dec x
+
+x ? 0  =  x + x
+x ? y  =  dec y
+
+x ? 0  =  x * x
+x ? y  =  dec x
+
+x ? 0  =  x * x
+x ? y  =  dec y
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec x
+
+x ? 0  =  dec (dec x)
+x ? y  =  dec y
+
+x ? 0  =  dec (x * x)
+x ? y  =  x
+
+x ? 0  =  dec (x * x)
+x ? y  =  y
+
+x ? 0  =  dec (x * x)
+x ? y  =  0
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  x
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  y
+
+x ? 0  =  dec (dec (dec x))
+x ? y  =  0
+
+x ? 0  =  x + dec x
+x ? y  =  x
+
+x ? 0  =  x + dec x
+x ? y  =  y
+
+x ? 0  =  x + dec x
+x ? y  =  0
+
+x ? 0  =  x * dec x
+x ? y  =  x
+
+x ? 0  =  x * dec x
+x ? y  =  y
+
+x ? 0  =  x * dec x
+x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  dec (x * x)
+
+0 ? x  =  x
+x ? y  =  dec (x * y)
+
+0 ? x  =  x
+x ? y  =  dec (y * y)
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  x
+x ? y  =  x + dec x
+
+0 ? x  =  x
+x ? y  =  x + dec y
+
+0 ? x  =  x
+x ? y  =  y + dec y
+
+0 ? x  =  x
+x ? y  =  x * dec x
+
+0 ? x  =  x
+x ? y  =  x * dec y
+
+0 ? x  =  x
+x ? y  =  y * dec x
+
+0 ? x  =  x
+x ? y  =  y * dec y
+
+0 ? x  =  0
+x ? y  =  dec (x * x)
+
+0 ? x  =  0
+x ? y  =  dec (x * y)
+
+0 ? x  =  0
+x ? y  =  dec (y * y)
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  0
+x ? y  =  x + dec x
+
+0 ? x  =  0
+x ? y  =  x + dec y
+
+0 ? x  =  0
+x ? y  =  y + dec y
+
+0 ? x  =  0
+x ? y  =  y * dec x
+
+0 ? x  =  0
+x ? y  =  y * dec y
+
+0 ? x  =  dec x
+x ? y  =  x + x
+
+0 ? x  =  dec x
+x ? y  =  x + y
+
+0 ? x  =  dec x
+x ? y  =  y + y
+
+0 ? x  =  dec x
+x ? y  =  x * x
+
+0 ? x  =  dec x
+x ? y  =  x * y
+
+0 ? x  =  dec x
+x ? y  =  y * y
+
+0 ? x  =  dec x
+x ? y  =  dec (dec x)
+
+0 ? x  =  dec x
+x ? y  =  dec (dec y)
+
+0 ? x  =  x + x
+x ? y  =  dec x
+
+0 ? x  =  x + x
+x ? y  =  dec y
+
+0 ? x  =  x * x
+x ? y  =  dec x
+
+0 ? x  =  x * x
+x ? y  =  dec y
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec x
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec y
+
+0 ? x  =  dec (x * x)
+x ? y  =  x
+
+0 ? x  =  dec (x * x)
+x ? y  =  y
+
+0 ? x  =  dec (x * x)
+x ? y  =  0
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  x
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  y
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  0
+
+0 ? x  =  x + dec x
+x ? y  =  x
+
+0 ? x  =  x + dec x
+x ? y  =  y
+
+0 ? x  =  x + dec x
+x ? y  =  0
+
+0 ? x  =  x * dec x
+x ? y  =  x
+
+0 ? x  =  x * dec x
+x ? y  =  y
+
+0 ? x  =  x * dec x
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x + x
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x * x
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  x * y
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  y * y
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? x  =  x
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x + x
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  x * x
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? x  =  x
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? x  =  x
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  x
+
+0 ? x  =  x
+x ? 0  =  x + x
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  x * x
+x ? y  =  x
+
+0 ? x  =  x
+x ? 0  =  x * x
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y + y
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  y * y
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec x)
+
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  x + y
+
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec x)
+
+0 ? x  =  0
+x ? 0  =  0
+x ? y  =  dec (dec y)
+
+0 ? x  =  0
+x ? 0  =  dec x
+x ? y  =  dec y
+
+0 ? x  =  0
+x ? 0  =  x + x
+x ? y  =  y
+
+0 ? x  =  0
+x ? 0  =  x * x
+x ? y  =  y
+
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+0 ? x  =  dec x
+x ? 0  =  x
+x ? y  =  dec x
+
+0 ? x  =  dec x
+x ? 0  =  0
+x ? y  =  dec x
+
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  x
+
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  y
+
+0 ? x  =  dec x
+x ? 0  =  dec x
+x ? y  =  0
+
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? x  =  x + x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? x  =  x + x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? x  =  x * x
+x ? 0  =  x
+x ? y  =  y
+
+0 ? x  =  x * x
+x ? 0  =  x
+x ? y  =  0
+
+0 ? x  =  x * x
+x ? 0  =  0
+x ? y  =  x
+
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  y
+
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  0
+
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  x
+
+0 ? 0  =  0
+0 ? x  =  dec x
+x ? y  =  dec x
+
+
+Unique candidates for: goo :: [Int] -> [Int]
+  pruning with 4/4 rules
+  [2,1,1,2,4,7,10] candidates
+  25/27 unique candidates
+  2/27 redundant candidates
+
+rules:
+xs ++ [] == xs
+[] ++ xs == xs
+(xs ++ ys) ++ zs == xs ++ (ys ++ zs)
+(x:xs) ++ ys == x:(xs ++ ys)
+
+goo xs  =  xs
+
+goo xs  =  []
+
+goo []  =  []
+goo (x:xs)  =  xs
+
+goo xs  =  xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  [x]
+
+goo []  =  []
+goo (x:xs)  =  xs ++ xs
+
+goo []  =  []
+goo (x:xs)  =  xs ++ goo xs
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ xs
+
+goo xs  =  xs ++ (xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  x:x:xs
+
+goo []  =  []
+goo (x:xs)  =  [x,x]
+
+goo []  =  []
+goo (x:xs)  =  x:(xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (x:xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ [x]
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  x:x:goo xs
+
+goo []  =  []
+goo (x:xs)  =  x:(xs ++ goo xs)
+
+goo []  =  []
+goo (x:xs)  =  x:(goo xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (x:goo xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (xs ++ goo xs)
+
+goo []  =  []
+goo (x:xs)  =  xs ++ (goo xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ (x:xs)
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ [x]
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ (xs ++ xs)
+
+goo xs  =  xs ++ (xs ++ (xs ++ xs))
+
+
+Unique candidates for: ?? :: [Int] -> [Int] -> [Int]
+  pruning with 4/4 rules
+  [3,8,15,43,122] candidates
+  150/191 unique candidates
+  41/191 redundant candidates
+
+rules:
+xs ++ [] == xs
+[] ++ xs == xs
+(xs ++ ys) ++ zs == xs ++ (ys ++ zs)
+(x:xs) ++ ys == x:(xs ++ ys)
+
+xs ?? ys  =  xs
+
+xs ?? ys  =  ys
+
+xs ?? ys  =  []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  []
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys
+
+xs ?? ys  =  xs ++ xs
+
+xs ?? ys  =  xs ++ ys
+
+xs ?? ys  =  ys ++ xs
+
+xs ?? ys  =  ys ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [x]
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [x]
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  xs
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  x:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  x:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  [x]
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  x:ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  [x]
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  ys
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? ys  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  [] ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? ys  =  xs
+
+xs ?? ys  =  xs ++ (xs ++ xs)
+
+xs ?? ys  =  xs ++ (xs ++ ys)
+
+xs ?? ys  =  xs ++ (ys ++ xs)
+
+xs ?? ys  =  xs ++ (ys ++ ys)
+
+xs ?? ys  =  ys ++ (xs ++ xs)
+
+xs ?? ys  =  ys ++ (xs ++ ys)
+
+xs ?? ys  =  ys ++ (ys ++ xs)
+
+xs ?? ys  =  ys ++ (ys ++ ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? ys  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? ys  =  []
+
+
+Unique candidates for: ton :: Bool -> Bool
+  pruning with 39/49 rules
+  [3,2,0,0,0,0,0] candidates
+  4/5 unique candidates
+  1/5 redundant candidates
+
+rules:
+not False == True
+not True == False
+p && p == p
+p || p == p
+not (not p) == p
+p && False == False
+p && True == p
+False && p == False
+True && p == p
+p || False == p
+p || True == True
+False || p == p
+True || p == True
+not (p && q) == not p || not q
+not (p && q) == not q || not p
+not (p || q) == not p && not q
+not (p || q) == not q && not p
+p && not p == False
+not p && p == False
+p || not p == True
+not p || p == True
+(p && q) && r == p && (q && r)
+(p && q) && r == q && (p && r)
+(p || q) || r == p || (q || r)
+(p || q) || r == q || (p || r)
+p && (p && q) == p && q
+p && (q && p) == p && q
+p && (q && p) == q && p
+p || (p || q) == p || q
+p || (q || p) == p || q
+p || (q || p) == q || p
+p && (p || q) == p
+p && (q || p) == p
+(p || q) && p == p
+(p || q) && q == q
+p || p && q == p
+p || q && p == p
+p && q || p == p
+p && q || q == q
+equations:
+q && p == p && q
+q || p == p || q
+q && (p && r) == p && (q && r)
+r && (p && q) == p && (q && r)
+r && (q && p) == p && (q && r)
+q || (p || r) == p || (q || r)
+r || (p || q) == p || (q || r)
+r || (q || p) == p || (q || r)
+(r || q) && p == p && (q || r)
+r && q || p == p || q && r
+
+ton p  =  p
+
+ton p  =  False
+
+ton p  =  True
+
+ton p  =  not p
+
+
+Unique candidates for: &| :: Bool -> Bool -> Bool
+  pruning with 39/49 rules
+  [4,12,20,6,2] candidates
+  16/44 unique candidates
+  28/44 redundant candidates
+
+rules:
+not False == True
+not True == False
+p && p == p
+p || p == p
+not (not p) == p
+p && False == False
+p && True == p
+False && p == False
+True && p == p
+p || False == p
+p || True == True
+False || p == p
+True || p == True
+not (p && q) == not p || not q
+not (p && q) == not q || not p
+not (p || q) == not p && not q
+not (p || q) == not q && not p
+p && not p == False
+not p && p == False
+p || not p == True
+not p || p == True
+(p && q) && r == p && (q && r)
+(p && q) && r == q && (p && r)
+(p || q) || r == p || (q || r)
+(p || q) || r == q || (p || r)
+p && (p && q) == p && q
+p && (q && p) == p && q
+p && (q && p) == q && p
+p || (p || q) == p || q
+p || (q || p) == p || q
+p || (q || p) == q || p
+p && (p || q) == p
+p && (q || p) == p
+(p || q) && p == p
+(p || q) && q == q
+p || p && q == p
+p || q && p == p
+p && q || p == p
+p && q || q == q
+equations:
+q && p == p && q
+q || p == p || q
+q && (p && r) == p && (q && r)
+r && (p && q) == p && (q && r)
+r && (q && p) == p && (q && r)
+q || (p || r) == p || (q || r)
+r || (p || q) == p || (q || r)
+r || (q || p) == p || (q || r)
+(r || q) && p == p && (q || r)
+r && q || p == p || q && r
+
+p &| q  =  p
+
+p &| q  =  q
+
+p &| q  =  False
+
+p &| q  =  True
+
+p &| q  =  not p
+
+p &| q  =  not q
+
+p &| False  =  p
+p &| True  =  False
+
+p &| False  =  p
+p &| True  =  True
+
+p &| False  =  False
+p &| True  =  p
+
+p &| False  =  True
+p &| True  =  p
+
+False &| p  =  p
+True &| p  =  False
+
+False &| p  =  True
+True &| p  =  p
+
+p &| False  =  p
+p &| True  =  not p
+
+p &| False  =  True
+p &| True  =  not p
+
+p &| False  =  not p
+p &| True  =  p
+
+p &| False  =  not p
+p &| True  =  False
+
+

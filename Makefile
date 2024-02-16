@@ -53,6 +53,7 @@ EG = \
   bench/gps \
   bench/gps2 \
   bench/terpret \
+  bench/unique \
   bench/weird \
   proto/u-conjure
 
