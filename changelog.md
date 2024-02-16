@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.14 (February 2024)
+-----------------------
 
 * improve commutative pruning, slightly faster Conjure
 * add `carryOn`, `rewriting`, `requireDescent`, `adHocRedundancy` switches
