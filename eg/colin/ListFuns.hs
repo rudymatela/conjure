@@ -1,3 +1,4 @@
+-- 2021  Colin Runciman
 import Conjure
 import Prelude hiding (sum, take, drop)
 
