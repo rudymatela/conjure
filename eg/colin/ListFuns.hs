@@ -2,135 +2,135 @@
 import Conjure
 import Prelude hiding (sum, take, drop)
 
-sum :: Spec1 [Int] Int
-sum  =  [ []       -=  0
-        , [0,1]    -=  1
-        , [1,0,1]  -=  2 ]
+sumSpec :: ([Int] -> Int) -> Bool
+sumSpec sum  =  and [ sum []       ==  0
+                    , sum [0,1]    ==  1
+                    , sum [1,0,1]  ==  2 ]
 
 -- hoping for something like
 -- sum xs = if null xs then 0 else head xs + sum (tail xs)
 
-sumBackground :: [Expr]
-sumBackground =
-  [ value "null" (null :: [Int] -> Bool)
-  , val (0::Int)
-  , value "+"    ((+) :: Int -> Int -> Int)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+sumPrimitives :: [Prim]
+sumPrimitives =
+  [ prim "null" (null :: [Int] -> Bool)
+  , pr (0::Int)
+  , prim "+"    ((+) :: Int -> Int -> Int)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
-app :: Spec2 [Int] [Int] [Int]
-app  =  [ (,) []      [0,1]  -=  [0,1]
-        , (,) [0,1]   []     -=  [0,1]
-        , (,) [0,1]   [0,1]  -=  [0,1,0,1] ]
+appSpec :: ([Int] -> [Int] -> [Int]) -> Bool
+appSpec (++)  =  and [ []    ++ [0,1]  ==  [0,1]
+                     , [0,1] ++ []     ==  [0,1]
+                     , [0,1] ++ [0,1]  ==  [0,1,0,1] ]
 
 -- hoping for something like
 -- app xs ys = if null xs then ys else head xs : app (tail xs) ys
 
-appBackground :: [Expr]
-appBackground =
-  [ value "null" (null :: [Int] -> Bool)
-  , value ":"    ((:) :: Int -> [Int] -> [Int])
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+appPrimitives :: [Prim]
+appPrimitives =
+  [ prim "null" (null :: [Int] -> Bool)
+  , prim ":"    ((:) :: Int -> [Int] -> [Int])
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
-mem :: Spec2 Int [Int] Bool
-mem  =  [ (,) 0 []       -=  False
-        , (,) 0 [0,1,1]  -=  True
-        , (,) 0 [1,0,1]  -=  True
-        , (,) 0 [1,1,0]  -=  True
-        , (,) 0 [1,1,1]  -=  False ]
+memSpec :: (Int -> [Int] -> Bool) -> Bool
+memSpec mem  =  and [ 0 `mem` []       ==  False
+                    , 0 `mem` [0,1,1]  ==  True
+                    , 0 `mem` [1,0,1]  ==  True
+                    , 0 `mem` [1,1,0]  ==  True
+                    , 0 `mem` [1,1,1]  ==  False ]
 
 -- hoping for something like
 -- mem x xs = not (null xs) && (x == head xs || mem x (tail xs))
 
-memBackground :: [Expr]
-memBackground =
-  [ value "null" (null :: [Int] -> Bool)
-  , value "==" ((==) :: Int -> Int -> Bool)
-  , value "not" (not :: Bool -> Bool)
-  , value "&&" ((&&) :: Bool -> Bool -> Bool)
-  , value "||" ((||) :: Bool -> Bool -> Bool)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+memPrimitives :: [Prim]
+memPrimitives =
+  [ prim "null" (null :: [Int] -> Bool)
+  , prim "==" ((==) :: Int -> Int -> Bool)
+  , prim "not" (not :: Bool -> Bool)
+  , prim "&&" ((&&) :: Bool -> Bool -> Bool)
+  , prim "||" ((||) :: Bool -> Bool -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
-set :: Spec1 [Int] Bool
-set  =  [ []     -=  True
-        , [0]    -=  True
-        , [0,0]  -=  False
-        , [0,1]  -=  True
-        , [0,1,2] -= True
-        , [0,0,1] -= False
-        , [0,1,0] -= False
-        , [0,1,1] -= False ]
+setSpec :: ([Int] -> Bool) -> Bool
+setSpec set  =  and [ set []     ==  True
+                    , set [0]    ==  True
+                    , set [0,0]  ==  False
+                    , set [0,1]  ==  True
+                    , set [0,1,2] == True
+                    , set [0,0,1] == False
+                    , set [0,1,0] == False
+                    , set [0,1,1] == False ]
 
 -- hoping for something like
 -- set xs = null xs || not (elem (head xs) (tail xs)) && set (tail xs)
 
-setBackground :: [Expr]
-setBackground =
-  [ value "null" (null :: [Int] -> Bool)
-  , value "not" (not :: Bool -> Bool)
-  , value "&&" ((&&) :: Bool -> Bool -> Bool)
-  , value "||" ((||) :: Bool -> Bool -> Bool)
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
-  , value "elem" (elem :: Int -> [Int] -> Bool)
+setPrimitives :: [Prim]
+setPrimitives =
+  [ prim "null" (null :: [Int] -> Bool)
+  , prim "not" (not :: Bool -> Bool)
+  , prim "&&" ((&&) :: Bool -> Bool -> Bool)
+  , prim "||" ((||) :: Bool -> Bool -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
+  , prim "elem" (elem :: Int -> [Int] -> Bool)
   ]
 
-take :: Spec2 Int [Int] [Int]
-take  =  [ (,) 0 []     -=  []
-         , (,) 1 []     -=  []
-         , (,) 0 [0,1]  -=  []
-         , (,) 1 [0,1]  -=  [0]
-         , (,) 2 [0,1]  -=  [0,1]
-         , (,) 3 [0,1]  -=  [0,1] ]
+takeSpec :: (Int -> [Int] -> [Int]) -> Bool
+takeSpec take  =  and [ take 0 []     ==  []
+                      , take 1 []     ==  []
+                      , take 0 [0,1]  ==  []
+                      , take 1 [0,1]  ==  [0]
+                      , take 2 [0,1]  ==  [0,1]
+                      , take 3 [0,1]  ==  [0,1] ]
 
 -- hoping for something like
 -- take n xs = if n==0 || null xs then [] else head xs : take (dec n) (tail xs)
 
-takeBackground :: [Expr]
-takeBackground =
-  [ val (0 :: Int)
-  , val ([] :: [Int])
-  , value "null" (null :: [Int] -> Bool)
-  , value "==" ((==) :: Int -> Int -> Bool)
-  , value "||" ((||) :: Bool -> Bool -> Bool)
-  , value "dec" ((\n -> n-1) :: Int -> Int)
-  , value ":" ((:) :: Int -> [Int] -> [Int])
-  , value "head" (head :: [Int] -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+takePrimitives :: [Prim]
+takePrimitives =
+  [ pr (0 :: Int)
+  , pr ([] :: [Int])
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "==" ((==) :: Int -> Int -> Bool)
+  , prim "||" ((||) :: Bool -> Bool -> Bool)
+  , prim "dec" ((\n -> n-1) :: Int -> Int)
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prim "head" (head :: [Int] -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
-drop :: Spec2 Int [Int] [Int]
-drop  =  [ (,) 0 []     -=  []
-         , (,) 1 []     -=  []
-         , (,) 0 [0,1]  -=  [0,1]
-         , (,) 1 [0,1]  -=  [1]
-         , (,) 2 [0,1]  -=  []
-         , (,) 3 [0,1]  -=  [] ]
+dropSpec :: (Int -> [Int] -> [Int]) -> Bool
+dropSpec drop  =  and [ drop 0 []     ==  []
+                      , drop 1 []     ==  []
+                      , drop 0 [0,1]  ==  [0,1]
+                      , drop 1 [0,1]  ==  [1]
+                      , drop 2 [0,1]  ==  []
+                      , drop 3 [0,1]  ==  [] ]
 
 -- hoping for something like
 -- drop n xs = if n==0 || null xs then xs else drop (dec n) (tail xs)
 
-dropBackground :: [Expr]
-dropBackground =
-  [ val (0 :: Int)
-  , value "null" (null :: [Int] -> Bool)
-  , value "==" ((==) :: Int -> Int -> Bool)
-  , value "||" ((||) :: Bool -> Bool -> Bool)
-  , value "dec" ((\n -> n-1) :: Int -> Int)
-  , value "tail" (tail :: [Int] -> [Int])
+dropPrimitives :: [Prim]
+dropPrimitives =
+  [ pr (0 :: Int)
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "==" ((==) :: Int -> Int -> Bool)
+  , prim "||" ((||) :: Bool -> Bool -> Bool)
+  , prim "dec" ((\n -> n-1) :: Int -> Int)
+  , prim "tail" (tail :: [Int] -> [Int])
   ]
 
 main :: IO ()
 main = do
-  conjure1With args{maxSize=15} "sum" sum sumBackground
-  conjure2With args{maxSize=15} "app" app appBackground
-  conjure2With args{maxSize=15} "mem" mem memBackground
-  conjure1With args{maxSize=15} "set" set setBackground
-  conjure2With args{maxSize=20} "take" take takeBackground
-  conjure2With args{maxSize=15} "drop" drop dropBackground
+  conjureFromSpecWith args{maxSize=15} "sum" sumSpec sumPrimitives
+  conjureFromSpecWith args{maxSize=15} "app" appSpec appPrimitives
+  conjureFromSpecWith args{maxSize=15} "mem" memSpec memPrimitives
+  conjureFromSpecWith args{maxSize=15} "set" setSpec setPrimitives
+  conjureFromSpecWith args{maxSize=20} "take" takeSpec takePrimitives
+  conjureFromSpecWith args{maxSize=15} "drop" dropSpec dropPrimitives
 
