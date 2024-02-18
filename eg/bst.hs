@@ -133,17 +133,17 @@ main = do
     , primOrdCaseFor (undefined :: Bool)
     ]
 
-  -- simply out of reach performance-wise (reaching 16 but need size 26)
+  -- simply out of reach performance-wise (reaching 16 but need size 22)
   conjureWithMaxSize 12 "insert" insert
     [ pr Leaf
     , prim "Node" Node
     , prim "unit" unit
-    , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "<" ((<) :: Int -> Int -> Bool)
-    , prif (undefined :: Tree)
+    , prim "`compare`" (compare :: Int -> Int -> Ordering)
+    , primOrdCaseFor (undefined :: Tree)
     ]
 
   -- out of reach performance-wise (reaching 16 but need 19)
+  -- cf. the primOrdCaseFor version below
   conjureFromSpecWith args{maxSize = 12} "before" beforeSpec
     [ pr Leaf
     , prim "Node" Node
@@ -170,7 +170,7 @@ main = do
     , primOrdCaseFor (undefined :: Tree)
     ]
 
-  -- out of reach (reaching 11 but need 13)
+  -- out of reach (reaching 12 but need 13)
   conjureWith args{maxSize = 9} "union" union
     [ pr Leaf
     , prim "Node" Node
