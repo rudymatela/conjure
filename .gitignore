@@ -53,6 +53,7 @@ eg/setelem
 eg/sort
 eg/subset
 eg/spec
+eg/colin/*Funs
 bench/carry-on
 bench/strategies
 bench/self
