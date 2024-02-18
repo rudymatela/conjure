@@ -38,20 +38,20 @@ mem x (Node t1 y t2)  =  case x `compare` y of LT -> mem x t1; EQ -> True; GT ->
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
--- pruning with 6/7 rules
+-- pruning with 2/3 rules
 -- looking through 2 candidates of size 1
 -- looking through 2 candidates of size 2
 -- looking through 0 candidates of size 3
 -- looking through 4 candidates of size 4
 -- looking through 21 candidates of size 5
 -- looking through 0 candidates of size 6
--- looking through 86 candidates of size 7
--- looking through 239 candidates of size 8
--- looking through 104 candidates of size 9
--- looking through 1558 candidates of size 10
--- looking through 3555 candidates of size 11
--- looking through 4028 candidates of size 12
--- tested 9599 candidates
+-- looking through 74 candidates of size 7
+-- looking through 335 candidates of size 8
+-- looking through 32 candidates of size 9
+-- looking through 1504 candidates of size 10
+-- looking through 6708 candidates of size 11
+-- looking through 1760 candidates of size 12
+-- tested 10442 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
