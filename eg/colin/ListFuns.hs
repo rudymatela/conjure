@@ -47,7 +47,11 @@ memSpec mem  =  and [ 0 `mem` []       ==  False
 
 memPrimitives :: [Prim]
 memPrimitives =
-  [ prim "null" (null :: [Int] -> Bool)
+  [ pr False
+  , pr True
+  , pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prim "null" (null :: [Int] -> Bool)
   , prim "==" ((==) :: Int -> Int -> Bool)
   , prim "not" (not :: Bool -> Bool)
   , prim "&&" ((&&) :: Bool -> Bool -> Bool)
@@ -72,6 +76,10 @@ setSpec set  =  and [ set []     ==  True
 setPrimitives :: [Prim]
 setPrimitives =
   [ prim "null" (null :: [Int] -> Bool)
+  , pr False
+  , pr True
+  , pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
   , prim "not" (not :: Bool -> Bool)
   , prim "&&" ((&&) :: Bool -> Bool -> Bool)
   , prim "||" ((||) :: Bool -> Bool -> Bool)
@@ -118,6 +126,8 @@ dropSpec drop  =  and [ drop 0 []     ==  []
 dropPrimitives :: [Prim]
 dropPrimitives =
   [ pr (0 :: Int)
+  , pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
   , prim "null" (null :: [Int] -> Bool)
   , prim "==" ((==) :: Int -> Int -> Bool)
   , prim "||" ((||) :: Bool -> Bool -> Bool)
