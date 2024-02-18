@@ -1,4 +1,5 @@
 -- 2021  Colin Runciman
+-- updated in 2024 to use the recent interface of Conjure
 import Conjure
 import Prelude hiding (sum, take, drop)
 
