@@ -208,6 +208,9 @@ tests n  =
   , showDefn appendDefn
     == "[] ++ xs  =  xs\n"
     ++ "(x:xs) ++ ys  =  x:(xs ++ ys)\n"
+
+  , showDefn isZeroCDefn
+    == "isZero x  =  case compare x 0 of LT -> False; EQ -> True; GT -> False\n"
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -255,6 +258,10 @@ isZeroDefn :: Defn
 isZeroDefn  =  [ isZero' zero  =-  true
                , isZero' xx    =-  false
                ]  where  isZero' e  =  isZeroV :$ e
+
+isZeroCDefn :: Defn
+isZeroCDefn  =  [ isZero' xx  =-  caseOrdering (xx `compare'` zero) false true false ]
+  where  isZero' e  =  isZeroV :$ e
 
 isOneDefn :: Defn
 isOneDefn  =  [ isOne' xx  =-  xx -==- one ]
