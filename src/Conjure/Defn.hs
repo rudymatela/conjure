@@ -73,28 +73,24 @@ type Bndn  =  (Expr,Expr)
 showDefn :: Defn -> String
 showDefn  =  unlines . map show1
   where
-  show1 (lhs,Value "if" _ :$ c :$ t :$ e)  =  lhseqs ++ "if " ++ showExpr c
-                                   ++ "\n" ++ spaces ++ "then " ++ showExpr t
-                                   ++ "\n" ++ spaces ++ "else " ++ showExpr e
-                                              where
-                                              lhseqs  =  showExpr lhs ++ "  =  "
-                                              spaces  =  map (const ' ') lhseqs
-  show1 (lhs,Value "case" _ :$ ep :$ ex :$ ey)
-    | typ ep == boolTy  =  lhseqs ++ "case " ++ showExpr ep ++ " of"
-                ++ "\n" ++ spaces ++ "False -> " ++ showExpr ex
-                ++ "\n" ++ spaces ++ "True  -> " ++ showExpr ey
-                           where
-                           lhseqs  =  showExpr lhs ++ "  =  "
-                           spaces  =  map (const ' ') lhseqs
-  show1 (lhs,Value "case" _ :$ eo :$ ex :$ ey :$ ez)
-    | typ eo == orderingTy  =  lhseqs ++ "case " ++ showExpr eo ++ " of"
-                ++ "\n" ++ spaces ++ "LT -> " ++ showExpr ex
-                ++ "\n" ++ spaces ++ "EQ -> " ++ showExpr ey
-                ++ "\n" ++ spaces ++ "GT -> " ++ showExpr ez
-                           where
-                           lhseqs  =  showExpr lhs ++ "  =  "
-                           spaces  =  map (const ' ') lhseqs
-  show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
+  show1 (lhs,rhs)  =
+    case rhs of
+    (Value "if" _ :$ c :$ t :$ e) -> lhseqs ++ "if " ++ showExpr c
+                          ++ "\n" ++ spaces ++ "then " ++ showExpr t
+                          ++ "\n" ++ spaces ++ "else " ++ showExpr e
+    (Value "case" _ :$ ep :$ ex :$ ey)
+      | typ ep == boolTy -> lhseqs ++ "case " ++ showExpr ep ++ " of"
+                 ++ "\n" ++ spaces ++ "False -> " ++ showExpr ex
+                 ++ "\n" ++ spaces ++ "True  -> " ++ showExpr ey
+    (Value "case" _ :$ eo :$ ex :$ ey :$ ez)
+      | typ eo == orderingTy -> lhseqs ++ "case " ++ showExpr eo ++ " of"
+                     ++ "\n" ++ spaces ++ "LT -> " ++ showExpr ex
+                     ++ "\n" ++ spaces ++ "EQ -> " ++ showExpr ey
+                     ++ "\n" ++ spaces ++ "GT -> " ++ showExpr ez
+    _ -> lhseqs ++ showExpr rhs
+    where
+    lhseqs  =  showExpr lhs ++ "  =  "
+    spaces  =  map (const ' ') lhseqs
 
 -- | Pretty-prints a 'Defn' to the screen.
 --
