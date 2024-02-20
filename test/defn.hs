@@ -189,6 +189,11 @@ tests n  =
     == "fact 0  =  1\n"
     ++ "fact x  =  x * fact (x - 1)\n"
 
+  , showDefn fact1Defn
+    == "fact x  =  if x == 0\n"
+    ++ "           then 1\n"
+    ++ "           else x * fact (x - 1)\n"
+
   , showDefn sumDefn
     == "sum []  =  0\n"
     ++ "sum (x:xs)  =  x + sum xs\n"
