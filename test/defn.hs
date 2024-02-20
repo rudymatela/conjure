@@ -194,6 +194,13 @@ tests n  =
     ++ "           then 1\n"
     ++ "           else x * fact (x - 1)\n"
 
+  , showDefn factCDefn
+    == "fact x  =  case x == 0 of False -> x * fact (x - 1); True -> 1\n"
+-- TODO: improve the above show
+--  == "fact x  =  case x == 0 of\n"
+--  ++ "           False -> x * fact (x - 1)\n"
+--  ++ "           True  -> 1\n"
+
   , showDefn sumDefn
     == "sum []  =  0\n"
     ++ "sum (x:xs)  =  x + sum xs\n"
@@ -232,7 +239,11 @@ factDefn  =  [ fact' zero  =-  one
              ]  where  fact' e  =  factV :$ e
 
 fact1Defn :: Defn
-fact1Defn  =  [ fact' xx  =-  if' (xx -==- zero) (one) (xx -*- (factV :$ (minus :$ xx :$ one)))
+fact1Defn  =  [ fact' xx  =-  if' (xx -==- zero) one (xx -*- (factV :$ (minus :$ xx :$ one)))
+              ]  where  fact' e  =  factV :$ e
+
+factCDefn :: Defn
+factCDefn  =  [ fact' xx  =-  caseBool (xx -==- zero) (xx -*- (factV :$ (minus :$ xx :$ one))) one
               ]  where  fact' e  =  factV :$ e
 
 nullDefn :: Defn
