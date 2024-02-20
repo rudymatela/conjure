@@ -184,6 +184,18 @@ tests n  =
       , (xx -?- zero, xx)
       , (xx -?- yy, xx -+- yy)
       ] == True
+
+  , showDefn factDefn
+    == "fact 0  =  1\n"
+    ++ "fact x  =  x * fact (x - 1)\n"
+
+  , showDefn sumDefn
+    == "sum []  =  0\n"
+    ++ "sum (x:xs)  =  x + sum xs\n"
+
+  , showDefn appendDefn
+    == "[] ++ xs  =  xs\n"
+    ++ "(x:xs) ++ ys  =  x:(xs ++ ys)\n"
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
@@ -211,7 +223,7 @@ sumDefn  =  [ sum' nil           =-  zero
 
 factDefn :: Defn
 factDefn  =  [ fact' zero  =-  one
-             , fact' xx    =-  xx -*- (factV :$ (xx -+- minusOne))
+             , fact' xx    =-  xx -*- (factV :$ (minus :$ xx :$ one))
              ]  where  fact' e  =  factV :$ e
 
 fact1Defn :: Defn
