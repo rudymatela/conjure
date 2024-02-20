@@ -41,6 +41,7 @@ import Conjure.Expr
 import Data.Express
 import Data.Express.Express
 import Data.Express.Fixtures
+import Data.Express.Utils.Typeable (boolTy, orderingTy)
 import Data.Dynamic
 import Control.Applicative ((<$>)) -- for older GHCs
 import Test.LeanCheck.Utils ((-:>), classifyOn)
@@ -78,6 +79,21 @@ showDefn  =  unlines . map show1
                                               where
                                               lhseqs  =  showExpr lhs ++ "  =  "
                                               spaces  =  map (const ' ') lhseqs
+  show1 (lhs,Value "case" _ :$ ep :$ ex :$ ey)
+    | typ ep == boolTy  =  lhseqs ++ "case " ++ showExpr ep ++ " of"
+                ++ "\n" ++ spaces ++ "False -> " ++ showExpr ex
+                ++ "\n" ++ spaces ++ "True  -> " ++ showExpr ey
+                           where
+                           lhseqs  =  showExpr lhs ++ "  =  "
+                           spaces  =  map (const ' ') lhseqs
+  show1 (lhs,Value "case" _ :$ eo :$ ex :$ ey :$ ez)
+    | typ eo == orderingTy  =  lhseqs ++ "case " ++ showExpr eo ++ " of"
+                ++ "\n" ++ spaces ++ "LT -> " ++ showExpr ex
+                ++ "\n" ++ spaces ++ "EQ -> " ++ showExpr ey
+                ++ "\n" ++ spaces ++ "GT -> " ++ showExpr ez
+                           where
+                           lhseqs  =  showExpr lhs ++ "  =  "
+                           spaces  =  map (const ' ') lhseqs
   show1 (lhs,rhs)  =  showExpr lhs ++ "  =  " ++ showExpr rhs
 
 -- | Pretty-prints a 'Defn' to the screen.

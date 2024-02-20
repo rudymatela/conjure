@@ -34,7 +34,10 @@ mem :: Int -> Tree -> Bool
 -- looking through 384 candidates of size 12
 -- tested 371 candidates
 mem x Leaf  =  False
-mem x (Node t1 y t2)  =  case x `compare` y of LT -> mem x t1; EQ -> True; GT -> mem x t2
+mem x (Node t1 y t2)  =  case x `compare` y of
+                         LT -> mem x t1
+                         EQ -> True
+                         GT -> mem x t2
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values

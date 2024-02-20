@@ -195,11 +195,9 @@ tests n  =
     ++ "           else x * fact (x - 1)\n"
 
   , showDefn factCDefn
-    == "fact x  =  case x == 0 of False -> x * fact (x - 1); True -> 1\n"
--- TODO: improve the above show
---  == "fact x  =  case x == 0 of\n"
---  ++ "           False -> x * fact (x - 1)\n"
---  ++ "           True  -> 1\n"
+    == "fact x  =  case x == 0 of\n"
+    ++ "           False -> x * fact (x - 1)\n"
+    ++ "           True  -> 1\n"
 
   , showDefn sumDefn
     == "sum []  =  0\n"
@@ -210,7 +208,10 @@ tests n  =
     ++ "(x:xs) ++ ys  =  x:(xs ++ ys)\n"
 
   , showDefn isZeroCDefn
-    == "isZero x  =  case compare x 0 of LT -> False; EQ -> True; GT -> False\n"
+    == "isZero x  =  case compare x 0 of\n"
+    ++ "             LT -> False\n"
+    ++ "             EQ -> True\n"
+    ++ "             GT -> False\n"
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a
