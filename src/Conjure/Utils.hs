@@ -64,8 +64,8 @@ import Test.LeanCheck.Stats (classify, classifyBy, classifyOn)
 
 -- | Checks if all elements of a list are equal.
 allEqual :: Eq a => [a] -> Bool
-allEqual (x:y:etc)  =  x == y && allEqual (y:etc)
-allEqual _          =  True
+allEqual [] = True
+allEqual xs = all ((==) (head xs)) xs
 
 
 allEqualOn :: Eq b => (a -> b) -> [a] -> Bool
@@ -139,10 +139,7 @@ mapHead f (x:xs)  =  f x : xs
 --
 -- The values in the list must me unique.
 sets :: [a] -> [[a]]
-sets []  =  [[]]
-sets (x:xs)  =  map (x:) ss ++ ss
-  where
-  ss  =  sets xs
+sets = subsequences             
 
 -- | Like 'head' but allows providing a default value.
 headOr :: a -> [a] -> a
