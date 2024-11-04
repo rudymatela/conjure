@@ -17,7 +17,7 @@ where
 
 import Conjure.Defn
 import Conjure.Conjurable
-import Test.LeanCheck.Error (errorToFalse)
+import Test.LeanCheck.Error (errorToFalse, errorToTrue)
 
 -- | Checks if an expression is a deconstruction.
 --
@@ -37,7 +37,7 @@ conjureIsDeconstruction f maxTests ed
   x << 0  =  True
   x << y  =  x < y
   is (sd,sx)  =  errorToFalse $ sd << sx
-  iz (sd,sx)  =  errorToFalse $ sd == 0 || sx == 0
+  iz (sd,sx)  =  errorToTrue $ sd == 0 || sx == 0
   -- We cannot simply conjureTiers for h here, because the deconstruction
   -- expression may contain variables, e.g.: @x `mod` _@.
   -- So conjureGrounds and the holeValue trick are required.
