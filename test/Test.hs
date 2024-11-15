@@ -50,9 +50,6 @@ mainTest tests n' = do
   n <- getMaxTestsFromArgs n'
   reportTests pn (tests n)
 
-printLines :: Show a => [a] -> IO ()
-printLines = putStrLn . unlines . map show
-
 
 -- checks if the functions conjureEquality, conjureExpress and conjureTiers
 -- were correctly generated.
@@ -66,6 +63,5 @@ conjurableOK x  =  and
   ]
   where
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
-  tiers'  =  mapT evl (fromJust $ conjureTiers x) -: [[x]]
   expr'  =  (conjureExpress x . val) -:> x
   cases'  =  conjureCases x
