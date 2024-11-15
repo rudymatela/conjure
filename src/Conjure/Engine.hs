@@ -313,7 +313,6 @@ conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, test
   (candidatesTT, thy)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
-  (rrff:xxs)  =  unfoldApp vffxx
 
   requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
   (-==-)  =  conjureMkEquation f
@@ -419,7 +418,7 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
 
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
-  (ef:exs)  =  unfoldApp efxs
+  (ef:_)  =  unfoldApp efxs
 
   keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
        | otherwise  =  const True
