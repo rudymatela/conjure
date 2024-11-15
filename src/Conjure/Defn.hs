@@ -38,13 +38,9 @@ where
 
 import Conjure.Utils
 import Conjure.Expr
-import Data.Express
-import Data.Express.Express
-import Data.Express.Fixtures
 import Data.Express.Utils.Typeable (boolTy, orderingTy)
 import Data.Dynamic
-import Control.Applicative ((<$>)) -- for older GHCs
-import Test.LeanCheck.Utils ((-:>), classifyOn)
+-- import Control.Applicative ((<$>)) -- for older GHCs
 
 -- | A function definition as a list of top-level case bindings ('Bndn').
 --

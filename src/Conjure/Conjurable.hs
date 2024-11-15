@@ -47,12 +47,11 @@ where
 import Test.LeanCheck
 import Test.LeanCheck.Utils
 import Test.LeanCheck.Error (errorToFalse)
-import Conjure.Expr hiding (application)
+import Conjure.Expr
 import Conjure.Defn
-import Data.Functor ((<$>))
-import Control.Applicative ((<*>))
+-- import Data.Functor ((<$>))
+-- import Control.Applicative ((<*>))
 import Data.Dynamic
-import Data.Express
 
 import Data.Int     -- for instances
 import Data.Word    -- for instances

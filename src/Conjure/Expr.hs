@@ -61,9 +61,9 @@ import Data.Express.Utils.Typeable
 import Data.Express.Fixtures hiding ((-==-))
 
 import Data.Dynamic
-import Control.Applicative ((<$>)) -- for GHC <= 7.8
+-- import Control.Applicative ((<$>)) -- for GHC <= 7.8
 
-import Test.LeanCheck (mapT, filterT, (\/), delay, productWith, productMaybeWith)
+import Test.LeanCheck (mapT, filterT, (\/), delay, productWith)
 import Test.LeanCheck.Tiers (products)
 import Test.LeanCheck.Utils.Types (A, B, C, D, E, F)
 
