@@ -1,7 +1,7 @@
 GHCIMPORTDIRS = src:test
 GHCFLAGS = -O2 -v0 \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo -dynamic)
-# -Wall -Werror -Wno-unused-matches -Wno-orphans -Wno-name-shadowing -Wno-incomplete-uni-patterns
+# -Wall -Werror -Wno-unused-matches -Wno-orphans -Wno-name-shadowing -Wno-incomplete-uni-patterns -Wno-unused-pattern-binds
 HADDOCKFLAGS = \
   -i $(shell find ~/.cabal -name leancheck.haddock | tail -1) \
   -i $(shell find ~/.cabal -name express.haddock   | tail -1) \
