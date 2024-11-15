@@ -10,7 +10,7 @@
 --
 -- You are probably better off importing "Conjure".
 module Conjure.Prim
-  ( Prim (..)
+  ( Prim
   , prim
   , pr
   , prif
@@ -24,7 +24,6 @@ where
 
 import Conjure.Conjurable
 import Conjure.Expr
-import Conjure.Utils
 import Test.LeanCheck.Error (errorToFalse)
 import Test.LeanCheck.Utils
 
