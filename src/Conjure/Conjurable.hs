@@ -653,12 +653,6 @@ conjureArgumentPats es f = zipWith mk (conjureArgumentHoles f) (conjureArgumentC
   mk h cs  =  [[[h]], [cs]]
 
 
-prods :: [[a]] -> [[a]]
-prods  =  foldr (productWith (:)) [[]]
-  where
-  productWith (?) xs ys  =  [x ? y | x <- xs, y <- ys]
-
-
 -- -- -- other Conjurable instances -- -- --
 
 instance Conjurable Ordering where
