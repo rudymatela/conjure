@@ -212,8 +212,8 @@ nubMergeBy cmp (x:xs) (y:ys) = case x `cmp` y of
                                  EQ -> x:nubMergeBy cmp xs ys
 nubMergeBy _ xs ys = xs ++ ys
 
-nubMergeOn :: Ord b => (a -> b) -> [a] -> [a] -> [a]
-nubMergeOn f = nubMergeBy (compare `on` f)
+-- nubMergeOn :: Ord b => (a -> b) -> [a] -> [a] -> [a]
+-- nubMergeOn f = nubMergeBy (compare `on` f)
 
 nubMerge :: Ord a => [a] -> [a] -> [a]
 nubMerge = nubMergeBy compare
