@@ -244,6 +244,7 @@ conjure0With args nm f p es  =  do
   pr 1 0 rs
   where
   showEq eq  =  showExpr (fst eq) ++ " == " ++ showExpr (snd eq)
+  pr :: Int -> Int -> [([Defn], [Defn])] -> IO ()
   pr n t []  =  do putStrLn $ "-- tested " ++ show t ++ " candidates"
                    putStrLn $ "cannot conjure\n"
   pr n t ((is,cs):rs)  =  do
