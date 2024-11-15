@@ -211,8 +211,11 @@ deval ee n fxpr x  =  fromMaybe x . devaluate ee n fxpr
 -- In other words, this only works when the given 'Defn' is a singleton list
 -- whose first value of the only element is a simple application without
 -- constructors.
+--
+-- TODO: remove this from the interface?
 devalFast :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 devalFast _ n [defn] x  =  reval defn n x
+devalFast _ _ _ _  =  error "devalFast: only works for singleton definitions"
 
 -- | Evaluates an 'Expr' expression into a regular Haskell value
 --   using a 'Defn' definition when it is found in the given expression.

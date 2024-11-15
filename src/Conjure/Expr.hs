@@ -150,6 +150,7 @@ recursexpr sz epat  =  re
     where
     e  =  re1 e'
     re1 e  =  case unfoldApp e of
+              []                   -> error "recursexpr: pattern is empty"
               [e]                  -> e
               (ef:exs) | ef == erf -> e' //- zip vs exs
                        | otherwise -> foldApp (map re1 (ef:exs))
@@ -536,9 +537,6 @@ listConflicts es
   | all isApp es             =  listConflicts [ef | ef :$ _ <- es]
                             +++ listConflicts [ex | _ :$ ex <- es]
   | otherwise                =  [es | not (allEqual es)]
-  where
-  fun (ef :$ _)  =  ef
-  arg (_ :$ ex)  =  ex
 
 -- | Is the expression encoding a negative number.
 --
