@@ -77,25 +77,6 @@ type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], Bool, Expr)
 type Reification  =  [Reification1] -> [Reification1]
 
 
--- | A primtive expression (paired with instance reification).
-type Prim  =  (Expr, Reification)
-
-
--- | Provides a primitive value to Conjure.
---   To be used on 'Show' instances.
---   (cf. 'prim')
-pr :: (Conjurable a, Show a) => a -> Prim
-pr x  =  (val x, conjureType x)
-
-
--- | Provides a primitive value to Conjure.
---   To be used on values that are not 'Show' instances
---   such as functions.
---   (cf. 'pr')
-prim :: Conjurable a => String -> a -> Prim
-prim s x  =  (value s x, conjureType x)
-
-
 -- | Class of 'Conjurable' types.
 -- Functions are 'Conjurable'
 -- if all their arguments are 'Conjurable', 'Listable' and 'Show'able.
