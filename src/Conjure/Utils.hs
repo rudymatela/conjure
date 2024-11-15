@@ -134,6 +134,7 @@ idIO action x  =  unsafePerformIO $ do
 -- | Applies a function to the head of a list.
 mapHead :: (a -> a) -> [a] -> [a]
 mapHead f (x:xs)  =  f x : xs
+mapHead f []  =  error "Conjure.Utils.mapHead: empty list"
 
 -- | Return sets of values based on the list.
 --
