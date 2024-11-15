@@ -187,3 +187,4 @@ qds1 `addFun` qds2 = do ds1 <- qds1
 #else
   [InstanceD o c ts ds1] `m` ds2 = [InstanceD o c ts (ds1 ++ ds2)]
 #endif
+  _ `m` _  =  error "Conjurable.Derive.addFun: unhandled case"
