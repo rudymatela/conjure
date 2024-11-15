@@ -15,16 +15,10 @@ where
 
 import Test.LeanCheck
 import Test.LeanCheck.Derive
-import Test.LeanCheck.Utils
 import Conjure.Expr hiding (mkName, Name, isInstanceOf)
 import Conjure.Conjurable hiding (Name)
 import Data.Express.Utils (primeCycle)
 import Data.Express.Utils.TH
-
-import Control.Monad
-import Data.Char
-import Data.List
-import Language.Haskell.TH.Lib
 
 #if __GLASGOW_HASKELL__ < 710
 import Data.Functor ((<$>))
