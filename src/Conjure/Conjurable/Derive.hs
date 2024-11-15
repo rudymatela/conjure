@@ -17,7 +17,6 @@ import Test.LeanCheck
 import Test.LeanCheck.Derive
 import Conjure.Expr hiding (mkName, Name, isInstanceOf)
 import Conjure.Conjurable hiding (Name)
-import Data.Express.Utils (primeCycle)
 import Data.Express.Utils.TH
 
 #if __GLASGOW_HASKELL__ < 710
@@ -114,12 +113,10 @@ reallyDeriveConjurable t  =  do
                   , v <- vs]
   cs <- typeConstructorsArgNames t
   asName <- newName "x"
-  let withTheReturnTypeOfs = deriveWithTheReturnTypeOfs $ [length ns | (_,ns) <- cs]
   let inst = [d| instance Conjurable $(return nt) where
                    conjureExpress   =  reifyExpress
                    conjureEquality  =  reifyEquality
                    conjureTiers     =  reifyTiers |]
-  -- withTheReturnTypeOfs |++| (cxt |=>| inst)
   cxt |=>| inst `addFun` deriveSize t `mergeI` deriveSubTypes t `mergeI` deriveCases t
 
 deriveCases :: Name -> DecsQ
@@ -179,36 +176,6 @@ deriveSizeClauses t  =  mapM (uncurry mkClause) =<< typeConstructors t
 -- but cascade through argument types.
 reallyDeriveConjurableCascading :: Name -> DecsQ
 reallyDeriveConjurableCascading  =  reallyDeriveCascading ''Conjurable reallyDeriveConjurable
-
-deriveWithTheReturnTypeOfs :: [Int] -> DecsQ
-deriveWithTheReturnTypeOfs  =
-  fmap concat . mapM deriveWithTheReturnTypeOf . nubSort
-
-deriveWithTheReturnTypeOf :: Int -> DecsQ
-deriveWithTheReturnTypeOf n  =  do
-  mf <- lookupValueName name
-  case mf of
-    Nothing -> reallyDeriveWithTheReturnTypeOf n
-    Just _  -> return []
-  where
-  name  =  "-" ++ replicate n '>' ++ ":"
-
-reallyDeriveWithTheReturnTypeOf :: Int -> DecsQ
-reallyDeriveWithTheReturnTypeOf n  =  do
-  td <- sigD name theT
-  vd <- [d| $(varP name) = const |]
-  return $ td:vd
-  where
-  theT  =  bind [t| $(theFunT) -> $(last vars) -> $(theFunT) |]
-  theFunT  =  foldr1 funT vars
-  funT t1 t2  =  [t| $(t1) -> $(t2) |]
-  vars  =  map (varT . mkName) . take (n+1) . primeCycle $ map (:"") ['a'..'z']
-  name  =  mkName $ "-" ++ replicate n '>' ++ ":"
-#if __GLASGOW_HASKELL__ >= 800
-  bind  =  id -- unbound variables are automatically bound
-#else
-  bind  =  toBoundedQ
-#endif
 
 addFun :: DecsQ -> DecsQ -> DecsQ
 qds1 `addFun` qds2 = do ds1 <- qds1
