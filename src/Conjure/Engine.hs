@@ -45,7 +45,6 @@ import Data.Express.Fixtures hiding ((-==-))
 import Test.LeanCheck
 import Test.LeanCheck.Tiers
 import Test.LeanCheck.Error (errorToFalse)
-import Test.LeanCheck.Utils (classifyOn)
 
 import Conjure.Expr
 import Conjure.Conjurable
@@ -575,14 +574,6 @@ nubCandidates Args{..} nm f  =
 
 
 --- tiers utils ---
-
-productsThat :: (a -> [a] -> Bool) -> [ [[a]] ] -> [[ [a] ]]
-productsThat p  =  foldr (productWithThat (:) p) [[[]]]
-
-productWithThat :: (a->b->c) -> (a->b->Bool) -> [[a]] -> [[b]] -> [[c]]
-productWithThat f p xss yss  =  mapT (uncurry f)
-                             .  filterT (uncurry p)
-                             $  xss >< yss
 
 productsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 productsWith f  =  mapT f . products
