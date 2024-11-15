@@ -124,7 +124,8 @@ deriveCases t  =  do
   n <- newName "x"
   (nt,vs) <- normalizeType t
   cs <- typeConstructorsArgNames t
-  let lets = [letin n c ns | (c,ns) <- cs]
+  -- below, we only need letin bindings for constructors with arguments
+  let lets = [letin n c ns | (c,ns) <- cs, not (null ns)]
   let rhs = foldr (\e1 e2 -> [| $e1 : $e2 |]) [|[]|] lets
   [d| instance Conjurable $(return nt) where
         conjureCases $(varP n) = $rhs |]
