@@ -3,7 +3,6 @@
 
 import Test
 import Conjure.Red
-import Data.Dynamic
 
 main :: IO ()
 main  =  mainTest tests 5040
