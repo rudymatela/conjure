@@ -11,13 +11,13 @@ import Test hiding ((-:), (->:))
 
 data Choice  =  Ae | Bee | Cee deriving (Show, Eq, Typeable)
 data Peano  =  Zero | Succ Peano deriving (Show, Eq, Typeable)
-data List a  =  a :- List a | Nil deriving (Show, Eq, Typeable)
+data Lst a  =  a :- Lst a | Nil deriving (Show, Eq, Typeable)
 data Bush a  =  Bush a :-: Bush a | Leaf a deriving (Show, Eq, Typeable)
 data Tree a  =  Node (Tree a) a (Tree a) | Null deriving (Show, Eq, Typeable)
 
 deriveConjurable ''Choice
 deriveConjurable ''Peano
-deriveConjurable ''List
+deriveConjurable ''Lst
 deriveConjurable ''Bush
 deriveConjurable ''Tree
 
@@ -73,7 +73,7 @@ tests n  =
 
   , conjurableOK (undefined :: Choice)
   , conjurableOK (undefined :: Peano)
-  , conjurableOK (undefined :: List Int)
+  , conjurableOK (undefined :: Lst Int)
   , conjurableOK (undefined :: Bush Int)
   , conjurableOK (undefined :: Tree Int)
 --, conjurableOK (undefined :: RN) -- TODO: FIX: infinite loop somewhere...
@@ -84,8 +84,8 @@ tests n  =
   , conjureSize Zero == 1
   , conjureSize (Succ Zero) == 2
   , conjureSize (Succ (Succ Zero)) == 3
-  , conjureSize (Nil :: List Int) == 1
-  , conjureSize (10 :- (20 :- Nil) :: List Int) == 33
+  , conjureSize (Nil :: Lst Int) == 1
+  , conjureSize (10 :- (20 :- Nil) :: Lst Int) == 33
 
   , conjureCases choice
     == [ val Ae
@@ -100,7 +100,7 @@ tests n  =
 
   , conjureCases (lst int)
     == [ value ":-" ((:-) ->>: lst int) :$ hole int :$ hole (lst int)
-       , val (Nil :: List Int)
+       , val (Nil :: Lst Int)
        ]
 
   , conjureCases (bush int)
@@ -123,8 +123,8 @@ tests n  =
   , conjureHoles (undefined :: Peano) == [ hole (undefined :: Peano)
                                          , hole (undefined :: Bool)
                                          ]
-  , conjureHoles (undefined :: List Int) == [ hole (undefined :: Int)
-                                            , hole (undefined :: List Int)
+  , conjureHoles (undefined :: Lst Int) == [ hole (undefined :: Int)
+                                            , hole (undefined :: Lst Int)
                                             , hole (undefined :: Bool)
                                             ]
   , conjureHoles (undefined :: Nested) == [ hole (undefined :: N0)
@@ -159,7 +159,7 @@ choice  =  undefined
 peano :: Peano
 peano  =  undefined
 
-lst :: a -> List a
+lst :: a -> Lst a
 lst _  =  undefined
 
 bush :: a -> Bush a
