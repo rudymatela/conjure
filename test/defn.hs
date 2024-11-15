@@ -217,7 +217,7 @@ tests n  =
 dvl :: Typeable a => Defn -> Expr -> a
 dvl  =  devl exprExpr 11
 
-sumV, factV, nullV, isZeroV :: Expr
+factV, sumV, andV, orV, isZeroV, isOneV, nullV, appendV :: Expr
 factV    =  var "fact"   (undefined :: Int -> Int)
 sumV     =  var "sum"    (undefined :: [Int] -> Int)
 andV     =  var "and"    (undefined :: [Bool] -> Bool)
@@ -376,5 +376,6 @@ redundantDefn2  =  [ zero -?- zero  =-  one
                    , xx   -?- yy    =-  yy
                    ]
 
+(=-) :: a -> b -> (a, b)
 (=-) = (,)
 infixr 0 =-
