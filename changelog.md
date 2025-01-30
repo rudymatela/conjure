@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.5.16 (January 2025)
+----------------------
 
 * slightly improve search space pruning
 * slightly cleanup code
