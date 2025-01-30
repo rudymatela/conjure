@@ -2,6 +2,15 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* slightly improve search space pruning
+* slightly cleanup code
+* fix build of tests on GHC >= 9.10
+* improve tests and CI scripts
+
+
 v0.5.14 (February 2024)
 -----------------------
 
