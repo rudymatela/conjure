@@ -112,6 +112,8 @@ test-via-cabal:
 test-via-stack:
 	stack test code-conjure:test:expr --ghc-options="$(GHCFLAGS) -O0" --system-ghc --no-install-ghc --no-terminal
 
+test-on-ghc-9.10:
+	make test GHC=ghc-9.10 GHCIMPORTDIRS=src:test:../leancheck/src:../express/src:../speculate/src
 
 fastest:
 	$(LONG) make test -j$(NJOBS)
