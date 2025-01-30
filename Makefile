@@ -1,3 +1,8 @@
+# Makefile for Conjure
+#
+# Copyright (C) 2021-2025 Rudy Matela
+# Distributed under a 3-Clause BSD license, see the LICENSE file
+
 GHCIMPORTDIRS = src:test
 GHCFLAGS = -O2 -v0 \
   $(shell grep -q "Arch Linux" /etc/lsb-release && echo -dynamic)
