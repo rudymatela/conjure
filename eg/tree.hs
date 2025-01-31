@@ -127,8 +127,8 @@ main = do
     , prim "==" ((==) :: Int -> Int -> Bool)
     ]
 
-  -- unreachable: needs size 22 but OOMs at 21 (v0.5.16)
-  conjureWithMaxSize 22 "ordered" ordered
+  -- unreachable: needs size 22 but OOMs at 19/20 (v0.5.16)
+  conjureWithMaxSize 12 "ordered" ordered
     [ pr True
     , pr False
     , prim "&&" (&&)
@@ -136,6 +136,7 @@ main = do
     , prim "<" ((<) :: Int -> Int -> Bool)
     , prim "rightmost" rightmost
     , prim "leftmost" leftmost
+    , prim "nil" nil
     ]
 
   conjure "ordered" ordered
