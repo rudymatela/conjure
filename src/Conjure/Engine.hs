@@ -274,7 +274,11 @@ conjure0With args nm f p es  =  do
     putStrLn $ showDefn i
     when (carryOn args) $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
-  (iss, css, ts, thy)  =  conjpure0With args nm f p es
+  results  =  conjpure0With args nm f p es
+  iss  =  implementationss results
+  css  =  candidatess results
+  ts  =  tests results
+  thy  =  theory results
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 
@@ -287,7 +291,12 @@ conjure0With args nm f p es  =  do
 -- 2. tiers of candidates
 -- 3. a list of tests
 -- 4. the underlying theory
-type Results = ([[Defn]], [[Defn]], [Expr], Thy)
+data Results = Results
+  { implementationss :: [[Defn]]
+  , candidatess :: [[Defn]]
+  , tests :: [Expr]
+  , theory :: Thy
+  }
 
 
 -- | Like 'conjure' but in the pure world.
@@ -320,7 +329,12 @@ conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 -- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
 -- 'conjure0' all refer to this.
 conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> Results
-conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, tests, thy)
+conjpure0With args@(Args{..}) nm f p es  =  Results
+  { implementationss  =  implementationsT
+  , candidatess  =  candidatesT
+  , tests  =  tests
+  , theory  =  thy
+  }
   where
   tests  =  [ffxx //- bs | bs <- dbss]
   implementationsT  =  filterT implements candidatesT
@@ -359,7 +373,7 @@ conjureTheoryWith args nm f es  =  do
                             ++ (show . length $ equations thy) ++ " equations"
   printThy thy
   where
-  (_, _, _, thy)  =  conjpureWith args nm f es
+  Results {theory = thy}  =  conjpureWith args nm f es
 
 
 -- | Return apparently unique candidate definitions.
