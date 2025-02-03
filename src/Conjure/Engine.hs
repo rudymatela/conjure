@@ -19,6 +19,7 @@ module Conjure.Engine
   , conjureFromSpecWith
   , conjure0
   , conjure0With
+  , Results
   , conjpure
   , conjpureWith
   , conjpureFromSpec
@@ -278,31 +279,38 @@ conjure0With args nm f p es  =  do
   nREs  =  length (equations thy) + nRules
 
 
--- | Like 'conjure' but in the pure world.
+-- | Results to the 'conjpure' family of functions.
 --
--- Returns a quadruple with:
+-- A quadruple with:
 --
 -- 1. tiers of implementations
 -- 2. tiers of candidates
 -- 3. a list of tests
 -- 4. the underlying theory
-conjpure :: Conjurable f => String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+type Results = ([[Defn]], [[Defn]], [Expr], Thy)
+
+
+-- | Like 'conjure' but in the pure world.
+--
+-- The most important part of the result are the tiers of implementations
+-- however results also include candidates, tests and the underlying theory.
+conjpure :: Conjurable f => String -> f -> [Prim] -> Results
 conjpure =  conjpureWith args
 
 -- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> Results
 conjpureFromSpec  =  conjpureFromSpecWith args
 
 -- | Like 'conjure0' but in the pure world.  (cf. 'conjpure')
-conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> Results
 conjpure0 =  conjpure0With args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> Results
 conjpureWith args nm f  =  conjpure0With args nm f (const True)
 
 -- | Like 'conjureFromSpecWith' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> Results
 conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
@@ -311,7 +319,7 @@ conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 -- 'conjpure', 'conjpureWith', 'conjpureFromSpec', 'conjpureFromSpecWith',
 -- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
 -- 'conjure0' all refer to this.
-conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> ([[Defn]], [[Defn]], [Expr], Thy)
+conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> Results
 conjpure0With args@(Args{..}) nm f p es  =  (implementationsT, candidatesT, tests, thy)
   where
   tests  =  [ffxx //- bs | bs <- dbss]
