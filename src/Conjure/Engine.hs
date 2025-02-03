@@ -425,13 +425,15 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
                     ,  m <- maybeToList (e `match` d)
                     ,  filter (uncurry (/=)) m == [(holeAsTypeOf e', e')]
                     ]
-    deconstructions :: [Expr]
-    deconstructions  =  filter (conjureIsDeconstruction f maxTests)
-                     $  concatMap candidateDeconstructionsFrom
-                     $  concat . take maxDeconstructionSize
-                     $  concatMapT forN [hs]
-      where
-      hs  =  nub $ conjureArgumentHoles f
+
+  deconstructions :: [Expr]
+  deconstructions  =  filter (conjureIsDeconstruction f maxTests)
+                   $  concatMap candidateDeconstructionsFrom
+                   $  concat . take maxDeconstructionSize
+                   $  concatMapT forN [hs]
+    where
+    hs  =  nub $ conjureArgumentHoles f
+
   recs  =  filterT keepR
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  doubleCheck (===)
@@ -512,13 +514,15 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
                     ]
       where
       h = holeAsTypeOf e'
-    deconstructions :: [Expr]
-    deconstructions  =  filter (conjureIsDeconstruction f maxTests)
-                     $  concatMap candidateDeconstructionsFromHoled
-                     $  concat . take maxDeconstructionSize
-                     $  concatMapT (`appsWith` hs) [hs]
-      where
-      hs  =  nub $ conjureArgumentHoles f
+
+  deconstructions :: [Expr]
+  deconstructions  =  filter (conjureIsDeconstruction f maxTests)
+                   $  concatMap candidateDeconstructionsFromHoled
+                   $  concat . take maxDeconstructionSize
+                   $  concatMapT (`appsWith` hs) [hs]
+    where
+    hs  =  nub $ conjureArgumentHoles f
+
   recs ep  =  filterT (keepR ep)
            .  discardT (\e -> e == ep)
            $  recsV' (tail (vars ep))
