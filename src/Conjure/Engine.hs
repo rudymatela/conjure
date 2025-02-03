@@ -164,6 +164,7 @@ data Args = Args
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , showCandidates        :: Int  -- ^ (debug) show candidates up to this size
+  , showTests             :: Bool -- ^ (debug) show tests
 
   -- pruning options --
   , rewriting             :: Bool -- ^ unique-modulo-rewriting candidates
@@ -201,6 +202,7 @@ args = Args
   , showTheory             =  False
   , usePatterns            =  True
   , showCandidates         =  0
+  , showTests              =  False
 
   -- pruning options --
   , rewriting              =  True
@@ -228,8 +230,12 @@ conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
   print (var (head $ words nm) f)
-  when (length ts > 0) $
+  when (length ts > 0) $ do
     putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
+    when (showTests args) $ do
+      putStrLn $ "{-"
+      putStr $ unlines $ map show ts
+      putStrLn $ "-}"
   putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   when (showTheory args) $ do
     putStrLn $ "{-"

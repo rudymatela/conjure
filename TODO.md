@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add `Args` switch to show tests
-
 * return a `Results` record from conjpure0With
 
 * add `Args` switch to show allowed deconstructions
