@@ -159,10 +159,11 @@ data Args = Args
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
 
-  -- advanced options --
+  -- advanced & debug options --
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
+  , showCandidates        :: Int  -- ^ (debug) show candidates up to this size
 
   -- pruning options --
   , rewriting             :: Bool -- ^ unique-modulo-rewriting candidates
@@ -184,6 +185,7 @@ data Args = Args
 -- * search for defined applications for up to 100000 combinations
 -- * require recursive calls to deconstruct arguments
 -- * don't show the theory used in pruning
+-- * do not show tested candidates
 -- * do not make candidates unique module testing
 args :: Args
 args = Args
@@ -194,10 +196,11 @@ args = Args
   , maxSearchTests         =  100000
   , maxDeconstructionSize  =   4
 
-  -- advanced options --
+  -- advanced & debug options --
   , carryOn                =  False
   , showTheory             =  False
   , usePatterns            =  True
+  , showCandidates         =  0
 
   -- pruning options --
   , rewriting              =  True
@@ -250,7 +253,8 @@ conjure0With args nm f p es  =  do
   pr n t ((is,cs):rs)  =  do
     let nc  =  length cs
     putStrLn $ "-- looking through " ++ show nc ++ " candidates of size " ++ show n
-    -- when (n<=12) $ putStrLn $ unlines $ map showDefn cs
+    when (n <= showCandidates args) $
+      putStr $ unlines $ ["{-"] ++ map showDefn cs ++ ["-}"]
     case is of
       []     ->  pr (n+1) (t+nc) rs
       (_:_)  ->  do pr1 t is cs
