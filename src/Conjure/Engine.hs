@@ -503,6 +503,8 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
                 .  tail
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
+      -- computes whether we should include a hole (recurse) for this given argument
+      -- the hole is filled later by fillings
       should aes ae  =  length (nub aes) > 1 && hasVar ae && (isApp ae || isUnbreakable ae)
       aes   =                  (tail . unfoldApp . rehole) pat
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
