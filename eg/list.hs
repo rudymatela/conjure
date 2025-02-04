@@ -63,6 +63,15 @@ last' [x]  =  x
 last' [x,y]  =  y
 last' [x,y,z]  =  z
 
+elem' :: Int -> [Int] -> Bool
+elem' 0 []  =  False
+elem' 1 [0]  =  False
+elem' 1 [1]  =  True
+elem' 0 [0,0]  =  True
+elem' 0 [0,1]  =  True
+elem' 0 [1,0]  =  True
+elem' 0 [1,1]  =  False
+
 main :: IO ()
 main = do
   conjure "length" length'
@@ -116,6 +125,14 @@ main = do
     , prim "null" (null :: [Int] -> Bool)
     , prim "head" (head :: [Int] -> Int)
     , prim "tail" (tail :: [Int] -> [Int])
+    ]
+
+  conjure "elem" elem'
+    [ pr False
+    , pr True
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prim "||" (||)
+    , prim "&&" (&&)
     ]
 
   -- unreachable: needs about 26, but can only reach 16

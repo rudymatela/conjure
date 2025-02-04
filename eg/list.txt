@@ -111,6 +111,21 @@ ordered :: [Int] -> Bool
 ordered []  =  True
 ordered (x:xs)  =  ordered xs && (null xs || x <= head xs)
 
+elem :: Int -> [Int] -> Bool
+-- testing 7 combinations of argument values
+-- pruning with 29/42 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 2 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 24 candidates of size 8
+-- tested 23 candidates
+elem x []  =  False
+elem x (y:xs)  =  elem x xs || x == y
+
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
