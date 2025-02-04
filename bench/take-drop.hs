@@ -23,10 +23,9 @@ take' 3 [x,y]  =  [x,y]
 
 main :: IO ()
 main = do
-  -- drop 0 []      =  []               -- 1
-  -- drop 0 (x:xs)  =  x : xs           -- 4
-  -- drop n []      =  []               -- 5
-  -- drop n (x:xs)  =  drop (x - 1) xs  -- 10
+  -- drop 0 xs  =  xs                   -- 1
+  -- drop x []  =  []                   -- 2
+  -- drop x (y:xs)  =  drop (x - 1) xs  -- 7
   conjure "drop" (drop' :: Int -> [A] -> [A])
     [ pr (0 :: Int)
     , pr (1 :: Int)
@@ -35,11 +34,10 @@ main = do
     , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
-  -- take 0 []  =  []                     -- 1
-  -- take 0 (x:xs)  =  []                 -- 2
-  -- take x []  =  []                     -- 3
-  -- take x (y:xs)  =  y:take (x - 1) xs  -- 10
-  conjureWithMaxSize 16 "take" (take' :: Int -> [A] -> [A])
+  -- take 0 xs  =  []                     -- 1
+  -- take x []  =  []                     -- 2
+  -- take x (y:xs)  =  y:take (x - 1) xs  -- 9
+  conjure "take" (take' :: Int -> [A] -> [A])
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , pr ([] :: [A])
