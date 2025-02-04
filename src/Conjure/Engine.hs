@@ -174,6 +174,7 @@ data Args = Args
   , adHocRedundancy       :: Bool -- ^ ad-hoc redundancy checks
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
   , atomicNumbers         :: Bool -- ^ restrict constant/ground numeric expressions to atoms
+  , requireZero           :: Bool -- ^ require 0 as base case for Num recursions
   , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
   }
 
@@ -213,6 +214,7 @@ args = Args
   , adHocRedundancy        =  True
   , copyBindings           =  True
   , atomicNumbers          =  True
+  , requireZero            =  True
   , uniqueCandidates       =  False
   }
 
@@ -509,7 +511,7 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
       -- numeric arguments additionally require 0 to be present as a case
       -- for recursion
       should aes ae  =  length (nub aes) > 1 && hasVar ae && (isApp ae || isUnbreakable ae)
-                     && (isNumeric ae ==> any isZero aes)
+                     && (not requireZero || not (isNumeric ae) || any isZero aes)
       aes   =                  (tail . unfoldApp . rehole) pat
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
