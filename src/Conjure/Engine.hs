@@ -477,8 +477,8 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
     where
-    k | atomicNumbers && conjureIsNumeric f eh  =  \e -> keepNumeric e && keep e
-      | otherwise                               =  keep
+    k | atomicNumbers && isNumeric eh  =  \e -> keepNumeric e && keep e
+      | otherwise                      =  keep
     -- discards non-atomic numeric ground expressions such as 1 + 1
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
 
@@ -487,6 +487,8 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
 
   hasRedundant | adHocRedundancy  =  hasRedundantRecursion
                | otherwise        =  const False
+
+  isNumeric  =  conjureIsNumeric f
 
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundant
@@ -503,9 +505,11 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
                 .  tail
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
-      -- computes whether we should include a hole (recurse) for this given argument
-      -- the hole is filled later by fillings
+      -- computes whether we should include a recurse for this given argument
+      -- numeric arguments additionally require 0 to be present as a case
+      -- for recursion
       should aes ae  =  length (nub aes) > 1 && hasVar ae && (isApp ae || isUnbreakable ae)
+                     && (isNumeric ae ==> any isZero aes)
       aes   =                  (tail . unfoldApp . rehole) pat
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 

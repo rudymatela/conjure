@@ -7,7 +7,7 @@ factorial :: Int -> Int
 -- looking through 6 candidates of size 3
 -- looking through 13 candidates of size 4
 -- looking through 40 candidates of size 5
--- looking through 138 candidates of size 6
+-- looking through 137 candidates of size 6
 -- tested 69 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (dec x)

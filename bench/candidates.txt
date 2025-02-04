@@ -1,7 +1,7 @@
 Candidates for: foo :: Int -> Int
   pruning with 27/65 rules
   [3,0,8,0,30,0,177,0,1203] direct candidates, 0 duplicates
-  [3,3,9,10,32,39,185,233,1169] pattern candidates, 0 duplicates
+  [3,3,9,10,32,39,185,217,1169] pattern candidates, 0 duplicates
 
 rules:
 x - x == 0

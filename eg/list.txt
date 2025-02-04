@@ -135,10 +135,10 @@ take :: Int -> [Int] -> [Int]
 -- looking through 38 candidates of size 4
 -- looking through 95 candidates of size 5
 -- looking through 301 candidates of size 6
--- looking through 742 candidates of size 7
--- looking through 2351 candidates of size 8
--- looking through 5934 candidates of size 9
--- tested 3692 candidates
+-- looking through 740 candidates of size 7
+-- looking through 2346 candidates of size 8
+-- looking through 5911 candidates of size 9
+-- tested 3679 candidates
 take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
@@ -152,7 +152,7 @@ drop :: Int -> [Int] -> [Int]
 -- looking through 38 candidates of size 4
 -- looking through 95 candidates of size 5
 -- looking through 301 candidates of size 6
--- looking through 742 candidates of size 7
+-- looking through 740 candidates of size 7
 -- tested 453 candidates
 drop 0 xs  =  xs
 drop x []  =  []

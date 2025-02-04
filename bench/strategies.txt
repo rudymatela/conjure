@@ -67,9 +67,9 @@ factorial :: Int -> Int
 -- looking through 12 candidates of size 3
 -- looking through 24 candidates of size 4
 -- looking through 37 candidates of size 5
--- looking through 72 candidates of size 6
+-- looking through 70 candidates of size 6
 -- looking through 196 candidates of size 7
--- tested 165 candidates
+-- tested 163 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -82,9 +82,9 @@ factorial :: Int -> Int
 -- looking through 12 candidates of size 3
 -- looking through 24 candidates of size 4
 -- looking through 47 candidates of size 5
--- looking through 82 candidates of size 6
+-- looking through 70 candidates of size 6
 -- looking through 342 candidates of size 7
--- tested 284 candidates
+-- tested 272 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -97,9 +97,9 @@ factorial :: Int -> Int
 -- looking through 21 candidates of size 3
 -- looking through 42 candidates of size 4
 -- looking through 302 candidates of size 5
--- looking through 602 candidates of size 6
+-- looking through 600 candidates of size 6
 -- looking through 6115 candidates of size 7
--- tested 1001 candidates
+-- tested 999 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -127,9 +127,9 @@ factorial :: Int -> Int
 -- looking through 21 candidates of size 3
 -- looking through 42 candidates of size 4
 -- looking through 330 candidates of size 5
--- looking through 630 candidates of size 6
+-- looking through 600 candidates of size 6
 -- looking through 7215 candidates of size 7
--- tested 1945 candidates
+-- tested 1915 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 

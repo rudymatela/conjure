@@ -320,13 +320,13 @@ digits :: Int -> [Int]
 -- looking through 3 candidates of size 4
 -- looking through 11 candidates of size 5
 -- looking through 13 candidates of size 6
--- looking through 91 candidates of size 7
+-- looking through 85 candidates of size 7
 -- looking through 104 candidates of size 8
--- looking through 850 candidates of size 9
+-- looking through 811 candidates of size 9
 -- looking through 923 candidates of size 10
--- looking through 8902 candidates of size 11
+-- looking through 8602 candidates of size 11
 -- looking through 9662 candidates of size 12
--- tested 20562 candidates
+-- tested 20217 candidates
 cannot conjure
 
 gps22 :: Int -> [Char]

@@ -7,9 +7,9 @@ pow :: Int -> Int -> Int
 -- looking through 159 candidates of size 4
 -- looking through 433 candidates of size 5
 -- looking through 1382 candidates of size 6
--- looking through 4136 candidates of size 7
+-- looking through 4118 candidates of size 7
 -- looking through 13292 candidates of size 8
--- tested 6383 candidates
+-- tested 6365 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)
 
@@ -21,7 +21,7 @@ pow :: Int -> Int -> Int
 -- looking through 58 candidates of size 3
 -- looking through 174 candidates of size 4
 -- looking through 485 candidates of size 5
--- looking through 1387 candidates of size 6
--- tested 2126 candidates
+-- looking through 1369 candidates of size 6
+-- tested 2108 candidates
 cannot conjure
 

@@ -31,6 +31,7 @@ module Conjure.Expr
   , deholings
   , varToConst
   , hasAppInstanceOf
+  , isZero
   , isNegative
   , isStrictSubexprOf
 
@@ -537,6 +538,13 @@ listConflicts es
   | all isApp es             =  listConflicts [ef | ef :$ _ <- es]
                             +++ listConflicts [ex | _ :$ ex <- es]
   | otherwise                =  [es | not (allEqual es)]
+
+-- | Is the epression encoding the number 0?
+--
+-- This function is sort of a hack.
+isZero :: Expr -> Bool
+isZero (Value "0" _)  =  True
+isZero _  =  False
 
 -- | Is the expression encoding a negative number.
 --

@@ -12,36 +12,32 @@ factorial :: Int -> Int
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
--- looking through 203 candidates of size 8
--- tested 254 candidates
-factorial 1  =  1
-factorial x  =  x * factorial (x - 1)
-
+-- looking through 195 candidates of size 8
 -- looking through 1048 candidates of size 9
--- tested 547 candidates
+-- tested 539 candidates
 factorial 0  =  0
 factorial 1  =  1
 factorial x  =  x * factorial (x - 1)
 
--- tested 555 candidates
+-- tested 547 candidates
 factorial 0  =  1
 factorial 1  =  1
 factorial x  =  x * factorial (x - 1)
 
--- looking through 1301 candidates of size 10
--- looking through 7201 candidates of size 11
--- tested 3216 candidates
+-- looking through 1256 candidates of size 10
+-- looking through 7198 candidates of size 11
+-- tested 3160 candidates
 factorial 0  =  1
 factorial x  =  x + x * (factorial (x - 1) - 1)
 
--- tested 3396 candidates
+-- tested 3340 candidates
 factorial 0  =  1
 factorial x  =  x - x * (1 - factorial (x - 1))
 
--- tested 3519 candidates
+-- tested 3463 candidates
 factorial 0  =  1
 factorial x  =  (0 - x) * (0 - factorial (x - 1))
 
--- tested 10004 candidates
+-- tested 9948 candidates
 cannot conjure
 
