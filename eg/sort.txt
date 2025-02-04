@@ -67,6 +67,27 @@ qsort :: [Int] -> [Int]
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
+qsort :: [Int] -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 8/8 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 3 candidates of size 4
+-- looking through 6 candidates of size 5
+-- looking through 9 candidates of size 6
+-- looking through 28 candidates of size 7
+-- looking through 51 candidates of size 8
+-- looking through 128 candidates of size 9
+-- looking through 303 candidates of size 10
+-- looking through 648 candidates of size 11
+-- looking through 1621 candidates of size 12
+-- looking through 3592 candidates of size 13
+-- looking through 8475 candidates of size 14
+-- tested 7794 candidates
+qsort []  =  []
+qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
+
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules

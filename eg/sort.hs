@@ -82,6 +82,17 @@ main = do
     , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     ]
 
+  -- if we disable the descent requirement, we get the efficient qsort
+  -- though with a larger search space
+  conjureWith args{maxSize=14, requireDescent=False} "qsort" sort'
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prim ">"  ((>)  :: Int -> Int -> Bool)
+    , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    ]
+
   -- merge [] []  =  []
   -- merge (x:xs) (y:ys)  =  if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
   --                         2  3 4  5      678     9 10 11 12  13 14 15 16 17 18 19
