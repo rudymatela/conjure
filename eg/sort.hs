@@ -41,9 +41,6 @@ merge' [0,2] [1,3]  =  [0,1,2,3]
 main :: IO ()
 main = do
   -- recursive insertion sort
-  -- sort xs  =  if null xs then [] else insert (head xs) (sort (tail xs))
-  --             1  2    3       4       5       6    7    8     9    10
-  -- -- OR --
   -- sort []  =  []
   -- sort (x:xs)  =  insert x (sort xs)
   conjure "sort" sort'
@@ -70,15 +67,6 @@ main = do
     , prif (undefined :: [Int])
     ]
 
-  -- qsort
-  -- qsort xs  =  if null xs                                 --  3
-  --              then []                                    --  4
-  --              else qsort (filter (< head xs) (tail xs))  -- 11
-  --                ++ (head xs:[])                          -- 16
-  --                ++ qsort (filter (>= head xs) (tail xs)) -- 24
-  -- not only this is out of reach performance wise,
-  -- but the needed recursive calls will not be enumerated
-  -- -- OR --
   -- qsort []  =  []                           -- 1
   -- qsort (x:xs)  =  qsort (filter (x >) xs)  -- 6
   --            ++ (x:qsort (filter (x <=) xs) -- 14
@@ -96,7 +84,7 @@ main = do
 
   -- merge [] []  =  []
   -- merge (x:xs) (y:ys)  =  if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
-  --                         2  3 4  5      678     9 10 11 12  13 14 15  16 17 18 19
+  --                         2  3 4  5      678     9 10 11 12  13 14 15 16 17 18 19
   -- OOM after size 17, out of reach performance wise
   -- update: cannot reach at size 19 on lapmatrud OOM
   conjureWith args{maxSize=12} "merge" merge'
