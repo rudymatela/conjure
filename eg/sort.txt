@@ -20,6 +20,32 @@ sort :: [Int] -> [Int]
 -- tested 5 candidates
 sort xs  =  foldr insert [] xs
 
+insert :: Int -> [Int] -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 4/4 rules
+-- looking through 2 candidates of size 1
+-- looking through 1 candidates of size 2
+-- looking through 2 candidates of size 3
+-- looking through 6 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 19 candidates of size 6
+-- looking through 6 candidates of size 7
+-- looking through 44 candidates of size 8
+-- looking through 62 candidates of size 9
+-- looking through 91 candidates of size 10
+-- looking through 334 candidates of size 11
+-- looking through 220 candidates of size 12
+-- looking through 1358 candidates of size 13
+-- looking through 1019 candidates of size 14
+-- looking through 4638 candidates of size 15
+-- looking through 6332 candidates of size 16
+-- looking through 14550 candidates of size 17
+-- tested 14943 candidates
+insert x []  =  [x]
+insert x (y:xs)  =  if x <= y
+                    then x:insert y xs
+                    else y:insert x xs
+
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 8/8 rules
@@ -57,5 +83,23 @@ merge :: [Int] -> [Int] -> [Int]
 -- looking through 2972 candidates of size 11
 -- looking through 11011 candidates of size 12
 -- tested 17710 candidates
+cannot conjure
+
+merge :: [Int] -> [Int] -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 1/2 rules
+-- looking through 2 candidates of size 1
+-- looking through 2 candidates of size 2
+-- looking through 3 candidates of size 3
+-- looking through 10 candidates of size 4
+-- looking through 21 candidates of size 5
+-- looking through 26 candidates of size 6
+-- looking through 61 candidates of size 7
+-- looking through 92 candidates of size 8
+-- looking through 203 candidates of size 9
+-- looking through 430 candidates of size 10
+-- looking through 1086 candidates of size 11
+-- looking through 2068 candidates of size 12
+-- tested 4004 candidates
 cannot conjure
 

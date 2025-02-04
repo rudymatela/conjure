@@ -158,21 +158,3 @@ drop 0 xs  =  xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
 
-merge :: [Int] -> [Int] -> [Int]
--- testing 360 combinations of argument values
--- pruning with 1/2 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 61 candidates of size 7
--- looking through 92 candidates of size 8
--- looking through 203 candidates of size 9
--- looking through 430 candidates of size 10
--- looking through 1086 candidates of size 11
--- looking through 2068 candidates of size 12
--- tested 4004 candidates
-cannot conjure
-

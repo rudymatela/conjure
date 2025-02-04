@@ -36,16 +36,6 @@ sort' [x,y,z]
 [x,y] \/ [z,w]  =  [x,z,y,w]
 [x,y,z] \/ [w,v,u]  =  [x,w,y,v,z,u]
 
-merge' :: [Int] -> [Int] -> [Int]
-merge' [] []  =  []
-merge' xs []  =  xs
-merge' [] ys  =  ys
-merge' [x] [y] | x <= y     =  [x,y]
-               | otherwise  =  [y,x]
-merge' [0,1] [0,1]  =  [0,0,1,1]
-merge' [0,1] [2,3]  =  [0,1,2,3]
-merge' [0,2] [1,3]  =  [0,1,2,3]
-
 ordered' :: [Int] -> Bool
 ordered' []  =  True
 ordered' [x]  =  True
@@ -160,11 +150,4 @@ main = do
     , pr (0 :: Int)
     , pr (1 :: Int)
     , prim "-" ((-) :: Int -> Int -> Int)
-    ]
-
-  -- unreachable: needs about 26, but can only reach 16
-  conjureWithMaxSize 12 "merge" merge'
-    [ prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "compare" (compare :: Int -> Int -> Ordering)
-    , primOrdCaseFor (undefined :: [Int])
     ]

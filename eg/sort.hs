@@ -19,8 +19,24 @@ sort' [x,y,z]
   | z <= x && x <= y  =  [z,x,y]
   | z <= y && y <= x  =  [z,y,x]
 
+insert' :: Int -> [Int] -> [Int]
+insert' 0 []  =  [0]
+insert' 0 [1,2]  =  [0,1,2]
+insert' 1 [0,2]  =  [0,1,2]
+insert' 2 [0,1]  =  [0,1,2]
+
+-- merge' :: [Int] -> [Int] -> [Int]
+-- merge' xs ys  =  sort (xs ++ ys)
+
 merge' :: [Int] -> [Int] -> [Int]
-merge' xs ys  =  sort (xs ++ ys)
+merge' [] []  =  []
+merge' xs []  =  xs
+merge' [] ys  =  ys
+merge' [x] [y] | x <= y     =  [x,y]
+               | otherwise  =  [y,x]
+merge' [0,1] [0,1]  =  [0,0,1,1]
+merge' [0,1] [2,3]  =  [0,1,2,3]
+merge' [0,2] [1,3]  =  [0,1,2,3]
 
 main :: IO ()
 main = do
@@ -44,6 +60,14 @@ main = do
     [ pr ([] :: [Int])
     , prim "insert" (insert :: Int -> [Int] -> [Int])
     , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    ]
+
+  -- an insert function
+  conjureWithMaxSize 18 "insert" insert'
+    [ prim "[]" ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prif (undefined :: [Int])
     ]
 
   -- qsort
@@ -80,4 +104,11 @@ main = do
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "<=" ((<=) :: Int -> Int -> Bool)
     , prif (undefined :: [Int])
+    ]
+
+  -- unreachable: needs about 26, but can only reach 16
+  conjureWithMaxSize 12 "merge" merge'
+    [ prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "compare" (compare :: Int -> Int -> Ordering)
+    , primOrdCaseFor (undefined :: [Int])
     ]
