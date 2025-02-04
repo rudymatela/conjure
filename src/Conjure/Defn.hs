@@ -169,6 +169,8 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   -- ef' :$ exprExpr ex :$ exprExpr ey :$ ...
   red :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
   red n m e  |  size e > n  =  err "argument-size limit reached"
+  -- prevent recursion into negatives:
+  -- red n m e  |  any isNegative (unfoldApp e)  =  err "recursion into negatives"
   red n m e  =  case lookup e m of
     Just Nothing -> err $ "loop detected " ++ show e
     Just (Just d) -> Just (n,m,d)
