@@ -46,7 +46,7 @@ tests n  =
   , errorToLeft (dvl factDefn (factV :$ val (10 :: Int)))
     == Right (3628800 :: Int)
   , errorToLeft (dvl factDefn (factV :$ val (11 :: Int)) == (39916800 :: Int))
-    == Left "toDynamicWithDefn: recursion limit reached"
+    == Left "Conjure.Defn.toDynamicWithDefn: recursion limit reached"
 
   , dvl fact1Defn (factV :$ val (0 :: Int)) == (1 :: Int)
   , dvl fact1Defn (factV :$ val (1 :: Int)) == (1 :: Int)
@@ -57,7 +57,7 @@ tests n  =
   , errorToLeft (dvl fact1Defn (factV :$ val (10 :: Int)))
     == Right (3628800 :: Int)
   , errorToLeft (dvl fact1Defn (factV :$ val (11 :: Int)) == (39916800 :: Int))
-    == Left "toDynamicWithDefn: recursion limit reached"
+    == Left "Conjure.Defn.toDynamicWithDefn: recursion limit reached"
 
   , dvl isZeroDefn (isZeroV :$ val (0 :: Int)) == True
   , dvl isZeroDefn (isZeroV :$ val (1 :: Int)) == False

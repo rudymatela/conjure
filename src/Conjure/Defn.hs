@@ -136,8 +136,8 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
 
   -- recursively evaluate an expression, the entry point
   re :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
-  re n m _  | length m > mx  =  error "toDynamicWithDefn: recursion limit reached"
-  re n m _  | n <= 0  =  error "toDynamicWithDefn: evaluation limit reached"
+  re n m _  | length m > mx  =  err "recursion limit reached"
+  re n m _  | n <= 0  =  err "evaluation limit reached"
   re n m (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev n m ec of
     Nothing    -> Nothing
     Just (n,m,True)  -> re n m ex
@@ -151,7 +151,7 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
     Just (n,m,True)  -> re n m eq
     Just (n,m,False) -> (n,m,) <$> toDynamic (val False)
   re n m e  =  case unfoldApp e of
-    [] -> error "toDynamicWithDefn: empty application unfold"  -- should never happen
+    [] -> err "empty application unfold"  -- should never happen
     [e] -> (n-1,m,) <$> toDynamic e
     (ef:exs) | ef == ef' -> red n m (foldApp (ef:map exprExpr exs))
              | otherwise -> foldl ($$) (re n m ef) exs
@@ -168,12 +168,12 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   -- should only be used to evaluate an expr of the form:
   -- ef' :$ exprExpr ex :$ exprExpr ey :$ ...
   red :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
-  red n m e  |  size e > n  =  error "toDynamicWithDefn: argument-size limit reached"
+  red n m e  |  size e > n  =  err "argument-size limit reached"
   red n m e  =  case lookup e m of
-    Just Nothing -> error $ "toDynamicWithDefn: loop detected " ++ show e
+    Just Nothing -> err $ "loop detected " ++ show e
     Just (Just d) -> Just (n,m,d)
     Nothing -> case [re n ((e,Nothing):m) $ e' //- bs | (a',e') <- cx, Just bs <- [e `match` a']] of
-               [] -> error $ "toDynamicWithDefn: unhandled pattern " ++ show e
+               [] -> err $ "unhandled pattern " ++ show e
                (Nothing:_) -> Nothing
                (Just (n,m,d):_) -> Just (n,[(e',if e == e' then Just d else md) | (e',md) <- m],d)
 
@@ -182,6 +182,9 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
                           Nothing -> Nothing
                           Just (n', m', d2) -> (n',m',) <$> dynApply d1 d2
   _ $$ _               =  Nothing
+
+  err msg  =  -- trace (m ++ " for:\n" ++ showDefn cx)
+    error m  where  m = "Conjure.Defn.toDynamicWithDefn: " ++ msg
 
 -- | Evaluates an 'Expr' expression into 'Just' a regular Haskell value
 --   using a 'Defn' definition when it is found.
@@ -215,7 +218,7 @@ deval ee n fxpr x  =  fromMaybe x . devaluate ee n fxpr
 -- TODO: remove this from the interface?
 devalFast :: Typeable a => (Expr -> Expr) -> Int -> Defn -> a -> Expr -> a
 devalFast _ n [defn] x  =  reval defn n x
-devalFast _ _ _ _  =  error "devalFast: only works for singleton definitions"
+devalFast _ _ _ _  =  error "Conjure.Defn.devalFast: only works for singleton definitions"
 
 -- | Evaluates an 'Expr' expression into a regular Haskell value
 --   using a 'Defn' definition when it is found in the given expression.
@@ -226,7 +229,7 @@ devalFast _ _ _ _  =  error "devalFast: only works for singleton definitions"
 --
 -- (cf. 'toDynamicWithDefn', 'devaluate', deval')
 devl :: Typeable a => (Expr -> Expr) -> Int -> Defn -> Expr -> a
-devl ee n fxpr  =  deval ee n fxpr (error "devl: incorrect type?")
+devl ee n fxpr  =  deval ee n fxpr (error "Conjure.Defn.devl: incorrect type?")
 
 -- | Returns whether the given definition 'apparentlyTerminates'.
 defnApparentlyTerminates :: Defn -> Bool
