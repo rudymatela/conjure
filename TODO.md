@@ -3,24 +3,10 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* fix infinite recursions through unmatches zeroes (see below)
-
 * improve documentation of `conjureIsDeconstruction`.
   Document behaviour outside of function, not inside of it.
 
 * consider non top-level cases
-
-
-## Infinite recursions through unmatched zeroes
-
-Consider the following:
-
-	foo 1  =  1
-	foo n  =  n + foo (n - 1)
-
-In this case, we want the function to be undefined for 0 with a guard.  Perhaps
-implicitly in the inner workings, perhaps explicitly through a custom show
-instance too...  I have to think about this.
 
 
 ## Non top-level cases
