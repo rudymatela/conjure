@@ -66,7 +66,3 @@ primitivesWithFold :: [Prim]
 primitivesWithFold  =
     prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
   : primitives
-
--- sum xs      =  if null xs then 0 else head xs + sum (tail xs)
--- product xs  =  if null xs then 1 else head xs * product (tail xs)
---                1  2    3       4      5    6  7 8        9    10 symbols

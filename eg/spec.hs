@@ -32,9 +32,6 @@ sumSpec sum  =  sum []      == 0
              && sum [1,2]   == 3
              && sum [3,4,5] == 12
 
--- hoping for something like
--- sum xs  =  if null xs then 0 else head xs + sum (tail xs)
-
 sumPrimitives :: [Prim]
 sumPrimitives  =
   [ prim "null" (null :: [Int] -> Bool)
@@ -49,9 +46,6 @@ appSpec :: ([Int] -> [Int] -> [Int]) -> Bool
 appSpec (++)  =  []      ++ [0,1]   == [0,1]
               && [2,3]   ++ []      == [2,3]
               && [4,5,6] ++ [7,8,9] == [4,5,6,7,8,9]
-
--- hoping for something like
--- app xs ys = if null xs then ys else head xs : app (tail xs) ys
 
 appPrimitives :: [Prim]
 appPrimitives =

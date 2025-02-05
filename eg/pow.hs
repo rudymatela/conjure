@@ -22,9 +22,6 @@ main  =  do
     , prim "-" ((-) :: Int -> Int -> Int)
     ]
 
-  -- pow b e  =  if e == 0 then 1 else pow b (halve e) * pow b (halve e) * if odd e then b else 1
-  --             1  2  3 4      5      6   7  8     9 10 11 12  13   14 15 16 17  18    19     20
-  -- -- OR --
   -- pow b 0  =  1
   -- pow b e  =  pow b (halve e) * pow b (halve e) * if odd e then b else 1
   --             2   3  4     5  6 7   8  9    10 11 12 13 14     15     16

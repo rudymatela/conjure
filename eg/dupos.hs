@@ -47,14 +47,6 @@ positionsFrom' n x (y:ys)  =  if y == x                           --  4
 
 main :: IO ()
 main = do
-  -- duplicates xs  =
-  --   if null xs                                                                   --  3
-  --   then []                                                                      --  4
-  --   else if head xs `elem` tail xs && not (head xs `elem` duplicates (tail xs))  -- 18
-  --        then head xs : duplicates (tail xs)                                     -- 24
-  --        else duplicates (tail xs)                                               -- 27
-  -- out of reach memory and performance wise
-  -- -- OR --
   -- duplicates []  =  []                                                  --  1
   -- duplicates (x:xs)  =  if x `elem` xs && not (x `elem` duplicates xs)  -- 11
   --                       then x : duplicates xs                          -- 15
