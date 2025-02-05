@@ -144,7 +144,37 @@ conjure0  =  conjure0With args
 -- | Like 'conjure' but allows setting the maximum size of considered expressions
 --   instead of the default value of 12.
 --
--- > conjureWithMaxSize 10 "function" function [...]
+-- > conjureWithMaxSize 18 "function" function [...]
+--
+-- For example, given the following partial definition for 'Data.List.insert':
+--
+-- > insert' :: Int -> [Int] -> [Int]
+-- > insert' 0 []  =  [0]
+-- > insert' 0 [1,2]  =  [0,1,2]
+-- > insert' 1 [0,2]  =  [0,1,2]
+-- > insert' 2 [0,1]  =  [0,1,2]
+--
+-- Conjure is able to find an appropriate definition at size 17
+-- with the following primitives:
+--
+-- > > conjureWithMaxSize 18 "insert" insert'
+-- > >   [ prim "[]" ([] :: [Int])
+-- > >   , prim ":" ((:) :: Int -> [Int] -> [Int])
+-- > >   , prim "<=" ((<=) :: Int -> Int -> Bool)
+-- > >   , prif (undefined :: [Int])
+-- > >   ]
+-- > insert :: Int -> [Int] -> [Int]
+-- > -- testing 4 combinations of argument values
+-- > -- pruning with 4/4 rules
+-- > -- ...  ...  ...
+-- > -- looking through 14550 candidates of size 17
+-- > -- tested 14943 candidates
+-- > insert x []  =  [x]
+-- > insert x (y:xs)  =  if x <= y
+-- >                     then x:insert y xs
+-- >                     else y:insert x xs
+--
+-- The default maximum size of 12 would not be enough for the above definition.
 conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
 conjureWithMaxSize sz  =  conjureWith args
                        {  maxSize = sz
@@ -223,13 +253,13 @@ args = Args
 
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
 --
--- > conjureWith args{maxSize = 11} "function" function [...]
+-- > conjureWith args{maxSize = 18} "function" function [...]
 conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
 conjureWith args nm f  =  conjure0With args nm f (const True)
 
 -- | Like 'conjureFromSpec' but allows setting options through 'Args'/'args'.
 --
--- > conjureFromSpecWith args{maxSize = 11} "function" spec [...]
+-- > conjureFromSpecWith args{maxSize = 18} "function" spec [...]
 conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
 conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
