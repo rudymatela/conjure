@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* bump copyright year
-
 * review main haddock documentation
 
 * consider non top-level cases

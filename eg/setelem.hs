@@ -1,4 +1,7 @@
 -- setelem.hs: elem and set functions
+--
+-- Copyright (C) 2021-2025 Rudy Matela
+-- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
 
 elem' :: Int -> [Int] -> Bool

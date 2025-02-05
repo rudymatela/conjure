@@ -1,6 +1,6 @@
 -- Print unique candidates
 --
--- Copyright (C) 2023-2024 Rudy Matela
+-- Copyright (C) 2023-2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 --
 -- This can be used to track

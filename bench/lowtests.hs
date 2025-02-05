@@ -1,6 +1,6 @@
 -- lowtests.hs: conjuring with a low number of tests
 --
--- Copyright (C) 2021-2024 Rudy Matela
+-- Copyright (C) 2021-2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 --
 -- With a low number of tests Conjure may not be able to find the actual

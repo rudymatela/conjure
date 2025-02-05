@@ -1,6 +1,6 @@
 -- maybe.hs: conjuring functions over maybe values
 --
--- Copyright (C) 2024 Rudy Matela
+-- Copyright (C) 2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
 

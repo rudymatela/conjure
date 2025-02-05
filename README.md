@@ -368,7 +368,7 @@ The `eg` folder in the source distribution
 contains more than 60 examples of use.
 
 
-Conjure, Copyright 2021-2024  Rudy Matela,
+Conjure, Copyright 2021-2025  Rudy Matela,
 distribued under the 3-clause BSD license.
 
 

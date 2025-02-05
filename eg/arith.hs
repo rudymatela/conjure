@@ -1,6 +1,6 @@
 -- arith.hs: conjuring simple non-recursive numeric functions
 --
--- Copyright (C) 2021-2024 Rudy Matela
+-- Copyright (C) 2021-2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
 
