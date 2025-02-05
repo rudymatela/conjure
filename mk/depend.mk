@@ -224,23 +224,6 @@ bench/strategies.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/strategies.hs
-bench/take-drop: \
-  bench/take-drop.hs \
-  mk/toplibs
-bench/take-drop.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/Red.hs \
-  src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
-  src/Conjure.hs \
-  src/Conjure/Expr.hs \
-  src/Conjure/Engine.hs \
-  src/Conjure/Defn/Test.hs \
-  src/Conjure/Defn/Redundancy.hs \
-  src/Conjure/Defn.hs \
-  src/Conjure/Conjurable.hs \
-  src/Conjure/Conjurable/Derive.hs \
-  bench/take-drop.hs
 bench/terpret: \
   bench/terpret.hs \
   mk/toplibs
@@ -343,6 +326,40 @@ eg/bst.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/bst.hs
+eg/colin/IntFuns: \
+  eg/colin/IntFuns.hs \
+  mk/toplibs
+eg/colin/IntFuns.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/colin/IntFuns.hs
+eg/colin/ListFuns: \
+  eg/colin/ListFuns.hs \
+  mk/toplibs
+eg/colin/ListFuns.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/colin/ListFuns.hs
 eg/count: \
   eg/count.hs \
   mk/toplibs
@@ -666,6 +683,23 @@ eg/subset.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/subset.hs
+eg/take-drop: \
+  eg/take-drop.hs \
+  mk/toplibs
+eg/take-drop.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/take-drop.hs
 eg/tapps: \
   eg/tapps.hs \
   mk/toplibs

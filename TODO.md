@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* move take-drop from bench to example
-
 * review main haddock documentation
 
 * consider non top-level cases

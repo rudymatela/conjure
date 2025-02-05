@@ -50,6 +50,7 @@ eg/tree
 eg/bst
 eg/replicate
 eg/setelem
+eg/take-drop
 eg/sort
 eg/subset
 eg/spec
@@ -59,7 +60,6 @@ bench/strategies
 bench/self
 bench/longshot
 bench/ill-hit
-bench/take-drop
 bench/p12
 bench/p30
 bench/candidates

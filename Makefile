@@ -38,6 +38,7 @@ EG = \
   eg/pow \
   eg/replicate \
   eg/setelem \
+  eg/take-drop \
   eg/sort \
   eg/subset \
   eg/spec \
@@ -53,7 +54,6 @@ EG = \
   bench/strategies \
   bench/self \
   bench/carry-on \
-  bench/take-drop \
   bench/p12 \
   bench/p30 \
   bench/gps \

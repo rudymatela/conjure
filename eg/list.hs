@@ -109,4 +109,4 @@ main = do
     ]
 
   -- for elem, please see eg/setelem.hs
-  -- for take and drop, please see bench/take-drop.hs
+  -- for take and drop, please see eg/take-drop.hs
