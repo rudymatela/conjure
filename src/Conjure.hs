@@ -55,9 +55,6 @@ module Conjure
   , conjureWith
   , Args(..)
   , args
-  , Expr
-  , val
-  , value
 
 -- * Conjuring from a specification
   , conjureFromSpec
@@ -65,6 +62,9 @@ module Conjure
 
 -- * When using custom types
   , Conjurable (conjureExpress, conjureEquality, conjureTiers, conjureCases, conjureSubTypes, conjureSize)
+  , Expr
+  , val
+  , value
   , reifyExpress
   , reifyEquality
   , reifyTiers
