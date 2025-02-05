@@ -196,7 +196,7 @@ data Args = Args
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
-  , showCandidates        :: Int  -- ^ (debug) show candidates up to this size
+  , showCandidates        :: Bool -- ^ (debug) show candidates -- warning: wall of text
   , showTests             :: Bool -- ^ (debug) show tests
   , showDeconstructions   :: Bool -- ^ (debug) show conjecture-and-allowed deconstructions
 
@@ -236,7 +236,7 @@ args = Args
   , carryOn                =  False
   , showTheory             =  False
   , usePatterns            =  True
-  , showCandidates         =  0
+  , showCandidates         =  False
   , showTests              =  False
   , showDeconstructions    =  False
 
@@ -300,7 +300,7 @@ conjure0With args nm f p es  =  do
   pr n t ((is,cs):rs)  =  do
     let nc  =  length cs
     putStrLn $ "-- looking through " ++ show nc ++ " candidates of size " ++ show n
-    when (n <= showCandidates args) $
+    when (showCandidates args) $
       putStr $ unlines $ ["{-"] ++ map showDefn cs ++ ["-}"]
     case is of
       []     ->  pr (n+1) (t+nc) rs
