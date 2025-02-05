@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* review main haddock documentation
+* review README, replace square by factorial as the first example
 
 * consider non top-level cases
 
