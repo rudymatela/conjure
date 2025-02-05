@@ -41,7 +41,6 @@ main = do
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , pr ([] :: [A])
-    , prim "||" ((||) :: Bool -> Bool -> Bool)
     , prim "-" ((-) :: Int -> Int -> Int)
     , prim ":" ((:) :: A -> [A] -> [A])
     ]
