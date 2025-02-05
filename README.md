@@ -49,51 +49,7 @@ To use Conjure, import the library with:
 
 Then, declare a partial definition of a function to be synthesized.
 For example,
-here is a partial implementation of a function that squares a number:
-
-	square :: Int -> Int
-	square 0  =  0
-	square 1  =  1
-	square 2  =  4
-
-Next, declare a list of primitives that seem like interesting pieces
-in the final fully-defined implementation.
-For example,
-here is a list of primitives including
-addition, multiplication and their neutral elements:
-
-	primitives :: [Prim]
-	primitives  =  [ pr (0::Int)
-	               , pr (1::Int)
-	               , prim "+" ((+) :: Int -> Int -> Int)
-	               , prim "*" ((*) :: Int -> Int -> Int)
-	               ]
-
-Finally, call the [`conjure`] function,
-passing the function name, the partial definition and the list of primitives:
-
-	> conjure "square" square primitives
-	square :: Int -> Int
-	-- testing 3 combinations of argument values
-	-- pruning with 14/25 rules
-	-- looking through 3 candidates of size 1
-	-- looking through 4 candidates of size 2
-	-- looking through 9 candidates of size 3
-	square x  =  x * x
-
-Conjure is able to synthesize the above implementation in less than a second.
-
-For more information, see the `eg/arith.hs` example and
-the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
-
-
-Synthesizing recursive functions
---------------------------------
-
-Conjure supports synthetization of recursive functions.
-
-Take for example the following partial implementation of a function
-that computes the factorial of a number:
+here is a partial implementation of a function that computes the factorial of a number:
 
 	factorial :: Int -> Int
 	factorial 1  =  1
@@ -101,7 +57,11 @@ that computes the factorial of a number:
 	factorial 3  =  6
 	factorial 4  =  24
 
-Here is a list of primitives:
+Next, declare a list of primitives that seem like interesting pieces
+in the final fully-defined implementation.
+For example,
+here is a list of primitives including
+addition, multiplication, subtraction and their neutral elements:
 
 	primitives :: [Prim]
 	primitives  =  [ pr (0::Int)
@@ -111,24 +71,25 @@ Here is a list of primitives:
 	               , prim "-" ((-) :: Int -> Int -> Int)
 	               ]
 
-And here is what Conjure produces
-with the above partial definition and list of primitives:
+Finally, call the [`conjure`] function,
+passing the function name, the partial definition and the list of primitives:
 
-	> conjure "factorial" factorial primitives
 	factorial :: Int -> Int
 	-- testing 4 combinations of argument values
 	-- pruning with 27/65 rules
 	-- looking through 3 candidates of size 1
-	-- looking through 4 candidates of size 2
-	-- looking through 13 candidates of size 3
-	-- looking through 34 candidates of size 4
-	-- looking through 75 candidates of size 5
-	-- looking through 183 candidates of size 6
-	-- looking through 577 candidates of size 7
+	-- looking through 3 candidates of size 2
+	-- looking through 7 candidates of size 3
+	-- looking through 8 candidates of size 4
+	-- looking through 28 candidates of size 5
+	-- looking through 35 candidates of size 6
+	-- looking through 167 candidates of size 7
+	-- tested 95 candidates
 	factorial 0  =  1
 	factorial x  =  x * factorial (x - 1)
 
-The above synthetization takes less than a second.
+Conjure is able to synthesize the above implementation in less than a second
+in a regular laptop computer.
 
 It is also possible to generate a folding implementation
 like the following:
@@ -139,6 +100,47 @@ by including [`enumFromTo`] and [`foldr`] in the background.
 
 For more information, see the `eg/factorial.hs` example and
 the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
+
+
+Synthesizing functions over algebraic data types
+------------------------------------------------
+
+Conjure is not limited to integers,
+it works for functions over algebraic data types too.
+Consider the following partial definition of `take`:
+
+	take' :: Int -> [a] -> [a]
+	take' 0 [x]    =  []
+	take' 1 [x]    =  [x]
+	take' 0 [x,y]  =  []
+	take' 1 [x,y]  =  [x]
+	take' 2 [x,y]  =  [x,y]
+	take' 3 [x,y]  =  [x,y]
+
+Conjure is able to find an appropriate implementation
+given list constructors, zero, one and subtraction:
+
+	> conjure "take" (take' :: Int -> [A] -> [A])
+	>   [ pr (0 :: Int)
+	>   , pr (1 :: Int)
+	>   , pr ([] :: [A])
+	>   , prim ":" ((:) :: A -> [A] -> [A])
+	>   , prim "-" ((-) :: Int -> Int -> Int)
+	>   ]
+	take :: Int -> [A] -> [A]
+	-- testing 153 combinations of argument values
+	-- pruning with 4/7 rules
+	-- ...  ...  ...
+	-- looking through 58 candidates of size 9
+	-- tested 104 candidates
+	take 0 xs  =  []
+	take x []  =  []
+	take x (y:xs)  =  y:take (x - 1) xs
+
+The above example also takes less than a second to run in a modern laptop.
+The selection of functions in the list of primitives was minimized
+to what was absolutely needed here.
+With a larger collection as primitives YMMV.
 
 
 Synthesizing from specifications (for advanced users)
@@ -155,6 +157,9 @@ for one of two reasons:
 
 Take for example a function `duplicates :: Eq a => [a] -> [a]`
 that should return the duplicate elements in a list without repetitions.
+
+We will first try to use a partial definition to arrive at an appropriate result.
+Then we'll see how to use [`conjureFromSpec`].
 
 Let's start with the primitives:
 
