@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* consider the size of patterns to thin-out each size partition
+
 * consider non top-level cases
 
 
