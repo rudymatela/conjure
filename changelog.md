@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.6.0 (February 2025)
+----------------------
 
 * `Args` record: add `showCandidates`, `showTests` and `showDeconstructions`
   to make it easier to see what Conjure is doing.
