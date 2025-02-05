@@ -53,26 +53,6 @@ last' [x]  =  x
 last' [x,y]  =  y
 last' [x,y,z]  =  z
 
-elem' :: Int -> [Int] -> Bool
-elem' 0 []  =  False
-elem' 1 [0]  =  False
-elem' 1 [1]  =  True
-elem' 0 [0,0]  =  True
-elem' 0 [0,1]  =  True
-elem' 0 [1,0]  =  True
-elem' 0 [1,1]  =  False
-
-take' :: Int -> [Int] -> [Int]
-take' 1 [0,1,2]  =  [0]
-take' 2 [0,1,2]  =  [0,1]
-take' 3 [0,0,0]  =  [0,0,0]
-
-drop' :: Int -> [Int] -> [Int]
-drop' 0 [0,1]  =  [0,1]
-drop' 1 [0,1,2]  =  [1,2]
-drop' 2 [0,1,2]  =  [2]
-drop' 3 [0,0,0]  =  []
-
 main :: IO ()
 main = do
   conjure "length" length'
@@ -128,26 +108,5 @@ main = do
     , prim "tail" (tail :: [Int] -> [Int])
     ]
 
-  conjure "elem" elem'
-    [ pr False
-    , pr True
-    , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "||" (||)
-    , prim "&&" (&&)
-    ]
-
-  conjure "take" take'
-    [ prim "[]" ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
-    ]
-
-  conjure "drop" drop'
-    [ prim "[]" ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
-    ]
+  -- for elem, please see eg/setelem.hs
+  -- for take and drop, please see bench/take-drop.hs
