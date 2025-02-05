@@ -30,9 +30,6 @@ primitives =
   , prim "not" not
   , prim "||" (||)
   , prim "&&" (&&)
-  , prim "null" (null :: [Bool] -> Bool)
-  , prim "head" (head :: [Bool] -> Bool)
-  , prim "tail" (tail :: [Bool] -> [Bool])
   ]
 
 primitivesWithFold :: [Prim]
