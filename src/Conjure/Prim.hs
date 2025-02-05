@@ -28,13 +28,24 @@ import Test.LeanCheck.Error (errorToFalse)
 import Test.LeanCheck.Utils
 
 
--- | A primtive expression (paired with instance reification).
+-- | A primitive expression (paired with instance reification).
+--   Create 'Prim's with 'pr' and 'prim'.
 type Prim  =  (Expr, Reification)
 
 
 -- | Provides a primitive value to Conjure.
 --   To be used on 'Show' instances.
 --   (cf. 'prim')
+--
+-- > conjure "fun" fun [ pr False
+-- >                   , pr True
+-- >                   , pr (0 :: Int)
+-- >                   , pr (1 :: Int)
+-- >                   , ...
+-- >                   ]
+--
+-- Argument types have to be monomorphized,
+-- so use type bindings when applicable.
 pr :: (Conjurable a, Show a) => a -> Prim
 pr x  =  (val x, conjureType x)
 
@@ -43,16 +54,71 @@ pr x  =  (val x, conjureType x)
 --   To be used on values that are not 'Show' instances
 --   such as functions.
 --   (cf. 'pr')
+--
+-- > conjure "fun" fun [ ...
+-- >                   , prim "&&" (&&)
+-- >                   , prim "||" (||)
+-- >                   , prim "+" ((+) :: Int -> Int -> Int)
+-- >                   , prim "*" ((*) :: Int -> Int -> Int)
+-- >                   , prim "-" ((-) :: Int -> Int -> Int)
+-- >                   , ...
+-- >                   ]
+--
+-- Argument types have to be monomorphized,
+-- so use type bindings when applicable.
 prim :: Conjurable a => String -> a -> Prim
 prim s x  =  (value s x, conjureType x)
 
 
 -- | Provides an if condition bound to the given return type.
+--
+-- This should be used when one wants Conjure to consider
+-- if-expressions at all:
+--
+-- > last' :: [Int] -> Int
+-- > last' [x]  =  x
+-- > last' [x,y]  =  y
+-- > last' [x,y,z]  =  z
+--
+-- > > conjure "last" last' [ pr ([] :: [Int])
+-- > >                      , prim ":" ((:) :: Int -> [Int] -> [Int])
+-- > >                      , prim "null" (null :: [Int] -> Bool)
+-- > >                      , prif (undefined :: Int)
+-- > >                      , prim "undefined" (undefined :: Int)
+-- > >                      ]
+-- > last :: [Int] -> Int
+-- > -- ...  ...  ...
+-- > -- looking through 4 candidates of size 7
+-- > -- tested 5 candidates
+-- > last []  =  undefined
+-- > last (x:xs)  =  if null xs
+-- >                 then x
+-- >                 else last xs
 prif :: Conjurable a => a -> Prim
 prif x  =  (ifFor x, conjureType x)
 
 
 -- | Provides a case condition bound to the given return type.
+--
+-- This should be used when one wants Conjure to consider ord-case expressions:
+--
+-- > > conjure "mem" mem
+-- > >   [ pr False
+-- > >   , pr True
+-- > >   , prim "`compare`" (compare :: Int -> Int -> Ordering)
+-- > >   , primOrdCaseFor (undefined :: Bool)
+-- > >   ]
+-- > mem :: Int -> Tree -> Bool
+-- > -- ...  ...  ...
+-- > -- looking through 384 candidates of size 12
+-- > -- tested 371 candidates
+-- > mem x Leaf  =  False
+-- > mem x (Node t1 y t2)  =  case x `compare` y of
+-- >                          LT -> mem x t1
+-- >                          EQ -> True
+-- >                          GT -> mem x t2
+
+
 primOrdCaseFor :: Conjurable a => a -> Prim
 primOrdCaseFor x  =  (caseForOrd x, conjureType x)
 

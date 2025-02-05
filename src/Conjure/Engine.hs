@@ -65,10 +65,10 @@ import Conjure.Reason
 --
 -- For example, given:
 --
--- > square :: Int -> Int
--- > square 0  =  0
--- > square 1  =  1
--- > square 2  =  4
+-- > factorial :: Int -> Int
+-- > factorial 2  =  2
+-- > factorial 3  =  6
+-- > factorial 4  =  24
 -- >
 -- > primitives :: [Prim]
 -- > primitives =
@@ -76,18 +76,20 @@ import Conjure.Reason
 -- >   , pr (1::Int)
 -- >   , prim "+" ((+) :: Int -> Int -> Int)
 -- >   , prim "*" ((*) :: Int -> Int -> Int)
+-- >   , prim "-" ((-) :: Int -> Int -> Int)
 -- >   ]
 --
 -- The conjure function does the following:
 --
--- > > conjure "square" square primitives
--- > square :: Int -> Int
--- > -- pruning with 14/25 rules
+-- > > conjure "factorial" factorial primitives
+-- > factorial :: Int -> Int
 -- > -- testing 3 combinations of argument values
--- > -- looking through 3 candidates of size 1
--- > -- looking through 3 candidates of size 2
--- > -- looking through 5 candidates of size 3
--- > square x  =  x * x
+-- > -- pruning with 27/65 rules
+-- > -- ...  ...  ...
+-- > -- looking through 185 candidates of size 7
+-- > -- tested 107 candidates
+-- > factorial 0  =  1
+-- > factorial x  =  x * factorial (x - 1)
 --
 -- The primitives list is defined with 'pr' and 'prim'.
 conjure :: Conjurable f => String -> f -> [Prim] -> IO ()

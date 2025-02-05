@@ -8,16 +8,12 @@
 -- from tests or partial definitions.
 -- (a.k.a.: functional inductive programming)
 --
--- This is currently an experimental tool in its early stages,
--- don't expect much from its current version.
--- It is just a piece of curiosity in its current state.
---
 -- Step 1: declare your partial function
 --
--- > square :: Int -> Int
--- > square 0  =  0
--- > square 1  =  1
--- > square 2  =  4
+-- > factorial :: Int -> Int
+-- > factorial 2  =  2
+-- > factorial 3  =  6
+-- > factorial 4  =  24
 --
 -- Step 2: declare a list with the potential building blocks:
 --
@@ -27,18 +23,28 @@
 -- >   , pr (1::Int)
 -- >   , prim "+" ((+) :: Int -> Int -> Int)
 -- >   , prim "*" ((*) :: Int -> Int -> Int)
+-- >   , prim "-" ((-) :: Int -> Int -> Int)
 -- >   ]
 --
--- Step 3: call conjure and see your generated function:
+-- Step 3: call 'conjure' and see your generated function:
 --
--- > > conjure "square" square primitives
--- > square :: Int -> Int
+-- > factorial :: Int -> Int
 -- > -- testing 3 combinations of argument values
--- > -- pruning with 14/25 rules
+-- > -- pruning with 27/65 rules
 -- > -- looking through 3 candidates of size 1
--- > -- looking through 4 candidates of size 2
+-- > -- looking through 3 candidates of size 2
 -- > -- looking through 9 candidates of size 3
--- > square x  =  x * x
+-- > -- looking through 10 candidates of size 4
+-- > -- looking through 32 candidates of size 5
+-- > -- looking through 39 candidates of size 6
+-- > -- looking through 185 candidates of size 7
+-- > -- tested 107 candidates
+-- > factorial 0  =  1
+-- > factorial x  =  x * factorial (x - 1)
+--
+-- Factorial is discovered from scratch through a search.
+-- We prune the search space using properties discovered
+-- from the results of testing.
 {-# LANGUAGE CPP #-}
 module Conjure
   (
