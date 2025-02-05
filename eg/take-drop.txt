@@ -14,7 +14,7 @@ drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
 
 take :: Int -> [A] -> [A]
--- testing 143 combinations of argument values
+-- testing 153 combinations of argument values
 -- pruning with 14/21 rules
 -- looking through 2 candidates of size 1
 -- looking through 3 candidates of size 2
