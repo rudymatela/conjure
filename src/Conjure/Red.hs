@@ -19,20 +19,69 @@ import Conjure.Defn
 import Conjure.Conjurable
 import Test.LeanCheck.Error (errorToFalse, errorToTrue)
 
--- | Checks if an expression is a deconstruction.
+-- | Returns whether an expression is a deconstruction
+--   based on the results of testing.
 --
--- There should be a single 'hole' in the expression.
+-- This function takes three arguments:
 --
--- It should decrease the size of all arguments that have
--- a size greater than 0.
+-- 1. a (conjurable) function from where type info is obtained
+-- 2. the maximum number of tests
+-- 3. an 'Expr' of a possible deconstruction.
+--
+-- Deconstructions are expressions that
+-- decrease the size of all arguments
+-- that have a size greater than 0.
+-- Here are some examples:
+--
+-- > > import Data.Express.Fixtures
+-- > > conjureIsDeconstruction (undefined::Int->Int) 60 (minus :$ i_ :$ one)
+-- > True
+--
+-- > > conjureIsDeconstruction (undefined::[Int]->Int) 60 (tail' is_)
+-- > True
+--
+-- > > conjureIsDeconstruction (undefined::Int->Int) 60 (minus :$ i_ :$ two)
+-- > True
+--
+-- > let decs = [minus :$ i_ :$ one, tail' is_, minus :$ i_ :$ two]
+-- > > filter (conjureIsDeconstruction (undefined::[Int]->Int) 60) decs
+-- > [ _ - 1 :: Int
+-- > ,tail _ :: [Int]
+-- > ,_ - 2 :: Int
+-- > ]
+--
+-- Well formed deconstructions should have exactly one typed hole:
+--
+-- > > conjureIsDeconstruction (undefined :: Int -> Int) 60 (i_ -+- i_)
+-- > False
+--
+-- > > conjureIsDeconstruction (undefined :: Int -> Int) 60 (xx -+- one)
+-- > False
+--
+-- We can only deconstruct to the same type.
+-- Even though 'tail' is a deconstruction,
+-- 'head' is not.
+--
+-- > > conjureIsDeconstruction (undefined::[Int]->Int) 60 (head' is_)
+-- > False
+--
+-- Deconstructions should always reduce the size of expressions:
+--
+-- > > conjureIsDeconstruction (undefined::[Int]->Int) 60 (take' two is_)
+-- > False
+--
+-- Lastly we disallow deconstructions that always map to values of size 0.
+-- For the purposes of expression generation, in these cases
+-- we are better of not recursing at all and returning a constant value!
+--
+-- > > conjureIsDeconstruction (undefined::Int->Int) 60 (zero -*- i_)
+-- > False
 conjureIsDeconstruction :: Conjurable f => f -> Int -> Expr -> Bool
 conjureIsDeconstruction f maxTests ed
   =  length (holes ed) == 1  -- Well formed deconstruction, single hole.
   && typ h == typ ed         -- We can only deconstruct to the same type.
   && all is sizes            -- Do we always reduce size?
   && not (all iz sizes)      -- Disallow always mapping to values of size 0.
-                             -- In this case, we are better off not recursing
-                             -- and returning a constant value!
   where
   x << 0  =  True
   x << y  =  x < y

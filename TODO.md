@@ -3,9 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* improve documentation of `conjureIsDeconstruction`.
-  Document behaviour outside of function, not inside of it.
-
 * consider non top-level cases
 
 
