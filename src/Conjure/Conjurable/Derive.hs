@@ -27,8 +27,12 @@ import Data.Functor ((<$>))
 --
 -- This function needs the @TemplateHaskell@ extension.
 --
--- If '-:', '->:', '->>:', '->>>:', ... are not in scope,
--- this will derive them as well.
+-- If the "Data.Express"' type binding operators
+-- ('Data.Express.-:',
+--  'Data.Express.->:' or
+--  'Data.Express.->>:')
+-- are not in scope,
+-- this derives them as well.
 deriveConjurable :: Name -> DecsQ
 deriveConjurable  =  deriveWhenNeededOrWarn ''Conjurable reallyDerive
   where
