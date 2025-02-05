@@ -39,13 +39,10 @@ main = do
     , prim "==" ((==) :: A -> A -> Bool)
     ]
 
-  conjureWithMaxSize 16 "count" count'
+  conjure "count" count'
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "head" (head :: [A] -> A)
-    , prim "tail" (tail :: [A] -> [A])
-    , prim "null" (null :: [A] -> Bool)
     , prim "==" ((==) :: A -> A -> Bool)
     , prif (undefined :: Int)
     ]
