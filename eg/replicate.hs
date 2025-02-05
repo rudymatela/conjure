@@ -48,11 +48,8 @@ main = do
     ]
 
   -- alternative generation using recursion
-  conjureWith args{maxSize=13} "replicates" replicates'
+  conjure "replicates" replicates'
     [ pr ""
-    , prim "null" (null :: String -> Bool)
-    , prim "head" (head :: String -> Char)
-    , prim "tail" (tail :: String -> String)
     , prim ":" ((:) :: Char -> String -> String)
     , prim "++" ((++) :: String -> String -> String)
     , prim "replicate" (replicate :: Int -> Char -> String)

@@ -37,16 +37,16 @@ replicates cs x  =  concat (map (replicate x) cs)
 
 replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values
--- pruning with 9/14 rules
+-- pruning with 4/4 rules
 -- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 22 candidates of size 4
--- looking through 59 candidates of size 5
--- looking through 152 candidates of size 6
--- looking through 442 candidates of size 7
--- looking through 1223 candidates of size 8
--- tested 736 candidates
+-- looking through 1 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 12 candidates of size 6
+-- looking through 1 candidates of size 7
+-- looking through 34 candidates of size 8
+-- tested 24 candidates
 replicates "" x  =  ""
 replicates (c:cs) x  =  replicate x c ++ replicates cs x
 
