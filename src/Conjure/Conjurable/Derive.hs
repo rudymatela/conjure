@@ -29,19 +29,6 @@ import Data.Functor ((<$>))
 --
 -- If '-:', '->:', '->>:', '->>>:', ... are not in scope,
 -- this will derive them as well.
---
--- For now,
--- this function only derives
--- 'conjureEquality',
--- 'conjureTiers' and
--- 'conjureExpress'
--- and does not derive
--- 'conjureSubTypes',
--- 'conjureArgumentCases' and
--- 'conjureSize'.
--- These will be added in future versions.
--- If you plan to use features that depend on these functionalities,
--- please define your instances manually.
 deriveConjurable :: Name -> DecsQ
 deriveConjurable  =  deriveWhenNeededOrWarn ''Conjurable reallyDerive
   where
@@ -49,19 +36,6 @@ deriveConjurable  =  deriveWhenNeededOrWarn ''Conjurable reallyDerive
 
 -- | Same as 'deriveConjurable' but does not warn when instance already exists
 --   ('deriveConjurable' is preferable).
---
--- For now,
--- this function only derives
--- 'conjureEquality',
--- 'conjureTiers' and
--- 'conjureExpress'
--- and does not derive
--- 'conjureSubTypes',
--- 'conjureArgumentCases' and
--- 'conjureSize'.
--- These will be added in future versions.
--- If you plan to use features that depend on these functionalities,
--- please define your instances manually.
 deriveConjurableIfNeeded :: Name -> DecsQ
 deriveConjurableIfNeeded  =  deriveWhenNeeded ''Conjurable reallyDerive
   where
@@ -69,19 +43,6 @@ deriveConjurableIfNeeded  =  deriveWhenNeeded ''Conjurable reallyDerive
 
 -- | Derives a 'Conjurable' instance for a given type 'Name'
 --   cascading derivation of type arguments as well.
---
--- For now,
--- this function only derives
--- 'conjureEquality',
--- 'conjureTiers' and
--- 'conjureExpress'
--- and does not derive
--- 'conjureSubTypes',
--- 'conjureArgumentCases' and
--- 'conjureSize'.
--- These will be added in future versions.
--- If you plan to use features that depend on these functionalities,
--- please define your instances manually.
 deriveConjurableCascading :: Name -> DecsQ
 deriveConjurableCascading  =  deriveWhenNeeded ''Conjurable reallyDerive
   where
