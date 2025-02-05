@@ -111,6 +111,9 @@ type Reification  =  [Reification1] -> [Reification1]
 --
 -- Please see the source code of "Conjure.Conjurable" for more examples.
 --
+-- 'Conjurable' instances can be derived automatically using
+-- 'Conjure.deriveConjurable'.
+--
 -- (cf. 'reifyTiers', 'reifyEquality', 'conjureType')
 class (Typeable a, Name a) => Conjurable a where
   conjureArgumentHoles :: a -> [Expr]
