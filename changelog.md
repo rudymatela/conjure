@@ -7,6 +7,8 @@ upcoming
 
 * `Args` record: add `showCandidates`, `showTests` and `showDeconstructions`
   to make it easier to see what Conjure is doing.
+* require `0` as a base case when recursing over `Num`s,
+  can be disabled by setting `requireZero=False` on `Args`.
 * `conjpure*`: return a record rather than a tuple.
 * improve main documentation and introductory examples in Haddock and README.
 * improve Haddock documentation a bit throughout
