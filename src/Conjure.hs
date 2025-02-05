@@ -28,6 +28,7 @@
 --
 -- Step 3: call 'conjure' and see your generated function:
 --
+-- > > conjure "factorial" factorial primitives
 -- > factorial :: Int -> Int
 -- > -- testing 3 combinations of argument values
 -- > -- pruning with 27/65 rules
