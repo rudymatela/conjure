@@ -2,6 +2,19 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* `Args` record: add `showCandidates`, `showTests` and `showDeconstructions`
+  to make it easier to see what Conjure is doing.
+* `conjpure*`: return a record rather than a tuple.
+* improve main documentation and introductory examples in Haddock and README.
+* improve Haddock documentation a bit throughout
+  (`conjureIsDeconstruction`, `deriveConjurable`, etc).
+* slightly improve examples and benchmarks
+* (internal) improve debugging mechanisms of `Defn` evaluation functions.
+
+
 v0.5.16 (January 2025)
 ----------------------
 
