@@ -76,6 +76,7 @@ module Conjure
   , deriveConjurableCascading
 
 -- * Pure interfaces
+  , Results (..)
   , conjpure
   , conjpureWith
 

@@ -19,7 +19,7 @@ module Conjure.Engine
   , conjureFromSpecWith
   , conjure0
   , conjure0With
-  , Results
+  , Results(..)
   , conjpure
   , conjpureWith
   , conjpureFromSpec
@@ -285,27 +285,21 @@ conjure0With args nm f p es  =  do
   results  =  conjpure0With args nm f p es
   iss  =  implementationss results
   css  =  candidatess results
-  ts  =  tests results
+  ts   =  bindings results
   thy  =  theory results
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 
 
 -- | Results to the 'conjpure' family of functions.
---
--- It contains:
---
--- 1. tiers of implementations
--- 2. tiers of candidates
--- 3. a list of tests
--- 4. the underlying theory
--- 5. list of allowed deconstructions
+-- This is for advanced users.
+-- One is probably better-off using the 'conjure' family.
 data Results = Results
-  { implementationss :: [[Defn]]
-  , candidatess :: [[Defn]]
-  , tests :: [Expr]
-  , theory :: Thy
-  , deconstructions :: [Expr]
+  { implementationss :: [[Defn]] -- ^ tiers of implementations
+  , candidatess :: [[Defn]]      -- ^ tiers of candidates
+  , bindings :: [Expr]           -- ^ test bindings used to verify candidates
+  , theory :: Thy                -- ^ the underlying theory
+  , deconstructions :: [Expr]    -- ^ the list of allowed deconstructions
   }
 
 
@@ -342,7 +336,7 @@ conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] ->
 conjpure0With args@(Args{..}) nm f p es  =  Results
   { implementationss  =  implementationsT
   , candidatess  =  candidatesT
-  , tests  =  tests
+  , bindings  =  tests
   , theory  =  thy
   , deconstructions  =  deconstructions
   }
