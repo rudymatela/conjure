@@ -191,6 +191,7 @@ data Args = Args
   , maxEquationSize       :: Int  -- ^ maximum size of equation operands
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
+  , maxConstantSize       :: Maybe Int  -- ^ maximum size of constants
 
   -- advanced & debug options --
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
@@ -231,6 +232,7 @@ args = Args
   , maxEquationSize        =   5
   , maxSearchTests         =  100000
   , maxDeconstructionSize  =   4
+  , maxConstantSize        =  Nothing
 
   -- advanced & debug options --
   , carryOn                =  False
@@ -506,9 +508,12 @@ candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT filling
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
     where
     k | atomicNumbers && isNumeric eh  =  \e -> keepNumeric e && keep e
-      | otherwise                      =  keep
+      | otherwise                      =  \e -> keepConstant e && keep e
     -- discards non-atomic numeric ground expressions such as 1 + 1
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
+    keepConstant  =  case maxConstantSize of
+                     Nothing -> const True
+                     Just m  -> \e -> isFun e || isConst e || not (isGround e) || size e <= 3
 
   isRedundant | adHocRedundancy  =  \e -> isRedundantDefn e || isRedundantModuloRewriting (normalize thy) e
               | otherwise        =  const False
