@@ -1,18 +1,12 @@
 -- count.hs: elem and set functions
 import Conjure
 
+-- an idiomatic count without using filter
 count :: Eq a => a -> [a] -> Int
 count x  =  c
   where
   c []  =  0
   c (y:ys)  =  (if x == y then 1 else 0) + c ys
-
--- this is the expected function
-countIf :: A -> [A] -> Int
-countIf x xs  =  if null xs                                                 -- 3
-                 then 0                                                     -- 4
-                 else (if x == head xs then 1 else 0) + countIf x (tail xs) -- 16
-                 --    5  6 7   8   9      10     11 12   13   14   15  16
 
 count' :: A -> [A] -> Int
 count' 0 [0]  =  1
@@ -39,6 +33,8 @@ main = do
     , prim "==" ((==) :: A -> A -> Bool)
     ]
 
+  -- count x []  =  0
+  -- count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
   conjure "count" count'
     [ pr (0 :: Int)
     , pr (1 :: Int)
