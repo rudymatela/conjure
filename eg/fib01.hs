@@ -23,27 +23,29 @@ fibonacci  =  f 0 1
 
 main :: IO ()
 main  =  do
-  conjureWithMaxSize 5 "fib01" fib01
+  -- These two examples show that currently
+  -- functions with "many" argument (>=3)
+  -- are particularly hard for conjure to synthesize.
+  -- I've added an item in TODO.md to address this in 2025-02.
+
+  -- It takes about 33 seconds to run with maxSize=8
+  -- running with maxSize = 5 for faster runtime
+  conjureWith args{maxSize=5, maxConstantSize=Just 1} "fib01" fib01
     [ pr (0::Int)
     , prim "dec" (subtract 1 :: Int -> Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     ]
 
-  -- takes about 22 seconds to run with maxSize=12
-  conjureWith args{usePatterns = False, maxSize = 10} "fib01" fib01
+  -- It takes about 27 seconds to run with maxSize=12
+  -- running with maxSize = 9 for faster runtime
+  conjureWith args{usePatterns = False, maxSize = 1, maxConstantSize=Just 1} "fib01" fib01
     [ pr (0::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
     , prim "<=" ((<=) :: Int -> Int -> Bool)
+    , prif (undefined :: Int)
     ]
--- expected function:
--- fib01 x y z  =  if z <= 0 then y else fib01 y (x + y) (dec z)
---                 1  2 3  4      5      6     7  8 9 10  11 12
-
-  -- out of reach as well:
-  -- conjure "fib01" fib01
-  --   [ pr (0::Int)
-  --   , pr (1::Int)
-  --   , prim "+" ((+) :: Int -> Int -> Int)
-  --   , prim "-" ((-) :: Int -> Int -> Int)
-  --   ]
+  -- expected function:
+  -- fib01 x y z  =  if z <= 0                     -- 4
+  --                 then y                        -- 5
+  --                 else fib01 y (x + y) (dec z)  -- 12

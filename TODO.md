@@ -8,6 +8,47 @@ A non-exhaustive list of things TO DO for Conjure.
 * consider non top-level cases
 
 
+## Thin-out size partitions
+
+Consider the following two candidates:
+
+	fib01 x y z  =  dec x
+
+	fib01 x y 0  =  x
+	fib01 x y z  =  y
+
+They both currently have size 2.
+Perhaps the second should be bigger than the first?
+"Simple" solution:
+consider the number of (extra) patterns as part of the size.
+
+See the following two candidates of size 3:
+
+	fib01 x y z  =  x + x
+
+	fib01 x y 0  =  x
+	fib01 x y z  =  dec x
+
+The same thing can be said.
+
+Now a little bit more complex...
+The following two candidates appear at size 3 for fib01:
+
+	fib01 x 0 y  =  x
+	fib01 x y 0  =  y
+	fib01 x y z  =  0
+
+	fib01 x 0 0  =  x
+	fib01 x 0 y  =  y
+	fib01 x y z  =  0
+
+Shouldn't these two have different size?
+The second feels bigger than the first.
+Maybe the size of non-variable patterns should be taken into account.
+
+This relates to the eg/fib01 example.
+
+
 ## Non top-level cases
 
 Consider allowing non top-level cases,
