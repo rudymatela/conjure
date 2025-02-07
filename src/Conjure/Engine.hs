@@ -292,9 +292,7 @@ conjure0With args nm f p es  =  do
       putStr   $ unlines $ map showEq $ invalid thy
       putStrLn $ "-}"
   when (showPatterns args) $ do
-    putStrLn $ "{- List of allowed patterns:"
-    putStr   $ unlines $ map unlines $ mapT showDefn $ patternss results
-    putStrLn $ "-}"
+    putStr   $ unlines $ zipWith (\i -> (("-- allowed patterns of size " ++ show i ++ "\n{-\n") ++) . (++ "-}") . unlines) [1..] $ mapT showDefn $ patternss results
   when (showDeconstructions args) $ do
     putStrLn $ "{- List of allowed deconstructions:"
     putStr   $ unlines $ map show $ deconstructions results
