@@ -67,6 +67,11 @@ If one wants to increase size, one needs to push things to size "1".
 So the size is actually being considered.  One would need a delayedProducts to
 complete "1.".  Maybe it is better to start investigating from "2."
 
+The enumeration currently works like so:
+the size of patterns is defined by the number of patterns that are allowed to
+have _another_ option other than a simple variable.
+Perhaps these should be thinned-out in post processing to achieve "2."?
+
 
 ## Non top-level cases
 
