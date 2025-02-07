@@ -428,6 +428,31 @@ foo 1  =  1
 foo x  =  0 - x
 
 
+
+allowed patterns:
+
+foo x  =  _
+
+
+foo 0  =  _
+foo x  =  _
+
+
+foo 1  =  _
+foo x  =  _
+
+
+foo 0  =  _
+foo 1  =  _
+foo x  =  _
+
+
+
+
+allowed deconstructions:
+
+_ - 1 :: Int
+
 Candidates for: ? :: Int -> Int -> Int
   pruning with 13/34 rules
   [3,3,9,18,60,162,489,1475,4619] direct candidates, 0 duplicates
@@ -1586,6 +1611,42 @@ x ? y  =  x
 x ? y  =  dec x
 
 
+
+allowed patterns:
+
+x ? y  =  _
+
+
+x ? 0  =  _
+x ? y  =  _
+
+0 ? x  =  _
+x ? y  =  _
+
+
+0 ? x  =  _
+x ? 0  =  _
+x ? y  =  _
+
+0 ? 0  =  _
+0 ? x  =  _
+x ? y  =  _
+
+
+0 ? 0  =  _
+0 ? x  =  _
+x ? 0  =  _
+x ? y  =  _
+
+
+
+
+allowed deconstructions:
+
+dec _ :: Int
+dec (dec _) :: Int
+dec (dec (dec _)) :: Int
+
 Candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
   [2,0,1,0,1,0,1,0,1] direct candidates, 0 duplicates
@@ -1659,6 +1720,21 @@ goo (x:xs)  =  xs ++ [x]
 
 goo []  =  []
 goo (x:xs)  =  xs ++ (xs ++ xs)
+
+
+
+allowed patterns:
+
+goo xs  =  _
+
+
+goo []  =  _
+goo (x:xs)  =  _
+
+
+
+
+allowed deconstructions:
 
 
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
@@ -3307,6 +3383,39 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? (y:ys)  =  []
 
 
+
+allowed patterns:
+
+xs ?? ys  =  _
+
+
+xs ?? []  =  _
+xs ?? (x:ys)  =  _
+
+[] ?? xs  =  _
+(x:xs) ?? ys  =  _
+
+
+[] ?? xs  =  _
+(x:xs) ?? []  =  _
+(x:xs) ?? (y:ys)  =  _
+
+[] ?? []  =  _
+[] ?? (x:xs)  =  _
+(x:xs) ?? ys  =  _
+
+
+[] ?? []  =  _
+[] ?? (x:xs)  =  _
+(x:xs) ?? []  =  _
+(x:xs) ?? (y:ys)  =  _
+
+
+
+
+allowed deconstructions:
+
+
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
   [3,1,0,0,0,0,0,0,0] direct candidates, 0 duplicates
@@ -3390,6 +3499,21 @@ ton True  =  True
 
 ton False  =  True
 ton True  =  False
+
+
+
+allowed patterns:
+
+ton p  =  _
+
+
+ton False  =  _
+ton True  =  _
+
+
+
+
+allowed deconstructions:
 
 
 Candidates for: &| :: Bool -> Bool -> Bool
@@ -3719,6 +3843,39 @@ p &| q  =  not p || (p || q)
 p &| q  =  not q || p && q
 
 p &| q  =  not q || (p || q)
+
+
+
+allowed patterns:
+
+p &| q  =  _
+
+
+p &| False  =  _
+p &| True  =  _
+
+False &| p  =  _
+True &| p  =  _
+
+
+False &| p  =  _
+True &| False  =  _
+True &| True  =  _
+
+False &| False  =  _
+False &| True  =  _
+True &| p  =  _
+
+
+False &| False  =  _
+False &| True  =  _
+True &| False  =  _
+True &| True  =  _
+
+
+
+
+allowed deconstructions:
 
 
 Candidates for: gcd :: Int -> Int -> Int
@@ -5353,4 +5510,38 @@ gcd x y  =  y
 gcd 0 x  =  0 `mod` (0 `mod` x)
 gcd x y  =  0
 
+
+
+allowed patterns:
+
+gcd x y  =  _
+
+
+gcd x 0  =  _
+gcd x y  =  _
+
+gcd 0 x  =  _
+gcd x y  =  _
+
+
+gcd 0 x  =  _
+gcd x 0  =  _
+gcd x y  =  _
+
+gcd 0 0  =  _
+gcd 0 x  =  _
+gcd x y  =  _
+
+
+gcd 0 0  =  _
+gcd 0 x  =  _
+gcd x 0  =  _
+gcd x y  =  _
+
+
+
+
+allowed deconstructions:
+
+x `mod` _ :: Int
 

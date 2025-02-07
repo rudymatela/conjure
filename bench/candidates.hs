@@ -19,6 +19,12 @@ printCandidates m n nm f ps  =  do
   putStrLn $ unlines $ map showDefn $ concat $ take n $ css1
   putStrLn $ "pattern candidates:\n"
   putStrLn $ unlines $ map showDefn $ concat $ take n $ cssC
+  putStrLn ""
+  putStrLn $ "allowed patterns:\n"
+  putStrLn $ unlines $ map unlines $ map (map showDefn) $ pss
+  putStrLn ""
+  putStrLn $ "allowed deconstructions:\n"
+  putStrLn $ unlines $ map show ds
   where
   nd1  =  length cs1 - length (nubSort cs1)
   ndC  =  length csC - length (nubSort csC)
@@ -27,7 +33,7 @@ printCandidates m n nm f ps  =  do
   css1  =  take m css1'
   cssC  =  take m cssC'
   (css1', thy, _, _)  =  candidateDefns1 args nm f ps
-  (cssC', _, _, _)    =  candidateDefnsC args nm f ps
+  (cssC', _, pss, ds)  =  candidateDefnsC args nm f ps
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 
