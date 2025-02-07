@@ -48,6 +48,10 @@ Maybe the size of non-variable patterns should be taken into account.
 
 This relates to the eg/fib01 example.
 
+Also:
+see the allowed patterns on the Int functions of two arguments
+in bench/candidates.txt.  Search for "allowed patterns".
+
 
 ## Non top-level cases
 
