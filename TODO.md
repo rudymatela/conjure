@@ -62,6 +62,11 @@ handled at the conjurePatterns function.  The patterns reported with showPattern
 and on bench/candidates already seem to be divided considering the number of
 lines...
 
+Something to keep in mind: tiers enumerations have size "0".
+If one wants to increase size, one needs to push things to size "1".
+So the size is actually being considered.  One would need a delayedProducts to
+complete "1.".  Maybe it is better to start investigating from "2."
+
 
 ## Non top-level cases
 
