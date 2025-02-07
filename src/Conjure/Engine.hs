@@ -199,7 +199,8 @@ data Args = Args
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
   , showCandidates        :: Bool -- ^ (debug) show candidates -- warning: wall of text
   , showTests             :: Bool -- ^ (debug) show tests
-  , showDeconstructions   :: Bool -- ^ (debug) show conjecture-and-allowed deconstructions
+  , showPatterns          :: Bool -- ^ (debug) show possible LHS patterns
+  , showDeconstructions   :: Bool -- ^ (debug) show conjectured-and-allowed deconstructions
 
   -- pruning options --
   , rewriting             :: Bool -- ^ unique-modulo-rewriting candidates
@@ -241,6 +242,7 @@ args = Args
   , showCandidates         =  False
   , showTests              =  False
   , showDeconstructions    =  False
+  , showPatterns           =  False
 
   -- pruning options --
   , rewriting              =  True
@@ -289,6 +291,10 @@ conjure0With args nm f p es  =  do
       putStrLn $ "invalid:"
       putStr   $ unlines $ map showEq $ invalid thy
       putStrLn $ "-}"
+  when (showPatterns args) $ do
+    putStrLn $ "{- List of allowed patterns:"
+    putStr   $ unlines $ map unlines $ mapT showDefn $ patternss results
+    putStrLn $ "-}"
   when (showDeconstructions args) $ do
     putStrLn $ "{- List of allowed deconstructions:"
     putStr   $ unlines $ map show $ deconstructions results
@@ -333,6 +339,7 @@ data Results = Results
   , candidatess :: [[Defn]]      -- ^ tiers of candidates
   , bindings :: [Expr]           -- ^ test bindings used to verify candidates
   , theory :: Thy                -- ^ the underlying theory
+  , patternss :: [[Defn]]        -- ^ tiers of allowed patterns
   , deconstructions :: [Expr]    -- ^ the list of allowed deconstructions
   }
 
@@ -372,6 +379,7 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
   , candidatess  =  candidatesT
   , bindings  =  tests
   , theory  =  thy
+  , patternss  =  patternss
   , deconstructions  =  deconstructions
   }
   where
@@ -382,7 +390,7 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
                  && errorToFalse (p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
                $  take maxSize candidatesTT
-  (candidatesTT, thy, deconstructions)  =  candidateDefns args nm f es
+  (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
 
@@ -422,7 +430,7 @@ conjureTheoryWith args nm f es  =  do
 -- 1. tiers of candidate definitions
 -- 2. an equational theory
 -- 3. a list of allowed deconstructions
-candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [Expr])
+candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefns args  =  candidateDefns' args
   where
   candidateDefns'  =  if usePatterns args
@@ -432,19 +440,20 @@ candidateDefns args  =  candidateDefns' args
 
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
-candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [Expr])
-candidateDefns1 args nm f ps  =  first3 (mapT toDefn) $ candidateExprs args nm f ps
+candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefns1 args nm f ps  =  first4 (mapT toDefn) $ candidateExprs args nm f ps
   where
   efxs  =  conjureVarApplication nm f
   toDefn e  =  [(efxs, e)]
-  first3 f (x,y,z)  =  (f x, y, z)
+  first4 f (x,y,z,w)  =  (f x, y, z, w)
 
 
 -- | Return apparently unique candidate bodies.
-candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy, [Expr])
+candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy, [[Defn]], [Expr])
 candidateExprs Args{..} nm f ps  =
   ( as \/ concatMapT (`enumerateFillings` recs) ts
   , thy
+  , [[ [(efxs, eh)] ]]
   , deconstructions
   )
   where
@@ -494,10 +503,11 @@ candidateExprs Args{..} nm f ps  =
 
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
-candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [Expr])
+candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefnsC Args{..} nm f ps  =
   ( discardT hasRedundant $ concatMapT fillingsFor fss
   , thy
+  , mapT (map (,eh)) pats
   , deconstructions
   )
   where

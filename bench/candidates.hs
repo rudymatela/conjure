@@ -26,8 +26,8 @@ printCandidates m n nm f ps  =  do
   csC  =  concat cssC
   css1  =  take m css1'
   cssC  =  take m cssC'
-  (css1', thy, _)  =  candidateDefns1 args nm f ps
-  (cssC', _, _)    =  candidateDefnsC args nm f ps
+  (css1', thy, _, _)  =  candidateDefns1 args nm f ps
+  (cssC', _, _, _)    =  candidateDefnsC args nm f ps
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 
