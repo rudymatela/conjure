@@ -553,7 +553,7 @@ candidateDefnsC Args{..} nm f ps  =
     p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
     p2eess pat  =  mapT (pat,)
                 .  appsWith pat
-                .  tail
+                .  drop 1 -- this excludes the function name itself
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
       -- computes whether we should include a recurse for this given argument
