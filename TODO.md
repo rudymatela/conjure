@@ -52,6 +52,16 @@ Also:
 see the allowed patterns on the Int functions of two arguments
 in bench/candidates.txt.  Search for "allowed patterns".
 
+There are two levels here:
+
+1. considering the number of patterns as part of the size
+2. considering the number of non-variable LHS arguments as part of the size
+
+Level 2. is not addressed at all.  But it turns out that level 1. is already
+handled at the conjurePatterns function.  The patterns reported with showPatterns
+and on bench/candidates already seem to be divided considering the number of
+lines...
+
 
 ## Non top-level cases
 
