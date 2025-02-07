@@ -442,7 +442,11 @@ candidateDefns1 args nm f ps  =  first3 (mapT toDefn) $ candidateExprs args nm f
 
 -- | Return apparently unique candidate bodies.
 candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy, [Expr])
-candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs) ts, thy, deconstructions)
+candidateExprs Args{..} nm f ps  =
+  ( as \/ concatMapT (`enumerateFillings` recs) ts
+  , thy
+  , deconstructions
+  )
   where
   es  =  map fst ps
   ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
@@ -491,7 +495,11 @@ candidateExprs Args{..} nm f ps  =  (as \/ concatMapT (`enumerateFillings` recs)
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
 candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [Expr])
-candidateDefnsC Args{..} nm f ps  =  (discardT hasRedundant $ concatMapT fillingsFor fss,thy,deconstructions)
+candidateDefnsC Args{..} nm f ps  =
+  ( discardT hasRedundant $ concatMapT fillingsFor fss
+  , thy
+  , deconstructions
+  )
   where
   pats  =  conjurePats es nm f
   fss  =  concatMapT ps2fss pats
