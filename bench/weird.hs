@@ -24,7 +24,7 @@ main  =  do
   conjure "^^^" (^^^) primitives
   conjureWith args{usePatterns = False} "^^^" (^^^) primitives
 
-  -- This example is quite degenerate,
+  -- This example is quite the degenerate case,
   -- it takes a while to conjure even with just 2 primitives.
   -- I am leaving it commented-out for now...
   -- conjure "thirty" thirty [pr (0::Int), prim "+" ((+) :: Int -> Int -> Int)]
