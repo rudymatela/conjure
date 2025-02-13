@@ -250,9 +250,11 @@ args = Args
   , adHocRedundancy        =  True
   , copyBindings           =  True
   , atomicNumbers          =  True
-  , requireZero            =  True
+  , requireZero            =  False
   , uniqueCandidates       =  False
   }
+
+-- TODO: remove the requireZero option from args?
 
 
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.

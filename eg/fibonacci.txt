@@ -8,12 +8,12 @@ fibonacci :: Int -> Int
 -- looking through 26 candidates of size 5
 -- looking through 27 candidates of size 6
 -- looking through 116 candidates of size 7
--- looking through 102 candidates of size 8
--- looking through 532 candidates of size 9
--- looking through 474 candidates of size 10
--- looking through 2571 candidates of size 11
--- looking through 2287 candidates of size 12
--- tested 3951 candidates
+-- looking through 120 candidates of size 8
+-- looking through 552 candidates of size 9
+-- looking through 540 candidates of size 10
+-- looking through 2663 candidates of size 11
+-- looking through 2675 candidates of size 12
+-- tested 4147 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

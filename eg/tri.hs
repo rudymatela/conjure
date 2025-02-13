@@ -11,7 +11,7 @@ tri 5  =  15
 
 main :: IO ()
 main  =  do
-  conjureWith args{requireZero=False} "tri" tri
+  conjure "tri" tri
     [ pr (1::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "-" ((-) :: Int -> Int -> Int)
