@@ -46,6 +46,7 @@ EG = \
   eg/tree \
   eg/bst \
   eg/tri \
+  eg/bits \
   bench/candidates \
   bench/redundants \
   bench/erroneous \

@@ -56,6 +56,7 @@ eg/subset
 eg/spec
 eg/colin/*Funs
 eg/tri
+eg/bits
 bench/carry-on
 bench/strategies
 bench/self
