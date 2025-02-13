@@ -3,9 +3,34 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* forbid recursion into negatives
+
 * consider the size of patterns to thin-out each size partition
 
 * consider non top-level cases
+
+
+## Forbid recursion into negatives
+
+Instead of reporting:
+
+	tri 1  =  1
+	tri x  =  x + tri (x - 1)
+
+Report:
+
+	tri 1          =  1
+	tri x | x > 1  =  x + tri (x - 1)
+
+This is not trivial to implement.
+Tentative steps:
+
+1. create a `descents` function, similar to `descends`,
+   that is able to list the groups of variable that have recursive descents.
+   This will somehow need a dummy `isDecOf` function.
+   This may require changing the format definitions themselves...
+2. use this on `showDefn` somehow
+3. use this on `toDynamicWithDefn` somehow
 
 
 ## Thin-out size partitions
