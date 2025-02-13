@@ -55,6 +55,7 @@ eg/sort
 eg/subset
 eg/spec
 eg/colin/*Funs
+eg/tri
 bench/carry-on
 bench/strategies
 bench/self

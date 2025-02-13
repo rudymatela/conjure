@@ -45,6 +45,7 @@ EG = \
   eg/tapps \
   eg/tree \
   eg/bst \
+  eg/tri \
   bench/candidates \
   bench/redundants \
   bench/erroneous \

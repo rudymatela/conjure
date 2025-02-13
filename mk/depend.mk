@@ -734,6 +734,23 @@ eg/tree.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/tree.hs
+eg/tri: \
+  eg/tri.hs \
+  mk/toplibs
+eg/tri.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/tri.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
