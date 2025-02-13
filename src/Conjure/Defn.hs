@@ -169,8 +169,10 @@ toDynamicWithDefn exprExpr mx cx  =  fmap (\(_,_,d) -> d) . re (mx * sum (map (s
   -- ef' :$ exprExpr ex :$ exprExpr ey :$ ...
   red :: Int -> Memo -> Expr -> Maybe (Int, Memo, Dynamic)
   red n m e  |  size e > n  =  err "argument-size limit reached"
-  -- prevent recursion into negatives:
-  -- red n m e  |  any isNegative (unfoldApp e)  =  err "recursion into negatives"
+  -- prevent recursion into negatives, we fail earlier in these cases
+  -- we match a non-empty memo table to know that we already have a call stack
+  -- red n (_:_) e | any isNegative (unfoldApp e)  =  err "recursion into negatives"
+  -- the above is not correct, we need to detect which arguments are descending somehow...
   red n m e  =  case lookup e m of
     Just Nothing -> err $ "loop detected " ++ show e
     Just (Just d) -> Just (n,m,d)
