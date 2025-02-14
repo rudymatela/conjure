@@ -41,6 +41,7 @@ module Conjure.Conjurable
   , Express (..)
   , conjureArgumentPats
   , conjureMostGeneralCanonicalVariation
+  , conjureCasesFor
   )
 where
 
@@ -67,9 +68,9 @@ import Data.Complex -- for instance
 -- 2. the '==' function encoded as an 'Expr' when available;
 -- 3. 'tiers' of enumerated test values encoded as 'Expr's when available;
 -- 4. infinite list of potential variable names;
--- 5. boolean indicating whether the type is atomic;
+-- 5. pattern (breakdown) cases for that type
 -- 6. the 'conjureSize' function encoded as an 'Expr'.
-type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], Bool, Expr)
+type Reification1  =  (Expr, Maybe Expr, Maybe [[Expr]], [String], [Expr], Expr)
 
 -- | A reification over a collection of types.
 --
@@ -186,7 +187,7 @@ nubConjureType x  =  nubOn (\(eh,_,_,_,_,_) -> eh) . conjureType x
 --
 -- This is used in the implementation of 'conjureReification'.
 conjureReification1 :: Conjurable a => a -> Reification1
-conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, null $ conjureCases x, value "conjureSize" (conjureSize -:> x))
+conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, conjureCases x, value "conjureSize" (conjureSize -:> x))
 
 -- | Conjures a list of 'Reification1'
 --   for a 'Conjurable' type, its subtypes and 'Bool'.
@@ -336,8 +337,7 @@ conjureSizeFor f eh  =
 
 -- | Checks if an 'Expr' is of an unbreakable type.
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
-conjureIsUnbreakable f e  =  head
-  [is | (h,_,_,_,is,_) <- conjureReification f, typ h == typ e]
+conjureIsUnbreakable f  =  null . conjureCasesFor f
 
 instance Conjurable () where
   conjureExpress   =  reifyExpress
@@ -655,6 +655,22 @@ conjureArgumentPats es f = zipWith mk (conjureArgumentHoles f) (conjureArgumentC
   -- deal with types that have cases, such as lists, maybes, etc.
   mk h cs  =  [[[h]], [cs]]
 
+-- | Conjures cases for the given typed hole.
+--
+-- > > conjureCasesFor (undefined :: [Maybe Int] -> [Int]) is_
+-- > [ [] :: [Int], _:_ :: [Int] ]
+--
+-- > > conjureCasesFor (undefined :: [Maybe Int] -> [Int]) nothingInt
+-- > [ Nothing :: Maybe Int, Just _ :: Maybe Int ]
+conjureCasesFor :: Conjurable f => f -> Expr -> [Expr]
+conjureCasesFor f eh  =
+  case [ces | (eh',_,_,_,ces,_) <- conjureReification f, typ eh == typ eh'] of
+  (ces:_) -> ces
+  _ -> error $ "Conjure.conjureCasesFor: could not find cases for " ++ show eh
+-- NOTE: the conjureCasesFor function is currently unused,
+--       but may be useful in the future if we decide to handle
+--       non-top-level case breakdowns.
+--       It can be used in building a replacement for conjureArgumentPats
 
 -- -- -- other Conjurable instances -- -- --
 
