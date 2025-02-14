@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* better error reporting when `Listable` is out-of-scope when using `deriveConjurable`
-
 * forbid recursion into negatives
 
 * consider the size of patterns to thin-out each size partition
