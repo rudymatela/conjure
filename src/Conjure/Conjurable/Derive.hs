@@ -75,23 +75,10 @@ deriveConjurableCascading  =  deriveWhenNeeded ''Conjurable reallyDerive
 
 reallyDeriveConjurableWithRequisites :: Name -> DecsQ
 reallyDeriveConjurableWithRequisites t  =  concat <$>
-  sequence [ dlin -- deriveListableIfNeeded t
+  sequence [ deriveListableIfNeeded t
            , deriveNameIfNeeded t
            , deriveExpressIfNeeded t
            , reallyDeriveConjurable t ]
-  where
-  -- TODO: somehow warn about this in deriveListableIfNeeded itself?
-  dlin  =  do
-    ln <- lookupTypeName "Listable"
-    case ln of
-      Nothing -> reportError msg >> return []
-      _ -> deriveListableIfNeeded t
-  msg  =  "While deriving 'Conjurable "
-       ++ nameBase t
-       ++ "', could not derive 'Listable "
-       ++ nameBase t
-       ++ "' as the Listable typeclass is not in scope."
-       ++ "  Possible solution: import Test.LeanCheck"
 
 reallyDeriveConjurable :: Name -> DecsQ
 reallyDeriveConjurable t  =  do
