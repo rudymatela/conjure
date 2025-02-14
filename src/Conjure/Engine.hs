@@ -526,12 +526,12 @@ candidateDefnsC Args{..} nm f ps  =
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
     where
     k | atomicNumbers && isNumeric eh  =  \e -> keepNumeric e && keep e
-      | otherwise                      =  \e -> keepConstant e && keep e
+      | maxConstantSize > 0            =  \e -> keepConstant e && keep e
+      | otherwise                      =  keep
     -- discards non-atomic numeric ground expressions such as 1 + 1
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
-    keepConstant  =  case maxConstantSize of
-                     0 -> const True
-                     m -> \e -> isFun e || isConst e || not (isGround e) || size e <= m
+    -- discards big non-atomic ground expressions such as 1 + 1 or reverse [1,2]
+    keepConstant e  =  isFun e || isConst e || not (isGround e) || size e <= maxConstantSize
 
   isRedundant | adHocRedundancy  =  \e -> isRedundantDefn e || isRedundantModuloRewriting (normalize thy) e
               | otherwise        =  const False
