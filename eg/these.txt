@@ -1,0 +1,96 @@
+fromThese :: A -> B -> These A B -> (A,B)
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 0 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 1 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 0 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 0 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 15 candidates of size 10
+-- tested 16 candidates
+fromThese x y None  =  (x,y)
+fromThese x y (This z)  =  (z,y)
+fromThese x y (That z)  =  (x,z)
+fromThese x y (These z x')  =  (z,x')
+
+these :: These A A -> [A]
+-- testing 3 combinations of argument values
+-- pruning with 0/0 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 4 candidates of size 4
+-- looking through 0 candidates of size 5
+-- looking through 11 candidates of size 6
+-- looking through 0 candidates of size 7
+-- looking through 26 candidates of size 8
+-- looking through 0 candidates of size 9
+-- looking through 57 candidates of size 10
+-- tested 83 candidates
+these None  =  []
+these (This x)  =  [x]
+these (That x)  =  [x]
+these (These x y)  =  [x,y]
+
+allThis :: [These A B] -> [A]
+-- testing 5 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 1 candidates of size 6
+-- looking through 2 candidates of size 7
+-- looking through 2 candidates of size 8
+-- looking through 3 candidates of size 9
+-- looking through 6 candidates of size 10
+-- looking through 8 candidates of size 11
+-- tested 17 candidates
+allThis []  =  []
+allThis (t:ts)  =  if isThis t
+                   then fromThis t:allThis ts
+                   else allThis ts
+
+allThat :: [These A B] -> [B]
+-- testing 4 combinations of argument values
+-- pruning with 3/3 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 1 candidates of size 5
+-- looking through 1 candidates of size 6
+-- looking through 2 candidates of size 7
+-- looking through 2 candidates of size 8
+-- looking through 3 candidates of size 9
+-- looking through 6 candidates of size 10
+-- looking through 8 candidates of size 11
+-- tested 17 candidates
+allThat []  =  []
+allThat (t:ts)  =  if isThat t
+                   then fromThat t:allThat ts
+                   else allThat ts
+
+allThese :: [These A A] -> [A]
+-- testing 5 combinations of argument values
+-- pruning with 7/7 rules
+-- looking through 1 candidates of size 1
+-- looking through 0 candidates of size 2
+-- looking through 0 candidates of size 3
+-- looking through 0 candidates of size 4
+-- looking through 2 candidates of size 5
+-- looking through 3 candidates of size 6
+-- looking through 4 candidates of size 7
+-- looking through 8 candidates of size 8
+-- looking through 17 candidates of size 9
+-- looking through 36 candidates of size 10
+-- looking through 54 candidates of size 11
+-- looking through 119 candidates of size 12
+-- tested 244 candidates
+cannot conjure
+

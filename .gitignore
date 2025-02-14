@@ -58,6 +58,7 @@ eg/colin/*Funs
 eg/tri
 eg/bits
 eg/peano
+eg/these
 bench/carry-on
 bench/strategies
 bench/self
