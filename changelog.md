@@ -2,6 +2,16 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* don't require 0 as a base case by default
+  (defalt to `requireZero=False`)
+* add switch to limit the size of constant sub-expressions
+* add switch to enable showing of allowed patterns
+* update examples
+
+
 v0.6.0 (February 2025)
 ----------------------
 
