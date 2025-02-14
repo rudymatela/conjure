@@ -8,7 +8,9 @@ upcoming
 * don't require 0 as a base case by default
   (defalt to `requireZero=False`)
 * add switch to limit the size of constant sub-expressions
+  (`Args.maxConstantSize`)
 * add switch to enable showing of allowed patterns
+  (`Args.showPatterns`)
 * update examples
 
 
