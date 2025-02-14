@@ -5,8 +5,8 @@ import Conjure
 import Test.LeanCheck
 
 
--- This was inspired by the These datatype from the allThis package.
--- https://hackage.haskell.org/package/allThis
+-- This was inspired by the These datatype from the cathis package.
+-- https://hackage.haskell.org/package/cathis
 -- This is an extension of the type there with the added None constructor.
 data These a b  =  None | This a | That b | These a b
   deriving (Eq, Ord, Show, Read)
@@ -39,30 +39,30 @@ fromThese' 0 1 (This 2)  =  (2,1)
 fromThese' 0 1 (That 2)  =  (0,2)
 fromThese' 0 1 (These 1 0)  =  (1,0)
 
-allThis' :: [These A B] -> [A]
-allThis' [This 0, This 1]  =  [0,1]
-allThis' [None, That 0]  =  []
-allThis' [This 0, None, That 1]  =  [0]
-allThis' [This 0, These 0 1]  =  [0,0]
-allThis' [These 0 1, None, This 0]  =  [0,0]
+listhese' :: These A A -> [A]
+listhese' (These 1 2)  =  [1,2]
+listhese' (This 1)  =  [1]
+listhese' (That 2)  =  [2]
 
-allThat' :: [These A B] -> [B]
-allThat' [This 0, This 1]  =  []
-allThat' [None, That 0]  =  [0]
-allThat' [This 0, None, That 1]  =  [1]
-allThat' [That 0, These 0 1]  =  [0,1]
+cathis' :: [These A B] -> [A]
+cathis' [This 0, This 1]  =  [0,1]
+cathis' [None, That 0]  =  []
+cathis' [This 0, None, That 1]  =  [0]
+cathis' [This 0, These 0 1]  =  [0,0]
+cathis' [These 0 1, None, This 0]  =  [0,0]
 
-these' :: These A A -> [A]
-these' (These 1 2)  =  [1,2]
-these' (This 1)  =  [1]
-these' (That 2)  =  [2]
+cathat' :: [These A B] -> [B]
+cathat' [This 0, This 1]  =  []
+cathat' [None, That 0]  =  [0]
+cathat' [This 0, None, That 1]  =  [1]
+cathat' [That 0, These 0 1]  =  [0,1]
 
-allThese' :: [These A A] -> [A]
-allThese' [This 0, This 1]  =  [0,1]
-allThese' [None, That 0]  =  [0]
-allThese' [This 0, None, That 1]  =  [0,1]
-allThese' [This 0, These 0 1]  =  [0,0,1]
-allThese' [These 0 1, That 2]  =  [0,1,2]
+cathese' :: [These A A] -> [A]
+cathese' [This 0, This 1]  =  [0,1]
+cathese' [None, That 0]  =  [0]
+cathese' [This 0, None, That 1]  =  [0,1]
+cathese' [This 0, These 0 1]  =  [0,0,1]
+cathese' [These 0 1, That 2]  =  [0,1,2]
 
 main :: IO ()
 main  =  do
@@ -70,12 +70,12 @@ main  =  do
     [ prim "," ((,) :: A -> B -> (A,B))
     ]
 
-  conjure "these" these'
+  conjure "listhese" listhese'
     [ pr ([] :: [A])
     , prim ":" ((:) :: A -> [A] -> [A])
     ]
 
-  conjure "allThis" allThis'
+  conjure "cathis" cathis'
     [ pr ([] :: [A])
     , prim ":" ((:) :: A -> [A] -> [A])
     , prim "isThis" (isThis :: These A B -> Bool)
@@ -83,7 +83,7 @@ main  =  do
     , prif (undefined :: [A])
     ]
 
-  conjure "allThat" allThat'
+  conjure "cathat" cathat'
     [ pr ([] :: [B])
     , prim ":" ((:) :: B -> [B] -> [B])
     , prim "isThat" (isThat :: These A B -> Bool)
@@ -92,7 +92,7 @@ main  =  do
     ]
 
   -- couldn't make this reachable, I didn't try much...
-  conjure "allThese" allThese'
+  conjure "cathese" cathese'
     [ pr ([] :: [A])
     , prim ":" ((:) :: A -> [A] -> [A])
     , prim "++" ((++) :: [A] -> [A] -> [A])

@@ -17,7 +17,7 @@ fromThese x y (This z)  =  (z,y)
 fromThese x y (That z)  =  (x,z)
 fromThese x y (These z x')  =  (z,x')
 
-these :: These A A -> [A]
+listhese :: These A A -> [A]
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
 -- looking through 1 candidates of size 1
@@ -31,12 +31,12 @@ these :: These A A -> [A]
 -- looking through 0 candidates of size 9
 -- looking through 57 candidates of size 10
 -- tested 83 candidates
-these None  =  []
-these (This x)  =  [x]
-these (That x)  =  [x]
-these (These x y)  =  [x,y]
+listhese None  =  []
+listhese (This x)  =  [x]
+listhese (That x)  =  [x]
+listhese (These x y)  =  [x,y]
 
-allThis :: [These A B] -> [A]
+cathis :: [These A B] -> [A]
 -- testing 5 combinations of argument values
 -- pruning with 3/3 rules
 -- looking through 1 candidates of size 1
@@ -51,12 +51,12 @@ allThis :: [These A B] -> [A]
 -- looking through 6 candidates of size 10
 -- looking through 8 candidates of size 11
 -- tested 17 candidates
-allThis []  =  []
-allThis (t:ts)  =  if isThis t
-                   then fromThis t:allThis ts
-                   else allThis ts
+cathis []  =  []
+cathis (t:ts)  =  if isThis t
+                  then fromThis t:cathis ts
+                  else cathis ts
 
-allThat :: [These A B] -> [B]
+cathat :: [These A B] -> [B]
 -- testing 4 combinations of argument values
 -- pruning with 3/3 rules
 -- looking through 1 candidates of size 1
@@ -71,12 +71,12 @@ allThat :: [These A B] -> [B]
 -- looking through 6 candidates of size 10
 -- looking through 8 candidates of size 11
 -- tested 17 candidates
-allThat []  =  []
-allThat (t:ts)  =  if isThat t
-                   then fromThat t:allThat ts
-                   else allThat ts
+cathat []  =  []
+cathat (t:ts)  =  if isThat t
+                  then fromThat t:cathat ts
+                  else cathat ts
 
-allThese :: [These A A] -> [A]
+cathese :: [These A A] -> [A]
 -- testing 5 combinations of argument values
 -- pruning with 7/7 rules
 -- looking through 1 candidates of size 1
