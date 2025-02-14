@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.6.2 (February 2025)
+----------------------
 
 * don't require 0 as a base case by default
   (defalt to `requireZero=False`)
