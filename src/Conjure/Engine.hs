@@ -543,8 +543,9 @@ candidateDefnsC Args{..} nm f ps  =
 
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundant
-               .  products
+               .  products  -- alt: use delayedProducts
                $  map p2eess pats
+    -- delayedProducts makes the number of patterns counts as the size+1.
     where
     p2eess :: Expr -> [[Bndn]]
     -- the following guarded line is an optional optimization
@@ -687,6 +688,10 @@ nubCandidates Args{..} nm f  =
 productsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 productsWith f  =  mapT f . products
 -- TODO: move productsWith to LeanCheck?
+
+delayedProducts :: [ [[a]] ] -> [[ [a] ]]
+delayedProducts xsss  =  products xsss `addWeight` (length xsss - 1)
+-- TODO: move delayedProducts to LeanCheck?
 
 delayedProductsWith :: ([a] -> a) -> [ [[a]] ] -> [[a]]
 delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
