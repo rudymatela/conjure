@@ -25,7 +25,8 @@ import Data.Functor ((<$>))
 
 -- | Derives an 'Conjurable' instance for the given type 'Name'.
 --
--- This function needs the @TemplateHaskell@ extension.
+-- If not already present,
+-- this also derives 'Listable', 'Express' and 'Name' instances.
 --
 -- If the "Data.Express"' type binding operators
 -- ('Data.Express.-:',
@@ -33,6 +34,22 @@ import Data.Functor ((<$>))
 --  'Data.Express.->>:')
 -- are not in scope,
 -- this derives them as well.
+--
+-- This function needs the @TemplateHaskell@ extension.
+-- You can place the following at the top of the file:
+--
+-- > {-# LANGUAGE TemplateHaskell #-}
+-- > import Conjure
+-- > import Test.LeanCheck
+--
+-- Then just call 'deriveConjurable' after your data type declaration:
+--
+-- > data Peano  =  Z | S Peano  deriving  (Show, Eq)
+-- >
+-- > deriveConjurable ''Peano
+--
+-- 'deriveConjurable' expects the argument type to be
+-- an instance of 'Show' and 'Eq'.
 deriveConjurable :: Name -> DecsQ
 deriveConjurable  =  deriveWhenNeededOrWarn ''Conjurable reallyDerive
   where
