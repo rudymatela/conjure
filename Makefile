@@ -47,6 +47,7 @@ EG = \
   eg/bst \
   eg/tri \
   eg/bits \
+  eg/peano \
   bench/candidates \
   bench/redundants \
   bench/erroneous \
