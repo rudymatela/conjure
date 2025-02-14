@@ -1,6 +1,7 @@
 -- peano.hs: conjuring functions over peano naturals
 --
--- This is a minimal example demonstrating user-defined data types.
+-- This is a minimal example demonstrating
+-- the use of user-defined data types with Conjure.
 --
 -- Copyright (C) 2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
