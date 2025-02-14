@@ -30,7 +30,7 @@ main  =  do
 
   -- It takes about 33 seconds to run with maxSize=8
   -- running with maxSize = 5 for faster runtime
-  conjureWith args{maxSize=5, maxConstantSize=Just 1} "fib01" fib01
+  conjureWith args{maxSize=5, maxConstantSize=1} "fib01" fib01
     [ pr (0::Int)
     , prim "dec" (subtract 1 :: Int -> Int)
     , prim "+" ((+) :: Int -> Int -> Int)
@@ -38,7 +38,7 @@ main  =  do
 
   -- It takes about 27 seconds to run with maxSize=12
   -- running with maxSize = 9 for faster runtime
-  conjureWith args{usePatterns = False, maxSize = 1, maxConstantSize=Just 1} "fib01" fib01
+  conjureWith args{usePatterns = False, maxSize = 1, maxConstantSize=1} "fib01" fib01
     [ pr (0::Int)
     , prim "+" ((+) :: Int -> Int -> Int)
     , prim "dec" (subtract 1 :: Int -> Int)
