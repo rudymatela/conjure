@@ -531,7 +531,7 @@ candidateDefnsC Args{..} nm f ps  =
     keepNumeric e  =  isFun e || isConst e || not (isGround e)
     keepConstant  =  case maxConstantSize of
                      Nothing -> const True
-                     Just m  -> \e -> isFun e || isConst e || not (isGround e) || size e <= 3
+                     Just m  -> \e -> isFun e || isConst e || not (isGround e) || size e <= m
 
   isRedundant | adHocRedundancy  =  \e -> isRedundantDefn e || isRedundantModuloRewriting (normalize thy) e
               | otherwise        =  const False
