@@ -78,6 +78,9 @@ instance Listable Tree where
 instance Name Tree where
   name _  =  "t1"
 
+-- the following instance could have been derived with:
+-- deriveConjurable ''Tree
+
 instance Conjurable Tree where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality

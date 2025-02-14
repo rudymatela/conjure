@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* add another example of deriveConjurable on eg/
-
-* mention deriveConjurable on eg/ on examples with explicit Conjurable instances
-
 * better error reporting when `Listable` is out-of-scope when using `deriveConjurable`
 
 * forbid recursion into negatives
