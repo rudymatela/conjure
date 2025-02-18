@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* fix targetiers' lazyness
+
 * rewrite after filling in recursions
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.

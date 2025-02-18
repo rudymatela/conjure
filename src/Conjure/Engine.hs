@@ -408,8 +408,9 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
                  && requal fx ffxx vffxx
                  && errorToFalse (p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
-               $  targetiers target
-               $  take maxSize candidatesTT
+               $  (if target > 0 then targetiers target else id)
+               $  (if maxSize > 0 then take maxSize else id)
+               $  candidatesTT
   (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
   vffxx  =  conjureVarApplication nm f
