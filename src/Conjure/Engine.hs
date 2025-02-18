@@ -192,6 +192,7 @@ data Args = Args
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
   , maxConstantSize       :: Int  -- ^ maximum size of constants (0 for no limit)
+  , maxPatternSize        :: Int  -- ^ maximum size of patterns (0 for no limit)
 
   -- advanced & debug options --
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
@@ -234,6 +235,7 @@ args = Args
   , maxSearchTests         =  100000
   , maxDeconstructionSize  =   4
   , maxConstantSize        =   0 -- unlimited
+  , maxPatternSize         =   0 -- unlimited
 
   -- advanced & debug options --
   , carryOn                =  False
@@ -511,7 +513,8 @@ candidateDefnsC Args{..} nm f ps  =
   , deconstructions
   )
   where
-  pats  =  conjurePats es nm f
+  pats | maxPatternSize > 0  =  take maxPatternSize $ conjurePats es nm f
+       | otherwise           =                        conjurePats es nm f
   fss  =  concatMapT ps2fss pats
   es  =  map fst ps
 
