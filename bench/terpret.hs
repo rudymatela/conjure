@@ -108,7 +108,7 @@ t4c :: IO ()
 t4c  =  do
   putStrLn "TerpreT benchmark #4: controlled shift\n"
 
-  conjure "cshift" t4p1 $ primitives123 ++
+  conjureWith args{target = 50400} "cshift" t4p1 $ primitives123 ++
     [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
     , prif (undefined :: (Bool,Bool,Bool))
     ]

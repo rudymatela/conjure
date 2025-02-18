@@ -60,7 +60,7 @@ main = do
     ]
 
   -- an insert function
-  conjureWithMaxSize 18 "insert" insert'
+  conjureWith args{target=50400} "insert" insert'
     [ prim "[]" ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "<=" ((<=) :: Int -> Int -> Bool)

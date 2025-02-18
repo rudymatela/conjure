@@ -347,12 +347,7 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- 600 candidates of size 9
 -- 2722 candidates of size 10
 -- 5292 candidates of size 11
--- 2832 candidates of size 12
--- 418 candidates of size 13
--- 7056 candidates of size 14
--- 7800 candidates of size 15
--- 1752 candidates of size 16
--- tested 30813 candidates
+-- tested 10955 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter

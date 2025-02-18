@@ -119,7 +119,6 @@ union :: Tree -> Tree -> Tree
 -- 922 candidates of size 6
 -- 3088 candidates of size 7
 -- 14022 candidates of size 8
--- 31810 candidates of size 9
--- tested 50381 candidates
+-- tested 18571 candidates
 cannot conjure
 

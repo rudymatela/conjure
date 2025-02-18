@@ -690,7 +690,7 @@ gps20c  =  do
     , pr False
     ]
 
-  conjureFromSpecWith args{maxSize=14} "pig1" pig1Spec
+  conjureFromSpecWith args{target=50400} "pig1" pig1Spec
     [ pr "ay"
     , prif (undefined :: String)
     , prim "isVowel" isVowel

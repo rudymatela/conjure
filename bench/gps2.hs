@@ -207,7 +207,7 @@ gps5c  =  do
     , prim "tell" tell
     ]
 
-  conjure "gps5" gps5p
+  conjureWith args{target=50400} "gps5" gps5p
     [ pr (1 :: Int)
     , pr (5 :: Int)
     , pr (10 :: Int)
@@ -323,7 +323,7 @@ gps10g (x:xs)  =  (x `div` 3 - 2) + gps10g xs
 
 -- unreachable due to lambda
 gps10c :: IO ()
-gps10c  =  conjure "gps10" gps10p
+gps10c  =  conjureWith args{target=50400} "gps10" gps10p
   [ pr (0 :: Int)
   , pr (1 :: Int)
   , pr (2 :: Int)

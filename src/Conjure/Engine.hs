@@ -235,7 +235,7 @@ args :: Args
 args = Args
   { maxTests               =  360
   , maxSize                =  24
-  , target                 =  50400
+  , target                 =  10080
   , maxEvalRecursions      =  60
   , maxEquationSize        =   5
   , maxSearchTests         =  100000
