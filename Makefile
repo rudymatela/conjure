@@ -144,8 +144,13 @@ full-clean: clean clean-cabal clean-stack
 %.run: %
 	./$<
 
-%.txt: %
-	./$< | $(RMTIME) >$@
+.PRECIOUS: .%.txt  # prevent deletion by make
+
+.%.txt: %
+	./$< >$@
+
+%.txt: .%.txt
+	$(RMTIME) $< >$@
 
 %.tee: %
 	$(LONG) unbuffer ./$< | $(RMTIME) -u | tee $<.txt

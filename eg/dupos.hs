@@ -52,7 +52,7 @@ main = do
   --                       then x : duplicates xs                          -- 15
   --                       else duplicates xs                              -- 17
   -- within reach performance wise.
-  conjureWith args{maxSize=18} "duplicates" duplicates'
+  conjure "duplicates" duplicates'
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)
@@ -61,7 +61,7 @@ main = do
     , prif (undefined :: [Int])
     ]
 
-  conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec
+  conjureFromSpec "duplicates" duplicatesSpec
     [ pr ([] :: [Int])
     , prim "not" not
     , prim "&&" (&&)
@@ -70,8 +70,7 @@ main = do
     , prif (undefined :: [Int])
     ]
 
-  -- found!
-  conjureWithMaxSize 14 "positionsFrom" positionsFrom'
+  conjure "positionsFrom" positionsFrom'
     [ pr ([] :: [Int])
     , pr (1 :: Int)
     , prim "+" ((+) :: Int -> Int -> Int)

@@ -28,6 +28,9 @@ TAGS
 
 **.runtimes
 
+# text output with runtimes
+.*.txt
+
 # benches, prototypes and test programs
 eg/arith
 eg/bools

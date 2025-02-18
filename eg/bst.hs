@@ -121,7 +121,7 @@ instance Conjurable Tree where
 
 main :: IO ()
 main = do
-  conjureWithMaxSize 15 "mem" mem
+  conjure "mem" mem
     [ pr False
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)

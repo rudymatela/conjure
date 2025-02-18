@@ -73,7 +73,7 @@ main = do
   -- this one is not out of reach performance wise,
   -- but is not generated because of the deconstruction restriction.
   -- The following does generate a correct but inneficient version of qsort.
-  conjureWith args{maxSize=14} "qsort" sort'
+  conjure "qsort" sort'
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
@@ -84,7 +84,7 @@ main = do
 
   -- if we disable the descent requirement, we get the efficient qsort
   -- though with a larger search space
-  conjureWith args{maxSize=14, requireDescent=False} "qsort" sort'
+  conjureWith args{requireDescent=False} "qsort" sort'
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "++" ((++) :: [Int] -> [Int] -> [Int])
