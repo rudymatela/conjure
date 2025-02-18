@@ -741,12 +741,10 @@ putWithTimeSince start msg
 
 -- consume tiers until a target is reached, then stop
 targetiers :: Int -> [[a]] -> [[a]]
-targetiers n []  =  []
-targetiers n (xs:xss)
-  | n <= 0  =  []
-  | otherwise  =  xs : targetiers (n - l) xss
-  where
-  l  =  length xs
+targetiers n xss
+  | n <= 0     =  []
+  | otherwise  =  case xss of [] -> []
+                              (xs:xss) -> xs : targetiers (n - length xs) xss
 
 boolTy :: TypeRep
 boolTy  =  typ b_
