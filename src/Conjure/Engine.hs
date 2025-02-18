@@ -189,6 +189,7 @@ conjureWithMaxSize sz  =  conjureWith args
 data Args = Args
   { maxTests              :: Int  -- ^ maximum number of tests to each candidate
   , maxSize               :: Int  -- ^ maximum size of candidate bodies
+  , targetCandidates      :: Int  -- ^ enumerate further sizes of candidates until this target
   , maxEvalRecursions     :: Int  -- ^ maximum number of recursive evaluations when testing candidates
   , maxEquationSize       :: Int  -- ^ maximum size of equation operands
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
@@ -233,6 +234,7 @@ args :: Args
 args = Args
   { maxTests               =  360
   , maxSize                =  12
+  , targetCandidates       =  50400
   , maxEvalRecursions      =  60
   , maxEquationSize        =   5
   , maxSearchTests         =  100000
@@ -405,6 +407,7 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
                  && requal fx ffxx vffxx
                  && errorToFalse (p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
+               $  targetiers targetCandidates
                $  take maxSize candidatesTT
   (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f
@@ -733,6 +736,15 @@ putWithTimeSince start msg
                    end <- getCPUTime
                    putStrLn $ "-- " ++ showTime (end - start) ++ ", " ++ msg
   | otherwise   =  error "putWithTimeSince: the impossible happened (GHC/Compiler/Interpreter bug?!)"
+
+-- consume tiers until a target is reached, then stop
+targetiers :: Int -> [[a]] -> [[a]]
+targetiers n []  =  []
+targetiers n (xs:xss)
+  | n <= 0  =  []
+  | otherwise  =  xs : targetiers (n - l) xss
+  where
+  l  =  length xs
 
 boolTy :: TypeRep
 boolTy  =  typ b_
