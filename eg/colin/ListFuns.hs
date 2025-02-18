@@ -146,7 +146,7 @@ main = do
   conjure "sum" sum sumBackground
   conjure "app" app appBackground
   conjure "mem" mem memBackground
-  conjureWith args{maxSize=12,showCandidates=True} "sub" sub subBackground
+  conjureWith args{maxSize=15,showCandidates=False} "sub" sub subBackground
   conjure "set" set setBackground
   conjure "take" take takeBackground
   conjure "drop" drop dropBackground
