@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* update documentation to reflect the new interface (runtimes and whatnot)
+
 * fix targetiers' lazyness
 
 * rewrite after filling in recursions
