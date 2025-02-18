@@ -345,7 +345,7 @@ wallisNext q  =  if n < d
 
 gps10c :: IO ()
 gps10c  =  do
-  conjureWith args{maxSize=14} "wallisNext" wallisNextP
+  conjure "wallisNext" wallisNextP
     [ pr (1 :: Integer)
     , pr (2 :: Integer)
     , prim "+" ((+) :: Integer -> Integer -> Integer)
@@ -504,7 +504,7 @@ gps14c  =  do
   -- hah!  I was expecting Conjure to use an if like above, but it was smarter:
   -- gps14 []  =  0
   -- gps14 (x:xs)  =  x `mod` 2 + gps14 xs
-  conjureWith args{maxSize=13} "gps14" gps14p
+  conjure "gps14" gps14p
     [ pr (0 :: Int)
     , pr (1 :: Int)
     , pr (2 :: Int)
@@ -679,7 +679,7 @@ isVowel' 'g'  =  False
 
 gps20c :: IO ()
 gps20c  =  do
-  conjureWith args{maxSize=22} "isVowel" isVowel'
+  conjure "isVowel" isVowel'
     [ pr 'a'
     , pr 'e'
     , pr 'i'
@@ -819,7 +819,7 @@ gps25g n  =  if abs n < 10                                --  8
 
 -- out of reach performance-wise
 gps25c :: IO ()
-gps25c  =  conjureWith args{maxSize=20} "gps25" gps25p $ take 0
+gps25c  =  conjure "gps25" gps25p $ take 0
   [ pr (0 :: Int)
   , pr (10 :: Int)
   , pr ([] :: [Int])
