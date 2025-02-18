@@ -5,8 +5,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * rewrite after filling in recursions
 
-* avoid generating the quadratic solution on `eg/colin/ListFuns.hs`
-
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 
