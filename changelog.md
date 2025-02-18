@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.6.4 (February 2025)
+----------------------
 
 * Create `Args.target` as the main setting to configure
   a target number of candidates to explore.
