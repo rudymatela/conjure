@@ -75,7 +75,7 @@ TESTS = \
   test/red \
   test/utils
 
-RMTIME = sed 's/^-- [0-9.]*s: /-- /'
+RMTIME = sed 's/^-- [0-9.]*s, /-- /'
 
 all: mk/toplibs
 

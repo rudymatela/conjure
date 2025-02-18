@@ -731,7 +731,7 @@ putWithTimeSince start msg
   | start < 0   =  putStrLn $ "-- " ++ msg  -- negative start time indicates omit runtime
   | msg == msg  =  do  -- forces evaluation of msg!
                    end <- getCPUTime
-                   putStrLn $ "-- " ++ showTime (end - start) ++ ": " ++ msg
+                   putStrLn $ "-- " ++ showTime (end - start) ++ ", " ++ msg
   | otherwise   =  error "putWithTimeSince: the impossible happened (GHC/Compiler/Interpreter bug?!)"
 
 boolTy :: TypeRep
