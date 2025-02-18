@@ -2,6 +2,18 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* Create `Args.target` as the main setting to configure
+  a target number of candidates to explore.
+  This should relate more closely with runtime.
+  `target = 10080` is the default.
+* relax `maxSize=12` to `maxSize=24` by default.
+* show runtime in the output by default
+* some internal refactoring
+
+
 v0.6.2 (February 2025)
 ----------------------
 
