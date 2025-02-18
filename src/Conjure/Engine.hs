@@ -189,7 +189,7 @@ conjureWithMaxSize sz  =  conjureWith args
 data Args = Args
   { maxTests              :: Int  -- ^ maximum number of tests to each candidate
   , maxSize               :: Int  -- ^ maximum size of candidate bodies
-  , targetCandidates      :: Int  -- ^ enumerate further sizes of candidates until this target
+  , target                :: Int  -- ^ enumerate further sizes of candidates until this target
   , maxEvalRecursions     :: Int  -- ^ maximum number of recursive evaluations when testing candidates
   , maxEquationSize       :: Int  -- ^ maximum size of equation operands
   , maxSearchTests        :: Int  -- ^ maximum number of tests to search for defined values
@@ -221,7 +221,8 @@ data Args = Args
 -- | Default arguments to conjure.
 --
 -- * 60 tests
--- * functions of up to 12 symbols
+-- * functions of up to 24 symbols
+-- * target testing over 50400 candidates
 -- * maximum of one recursive call allowed in candidate bodies
 -- * maximum evaluation of up to 60 recursions
 -- * pruning with equations up to size 5
@@ -233,8 +234,8 @@ data Args = Args
 args :: Args
 args = Args
   { maxTests               =  360
-  , maxSize                =  12
-  , targetCandidates       =  50400
+  , maxSize                =  24
+  , target                 =  50400
   , maxEvalRecursions      =  60
   , maxEquationSize        =   5
   , maxSearchTests         =  100000
@@ -407,7 +408,7 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
                  && requal fx ffxx vffxx
                  && errorToFalse (p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
-               $  targetiers targetCandidates
+               $  targetiers target
                $  take maxSize candidatesTT
   (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns args nm f es
   ffxx   =  conjureApplication nm f

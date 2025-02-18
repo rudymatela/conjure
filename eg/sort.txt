@@ -100,10 +100,7 @@ merge :: [Int] -> [Int] -> [Int]
 -- 297 candidates of size 7
 -- 322 candidates of size 8
 -- 939 candidates of size 9
--- 1966 candidates of size 10
--- 2972 candidates of size 11
--- 11011 candidates of size 12
--- tested 17710 candidates
+-- tested 1761 candidates
 cannot conjure
 
 merge :: [Int] -> [Int] -> [Int]
@@ -120,7 +117,6 @@ merge :: [Int] -> [Int] -> [Int]
 -- 203 candidates of size 9
 -- 430 candidates of size 10
 -- 1086 candidates of size 11
--- 2068 candidates of size 12
--- tested 4004 candidates
+-- tested 1936 candidates
 cannot conjure
 

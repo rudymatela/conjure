@@ -91,6 +91,9 @@ cathese :: [These A A] -> [A]
 -- 36 candidates of size 10
 -- 54 candidates of size 11
 -- 119 candidates of size 12
--- tested 244 candidates
+-- 268 candidates of size 13
+-- 490 candidates of size 14
+-- 985 candidates of size 15
+-- tested 1987 candidates
 cannot conjure
 

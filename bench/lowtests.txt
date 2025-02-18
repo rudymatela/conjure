@@ -25,6 +25,12 @@ xs `isSubsequenceOf` sort xs == True
 -- 6 candidates of size 10
 -- 20 candidates of size 11
 -- 15 candidates of size 12
+-- 0 candidates of size 13
+-- 0 candidates of size 14
+-- 0 candidates of size 15
+-- 0 candidates of size 16
+-- 0 candidates of size 17
+-- 0 candidates of size 18
 -- tested 67 candidates
 cannot conjure
 
@@ -67,7 +73,13 @@ transpose (transpose (transpose xss)) == transpose xss
 -- 1 candidates of size 10
 -- 0 candidates of size 11
 -- 0 candidates of size 12
--- tested 4 candidates
+-- 1 candidates of size 13
+-- 0 candidates of size 14
+-- 0 candidates of size 15
+-- 1 candidates of size 16
+-- 0 candidates of size 17
+-- 0 candidates of size 18
+-- tested 6 candidates
 cannot conjure
 
 replicates :: [Char] -> Int -> [Char]

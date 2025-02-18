@@ -627,7 +627,8 @@ gps22p  =  undefined
 
 gps22c :: IO ()
 gps22c  =  do
-  conjure "digits" digits'
+  -- cannot conjure at size 13, maybe beyond?
+  conjureWith args{target=10080} "digits" digits'
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "`div`" (div :: Int -> Int -> Int)

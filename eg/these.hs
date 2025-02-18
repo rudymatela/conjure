@@ -92,7 +92,7 @@ main  =  do
     ]
 
   -- couldn't make this reachable, I didn't try much...
-  conjure "cathese" cathese'
+  conjureWith args{target = 1080} "cathese" cathese'
     [ pr ([] :: [A])
     , prim ":" ((:) :: A -> [A] -> [A])
     , prim "++" ((++) :: [A] -> [A] -> [A])

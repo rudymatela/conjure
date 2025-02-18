@@ -55,7 +55,7 @@ replicates' [a,b]   3  =  [a,a,a,b,b,b]
 replicates' [a,b,c] 3  =  [a,a,a,b,b,b,c,c,c]
 
 as :: Args
-as  =  args{showTheory = True}
+as  =  args{showTheory = True, maxSize = 18}
 
 main :: IO ()
 main = do
