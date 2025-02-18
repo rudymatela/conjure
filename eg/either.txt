@@ -1,8 +1,8 @@
 isLeft :: Either A A -> Bool
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- 2 candidates of size 1
+-- 2 candidates of size 2
 -- tested 4 candidates
 isLeft (Left x)  =  True
 isLeft (Right x)  =  False
@@ -10,8 +10,8 @@ isLeft (Right x)  =  False
 isRight :: Either A A -> Bool
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
+-- 2 candidates of size 1
+-- 2 candidates of size 2
 -- tested 3 candidates
 isRight (Left x)  =  False
 isRight (Right x)  =  True
@@ -19,8 +19,8 @@ isRight (Right x)  =  True
 fromLeft :: A -> Either A A -> A
 -- testing 5 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 3 candidates of size 2
+-- 1 candidates of size 1
+-- 3 candidates of size 2
 -- tested 3 candidates
 fromLeft x (Left y)  =  y
 fromLeft x (Right y)  =  x
@@ -28,18 +28,18 @@ fromLeft x (Right y)  =  x
 fromLeft :: A -> Either A A -> A
 -- testing 5 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 3 candidates of size 2
+-- 1 candidates of size 1
+-- 3 candidates of size 2
 -- tested 2 candidates
 fromLeft x (Left y)  =  x
 fromLeft x (Right y)  =  y
 
 either :: (A -> A) -> (A -> A) -> Either A A -> A
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 12 candidates of size 4
+-- 0 candidates of size 1
+-- 1 candidates of size 2
+-- 4 candidates of size 3
+-- 12 candidates of size 4
 -- tested 11 candidates
 either f g (Left x)  =  f x
 either f g (Right x)  =  g x
@@ -47,8 +47,8 @@ either f g (Right x)  =  g x
 lefts :: [Either A A] -> [A]
 -- testing 5 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
+-- 1 candidates of size 1
+-- 0 candidates of size 2
 -- tested 1 candidates
 cannot conjure
 

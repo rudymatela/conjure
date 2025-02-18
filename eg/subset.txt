@@ -1,14 +1,14 @@
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
 -- pruning with 29/39 rules
--- looking through 2 candidates of size 1
--- looking through 4 candidates of size 2
--- looking through 8 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 64 candidates of size 5
--- looking through 40 candidates of size 6
--- looking through 64 candidates of size 7
--- looking through 522 candidates of size 8
+-- 2 candidates of size 1
+-- 4 candidates of size 2
+-- 8 candidates of size 3
+-- 10 candidates of size 4
+-- 64 candidates of size 5
+-- 40 candidates of size 6
+-- 64 candidates of size 7
+-- 522 candidates of size 8
 -- tested 553 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  subset xs ys && elem x ys
@@ -16,11 +16,11 @@ subset (x:xs) ys  =  subset xs ys && elem x ys
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
 -- pruning with 3/3 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 2 candidates of size 5
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 2 candidates of size 3
+-- 6 candidates of size 4
+-- 2 candidates of size 5
 -- tested 9 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 

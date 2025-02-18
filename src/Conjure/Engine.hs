@@ -56,6 +56,8 @@ import Conjure.Defn.Test
 import Conjure.Red
 import Conjure.Reason
 
+import System.CPUTime (getCPUTime)
+
 
 -- | Conjures an implementation of a partially defined function.
 --
@@ -198,6 +200,7 @@ data Args = Args
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
   , showTheory            :: Bool -- ^ show theory discovered by Speculate used in pruning
   , usePatterns           :: Bool -- ^ use pattern matching to create (recursive) candidates
+  , showRuntime           :: Bool -- ^ show runtime
   , showCandidates        :: Bool -- ^ (debug) show candidates -- warning: wall of text
   , showTests             :: Bool -- ^ (debug) show tests
   , showPatterns          :: Bool -- ^ (debug) show possible LHS patterns
@@ -241,6 +244,7 @@ args = Args
   , carryOn                =  False
   , showTheory             =  False
   , usePatterns            =  True
+  , showRuntime            =  True
   , showCandidates         =  False
   , showTests              =  False
   , showDeconstructions    =  False
@@ -274,14 +278,20 @@ conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 -- | Like 'conjure0' but allows setting options through 'Args'/'args'.
 conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
 conjure0With args nm f p es  =  do
+  -- the code section below became quite ugly with time and patches.
+  -- it is still maintainable and readable as it is, but perhaps
+  -- needs to be cleaned up and simplified
+  t0 <- if showRuntime args
+        then getCPUTime
+        else return (-1)
   print (var (head $ words nm) f)
   when (length ts > 0) $ do
-    putStrLn $ "-- testing " ++ show (length ts) ++ " combinations of argument values"
+    putWithTimeSince t0 $ "testing " ++ show (length ts) ++ " combinations of argument values"
     when (showTests args) $ do
       putStrLn $ "{-"
       putStr $ unlines $ map show ts
       putStrLn $ "-}"
-  putStrLn $ "-- pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
+  putWithTimeSince t0 $ "pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   when (showTheory args) $ do
     putStrLn $ "{-"
     printThy thy
@@ -304,28 +314,29 @@ conjure0With args nm f p es  =  do
     putStrLn $ "{- List of allowed deconstructions:"
     putStr   $ unlines $ map show $ deconstructions results
     putStrLn $ "-}"
-  pr 1 0 rs
+  pr t0 1 0 rs
   where
   showEq eq  =  showExpr (fst eq) ++ " == " ++ showExpr (snd eq)
-  pr :: Int -> Int -> [([Defn], [Defn])] -> IO ()
-  pr n t []  =  do putStrLn $ "-- tested " ++ show t ++ " candidates"
-                   putStrLn $ "cannot conjure\n"
-  pr n t ((is,cs):rs)  =  do
+  pr :: Integer -> Int -> Int -> [([Defn], [Defn])] -> IO ()
+  pr t0 n t []  =  do putWithTimeSince t0 $ "tested " ++ show t ++ " candidates"
+                      putStrLn $ "cannot conjure\n"
+  pr t0 n t ((is,cs):rs)  =  do
     let nc  =  length cs
-    putStrLn $ "-- looking through " ++ show nc ++ " candidates of size " ++ show n
+    putWithTimeSince t0 $ show nc ++ " candidates of size " ++ show n
     when (showCandidates args) $
       putStr $ unlines $ ["{-"] ++ map showDefn cs ++ ["-}"]
     case is of
-      []     ->  pr (n+1) (t+nc) rs
+      []     ->  pr t0 (n+1) (t+nc) rs
       (_:_)  ->  do pr1 t is cs
-                    when (carryOn args) $ pr (n+1) (t+nc) rs
-  pr1 t [] cs  =  return ()
-  pr1 t (i:is) cs  =  do
-    let (cs',cs'') = break (i==) cs
-    let t' = t + length cs' + 1
-    putStrLn $ "-- tested " ++ show t' ++ " candidates"
-    putStrLn $ showDefn i
-    when (carryOn args) $ pr1 t' is (drop 1 cs'')
+                    when (carryOn args) $ pr t0 (n+1) (t+nc) rs
+    where
+    pr1 t [] cs  =  return ()
+    pr1 t (i:is) cs  =  do
+      let (cs',cs'') = break (i==) cs
+      let t' = t + length cs' + 1
+      putWithTimeSince t0 $ "tested " ++ show t' ++ " candidates"
+      putStrLn $ showDefn i
+      when (carryOn args) $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
   results  =  conjpure0With args nm f p es
   iss  =  implementationss results
@@ -705,6 +716,23 @@ delayedProductsWith f xsss  =  productsWith f xsss `addWeight` length xsss
 
 foldAppProducts :: Expr -> [ [[Expr]] ] -> [[Expr]]
 foldAppProducts ef  =  delayedProductsWith (foldApp . (ef:))
+
+-- show time in seconds rounded to one decimal place
+-- the argument is expected to be in picoseconds
+showTime :: Integer -> String
+showTime ps  =  show s ++ "s"
+  where
+  s  =  fromIntegral ds / 10.0 -- seconds
+  ds  =  ps `div` 100000000000 -- deciseconds, * 10 / 1 000 000 000 000
+
+-- beware of lazyness, this computes the time for evaluating msg!
+putWithTimeSince :: Integer -> String -> IO ()
+putWithTimeSince start msg
+  | start < 0   =  putStrLn $ "-- " ++ msg  -- negative start time indicates omit runtime
+  | msg == msg  =  do  -- forces evaluation of msg!
+                   end <- getCPUTime
+                   putStrLn $ "-- " ++ showTime (end - start) ++ ": " ++ msg
+  | otherwise   =  error "putWithTimeSince: the impossible happened (GHC/Compiler/Interpreter bug?!)"
 
 boolTy :: TypeRep
 boolTy  =  typ b_

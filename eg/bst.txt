@@ -1,18 +1,18 @@
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 20/30 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 0 candidates of size 7
--- looking through 31 candidates of size 8
--- looking through 92 candidates of size 9
--- looking through 0 candidates of size 10
--- looking through 304 candidates of size 11
--- looking through 151 candidates of size 12
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 3 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 31 candidates of size 8
+-- 92 candidates of size 9
+-- 0 candidates of size 10
+-- 304 candidates of size 11
+-- 151 candidates of size 12
 -- tested 497 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
@@ -20,18 +20,18 @@ mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 6 candidates of size 7
--- looking through 24 candidates of size 8
--- looking through 0 candidates of size 9
--- looking through 192 candidates of size 10
--- looking through 0 candidates of size 11
--- looking through 384 candidates of size 12
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 6 candidates of size 7
+-- 24 candidates of size 8
+-- 0 candidates of size 9
+-- 192 candidates of size 10
+-- 0 candidates of size 11
+-- 384 candidates of size 12
 -- tested 371 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  case x `compare` y of
@@ -42,84 +42,84 @@ mem x (Node t1 y t2)  =  case x `compare` y of
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
 -- pruning with 2/3 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 74 candidates of size 7
--- looking through 335 candidates of size 8
--- looking through 32 candidates of size 9
--- looking through 1504 candidates of size 10
--- looking through 6708 candidates of size 11
--- looking through 1760 candidates of size 12
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 21 candidates of size 5
+-- 0 candidates of size 6
+-- 74 candidates of size 7
+-- 335 candidates of size 8
+-- 32 candidates of size 9
+-- 1504 candidates of size 10
+-- 6708 candidates of size 11
+-- 1760 candidates of size 12
 -- tested 10442 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 86 candidates of size 7
--- looking through 239 candidates of size 8
--- looking through 104 candidates of size 9
--- looking through 1558 candidates of size 10
--- looking through 3555 candidates of size 11
--- looking through 4028 candidates of size 12
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 21 candidates of size 5
+-- 0 candidates of size 6
+-- 86 candidates of size 7
+-- 239 candidates of size 8
+-- 104 candidates of size 9
+-- 1558 candidates of size 10
+-- 3555 candidates of size 11
+-- 4028 candidates of size 12
 -- tested 9599 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
 -- pruning with 2/4 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 68 candidates of size 7
--- looking through 287 candidates of size 8
--- looking through 32 candidates of size 9
--- looking through 1216 candidates of size 10
--- looking through 5103 candidates of size 11
--- looking through 1472 candidates of size 12
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 21 candidates of size 5
+-- 0 candidates of size 6
+-- 68 candidates of size 7
+-- 287 candidates of size 8
+-- 32 candidates of size 9
+-- 1216 candidates of size 10
+-- 5103 candidates of size 11
+-- 1472 candidates of size 12
 -- tested 8207 candidates
 cannot conjure
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 2/4 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 68 candidates of size 7
--- looking through 287 candidates of size 8
--- looking through 32 candidates of size 9
--- looking through 1216 candidates of size 10
--- looking through 5103 candidates of size 11
--- looking through 1472 candidates of size 12
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 21 candidates of size 5
+-- 0 candidates of size 6
+-- 68 candidates of size 7
+-- 287 candidates of size 8
+-- 32 candidates of size 9
+-- 1216 candidates of size 10
+-- 5103 candidates of size 11
+-- 1472 candidates of size 12
 -- tested 8207 candidates
 cannot conjure
 
 union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
 -- pruning with 6/8 rules
--- looking through 3 candidates of size 1
--- looking through 12 candidates of size 2
--- looking through 32 candidates of size 3
--- looking through 58 candidates of size 4
--- looking through 434 candidates of size 5
--- looking through 922 candidates of size 6
--- looking through 3088 candidates of size 7
--- looking through 14022 candidates of size 8
--- looking through 31810 candidates of size 9
+-- 3 candidates of size 1
+-- 12 candidates of size 2
+-- 32 candidates of size 3
+-- 58 candidates of size 4
+-- 434 candidates of size 5
+-- 922 candidates of size 6
+-- 3088 candidates of size 7
+-- 14022 candidates of size 8
+-- 31810 candidates of size 9
 -- tested 50381 candidates
 cannot conjure
 

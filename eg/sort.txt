@@ -1,11 +1,11 @@
 sort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 6/7 rules
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 11 candidates of size 4
--- looking through 23 candidates of size 5
+-- 2 candidates of size 1
+-- 3 candidates of size 2
+-- 4 candidates of size 3
+-- 11 candidates of size 4
+-- 23 candidates of size 5
 -- tested 22 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
@@ -13,33 +13,33 @@ sort (x:xs)  =  insert x (sort xs)
 sort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 4 candidates of size 4
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
 -- tested 5 candidates
 sort xs  =  foldr insert [] xs
 
 insert :: Int -> [Int] -> [Int]
 -- testing 4 combinations of argument values
 -- pruning with 4/4 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 2 candidates of size 5
--- looking through 19 candidates of size 6
--- looking through 6 candidates of size 7
--- looking through 44 candidates of size 8
--- looking through 62 candidates of size 9
--- looking through 91 candidates of size 10
--- looking through 334 candidates of size 11
--- looking through 220 candidates of size 12
--- looking through 1358 candidates of size 13
--- looking through 1019 candidates of size 14
--- looking through 4638 candidates of size 15
--- looking through 6332 candidates of size 16
--- looking through 14550 candidates of size 17
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 2 candidates of size 3
+-- 6 candidates of size 4
+-- 2 candidates of size 5
+-- 19 candidates of size 6
+-- 6 candidates of size 7
+-- 44 candidates of size 8
+-- 62 candidates of size 9
+-- 91 candidates of size 10
+-- 334 candidates of size 11
+-- 220 candidates of size 12
+-- 1358 candidates of size 13
+-- 1019 candidates of size 14
+-- 4638 candidates of size 15
+-- 6332 candidates of size 16
+-- 14550 candidates of size 17
 -- tested 14943 candidates
 insert x []  =  [x]
 insert x (y:xs)  =  if x <= y
@@ -49,20 +49,20 @@ insert x (y:xs)  =  if x <= y
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 8/8 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 9 candidates of size 6
--- looking through 22 candidates of size 7
--- looking through 37 candidates of size 8
--- looking through 84 candidates of size 9
--- looking through 169 candidates of size 10
--- looking through 352 candidates of size 11
--- looking through 767 candidates of size 12
--- looking through 1600 candidates of size 13
--- looking through 3499 candidates of size 14
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 3 candidates of size 4
+-- 6 candidates of size 5
+-- 9 candidates of size 6
+-- 22 candidates of size 7
+-- 37 candidates of size 8
+-- 84 candidates of size 9
+-- 169 candidates of size 10
+-- 352 candidates of size 11
+-- 767 candidates of size 12
+-- 1600 candidates of size 13
+-- 3499 candidates of size 14
 -- tested 3667 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
@@ -70,20 +70,20 @@ qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 8/8 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 9 candidates of size 6
--- looking through 28 candidates of size 7
--- looking through 51 candidates of size 8
--- looking through 128 candidates of size 9
--- looking through 303 candidates of size 10
--- looking through 648 candidates of size 11
--- looking through 1621 candidates of size 12
--- looking through 3592 candidates of size 13
--- looking through 8475 candidates of size 14
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 3 candidates of size 4
+-- 6 candidates of size 5
+-- 9 candidates of size 6
+-- 28 candidates of size 7
+-- 51 candidates of size 8
+-- 128 candidates of size 9
+-- 303 candidates of size 10
+-- 648 candidates of size 11
+-- 1621 candidates of size 12
+-- 3592 candidates of size 13
+-- 8475 candidates of size 14
 -- tested 7794 candidates
 qsort []  =  []
 qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
@@ -91,36 +91,36 @@ qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
--- looking through 3 candidates of size 1
--- looking through 8 candidates of size 2
--- looking through 11 candidates of size 3
--- looking through 23 candidates of size 4
--- looking through 86 candidates of size 5
--- looking through 72 candidates of size 6
--- looking through 297 candidates of size 7
--- looking through 322 candidates of size 8
--- looking through 939 candidates of size 9
--- looking through 1966 candidates of size 10
--- looking through 2972 candidates of size 11
--- looking through 11011 candidates of size 12
+-- 3 candidates of size 1
+-- 8 candidates of size 2
+-- 11 candidates of size 3
+-- 23 candidates of size 4
+-- 86 candidates of size 5
+-- 72 candidates of size 6
+-- 297 candidates of size 7
+-- 322 candidates of size 8
+-- 939 candidates of size 9
+-- 1966 candidates of size 10
+-- 2972 candidates of size 11
+-- 11011 candidates of size 12
 -- tested 17710 candidates
 cannot conjure
 
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 21 candidates of size 5
--- looking through 26 candidates of size 6
--- looking through 61 candidates of size 7
--- looking through 92 candidates of size 8
--- looking through 203 candidates of size 9
--- looking through 430 candidates of size 10
--- looking through 1086 candidates of size 11
--- looking through 2068 candidates of size 12
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 3 candidates of size 3
+-- 10 candidates of size 4
+-- 21 candidates of size 5
+-- 26 candidates of size 6
+-- 61 candidates of size 7
+-- 92 candidates of size 8
+-- 203 candidates of size 9
+-- 430 candidates of size 10
+-- 1086 candidates of size 11
+-- 2068 candidates of size 12
 -- tested 4004 candidates
 cannot conjure
 

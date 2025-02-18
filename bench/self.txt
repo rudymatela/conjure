@@ -1,36 +1,36 @@
 (?) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 4 candidates of size 1
--- looking through 16 candidates of size 2
--- looking through 56 candidates of size 3
+-- 4 candidates of size 1
+-- 16 candidates of size 2
+-- 56 candidates of size 3
 -- tested 22 candidates
 x ? y  =  x + y
 
 (?) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 4 candidates of size 1
--- looking through 16 candidates of size 2
--- looking through 56 candidates of size 3
+-- 4 candidates of size 1
+-- 16 candidates of size 2
+-- 56 candidates of size 3
 -- tested 34 candidates
 x ? y  =  x * y
 
 i :: Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 3 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 13 candidates of size 3
+-- 3 candidates of size 1
+-- 2 candidates of size 2
+-- 13 candidates of size 3
 -- tested 8 candidates
 i x  =  x + 1
 
 d :: Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 12 candidates of size 3
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 12 candidates of size 3
 -- tested 18 candidates
 cannot conjure
 

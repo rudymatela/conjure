@@ -13,18 +13,18 @@ sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
 invalid:
 xs `isSubsequenceOf` sort xs == True
 -}
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 10 candidates of size 7
--- looking through 10 candidates of size 8
--- looking through 0 candidates of size 9
--- looking through 6 candidates of size 10
--- looking through 20 candidates of size 11
--- looking through 15 candidates of size 12
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 2 candidates of size 3
+-- 4 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 10 candidates of size 7
+-- 10 candidates of size 8
+-- 0 candidates of size 9
+-- 6 candidates of size 10
+-- 20 candidates of size 11
+-- 15 candidates of size 12
 -- tested 67 candidates
 cannot conjure
 
@@ -38,11 +38,11 @@ sort (sort xs) == sort xs
 sort xs `isSubsequenceOf` xs == xs `isSubsequenceOf` sort xs
 
 -}
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 2 candidates of size 5
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 2 candidates of size 3
+-- 6 candidates of size 4
+-- 2 candidates of size 5
 -- tested 9 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 
@@ -55,18 +55,18 @@ concat (transpose xss) == concat xss
 transpose (transpose (transpose xss)) == transpose xss
 
 -}
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 0 candidates of size 8
--- looking through 0 candidates of size 9
--- looking through 1 candidates of size 10
--- looking through 0 candidates of size 11
--- looking through 0 candidates of size 12
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 1 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 1 candidates of size 10
+-- 0 candidates of size 11
+-- 0 candidates of size 12
 -- tested 4 candidates
 cannot conjure
 
@@ -79,11 +79,11 @@ transpose (transpose (transpose xss)) == transpose xss
 replicate x (concat (transpose xss)) == replicate x (concat xss)
 
 -}
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 1 candidates of size 5
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 1 candidates of size 5
 -- tested 3 candidates
 replicates cs x  =  concat (transpose (replicate x cs))
 

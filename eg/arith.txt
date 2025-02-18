@@ -1,62 +1,62 @@
 double :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 3 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 6 candidates of size 3
+-- 3 candidates of size 1
+-- 1 candidates of size 2
+-- 6 candidates of size 3
 -- tested 5 candidates
 double x  =  x + x
 
 triple :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 3 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 2 candidates of size 4
--- looking through 11 candidates of size 5
+-- 3 candidates of size 1
+-- 1 candidates of size 2
+-- 6 candidates of size 3
+-- 2 candidates of size 4
+-- 11 candidates of size 5
 -- tested 13 candidates
 triple x  =  x + (x + x)
 
 add :: Int -> Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 4 candidates of size 1
--- looking through 16 candidates of size 2
--- looking through 40 candidates of size 3
+-- 4 candidates of size 1
+-- 16 candidates of size 2
+-- 40 candidates of size 3
 -- tested 22 candidates
 add x y  =  x + y
 
 square :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 3 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 4 candidates of size 3
+-- 3 candidates of size 1
+-- 1 candidates of size 2
+-- 4 candidates of size 3
 -- tested 7 candidates
 square x  =  x * x
 
 cube :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 3 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 4 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 10 candidates of size 5
+-- 3 candidates of size 1
+-- 1 candidates of size 2
+-- 4 candidates of size 3
+-- 1 candidates of size 4
+-- 10 candidates of size 5
 -- tested 17 candidates
 cube x  =  x * (x * x)
 
 tnpo :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 3 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 4 candidates of size 4
--- looking through 11 candidates of size 5
--- looking through 7 candidates of size 6
--- looking through 35 candidates of size 7
+-- 3 candidates of size 1
+-- 2 candidates of size 2
+-- 6 candidates of size 3
+-- 4 candidates of size 4
+-- 11 candidates of size 5
+-- 7 candidates of size 6
+-- 35 candidates of size 7
 -- tested 35 candidates
 tnpo x  =  x + (x + (x + 1))
 

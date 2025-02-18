@@ -1,21 +1,21 @@
 third :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 10 candidates of size 4
+-- 2 candidates of size 1
+-- 5 candidates of size 2
+-- 3 candidates of size 3
+-- 10 candidates of size 4
 -- tested 12 candidates
 third xs  =  head (tail (tail xs))
 
 product :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 14/25 rules
--- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 18 candidates of size 5
+-- 2 candidates of size 1
+-- 5 candidates of size 2
+-- 3 candidates of size 3
+-- 10 candidates of size 4
+-- 18 candidates of size 5
 -- tested 26 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
@@ -23,10 +23,10 @@ product (x:xs)  =  x * product xs
 product :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 15/26 rules
--- looking through 2 candidates of size 1
--- looking through 5 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 13 candidates of size 4
+-- 2 candidates of size 1
+-- 5 candidates of size 2
+-- 3 candidates of size 3
+-- 13 candidates of size 4
 -- tested 14 candidates
 product xs  =  foldr (*) 1 xs
 

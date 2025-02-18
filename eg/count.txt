@@ -1,28 +1,28 @@
 count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
 -- pruning with 1/2 rules
--- looking through 0 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 1 candidates of size 5
+-- 0 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 1 candidates of size 5
 -- tested 2 candidates
 count x xs  =  length (filter (x ==) xs)
 
 count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
 -- pruning with 8/13 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 4 candidates of size 6
--- looking through 4 candidates of size 7
--- looking through 12 candidates of size 8
--- looking through 20 candidates of size 9
--- looking through 20 candidates of size 10
--- looking through 52 candidates of size 11
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 4 candidates of size 6
+-- 4 candidates of size 7
+-- 12 candidates of size 8
+-- 20 candidates of size 9
+-- 20 candidates of size 10
+-- 52 candidates of size 11
 -- tested 79 candidates
 count x []  =  0
 count x (y:xs)  =  count x xs + (if x == y then 1 else 0)

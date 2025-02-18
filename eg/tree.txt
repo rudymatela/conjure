@@ -1,13 +1,13 @@
 leftmost :: Tree -> Int
 -- testing 360 combinations of argument values
 -- pruning with 3/3 rules
--- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 4 candidates of size 6
--- looking through 16 candidates of size 7
+-- 1 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 4 candidates of size 6
+-- 16 candidates of size 7
 -- tested 7 candidates
 leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)  =  if nil t1
@@ -17,13 +17,13 @@ leftmost (Node t1 x t2)  =  if nil t1
 rightmost :: Tree -> Int
 -- testing 360 combinations of argument values
 -- pruning with 3/3 rules
--- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 4 candidates of size 6
--- looking through 16 candidates of size 7
+-- 1 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 4 candidates of size 6
+-- 16 candidates of size 7
 -- tested 16 candidates
 rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)  =  if nil t2
@@ -33,14 +33,14 @@ rightmost (Node t1 x t2)  =  if nil t2
 size :: Tree -> Int
 -- testing 360 combinations of argument values
 -- pruning with 4/8 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 2 candidates of size 4
--- looking through 4 candidates of size 5
--- looking through 8 candidates of size 6
--- looking through 12 candidates of size 7
--- looking through 24 candidates of size 8
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 2 candidates of size 4
+-- 4 candidates of size 5
+-- 8 candidates of size 6
+-- 12 candidates of size 7
+-- 24 candidates of size 8
 -- tested 40 candidates
 size Leaf  =  0
 size (Node t1 x t2)  =  size t1 + (size t2 + 1)
@@ -48,14 +48,14 @@ size (Node t1 x t2)  =  size t1 + (size t2 + 1)
 height :: Tree -> Int
 -- testing 360 combinations of argument values
 -- pruning with 49/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 14 candidates of size 5
--- looking through 34 candidates of size 6
--- looking through 98 candidates of size 7
--- looking through 274 candidates of size 8
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 0 candidates of size 3
+-- 6 candidates of size 4
+-- 14 candidates of size 5
+-- 34 candidates of size 6
+-- 98 candidates of size 7
+-- 274 candidates of size 8
 -- tested 200 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  1 + max (height t1) (height t2)
@@ -63,18 +63,18 @@ height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 11/17 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 0 candidates of size 7
--- looking through 20 candidates of size 8
--- looking through 0 candidates of size 9
--- looking through 0 candidates of size 10
--- looking through 0 candidates of size 11
--- looking through 80 candidates of size 12
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 20 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 0 candidates of size 11
+-- 80 candidates of size 12
 -- tested 88 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
@@ -82,41 +82,41 @@ mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 29/39 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 10 candidates of size 5
--- looking through 30 candidates of size 6
--- looking through 0 candidates of size 7
--- looking through 68 candidates of size 8
--- looking through 216 candidates of size 9
--- looking through 56 candidates of size 10
--- looking through 802 candidates of size 11
--- looking through 2077 candidates of size 12
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 2 candidates of size 3
+-- 0 candidates of size 4
+-- 10 candidates of size 5
+-- 30 candidates of size 6
+-- 0 candidates of size 7
+-- 68 candidates of size 8
+-- 216 candidates of size 9
+-- 56 candidates of size 10
+-- 802 candidates of size 11
+-- 2077 candidates of size 12
 -- tested 3265 candidates
 cannot conjure
 
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 1 candidates of size 3
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 1 candidates of size 3
 -- tested 1 candidates
 ordered t1  =  strictlyOrdered (inorder t1)
 
 preorder :: Tree -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 2 candidates of size 5
--- looking through 5 candidates of size 6
--- looking through 4 candidates of size 7
--- looking through 9 candidates of size 8
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 2 candidates of size 5
+-- 5 candidates of size 6
+-- 4 candidates of size 7
+-- 9 candidates of size 8
 -- tested 15 candidates
 preorder Leaf  =  []
 preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
@@ -124,14 +124,14 @@ preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
 inorder :: Tree -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 2 candidates of size 5
--- looking through 5 candidates of size 6
--- looking through 4 candidates of size 7
--- looking through 9 candidates of size 8
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 2 candidates of size 5
+-- 5 candidates of size 6
+-- 4 candidates of size 7
+-- 9 candidates of size 8
 -- tested 19 candidates
 inorder Leaf  =  []
 inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
@@ -139,16 +139,16 @@ inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
 posorder :: Tree -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 2 candidates of size 5
--- looking through 5 candidates of size 6
--- looking through 4 candidates of size 7
--- looking through 9 candidates of size 8
--- looking through 14 candidates of size 9
--- looking through 17 candidates of size 10
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 2 candidates of size 5
+-- 5 candidates of size 6
+-- 4 candidates of size 7
+-- 9 candidates of size 8
+-- 14 candidates of size 9
+-- 17 candidates of size 10
 -- tested 50 candidates
 posorder Leaf  =  []
 posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])

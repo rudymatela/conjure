@@ -1,92 +1,92 @@
 gps1 :: [Int] -> Maybe Int
 -- testing 4 combinations of argument values
 -- pruning with 11/21 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 0 candidates of size 8
--- looking through 1 candidates of size 9
--- looking through 2 candidates of size 10
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 1 candidates of size 7
+-- 0 candidates of size 8
+-- 1 candidates of size 9
+-- 2 candidates of size 10
 -- tested 5 candidates
 gps1 xs  =  findIndex (0 >) (map (foldr (+) 0) (tail (inits xs)))
 
 gps1 :: [Int] -> Maybe Int
 -- testing 4 combinations of argument values
 -- pruning with 11/21 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 4 candidates of size 8
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 1 candidates of size 5
+-- 0 candidates of size 6
+-- 1 candidates of size 7
+-- 4 candidates of size 8
 -- tested 6 candidates
 gps1 xs  =  findIndex (0 >) (map sum (tail (inits xs)))
 
 gps1 :: Int -> [Int] -> Int
 -- testing 6 combinations of argument values
 -- pruning with 8/9 rules
--- looking through 4 candidates of size 1
--- looking through 24 candidates of size 2
--- looking through 75 candidates of size 3
--- looking through 216 candidates of size 4
+-- 4 candidates of size 1
+-- 24 candidates of size 2
+-- 75 candidates of size 3
+-- 216 candidates of size 4
 -- tested 319 candidates
 cannot conjure
 
 gps2 :: Double -> Double -> Int -> Double
 -- testing 5 combinations of argument values
 -- pruning with 2/6 rules
--- looking through 2 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 18 candidates of size 3
--- looking through 66 candidates of size 4
--- looking through 316 candidates of size 5
--- looking through 1376 candidates of size 6
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 18 candidates of size 3
+-- 66 candidates of size 4
+-- 316 candidates of size 5
+-- 1376 candidates of size 6
 -- tested 1780 candidates
 cannot conjure
 
 gps3 :: [Char] -> Int
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
+-- 0 candidates of size 1
+-- 0 candidates of size 2
 -- tested 0 candidates
 cannot conjure
 
 gps4 :: [Char] -> [Char]
 -- pruning with 13/21 rules
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 8 candidates of size 3
--- looking through 20 candidates of size 4
--- looking through 51 candidates of size 5
--- looking through 119 candidates of size 6
+-- 2 candidates of size 1
+-- 3 candidates of size 2
+-- 8 candidates of size 3
+-- 20 candidates of size 4
+-- 51 candidates of size 5
+-- 119 candidates of size 6
 -- tested 203 candidates
 cannot conjure
 
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
+-- 0 candidates of size 1
 -- tested 0 candidates
 cannot conjure
 
 tell :: [Int] -> Int -> [Int]
 -- pruning with 0/0 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 6 candidates of size 5
--- looking through 39 candidates of size 6
--- looking through 26 candidates of size 7
--- looking through 328 candidates of size 8
--- looking through 134 candidates of size 9
--- looking through 3229 candidates of size 10
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 2 candidates of size 3
+-- 6 candidates of size 4
+-- 6 candidates of size 5
+-- 39 candidates of size 6
+-- 26 candidates of size 7
+-- 328 candidates of size 8
+-- 134 candidates of size 9
+-- 3229 candidates of size 10
 -- tested 783 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
@@ -94,71 +94,71 @@ tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 1 candidates of size 3
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 1 candidates of size 3
 -- tested 2 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 12/12 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 5 candidates of size 3
--- looking through 9 candidates of size 4
--- looking through 45 candidates of size 5
--- looking through 82 candidates of size 6
--- looking through 428 candidates of size 7
--- looking through 882 candidates of size 8
--- looking through 4350 candidates of size 9
--- looking through 9232 candidates of size 10
--- looking through 43847 candidates of size 11
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 5 candidates of size 3
+-- 9 candidates of size 4
+-- 45 candidates of size 5
+-- 82 candidates of size 6
+-- 428 candidates of size 7
+-- 882 candidates of size 8
+-- 4350 candidates of size 9
+-- 9232 candidates of size 10
+-- 43847 candidates of size 11
 -- tested 32290 candidates
 gps5 x  =  tell [25,10,5,1] x
 
 gps6 :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 1 candidates of size 2
+-- 0 candidates of size 1
+-- 1 candidates of size 2
 -- tested 1 candidates
 cannot conjure
 
 gps7 :: Integer -> Integer -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
+-- 0 candidates of size 1
 -- tested 0 candidates
 cannot conjure
 
 gps8 :: Int -> [Int] -> (Int,Int)
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
+-- 0 candidates of size 1
+-- 0 candidates of size 2
 -- tested 0 candidates
 cannot conjure
 
 gps9 :: Int -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
+-- 0 candidates of size 1
 -- tested 0 candidates
 cannot conjure
 
 gps10 :: [Int] -> Int
 -- testing 7 combinations of argument values
 -- pruning with 67/100 rules
--- looking through 4 candidates of size 1
--- looking through 16 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 68 candidates of size 4
--- looking through 80 candidates of size 5
--- looking through 980 candidates of size 6
--- looking through 1428 candidates of size 7
--- looking through 17324 candidates of size 8
--- looking through 30724 candidates of size 9
+-- 4 candidates of size 1
+-- 16 candidates of size 2
+-- 0 candidates of size 3
+-- 68 candidates of size 4
+-- 80 candidates of size 5
+-- 980 candidates of size 6
+-- 1428 candidates of size 7
+-- 17324 candidates of size 8
+-- 30724 candidates of size 9
 -- tested 25024 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  gps10 xs + (x `div` 3 - 2)
@@ -166,12 +166,12 @@ gps10 (x:xs)  =  gps10 xs + (x `div` 3 - 2)
 gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 3 candidates of size 1
--- looking through 6 candidates of size 2
--- looking through 11 candidates of size 3
--- looking through 50 candidates of size 4
--- looking through 98 candidates of size 5
--- looking through 330 candidates of size 6
+-- 3 candidates of size 1
+-- 6 candidates of size 2
+-- 11 candidates of size 3
+-- 50 candidates of size 4
+-- 98 candidates of size 5
+-- 330 candidates of size 6
 -- tested 172 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
@@ -179,29 +179,29 @@ gcd x y  =  gcd y (x `mod` y)
 gps12 :: [Char] -> [Char] -> [Int]
 -- testing 5 combinations of argument values
 -- pruning with 1/2 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 4 candidates of size 5
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 4 candidates of size 5
 -- tested 3 candidates
 gps12 cs ds  =  findIndices (ds `isPrefixOf`) (tails cs)
 
 gps13_leaders :: [Int] -> [Int]
 -- testing 4 combinations of argument values
 -- pruning with 5/5 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 2 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 2 candidates of size 6
--- looking through 1 candidates of size 7
--- looking through 4 candidates of size 8
--- looking through 7 candidates of size 9
--- looking through 21 candidates of size 10
--- looking through 34 candidates of size 11
--- looking through 67 candidates of size 12
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 2 candidates of size 4
+-- 1 candidates of size 5
+-- 2 candidates of size 6
+-- 1 candidates of size 7
+-- 4 candidates of size 8
+-- 7 candidates of size 9
+-- 21 candidates of size 10
+-- 34 candidates of size 11
+-- 67 candidates of size 12
 -- tested 82 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs
@@ -210,32 +210,32 @@ gps13_leaders (x:xs)  =  if all (x >) xs
 
 gps14_luhn :: [Int] -> Int
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
+-- 0 candidates of size 1
+-- 0 candidates of size 2
 -- tested 0 candidates
 cannot conjure
 
 gps15_mastermind :: () -> ()
 -- pruning with 0/1 rules
--- looking through 1 candidates of size 1
+-- 1 candidates of size 1
 -- tested 1 candidates
 gps15_mastermind u  =  u
 
 gps16_middle :: [Char] -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 10/11 rules
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 10 candidates of size 4
--- looking through 19 candidates of size 5
--- looking through 32 candidates of size 6
--- looking through 59 candidates of size 7
--- looking through 124 candidates of size 8
--- looking through 305 candidates of size 9
--- looking through 822 candidates of size 10
--- looking through 2276 candidates of size 11
--- looking through 6273 candidates of size 12
+-- 2 candidates of size 1
+-- 3 candidates of size 2
+-- 6 candidates of size 3
+-- 10 candidates of size 4
+-- 19 candidates of size 5
+-- 32 candidates of size 6
+-- 59 candidates of size 7
+-- 124 candidates of size 8
+-- 305 candidates of size 9
+-- 822 candidates of size 10
+-- 2276 candidates of size 11
+-- 6273 candidates of size 12
 -- tested 3956 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
@@ -245,56 +245,56 @@ gps16_middle (c:cs)  =  if length cs <= 1
 gps17_pds :: [Int] -> Int
 -- testing 5 combinations of argument values
 -- pruning with 29/40 rules
--- looking through 1 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 3 candidates of size 5
+-- 1 candidates of size 1
+-- 2 candidates of size 2
+-- 1 candidates of size 3
+-- 1 candidates of size 4
+-- 3 candidates of size 5
 -- tested 8 candidates
 cannot conjure
 
 gps18_price :: [Double] -> [Double] -> Double
 -- testing 4 combinations of argument values
 -- pruning with 26/35 rules
--- looking through 2 candidates of size 1
--- looking through 8 candidates of size 2
--- looking through 32 candidates of size 3
--- looking through 74 candidates of size 4
--- looking through 433 candidates of size 5
--- looking through 1218 candidates of size 6
+-- 2 candidates of size 1
+-- 8 candidates of size 2
+-- 32 candidates of size 3
+-- 74 candidates of size 4
+-- 433 candidates of size 5
+-- 1218 candidates of size 6
 -- tested 1767 candidates
 cannot conjure
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
 -- pruning with 6/19 rules
--- looking through 3 candidates of size 1
--- looking through 6 candidates of size 2
--- looking through 27 candidates of size 3
--- looking through 138 candidates of size 4
--- looking through 435 candidates of size 5
--- looking through 2715 candidates of size 6
+-- 3 candidates of size 1
+-- 6 candidates of size 2
+-- 27 candidates of size 3
+-- 138 candidates of size 4
+-- 435 candidates of size 5
+-- 2715 candidates of size 6
 -- tested 3324 candidates
 cannot conjure
 
 gps20 :: [Char] -> Bool
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
+-- 0 candidates of size 1
+-- 0 candidates of size 2
 -- tested 0 candidates
 cannot conjure
 
 spin :: [Char] -> [Char]
 -- pruning with 6/6 rules
 -- reasoning produced 1 incorrect properties, please re-run with more tests for faster results
--- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 0 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 0 candidates of size 7
--- looking through 4 candidates of size 8
+-- 1 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 4 candidates of size 8
 -- tested 3 candidates
 spin cs  =  if length cs >= 5
             then reverse cs
@@ -303,70 +303,70 @@ spin cs  =  if length cs >= 5
 gps21_spinwords :: [Char] -> [Char]
 -- pruning with 16/16 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
--- looking through 1 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 5 candidates of size 5
+-- 1 candidates of size 1
+-- 2 candidates of size 2
+-- 2 candidates of size 3
+-- 3 candidates of size 4
+-- 5 candidates of size 5
 -- tested 12 candidates
 gps21_spinwords cs  =  unwords (map spin (words cs))
 
 digits :: Int -> [Int]
 -- testing 5 combinations of argument values
 -- pruning with 7/7 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 2 candidates of size 3
--- looking through 3 candidates of size 4
--- looking through 11 candidates of size 5
--- looking through 13 candidates of size 6
--- looking through 91 candidates of size 7
--- looking through 104 candidates of size 8
--- looking through 850 candidates of size 9
--- looking through 923 candidates of size 10
--- looking through 8902 candidates of size 11
--- looking through 9662 candidates of size 12
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 2 candidates of size 3
+-- 3 candidates of size 4
+-- 11 candidates of size 5
+-- 13 candidates of size 6
+-- 91 candidates of size 7
+-- 104 candidates of size 8
+-- 850 candidates of size 9
+-- 923 candidates of size 10
+-- 8902 candidates of size 11
+-- 9662 candidates of size 12
 -- tested 20562 candidates
 cannot conjure
 
 gps22 :: Int -> [Char]
 -- pruning with 0/0 rules
--- looking through 0 candidates of size 1
+-- 0 candidates of size 1
 -- tested 0 candidates
 cannot conjure
 
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules
--- looking through 3 candidates of size 1
--- looking through 12 candidates of size 2
--- looking through 33 candidates of size 3
--- looking through 36 candidates of size 4
--- looking through 127 candidates of size 5
--- looking through 507 candidates of size 6
--- looking through 839 candidates of size 7
--- looking through 784 candidates of size 8
--- looking through 600 candidates of size 9
--- looking through 2722 candidates of size 10
--- looking through 5292 candidates of size 11
--- looking through 2832 candidates of size 12
+-- 3 candidates of size 1
+-- 12 candidates of size 2
+-- 33 candidates of size 3
+-- 36 candidates of size 4
+-- 127 candidates of size 5
+-- 507 candidates of size 6
+-- 839 candidates of size 7
+-- 784 candidates of size 8
+-- 600 candidates of size 9
+-- 2722 candidates of size 10
+-- 5292 candidates of size 11
+-- 2832 candidates of size 12
 -- tested 13787 candidates
 cannot conjure
 
 gps24 :: [Char] -> Twitter
 -- pruning with 4/8 rules
 -- reasoning produced 4 incorrect properties, please re-run with more tests for faster results
--- looking through 2 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 6 candidates of size 3
--- looking through 6 candidates of size 4
--- looking through 3 candidates of size 5
--- looking through 5 candidates of size 6
--- looking through 10 candidates of size 7
--- looking through 48 candidates of size 8
--- looking through 134 candidates of size 9
--- looking through 224 candidates of size 10
--- looking through 314 candidates of size 11
--- looking through 479 candidates of size 12
+-- 2 candidates of size 1
+-- 3 candidates of size 2
+-- 6 candidates of size 3
+-- 6 candidates of size 4
+-- 3 candidates of size 5
+-- 5 candidates of size 6
+-- 10 candidates of size 7
+-- 48 candidates of size 8
+-- 134 candidates of size 9
+-- 224 candidates of size 10
+-- 314 candidates of size 11
+-- 479 candidates of size 12
 -- tested 908 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs
@@ -376,12 +376,12 @@ gps24 (c:cs)  =  if 140 > length cs
 gps25 :: [Double] -> [Double] -> Double
 -- testing 6 combinations of argument values
 -- pruning with 31/59 rules
--- looking through 2 candidates of size 1
--- looking through 9 candidates of size 2
--- looking through 49 candidates of size 3
--- looking through 200 candidates of size 4
--- looking through 1104 candidates of size 5
--- looking through 5170 candidates of size 6
+-- 2 candidates of size 1
+-- 9 candidates of size 2
+-- 49 candidates of size 3
+-- 200 candidates of size 4
+-- 1104 candidates of size 5
+-- 5170 candidates of size 6
 -- tested 6534 candidates
 cannot conjure
 

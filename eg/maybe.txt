@@ -1,8 +1,8 @@
 isNothing :: Maybe A -> Bool
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
+-- 2 candidates of size 1
+-- 1 candidates of size 2
 -- tested 3 candidates
 isNothing Nothing  =  True
 isNothing (Just x)  =  False
@@ -10,8 +10,8 @@ isNothing (Just x)  =  False
 isJust :: Maybe A -> Bool
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
+-- 2 candidates of size 1
+-- 1 candidates of size 2
 -- tested 3 candidates
 isJust Nothing  =  False
 isJust (Just x)  =  True
@@ -19,17 +19,17 @@ isJust (Just x)  =  True
 fromMaybe :: A -> Maybe A -> A
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 1 candidates of size 2
+-- 1 candidates of size 1
+-- 1 candidates of size 2
 -- tested 2 candidates
 fromMaybe x Nothing  =  x
 fromMaybe x (Just y)  =  y
 
 maybe :: A -> (A -> A) -> Maybe A -> A
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 2 candidates of size 2
--- looking through 5 candidates of size 3
+-- 1 candidates of size 1
+-- 2 candidates of size 2
+-- 5 candidates of size 3
 -- tested 6 candidates
 maybe x f Nothing  =  x
 maybe x f (Just y)  =  f y
@@ -37,9 +37,9 @@ maybe x f (Just y)  =  f y
 listToMaybe :: [A] -> Maybe A
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 1 candidates of size 3
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 1 candidates of size 3
 -- tested 2 candidates
 listToMaybe []  =  Nothing
 listToMaybe (x:xs)  =  Just x
@@ -47,10 +47,10 @@ listToMaybe (x:xs)  =  Just x
 maybeToList :: Maybe A -> [A]
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 0 candidates of size 3
--- looking through 1 candidates of size 4
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
 -- tested 2 candidates
 maybeToList Nothing  =  []
 maybeToList (Just x)  =  [x]
@@ -58,8 +58,8 @@ maybeToList (Just x)  =  [x]
 catMaybes :: [Maybe A] -> [A]
 -- testing 44 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 1 candidates of size 1
--- looking through 0 candidates of size 2
+-- 1 candidates of size 1
+-- 0 candidates of size 2
 -- tested 1 candidates
 cannot conjure
 

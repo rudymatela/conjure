@@ -75,6 +75,8 @@ TESTS = \
   test/red \
   test/utils
 
+RMTIME = sed 's/^-- [0-9.]*s: /-- /'
+
 all: mk/toplibs
 
 all-all: all $(EG) $(TESTS)
@@ -143,13 +145,13 @@ full-clean: clean clean-cabal clean-stack
 	./$<
 
 %.txt: %
-	./$< >$@
+	./$< | $(RMTIME) >$@
 
 %.tee: %
-	$(LONG) unbuffer ./$< | tee $<.txt
+	$(LONG) unbuffer ./$< | $(RMTIME) -u | tee $<.txt
 
 %.diff: %
-	./$< | diff -rud $<.txt -
+	./$< | $(RMTIME) | diff -rud $<.txt -
 
 # lists files missing copyright notices
 list-missing-copyright:

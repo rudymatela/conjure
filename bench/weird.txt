@@ -1,9 +1,9 @@
 (^^^) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 56/91 rules
--- looking through 4 candidates of size 1
--- looking through 16 candidates of size 2
--- looking through 40 candidates of size 3
+-- 4 candidates of size 1
+-- 16 candidates of size 2
+-- 40 candidates of size 3
 -- tested 37 candidates
 0 ^^^ x  =  x
 x ^^^ 0  =  x
@@ -12,16 +12,16 @@ x ^^^ y  =  0
 (^^^) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 56/91 rules
--- looking through 4 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 9 candidates of size 3
--- looking through 0 candidates of size 4
--- looking through 39 candidates of size 5
--- looking through 60 candidates of size 6
--- looking through 222 candidates of size 7
--- looking through 996 candidates of size 8
--- looking through 1266 candidates of size 9
--- looking through 11700 candidates of size 10
+-- 4 candidates of size 1
+-- 0 candidates of size 2
+-- 9 candidates of size 3
+-- 0 candidates of size 4
+-- 39 candidates of size 5
+-- 60 candidates of size 6
+-- 222 candidates of size 7
+-- 996 candidates of size 8
+-- 1266 candidates of size 9
+-- 11700 candidates of size 10
 -- tested 6683 candidates
 x ^^^ y  =  if 0 == x * y
             then x + y

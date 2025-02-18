@@ -1,13 +1,13 @@
 odd :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 21/44 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 2 candidates of size 7
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 1 candidates of size 4
+-- 1 candidates of size 5
+-- 0 candidates of size 6
+-- 2 candidates of size 7
 -- tested 8 candidates
 odd 0  =  False
 odd 1  =  True
@@ -16,13 +16,13 @@ odd x  =  odd (x - 2)
 even :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 21/44 rules
--- looking through 2 candidates of size 1
--- looking through 1 candidates of size 2
--- looking through 1 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 1 candidates of size 5
--- looking through 0 candidates of size 6
--- looking through 2 candidates of size 7
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 1 candidates of size 4
+-- 1 candidates of size 5
+-- 0 candidates of size 6
+-- 2 candidates of size 7
 -- tested 8 candidates
 even 0  =  True
 even 1  =  False
@@ -31,22 +31,22 @@ even x  =  even (x - 2)
 odd :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 36/55 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 1 candidates of size 4
--- looking through 46 candidates of size 5
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 1 candidates of size 4
+-- 46 candidates of size 5
 -- tested 31 candidates
 odd x  =  1 == x `mod` 2
 
 even :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 36/55 rules
--- looking through 0 candidates of size 1
--- looking through 0 candidates of size 2
--- looking through 3 candidates of size 3
--- looking through 2 candidates of size 4
--- looking through 45 candidates of size 5
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 2 candidates of size 4
+-- 45 candidates of size 5
 -- tested 22 candidates
 even x  =  0 == x `mod` 2
 

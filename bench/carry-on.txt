@@ -1,23 +1,23 @@
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 28 candidates of size 5
--- looking through 35 candidates of size 6
--- looking through 167 candidates of size 7
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 7 candidates of size 3
+-- 8 candidates of size 4
+-- 28 candidates of size 5
+-- 35 candidates of size 6
+-- 167 candidates of size 7
 -- tested 95 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
--- looking through 203 candidates of size 8
+-- 203 candidates of size 8
 -- tested 254 candidates
 factorial 1  =  1
 factorial x  =  x * factorial (x - 1)
 
--- looking through 1048 candidates of size 9
+-- 1048 candidates of size 9
 -- tested 547 candidates
 factorial 0  =  0
 factorial 1  =  1
@@ -28,8 +28,8 @@ factorial 0  =  1
 factorial 1  =  1
 factorial x  =  x * factorial (x - 1)
 
--- looking through 1301 candidates of size 10
--- looking through 7201 candidates of size 11
+-- 1301 candidates of size 10
+-- 7201 candidates of size 11
 -- tested 3216 candidates
 factorial 0  =  1
 factorial x  =  x + x * (factorial (x - 1) - 1)

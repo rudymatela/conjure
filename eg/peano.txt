@@ -1,11 +1,11 @@
 (+) :: Peano -> Peano -> Peano
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
--- looking through 3 candidates of size 1
--- looking through 11 candidates of size 2
--- looking through 38 candidates of size 3
--- looking through 87 candidates of size 4
--- looking through 218 candidates of size 5
+-- 3 candidates of size 1
+-- 11 candidates of size 2
+-- 38 candidates of size 3
+-- 87 candidates of size 4
+-- 218 candidates of size 5
 -- tested 140 candidates
 p + Z  =  p
 p + S q  =  S p + q
@@ -13,12 +13,12 @@ p + S q  =  S p + q
 (*) :: Peano -> Peano -> Peano
 -- testing 7 combinations of argument values
 -- pruning with 6/10 rules
--- looking through 3 candidates of size 1
--- looking through 11 candidates of size 2
--- looking through 41 candidates of size 3
--- looking through 108 candidates of size 4
--- looking through 291 candidates of size 5
--- looking through 746 candidates of size 6
+-- 3 candidates of size 1
+-- 11 candidates of size 2
+-- 41 candidates of size 3
+-- 108 candidates of size 4
+-- 291 candidates of size 5
+-- 746 candidates of size 6
 -- tested 537 candidates
 p * Z  =  Z
 p * S q  =  p + p * q

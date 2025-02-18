@@ -2,13 +2,13 @@
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 23 candidates of size 5
--- looking through 30 candidates of size 6
--- looking through 82 candidates of size 7
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 7 candidates of size 3
+-- 8 candidates of size 4
+-- 23 candidates of size 5
+-- 30 candidates of size 6
+-- 82 candidates of size 7
 -- tested 84 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -17,13 +17,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 28 candidates of size 5
--- looking through 35 candidates of size 6
--- looking through 167 candidates of size 7
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 7 candidates of size 3
+-- 8 candidates of size 4
+-- 28 candidates of size 5
+-- 35 candidates of size 6
+-- 167 candidates of size 7
 -- tested 95 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -32,13 +32,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 16 candidates of size 3
--- looking through 17 candidates of size 4
--- looking through 279 candidates of size 5
--- looking through 313 candidates of size 6
--- looking through 5763 candidates of size 7
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 16 candidates of size 3
+-- 17 candidates of size 4
+-- 279 candidates of size 5
+-- 313 candidates of size 6
+-- 5763 candidates of size 7
 -- tested 656 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -47,13 +47,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 7 candidates of size 3
--- looking through 8 candidates of size 4
--- looking through 28 candidates of size 5
--- looking through 35 candidates of size 6
--- looking through 252 candidates of size 7
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 7 candidates of size 3
+-- 8 candidates of size 4
+-- 28 candidates of size 5
+-- 35 candidates of size 6
+-- 252 candidates of size 7
 -- tested 148 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -62,13 +62,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 6 candidates of size 2
--- looking through 12 candidates of size 3
--- looking through 24 candidates of size 4
--- looking through 37 candidates of size 5
--- looking through 72 candidates of size 6
--- looking through 196 candidates of size 7
+-- 3 candidates of size 1
+-- 6 candidates of size 2
+-- 12 candidates of size 3
+-- 24 candidates of size 4
+-- 37 candidates of size 5
+-- 72 candidates of size 6
+-- 196 candidates of size 7
 -- tested 165 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -77,13 +77,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 6 candidates of size 2
--- looking through 12 candidates of size 3
--- looking through 24 candidates of size 4
--- looking through 47 candidates of size 5
--- looking through 82 candidates of size 6
--- looking through 342 candidates of size 7
+-- 3 candidates of size 1
+-- 6 candidates of size 2
+-- 12 candidates of size 3
+-- 24 candidates of size 4
+-- 47 candidates of size 5
+-- 82 candidates of size 6
+-- 342 candidates of size 7
 -- tested 284 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -92,13 +92,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 6 candidates of size 2
--- looking through 21 candidates of size 3
--- looking through 42 candidates of size 4
--- looking through 302 candidates of size 5
--- looking through 602 candidates of size 6
--- looking through 6115 candidates of size 7
+-- 3 candidates of size 1
+-- 6 candidates of size 2
+-- 21 candidates of size 3
+-- 42 candidates of size 4
+-- 302 candidates of size 5
+-- 602 candidates of size 6
+-- 6115 candidates of size 7
 -- tested 1001 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -107,13 +107,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 3 candidates of size 2
--- looking through 16 candidates of size 3
--- looking through 17 candidates of size 4
--- looking through 279 candidates of size 5
--- looking through 313 candidates of size 6
--- looking through 6281 candidates of size 7
+-- 3 candidates of size 1
+-- 3 candidates of size 2
+-- 16 candidates of size 3
+-- 17 candidates of size 4
+-- 279 candidates of size 5
+-- 313 candidates of size 6
+-- 6281 candidates of size 7
 -- tested 1004 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
@@ -122,13 +122,13 @@ factorial x  =  x * factorial (x - 1)
 factorial :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
--- looking through 3 candidates of size 1
--- looking through 6 candidates of size 2
--- looking through 21 candidates of size 3
--- looking through 42 candidates of size 4
--- looking through 330 candidates of size 5
--- looking through 630 candidates of size 6
--- looking through 7215 candidates of size 7
+-- 3 candidates of size 1
+-- 6 candidates of size 2
+-- 21 candidates of size 3
+-- 42 candidates of size 4
+-- 330 candidates of size 5
+-- 630 candidates of size 6
+-- 7215 candidates of size 7
 -- tested 1945 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
