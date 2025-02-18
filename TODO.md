@@ -3,6 +3,10 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Implement `maxPatternSize`.
+
+* Report runtime (optionally?)
+
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 
