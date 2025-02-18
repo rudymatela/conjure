@@ -30,6 +30,7 @@ extra-source-files: .gitignore
                   , eg/*.hs
                   , eg/*.txt
                   , eg/colin/*.hs
+                  , eg/colin/*.txt
                   , proto/*.hs
                   , proto/*.txt
                   , mk/All.hs
