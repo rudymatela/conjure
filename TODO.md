@@ -3,6 +3,10 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* rewrite after filling in recursions
+
+* avoid generating the quadratic solution on `eg/colin/ListFuns.hs`
+
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 
@@ -11,6 +15,50 @@ A non-exhaustive list of things TO DO for Conjure.
 * consider the size of patterns to thin-out each size partition
 
 * consider non top-level cases
+
+
+## Rewrite after filling in recursions
+
+When Conjure conjures length, it does it like so:
+
+	length []  =  0
+	length (x:xs)  =  length xs + 1
+
+However, the following would precede in term-rewriting order:
+
+	length []  =  0
+	length (x:xs)  =  1 + length xs
+
+The problem is that `_ + 1` precedes `1 + _` in our term rewriting order,
+so when we do the recursion fillings, we get the first version not the second.
+
+Rewriting after filling in recursions would make it so that we get the wanted
+second.
+
+There's an opportunity for a late pruning rule here:
+
+If we rewrite any of the RHS to a smaller expression.  We can prune away that
+candidate.  Considering sub from `eg/colin/ListFuns.hs`:
+
+We encounter the following candidate:
+
+	sub xs []  =  True
+	sub xs (x:ys)  =  sub ys ys && sub ys ys
+
+It can be pruned away by simplifying the last RHS to `sub ys ys`:
+`p && p` is `p`!
+We need to do this pruning in the `fillingsFor` for the most performance gain.
+
+Beware,
+we can't really just check for normality: as we can have:
+
+	length xs + 1
+
+without having
+
+	1 + length xs
+
+We may rewrite to a term of the same size that would not be generated!
 
 
 ## Forbid recursion into negatives
