@@ -28,20 +28,20 @@ factorial 0  =  1
 factorial 1  =  1
 factorial x  =  x * factorial (x - 1)
 
--- 1301 candidates of size 10
--- 7201 candidates of size 11
--- tested 3216 candidates
+-- 1299 candidates of size 10
+-- 7200 candidates of size 11
+-- tested 3213 candidates
 factorial 0  =  1
 factorial x  =  x + x * (factorial (x - 1) - 1)
 
--- tested 3396 candidates
+-- tested 3393 candidates
 factorial 0  =  1
 factorial x  =  x - x * (1 - factorial (x - 1))
 
--- tested 3519 candidates
+-- tested 3516 candidates
 factorial 0  =  1
 factorial x  =  (0 - x) * (0 - factorial (x - 1))
 
--- tested 10004 candidates
+-- tested 10001 candidates
 cannot conjure
 

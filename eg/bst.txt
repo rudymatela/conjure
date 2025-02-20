@@ -8,12 +8,12 @@ mem :: Int -> Tree -> Bool
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 31 candidates of size 8
--- 92 candidates of size 9
+-- 27 candidates of size 8
+-- 84 candidates of size 9
 -- 0 candidates of size 10
--- 304 candidates of size 11
--- 151 candidates of size 12
--- tested 497 candidates
+-- 252 candidates of size 11
+-- 99 candidates of size 12
+-- tested 392 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 
@@ -69,9 +69,9 @@ before :: Int -> Tree -> Tree
 -- 239 candidates of size 8
 -- 104 candidates of size 9
 -- 1558 candidates of size 10
--- 3555 candidates of size 11
+-- 3543 candidates of size 11
 -- 4028 candidates of size 12
--- tested 9599 candidates
+-- tested 9587 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree

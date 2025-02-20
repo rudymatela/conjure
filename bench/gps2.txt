@@ -155,11 +155,11 @@ gps10 :: [Int] -> Int
 -- 0 candidates of size 3
 -- 68 candidates of size 4
 -- 80 candidates of size 5
--- 980 candidates of size 6
+-- 976 candidates of size 6
 -- 1428 candidates of size 7
--- 17324 candidates of size 8
--- 30724 candidates of size 9
--- tested 25024 candidates
+-- 17256 candidates of size 8
+-- 30712 candidates of size 9
+-- tested 24940 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  gps10 xs + (x `div` 3 - 2)
 
@@ -199,10 +199,10 @@ gps13_leaders :: [Int] -> [Int]
 -- 1 candidates of size 7
 -- 4 candidates of size 8
 -- 7 candidates of size 9
--- 21 candidates of size 10
--- 34 candidates of size 11
--- 67 candidates of size 12
--- tested 82 candidates
+-- 20 candidates of size 10
+-- 33 candidates of size 11
+-- 64 candidates of size 12
+-- tested 78 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs
                          then x:gps13_leaders xs
@@ -233,10 +233,10 @@ gps16_middle :: [Char] -> [Char]
 -- 59 candidates of size 7
 -- 124 candidates of size 8
 -- 305 candidates of size 9
--- 822 candidates of size 10
--- 2276 candidates of size 11
--- 6273 candidates of size 12
--- tested 3956 candidates
+-- 820 candidates of size 10
+-- 2263 candidates of size 11
+-- 6212 candidates of size 12
+-- tested 3912 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
                         then c:cs
@@ -362,10 +362,10 @@ gps24 :: [Char] -> Twitter
 -- 10 candidates of size 7
 -- 48 candidates of size 8
 -- 134 candidates of size 9
--- 224 candidates of size 10
--- 314 candidates of size 11
--- 479 candidates of size 12
--- tested 908 candidates
+-- 216 candidates of size 10
+-- 308 candidates of size 11
+-- 466 candidates of size 12
+-- tested 881 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs
                  then Tweet (length (c:cs))

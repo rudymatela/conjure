@@ -8,8 +8,8 @@ subset :: [Int] -> [Int] -> Bool
 -- 64 candidates of size 5
 -- 40 candidates of size 6
 -- 64 candidates of size 7
--- 522 candidates of size 8
--- tested 553 candidates
+-- 482 candidates of size 8
+-- tested 513 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  subset xs ys && elem x ys
 

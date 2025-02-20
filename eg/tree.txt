@@ -53,10 +53,10 @@ height :: Tree -> Int
 -- 0 candidates of size 3
 -- 6 candidates of size 4
 -- 14 candidates of size 5
--- 34 candidates of size 6
+-- 32 candidates of size 6
 -- 98 candidates of size 7
--- 274 candidates of size 8
--- tested 200 candidates
+-- 248 candidates of size 8
+-- tested 195 candidates
 height Leaf  =  -1
 height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 
@@ -70,12 +70,12 @@ mem :: Int -> Tree -> Bool
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 20 candidates of size 8
+-- 16 candidates of size 8
 -- 0 candidates of size 9
 -- 0 candidates of size 10
 -- 0 candidates of size 11
--- 80 candidates of size 12
--- tested 88 candidates
+-- 36 candidates of size 12
+-- tested 43 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 
@@ -87,14 +87,14 @@ ordered :: Tree -> Bool
 -- 2 candidates of size 3
 -- 0 candidates of size 4
 -- 10 candidates of size 5
--- 30 candidates of size 6
+-- 26 candidates of size 6
 -- 0 candidates of size 7
 -- 68 candidates of size 8
--- 216 candidates of size 9
+-- 152 candidates of size 9
 -- 56 candidates of size 10
--- 802 candidates of size 11
--- 2077 candidates of size 12
--- tested 3265 candidates
+-- 706 candidates of size 11
+-- 1317 candidates of size 12
+-- tested 2341 candidates
 cannot conjure
 
 ordered :: Tree -> Bool

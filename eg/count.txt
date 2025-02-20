@@ -22,8 +22,8 @@ count :: A -> [A] -> Int
 -- 12 candidates of size 8
 -- 20 candidates of size 9
 -- 20 candidates of size 10
--- 52 candidates of size 11
--- tested 79 candidates
+-- 48 candidates of size 11
+-- tested 75 candidates
 count x []  =  0
 count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
 

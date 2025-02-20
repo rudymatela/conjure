@@ -101,13 +101,13 @@ ordered :: [Int] -> Bool
 -- 2 candidates of size 3
 -- 2 candidates of size 4
 -- 4 candidates of size 5
--- 12 candidates of size 6
+-- 10 candidates of size 6
 -- 20 candidates of size 7
--- 30 candidates of size 8
--- 56 candidates of size 9
--- 112 candidates of size 10
--- 200 candidates of size 11
--- tested 319 candidates
+-- 28 candidates of size 8
+-- 44 candidates of size 9
+-- 94 candidates of size 10
+-- 162 candidates of size 11
+-- tested 247 candidates
 ordered []  =  True
 ordered (x:xs)  =  ordered xs && (null xs || x <= head xs)
 

@@ -216,13 +216,13 @@ gps12 :: [Int] -> Int
 -- 2 candidates of size 3
 -- 9 candidates of size 4
 -- 22 candidates of size 5
--- 41 candidates of size 6
+-- 39 candidates of size 6
 -- 125 candidates of size 7
--- 262 candidates of size 8
--- 816 candidates of size 9
--- 1996 candidates of size 10
--- 5925 candidates of size 11
--- tested 6320 candidates
+-- 244 candidates of size 8
+-- 804 candidates of size 9
+-- 1880 candidates of size 10
+-- 5719 candidates of size 11
+-- tested 5966 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -389,14 +389,14 @@ pig1 :: [Char] -> [Char]
 -- 13 candidates of size 5
 -- 28 candidates of size 6
 -- 46 candidates of size 7
--- 126 candidates of size 8
+-- 125 candidates of size 8
 -- 200 candidates of size 9
--- 631 candidates of size 10
--- 1068 candidates of size 11
--- 3495 candidates of size 12
--- 6381 candidates of size 13
--- 20409 candidates of size 14
--- tested 27895 candidates
+-- 625 candidates of size 10
+-- 1066 candidates of size 11
+-- 3459 candidates of size 12
+-- 6361 candidates of size 13
+-- 20207 candidates of size 14
+-- tested 27628 candidates
 pig1 ""  =  "ay"
 pig1 (c:cs)  =  if isVowel c
                 then (c:cs) ++ "ay"
@@ -459,9 +459,9 @@ gps24 :: [Char] -> Char
 -- 13 candidates of size 6
 -- 30 candidates of size 7
 -- 75 candidates of size 8
--- 194 candidates of size 9
--- 470 candidates of size 10
--- tested 456 candidates
+-- 193 candidates of size 9
+-- 469 candidates of size 10
+-- tested 454 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]
@@ -531,9 +531,9 @@ gps29 :: [Char] -> Int
 -- 2 candidates of size 5
 -- 6 candidates of size 6
 -- 10 candidates of size 7
--- 10 candidates of size 8
+-- 8 candidates of size 8
 -- 24 candidates of size 9
--- tested 38 candidates
+-- tested 36 candidates
 gps29 ""  =  0
 gps29 (c:cs)  =  gps29 cs + (if isVowel c then 1 else 0)
 

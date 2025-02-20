@@ -8,8 +8,8 @@ elem :: Int -> [Int] -> Bool
 -- 6 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 24 candidates of size 8
--- tested 33 candidates
+-- 16 candidates of size 8
+-- tested 25 candidates
 elem x []  =  False
 elem x (y:xs)  =  elem x xs || x == y
 
@@ -21,10 +21,10 @@ set :: [Int] -> Bool
 -- 0 candidates of size 3
 -- 2 candidates of size 4
 -- 1 candidates of size 5
--- 2 candidates of size 6
--- 4 candidates of size 7
--- 6 candidates of size 8
--- tested 15 candidates
+-- 0 candidates of size 6
+-- 2 candidates of size 7
+-- 4 candidates of size 8
+-- tested 9 candidates
 set []  =  True
 set (x:xs)  =  set xs && not (elem x xs)
 

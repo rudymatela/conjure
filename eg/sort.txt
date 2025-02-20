@@ -33,14 +33,14 @@ insert :: Int -> [Int] -> [Int]
 -- 44 candidates of size 8
 -- 62 candidates of size 9
 -- 91 candidates of size 10
--- 334 candidates of size 11
+-- 330 candidates of size 11
 -- 220 candidates of size 12
--- 1358 candidates of size 13
+-- 1346 candidates of size 13
 -- 1019 candidates of size 14
--- 4638 candidates of size 15
--- 6332 candidates of size 16
--- 14550 candidates of size 17
--- tested 14943 candidates
+-- 4602 candidates of size 15
+-- 6300 candidates of size 16
+-- 14466 candidates of size 17
+-- tested 14793 candidates
 insert x []  =  [x]
 insert x (y:xs)  =  if x <= y
                     then x:insert y xs

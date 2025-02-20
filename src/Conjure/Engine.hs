@@ -544,6 +544,9 @@ candidateDefnsC Args{..} nm f ps  =
   keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
        | otherwise  =  const True
 
+  keepBndn | rewriting  =  \(_,rhs) -> size (normalize thy rhs) >= size rhs
+           | otherwise  =  const True
+
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
     where
@@ -588,7 +591,8 @@ candidateDefnsC Args{..} nm f ps  =
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
   fillingsFor1 :: Bndn -> [[Bndn]]
-  fillingsFor1 (ep,er)  =  mapT (\es -> (ep,fill er es))
+  fillingsFor1 (ep,er)  =  filterT keepBndn
+                        .  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
                         $  recs' ep

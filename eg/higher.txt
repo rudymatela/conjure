@@ -58,10 +58,10 @@ filter :: (Int -> Bool) -> [Int] -> [Int]
 -- 0 candidates of size 7
 -- 17 candidates of size 8
 -- 0 candidates of size 9
--- 44 candidates of size 10
+-- 43 candidates of size 10
 -- 0 candidates of size 11
--- 142 candidates of size 12
--- tested 72 candidates
+-- 141 candidates of size 12
+-- tested 71 candidates
 filter f []  =  []
 filter f (x:xs)  =  if f x
                     then x:filter f xs
