@@ -301,6 +301,9 @@ conjureTestDefn :: Conjurable f => Int -> Int -> String -> f -> Defn
 conjureTestDefn maxTests maxSearchTests nm f  =
   [(fxys, exprExpr fxys) | fxys <- conjureTestApps maxTests maxSearchTests nm f]
   where
+  -- the use of conjureExpress here is sort of a hack
+  -- we "only" would need a conjureRevl :: Conjurable f => f -> Expr -> Expr
+  -- which would generate (val . evl) for supported types
   exprExpr  =  conjureExpress f
   (-==-)    =  conjureMkEquation f
 
