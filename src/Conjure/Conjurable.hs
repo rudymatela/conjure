@@ -28,6 +28,7 @@ module Conjure.Conjurable
   , conjureGrounds
   , conjureAreEqual
   , conjureMkEquation
+  , conjureTestBinds
   , A, B, C, D, E, F
   , conjureIsUnbreakable
   , conjureReification
@@ -249,8 +250,10 @@ reifyExpress a e  =  case exprE $$ e of
   where
   exprE  =  value "expr" (expr -:> a)
 
+
 mkExprTiers :: (Listable a, Show a, Typeable a) => a -> [[Expr]]
 mkExprTiers a  =  mapT val (tiers -: [[a]])
+
 
 -- | Computes a list of holes encoded as 'Expr's
 --   from a 'Conjurable' functional value.
@@ -259,9 +262,11 @@ mkExprTiers a  =  mapT val (tiers -: [[a]])
 conjureHoles :: Conjurable f => f -> [Expr]
 conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 
+
 -- | Computes a function that makes an equation between two expressions.
 conjureMkEquation :: Conjurable f => f -> Expr -> Expr -> Expr
 conjureMkEquation f  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- conjureReification f]
+
 
 conjureDynamicEq :: Conjurable f => f -> Dynamic
 conjureDynamicEq f  =  case conjureMkEquation f efxs efxs of
@@ -280,6 +285,44 @@ conjureAreEqual f maxTests  =  (===)
   e1 === e2  =  isTrue $ e1 -==- e2
   isTrue  =  all (errorToFalse . eval False) . gs
   gs  =  take maxTests . conjureGrounds f
+
+
+-- | Compute test bindings based on a partially defined function.
+--
+-- With:
+--
+-- > fact 1  =  1
+-- > fact 3  =  6
+-- > fact 4  =  24
+--
+-- Then:
+--
+-- > > conjureTestBinds 6 12 "factorial n" fact
+-- > [ [(n :: Int,1 :: Int)]
+-- > , [(n :: Int,3 :: Int)]
+-- > , [(n :: Int,4 :: Int)]
+-- > ]
+--
+-- Multiple arguments yield multiple bindins:
+--
+-- > > conjureTestBinds 3 4 ":" ((:) :: Int -> [Int] -> [Int])
+-- > [ [(x :: Int,0 :: Int),(xs :: [Int],[] :: [Int])]
+-- > , [(x :: Int,0 :: Int),(xs :: [Int],[0] :: [Int])]
+-- > , [(x :: Int,1 :: Int),(xs :: [Int],[] :: [Int])]
+-- > ]
+--
+-- The variable naming is consistent with 'conjureApplication' and 'conjureVarApplication'.
+conjureTestBinds :: Conjurable f => Int -> Int -> String -> f -> [[(Expr,Expr)]]
+conjureTestBinds maxTests maxSearchTests nm f  =  take maxTests
+  [ bs
+  | bs <- take maxSearchTests $ groundBinds tiersFor fxys
+  , errorToFalse . eval False $ fxys -==- fxys //- bs
+  ]
+  where
+  (-==-)    =  conjureMkEquation f
+  tiersFor  =  conjureTiersFor f
+  fxys      =  conjureApplication nm f
+
 
 -- | Compute 'tiers' of values encoded as 'Expr's
 --   of the type of the given 'Expr'.

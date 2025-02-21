@@ -293,6 +293,26 @@ tests n  =
   -- little sanity check (conjurableOK should catch it anyway)
   , take 6 (conjureListFor (undefined :: Int) i_)
     == [zero, one, minusOne, two, minusTwo, three]
+
+  , conjureTestBinds 6 12 "factorial n" fact
+    == [ [(nn, one)]
+       , [(nn, two)]
+       , [(nn, three)]
+       , [(nn, four)]
+       ]
+
+  , conjureTestBinds 4 6 "sum" (sum :: [Int] -> Int)
+    == [ [(xxs, nil)]
+       , [(xxs, val [0 :: Int])] -- needs val!
+       , [(xxs, val [0, 0 :: Int])]
+       , [(xxs, val [1 :: Int])]
+       ]
+
+  , conjureTestBinds 3 4 ":" ((:) :: Int -> [Int] -> [Int])
+    == [ [(xx, zero), (xxs, nil)]
+       , [(xx, zero), (xxs, val [0::Int])]
+       , [(xx, one), (xxs, nil)]
+       ]
   ]
 
 isNumeric :: Expr -> Bool
@@ -321,3 +341,11 @@ x <==> y  =  x == y
   (==)  =  eval err . fromMaybe err $ conjureEquality x
   err  =  error "<==>: could not conjure"
 infix 4 <==>
+
+
+-- to be used in the test of conjureTestBinds and related functions
+fact :: Int -> Int
+fact 1  =  1
+fact 2  =  2
+fact 3  =  6
+fact 4  =  24

@@ -421,11 +421,7 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
   isTrueWhenDefined dfn e  =  all (errorToFalse . deval (conjureExpress f) maxEvalRecursions dfn False)
                            $  map (e //-) dbss
 
-  bss, dbss :: [[(Expr,Expr)]]
-  bss  =  take maxSearchTests $ groundBinds (conjureTiersFor f) ffxx
-  dbss  =  take maxTests [bs | bs <- bss, errorToFalse . eval False $ e //- bs]
-    where
-    e  =  ffxx -==- ffxx
+  dbss  =  conjureTestBinds maxTests maxSearchTests nm f
 
 
 -- | Just prints the underlying theory found by "Test.Speculate"
