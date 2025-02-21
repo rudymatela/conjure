@@ -231,9 +231,7 @@ main = do
   conjure "set" set setBackground
   conjure "take" take takeBackground
   conjure "drop" drop dropBackground
-  conjureWith args{showCandidates=True} "ord" ord ordBackground
+  conjure "ord" ord ordBackground
   conjure "merge" merge mergeBackground
   conjure "zip" zip zipBackground
   conjure "assocs" assocs assocsBackground
-
-

@@ -2,11 +2,11 @@ sum :: [Int] -> Int
 -- testing 3 combinations of argument values
 -- pruning with 4/8 rules
 -- 1 candidates of size 1
--- 1 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
+-- 0 candidates of size 4
 -- 1 candidates of size 5
--- tested 4 candidates
+-- tested 2 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -14,12 +14,12 @@ app :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
 -- 2 candidates of size 1
--- 2 candidates of size 2
--- 1 candidates of size 3
--- 10 candidates of size 4
--- 12 candidates of size 5
--- 14 candidates of size 6
--- tested 32 candidates
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 6 candidates of size 4
+-- 0 candidates of size 5
+-- 10 candidates of size 6
+-- tested 13 candidates
 app xs []  =  xs
 app xs (x:ys)  =  x:app xs ys
 
@@ -29,37 +29,38 @@ mem :: Int -> [Int] -> Bool
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 12 candidates of size 8
--- tested 13 candidates
+-- 8 candidates of size 8
+-- tested 8 candidates
 mem x []  =  False
 mem x (y:xs)  =  mem x xs || x == y
 
 sub :: [Int] -> [Int] -> Bool
 -- testing 9 combinations of argument values
--- pruning with 29/42 rules
+-- pruning with 9/18 rules
 -- 2 candidates of size 1
--- 4 candidates of size 2
--- 6 candidates of size 3
--- 1 candidates of size 4
--- 18 candidates of size 5
--- 7 candidates of size 6
--- 26 candidates of size 7
--- 95 candidates of size 8
--- 228 candidates of size 9
--- 191 candidates of size 10
--- 954 candidates of size 11
--- 957 candidates of size 12
--- 4260 candidates of size 13
--- 2687 candidates of size 14
--- 17846 candidates of size 15
--- tested 25802 candidates
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 4 candidates of size 5
+-- 0 candidates of size 6
+-- 16 candidates of size 7
+-- 12 candidates of size 8
+-- 68 candidates of size 9
+-- 214 candidates of size 10
+-- 184 candidates of size 11
+-- 1400 candidates of size 12
+-- 987 candidates of size 13
+-- 5970 candidates of size 14
+-- tested 8437 candidates
 sub [] xs  =  True
 sub (x:xs) []  =  False
-sub (x:xs) (y:ys)  =  sub xs ys && (sub (x:xs) ys || x == y)
+sub (x:xs) (y:ys)  =  if x == y
+                      then sub xs ys
+                      else sub (x:xs) ys
 
 set :: [Int] -> Bool
 -- testing 8 combinations of argument values
@@ -67,12 +68,12 @@ set :: [Int] -> Bool
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 2 candidates of size 4
--- 1 candidates of size 5
--- 1 candidates of size 6
--- 3 candidates of size 7
--- 5 candidates of size 8
--- tested 11 candidates
+-- 1 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 1 candidates of size 7
+-- 3 candidates of size 8
+-- tested 4 candidates
 set []  =  True
 set (x:xs)  =  set xs && not (elem x xs)
 
@@ -80,15 +81,15 @@ take :: Int -> [A] -> [A]
 -- testing 143 combinations of argument values
 -- pruning with 4/7 rules
 -- 2 candidates of size 1
--- 3 candidates of size 2
--- 4 candidates of size 3
--- 6 candidates of size 4
--- 8 candidates of size 5
--- 13 candidates of size 6
--- 24 candidates of size 7
--- 31 candidates of size 8
--- 59 candidates of size 9
--- tested 111 candidates
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 3 candidates of size 6
+-- 2 candidates of size 7
+-- 6 candidates of size 8
+-- 5 candidates of size 9
+-- tested 15 candidates
 take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
@@ -97,14 +98,94 @@ drop :: Int -> [A] -> [A]
 -- testing 143 combinations of argument values
 -- pruning with 4/7 rules
 -- 2 candidates of size 1
--- 3 candidates of size 2
--- 4 candidates of size 3
--- 4 candidates of size 4
--- 4 candidates of size 5
--- 4 candidates of size 6
--- 12 candidates of size 7
--- tested 24 candidates
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 2 candidates of size 5
+-- 2 candidates of size 6
+-- 3 candidates of size 7
+-- tested 8 candidates
 drop 0 xs  =  xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
+
+ord :: [Int] -> Bool
+-- testing 6 combinations of argument values
+-- pruning with 29/39 rules
+-- 1 candidates of size 1
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 2 candidates of size 6
+-- 0 candidates of size 7
+-- 4 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 20 candidates of size 11
+-- tested 12 candidates
+ord []  =  True
+ord (x:xs)  =  ord xs && (null xs || x <= head xs)
+
+merge :: [Int] -> [Int] -> [Int]
+-- testing 360 combinations of argument values
+-- pruning with 4/4 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 10 candidates of size 4
+-- 0 candidates of size 5
+-- 16 candidates of size 6
+-- 13 candidates of size 7
+-- 22 candidates of size 8
+-- 114 candidates of size 9
+-- 36 candidates of size 10
+-- 472 candidates of size 11
+-- 604 candidates of size 12
+-- 1442 candidates of size 13
+-- 5188 candidates of size 14
+-- 5474 candidates of size 15
+-- tested 13394 candidates
+cannot conjure
+
+zip :: [A] -> [B] -> [(A,B)]
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 1 candidates of size 9
+-- tested 2 candidates
+zip [] xs  =  []
+zip (x:xs) []  =  []
+zip (x:xs) (y:ys)  =  (,) x y:zip xs ys
+
+assocs :: Int -> [(Int,A)] -> [A]
+-- testing 67 combinations of argument values
+-- pruning with 4/5 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 1 candidates of size 7
+-- 1 candidates of size 8
+-- 0 candidates of size 9
+-- 3 candidates of size 10
+-- 3 candidates of size 11
+-- 0 candidates of size 12
+-- 9 candidates of size 13
+-- 7 candidates of size 14
+-- 2 candidates of size 15
+-- tested 26 candidates
+assocs x []  =  []
+assocs x (xy:xys)  =  if x == fst xy
+                      then snd xy:assocs x xys
+                      else assocs x xys
 
