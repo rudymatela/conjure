@@ -298,7 +298,11 @@ conjureAreEqual f maxTests  =  (===)
 
 -- TODO: document me
 conjureTests :: Conjurable f => Int -> Int -> String -> f -> [Expr]
-conjureTests  =  undefined -- TODO: implement me
+conjureTests maxTests maxSearchTests nm f  =
+  [fxys -==- exprExpr fxys | fxys <- conjureTestApps maxTests maxSearchTests nm f]
+  where
+  exprExpr  =  conjureExpress f
+  (-==-)    =  conjureMkEquation f
 
 
 -- TODO: document me
