@@ -30,16 +30,16 @@
 --
 -- > > conjure "factorial" factorial primitives
 -- > factorial :: Int -> Int
--- > -- testing 3 combinations of argument values
--- > -- pruning with 27/65 rules
--- > -- looking through 3 candidates of size 1
--- > -- looking through 3 candidates of size 2
--- > -- looking through 9 candidates of size 3
--- > -- looking through 10 candidates of size 4
--- > -- looking through 32 candidates of size 5
--- > -- looking through 39 candidates of size 6
--- > -- looking through 185 candidates of size 7
--- > -- tested 107 candidates
+-- > -- 0.1s, testing 4 combinations of argument values
+-- > -- 0.8s, pruning with 27/65 rules
+-- > -- 0.8s, 3 candidates of size 1
+-- > -- 0.9s, 3 candidates of size 2
+-- > -- 0.9s, 7 candidates of size 3
+-- > -- 0.9s, 8 candidates of size 4
+-- > -- 0.9s, 28 candidates of size 5
+-- > -- 0.9s, 35 candidates of size 6
+-- > -- 0.9s, 167 candidates of size 7
+-- > -- 0.9s, tested 95 candidates
 -- > factorial 0  =  1
 -- > factorial x  =  x * factorial (x - 1)
 --
@@ -71,9 +71,10 @@
 -- > take :: Int -> [A] -> [A]
 -- > -- testing 153 combinations of argument values
 -- > -- pruning with 4/7 rules
--- > -- ...  ...  ...
--- > -- looking through 58 candidates of size 9
--- > -- tested 104 candidates
+-- > -- ...  ...  ...  ...  ...  ...
+-- > -- 0.4s, 6 candidates of size 8
+-- > -- 0.4s, 5 candidates of size 9
+-- > -- 0.4s, tested 15 candidates
 -- > take 0 xs  =  []
 -- > take x []  =  []
 -- > take x (y:xs)  =  y:take (x - 1) xs

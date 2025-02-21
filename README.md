@@ -75,16 +75,16 @@ Finally, call the [`conjure`] function,
 passing the function name, the partial definition and the list of primitives:
 
 	factorial :: Int -> Int
-	-- testing 4 combinations of argument values
-	-- pruning with 27/65 rules
-	-- looking through 3 candidates of size 1
-	-- looking through 3 candidates of size 2
-	-- looking through 7 candidates of size 3
-	-- looking through 8 candidates of size 4
-	-- looking through 28 candidates of size 5
-	-- looking through 35 candidates of size 6
-	-- looking through 167 candidates of size 7
-	-- tested 95 candidates
+	-- 0.1s, testing 4 combinations of argument values
+	-- 0.8s, pruning with 27/65 rules
+	-- 0.8s, 3 candidates of size 1
+	-- 0.9s, 3 candidates of size 2
+	-- 0.9s, 7 candidates of size 3
+	-- 0.9s, 8 candidates of size 4
+	-- 0.9s, 28 candidates of size 5
+	-- 0.9s, 35 candidates of size 6
+	-- 0.9s, 167 candidates of size 7
+	-- 0.9s, tested 95 candidates
 	factorial 0  =  1
 	factorial x  =  x * factorial (x - 1)
 
@@ -128,11 +128,11 @@ given list constructors, zero, one and subtraction:
 	>   , prim "-" ((-) :: Int -> Int -> Int)
 	>   ]
 	take :: Int -> [A] -> [A]
-	-- testing 153 combinations of argument values
-	-- pruning with 4/7 rules
-	-- ...  ...  ...
-	-- looking through 58 candidates of size 9
-	-- tested 104 candidates
+	-- 0.2s, testing 153 combinations of argument values
+	-- 0.2s, pruning with 4/7 rules
+	-- ...   ...   ...   ...   ...
+	-- 0.4s, 5 candidates of size 9
+	-- 0.4s, tested 15 candidates
 	take 0 xs  =  []
 	take x []  =  []
 	take x (y:xs)  =  y:take (x - 1) xs
@@ -181,13 +181,13 @@ Now here's a first attempt at a partial definition:
 	duplicates' [1,2,3,3,3]  =  [3]
 	duplicates' [1,2,2,3,3]  =  [2,3]
 
-Here is what [`conjureWith`] prints:
+Here is what [`conjure`] prints:
 
-	> conjureWith args{maxSize=18} "duplicates" duplicates primitives
+	> conjure "duplicates" duplicates primitives
 	duplicates :: [Int] -> [Int]
 	-- testing 1 combinations of argument values
 	-- pruning with 21/26 rules
-	-- looking through 2 candidates of size 1
+	-- ...  ...  ...
 	duplicates xs  =  xs
 
 The generated function clearly does not follow our specification.
@@ -204,14 +204,13 @@ Here is a second attempt:
 	duplicates [0,1]  =  []
 	duplicates [1,0,1]  =  [1]
 
-Here is what [`conjureWith`] now prints:
+Here is what [`conjure`] now prints:
 
-	> conjureWith args{maxSize=18} "duplicates" duplicates primitives
+	> conjure "duplicates" duplicates primitives
 	duplicates :: [Int] -> [Int]
 	-- testing 3 combinations of argument values
 	-- pruning with 21/26 rules
-	-- ...
-	-- looking through 16 candidates of size 9
+	-- ...  ...  ...
 	duplicates []  =  []
 	duplicates (x:xs)  =  if elem x xs then [x] else []
 
@@ -247,14 +246,17 @@ Here is a fourth and final refinement:
 
 Now Conjure prints a correct implementation:
 
-	> conjureWith args{maxSize=18} "duplicates" duplicates primitives
+	> conjure "duplicates" duplicates primitives
 	duplicates :: [Int] -> [Int]
-	-- testing 6 combinations of argument values
-	-- ...
-	-- looking through 2189 candidates of size 17
+	-- 0.2s, testing 6 combinations of argument values
+	-- 0.3s, pruning with 21/26 rules
+	-- ...   ...   ...   ...   ...
+	-- 2.1s, 1723 candidates of size 17
+	-- 2.1s, tested 1705 candidates
 	duplicates []  =  []
-	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
-	(in 1.5s)
+	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
+	                      then x:duplicates xs
+	                      else duplicates xs
 
 In this case,
 specifying the function with specific argument-result bindings

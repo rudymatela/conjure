@@ -85,11 +85,12 @@ import System.CPUTime (getCPUTime)
 --
 -- > > conjure "factorial" factorial primitives
 -- > factorial :: Int -> Int
--- > -- testing 3 combinations of argument values
--- > -- pruning with 27/65 rules
--- > -- ...  ...  ...
--- > -- looking through 185 candidates of size 7
--- > -- tested 107 candidates
+-- > -- 0.1s, testing 4 combinations of argument values
+-- > -- 0.8s, pruning with 27/65 rules
+-- > -- ...  ...  ...  ...  ...  ...
+-- > -- 0.9s, 35 candidates of size 6
+-- > -- 0.9s, 167 candidates of size 7
+-- > -- 0.9s, tested 95 candidates
 -- > factorial 0  =  1
 -- > factorial x  =  x * factorial (x - 1)
 --
@@ -112,12 +113,13 @@ conjure  =  conjureWith args
 --
 -- Then:
 --
--- > > conjureFromSpec "square" squareSpec primitives
+-- > > conjureFromSpec "square" squareSpec [prim "*" ((*) :: Int -> Int -> Int)]
 -- > square :: Int -> Int
--- > -- pruning with 14/25 rules
--- > -- looking through 3 candidates of size 1
--- > -- looking through 4 candidates of size 2
--- > -- looking through 9 candidates of size 3
+-- > -- 0.1s, pruning with 2/6 rules
+-- > -- 0.1s, 1 candidates of size 1
+-- > -- 0.1s, 0 candidates of size 2
+-- > -- 0.1s, 1 candidates of size 3
+-- > -- 0.1s, tested 2 candidates
 -- > square x  =  x * x
 --
 -- This allows users to specify QuickCheck-style properties,
@@ -144,39 +146,12 @@ conjure0  =  conjure0With args
 
 
 -- | Like 'conjure' but allows setting the maximum size of considered expressions
---   instead of the default value of 12.
+--   instead of the default value of 24.
 --
--- > conjureWithMaxSize 18 "function" function [...]
+-- > conjureWithMaxSize 12 "function" function [...]
 --
--- For example, given the following partial definition for 'Data.List.insert':
---
--- > insert' :: Int -> [Int] -> [Int]
--- > insert' 0 []  =  [0]
--- > insert' 0 [1,2]  =  [0,1,2]
--- > insert' 1 [0,2]  =  [0,1,2]
--- > insert' 2 [0,1]  =  [0,1,2]
---
--- Conjure is able to find an appropriate definition at size 17
--- with the following primitives:
---
--- > > conjureWithMaxSize 18 "insert" insert'
--- > >   [ prim "[]" ([] :: [Int])
--- > >   , prim ":" ((:) :: Int -> [Int] -> [Int])
--- > >   , prim "<=" ((<=) :: Int -> Int -> Bool)
--- > >   , prif (undefined :: [Int])
--- > >   ]
--- > insert :: Int -> [Int] -> [Int]
--- > -- testing 4 combinations of argument values
--- > -- pruning with 4/4 rules
--- > -- ...  ...  ...
--- > -- looking through 14550 candidates of size 17
--- > -- tested 14943 candidates
--- > insert x []  =  [x]
--- > insert x (y:xs)  =  if x <= y
--- >                     then x:insert y xs
--- >                     else y:insert x xs
---
--- The default maximum size of 12 would not be enough for the above definition.
+-- This function is a candidate for going away.
+-- Please set maxSize in Args instead.
 conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
 conjureWithMaxSize sz  =  conjureWith args
                        {  maxSize = sz

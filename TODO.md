@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* update documentation to reflect the new interface (runtimes and whatnot)
-
-* test ground bindings independently before combining
-
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 

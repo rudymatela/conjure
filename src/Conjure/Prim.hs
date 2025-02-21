@@ -87,9 +87,11 @@ prim s x  =  (value s x, conjureType x)
 -- > >                      , prim "undefined" (undefined :: Int)
 -- > >                      ]
 -- > last :: [Int] -> Int
--- > -- ...  ...  ...
--- > -- looking through 4 candidates of size 7
--- > -- tested 5 candidates
+-- > -- 0.0s, testing 360 combinations of argument values
+-- > -- 0.0s, pruning with 5/5 rules
+-- > -- ...   ...   ...   ...   ...
+-- > -- 0.0s, 4 candidates of size 7
+-- > -- 0.0s, tested 2 candidates
 -- > last []  =  undefined
 -- > last (x:xs)  =  if null xs
 -- >                 then x
@@ -109,16 +111,14 @@ prif x  =  (ifFor x, conjureType x)
 -- > >   , primOrdCaseFor (undefined :: Bool)
 -- > >   ]
 -- > mem :: Int -> Tree -> Bool
--- > -- ...  ...  ...
--- > -- looking through 384 candidates of size 12
--- > -- tested 371 candidates
+-- > -- ...   ...   ...   ...   ...
+-- > -- 0.0s, 384 candidates of size 12
+-- > -- 0.0s, tested 346 candidates
 -- > mem x Leaf  =  False
 -- > mem x (Node t1 y t2)  =  case x `compare` y of
 -- >                          LT -> mem x t1
 -- >                          EQ -> True
 -- >                          GT -> mem x t2
-
-
 primOrdCaseFor :: Conjurable a => a -> Prim
 primOrdCaseFor x  =  (caseForOrd x, conjureType x)
 
