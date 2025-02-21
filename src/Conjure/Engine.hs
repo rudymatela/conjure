@@ -514,21 +514,6 @@ candidateDefnsC Args{..} nm f ps  =
   keepBndn | rewriting  =  \b@(_,rhs) -> isBaseCase b || size (normalize thy rhs) >= size rhs
            | otherwise  =  const True
 
-  normalizeBndn
-    | rewriting  =  really
-    | otherwise  =  Just -- don't do anything if rewriting is off...
-    where
-    really b@(lhs,rhs)  =
-      if isBaseCase b
-      then Just b -- we keep base cases as they are
-      else -- but for recursive cases:
-      case size rhs' `compare` size rhs of
-      LT -> Nothing   -- we have enumerated an equivalent case previously
-      EQ -> Just (lhs,rhs') -- we rewrite
-      GT -> Just (lhs,rhs)  -- we don't rewrite to something bigger...
-      where
-      rhs'  =  normalize thy rhs
-
   appsWith :: Expr -> [Expr] -> [[Expr]]
   appsWith eh vs  =  enumerateAppsFor eh k $ vs ++ es
     where
@@ -591,7 +576,7 @@ candidateDefnsC Args{..} nm f ps  =
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
   fillingsFor1 :: Bndn -> [[Bndn]]
-  fillingsFor1 (ep,er)  =  mapMaybeT normalizeBndn
+  fillingsFor1 (ep,er)  =  filterT keepBndn
                         .  mapT (\es -> (ep,fill er es))
                         .  products
                         .  replicate (length $ holes er)
