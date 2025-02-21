@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.6.6 (February 2025)
+----------------------
 
 * (pruning) test candidate cases earlier and indepentently
   (can be disabled with `earlyTests=False`);
