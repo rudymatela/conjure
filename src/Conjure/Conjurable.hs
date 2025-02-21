@@ -28,6 +28,8 @@ module Conjure.Conjurable
   , conjureGrounds
   , conjureAreEqual
   , conjureMkEquation
+  , conjureTests
+  , conjureTestApps
   , conjureTestBinds
   , A, B, C, D, E, F
   , conjureIsUnbreakable
@@ -292,6 +294,19 @@ conjureAreEqual f maxTests  =  (===)
   e1 === e2  =  isTrue $ e1 -==- e2
   isTrue  =  all (errorToFalse . eval False) . gs
   gs  =  take maxTests . conjureGrounds f
+
+
+-- TODO: document me
+conjureTests :: Conjurable f => Int -> Int -> String -> f -> [Expr]
+conjureTests  =  undefined -- TODO: implement me
+
+
+-- TODO: document me
+conjureTestApps :: Conjurable f => Int -> Int -> String -> f -> [Expr]
+conjureTestApps maxTests maxSearchTests nm f  =
+  [fxys //- bs | bs <- conjureTestBinds maxTests maxSearchTests nm f]
+  where
+  fxys  =  conjureApplication nm f
 
 
 -- | Compute test bindings based on a partially defined function.
