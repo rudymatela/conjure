@@ -2,6 +2,19 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* (pruning) test candidate cases earlier and indepentently
+  (can be disabled with `earlyTests=False`);
+* (pruning) rewrite after filling in recursions;
+* improve showing of test values;
+* some internal refactoring and code cleanup;
+* update documentation of new interfaces
+  with runtimes in examples
+  and removal of uneeded uses of maxSize.
+
+
 v0.6.4 (February 2025)
 ----------------------
 
