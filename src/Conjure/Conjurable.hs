@@ -28,7 +28,7 @@ module Conjure.Conjurable
   , conjureGrounds
   , conjureAreEqual
   , conjureMkEquation
-  , conjureTests
+  , conjureTestDefn
   , conjureTestApps
   , conjureTestBinds
   , A, B, C, D, E, F
@@ -297,9 +297,9 @@ conjureAreEqual f maxTests  =  (===)
 
 
 -- TODO: document me
-conjureTests :: Conjurable f => Int -> Int -> String -> f -> [Expr]
-conjureTests maxTests maxSearchTests nm f  =
-  [fxys -==- exprExpr fxys | fxys <- conjureTestApps maxTests maxSearchTests nm f]
+conjureTestDefn :: Conjurable f => Int -> Int -> String -> f -> Defn
+conjureTestDefn maxTests maxSearchTests nm f  =
+  [(fxys, exprExpr fxys) | fxys <- conjureTestApps maxTests maxSearchTests nm f]
   where
   exprExpr  =  conjureExpress f
   (-==-)    =  conjureMkEquation f

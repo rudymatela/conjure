@@ -292,7 +292,7 @@ conjure0With args nm f p es  =  do
     putWithTimeSince t0 $ "testing " ++ show (length ts) ++ " combinations of argument values"
     when (showTests args) $ do
       putStrLn $ "{-"
-      putStr $ unlines $ map show ts
+      putStr $ showDefn ts
       putStrLn $ "-}"
   putWithTimeSince t0 $ "pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
   when (showTheory args) $ do
@@ -356,7 +356,7 @@ conjure0With args nm f p es  =  do
 data Results = Results
   { implementationss :: [[Defn]] -- ^ tiers of implementations
   , candidatess :: [[Defn]]      -- ^ tiers of candidates
-  , bindings :: [Expr]           -- ^ test bindings used to verify candidates
+  , bindings :: Defn             -- ^ test bindings used to verify candidates
   , theory :: Thy                -- ^ the underlying theory
   , patternss :: [[Defn]]        -- ^ tiers of allowed patterns
   , deconstructions :: [Expr]    -- ^ the list of allowed deconstructions
@@ -402,7 +402,7 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
   , deconstructions  =  deconstructions
   }
   where
-  tests  =  [ffxx //- bs | bs <- dbss]
+  tests  =  conjureTestDefn maxTests maxSearchTests nm f
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && requal fx ffxx vffxx
