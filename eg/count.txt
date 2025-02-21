@@ -13,17 +13,17 @@ count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
 -- pruning with 8/13 rules
 -- 2 candidates of size 1
--- 2 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 4 candidates of size 6
--- 4 candidates of size 7
+-- 0 candidates of size 7
 -- 12 candidates of size 8
--- 20 candidates of size 9
+-- 16 candidates of size 9
 -- 20 candidates of size 10
--- 48 candidates of size 11
--- tested 75 candidates
+-- 44 candidates of size 11
+-- tested 65 candidates
 count x []  =  0
 count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
 

@@ -5,11 +5,11 @@ replicate :: Int -> Char -> [Char]
 -- 0 candidates of size 2
 -- 1 candidates of size 3
 -- 1 candidates of size 4
--- 3 candidates of size 5
--- 2 candidates of size 6
--- 3 candidates of size 7
--- 3 candidates of size 8
--- tested 12 candidates
+-- 2 candidates of size 5
+-- 1 candidates of size 6
+-- 1 candidates of size 7
+-- 2 candidates of size 8
+-- tested 8 candidates
 replicate 0 c  =  ""
 replicate x c  =  c:replicate (x - 1) c
 
@@ -39,14 +39,14 @@ replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
 -- 2 candidates of size 1
--- 1 candidates of size 2
+-- 0 candidates of size 2
 -- 1 candidates of size 3
--- 4 candidates of size 4
+-- 0 candidates of size 4
 -- 1 candidates of size 5
--- 12 candidates of size 6
+-- 3 candidates of size 6
 -- 1 candidates of size 7
--- 34 candidates of size 8
--- tested 24 candidates
+-- 12 candidates of size 8
+-- tested 10 candidates
 replicates "" x  =  ""
 replicates (c:cs) x  =  replicate x c ++ replicates cs x
 

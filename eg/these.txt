@@ -10,8 +10,8 @@ fromThese :: A -> B -> These A B -> (A,B)
 -- 0 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 15 candidates of size 10
--- tested 16 candidates
+-- 1 candidates of size 10
+-- tested 2 candidates
 fromThese x y None  =  (x,y)
 fromThese x y (This z)  =  (z,y)
 fromThese x y (That z)  =  (x,z)
@@ -23,14 +23,14 @@ listhese :: These A A -> [A]
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 4 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
--- 11 candidates of size 6
+-- 0 candidates of size 6
 -- 0 candidates of size 7
--- 26 candidates of size 8
+-- 0 candidates of size 8
 -- 0 candidates of size 9
--- 57 candidates of size 10
--- tested 83 candidates
+-- 1 candidates of size 10
+-- tested 2 candidates
 listhese None  =  []
 listhese (This x)  =  [x]
 listhese (That x)  =  [x]
@@ -43,14 +43,14 @@ cathis :: [These A B] -> [A]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 1 candidates of size 5
+-- 0 candidates of size 5
 -- 1 candidates of size 6
 -- 2 candidates of size 7
--- 1 candidates of size 8
--- 3 candidates of size 9
+-- 0 candidates of size 8
+-- 1 candidates of size 9
 -- 6 candidates of size 10
--- 7 candidates of size 11
--- tested 16 candidates
+-- 6 candidates of size 11
+-- tested 12 candidates
 cathis []  =  []
 cathis (t:ts)  =  if isThis t
                   then fromThis t:cathis ts
@@ -63,14 +63,14 @@ cathat :: [These A B] -> [B]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 1 candidates of size 5
+-- 0 candidates of size 5
 -- 1 candidates of size 6
 -- 2 candidates of size 7
--- 1 candidates of size 8
--- 3 candidates of size 9
+-- 0 candidates of size 8
+-- 1 candidates of size 9
 -- 6 candidates of size 10
--- 7 candidates of size 11
--- tested 16 candidates
+-- 6 candidates of size 11
+-- tested 12 candidates
 cathat []  =  []
 cathat (t:ts)  =  if isThat t
                   then fromThat t:cathat ts
@@ -83,17 +83,17 @@ cathese :: [These A A] -> [A]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 2 candidates of size 5
+-- 0 candidates of size 5
 -- 3 candidates of size 6
 -- 4 candidates of size 7
--- 6 candidates of size 8
--- 17 candidates of size 9
+-- 2 candidates of size 8
+-- 9 candidates of size 9
 -- 36 candidates of size 10
--- 46 candidates of size 11
--- 111 candidates of size 12
--- 256 candidates of size 13
--- 454 candidates of size 14
--- 889 candidates of size 15
--- tested 1825 candidates
+-- 38 candidates of size 11
+-- 75 candidates of size 12
+-- 224 candidates of size 13
+-- 422 candidates of size 14
+-- 753 candidates of size 15
+-- tested 1567 candidates
 cannot conjure
 

@@ -4,16 +4,16 @@ mem :: Int -> Tree -> Bool
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 3 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 27 candidates of size 8
--- 84 candidates of size 9
+-- 24 candidates of size 8
+-- 72 candidates of size 9
 -- 0 candidates of size 10
--- 252 candidates of size 11
--- 99 candidates of size 12
--- tested 392 candidates
+-- 240 candidates of size 11
+-- 96 candidates of size 12
+-- tested 362 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
 
@@ -21,18 +21,18 @@ mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
 -- 2 candidates of size 1
--- 1 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 6 candidates of size 7
--- 24 candidates of size 8
+-- 0 candidates of size 8
 -- 0 candidates of size 9
 -- 192 candidates of size 10
 -- 0 candidates of size 11
 -- 384 candidates of size 12
--- tested 371 candidates
+-- tested 346 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  case x `compare` y of
                          LT -> mem x t1
@@ -43,18 +43,18 @@ insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
 -- pruning with 2/3 rules
 -- 2 candidates of size 1
--- 2 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
--- 21 candidates of size 5
+-- 0 candidates of size 5
 -- 0 candidates of size 6
--- 74 candidates of size 7
--- 335 candidates of size 8
--- 32 candidates of size 9
--- 1504 candidates of size 10
--- 6708 candidates of size 11
--- 1760 candidates of size 12
--- tested 10442 candidates
+-- 26 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 200 candidates of size 10
+-- 0 candidates of size 11
+-- 32 candidates of size 12
+-- tested 264 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -112,13 +112,14 @@ union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
 -- pruning with 6/8 rules
 -- 3 candidates of size 1
--- 12 candidates of size 2
--- 32 candidates of size 3
--- 58 candidates of size 4
--- 434 candidates of size 5
--- 922 candidates of size 6
--- 3088 candidates of size 7
--- 14022 candidates of size 8
--- tested 18571 candidates
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 22 candidates of size 4
+-- 0 candidates of size 5
+-- 68 candidates of size 6
+-- 240 candidates of size 7
+-- 82 candidates of size 8
+-- 3018 candidates of size 9
+-- tested 3433 candidates
 cannot conjure
 

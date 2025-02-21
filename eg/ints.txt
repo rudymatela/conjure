@@ -21,11 +21,11 @@ sum :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 14/25 rules
 -- 2 candidates of size 1
--- 4 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
--- 6 candidates of size 4
+-- 0 candidates of size 4
 -- 6 candidates of size 5
--- tested 13 candidates
+-- tested 3 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -33,11 +33,11 @@ product :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 14/25 rules
 -- 2 candidates of size 1
--- 4 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
--- 6 candidates of size 4
+-- 0 candidates of size 4
 -- 6 candidates of size 5
--- tested 18 candidates
+-- tested 8 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
 
@@ -45,19 +45,19 @@ sum :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 15/26 rules
 -- 2 candidates of size 1
--- 4 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
--- 9 candidates of size 4
--- tested 7 candidates
+-- 3 candidates of size 4
+-- tested 3 candidates
 sum xs  =  foldr (+) 0 xs
 
 product :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 15/26 rules
 -- 2 candidates of size 1
--- 4 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
--- 9 candidates of size 4
--- tested 9 candidates
+-- 3 candidates of size 4
+-- tested 5 candidates
 product xs  =  foldr (*) 1 xs
 

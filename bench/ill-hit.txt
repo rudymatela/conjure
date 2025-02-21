@@ -2,11 +2,11 @@ sum :: [Int] -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- 2 candidates of size 1
--- 3 candidates of size 2
--- 2 candidates of size 3
--- 6 candidates of size 4
--- 11 candidates of size 5
--- tested 14 candidates
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 2 candidates of size 4
+-- 7 candidates of size 5
+-- tested 7 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 

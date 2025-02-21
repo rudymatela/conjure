@@ -212,6 +212,7 @@ data Args = Args
   , requireDescent        :: Bool -- ^ require recursive calls to deconstruct arguments
   , adHocRedundancy       :: Bool -- ^ ad-hoc redundancy checks
   , copyBindings          :: Bool -- ^ copy partial definition bindings in candidates
+  , earlyTests            :: Bool -- ^ perform tests early-and-independently on each binding
   , atomicNumbers         :: Bool -- ^ restrict constant/ground numeric expressions to atoms
   , requireZero           :: Bool -- ^ require 0 as base case for Num recursions
   , uniqueCandidates      :: Bool -- ^ unique-modulo-testing candidates
@@ -258,6 +259,7 @@ args = Args
   , requireDescent         =  True
   , adHocRedundancy        =  True
   , copyBindings           =  True
+  , earlyTests             =  True
   , atomicNumbers          =  True
   , requireZero            =  False
   , uniqueCandidates       =  False
@@ -556,6 +558,10 @@ candidateDefnsC Args{..} nm f ps  =
 
   isNumeric  =  conjureIsNumeric f
 
+  (-==-)  =  conjureMkEquation f
+  tests  =  conjureTestDefn maxTests maxSearchTests nm f
+  exprExpr  =  conjureExpress f
+
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundant
                .  products  -- alt: use delayedProducts
@@ -568,10 +574,24 @@ candidateDefnsC Args{..} nm f ps  =
     -- simply use its return value as the only possible result
     p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
     p2eess pat  =  mapT (pat,)
+                .  filterT keepBase
                 .  appsWith pat
                 .  drop 1 -- this excludes the function name itself
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
+      keepBase
+        | not earlyTests  =  const True
+        | all isVar (unfoldApp pat)  =  const True
+        | otherwise  =  \e -> hasHole e || reallyKeepBase e
+      reallyKeepBase e  =  and
+        [ errorToFalse $ eval False $ (e //- bs) -==- rhs
+        | (lhs,rhs) <- tests
+        -- filter test bindings that match the current pattern:
+        , Just bs <- [lhs `matchArgs` pat]
+        ]
+      matchArgs efxs efys  =  fold (map exprExpr (drop 1 (unfoldApp efxs)))
+                      `match` fold               (drop 1 (unfoldApp efys))
+
       -- computes whether we should include a recurse for this given argument
       -- numeric arguments additionally require 0 to be present as a case
       -- for recursion

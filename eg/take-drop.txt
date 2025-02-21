@@ -2,13 +2,13 @@ drop :: Int -> [A] -> [A]
 -- testing 360 combinations of argument values
 -- pruning with 4/7 rules
 -- 2 candidates of size 1
--- 3 candidates of size 2
--- 4 candidates of size 3
--- 6 candidates of size 4
--- 8 candidates of size 5
--- 13 candidates of size 6
--- 24 candidates of size 7
--- tested 39 candidates
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 2 candidates of size 5
+-- 5 candidates of size 6
+-- 5 candidates of size 7
+-- tested 11 candidates
 drop 0 xs  =  xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
@@ -17,15 +17,15 @@ take :: Int -> [A] -> [A]
 -- testing 153 combinations of argument values
 -- pruning with 4/7 rules
 -- 2 candidates of size 1
--- 3 candidates of size 2
--- 4 candidates of size 3
--- 6 candidates of size 4
--- 8 candidates of size 5
--- 13 candidates of size 6
--- 24 candidates of size 7
--- 31 candidates of size 8
--- 59 candidates of size 9
--- tested 111 candidates
+-- 1 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 3 candidates of size 6
+-- 2 candidates of size 7
+-- 6 candidates of size 8
+-- 5 candidates of size 9
+-- tested 15 candidates
 take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs

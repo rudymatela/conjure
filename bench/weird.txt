@@ -2,9 +2,9 @@
 -- testing 360 combinations of argument values
 -- pruning with 56/91 rules
 -- 4 candidates of size 1
--- 16 candidates of size 2
--- 40 candidates of size 3
--- tested 37 candidates
+-- 6 candidates of size 2
+-- 10 candidates of size 3
+-- tested 19 candidates
 0 ^^^ x  =  x
 x ^^^ 0  =  x
 x ^^^ y  =  0

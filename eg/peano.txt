@@ -2,11 +2,11 @@
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
 -- 3 candidates of size 1
--- 11 candidates of size 2
--- 38 candidates of size 3
--- 87 candidates of size 4
--- 218 candidates of size 5
--- tested 140 candidates
+-- 3 candidates of size 2
+-- 3 candidates of size 3
+-- 13 candidates of size 4
+-- 19 candidates of size 5
+-- tested 23 candidates
 p + Z  =  p
 p + S q  =  S p + q
 
@@ -14,12 +14,12 @@ p + S q  =  S p + q
 -- testing 7 combinations of argument values
 -- pruning with 6/10 rules
 -- 3 candidates of size 1
--- 11 candidates of size 2
--- 41 candidates of size 3
--- 108 candidates of size 4
--- 291 candidates of size 5
--- 746 candidates of size 6
--- tested 537 candidates
+-- 3 candidates of size 2
+-- 6 candidates of size 3
+-- 6 candidates of size 4
+-- 35 candidates of size 5
+-- 86 candidates of size 6
+-- tested 71 candidates
 p * Z  =  Z
 p * S q  =  p + p * q
 

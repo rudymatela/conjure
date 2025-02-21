@@ -2,14 +2,14 @@ subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
 -- pruning with 29/39 rules
 -- 2 candidates of size 1
--- 4 candidates of size 2
--- 8 candidates of size 3
--- 10 candidates of size 4
--- 64 candidates of size 5
--- 40 candidates of size 6
--- 64 candidates of size 7
--- 482 candidates of size 8
--- tested 513 candidates
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 13 candidates of size 5
+-- 0 candidates of size 6
+-- 6 candidates of size 7
+-- 176 candidates of size 8
+-- tested 176 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  subset xs ys && elem x ys
 

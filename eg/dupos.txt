@@ -2,23 +2,23 @@ duplicates :: [Int] -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 21/26 rules
 -- 2 candidates of size 1
--- 1 candidates of size 2
+-- 0 candidates of size 2
 -- 0 candidates of size 3
--- 2 candidates of size 4
+-- 0 candidates of size 4
 -- 1 candidates of size 5
--- 2 candidates of size 6
--- 3 candidates of size 7
--- 8 candidates of size 8
--- 15 candidates of size 9
--- 24 candidates of size 10
--- 35 candidates of size 11
--- 62 candidates of size 12
--- 129 candidates of size 13
--- 282 candidates of size 14
--- 559 candidates of size 15
--- 1036 candidates of size 16
--- 1899 candidates of size 17
--- tested 2274 candidates
+-- 0 candidates of size 6
+-- 1 candidates of size 7
+-- 6 candidates of size 8
+-- 5 candidates of size 9
+-- 22 candidates of size 10
+-- 15 candidates of size 11
+-- 48 candidates of size 12
+-- 93 candidates of size 13
+-- 188 candidates of size 14
+-- 505 candidates of size 15
+-- 706 candidates of size 16
+-- 1723 candidates of size 17
+-- tested 1705 candidates
 duplicates []  =  []
 duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
                       then x:duplicates xs
@@ -55,18 +55,18 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
--- 5 candidates of size 4
--- 9 candidates of size 5
--- 16 candidates of size 6
--- 43 candidates of size 7
--- 73 candidates of size 8
--- 185 candidates of size 9
--- 285 candidates of size 10
--- 722 candidates of size 11
--- 1157 candidates of size 12
--- 2847 candidates of size 13
--- 4505 candidates of size 14
--- tested 5484 candidates
+-- 0 candidates of size 4
+-- 7 candidates of size 5
+-- 0 candidates of size 6
+-- 34 candidates of size 7
+-- 0 candidates of size 8
+-- 133 candidates of size 9
+-- 0 candidates of size 10
+-- 510 candidates of size 11
+-- 16 candidates of size 12
+-- 1947 candidates of size 13
+-- 104 candidates of size 14
+-- tested 2653 candidates
 positionsFrom x y []  =  []
 positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
 

@@ -22,9 +22,9 @@ add :: Int -> Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- 4 candidates of size 1
--- 16 candidates of size 2
--- 40 candidates of size 3
--- tested 22 candidates
+-- 6 candidates of size 2
+-- 10 candidates of size 3
+-- tested 12 candidates
 add x y  =  x + y
 
 square :: Int -> Int

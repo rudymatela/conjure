@@ -64,12 +64,12 @@ factorial :: Int -> Int
 -- pruning with 27/65 rules
 -- 3 candidates of size 1
 -- 6 candidates of size 2
--- 12 candidates of size 3
--- 24 candidates of size 4
--- 37 candidates of size 5
--- 72 candidates of size 6
--- 196 candidates of size 7
--- tested 165 candidates
+-- 9 candidates of size 3
+-- 18 candidates of size 4
+-- 31 candidates of size 5
+-- 59 candidates of size 6
+-- 171 candidates of size 7
+-- tested 137 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -79,12 +79,12 @@ factorial :: Int -> Int
 -- pruning with 27/65 rules
 -- 3 candidates of size 1
 -- 6 candidates of size 2
--- 12 candidates of size 3
--- 24 candidates of size 4
--- 47 candidates of size 5
--- 82 candidates of size 6
--- 342 candidates of size 7
--- tested 284 candidates
+-- 9 candidates of size 3
+-- 18 candidates of size 4
+-- 41 candidates of size 5
+-- 64 candidates of size 6
+-- 307 candidates of size 7
+-- tested 251 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -94,12 +94,12 @@ factorial :: Int -> Int
 -- pruning with 27/65 rules
 -- 3 candidates of size 1
 -- 6 candidates of size 2
--- 21 candidates of size 3
--- 42 candidates of size 4
--- 302 candidates of size 5
--- 602 candidates of size 6
--- 6115 candidates of size 7
--- tested 1001 candidates
+-- 18 candidates of size 3
+-- 36 candidates of size 4
+-- 287 candidates of size 5
+-- 571 candidates of size 6
+-- 5843 candidates of size 7
+-- tested 946 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -124,12 +124,12 @@ factorial :: Int -> Int
 -- pruning with 27/65 rules
 -- 3 candidates of size 1
 -- 6 candidates of size 2
--- 21 candidates of size 3
--- 42 candidates of size 4
--- 330 candidates of size 5
--- 630 candidates of size 6
--- 7215 candidates of size 7
--- tested 1945 candidates
+-- 18 candidates of size 3
+-- 36 candidates of size 4
+-- 315 candidates of size 5
+-- 585 candidates of size 6
+-- 6915 candidates of size 7
+-- tested 1876 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
