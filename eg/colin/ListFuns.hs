@@ -1,6 +1,6 @@
---- 2021, 2025  Colin Runciman
+-- 2021, 2025  Colin Runciman
 import Conjure
-import Prelude hiding (sum, take, drop)
+import Prelude hiding (sum, take, drop, zip)
 
 sum :: [Int] -> Int
 sum []       =  0
@@ -65,7 +65,7 @@ sub [2,0]   [0,1]  =  False
 -- sub :: [Int] -> [Int] -> Bool
 -- sub []     _       =  True
 -- sub _      []      =  False
--- sub (x:xs) (y:ys)  =  x == y && sub xs ys || sub (x:xs) ys
+-- sub (x:xs) (y:ys)  =  if x == y then sub xs ys else sub (x:xs) ys
 
 subBackground :: [Prim]
 subBackground  =
@@ -73,8 +73,7 @@ subBackground  =
   , pr False
   , prim ":" ((:) :: Int -> [Int] -> [Int])
   , prim "==" ((==) :: Int -> Int -> Bool)
-  , prim "&&" ((&&) :: Bool -> Bool -> Bool)
-  , prim "||" ((||) :: Bool -> Bool -> Bool)
+  , prif (undefined :: Bool)
   ]
 
 set :: [Int] -> Bool
@@ -112,7 +111,7 @@ take 3 [x,y]  =  [x,y]
 -- take x (y:ys)  =  y : take (x-1) ys
 
 takeBackground :: [Prim]
-takeBackground =
+takeBackground  =
   [ pr (0 :: Int)
   , pr (1 :: Int)
   , pr ([] :: [A])
@@ -134,11 +133,93 @@ drop 3 [x,y]  =  []
 -- drop x (y:ys)  =  drop (x-1) ys
 
 dropBackground :: [Prim]
-dropBackground =
+dropBackground  =
   [ pr (0 :: Int)
   , pr (1 :: Int)
   , pr ([] :: [A])
   , prim "-" ((-) :: Int -> Int -> Int)
+  ]
+
+ord :: [Int] -> Bool
+ord []       =  True
+ord [0]      =  True
+ord [0,1]    =  True
+ord [1,0]    =  False
+ord [0,1,0]  =  False
+ord [0,1,1]  =  True
+
+-- hoping for something like
+-- ord []   =  True
+-- ord [x]  =  True
+-- ord (x:y:ys)  =  x <= y && ord (y:ys)
+
+ordBackground :: [Prim]
+ordBackground  =
+  [ pr True
+  , prim "null" (null :: [Int] -> Bool)
+  , prim "head" (head :: [Int] -> Int)
+  , prim "<=" ((<=) :: Int -> Int -> Bool)
+  , prim "&&" (&&)
+  , prim "||" (||)
+  ]
+
+merge :: [Int] -> [Int] -> [Int]
+merge []    [0,1]  =  [0,1]
+merge [0,1] []     =  [0,1]
+merge [0,2] [1,3]  =  [0,1,2,3]
+merge [1,3] [0,2]  =  [0,1,2,3]
+
+-- hoping for something like
+merge [] ys  =  ys
+merge xs []  =  xs
+merge (x:xs) (y:ys)  =  if x <= y
+                        then x : merge xs (y:ys)
+                        else y : merge (x:xs) ys
+
+mergeBackground :: [Prim]
+mergeBackground  =
+  [ prim "<=" ((<=) :: Int -> Int -> Bool)
+  , pr ([] :: [Int])
+  , prim ":" ((:) :: Int -> [Int] -> [Int])
+  , prif (undefined :: [Int])
+  ]
+
+zip :: [A] -> [B] -> [(A,B)]
+zip []    []     =  []
+zip []    [x,y]  =  []
+zip [v,w] []     =  []
+zip [v,w] [x,y]  =  [(v,x),(w,y)]
+
+-- hoping for something like
+-- zip []     _       =  []
+-- zip (x:xs) []      =  []
+-- zip (x:xs) (y:ys)  =  (x,y) : zip xs ys
+
+zipBackground :: [Prim]
+zipBackground  =
+  [ pr ([] :: [(A,B)])
+  , prim "(,)" ((,) :: A -> B -> (A,B))
+  , prim ":" ((:) :: (A,B) -> [(A,B)] -> [(A,B)])
+  ]
+
+assocs :: Int -> [(Int,A)] -> [A]
+assocs 1 []             =  []
+assocs 0 [(0,x),(1,y)]  =  [x]
+assocs 1 [(0,x),(1,y)]  =  [y]
+assocs 2 [(2,x),(2,y)]  =  [x,y]
+
+-- hoping for something like
+-- assocs _ []      =  []
+-- assocs n (x:xs)  =  if fst x == n then snd x : assocs n xs else assocs n xs
+
+assocsBackground :: [Prim]
+assocsBackground  =
+  [ pr ([] :: [A])
+  , prim "==" ((==) :: Int -> Int -> Bool)
+  , prim ":" ((:) :: A -> [A] -> [A])
+  , prim "fst" (fst :: (Int,A) -> Int)
+  , prim "snd" (snd :: (Int,A) -> A)
+  , prif (undefined :: [A])
   ]
 
 main :: IO ()
@@ -146,8 +227,13 @@ main = do
   conjure "sum" sum sumBackground
   conjure "app" app appBackground
   conjure "mem" mem memBackground
-  conjureWith args{maxSize=15,showCandidates=False} "sub" sub subBackground
+  conjure "sub" sub subBackground
   conjure "set" set setBackground
   conjure "take" take takeBackground
   conjure "drop" drop dropBackground
+  conjureWith args{showCandidates=True} "ord" ord ordBackground
+  conjure "merge" merge mergeBackground
+  conjure "zip" zip zipBackground
+  conjure "assocs" assocs assocsBackground
+
 
