@@ -29,8 +29,6 @@ module Conjure.Conjurable
   , conjureAreEqual
   , conjureMkEquation
   , conjureTestDefn
-  , conjureTestApps
-  , conjureTestBinds
   , A, B, C, D, E, F
   , conjureIsUnbreakable
   , conjureReification
@@ -340,6 +338,8 @@ conjureTestDefn maxTests maxSearchTests nm f  =
 --
 -- > > putStrLn $ showDefn $ conjureTestApps 60 360 "fact n" fact
 -- > [fact 1 :: Int, fact 3 :: Int, fact 4 :: Int]
+--
+-- This function is internal and used in the implementation of 'conjureTestDefn'.
 conjureTestApps :: Conjurable f => Int -> Int -> String -> f -> [Expr]
 conjureTestApps maxTests maxSearchTests nm f  =
   [fxys //- bs | bs <- conjureTestBinds maxTests maxSearchTests nm f]
@@ -372,6 +372,8 @@ conjureTestApps maxTests maxSearchTests nm f  =
 -- > ]
 --
 -- The variable naming is consistent with 'conjureApplication' and 'conjureVarApplication'.
+--
+-- This function is internal and used in the implementation of 'conjureTestDefn'.
 conjureTestBinds :: Conjurable f => Int -> Int -> String -> f -> [[(Expr,Expr)]]
 conjureTestBinds maxTests maxSearchTests nm f  =  take maxTests
   [ bs
