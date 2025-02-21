@@ -544,7 +544,7 @@ candidateDefnsC Args{..} nm f ps  =
   keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
        | otherwise  =  const True
 
-  keepBndn | rewriting  =  \(_,rhs) -> size (normalize thy rhs) >= size rhs
+  keepBndn | rewriting  =  \b@(_,rhs) -> isBaseCase b || size (normalize thy rhs) >= size rhs
            | otherwise  =  const True
 
   appsWith :: Expr -> [Expr] -> [[Expr]]
