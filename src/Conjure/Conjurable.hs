@@ -188,7 +188,14 @@ nubConjureType x  =  nubOn (\(eh,_,_,_,_,_) -> eh) . conjureType x
 --
 -- This is used in the implementation of 'conjureReification'.
 conjureReification1 :: Conjurable a => a -> Reification1
-conjureReification1 x  =  (hole x, conjureEquality x, conjureTiers x, names x, conjureCases x, value "conjureSize" (conjureSize -:> x))
+conjureReification1 x  =
+  ( hole x
+  , conjureEquality x
+  , conjureTiers x
+  , names x
+  , conjureCases x
+  , value "conjureSize" (conjureSize -:> x)
+  )
 
 -- | Conjures a list of 'Reification1'
 --   for a 'Conjurable' type, its subtypes and 'Bool'.
