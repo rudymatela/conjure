@@ -305,7 +305,6 @@ conjureTestDefn maxTests maxSearchTests nm f  =
   -- we "only" would need a conjureRevl :: Conjurable f => f -> Expr -> Expr
   -- which would generate (val . evl) for supported types
   exprExpr  =  conjureExpress f
-  (-==-)    =  conjureMkEquation f
 
 
 -- TODO: document me

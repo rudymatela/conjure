@@ -402,26 +402,20 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
   , deconstructions  =  deconstructions
   }
   where
-  tests  =  conjureTestDefn maxTests maxSearchTests nm f
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
-                 && requal fx ffxx vffxx
+                 && test fx
                  && errorToFalse (p (cevl maxEvalRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
                $  (if target > 0 then targetiers target else id)
                $  (if maxSize > 0 then take maxSize else id)
                $  candidatesTT
   (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns args nm f es
-  ffxx   =  conjureApplication nm f
-  vffxx  =  conjureVarApplication nm f
 
-  requal dfn e1 e2  =  isTrueWhenDefined dfn (e1 -==- e2)
+  test dfn  =  all (errorToFalse . deval (conjureExpress f) maxEvalRecursions dfn False)
+            $  [funToVar lhs -==- rhs | (lhs, rhs) <- tests]
+  tests  =  conjureTestDefn maxTests maxSearchTests nm f
   (-==-)  =  conjureMkEquation f
-
-  isTrueWhenDefined dfn e  =  all (errorToFalse . deval (conjureExpress f) maxEvalRecursions dfn False)
-                           $  map (e //-) dbss
-
-  dbss  =  conjureTestBinds maxTests maxSearchTests nm f
 
 
 -- | Just prints the underlying theory found by "Test.Speculate"
