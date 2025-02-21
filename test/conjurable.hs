@@ -294,6 +294,26 @@ tests n  =
   , take 6 (conjureListFor (undefined :: Int) i_)
     == [zero, one, minusOne, two, minusTwo, three]
 
+  , conjureTestDefn 6 12 "factorial n" fact
+    == [ (value "factorial" fact :$ one,   one)
+       , (value "factorial" fact :$ two,   two)
+       , (value "factorial" fact :$ three, six)
+       , (value "factorial" fact :$ four,  val (24 :: Int))
+       ]
+
+  , conjureTestDefn 4 6 "sum" (sum :: [Int] -> Int)
+    == [ (sum' nil, zero)
+       , (sum' (val [0 :: Int]),    zero)
+       , (sum' (val [0, 0 :: Int]), zero)
+       , (sum' (val [1 :: Int]),    one)
+       ]
+
+  , conjureTestDefn 3 4 ":" ((:) :: Int -> [Int] -> [Int])
+    == [ (zero -:- nil,          zero -:- nil)
+       , (zero -:- val [0::Int], zero -:- zero -:- nil)
+       , (one -:- nil,           one -:- nil)
+       ]
+
   , conjureTestBinds 6 12 "factorial n" fact
     == [ [(nn, one)]
        , [(nn, two)]

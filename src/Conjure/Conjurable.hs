@@ -296,7 +296,27 @@ conjureAreEqual f maxTests  =  (===)
   gs  =  take maxTests . conjureGrounds f
 
 
--- TODO: document me
+-- | Compute a 'Defn' from the given partial definition.
+--
+-- With:
+--
+-- > fact :: Int -> Int
+-- > fact 1  =  1
+-- > fact 3  =  6
+-- > fact 4  =  24
+--
+-- Then:
+--
+-- > > putStrLn $ showDefn $ conjureTestDefn 60 360 "fact n" fact
+-- > fact :: Int -> Int
+-- > fact 1  =  1
+-- > fact 3  =  6
+-- > fact 4  =  24
+--
+-- > > putStrLn $ showDefn $ conjureTestDefn 3 4 "-:-" ((:) :: Int -> [Int] -> [Int])
+-- > 0 -:- []  =  [0]
+-- > 0 -:- [0]  =  [0,0]
+-- > 1 -:- []  =  [1]
 conjureTestDefn :: Conjurable f => Int -> Int -> String -> f -> Defn
 conjureTestDefn maxTests maxSearchTests nm f  =
   [(fxys, exprExpr fxys) | fxys <- conjureTestApps maxTests maxSearchTests nm f]
@@ -307,7 +327,19 @@ conjureTestDefn maxTests maxSearchTests nm f  =
   exprExpr  =  conjureExpress f
 
 
--- TODO: document me
+-- | Compute a test applications that yield non-undefined values.
+--
+-- With:
+--
+-- > fact :: Int -> Int
+-- > fact 1  =  1
+-- > fact 3  =  6
+-- > fact 4  =  24
+--
+-- Then:
+--
+-- > > putStrLn $ showDefn $ conjureTestApps 60 360 "fact n" fact
+-- > [fact 1 :: Int, fact 3 :: Int, fact 4 :: Int]
 conjureTestApps :: Conjurable f => Int -> Int -> String -> f -> [Expr]
 conjureTestApps maxTests maxSearchTests nm f  =
   [fxys //- bs | bs <- conjureTestBinds maxTests maxSearchTests nm f]
