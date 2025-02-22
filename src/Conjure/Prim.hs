@@ -104,6 +104,34 @@ prif x  =  (ifFor x, conjureType x)
 -- | Provides an if condition bound to the conjured function's return type.
 --
 -- Guards are only alllowed at the root fo the RHS.
+--
+-- > last' :: [Int] -> Int
+-- > last' [x]  =  x
+-- > last' [x,y]  =  y
+-- > last' [x,y,z]  =  z
+--
+-- > > conjure "last" last'
+-- > >   [ pr ([] :: [Int])
+-- > >   , prim ":" ((:) :: Int -> [Int] -> [Int])
+-- > >   , prim "null" (null :: [Int] -> Bool)
+-- > >   , guard
+-- > >   , prim "undefined" (undefined :: Int)
+-- > >   ]
+-- > last :: [Int] -> Int
+-- > -- 0.0s, testing 360 combinations of argument values
+-- > -- 0.0s, pruning with 5/5 rules
+-- > -- 0.0s, 1 candidates of size 1
+-- > -- 0.0s, 0 candidates of size 2
+-- > -- 0.0s, 0 candidates of size 3
+-- > -- 0.0s, 0 candidates of size 4
+-- > -- 0.0s, 0 candidates of size 5
+-- > -- 0.0s, 0 candidates of size 6
+-- > -- 0.0s, 4 candidates of size 7
+-- > -- 0.0s, tested 2 candidates
+-- > last []  =  undefined
+-- > last (x:xs)
+-- >   | null xs  =  x
+-- >   | otherwise  =  last xs
 guard :: Prim
 guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
 -- internally we always return a guard of the Bool return type,
