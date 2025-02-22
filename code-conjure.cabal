@@ -3,7 +3,7 @@
 -- Copyright (C) 2021-2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 name:                code-conjure
-version:             0.6.8
+version:             0.6.9
 synopsis:            synthesize Haskell functions out of partial definitions
 description:
   Conjure is a tool that synthesizes Haskell functions out of partial definitions.
@@ -69,7 +69,7 @@ source-repository head
 source-repository this
   type:            git
   location:        https://github.com/rudymatela/conjure
-  tag:             v0.6.8
+  tag:             v0.6.9
 
 library
   exposed-modules: Conjure
