@@ -508,6 +508,9 @@ candidateDefnsC Args{..} nm f ps  =
   efxs  =  conjureVarApplication nm f
   (ef:_)  =  unfoldApp efxs
 
+  unguardT | any isGuardSymbol es  =  discardT isGuard
+           | otherwise             =  id
+
   keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
        | otherwise  =  const True
 
@@ -604,6 +607,7 @@ candidateDefnsC Args{..} nm f ps  =
   deconstructions  =  filter (conjureIsDeconstruction f maxTests)
                    $  concatMap candidateDeconstructionsFromHoled
                    $  concat . take maxDeconstructionSize
+                   $  unguardT
                    $  concatMapT (`appsWith` hs) [hs]
     where
     hs  =  nub $ conjureArgumentHoles f
@@ -612,7 +616,7 @@ candidateDefnsC Args{..} nm f ps  =
            .  discardT (\e -> e == ep)
            $  recsV' (tail (vars ep))
   recsV vs  =  filterT (\e -> any (`elem` vs) (vars e))
-            $  foldAppProducts ef [appsWith h vs | h <- conjureArgumentHoles f]
+            $  foldAppProducts ef [unguardT $ appsWith h vs | h <- conjureArgumentHoles f]
   -- like recs, but memoized
   recs' ep  =  fromMaybe errRP $ lookup ep eprs
     where

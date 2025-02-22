@@ -97,6 +97,7 @@ module Conjure
   , Prim
   , pr
   , prim
+  , guard
   , prif
   , primOrdCaseFor
 

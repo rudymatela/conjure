@@ -15,6 +15,7 @@ module Conjure.Prim
   , pr
   , prif
   , primOrdCaseFor
+  , guard
   , cjHoles
   , cjTiersFor
   , cjAreEqual

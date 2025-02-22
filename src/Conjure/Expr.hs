@@ -364,12 +364,15 @@ enumerateAppsFor h keep es  =  for h
   for h  =  filter (\e -> typ h == typ e) es : apps
     where
     apps  =  foldr (\/) []
-          [  filterT keep $ fliproductWith (:$) (for hf) (for hx)
+          [  filterT keep $ fliproductWith (:$) (ufor hf) (ufor hx)
           |  hf <- hs
           ,  hx <- hs
           ,  Just hfx <- [hf $$ hx]
           ,  typ h == typ hfx
           ]
+  -- unguarded for
+  ufor | any isGuardSymbol es  =  filterT (not . isGuard) . for
+       | otherwise             =  for
 
 -- | Given an expression whose holes are /all of the same type/
 --   and an enumeration of 'Expr's of this same type,
