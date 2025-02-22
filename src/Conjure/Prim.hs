@@ -103,10 +103,11 @@ prif x  =  (ifFor x, conjureType x)
 
 -- | Provides an if condition bound to the conjured function's return type.
 --
--- The difference to 'prif' is that this one is only allowed at the root of the RHS
--- rather than anywhere.  This also does not take any argument.  (TODO: TBD)
-guard :: Conjurable a => a -> Prim
-guard x  =  (guardFor x, conjureType x)
+-- Guards are only alllowed at the root fo the RHS.
+guard :: Prim
+guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
+-- internally we always return a guard of the Bool return type,
+-- this is replaced by Conjure when enumerating candidates
 
 
 -- | Provides a case condition bound to the given return type.

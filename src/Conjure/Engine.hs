@@ -502,7 +502,8 @@ candidateDefnsC Args{..} nm f ps  =
   pats | maxPatternSize > 0  =  take maxPatternSize $ conjurePats es nm f
        | otherwise           =                        conjurePats es nm f
   fss  =  concatMapT ps2fss pats
-  es  =  map fst ps
+  -- replaces the any guard symbol with a guard of the correct type
+  es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ps]
 
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f

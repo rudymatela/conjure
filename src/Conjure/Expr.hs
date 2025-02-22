@@ -20,6 +20,7 @@ module Conjure.Expr
   , ifFor
   , caseForOrd
   , guardFor
+  , ifToGuard
   , valuesBFS
   , holesBFS
   , fillBFS
@@ -244,6 +245,14 @@ caseForOrd a  =  value "case" (\o x y z -> case o of LT -> x; EQ -> y; GT -> z `
 -- For now, this will signalize an if that can only appear as a root expression.
 guardFor :: Typeable a => a -> Expr
 guardFor a  =  value "|" (\p x y -> if p then x else y `asTypeOf` a)
+
+-- | Changes an if encoded as an 'Expr' to a guard encoded as an 'Expr'.
+--
+-- This works for both the dangling symbol, or for a full application.
+ifToGuard :: Expr -> Expr
+ifToGuard (Value "if" dyn)  =  Value "|" dyn
+ifToGuard (Value "if" dyn :$ ep :$ ex :$ ey)  =  Value "|" dyn :$ ep :$ ex :$ ey
+ifToGuard e  =  e
 
 -- | Lists terminal values in BFS order.
 --

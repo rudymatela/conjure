@@ -35,6 +35,7 @@ module Conjure.Conjurable
   , conjureReification1
   , conjureDynamicEq
   , conjureIsNumeric
+  , conjureGuard
   , cevaluate
   , ceval
   , cevl
@@ -443,6 +444,10 @@ conjureSizeFor f eh  =
 -- | Checks if an 'Expr' is of an unbreakable type.
 conjureIsUnbreakable :: Conjurable f => f -> Expr -> Bool
 conjureIsUnbreakable f  =  null . conjureCasesFor f
+
+-- | Conjures a guard at the return type of the given function.
+conjureGuard :: Conjurable f => f -> Expr
+conjureGuard  =  ifToGuard . conjureIf
 
 instance Conjurable () where
   conjureExpress   =  reifyExpress
