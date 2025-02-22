@@ -35,16 +35,16 @@ insert :: Int -> [Int] -> [Int]
 -- 8 candidates of size 10
 -- 18 candidates of size 11
 -- 16 candidates of size 12
--- 102 candidates of size 13
+-- 70 candidates of size 13
 -- 32 candidates of size 14
--- 426 candidates of size 15
--- 224 candidates of size 16
--- 1450 candidates of size 17
--- tested 991 candidates
+-- 226 candidates of size 15
+-- 64 candidates of size 16
+-- 602 candidates of size 17
+-- tested 519 candidates
 insert x []  =  [x]
-insert x (y:xs)  =  if x <= y
-                    then x:insert y xs
-                    else y:insert x xs
+insert x (y:xs)
+  | x <= y  =  x:insert y xs
+  | otherwise  =  y:insert x xs
 
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
@@ -89,7 +89,7 @@ qsort []  =  []
 qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
 
 merge :: [Int] -> [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 1080 combinations of argument values
 -- pruning with 4/4 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
@@ -102,8 +102,11 @@ merge :: [Int] -> [Int] -> [Int]
 -- 114 candidates of size 9
 -- 36 candidates of size 10
 -- 472 candidates of size 11
--- 604 candidates of size 12
--- tested 1290 candidates
+-- 568 candidates of size 12
+-- 1442 candidates of size 13
+-- 4204 candidates of size 14
+-- 5426 candidates of size 15
+-- tested 12326 candidates
 cannot conjure
 
 merge :: [Int] -> [Int] -> [Int]

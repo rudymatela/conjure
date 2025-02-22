@@ -28,7 +28,7 @@ main  =  do
   -- are particularly hard for conjure to synthesize.
   -- I've added an item in TODO.md to address this in 2025-02.
 
-  -- It takes about 33 seconds to run with maxSize=8
+  -- Found!  It takes about 12 seconds to run with maxSize=8
   -- running with maxSize = 5 for faster runtime
   conjureWith args{maxSize=5, maxConstantSize=1} "fib01" fib01
     [ pr (0::Int)

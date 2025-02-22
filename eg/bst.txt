@@ -68,10 +68,11 @@ before :: Int -> Tree -> Tree
 -- 86 candidates of size 7
 -- 239 candidates of size 8
 -- 104 candidates of size 9
--- 1558 candidates of size 10
+-- 1342 candidates of size 10
 -- 3543 candidates of size 11
--- 4028 candidates of size 12
--- tested 9587 candidates
+-- 2552 candidates of size 12
+-- 23874 candidates of size 13
+-- tested 31769 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree

@@ -42,3 +42,13 @@ main = do
     , prim "==" ((==) :: A -> A -> Bool)
     , prif (undefined :: Int)
     ]
+
+  -- a little bit larger, guards are only allowed at the root
+  -- so there is a need to repeat the recursive call twice
+  conjure "count" count'
+    [ pr (0 :: Int)
+    , pr (1 :: Int)
+    , prim "+" ((+) :: Int -> Int -> Int)
+    , prim "==" ((==) :: A -> A -> Bool)
+    , guard
+    ]

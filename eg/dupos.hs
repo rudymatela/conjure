@@ -58,7 +58,7 @@ main = do
     , prim "&&" (&&)
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "elem" (elem :: Int -> [Int] -> Bool)
-    , prif (undefined :: [Int])
+    , guard
     ]
 
   conjureFromSpec "duplicates" duplicatesSpec
@@ -67,7 +67,7 @@ main = do
     , prim "&&" (&&)
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "elem" (elem :: Int -> [Int] -> Bool)
-    , prif (undefined :: [Int])
+    , guard
     ]
 
   conjure "positionsFrom" positionsFrom'

@@ -48,13 +48,13 @@ cathis :: [These A B] -> [A]
 -- 2 candidates of size 7
 -- 0 candidates of size 8
 -- 1 candidates of size 9
--- 6 candidates of size 10
--- 6 candidates of size 11
--- tested 12 candidates
+-- 4 candidates of size 10
+-- 2 candidates of size 11
+-- tested 10 candidates
 cathis []  =  []
-cathis (t:ts)  =  if isThis t
-                  then fromThis t:cathis ts
-                  else cathis ts
+cathis (t:ts)
+  | isThis t  =  fromThis t:cathis ts
+  | otherwise  =  cathis ts
 
 cathat :: [These A B] -> [B]
 -- testing 4 combinations of argument values
@@ -68,13 +68,13 @@ cathat :: [These A B] -> [B]
 -- 2 candidates of size 7
 -- 0 candidates of size 8
 -- 1 candidates of size 9
--- 6 candidates of size 10
--- 6 candidates of size 11
--- tested 12 candidates
+-- 4 candidates of size 10
+-- 2 candidates of size 11
+-- tested 10 candidates
 cathat []  =  []
-cathat (t:ts)  =  if isThat t
-                  then fromThat t:cathat ts
-                  else cathat ts
+cathat (t:ts)
+  | isThat t  =  fromThat t:cathat ts
+  | otherwise  =  cathat ts
 
 cathese :: [These A A] -> [A]
 -- testing 5 combinations of argument values
@@ -88,12 +88,15 @@ cathese :: [These A A] -> [A]
 -- 4 candidates of size 7
 -- 2 candidates of size 8
 -- 9 candidates of size 9
--- 36 candidates of size 10
--- 38 candidates of size 11
--- 75 candidates of size 12
--- 224 candidates of size 13
--- 422 candidates of size 14
--- 753 candidates of size 15
--- tested 1567 candidates
+-- 20 candidates of size 10
+-- 22 candidates of size 11
+-- 35 candidates of size 12
+-- 84 candidates of size 13
+-- 86 candidates of size 14
+-- 137 candidates of size 15
+-- 324 candidates of size 16
+-- 346 candidates of size 17
+-- 511 candidates of size 18
+-- tested 1584 candidates
 cannot conjure
 

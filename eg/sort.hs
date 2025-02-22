@@ -37,6 +37,9 @@ merge' [x] [y] | x <= y     =  [x,y]
 merge' [0,1] [0,1]  =  [0,0,1,1]
 merge' [0,1] [2,3]  =  [0,1,2,3]
 merge' [0,2] [1,3]  =  [0,1,2,3]
+merge' [0,1] [1,2]  =  [0,1,1,2]
+merge' [1,2] [0,1]  =  [0,1,1,2]
+merge' [0,2] [1,1]  =  [0,1,1,2]
 
 main :: IO ()
 main = do
@@ -64,7 +67,7 @@ main = do
     [ prim "[]" ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "<=" ((<=) :: Int -> Int -> Bool)
-    , prif (undefined :: [Int])
+    , guard
     ]
 
   -- qsort []  =  []                           -- 1
@@ -93,16 +96,18 @@ main = do
     , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     ]
 
-  -- merge [] []  =  []
-  -- merge (x:xs) (y:ys)  =  if x <= y then x:merge xs (y:ys) else y:merge (x:xs) ys
-  --                         2  3 4  5      678     9 10 11 12  13 14 15 16 17 18 19
-  -- OOM after size 17, out of reach performance wise
-  -- update: cannot reach at size 19 on lapmatrud OOM
-  conjureWith args{target=1080} "merge" merge'
+  -- found!  candidate #1703311 @ size 22
+  -- merge [] xs  =  xs
+  -- merge (x:xs) []  =  x:xs
+  -- merge (x:xs) (y:ys)
+  --   | x <= y  =  x:merge xs (y:ys)
+  --   | otherwise  =  merge (y:x:xs) ys
+  -- set target to 2 000 000 to reach it
+  conjureWith args{target=10080, maxTests=1080} "merge" merge'
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "<=" ((<=) :: Int -> Int -> Bool)
-    , prif (undefined :: [Int])
+    , guard
     ]
 
   -- unreachable: needs about 26, but can only reach 16

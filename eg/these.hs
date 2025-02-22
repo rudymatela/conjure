@@ -80,7 +80,7 @@ main  =  do
     , prim ":" ((:) :: A -> [A] -> [A])
     , prim "isThis" (isThis :: These A B -> Bool)
     , prim "fromThis" (fromThis :: These A B -> A)
-    , prif (undefined :: [A])
+    , guard
     ]
 
   conjure "cathat" cathat'
@@ -88,7 +88,7 @@ main  =  do
     , prim ":" ((:) :: B -> [B] -> [B])
     , prim "isThat" (isThat :: These A B -> Bool)
     , prim "fromThat" (fromThat :: These A B -> B)
-    , prif (undefined :: [B])
+    , guard
     ]
 
   -- couldn't make this reachable, I didn't try much...
@@ -101,7 +101,8 @@ main  =  do
     , prim "isThat" (isThat :: These A A -> Bool)
     , prim "fromThat" (fromThat :: These A A -> A)
     -- , prif (undefined :: A)
-    , prif (undefined :: [A])
+    -- , prif (undefined :: [A])
+    , guard
     ]
   -- expected functionality
   -- these []  =  []

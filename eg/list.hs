@@ -82,7 +82,7 @@ main = do
     [ pr ([] :: [Int])
     , prim ":" ((:) :: Int -> [Int] -> [Int])
     , prim "null" (null :: [Int] -> Bool)
-    , prif (undefined :: Int)
+    , guard
     , prim "undefined" (undefined :: Int)
     ]
 

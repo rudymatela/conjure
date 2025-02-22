@@ -59,9 +59,9 @@ last :: [Int] -> Int
 -- 4 candidates of size 7
 -- tested 2 candidates
 last []  =  undefined
-last (x:xs)  =  if null xs
-                then x
-                else last xs
+last (x:xs)
+  | null xs  =  x
+  | otherwise  =  last xs
 
 zip :: [Int] -> [Int] -> [(Int,Int)]
 -- testing 360 combinations of argument values

@@ -126,7 +126,7 @@ main = do
     , prim "||" (||)
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
-    , prif (undefined :: Bool)
+    , guard
     ]
 
   conjure "mem" mem
@@ -145,14 +145,16 @@ main = do
     , primOrdCaseFor (undefined :: Tree)
     ]
 
+  -- reachable in 15s after 32878 at size 14.
   -- out of reach performance-wise (reaching 16 but need 19)
   -- cf. the primOrdCaseFor version below
-  conjureFromSpecWith args{maxSize = 12} "before" beforeSpec
+  -- increase target to 50400 to reach...
+  conjureFromSpecWith args{target=10080} "before" beforeSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
-    , prif (undefined :: Tree)
+    , guard
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime

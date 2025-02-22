@@ -27,3 +27,25 @@ count :: A -> [A] -> Int
 count x []  =  0
 count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
 
+count :: A -> [A] -> Int
+-- testing 13 combinations of argument values
+-- pruning with 8/13 rules
+-- 2 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 4 candidates of size 6
+-- 0 candidates of size 7
+-- 12 candidates of size 8
+-- 16 candidates of size 9
+-- 20 candidates of size 10
+-- 20 candidates of size 11
+-- 44 candidates of size 12
+-- 64 candidates of size 13
+-- tested 127 candidates
+count x []  =  0
+count x (y:xs)
+  | x == y  =  count x xs + 1
+  | otherwise  =  count x xs
+

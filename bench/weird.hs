@@ -39,6 +39,7 @@ primitives  =
   , prim "&&" (&&)
   , prim "||" (||)
   , prif (undefined :: Int)
+  -- guard does not play well with usePatterns = False yet
   ]
 
 -- | returns the sum when one of the arguments is 0

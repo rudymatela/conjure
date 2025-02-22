@@ -49,5 +49,5 @@ primitives :: [Prim]
 primitives  =
   [ pr ([] :: [Int])
   , prim ":" ((:) :: Int -> [Int] -> [Int])
-  , prif (undefined :: [Int])
+  , guard
   ]
