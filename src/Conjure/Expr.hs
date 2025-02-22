@@ -19,6 +19,7 @@ module Conjure.Expr
   , compareSimplicity
   , ifFor
   , caseForOrd
+  , guardFor
   , valuesBFS
   , holesBFS
   , fillBFS
@@ -34,6 +35,8 @@ module Conjure.Expr
   , isZero
   , isNegative
   , isStrictSubexprOf
+  , isGuard
+  , hasGuard
 
   , enumerateAppsFor
   , enumerateFillings
@@ -203,6 +206,7 @@ apparentlyTerminates eRecursiveCall  =  at
 -- This currently works by checking if the function is an if, '&&' or '||'.
 mayNotEvaluateArgument :: Expr -> Bool
 mayNotEvaluateArgument (Value "if" ce :$ _ :$ _)  =  True
+mayNotEvaluateArgument (Value "|"  ce :$ _ :$ _)  =  True
 mayNotEvaluateArgument (Value "&&" ce :$ _)       =  True
 mayNotEvaluateArgument (Value "||" ce :$ _)       =  True
 mayNotEvaluateArgument _                          =  False
@@ -226,6 +230,19 @@ ifFor a  =  value "if" (\p x y -> if p then x else y `asTypeOf` a)
 -- > case :: Ordering -> [Char] -> [Char] -> [Char] -> [Char]
 caseForOrd :: Typeable a => a -> Expr
 caseForOrd a  =  value "case" (\o x y z -> case o of LT -> x; EQ -> y; GT -> z `asTypeOf` a)
+
+-- | Creates an if 'Expr' of the type argument of the given proxy.
+--
+-- The expression is named as @|@ as if to represent a guard.
+--
+-- > > guardFor (undefined :: Int)
+-- > (|) :: Bool -> Int -> Int -> Int
+--
+-- In the future, maybe we display these differently in Conjure as guards.
+--
+-- For now, this will signalize an if that can only appear as a root expression.
+guardFor :: Typeable a => a -> Expr
+guardFor a  =  value "|" (\p x y -> if p then x else y `asTypeOf` a)
 
 -- | Lists terminal values in BFS order.
 --
@@ -383,6 +400,11 @@ recursiveToDynamic (efxs, ebody) n  =  fmap (\(_,_,d) -> d) . re (n * size ebody
   re m n _  | n <= 0  =  error "recursiveToDynamic: recursion limit reached"
   re m n _  | m <= 0  =  error "recursiveToDynamic: evaluation limit reached"
   re m n (Value "if" _ :$ ec :$ ex :$ ey)  =  case rev m n ec of
+    Nothing    -> Nothing
+    Just (m,n,True)  -> re m n ex
+    Just (m,n,False) -> re m n ey
+  -- the following repeats the above
+  re m n (Value "|" _ :$ ec :$ ex :$ ey)  =  case rev m n ec of
     Nothing    -> Nothing
     Just (m,n,True)  -> re m n ex
     Just (m,n,False) -> re m n ey
@@ -552,6 +574,20 @@ isZero _  =  False
 isNegative :: Expr -> Bool
 isNegative (Value ('-':_) _)  =  True
 isNegative _  =  False
+
+-- | Is the expression a guard application?
+isGuard :: Expr -> Bool
+isGuard (Value "|" _ :$ _ :$ _ :$ _)  =  True
+isGuard _  =  False
+
+-- | Has this expression a non-root guard?
+--
+-- This only checks the immediate sub-expressions,
+-- good enough for when enumerating.
+--
+-- Guards at the root are still allowed.
+hasGuard :: Expr -> Bool
+hasGuard (ef :$ ex)  =  isGuard ef || isGuard ex
 
 -- | Lists all variables in an expression
 --   that are of the same type of the expression itself.

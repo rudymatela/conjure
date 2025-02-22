@@ -100,6 +100,14 @@ prif :: Conjurable a => a -> Prim
 prif x  =  (ifFor x, conjureType x)
 
 
+-- | Provides an if condition bound to the conjured function's return type.
+--
+-- The difference to 'prif' is that this one is only allowed at the root of the RHS
+-- rather than anywhere.  This also does not take any argument.  (TODO: TBD)
+guard :: Conjurable a => a -> Prim
+guard x  =  (guardFor x, conjureType x)
+
+
 -- | Provides a case condition bound to the given return type.
 --
 -- This should be used when one wants Conjure to consider ord-case expressions:
