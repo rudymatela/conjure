@@ -35,6 +35,7 @@ module Conjure.Expr
   , isZero
   , isNegative
   , isStrictSubexprOf
+  , isGuardSymbol
   , isGuard
   , hasGuard
 
@@ -574,6 +575,10 @@ isZero _  =  False
 isNegative :: Expr -> Bool
 isNegative (Value ('-':_) _)  =  True
 isNegative _  =  False
+
+isGuardSymbol :: Expr -> Bool
+isGuardSymbol (Value "|" _)  =  True
+isGuardSymbol _  =  False
 
 -- | Is the expression a guard application?
 isGuard :: Expr -> Bool
