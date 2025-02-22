@@ -71,10 +71,9 @@ showDefn  =  unlines . map show1
   where
   show1 (lhs,rhs)  =
     case rhs of
-    -- TODO: show guards as guards instead of as an if?
-    (Value "|" _ :$ c :$ t :$ e) -> lhseqs ++ "if " ++ showExpr c
-                         ++ "\n" ++ spaces ++ "then " ++ showExpr t
-                         ++ "\n" ++ spaces ++ "else " ++ showExpr e
+    (Value "|" _ :$ c :$ t :$ e) -> showExpr lhs
+                         ++ "\n  | " ++ showExpr c ++ "  =  " ++ showExpr t
+                         ++ "\n  | otherwise  =  " ++ showExpr e
     (Value "if" _ :$ c :$ t :$ e) -> lhseqs ++ "if " ++ showExpr c
                           ++ "\n" ++ spaces ++ "then " ++ showExpr t
                           ++ "\n" ++ spaces ++ "else " ++ showExpr e

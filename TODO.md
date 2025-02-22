@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* show guards-ifs as guards?
-
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 
