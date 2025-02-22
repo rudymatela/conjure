@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.6.8 (February 2025)
+----------------------
 
 * add `guard` to provide guard as a primitive
 * fix bug in `maxConstantSize` handling
