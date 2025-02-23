@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* refactor `recs'` and `recsV'`
-
 * Allow chains of guards (see below).
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
@@ -15,22 +13,6 @@ A non-exhaustive list of things TO DO for Conjure.
 * consider non top-level case breakdowns
 
 * forbid recursion into negatives (see below)
-
-
-## Refactoring recs
-
-Memoization on `recs'` and `recsV'` should be on-demand
-rather than the current version.
-
-The current version has a positive effect for some benchmarks.
-Here are some examples:
-
-* dupos:     from 4.6s to 3.6s (-1s)
-* fibonacci: from 7.2s to 6.0s (-1s)
-* sort:      from 8.0s to 5.8s (-2s)
-
-Perhaps it's a good idea to use the above as a baseline
-for the refactoring.
 
 
 ## Allow chains of guards
