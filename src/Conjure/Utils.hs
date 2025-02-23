@@ -46,6 +46,7 @@ module Conjure.Utils
   , both
   , (+++)
   , isSubsetOf
+  , prods
   )
 where
 
@@ -221,3 +222,7 @@ nubMerge = nubMergeBy compare
 (+++) :: Ord a => [a] -> [a] -> [a]
 (+++) = nubMerge
 infixr 5 +++
+
+prods :: [[a]] -> [[a]]
+prods []  =  [[]]
+prods (xs:xss)  =  [y:ys | y <- xs, ys <- prods xss]
