@@ -45,6 +45,7 @@ module Conjure.Conjurable
   , conjureMostGeneralCanonicalVariation
   , conjureCasesFor
   , conjurePatternsFor
+  , conjureArgumentPatterns
   , conjurePatternsDebug
   )
 where
@@ -841,7 +842,9 @@ conjurePatternsFor es f  =  cpf . holeAsTypeOf
   -- TODO: move productsWith to LeanCheck?
 
 
--- a drop-in replacement for conjureArgumentPats
+-- | A drop-in replacement for conjureArgumentPats.
+--
+-- Still not in use by Conjure.
 conjureArgumentPatterns :: Conjurable f => [Expr] -> f -> [ [[ [Expr] ]] ]
 conjureArgumentPatterns es f  =  map (conjurePatternsFor es f) $ conjureArgumentHoles f
 

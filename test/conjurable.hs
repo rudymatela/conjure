@@ -313,6 +313,24 @@ tests n  =
        , (zero -:- val [0::Int], zero -:- zero -:- nil)
        , (one -:- nil,           one -:- nil)
        ]
+
+  , conjureArgumentPatterns [] (undefined :: Int -> ()) ==
+    conjureArgumentPats     [] (undefined :: Int -> ())
+
+  , conjureArgumentPatterns [] (undefined :: Bool -> ()) ==
+    conjureArgumentPats     [] (undefined :: Bool -> ())
+
+  , map (take 2) (conjureArgumentPatterns [] (undefined :: [Bool] -> ()))
+      ==          conjureArgumentPats     [] (undefined :: [Bool] -> ())
+
+  , map (take 2) (conjureArgumentPatterns [zero, one] (undefined :: [Int] -> ()))
+      ==          conjureArgumentPats     [zero, one] (undefined :: [Int] -> ())
+
+  , map (take 2) (conjureArgumentPatterns [] (undefined :: [Maybe Bool] -> ()))
+      ==          conjureArgumentPats     [] (undefined :: [Maybe Bool] -> ())
+
+  , map (take 2) (conjureArgumentPatterns [] (undefined :: Maybe Bool -> ()))
+      ==          conjureArgumentPats     [] (undefined :: Maybe Bool -> ())
   ]
 
 isNumeric :: Expr -> Bool
