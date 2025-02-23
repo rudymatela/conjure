@@ -32,8 +32,8 @@ listhese :: These A A -> [A]
 -- 1 candidates of size 10
 -- tested 2 candidates
 listhese None  =  []
-listhese (This x)  =  [x]
 listhese (That x)  =  [x]
+listhese (This x)  =  [x]
 listhese (These x y)  =  [x,y]
 
 cathis :: [These A B] -> [A]

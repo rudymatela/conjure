@@ -314,34 +314,26 @@ tests n  =
        , (one -:- nil,           one -:- nil)
        ]
 
-  , conjureArgumentPatterns [] (undefined :: Int -> ()) ==
-    conjureArgumentPats     [] (undefined :: Int -> ())
+  , conjureArgumentPatterns 1 [] (undefined :: Int -> ())
+      ==  conjureArgumentPats [] (undefined :: Int -> ())
 
-  , conjureArgumentPatterns [] (undefined :: Bool -> ()) ==
-    conjureArgumentPats     [] (undefined :: Bool -> ())
+  , conjureArgumentPatterns 1 [] (undefined :: Bool -> ())
+      ==  conjureArgumentPats [] (undefined :: Bool -> ())
 
-  -- the first two tiers of conjureArgumentPatters should be the same as
-  -- the result of conjureArgumentPats in most cases
+  , conjureArgumentPatterns 1 [] (undefined :: [Bool] -> ())
+      ==  conjureArgumentPats [] (undefined :: [Bool] -> ())
 
-  , map (take 2) (conjureArgumentPatterns [] (undefined :: [Bool] -> ()))
-      ==          conjureArgumentPats     [] (undefined :: [Bool] -> ())
+  , conjureArgumentPatterns 1 [zero, one] (undefined :: [Int] -> ())
+      ==  conjureArgumentPats [zero, one] (undefined :: [Int] -> ())
 
-  , map (take 2) (conjureArgumentPatterns [zero, one] (undefined :: [Int] -> ()))
-      ==          conjureArgumentPats     [zero, one] (undefined :: [Int] -> ())
+  , conjureArgumentPatterns 1 [] (undefined :: [Maybe Bool] -> ())
+      ==  conjureArgumentPats [] (undefined :: [Maybe Bool] -> ())
 
-  , map (take 2) (conjureArgumentPatterns [] (undefined :: [Maybe Bool] -> ()))
-      ==          conjureArgumentPats     [] (undefined :: [Maybe Bool] -> ())
+  , conjureArgumentPatterns 1 [] (undefined :: Maybe Bool -> ())
+      ==  conjureArgumentPats [] (undefined :: Maybe Bool -> ())
 
-  , map (take 2) (conjureArgumentPatterns [] (undefined :: Maybe Bool -> ()))
-      ==          conjureArgumentPats     [] (undefined :: Maybe Bool -> ())
-
-  -- this is not true for Ints:
-  , map (take 2) (conjureArgumentPatterns [zero, one] (undefined :: Int -> ()))
-      /=          conjureArgumentPats     [zero, one] (undefined :: Int -> ())
-
-  -- instead this holds:
-  ,               conjureArgumentPatterns [zero, one] (undefined :: Int -> ())
-      ==          conjureArgumentPats     [zero, one] (undefined :: Int -> ())
+  , conjureArgumentPatterns 1 [zero, one] (undefined :: Int -> ())
+      ==  conjureArgumentPats [zero, one] (undefined :: Int -> ())
   ]
 
 isNumeric :: Expr -> Bool
