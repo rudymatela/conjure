@@ -3,14 +3,48 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Allow chains of guards (see below).
+
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 
-* forbid recursion into negatives
-
 * consider the size of patterns to thin-out each size partition
 
-* consider non top-level cases
+* consider non top-level case breakdowns
+
+* forbid recursion into negatives (see below)
+
+
+## Allow chains of guards
+
+With the use of `guard` right now,
+Conjure can generate functions such as the following:
+
+	function x y z
+	  | x < 123    =  ...
+	  | otherwise  =  ...
+
+We should probably allow chains of guards such as the following:
+
+	function x y z
+	  | x < 123    =  ...
+	  | x == 321   =  ...
+	  | y == 12    =  ...
+	  | otherwise  =  ...
+
+Internally, these are just chains of if-then-else applications:
+
+	function x y z  =  if x < 123
+	                   then ...
+					   else if x == 321
+					   then ...
+					   else if y == 12
+					   then ...
+					   else ...
+
+This change shouldn't be so complicated to introduce
+requiring a change in `enumerateAppsFor` relaxing `ufor hx`
+depending on what we have on the left...
 
 
 ## Forbid recursion into negatives
