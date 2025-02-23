@@ -613,28 +613,38 @@ candidateDefnsC Args{..} nm f ps  =
     where
     hs  =  nub $ conjureArgumentHoles f
 
+  recs :: Expr -> [[Expr]]
   recs ep  =  filterT (keepR ep)
            .  discardT (\e -> e == ep)
            $  recsV' (tail (vars ep))
+
+  recsV :: [Expr] -> [[Expr]]
   recsV vs  =  filterT (\e -> any (`elem` vs) (vars e))
             $  foldAppProducts ef [unguardT $ appsWith h vs | h <- conjureArgumentHoles f]
+
   -- like recs, but memoized
+  recs' :: Expr -> [[Expr]]
   recs' ep  =  fromMaybe errRP $ lookup ep eprs
     where
     eprs = [(ep, recs ep) | ep <- possiblePats]
+
+  possiblePats :: [Expr]
   possiblePats  =  nubSort . concat . concat $ pats
+
   -- like recsV, but memoized
+  recsV' :: [Expr] -> [[Expr]]
   recsV' vs  =  fromMaybe errRV $ lookup vs evrs
     where
     evrs = [(vs, recsV vs) | vs <- nubSort $ map (tail . vars) possiblePats]
+
+  errRP  =  error "candidateDefnsC: unexpected pattern.  You have found a bug, please report it."
+  errRV  =  error "candidateDefnsC: unexpected variables.  You have found a bug, please report it."
 
   thy  =  doubleCheck (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (prim nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
-  errRP  =  error "candidateDefnsC: unexpected pattern.  You have found a bug, please report it."
-  errRV  =  error "candidateDefnsC: unexpected variables.  You have found a bug, please report it."
 
 
 -- | Checks if the given pattern is a ground pattern.
