@@ -171,6 +171,7 @@ data Args = Args
   , maxDeconstructionSize :: Int  -- ^ maximum size of deconstructions (e.g.: @_ - 1@)
   , maxConstantSize       :: Int  -- ^ maximum size of constants (0 for no limit)
   , maxPatternSize        :: Int  -- ^ maximum size of patterns (0 for no limit)
+  , maxPatternDepth       :: Int  -- ^ maximum depth of patterns
 
   -- advanced & debug options --
   , carryOn               :: Bool -- ^ whether to carry on after finding a suitable candidate
@@ -218,6 +219,7 @@ args = Args
   , maxDeconstructionSize  =   4
   , maxConstantSize        =   0 -- unlimited
   , maxPatternSize         =   0 -- unlimited
+  , maxPatternDepth        =   1
 
   -- advanced & debug options --
   , carryOn                =  False
@@ -499,8 +501,8 @@ candidateDefnsC Args{..} nm f ps  =
   , deconstructions
   )
   where
-  pats | maxPatternSize > 0  =  take maxPatternSize $ conjurePats es nm f
-       | otherwise           =                        conjurePats es nm f
+  pats | maxPatternSize > 0  =  take maxPatternSize $ conjurePats maxPatternDepth es nm f
+       | otherwise           =                        conjurePats maxPatternDepth es nm f
   fss  =  concatMapT ps2fss pats
   -- replaces the any guard symbol with a guard of the correct type
   es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ps]

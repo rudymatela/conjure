@@ -132,7 +132,7 @@ tests n  =
   , map length (conjureArgumentCases (undefined :: () -> Bool -> Int -> [Int] -> [Bool] -> ()))
     == [1, 2, 0, 2, 2]
 
-  , conjurePats [zero, one] "f" (undefined :: Int -> Int)
+  , conjurePats 1 [zero, one] "f" (undefined :: Int -> Int)
     == [ [ [ ff xx
            ]
          ]
@@ -151,7 +151,7 @@ tests n  =
          ]
        ]
 
-  , conjurePats [] "f" (undefined :: [Int] -> Int)
+  , conjurePats 1 [] "f" (undefined :: [Int] -> Int)
     == [ [ [ ffs xxs
            ]
          ]
@@ -161,7 +161,7 @@ tests n  =
          ]
        ]
 
-  , take 3 (conjurePats [zero, one] "?" (undefined :: Int -> Int -> Int))
+  , take 3 (conjurePats 1 [zero, one] "?" (undefined :: Int -> Int -> Int))
     == [ [ [ xx -?- yy
            ]
          ]
@@ -189,14 +189,14 @@ tests n  =
          ]
        ]
 
-  , mapT length (conjurePats [zero, one] "foo" (undefined :: [Int] -> Int -> Int))
+  , mapT length (conjurePats 1 [zero, one] "foo" (undefined :: [Int] -> Int -> Int))
     == [[1],[2,2],[2,3,3],[3,3,4,3],[4,4,4,4],[5,4,5],[5,5],[6]]
 
 
-  , mapT length (conjurePats [zero, one] "foo" (undefined :: Int -> [Int] -> Int))
+  , mapT length (conjurePats 1 [zero, one] "foo" (undefined :: Int -> [Int] -> Int))
     == [[1],[2,2],[3,3,2],[4,3,3,3],[4,4,4,4],[5,5,5],[6]]
 
-  , conjurePats [] "foo" (undefined :: [Int] -> [Char] -> Int)
+  , conjurePats 1 [] "foo" (undefined :: [Int] -> [Char] -> Int)
     == [ [ [ ffoo xxs ccs
            ]
          ]
