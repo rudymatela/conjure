@@ -56,7 +56,7 @@ main = do
   conjure "maybeToList"   maybeToList' primitives
 
   -- only top-level break downs, so would need morePrimitives
-  conjure "catMaybes"     catMaybes'   primitives
+  conjureWith args{maxPatternDepth=2} "catMaybes"     catMaybes'   primitives
   -- conjure "mapMaybe" mapMaybe' primitives  -- same
 
 primitives :: [Prim]
