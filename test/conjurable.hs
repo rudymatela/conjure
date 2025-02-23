@@ -320,6 +320,9 @@ tests n  =
   , conjureArgumentPatterns [] (undefined :: Bool -> ()) ==
     conjureArgumentPats     [] (undefined :: Bool -> ())
 
+  -- the first two tiers of conjureArgumentPatters should be the same as
+  -- the result of conjureArgumentPats
+
   , map (take 2) (conjureArgumentPatterns [] (undefined :: [Bool] -> ()))
       ==          conjureArgumentPats     [] (undefined :: [Bool] -> ())
 
