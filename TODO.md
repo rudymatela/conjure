@@ -10,8 +10,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * consider the size of patterns to thin-out each size partition
 
-* consider non top-level case breakdowns
-
 * forbid recursion into negatives (see below)
 
 
@@ -133,23 +131,6 @@ The enumeration currently works like so:
 the size of patterns is defined by the number of patterns that are allowed to
 have _another_ option other than a simple variable.
 Perhaps these should be thinned-out in post processing to achieve "2."?
-
-
-## Non top-level cases
-
-Consider allowing non top-level cases,
-so that functions like the following are reachable:
-
-	last []  =  undefined
-	last [x]  =  x
-	last (x:y:xs)  =  last (y:xs)
-
-Perhaps the negative runtime impact would not be so great
-given the delayed tiers enumeration,
-and we would avoid some `prif` hacks
-needed to conjure some functions.
-
-The one downside is that this would take a few days of work to implement.
 
 
 This file is part of Conjure,

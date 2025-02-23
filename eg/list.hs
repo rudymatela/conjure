@@ -86,6 +86,12 @@ main = do
     , prim "undefined" (undefined :: Int)
     ]
 
+  conjureWith args{maxPatternDepth=2} "last" last'
+    [ pr ([] :: [Int])
+    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    , prim "undefined" (undefined :: Int)
+    ]
+
   conjure "zip" (zip')
     [ pr ([] :: [(Int,Int)])
     , prim ":" ((:) :: (Int,Int) -> [(Int,Int)] -> [(Int,Int)])

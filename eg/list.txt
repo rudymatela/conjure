@@ -63,6 +63,20 @@ last (x:xs)
   | null xs  =  x
   | otherwise  =  last xs
 
+last :: [Int] -> Int
+-- testing 360 combinations of argument values
+-- pruning with 0/0 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 2 candidates of size 5
+-- 2 candidates of size 6
+-- tested 5 candidates
+last []  =  undefined
+last [x]  =  x
+last (x:y:xs)  =  last (y:xs)
+
 zip :: [Int] -> [Int] -> [(Int,Int)]
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
