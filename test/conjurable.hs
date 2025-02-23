@@ -321,7 +321,7 @@ tests n  =
     conjureArgumentPats     [] (undefined :: Bool -> ())
 
   -- the first two tiers of conjureArgumentPatters should be the same as
-  -- the result of conjureArgumentPats
+  -- the result of conjureArgumentPats in most cases
 
   , map (take 2) (conjureArgumentPatterns [] (undefined :: [Bool] -> ()))
       ==          conjureArgumentPats     [] (undefined :: [Bool] -> ())
@@ -334,6 +334,14 @@ tests n  =
 
   , map (take 2) (conjureArgumentPatterns [] (undefined :: Maybe Bool -> ()))
       ==          conjureArgumentPats     [] (undefined :: Maybe Bool -> ())
+
+  -- this is not true for Ints:
+  , map (take 2) (conjureArgumentPatterns [zero, one] (undefined :: Int -> ()))
+      /=          conjureArgumentPats     [zero, one] (undefined :: Int -> ())
+
+  -- instead this holds:
+  ,               conjureArgumentPatterns [zero, one] (undefined :: Int -> ())
+      ==          conjureArgumentPats     [zero, one] (undefined :: Int -> ())
   ]
 
 isNumeric :: Expr -> Bool
