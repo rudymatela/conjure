@@ -44,6 +44,8 @@ module Conjure.Conjurable
   , conjureArgumentPats
   , conjureMostGeneralCanonicalVariation
   , conjureCasesFor
+  , conjurePatternsFor
+  , conjurePatternsDebug
   )
 where
 
@@ -781,6 +783,79 @@ conjureCasesFor f eh  =
 --       but may be useful in the future if we decide to handle
 --       non-top-level case breakdowns.
 --       It can be used in building a replacement for conjureArgumentPats
+
+
+-- | Towards a replacement for conjurePats that allows non-top-level breakdowns...
+--
+-- This function is currently experimental and unused in Conjure.
+--
+-- > > conjurePatternsFor (undefined :: [Int] -> ()) (is_)
+-- > [ [ [ _ ] ]
+-- > , [ [ [], (_:_) ] ]
+-- > , [ [ [], [_], (_:_:_) ] ]
+-- > , [ [ [], [_], [_,_], (_:_:_:_) ] ]
+-- > , ...
+-- > ]
+--
+-- > > let mis_ = hole (undefined :: [Maybe Int])
+-- > > conjurePatternsFor (undefined :: [Maybe Int] -> ()) mis_
+-- > [ [ [ _ ] ]
+-- > , [ [ [], (_:_) ]
+-- > , [ [ [], (Nothing:_), (Just _:_) ]
+-- >   , [ [], [_], (_:_:_) ] ]
+-- > , [ [ [], [Nothing], [Just _], (_:_:_) ] ]
+-- > , ...
+-- > ]
+--
+-- Ints are /crudely/ supported
+--
+-- > ghci> putLL 4 $ conjurePatternsDebug [zero] (undefined :: [Int])
+-- > [_ :: [Int]]
+-- >
+-- > [[] :: [Int],_:_ :: [Int]]
+-- >
+-- > [[] :: [Int],[_] :: [Int],_:_:_ :: [Int]]
+-- > [[] :: [Int],_:_ :: [Int],0:_ :: [Int]]
+conjurePatternsFor :: Conjurable f => [Expr] -> f -> Expr -> [[ [Expr] ]]
+conjurePatternsFor es f  =  cpf . holeAsTypeOf
+  where
+  casesFor  =  conjureCasesFor f
+  cpf :: Expr -> [[ [Expr] ]]
+  cpf h
+    | null cs    =  mapT (++ [h]) $ setsOf [[e] | e <- es, typ e == typ h]
+    | otherwise  =  [ [h] ] : rest
+    where
+    cs  =  casesFor h
+    rest :: [[ [Expr] ]]
+    rest  =  mapT nubSort
+          $  mapT (concatMap $ unfold . fill (fold cs))
+          $  productsWith prods
+          $  map cpf
+          $  concatMap holes cs
+    -- TODO: avoid nubSorting here, by somehow not generating repeats
+    -- the repeats appear because of the way we fold before concatMapping
+    -- this may cause a significant performance issue on wider types ([Bool])
+
+  productsWith :: ([a] -> b) -> [ [[a]] ] -> [[b]]
+  productsWith f  =  mapT f . products
+  -- TODO: move productsWith to LeanCheck?
+
+
+-- a drop-in replacement for conjureArgumentPats
+conjureArgumentPatterns :: Conjurable f => [Expr] -> f -> [ [[ [Expr] ]] ]
+conjureArgumentPatterns es f  =  map (conjurePatternsFor es f) $ conjureArgumentHoles f
+
+
+-- | Use this instead of conjurePatternsFor for simpler calling.
+--
+-- This is an interface for running internal experiments.
+-- It will go away in a future version of Conjure.
+conjurePatternsDebug :: Conjurable a => [Expr] -> a -> [[ [Expr] ]]
+conjurePatternsDebug es a  =  conjurePatternsFor es foo (hole a)
+  where
+  foo x  =  ()  where _  =  x `asTypeOf` a
+
+
 
 -- -- -- other Conjurable instances -- -- --
 
