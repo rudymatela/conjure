@@ -1,4 +1,6 @@
--- count.hs: elem and set functions
+-- count.hs: conjuring an element count function
+--
+-- 2021-2025 Rudy Matela
 import Conjure
 
 -- an idiomatic count without using filter
