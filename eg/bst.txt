@@ -70,9 +70,23 @@ before :: Int -> Tree -> Tree
 -- 104 candidates of size 9
 -- 1342 candidates of size 10
 -- 3543 candidates of size 11
--- 2552 candidates of size 12
--- 23874 candidates of size 13
--- tested 31769 candidates
+-- tested 5343 candidates
+cannot conjure
+
+beyond :: Int -> Tree -> Tree
+-- pruning with 5/6 rules
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 21 candidates of size 5
+-- 0 candidates of size 6
+-- 86 candidates of size 7
+-- 239 candidates of size 8
+-- 104 candidates of size 9
+-- 1342 candidates of size 10
+-- 3543 candidates of size 11
+-- tested 5343 candidates
 cannot conjure
 
 before :: Int -> Tree -> Tree
@@ -121,6 +135,7 @@ union :: Tree -> Tree -> Tree
 -- 240 candidates of size 7
 -- 82 candidates of size 8
 -- 3018 candidates of size 9
--- tested 3433 candidates
+-- 8098 candidates of size 10
+-- tested 11531 candidates
 cannot conjure
 

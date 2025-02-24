@@ -145,15 +145,23 @@ main = do
     , primOrdCaseFor (undefined :: Tree)
     ]
 
-  -- reachable in 15s after 32878 at size 14.
-  -- out of reach performance-wise (reaching 16 but need 19)
-  -- cf. the primOrdCaseFor version below
+  -- reachable in 15s, candidate #32878 at size 14.
   -- increase target to 50400 to reach...
-  conjureFromSpecWith args{target=10080} "before" beforeSpec
+  conjureFromSpecWith args{target=5040} "before" beforeSpec
     [ pr Leaf
     , prim "Node" Node
     , prim "==" ((==) :: Int -> Int -> Bool)
     , prim "<" ((<) :: Int -> Int -> Bool)
+    , guard
+    ]
+
+  -- reachable in 14s, candidate #32747 at size 14.
+  -- increase target to 50400 to reach...
+  conjureFromSpecWith args{target=5040} "beyond" beyondSpec
+    [ pr Leaf
+    , prim "Node" Node
+    , prim "==" ((==) :: Int -> Int -> Bool)
+    , prim "<=" ((<) :: Int -> Int -> Bool)
     , guard
     ]
 
@@ -175,8 +183,9 @@ main = do
     , primOrdCaseFor (undefined :: Tree)
     ]
 
-  -- out of reach (reaching 12 but need 13)
-  conjureWith args{maxSize = 9} "union" union
+  -- reachable in 55s, candidate #173109 at size 13.
+  -- increase to 554400 to reach
+  conjureWith args{target=5544} "union" union
     [ pr Leaf
     , prim "Node" Node
     , prim "before" before
