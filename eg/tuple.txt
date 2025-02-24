@@ -1,0 +1,107 @@
+fst :: (A,A) -> A
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- 0 candidates of size 1
+-- 1 candidates of size 2
+-- tested 1 candidates
+fst (x,y)  =  x
+
+snd :: (A,A) -> A
+-- testing 4 combinations of argument values
+-- pruning with 0/0 rules
+-- 0 candidates of size 1
+-- 1 candidates of size 2
+-- tested 1 candidates
+snd (x,y)  =  y
+
+swap :: (A,A) -> (A,A)
+-- testing 4 combinations of argument values
+-- pruning with 10/10 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- tested 2 candidates
+swap (x,y)  =  (y,x)
+
+curry :: ((A,A) -> A) -> A -> A -> A
+-- pruning with 10/10 rules
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 2 candidates of size 3
+-- 6 candidates of size 4
+-- tested 8 candidates
+curry f x y  =  f (x,y)
+
+uncurry :: (A -> A -> A) -> (A,A) -> A
+-- pruning with 10/10 rules
+-- 0 candidates of size 1
+-- 4 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- tested 6 candidates
+uncurry f (x,y)  =  f x y
+
+pairwise :: [A] -> [(A,A)]
+-- testing 360 combinations of argument values
+-- pruning with 10/10 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 7 candidates of size 7
+-- 19 candidates of size 8
+-- 34 candidates of size 9
+-- tested 36 candidates
+pairwise []  =  []
+pairwise (x:xs)  =  (x,head xs):pairwise (tail xs)
+
+catpairs :: [(A,A)] -> [A]
+-- testing 360 combinations of argument values
+-- pruning with 12/13 rules
+-- 1 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 3 candidates of size 4
+-- 5 candidates of size 5
+-- 11 candidates of size 6
+-- 22 candidates of size 7
+-- 46 candidates of size 8
+-- 106 candidates of size 9
+-- tested 124 candidates
+catpairs []  =  []
+catpairs (xy:xys)  =  fst xy:snd xy:catpairs xys
+
+pairwise :: [A] -> [(A,A)]
+-- testing 360 combinations of argument values
+-- pruning with 10/10 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 7 candidates of size 7
+-- 26 candidates of size 8
+-- tested 23 candidates
+pairwise []  =  []
+pairwise [x]  =  []
+pairwise (x:y:xs)  =  (x,y):pairwise xs
+
+catpairs :: [(A,A)] -> [A]
+-- testing 360 combinations of argument values
+-- pruning with 12/13 rules
+-- 1 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 3 candidates of size 4
+-- 6 candidates of size 5
+-- 15 candidates of size 6
+-- 31 candidates of size 7
+-- 68 candidates of size 8
+-- tested 97 candidates
+catpairs []  =  []
+catpairs ((x,y):xys)  =  x:y:catpairs xys
+

@@ -802,6 +802,23 @@ eg/tri.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/tri.hs
+eg/tuple: \
+  eg/tuple.hs \
+  mk/toplibs
+eg/tuple.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/tuple.hs
 mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
@@ -863,6 +880,8 @@ src/Conjure/Defn/Test.o: \
   src/Conjure/Defn/Test.hs \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs
+src/Conjure/Engine: \
+  mk/toplibs
 src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \

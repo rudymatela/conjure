@@ -49,6 +49,7 @@ EG = \
   eg/bits \
   eg/peano \
   eg/these \
+  eg/tuple \
   bench/candidates \
   bench/redundants \
   bench/erroneous \

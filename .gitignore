@@ -62,6 +62,7 @@ eg/tri
 eg/bits
 eg/peano
 eg/these
+eg/tuple
 bench/carry-on
 bench/strategies
 bench/self

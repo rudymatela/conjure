@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Fix bug with pairwise in eg/tuple
+
 * Allow timeout setting?
 
 * Allow chains of guards (see below).
@@ -15,6 +17,8 @@ A non-exhaustive list of things TO DO for Conjure.
 * consider the size of patterns to thin-out each size partition
 
 * forbid recursion into negatives (see below)
+
+* Warn when no tests are present somehow?
 
 
 ## Allow chains of guards
