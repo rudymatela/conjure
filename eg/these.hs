@@ -91,21 +91,12 @@ main  =  do
     , guard
     ]
 
-  -- couldn't make this reachable, I didn't try much...
-  conjureWith args{target = 1080} "cathese" cathese'
+  conjureWith args{maxPatternDepth = 2} "cathese" cathese'
     [ pr ([] :: [A])
     , prim ":" ((:) :: A -> [A] -> [A])
-    , prim "++" ((++) :: [A] -> [A] -> [A])
-    , prim "isThis" (isThis :: These A A -> Bool)
-    , prim "fromThis" (fromThis :: These A A -> A)
-    , prim "isThat" (isThat :: These A A -> Bool)
-    , prim "fromThat" (fromThat :: These A A -> A)
-    -- , prif (undefined :: A)
-    -- , prif (undefined :: [A])
-    , guard
     ]
-  -- expected functionality
-  -- these []  =  []
-  -- these (This x : ts)  =  x : these ts
-  -- these (That y : ts)  =  y : these ts
-  -- these (These x y : ts)  =  x : y : these ts
+  -- cathese []  =  []
+  -- cathese (None : ts)  =  cathese ts
+  -- cathese (This x : ts)  =  x : these ts
+  -- cathese (That y : ts)  =  y : these ts
+  -- cathese (These x y : ts)  =  x : y : these ts

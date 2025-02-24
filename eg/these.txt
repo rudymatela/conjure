@@ -78,25 +78,25 @@ cathat (t:ts)
 
 cathese :: [These A A] -> [A]
 -- testing 5 combinations of argument values
--- pruning with 7/7 rules
+-- pruning with 0/0 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
--- 3 candidates of size 6
--- 4 candidates of size 7
--- 2 candidates of size 8
--- 9 candidates of size 9
--- 20 candidates of size 10
--- 22 candidates of size 11
--- 35 candidates of size 12
--- 84 candidates of size 13
--- 86 candidates of size 14
--- 137 candidates of size 15
--- 324 candidates of size 16
--- 346 candidates of size 17
--- 511 candidates of size 18
--- tested 1584 candidates
-cannot conjure
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 4 candidates of size 8
+-- 12 candidates of size 9
+-- 19 candidates of size 10
+-- 49 candidates of size 11
+-- 64 candidates of size 12
+-- 166 candidates of size 13
+-- 197 candidates of size 14
+-- tested 496 candidates
+cathese []  =  []
+cathese (None:ts)  =  cathese ts
+cathese (That x:ts)  =  [x]
+cathese (This x:ts)  =  x:cathese ts
+cathese (These x y:ts)  =  x:y:cathese ts
 
