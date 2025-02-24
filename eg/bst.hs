@@ -71,11 +71,12 @@ mem _ Leaf  =  False
 mem y (Node l x r)  =  y == x || (if y < x then mem y l else mem y r)
 
 insert :: Int -> Tree -> Tree
-insert x Leaf  =  unit x
-insert x (Node l y r)  =  case compare x y of
-  LT -> Node (insert x l) y r
-  EQ -> Node l y r
-  GT -> Node l y (insert x r)
+insert x Leaf          =  unit x  -- 2
+insert x (Node l y r)  =
+  case compare x y of             -- 6
+  LT -> Node (insert x l) y r     -- 12
+  EQ -> Node l y r                -- 16
+  GT -> Node l y (insert x r)     -- 22
 
 before :: Int -> Tree -> Tree
 before _ Leaf  =  Leaf
