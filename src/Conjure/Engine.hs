@@ -635,9 +635,9 @@ candidateDefnsC Args{..} nm f ps  =
 
   -- like recsV, but memoized
   recsV' :: [Expr] -> [[Expr]]
-  recsV' vs  =  fromMaybe errRV $ lookup vs evrs
+  recsV' vs  =  fromMaybe errRV $ lookup (nubSort vs) evrs
     where
-    evrs = [(vs, recsV vs) | vs <- concatMap nubSort $ mapT (tail . vars) possiblePats]
+    evrs = [(vs, recsV vs) | vs <- concatMap nubSort $ mapT (nubSort . tail . vars) possiblePats]
 
   errRP  =  error "candidateDefnsC: unexpected pattern.  You have found a bug, please report it."
   errRV  =  error "candidateDefnsC: unexpected variables.  You have found a bug, please report it."
