@@ -7,8 +7,8 @@ import Test.LeanCheck
 
 -- This was inspired by the These datatype from the cathis package.
 -- https://hackage.haskell.org/package/cathis
--- This is an extension of the type there with the added None constructor.
-data These a b  =  None | This a | That b | These a b
+-- This is an extension of the type there with the added Neither constructor.
+data These a b  =  Neither | This a | That b | These a b
   deriving (Eq, Ord, Show, Read)
 
 isThis :: These a b -> Bool
@@ -34,7 +34,7 @@ deriveConjurable ''These
 
 
 fromThese' :: A -> B -> These A B -> (A, B)
-fromThese' 0 1 None  =  (0, 1)
+fromThese' 0 1 Neither  =  (0, 1)
 fromThese' 0 1 (This 2)  =  (2,1)
 fromThese' 0 1 (That 2)  =  (0,2)
 fromThese' 0 1 (These 1 0)  =  (1,0)
@@ -47,27 +47,27 @@ listhese' (That 2)  =  [2]
 cathis' :: [These A B] -> [A]
 cathis' []  =  []
 cathis' [This 0, This 1]  =  [0,1]
-cathis' [None, That 0]  =  []
+cathis' [Neither, That 0]  =  []
 cathis' [That 0, This 1]  =  [1]
-cathis' [This 0, None, That 1]  =  [0]
+cathis' [This 0, Neither, That 1]  =  [0]
 cathis' [This 0, These 0 1]  =  [0,0]
-cathis' [These 0 1, None, This 0]  =  [0,0]
+cathis' [These 0 1, Neither, This 0]  =  [0,0]
 cathis' [These 0 1, This 2]  =  [0,2]
 
 cathat' :: [These A B] -> [B]
 cathat' []  =  []
 cathat' [This 0, This 1]  =  []
-cathat' [None, That 0]  =  [0]
-cathat' [This 0, None, That 1]  =  [1]
+cathat' [Neither, That 0]  =  [0]
+cathat' [This 0, Neither, That 1]  =  [1]
 cathat' [That 0, These 0 1]  =  [0,1]
 cathat' [These 0 1, That 0]  =  [1,0]
 
 cathese' :: [These A A] -> [A]
 cathese' []  =  []
 cathese' [This 0, This 1]  =  [0,1]
-cathese' [None, That 0]  =  [0]
+cathese' [Neither, That 0]  =  [0]
 cathese' [That 0, This 1]  =  [0,1]
-cathese' [This 0, None, That 1]  =  [0,1]
+cathese' [This 0, Neither, That 1]  =  [0,1]
 cathese' [This 0, These 0 1]  =  [0,0,1]
 cathese' [These 0 1, That 2]  =  [0,1,2]
 
@@ -113,7 +113,7 @@ main  =  do
     , prim ":" ((:) :: A -> [A] -> [A])
     ]
   -- cathese []  =  []
-  -- cathese (None : ts)  =  cathese ts
+  -- cathese (Neither : ts)  =  cathese ts
   -- cathese (This x : ts)  =  x : these ts
   -- cathese (That y : ts)  =  y : these ts
   -- cathese (These x y : ts)  =  x : y : these ts

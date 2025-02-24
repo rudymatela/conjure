@@ -12,7 +12,7 @@ fromThese :: A -> B -> These A B -> (A,B)
 -- 0 candidates of size 9
 -- 1 candidates of size 10
 -- tested 2 candidates
-fromThese x y None  =  (x,y)
+fromThese x y Neither  =  (x,y)
 fromThese x y (This z)  =  (z,y)
 fromThese x y (That z)  =  (x,z)
 fromThese x y (These z x')  =  (z,x')
@@ -31,7 +31,7 @@ listhese :: These A A -> [A]
 -- 0 candidates of size 9
 -- 1 candidates of size 10
 -- tested 2 candidates
-listhese None  =  []
+listhese Neither  =  []
 listhese (That x)  =  [x]
 listhese (This x)  =  [x]
 listhese (These x y)  =  [x,y]
@@ -92,7 +92,7 @@ cathis :: [These A B] -> [A]
 -- 13 candidates of size 11
 -- tested 18 candidates
 cathis []  =  []
-cathis (None:ts)  =  cathis ts
+cathis (Neither:ts)  =  cathis ts
 cathis (This x:ts)  =  x:cathis ts
 cathis (That x:ts)  =  cathis ts
 cathis (These x y:ts)  =  x:cathis ts
@@ -113,7 +113,7 @@ cathat :: [These A B] -> [B]
 -- 3 candidates of size 11
 -- tested 9 candidates
 cathat []  =  []
-cathat (None:ts)  =  cathat ts
+cathat (Neither:ts)  =  cathat ts
 cathat (This x:ts)  =  cathat ts
 cathat (That x:ts)  =  x:cathat ts
 cathat (These x y:ts)  =  y:cathat ts
@@ -138,7 +138,7 @@ cathese :: [These A A] -> [A]
 -- 57 candidates of size 15
 -- tested 269 candidates
 cathese []  =  []
-cathese (None:ts)  =  cathese ts
+cathese (Neither:ts)  =  cathese ts
 cathese (That x:ts)  =  x:cathese ts
 cathese (This x:ts)  =  x:cathese ts
 cathese (These x y:ts)  =  x:y:cathese ts
