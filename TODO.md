@@ -3,7 +3,11 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Allow timeout setting?
+
 * Allow chains of guards (see below).
+
+* Move `Args` into `[Prim]`?
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
