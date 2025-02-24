@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Add `test/conjure.hs` with some basic conjuring...
+
 * Fix bug with pairwise in eg/tuple
 
 * Allow timeout setting?
