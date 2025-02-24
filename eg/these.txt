@@ -119,7 +119,7 @@ cathat (That x:ts)  =  x:cathat ts
 cathat (These x y:ts)  =  y:cathat ts
 
 cathese :: [These A A] -> [A]
--- testing 5 combinations of argument values
+-- testing 6 combinations of argument values
 -- pruning with 0/0 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
@@ -128,17 +128,18 @@ cathese :: [These A A] -> [A]
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 4 candidates of size 8
--- 12 candidates of size 9
--- 19 candidates of size 10
--- 49 candidates of size 11
--- 64 candidates of size 12
--- 166 candidates of size 13
--- 197 candidates of size 14
--- tested 496 candidates
+-- 0 candidates of size 8
+-- 4 candidates of size 9
+-- 8 candidates of size 10
+-- 11 candidates of size 11
+-- 38 candidates of size 12
+-- 26 candidates of size 13
+-- 140 candidates of size 14
+-- 57 candidates of size 15
+-- tested 269 candidates
 cathese []  =  []
 cathese (None:ts)  =  cathese ts
-cathese (That x:ts)  =  [x]
+cathese (That x:ts)  =  x:cathese ts
 cathese (This x:ts)  =  x:cathese ts
 cathese (These x y:ts)  =  x:y:cathese ts
 
