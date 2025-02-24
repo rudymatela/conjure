@@ -37,7 +37,7 @@ listhese (This x)  =  [x]
 listhese (These x y)  =  [x,y]
 
 cathis :: [These A B] -> [A]
--- testing 5 combinations of argument values
+-- testing 7 combinations of argument values
 -- pruning with 3/3 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
@@ -57,7 +57,7 @@ cathis (t:ts)
   | otherwise  =  cathis ts
 
 cathat :: [These A B] -> [B]
--- testing 4 combinations of argument values
+-- testing 5 combinations of argument values
 -- pruning with 3/3 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
@@ -75,6 +75,48 @@ cathat []  =  []
 cathat (t:ts)
   | isThat t  =  fromThat t:cathat ts
   | otherwise  =  cathat ts
+
+cathis :: [These A B] -> [A]
+-- testing 7 combinations of argument values
+-- pruning with 0/0 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 2 candidates of size 8
+-- 6 candidates of size 9
+-- 7 candidates of size 10
+-- 13 candidates of size 11
+-- tested 18 candidates
+cathis []  =  []
+cathis (None:ts)  =  cathis ts
+cathis (This x:ts)  =  x:cathis ts
+cathis (That x:ts)  =  cathis ts
+cathis (These x y:ts)  =  x:cathis ts
+
+cathat :: [These A B] -> [B]
+-- testing 5 combinations of argument values
+-- pruning with 0/0 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 2 candidates of size 9
+-- 4 candidates of size 10
+-- 3 candidates of size 11
+-- tested 9 candidates
+cathat []  =  []
+cathat (None:ts)  =  cathat ts
+cathat (This x:ts)  =  cathat ts
+cathat (That x:ts)  =  x:cathat ts
+cathat (These x y:ts)  =  y:cathat ts
 
 cathese :: [These A A] -> [A]
 -- testing 5 combinations of argument values

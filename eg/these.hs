@@ -47,15 +47,18 @@ listhese' (That 2)  =  [2]
 cathis' :: [These A B] -> [A]
 cathis' [This 0, This 1]  =  [0,1]
 cathis' [None, That 0]  =  []
+cathis' [That 0, This 1]  =  [1]
 cathis' [This 0, None, That 1]  =  [0]
 cathis' [This 0, These 0 1]  =  [0,0]
 cathis' [These 0 1, None, This 0]  =  [0,0]
+cathis' [These 0 1, This 2]  =  [0,2]
 
 cathat' :: [These A B] -> [B]
 cathat' [This 0, This 1]  =  []
 cathat' [None, That 0]  =  [0]
 cathat' [This 0, None, That 1]  =  [1]
 cathat' [That 0, These 0 1]  =  [0,1]
+cathat' [These 0 1, That 0]  =  [1,0]
 
 cathese' :: [These A A] -> [A]
 cathese' [This 0, This 1]  =  [0,1]
@@ -89,6 +92,16 @@ main  =  do
     , prim "isThat" (isThat :: These A B -> Bool)
     , prim "fromThat" (fromThat :: These A B -> B)
     , guard
+    ]
+
+  conjureWith args{maxPatternDepth = 2} "cathis" cathis'
+    [ pr ([] :: [A])
+    , prim ":" ((:) :: A -> [A] -> [A])
+    ]
+
+  conjureWith args{maxPatternDepth = 2} "cathat" cathat'
+    [ pr ([] :: [B])
+    , prim ":" ((:) :: B -> [B] -> [B])
     ]
 
   conjureWith args{maxPatternDepth = 2} "cathese" cathese'
