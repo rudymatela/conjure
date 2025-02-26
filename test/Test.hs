@@ -57,7 +57,7 @@ conjurableOK :: (Eq a, Show a, Express a, Listable a, Conjurable a) => a -> Bool
 conjurableOK x  =  and
   [ holds 60 $ (-==-) ==== (==)
   , holds 60 $ expr' === expr
-  , tiers =| 6 |= (tiers -: [[x]])
+  , tiers' =| 6 |= (mapT val $ tiers -: [[x]])
   , all isWellTyped cases'
   , all (\c -> typ c == typeOf x) cases'
   ]
@@ -65,3 +65,4 @@ conjurableOK x  =  and
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
   expr'  =  (conjureExpress x . val) -:> x
   cases'  =  conjureCases x
+  tiers'  =  conjureTiersFor x (hole x)
