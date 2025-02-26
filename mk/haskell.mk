@@ -69,6 +69,10 @@ HADDOCK_HAS = haddock --help | grep -q --
 %.hugs: %.hs
 	$(HUGSCMD) $<
 
+.PHONY: %.runhaskell
+%.runhaskell: %.hs
+	$(GHCCMD) -O0 --run $<
+
 .PHONY: %.runhugs
 %.runhugs: %.hs
 	$(RUNHUGSCMD) $<
