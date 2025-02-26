@@ -1,15 +1,11 @@
 -- Copyright (C) 2021-2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 
-{-# Language DeriveDataTypeable, StandaloneDeriving #-}  -- for GHC < 7.10
-
 import Test
 import Data.Dynamic
 
 -- An Unit type that is not an Eq instance
 data Unit  =  Unit  deriving Show
-
-deriving instance Typeable Unit  -- for GHC < 7.10
 
 instance Listable Unit where list = [Unit]
 instance Name Unit where name _ = "u"
