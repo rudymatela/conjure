@@ -21,6 +21,8 @@ soon
 later
 -----
 
+* Expand tests on `conjurableOK`?
+
 * Add `test/conjure.hs` with some basic conjuring...
 
 * Fix bug with pairwise in eg/tuple
