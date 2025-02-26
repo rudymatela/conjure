@@ -43,12 +43,10 @@ data  N2 a b  =  R2 a b  deriving (Eq, Show)
 deriveConjurableCascading ''Nested
 
 -- Recursive nested datatype cascade
-data  RN       =  RN RN0 (RN1 Int) (RN2 Int RN)  deriving (Eq, Show)
+data  RN       =  RN RN0 (RN1 Int) (RN2 Int RN0)  deriving (Eq, Show)
 data  RN0      =  Nest0 Int | Recurse0 RN  deriving (Eq, Show)
 data  RN1 a    =  Nest1 a   | Recurse1 RN  deriving (Eq, Show)
 data  RN2 a b  =  Nest2 a b | Recurse2 RN  deriving (Eq, Show)
--- beware: values of the above type are always infinite!
---         derivation works but full evaluation does not terminate
 
 deriveConjurableCascading ''RN
 
@@ -103,7 +101,7 @@ tests n  =
   , conjurableOK (undefined :: Bush Int)
   , conjurableOK (undefined :: Tree Int)
 
---, conjurableOK (undefined :: RN) -- TODO: FIX: infinite loop somewhere...
+  , conjurableOK (undefined :: RN)
   , conjurableOK (undefined :: Mutual)
   , conjurableOK (undefined :: CoMutual)
 
@@ -162,9 +160,13 @@ tests n  =
                                          , hole (undefined :: Bool)
                                          ]
   , conjureHoles (undefined :: Lst Int) == [ hole (undefined :: Int)
-                                            , hole (undefined :: Lst Int)
-                                            , hole (undefined :: Bool)
-                                            ]
+                                           , hole (undefined :: Lst Int)
+                                           , hole (undefined :: Bool)
+                                           ]
+  , conjureHoles (undefined :: Lst Peano) == [ hole (undefined :: Peano)
+                                             , hole (undefined :: Lst Peano)
+                                             , hole (undefined :: Bool)
+                                             ]
   , conjureHoles (undefined :: Nested) == [ hole (undefined :: N0)
                                           , hole (undefined :: N1 Int)
                                           , hole (undefined :: Int)
@@ -172,10 +174,10 @@ tests n  =
                                           , hole (undefined :: Nested)
                                           , hole (undefined :: Bool)
                                           ]
-  , conjureHoles (undefined :: RN) == [ hole (undefined :: RN0)
-                                      , hole (undefined :: RN1 Int)
+  , conjureHoles (undefined :: RN) == [ hole (undefined :: RN1 Int)
                                       , hole (undefined :: Int)
-                                      , hole (undefined :: RN2 Int RN)
+                                      , hole (undefined :: RN0)
+                                      , hole (undefined :: RN2 Int RN0)
                                       , hole (undefined :: RN)
                                       , hole (undefined :: Bool)
                                       ]
