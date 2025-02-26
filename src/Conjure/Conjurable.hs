@@ -393,17 +393,10 @@ conjureTestBinds maxTests maxSearchTests nm f  =  take maxTests
 -- | Compute 'tiers' of values encoded as 'Expr's
 --   of the type of the given 'Expr'.
 conjureTiersFor :: Conjurable f => f -> Expr -> [[Expr]]
-conjureTiersFor f e  =  tf allTiers
-  where
-  allTiers :: [ [[Expr]] ]
-  allTiers  =  [etiers | (_,_,Just etiers,_,_,_) <- conjureReification f]
-  tf []  =  [[e]] -- no tiers found, keep variable
-  tf (etiers:etc)  =  case concat etiers of
-                      (e':_) | typ e' == typ e -> etiers
-                      _                        -> tf etc
-  -- regression: we concat above because we may have no values of size 0!
-  -- TODO: refactor this to match on the hole...
-  -- maybe create a conjureReificationFor to use throughout?
+conjureTiersFor f e  =
+  case [metiers | (eh,_,metiers,_,_,_) <- conjureReification f, typ e == typ eh] of
+  (Nothing:_) -> [[e]] -- no tiers found, keep variable
+  (Just etiers:_) -> etiers
 
 conjureGrounds :: Conjurable f => f -> Expr -> [Expr]
 conjureGrounds  =  grounds . conjureTiersFor

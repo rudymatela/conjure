@@ -6,16 +6,8 @@ A non-exhaustive list of things TO DO for Conjure.
 soon
 ----
 
-* Add regression test for empty enumeration bug
-
-* Quick fix for empty enumeration bug
-
-* Proper fix for empty enumeration bug
-
-* Check derivation of either enumeration...
-
 * Warn when there are no tests!
-  Test high order functions.
+  Test this on high order functions.
 
 
 later
