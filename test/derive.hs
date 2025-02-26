@@ -89,6 +89,8 @@ tests n  =
   , conjurableOK (undefined :: Tree Int)
 
 --, conjurableOK (undefined :: RN) -- TODO: FIX: infinite loop somewhere...
+  , conjurableOK (undefined :: Mutual)
+  , conjurableOK (undefined :: CoMutual)
 
   , conjureSize Ae == 1
   , conjureSize Bee == 1

@@ -25,6 +25,8 @@ later
 
 * Fix bug with pairwise in eg/tuple
 
+* On `test/derive.hs`, fix infinite loop on the RN instance
+
 * Allow timeout setting?
 
 * Rethink Conjurable typeclass?
