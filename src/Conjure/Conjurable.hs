@@ -398,9 +398,12 @@ conjureTiersFor f e  =  tf allTiers
   allTiers :: [ [[Expr]] ]
   allTiers  =  [etiers | (_,_,Just etiers,_,_,_) <- conjureReification f]
   tf []  =  [[e]] -- no tiers found, keep variable
-  tf (etiers:etc)  =  case etiers of
-                      ((e':_):_) | typ e' == typ e -> etiers
-                      _                            -> tf etc
+  tf (etiers:etc)  =  case concat etiers of
+                      (e':_) | typ e' == typ e -> etiers
+                      _                        -> tf etc
+  -- regression: we concat above because we may have no values of size 0!
+  -- TODO: refactor this to match on the hole...
+  -- maybe create a conjureReificationFor to use throughout?
 
 conjureGrounds :: Conjurable f => f -> Expr -> [Expr]
 conjureGrounds  =  grounds . conjureTiersFor
