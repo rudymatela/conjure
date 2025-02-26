@@ -2,7 +2,7 @@
 --
 -- Based on an example sent by Colin Runciman
 --
--- Even though sum' is defined for 6 prims,
+-- Even though sum' is defined with 6 equations,
 -- Conjure only ever hits 4 of them.
 import Conjure
 
