@@ -34,6 +34,12 @@ data  Tree a  =  Node (Tree a) a (Tree a) | Null  deriving (Show, Eq)
 deriveConjurable ''Bush
 deriveConjurable ''Tree
 
+-- inner/outer
+data  Inner  =  I  deriving (Eq, Ord, Show)
+data  Outer  =  O Inner  deriving (Eq, Ord, Show)
+
+deriveConjurableCascading ''Outer
+
 -- Nested datatype cascade
 data  Nested  =  Nested N0 (N1 Int) (N2 Int Int)  deriving (Eq, Show)
 data  N0      =  R0 Int  deriving (Eq, Show)
@@ -100,6 +106,9 @@ tests n  =
   -- tree types
   , conjurableOK (undefined :: Bush Int)
   , conjurableOK (undefined :: Tree Int)
+
+  , conjurableOK (undefined :: Inner)
+  , conjurableOK (undefined :: Outer)
 
   , conjurableOK (undefined :: RN)
   , conjurableOK (undefined :: Mutual)
