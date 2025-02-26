@@ -3,11 +3,33 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+soon
+----
+
+* Add regression test for empty enumeration bug
+
+* Quick fix for empty enumeration bug
+
+* Proper fix for empty enumeration bug
+
+* Check derivation of either enumeration...
+
+* Warn when there are no tests!
+  Test high order functions.
+
+
+later
+-----
+
 * Add `test/conjure.hs` with some basic conjuring...
 
 * Fix bug with pairwise in eg/tuple
 
 * Allow timeout setting?
+
+* Rethink Conjurable typeclass?
+
+* Rename primitives to ingredients?
 
 * Allow chains of guards (see below).
 
