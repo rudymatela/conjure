@@ -12,17 +12,26 @@ A non-exhaustive list of things TO DO for Conjure.
   there is no way to build the given function
   with the given ingredients up to the given size.
 
+* Make so that derived Listable instances `reset`
+  constructors that are not recursive.
+  This change will need to be one in LeanCheck itself.
+
 * Expand tests on `conjurableOK`?
 
 * Add `test/conjure.hs` with some basic conjuring...
 
 * Fix bug with pairwise in eg/tuple
 
+* Detail two new proposed pruning rules from Colin.
+  (email from Feb 24 and follow-up in meeting)
+
 * Allow timeout setting?
 
 * Rethink Conjurable typeclass?
 
 * Rename primitives to ingredients?
+
+* Remove `require0` setting
 
 * Allow chains of guards (see below).
 
