@@ -2,6 +2,18 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* fix bug preventing Conjure to work in the presence of argument types
+  whose tiers enumeration would have no values of the first tier
+* allow configuring `maxPatternDepth`.  Default 1, interesting 2.
+* slightly increase default `maxSearchTests`
+* slight improvements in performance by improve memo tables
+* improve internal tests
+* add `eg/tuple`
+
+
 v0.6.8 (February 2025)
 ----------------------
 
