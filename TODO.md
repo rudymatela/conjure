@@ -3,15 +3,14 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-soon
-----
-
 * Warn when there are no tests!
   Test this on high order functions.
+  Encode `error "could not reify specification"`
 
-
-later
------
+* change cannot conjure to "search exhausted",
+  to indicate that Conjure has _shown_ that
+  there is no way to build the given function
+  with the given ingredients up to the given size.
 
 * Expand tests on `conjurableOK`?
 
