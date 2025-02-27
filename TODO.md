@@ -47,6 +47,9 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Warn when no tests are present somehow?
 
+* Add way to consider functions that don't increase size of arguments in recursive calls
+	(qsort example)
+
 
 ## Allow chains of guards
 
