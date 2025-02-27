@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.6.10 (February 2025)
+-----------------------
 
 * fix bug preventing Conjure to work in the presence of argument types
   whose tiers enumeration would have no values of the first tier
