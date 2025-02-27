@@ -19,6 +19,9 @@ A non-exhaustive list of things TO DO for Conjure.
 * Expand tests on `conjurableOK`?
 
 * Add `test/conjure.hs` with some basic conjuring...
+  This will increase the coverage score on Hackage.
+  (Which in principle should be higher due to the tests
+  that are only run through the Makefile)
 
 * Fix bug with pairwise in eg/tuple
 
