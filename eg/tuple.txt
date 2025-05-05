@@ -43,7 +43,7 @@ uncurry :: (A -> A -> A) -> (A,A) -> A
 uncurry f (x,y)  =  f x y
 
 pairwise :: [A] -> [(A,A)]
--- testing 360 combinations of argument values
+-- testing 3 combinations of argument values
 -- pruning with 10/10 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
@@ -75,7 +75,7 @@ catpairs []  =  []
 catpairs (xy:xys)  =  fst xy:snd xy:catpairs xys
 
 pairwise :: [A] -> [(A,A)]
--- testing 360 combinations of argument values
+-- testing 3 combinations of argument values
 -- pruning with 10/10 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2

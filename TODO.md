@@ -14,8 +14,6 @@ A non-exhaustive list of things TO DO for Conjure.
   (Which in principle should be higher due to the tests
   that are only run through the Makefile)
 
-* Fix bug with pairwise in eg/tuple
-
 * Detail two new proposed pruning rules from Colin.
   (email from Feb 24 and follow-up in meeting)
 

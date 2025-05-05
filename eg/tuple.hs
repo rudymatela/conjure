@@ -54,15 +54,13 @@ uncurrySpec uncurry  =  and
 -- now two functions that are a bit more interesting:
 
 pairwise :: [A] -> [(A,A)]
-pairwise []  =  []
--- pairwise [x]  =  []
-pairwise [x,y]  =  [(x,y)]
--- pairwise [x,y,z]  =  [] -- TODO: why this does not work
-pairwise [x,y,z,w]  =  [(x,y), (z,w)]
--- pairwise [0,1,2,3]  =  [(0,1), (2,3)]
--- pairwise [0,1,0,1]  =  [(0,1), (0,1)]
--- pairwise [0,0,0,0,0]  =  [(0,0), (0,0)]
--- pairwise [0,0,0,0,0,0]  =  [(0,0), (0,0), (0,0)]
+pairwise [0,1,2,3]  =  [(0,1), (2,3)]
+pairwise [0,1,0,1]  =  [(0,1), (0,1)]
+pairwise [0,0,0,0,0,0]  =  [(0,0), (0,0), (0,0)]
+-- alt:
+-- pairwise [x,y]  =  [(x,y)]
+-- pairwise [x,y,z,w]  =  [(x,y), (z,w)]
+-- notice above even lists are required for the shallow-pattern solution
 
 catpairs :: [(A,A)] -> [A]
 catpairs [(x,y)]  =  [x,y]
