@@ -55,7 +55,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- 81 candidates of size 7
 -- 36 candidates of size 8
 -- tested 136 candidates
-cannot conjure
+gps3  =  undefined  -- search exhausted
 
 gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- testing 9 combinations of argument values
@@ -84,7 +84,7 @@ gps5 :: [Char] -> [Char]
 -- 4 candidates of size 5
 -- 0 candidates of size 6
 -- tested 8 candidates
-cannot conjure
+gps5  =  undefined  -- search exhausted
 
 gps6 :: Int -> Int
 -- testing 9 combinations of argument values
@@ -96,7 +96,7 @@ gps6 :: Int -> Int
 -- 186 candidates of size 5
 -- 165 candidates of size 6
 -- tested 385 candidates
-cannot conjure
+gps6  =  undefined  -- search exhausted
 
 gps7 :: [Char] -> ([Char],Int)
 -- testing 4 combinations of argument values
@@ -123,7 +123,7 @@ gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- tested 0 candidates
-cannot conjure
+gps8  =  undefined  -- search exhausted
 
 gps9 :: Int -> [Int]
 -- testing 3 combinations of argument values
@@ -344,7 +344,7 @@ gps19 :: Int -> [Char] -> [Char]
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- tested 1 candidates
-cannot conjure
+gps19  =  undefined  -- search exhausted
 
 isVowel :: Char -> Bool
 -- testing 12 combinations of argument values
@@ -465,7 +465,7 @@ gps25 :: Int -> [Int]
 -- pruning with 0/0 rules
 -- 0 candidates of size 1
 -- tested 0 candidates
-cannot conjure
+gps25  =  undefined  -- search exhausted
 
 gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- testing 5 combinations of argument values
@@ -473,7 +473,7 @@ gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- 5 candidates of size 1
 -- 0 candidates of size 2
 -- tested 5 candidates
-cannot conjure
+gps26  =  undefined  -- search exhausted
 
 gps27 :: Int -> Int -> Int -> Int
 -- testing 3 combinations of argument values

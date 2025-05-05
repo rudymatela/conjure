@@ -43,5 +43,5 @@ factorial 0  =  1
 factorial x  =  (0 - x) * (0 - factorial (x - 1))
 
 -- tested 10001 candidates
-cannot conjure
+factorial n  =  undefined  -- search exhausted
 

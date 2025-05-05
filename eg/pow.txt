@@ -23,5 +23,5 @@ pow :: Int -> Int -> Int
 -- 259 candidates of size 5
 -- 750 candidates of size 6
 -- tested 1169 candidates
-cannot conjure
+pow  =  undefined  -- search exhausted
 

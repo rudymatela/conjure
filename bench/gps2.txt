@@ -36,7 +36,7 @@ gps1 :: Int -> [Int] -> Int
 -- 11 candidates of size 3
 -- 29 candidates of size 4
 -- tested 44 candidates
-cannot conjure
+gps1  =  undefined  -- search exhausted
 
 gps2 :: Double -> Double -> Int -> Double
 -- testing 5 combinations of argument values
@@ -48,7 +48,7 @@ gps2 :: Double -> Double -> Int -> Double
 -- 256 candidates of size 5
 -- 1252 candidates of size 6
 -- tested 1592 candidates
-cannot conjure
+gps2  =  undefined  -- search exhausted
 
 gps3 :: [Char] -> Int
 gps3  =  error "could not reify specification, suggestion: conjureFromSpec"
@@ -62,14 +62,14 @@ gps4 :: [Char] -> [Char]
 -- 51 candidates of size 5
 -- 119 candidates of size 6
 -- tested 203 candidates
-cannot conjure
+gps4  =  undefined  -- search exhausted
 
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
 -- 0 candidates of size 1
 -- tested 0 candidates
-cannot conjure
+gps5  =  undefined  -- search exhausted
 
 tell :: [Int] -> Int -> [Int]
 -- pruning with 0/0 rules
@@ -119,14 +119,14 @@ gps6 :: [Int] -> Int
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- tested 0 candidates
-cannot conjure
+gps6  =  undefined  -- search exhausted
 
 gps7 :: Integer -> Integer -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
 -- 0 candidates of size 1
 -- tested 0 candidates
-cannot conjure
+gps7  =  undefined  -- search exhausted
 
 gps8 :: Int -> [Int] -> (Int,Int)
 -- testing 3 combinations of argument values
@@ -134,14 +134,14 @@ gps8 :: Int -> [Int] -> (Int,Int)
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- tested 0 candidates
-cannot conjure
+gps8  =  undefined  -- search exhausted
 
 gps9 :: Int -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 0/0 rules
 -- 0 candidates of size 1
 -- tested 0 candidates
-cannot conjure
+gps9  =  undefined  -- search exhausted
 
 gps10 :: [Int] -> Int
 -- testing 7 combinations of argument values
@@ -240,7 +240,7 @@ gps17_pds :: [Int] -> Int
 -- 0 candidates of size 4
 -- 2 candidates of size 5
 -- tested 4 candidates
-cannot conjure
+gps17_pds  =  undefined  -- search exhausted
 
 gps18_price :: [Double] -> [Double] -> Double
 -- testing 4 combinations of argument values
@@ -252,7 +252,7 @@ gps18_price :: [Double] -> [Double] -> Double
 -- 33 candidates of size 5
 -- 176 candidates of size 6
 -- tested 213 candidates
-cannot conjure
+gps18_price  =  undefined  -- search exhausted
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
@@ -264,7 +264,7 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- 312 candidates of size 5
 -- 659 candidates of size 6
 -- tested 1036 candidates
-cannot conjure
+gps19_snowday  =  undefined  -- search exhausted
 
 gps20 :: [Char] -> Bool
 gps20  =  error "could not reify specification, suggestion: conjureFromSpec"
@@ -311,7 +311,7 @@ digits :: Int -> [Int]
 -- 923 candidates of size 10
 -- 8902 candidates of size 11
 -- tested 10900 candidates
-cannot conjure
+digits  =  undefined  -- search exhausted
 
 gps22 :: Int -> [Char]
 gps22  =  error "could not reify specification, suggestion: conjureFromSpec"
@@ -330,7 +330,7 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- 2722 candidates of size 10
 -- 5292 candidates of size 11
 -- tested 10955 candidates
-cannot conjure
+gps23  =  undefined  -- search exhausted
 
 gps24 :: [Char] -> Twitter
 -- pruning with 4/8 rules
@@ -363,5 +363,5 @@ gps25 :: [Double] -> [Double] -> Double
 -- 76 candidates of size 5
 -- 438 candidates of size 6
 -- tested 532 candidates
-cannot conjure
+gps25  =  undefined  -- search exhausted
 

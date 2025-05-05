@@ -116,7 +116,7 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- tested 8 candidates
-cannot conjure
+adder2  =  undefined  -- search exhausted
 
 TerpreT benchmark #7: access
 

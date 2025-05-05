@@ -32,7 +32,7 @@ xs `isSubsequenceOf` sort xs == True
 -- 0 candidates of size 17
 -- 0 candidates of size 18
 -- tested 27 candidates
-cannot conjure
+subset  =  undefined  -- search exhausted
 
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
@@ -80,7 +80,7 @@ transpose (transpose (transpose xss)) == transpose xss
 -- 0 candidates of size 17
 -- 0 candidates of size 18
 -- tested 6 candidates
-cannot conjure
+replicates  =  undefined  -- search exhausted
 
 replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values

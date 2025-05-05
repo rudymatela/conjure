@@ -50,5 +50,5 @@ lefts :: [Either A A] -> [A]
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- tested 1 candidates
-cannot conjure
+lefts  =  undefined  -- search exhausted
 

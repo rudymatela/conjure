@@ -304,7 +304,7 @@ conjure0With args nm f p es  =  do
   showEq eq  =  showExpr (fst eq) ++ " == " ++ showExpr (snd eq)
   pr :: Integer -> Int -> Int -> [([Defn], [Defn])] -> IO ()
   pr t0 n t []  =  do putWithTimeSince t0 $ "tested " ++ show t ++ " candidates"
-                      putStrLn $ "cannot conjure\n"
+                      putStrLn $ nm ++ "  =  undefined  -- search exhausted\n"
   pr t0 n t ((is,cs):rs)  =  do
     let nc  =  length cs
     putWithTimeSince t0 $ show nc ++ " candidates of size " ++ show n

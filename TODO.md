@@ -3,11 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* change cannot conjure to "search exhausted",
-  to indicate that Conjure has _shown_ that
-  there is no way to build the given function
-  with the given ingredients up to the given size.
-
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.
   This change will need to be one in LeanCheck itself.

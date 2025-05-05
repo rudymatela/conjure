@@ -95,7 +95,7 @@ ordered :: Tree -> Bool
 -- 418 candidates of size 11
 -- 1064 candidates of size 12
 -- tested 1639 candidates
-cannot conjure
+ordered  =  undefined  -- search exhausted
 
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values

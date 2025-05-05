@@ -32,5 +32,5 @@ d :: Int -> Int
 -- 3 candidates of size 2
 -- 12 candidates of size 3
 -- tested 18 candidates
-cannot conjure
+d  =  undefined  -- search exhausted
 

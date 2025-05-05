@@ -7,12 +7,12 @@ fib01 :: Int -> Int -> Int -> Int
 -- 111 candidates of size 4
 -- 255 candidates of size 5
 -- tested 422 candidates
-cannot conjure
+fib01  =  undefined  -- search exhausted
 
 fib01 :: Int -> Int -> Int -> Int
 -- testing 8 combinations of argument values
 -- pruning with 21/41 rules
 -- 4 candidates of size 1
 -- tested 4 candidates
-cannot conjure
+fib01  =  undefined  -- search exhausted
 

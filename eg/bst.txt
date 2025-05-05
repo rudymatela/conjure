@@ -55,7 +55,7 @@ insert :: Int -> Tree -> Tree
 -- 0 candidates of size 11
 -- 32 candidates of size 12
 -- tested 264 candidates
-cannot conjure
+insert  =  undefined  -- search exhausted
 
 before :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
@@ -71,7 +71,7 @@ before :: Int -> Tree -> Tree
 -- 1342 candidates of size 10
 -- 3543 candidates of size 11
 -- tested 5343 candidates
-cannot conjure
+before  =  undefined  -- search exhausted
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
@@ -87,7 +87,7 @@ beyond :: Int -> Tree -> Tree
 -- 1342 candidates of size 10
 -- 3543 candidates of size 11
 -- tested 5343 candidates
-cannot conjure
+beyond  =  undefined  -- search exhausted
 
 before :: Int -> Tree -> Tree
 -- pruning with 2/4 rules
@@ -104,7 +104,7 @@ before :: Int -> Tree -> Tree
 -- 5103 candidates of size 11
 -- 1472 candidates of size 12
 -- tested 8207 candidates
-cannot conjure
+before  =  undefined  -- search exhausted
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 2/4 rules
@@ -121,7 +121,7 @@ beyond :: Int -> Tree -> Tree
 -- 5103 candidates of size 11
 -- 1472 candidates of size 12
 -- tested 8207 candidates
-cannot conjure
+beyond  =  undefined  -- search exhausted
 
 union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
@@ -137,5 +137,5 @@ union :: Tree -> Tree -> Tree
 -- 3018 candidates of size 9
 -- 8098 candidates of size 10
 -- tested 11531 candidates
-cannot conjure
+union  =  undefined  -- search exhausted
 

@@ -107,7 +107,7 @@ merge :: [Int] -> [Int] -> [Int]
 -- 4204 candidates of size 14
 -- 5426 candidates of size 15
 -- tested 12326 candidates
-cannot conjure
+merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
@@ -126,5 +126,5 @@ merge :: [Int] -> [Int] -> [Int]
 -- 588 candidates of size 12
 -- 958 candidates of size 13
 -- tested 1876 candidates
-cannot conjure
+merge  =  undefined  -- search exhausted
 
