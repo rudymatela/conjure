@@ -7,8 +7,6 @@ A non-exhaustive list of things TO DO for Conjure.
   constructors that are not recursive.
   This change will need to be one in LeanCheck itself.
 
-* Expand tests on `conjurableOK`?
-
 * Add `test/conjure.hs` with some basic conjuring...
   This will increase the coverage score on Hackage.
   (Which in principle should be higher due to the tests

@@ -55,14 +55,17 @@ mainTest tests n' = do
 -- were correctly generated.
 conjurableOK :: (Eq a, Show a, Express a, Listable a, Conjurable a) => a -> Bool
 conjurableOK x  =  and
-  [ holds 60 $ (-==-) ==== (==)
+  [ null (conjureArgumentHoles x) -- conjurableOK is for non-functional types
+  , holds 60 $ (-==-) ==== (==)
   , holds 60 $ expr' === expr
   , tiers' =| 6 |= (mapT val $ tiers -: [[x]])
   , all isWellTyped cases'
   , all (\c -> typ c == typeOf x) cases'
+  , isWellTyped (if' :$ (val True) :$ (value "undefined" x) :$ (value "undefined" x))
   ]
   where
   (-==-)  =  evl (fromJust $ conjureEquality x) -:> x
   expr'  =  (conjureExpress x . val) -:> x
   cases'  =  conjureCases x
   tiers'  =  conjureTiersFor x (hole x)
+  if'  =  conjureIf x
