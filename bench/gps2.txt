@@ -51,11 +51,7 @@ gps2 :: Double -> Double -> Int -> Double
 cannot conjure
 
 gps3 :: [Char] -> Int
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- tested 0 candidates
-cannot conjure
+gps3  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 gps4 :: [Char] -> [Char]
 -- pruning with 13/21 rules
@@ -209,17 +205,10 @@ gps13_leaders (x:xs)  =  if all (x >) xs
                          else gps13_leaders xs
 
 gps14_luhn :: [Int] -> Int
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- tested 0 candidates
-cannot conjure
+gps14_luhn  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 gps15_mastermind :: () -> ()
--- pruning with 0/1 rules
--- 1 candidates of size 1
--- tested 1 candidates
-gps15_mastermind u  =  u
+gps15_mastermind  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 gps16_middle :: [Char] -> [Char]
 -- testing 7 combinations of argument values
@@ -278,11 +267,7 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 cannot conjure
 
 gps20 :: [Char] -> Bool
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- tested 0 candidates
-cannot conjure
+gps20  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 spin :: [Char] -> [Char]
 -- pruning with 6/6 rules
@@ -329,10 +314,7 @@ digits :: Int -> [Int]
 cannot conjure
 
 gps22 :: Int -> [Char]
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- tested 0 candidates
-cannot conjure
+gps22  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- pruning with 0/0 rules

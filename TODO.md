@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Warn when there are no tests!
-  Test this on high order functions.
-  Encode `error "could not reify specification"`
-
 * change cannot conjure to "search exhausted",
   to indicate that Conjure has _shown_ that
   there is no way to build the given function

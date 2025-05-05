@@ -1,4 +1,7 @@
 sum :: [Int] -> Int
+sum  =  error "could not reify specification, suggestion: conjureFromSpec"
+
+sum :: [Int] -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- 2 candidates of size 1

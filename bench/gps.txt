@@ -442,11 +442,7 @@ gps22 ""  =  0
 gps22 (c:cs)  =  gps22 cs + scrabble1 c
 
 gps23 :: [Char] -> ([(Int,Int)],Int,Double)
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- tested 0 candidates
-cannot conjure
+gps23  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 gps24 :: [Char] -> Char
 -- testing 4 combinations of argument values

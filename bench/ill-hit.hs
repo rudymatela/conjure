@@ -24,6 +24,10 @@ sumSpec sum  =  sum [] == 0
 
 main :: IO ()
 main  =  do
+  -- the following conjures from an "empty" spec
+  -- we should get a proper error message
+  conjure "sum" (undefined :: [Int] -> Int) primitives
+
   -- the following does not hit all 6 defined prims, only 4
   conjure "sum" (sum' :: [Int] -> Int) primitives
 

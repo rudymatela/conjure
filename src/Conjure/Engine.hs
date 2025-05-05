@@ -273,30 +273,33 @@ conjure0With args nm f p es  =  do
       putStrLn $ "{-"
       putStr $ showDefn ts
       putStrLn $ "-}"
-  putWithTimeSince t0 $ "pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
-  when (showTheory args) $ do
-    putStrLn $ "{-"
-    printThy thy
-    putStrLn $ "-}"
-  when (not . null $ invalid thy) $ do
-    putStrLn $ "-- reasoning produced "
-            ++ show (length (invalid thy)) ++ " incorrect properties,"
-            ++ " please re-run with more tests for faster results"
+  if length ts == 0 && errorToFalse (p undefined)
+  then putStrLn $ nm ++ "  =  error \"could not reify specification, suggestion: conjureFromSpec\"\n"
+  else do
+    putWithTimeSince t0 $ "pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
     when (showTheory args) $ do
       putStrLn $ "{-"
-      putStrLn $ "invalid:"
-      putStr   $ unlines $ map showEq $ invalid thy
+      printThy thy
       putStrLn $ "-}"
-  when (showPatterns args) $ do
-    putStr $ unlines
-           $ zipWith (\i -> (("-- allowed patterns of size " ++ show i ++ "\n{-\n") ++) . (++ "-}") . unlines) [1..]
-           $ mapT showDefn
-           $ patternss results
-  when (showDeconstructions args) $ do
-    putStrLn $ "{- List of allowed deconstructions:"
-    putStr   $ unlines $ map show $ deconstructions results
-    putStrLn $ "-}"
-  pr t0 1 0 rs
+    when (not . null $ invalid thy) $ do
+      putStrLn $ "-- reasoning produced "
+              ++ show (length (invalid thy)) ++ " incorrect properties,"
+              ++ " please re-run with more tests for faster results"
+      when (showTheory args) $ do
+        putStrLn $ "{-"
+        putStrLn $ "invalid:"
+        putStr   $ unlines $ map showEq $ invalid thy
+        putStrLn $ "-}"
+    when (showPatterns args) $ do
+      putStr $ unlines
+             $ zipWith (\i -> (("-- allowed patterns of size " ++ show i ++ "\n{-\n") ++) . (++ "-}") . unlines) [1..]
+             $ mapT showDefn
+             $ patternss results
+    when (showDeconstructions args) $ do
+      putStrLn $ "{- List of allowed deconstructions:"
+      putStr   $ unlines $ map show $ deconstructions results
+      putStrLn $ "-}"
+    pr t0 1 0 rs
   where
   showEq eq  =  showExpr (fst eq) ++ " == " ++ showExpr (snd eq)
   pr :: Integer -> Int -> Int -> [([Defn], [Defn])] -> IO ()
