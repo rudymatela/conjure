@@ -69,6 +69,7 @@ EG = \
   proto/u-conjure
 
 TESTS = \
+  test/factorial \
   test/expr \
   test/defn \
   test/conjurable \

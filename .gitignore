@@ -86,3 +86,4 @@ test/utils
 test/defn
 test/derive
 test/red
+test/factorial

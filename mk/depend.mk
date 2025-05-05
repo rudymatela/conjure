@@ -1011,6 +1011,23 @@ test/expr: \
   test/Test/ListableExpr.hs \
   test/expr.hs \
   mk/toplibs
+test/factorial.o: \
+  test/factorial.hs \
+  src/Conjure/Utils.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure/Prim.hs \
+  src/Conjure.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs
+test/factorial: \
+  test/factorial.hs \
+  mk/toplibs
 test/red.o: \
   test/Test.hs \
   test/Test/ListableExpr.hs \

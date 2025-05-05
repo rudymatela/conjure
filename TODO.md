@@ -7,11 +7,6 @@ A non-exhaustive list of things TO DO for Conjure.
   constructors that are not recursive.
   This change will need to be one in LeanCheck itself.
 
-* Add `test/conjure.hs` with some basic conjuring...
-  This will increase the coverage score on Hackage.
-  (Which in principle should be higher due to the tests
-  that are only run through the Makefile)
-
 * Detail two new proposed pruning rules from Colin.
   (email from Feb 24 and follow-up in meeting)
 
