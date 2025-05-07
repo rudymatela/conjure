@@ -31,6 +31,9 @@ A non-exhaustive list of things TO DO for Conjure.
 	I am beginning to few inclined to use Ingredient / constant / function.
 	I'll think for a bit...
 
+	Other options: vocabulary, direction, order, term?
+
+
 * Remove `require0` setting
 
 * Allow chains of guards (see below).
