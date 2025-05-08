@@ -15,11 +15,11 @@ main :: IO ()
 main  =  do
   -- explicit recursion
   conjure "factorial n" factorial
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (0::Int)
+    , con (1::Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]
   -- should produce:
   -- factorial 0  =  1
@@ -27,13 +27,13 @@ main  =  do
 
   -- using foldr and enumFromTo
   conjure "factorial n" factorial
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
-    , prim ".." (enumFromTo :: Int -> Int -> [Int])
-    , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    [ con (0::Int)
+    , con (1::Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun ".." (enumFromTo :: Int -> Int -> [Int])
+    , fun "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
     ]
   -- should produce:
   -- factorial x  =  foldr (*) 1 [1..x]

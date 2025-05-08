@@ -26,43 +26,43 @@ product' [x,y,z]  =  x*y*z
 main :: IO ()
 main = do
   conjure "second"  (second :: [Int] -> Int)
-    [ prim "null" (null :: [Int] -> Bool)
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
+    [ fun "null" (null :: [Int] -> Bool)
+    , fun "head" (head :: [Int] -> Int)
+    , fun "tail" (tail :: [Int] -> [Int])
     ]
 
   conjure "third"   (third :: [Int] -> Int)
-    [ prim "null" (null :: [Int] -> Bool)
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
+    [ fun "null" (null :: [Int] -> Bool)
+    , fun "head" (head :: [Int] -> Int)
+    , fun "tail" (tail :: [Int] -> [Int])
     ]
 
   conjure "sum"     (sum' :: [Int] -> Int)
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
     ]
 
   conjure "product" (product' :: [Int] -> Int)
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
     ]
 
-  conjure "sum"     (sum' :: [Int] -> Int) primitivesWithFold
-  conjure "product" (product' :: [Int] -> Int) primitivesWithFold
+  conjure "sum"     (sum' :: [Int] -> Int) ingredientsWithFold
+  conjure "product" (product' :: [Int] -> Int) ingredientsWithFold
 
-primitives :: [Prim]
-primitives =
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "*" ((*) :: Int -> Int -> Int)
+ingredients :: [Ingredient]
+ingredients =
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "*" ((*) :: Int -> Int -> Int)
   ]
 
-primitivesWithFold :: [Prim]
-primitivesWithFold  =
-    prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-  : primitives
+ingredientsWithFold :: [Ingredient]
+ingredientsWithFold  =
+    fun "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+  : ingredients

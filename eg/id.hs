@@ -6,7 +6,7 @@ import Conjure
 
 main :: IO ()
 main = do
-  -- conjure needs no primitives
+  -- conjure needs no ingredients
   -- to figure out the implementation of id and const
   conjure "id"    (id :: Int -> Int)           []
   conjure "const" (const :: Int -> Int -> Int) []

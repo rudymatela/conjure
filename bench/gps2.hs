@@ -42,36 +42,36 @@ gps1g2 t (x:xs)  =  if t + x < 0 -- 7
 gps1c :: IO ()
 gps1c  =  do
   conjure "gps1" gps1p
-    [ pr (0 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim ">" ((>) :: Int -> Int -> Bool)
-    , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-    , prim "sum" (sum :: [Int] -> Int)
-    , prim "findIndex" (findIndex :: (Int -> Bool) -> [Int] -> Maybe Int)
-    , prim "map" (map :: ([Int] -> Int) -> [[Int]] -> [Int])
-    , prim "inits" (inits :: [Int] -> [[Int]])
-    , prim "tail" (tail :: [[Int]] -> [[Int]])
+    [ con (0 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun ">" ((>) :: Int -> Int -> Bool)
+    , fun "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    , fun "sum" (sum :: [Int] -> Int)
+    , fun "findIndex" (findIndex :: (Int -> Bool) -> [Int] -> Maybe Int)
+    , fun "map" (map :: ([Int] -> Int) -> [[Int]] -> [Int])
+    , fun "inits" (inits :: [Int] -> [[Int]])
+    , fun "tail" (tail :: [[Int]] -> [[Int]])
     ]
 
   conjure "gps1" gps1p
-    [ pr (0 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim ">" ((>) :: Int -> Int -> Bool)
-    , prim "sum" (sum :: [Int] -> Int)
-    , prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-    , prim "findIndex" (findIndex :: (Int -> Bool) -> [Int] -> Maybe Int)
-    , prim "map" (map :: ([Int] -> Int) -> [[Int]] -> [Int])
-    , prim "inits" (inits :: [Int] -> [[Int]])
-    , prim "tail" (tail :: [[Int]] -> [[Int]])
+    [ con (0 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun ">" ((>) :: Int -> Int -> Bool)
+    , fun "sum" (sum :: [Int] -> Int)
+    , fun "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+    , fun "findIndex" (findIndex :: (Int -> Bool) -> [Int] -> Maybe Int)
+    , fun "map" (map :: ([Int] -> Int) -> [[Int]] -> [Int])
+    , fun "inits" (inits :: [Int] -> [[Int]])
+    , fun "tail" (tail :: [[Int]] -> [[Int]])
     ]
 
   conjureWithMaxSize 4 "gps1" gps1p2
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "<" ((<) :: Int -> Int -> Bool)
-    , prif (undefined :: Int)
-    , prim "undefined" (undefined :: Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "<" ((<) :: Int -> Int -> Bool)
+    , iif (undefined :: Int)
+    , fun "undefined" (undefined :: Int)
     ]
 
 
@@ -91,12 +91,12 @@ gps2g h0 h1 n  =  h0 + h1 + gps2g h1 (h1 * (h1 / h0)) (n - 1)
 gps2c :: IO ()
 gps2c  =  do
   conjureWithMaxSize 6 "gps2" gps2p
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "*" ((*) :: Double -> Double -> Double)
-    , prim "/" ((/) :: Double -> Double -> Double)
-    , prim "+" ((+) :: Double -> Double -> Double)
-    , prim "-" ((-) :: Double -> Double -> Double)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "*" ((*) :: Double -> Double -> Double)
+    , fun "/" ((/) :: Double -> Double -> Double)
+    , fun "+" ((+) :: Double -> Double -> Double)
+    , fun "-" ((-) :: Double -> Double -> Double)
     ]
 
 
@@ -134,15 +134,15 @@ gps4g (c:cs)  =  if c == '-'                                   --  5
 gps4c :: IO ()
 gps4c  =  do
   conjureFromSpecWith args{maxSize=6} "gps4" gps4s
-    [ pr '-'
-    , pr ("" :: String)
-    , prim ":" ((:) :: Char -> String -> String)
-    , prim "==" ((==) :: Char -> Char -> Bool)
-    , prim "head" (head :: String -> Char)
-    , prim "tail" (tail :: String -> String)
-    , prif (undefined :: Char)
-    , prif (undefined :: String)
-    , prim "toUpper" (toUpper :: Char -> Char)
+    [ con '-'
+    , con ("" :: String)
+    , fun ":" ((:) :: Char -> String -> String)
+    , fun "==" ((==) :: Char -> Char -> Bool)
+    , fun "head" (head :: String -> Char)
+    , fun "tail" (tail :: String -> String)
+    , iif (undefined :: Char)
+    , iif (undefined :: String)
+    , fun "toUpper" (toUpper :: Char -> Char)
     ]
 
 
@@ -192,25 +192,25 @@ gps5c  =  do
     ]
 
   conjureFromSpec "tell" gps5s
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "`div`" (div :: Int -> Int -> Int)
-    , prim "`mod`" (mod :: Int -> Int -> Int)
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "`div`" (div :: Int -> Int -> Int)
+    , fun "`mod`" (mod :: Int -> Int -> Int)
     ]
 
   conjure "gps5" gps5p
-    [ pr coins
-    , prim "tell" tell
+    [ con coins
+    , fun "tell" tell
     ]
 
   conjureWith args{target=50400} "gps5" gps5p
-    [ pr (1 :: Int)
-    , pr (5 :: Int)
-    , pr (10 :: Int)
-    , pr (25 :: Int)
-    , pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "tell" tell
+    [ con (1 :: Int)
+    , con (5 :: Int)
+    , con (10 :: Int)
+    , con (25 :: Int)
+    , con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "tell" tell
     ]
 
 
@@ -250,16 +250,16 @@ gps7g peter colin  =  sum (map (min colin) [0 .. (peter-1)]) % (colin*peter)
 gps7c :: IO ()
 gps7c  =  do
   conjureWith args{maxSize=6} "gps7" gps7p $ take 0
-    [ pr (0 :: Integer)
-    , pr (1 :: Integer)
-    , prim "%" ((%) :: Integer -> Integer -> Rational)
-    , prim "+" ((+) :: Integer -> Integer -> Integer)
-    , prim "-" ((-) :: Integer -> Integer -> Integer)
-    , prim "*" ((*) :: Integer -> Integer -> Integer)
-    , prim "min" (min :: Integer -> Integer -> Integer)
-    , prim ".." (enumFromTo :: Integer -> Integer -> [Integer])
-    , prim "map" (map :: (Integer -> Integer) -> [Integer] -> [Integer])
-    , prim "sum" (sum :: [Integer] -> Integer)
+    [ con (0 :: Integer)
+    , con (1 :: Integer)
+    , fun "%" ((%) :: Integer -> Integer -> Rational)
+    , fun "+" ((+) :: Integer -> Integer -> Integer)
+    , fun "-" ((-) :: Integer -> Integer -> Integer)
+    , fun "*" ((*) :: Integer -> Integer -> Integer)
+    , fun "min" (min :: Integer -> Integer -> Integer)
+    , fun ".." (enumFromTo :: Integer -> Integer -> [Integer])
+    , fun "map" (map :: (Integer -> Integer) -> [Integer] -> [Integer])
+    , fun "sum" (sum :: [Integer] -> Integer)
     ]
 
 
@@ -320,13 +320,13 @@ gps10g (x:xs)  =  (x `div` 3 - 2) + gps10g xs
 -- unreachable due to lambda
 gps10c :: IO ()
 gps10c  =  conjureWith args{target=50400} "gps10" gps10p
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
-  , pr (2 :: Int)
-  , pr (3 :: Int)
-  , prim "`div`" (div :: Int -> Int -> Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "-" ((-) :: Int -> Int -> Int)
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con (2 :: Int)
+  , con (3 :: Int)
+  , fun "`div`" (div :: Int -> Int -> Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "-" ((-) :: Int -> Int -> Int)
   ]
 
 
@@ -348,8 +348,8 @@ gps11p  =  gcd'
 
 gps11c :: IO ()
 gps11c  =  conjure "gcd a b" gps11p
-  [ pr (0::Int)
-  , prim "`mod`" (mod :: Int -> Int -> Int)
+  [ con (0::Int)
+  , fun "`mod`" (mod :: Int -> Int -> Int)
   ]
   -- generated function:
   -- gcd x 0  =  x
@@ -368,9 +368,9 @@ gps12g s s'  =  findIndices (s' `isPrefixOf`) (tails s)
 
 gps12c :: IO ()
 gps12c  =  conjure "gps12" gps12p
-  [ prim "findIndices" (findIndices :: (String -> Bool) -> [String] -> [Int])
-  , prim "`isPrefixOf`" (isPrefixOf :: String -> String -> Bool)
-  , prim "tails" (tails :: String -> [String])
+  [ fun "findIndices" (findIndices :: (String -> Bool) -> [String] -> [Int])
+  , fun "`isPrefixOf`" (isPrefixOf :: String -> String -> Bool)
+  , fun "tails" (tails :: String -> [String])
   ]
 
 
@@ -390,11 +390,11 @@ gps13g  =  leaders
 
 gps13c :: IO ()
 gps13c  =  conjure "gps13_leaders" gps13p
-  [ pr ([] :: [Int])
-  , prim ":" ((:) :: Int -> [Int] -> [Int])
-  , prim ">" ((>) :: Int -> Int -> Bool)
-  , prim "all" (all :: (Int -> Bool) -> [Int] -> Bool)
-  , prif (undefined :: [Int])
+  [ con ([] :: [Int])
+  , fun ":" ((:) :: Int -> [Int] -> [Int])
+  , fun ">" ((>) :: Int -> Int -> Bool)
+  , fun "all" (all :: (Int -> Bool) -> [Int] -> Bool)
+  , iif (undefined :: [Int])
   ]
 
 
@@ -460,13 +460,13 @@ gps16g2 (c:cs)  =  if length cs <= 1
 
 gps16c :: IO ()
 gps16c  =  conjure "gps16_middle" gps16p
-  [ pr ""
-  , pr (1 :: Int)
-  , prim "<=" ((<=) :: Int -> Int -> Bool)
-  , prim ":" ((:) :: Char -> String -> String)
-  , prim "length" (length :: String -> Int)
-  , prim "init" (init :: String -> String)
-  , prif (undefined :: String)
+  [ con ""
+  , con (1 :: Int)
+  , fun "<=" ((<=) :: Int -> Int -> Bool)
+  , fun ":" ((:) :: Char -> String -> String)
+  , fun "length" (length :: String -> Int)
+  , fun "init" (init :: String -> String)
+  , iif (undefined :: String)
   ]
 
 
@@ -494,14 +494,14 @@ gps17g xs  =  pds xs
 -- BENCHMARK: increase maxSize from 5 to 18
 gps17c :: IO ()
 gps17c  =  conjureWith args{maxSize=5} "gps17_pds" gps17p
-  [ pr (0 :: Int)
-  , prif (undefined :: Int)
-  , prim "not" not
-  , prim "null" (null :: [Int] -> Bool)
-  , prim "==" ((==) :: Int -> Int -> Bool)
-  , prim "head" (head :: [Int] -> Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "&&" (&&)
+  [ con (0 :: Int)
+  , iif (undefined :: Int)
+  , fun "not" not
+  , fun "null" (null :: [Int] -> Bool)
+  , fun "==" ((==) :: Int -> Int -> Bool)
+  , fun "head" (head :: [Int] -> Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "&&" (&&)
   ]
 
 
@@ -517,14 +517,14 @@ gps18g prices discounts  =  foldr (+) 0 (zipWith (*) prices (map (1-) discounts)
 -- this was OOM'd
 gps18c :: IO ()
 gps18c  =  conjureWithMaxSize 6 "gps18_price" gps18p
-  [ pr (0 :: Double)
-  , pr (1 :: Double)
-  , prim "+" ((+) :: Double -> Double -> Double)
-  , prim "*" ((*) :: Double -> Double -> Double)
-  , prim "-" ((-) :: Double -> Double -> Double)
---  , prim "foldr" (foldr :: (Double -> Double -> Double) -> Double -> [Double] -> Double)
---   , prim "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
---  , prim "map" (map :: (Double -> Double) -> [Double] -> [Double])
+  [ con (0 :: Double)
+  , con (1 :: Double)
+  , fun "+" ((+) :: Double -> Double -> Double)
+  , fun "*" ((*) :: Double -> Double -> Double)
+  , fun "-" ((-) :: Double -> Double -> Double)
+--  , fun "foldr" (foldr :: (Double -> Double -> Double) -> Double -> [Double] -> Double)
+--   , fun "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
+--  , fun "map" (map :: (Double -> Double) -> [Double] -> [Double])
   ]
 
 
@@ -544,11 +544,11 @@ gps19g n total melt fall  =  gps19p (n-1) (max 0 (total-melt+fall)) melt fall
 
 gps19c :: IO ()
 gps19c  =  conjureWithMaxSize 6 "gps19_snowday" gps19p
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
-  , prim "max" (max :: Double -> Double -> Double)
-  , prim "+" ((+) :: Double -> Double -> Double)
-  , prim "-" ((-) :: Double -> Double -> Double)
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , fun "max" (max :: Double -> Double -> Double)
+  , fun "+" ((+) :: Double -> Double -> Double)
+  , fun "-" ((-) :: Double -> Double -> Double)
   ]
 
 
@@ -587,23 +587,23 @@ gps21g s  =  unwords (map spin (words s))
 gps21c :: IO ()
 gps21c  =  do
   conjureFromSpec "spin" spinSpec
-    [ prim "length"  (length :: String -> Int)
-    , prim "reverse" (reverse :: String -> String)
-    , prif (undefined :: String)
-    , prim ">="      ((>=) :: Int -> Int -> Bool)
-    , pr (5 :: Int)
+    [ fun "length"  (length :: String -> Int)
+    , fun "reverse" (reverse :: String -> String)
+    , iif (undefined :: String)
+    , fun ">="      ((>=) :: Int -> Int -> Bool)
+    , con (5 :: Int)
     ]
 
   conjureFromSpec "gps21_spinwords" gps21s
-    [ prim "words"   words
-    , prim "unwords" unwords
-    , prim "spin"    (spin :: String -> String)
-    , prim "map"     (map :: (String -> String) -> [String] -> [String])
-    , prim "length"  (length :: String -> Int)
-    , prim "reverse" (reverse :: String -> String)
-    , prif (undefined :: String)
-    , prim ">="      ((>=) :: Int -> Int -> Bool)
-    , pr (5 :: Int)
+    [ fun "words"   words
+    , fun "unwords" unwords
+    , fun "spin"    (spin :: String -> String)
+    , fun "map"     (map :: (String -> String) -> [String] -> [String])
+    , fun "length"  (length :: String -> Int)
+    , fun "reverse" (reverse :: String -> String)
+    , iif (undefined :: String)
+    , fun ">="      ((>=) :: Int -> Int -> Bool)
+    , con (5 :: Int)
     ]
 
 
@@ -625,12 +625,12 @@ gps22c :: IO ()
 gps22c  =  do
   -- cannot conjure at size 13, maybe beyond?
   conjureWith args{target=10080} "digits" digits'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "`div`" (div :: Int -> Int -> Int)
-    , prim "`mod`" (mod :: Int -> Int -> Int)
-    , prim "div10" ((`div` 10) :: Int -> Int)
-    , pr (10 :: Int)
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "`div`" (div :: Int -> Int -> Int)
+    , fun "`mod`" (mod :: Int -> Int -> Int)
+    , fun "div10" ((`div` 10) :: Int -> Int)
+    , con (10 :: Int)
     ]
 
   conjure "gps22" gps22p
@@ -685,15 +685,15 @@ gps24s_twitter twitter  =  twitter "" == Empty
 gps24c :: IO ()
 gps24c  =  do
   conjureFromSpecWith args{maxTests=360} "gps24" gps24s_twitter
-    [ pr Empty
-    , pr TooMany
-    , prim "Tweet" Tweet
-    , prif (undefined :: Twitter)
-    , pr ""
-    , prim ":" ((:) :: Char -> String -> String)
-    , prim "length" (length :: String -> Int)
-    , pr (140 :: Int)
-    , prim ">" ((>) :: Int -> Int -> Bool)
+    [ con Empty
+    , con TooMany
+    , fun "Tweet" Tweet
+    , iif (undefined :: Twitter)
+    , con ""
+    , fun ":" ((:) :: Char -> String -> String)
+    , fun "length" (length :: String -> Int)
+    , con (140 :: Int)
+    , fun ">" ((>) :: Int -> Int -> Bool)
     ]
 
 
@@ -712,14 +712,14 @@ gps25g v1 v2  =  sqrt (foldr (+) 0 (map (^2) (zipWith (-) v1 v2)))
 -- out of reach performance-wise
 gps25c :: IO ()
 gps25c  =  conjureWith args{maxSize=6} "gps25" gps25p
-  [ pr (0 :: Double)
-  , pr (2 :: Double)
-  , prim "+" ((+) :: Double -> Double -> Double)
-  , prim "-" ((-) :: Double -> Double -> Double)
-  , prim "**" ((**) :: Double -> Double -> Double)
-  , prim "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
-  , prim "map" (map :: (Double -> Double) -> [Double] -> [Double])
-  , prim "sqrt" (sqrt :: Double -> Double)
+  [ con (0 :: Double)
+  , con (2 :: Double)
+  , fun "+" ((+) :: Double -> Double -> Double)
+  , fun "-" ((-) :: Double -> Double -> Double)
+  , fun "**" ((**) :: Double -> Double -> Double)
+  , fun "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
+  , fun "map" (map :: (Double -> Double) -> [Double] -> [Double])
+  , fun "sqrt" (sqrt :: Double -> Double)
   ]
 
 

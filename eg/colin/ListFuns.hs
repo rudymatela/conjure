@@ -11,10 +11,10 @@ sum [1,0,1]  =  2
 -- sum []      =  0
 -- sum (x:xs)  =  x + sum xs
 
-sumBackground :: [Prim]
+sumBackground :: [Ingredient]
 sumBackground =
-  [ pr (0::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
+  [ con (0::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
   ]
 
 app :: [Int] -> [Int] -> [Int]
@@ -26,9 +26,9 @@ app [0,1]   [0,1]  =  [0,1,0,1]
 -- app []     ys  =  ys
 -- app (x:xs) ys  =  x : app xs ys
 
-appBackground :: [Prim]
+appBackground :: [Ingredient]
 appBackground =
-  [ prim ":" ((:) :: Int -> [Int] -> [Int])  
+  [ fun ":" ((:) :: Int -> [Int] -> [Int])  
   ]
 
 mem :: Int -> [Int] -> Bool
@@ -42,12 +42,12 @@ mem 0 [1,1,1]  =  False
 -- mem x []      =  False
 -- mem x (y:ys)  =  x == y || mem x ys
 
-memBackground :: [Prim]
+memBackground :: [Ingredient]
 memBackground =
-  [ pr False
-  , prim "==" ((==) :: Int -> Int -> Bool)
-  , prim "&&" ((&&) :: Bool -> Bool -> Bool)
-  , prim "||" ((||) :: Bool -> Bool -> Bool)
+  [ con False
+  , fun "==" ((==) :: Int -> Int -> Bool)
+  , fun "&&" ((&&) :: Bool -> Bool -> Bool)
+  , fun "||" ((||) :: Bool -> Bool -> Bool)
   ]
 
 sub :: [Int] -> [Int] -> Bool
@@ -67,13 +67,13 @@ sub [2,0]   [0,1]  =  False
 -- sub _      []      =  False
 -- sub (x:xs) (y:ys)  =  if x == y then sub xs ys else sub (x:xs) ys
 
-subBackground :: [Prim]
+subBackground :: [Ingredient]
 subBackground  =
-  [ pr True
-  , pr False
-  , prim ":" ((:) :: Int -> [Int] -> [Int])
-  , prim "==" ((==) :: Int -> Int -> Bool)
-  , prif (undefined :: Bool)
+  [ con True
+  , con False
+  , fun ":" ((:) :: Int -> [Int] -> [Int])
+  , fun "==" ((==) :: Int -> Int -> Bool)
+  , iif (undefined :: Bool)
   ]
 
 set :: [Int] -> Bool
@@ -90,11 +90,11 @@ set [0,1,1]  =  False
 -- set []      =  True
 -- set (x:xs)  =  not (elem x xs) && set xs
 
-setBackground :: [Prim]
+setBackground :: [Ingredient]
 setBackground =
-  [ prim "not" (not :: Bool -> Bool)
-  , prim "&&" ((&&) :: Bool -> Bool -> Bool)
-  , prim "elem" (elem :: Int -> [Int] -> Bool)
+  [ fun "not" (not :: Bool -> Bool)
+  , fun "&&" ((&&) :: Bool -> Bool -> Bool)
+  , fun "elem" (elem :: Int -> [Int] -> Bool)
   ]
 
 take :: Int -> [A] -> [A]
@@ -110,13 +110,13 @@ take 3 [x,y]  =  [x,y]
 -- take x []      =  []
 -- take x (y:ys)  =  y : take (x-1) ys
 
-takeBackground :: [Prim]
+takeBackground :: [Ingredient]
 takeBackground  =
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
-  , pr ([] :: [A])
-  , prim "-" ((-) :: Int -> Int -> Int)
-  , prim ":" ((:) :: A -> [A] -> [A])
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con ([] :: [A])
+  , fun "-" ((-) :: Int -> Int -> Int)
+  , fun ":" ((:) :: A -> [A] -> [A])
   ]
 
 drop :: Int -> [A] -> [A]
@@ -132,12 +132,12 @@ drop 3 [x,y]  =  []
 -- drop x []  =  []
 -- drop x (y:ys)  =  drop (x-1) ys
 
-dropBackground :: [Prim]
+dropBackground :: [Ingredient]
 dropBackground  =
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
-  , pr ([] :: [A])
-  , prim "-" ((-) :: Int -> Int -> Int)
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con ([] :: [A])
+  , fun "-" ((-) :: Int -> Int -> Int)
   ]
 
 ord :: [Int] -> Bool
@@ -153,14 +153,14 @@ ord [0,1,1]  =  True
 -- ord [x]  =  True
 -- ord (x:y:ys)  =  x <= y && ord (y:ys)
 
-ordBackground :: [Prim]
+ordBackground :: [Ingredient]
 ordBackground  =
-  [ pr True
-  , prim "null" (null :: [Int] -> Bool)
-  , prim "head" (head :: [Int] -> Int)
-  , prim "<=" ((<=) :: Int -> Int -> Bool)
-  , prim "&&" (&&)
-  , prim "||" (||)
+  [ con True
+  , fun "null" (null :: [Int] -> Bool)
+  , fun "head" (head :: [Int] -> Int)
+  , fun "<=" ((<=) :: Int -> Int -> Bool)
+  , fun "&&" (&&)
+  , fun "||" (||)
   ]
 
 merge :: [Int] -> [Int] -> [Int]
@@ -176,12 +176,12 @@ merge (x:xs) (y:ys)  =  if x <= y
                         then x : merge xs (y:ys)
                         else y : merge (x:xs) ys
 
-mergeBackground :: [Prim]
+mergeBackground :: [Ingredient]
 mergeBackground  =
-  [ prim "<=" ((<=) :: Int -> Int -> Bool)
-  , pr ([] :: [Int])
-  , prim ":" ((:) :: Int -> [Int] -> [Int])
-  , prif (undefined :: [Int])
+  [ fun "<=" ((<=) :: Int -> Int -> Bool)
+  , con ([] :: [Int])
+  , fun ":" ((:) :: Int -> [Int] -> [Int])
+  , iif (undefined :: [Int])
   ]
 
 zip :: [A] -> [B] -> [(A,B)]
@@ -195,11 +195,11 @@ zip [v,w] [x,y]  =  [(v,x),(w,y)]
 -- zip (x:xs) []      =  []
 -- zip (x:xs) (y:ys)  =  (x,y) : zip xs ys
 
-zipBackground :: [Prim]
+zipBackground :: [Ingredient]
 zipBackground  =
-  [ pr ([] :: [(A,B)])
-  , prim "(,)" ((,) :: A -> B -> (A,B))
-  , prim ":" ((:) :: (A,B) -> [(A,B)] -> [(A,B)])
+  [ con ([] :: [(A,B)])
+  , fun "(,)" ((,) :: A -> B -> (A,B))
+  , fun ":" ((:) :: (A,B) -> [(A,B)] -> [(A,B)])
   ]
 
 assocs :: Int -> [(Int,A)] -> [A]
@@ -212,14 +212,14 @@ assocs 2 [(2,x),(2,y)]  =  [x,y]
 -- assocs _ []      =  []
 -- assocs n (x:xs)  =  if fst x == n then snd x : assocs n xs else assocs n xs
 
-assocsBackground :: [Prim]
+assocsBackground :: [Ingredient]
 assocsBackground  =
-  [ pr ([] :: [A])
-  , prim "==" ((==) :: Int -> Int -> Bool)
-  , prim ":" ((:) :: A -> [A] -> [A])
-  , prim "fst" (fst :: (Int,A) -> Int)
-  , prim "snd" (snd :: (Int,A) -> A)
-  , prif (undefined :: [A])
+  [ con ([] :: [A])
+  , fun "==" ((==) :: Int -> Int -> Bool)
+  , fun ":" ((:) :: A -> [A] -> [A])
+  , fun "fst" (fst :: (Int,A) -> Int)
+  , fun "snd" (snd :: (Int,A) -> A)
+  , iif (undefined :: [A])
   ]
 
 main :: IO ()

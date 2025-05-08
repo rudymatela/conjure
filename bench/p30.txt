@@ -1,2 +1,2 @@
-running with 26 primitives
+running with 26 ingredients
 usage: p30 <factorial|sum|product|length|count> [t]

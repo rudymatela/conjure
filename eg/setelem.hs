@@ -18,23 +18,23 @@ set' [x,y,z]  =  not (x == y || y == z || x == z)
 main :: IO ()
 main = do
   conjure "elem" (elem')
-    [ pr ([] :: [Int])
-    , pr True
-    , pr False
-    , prim "||" (||)
-    , prim "&&" (&&)
-    , prim "not" not
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "==" ((==) :: Int -> Int -> Bool)
+    [ con ([] :: [Int])
+    , con True
+    , con False
+    , fun "||" (||)
+    , fun "&&" (&&)
+    , fun "not" not
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "==" ((==) :: Int -> Int -> Bool)
     ]
 
   conjure "set" (set')
-    [ pr ([] :: [Int])
-    , pr True
-    , pr False
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "not" not
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "elem" (elem :: Int -> [Int] -> Bool)
+    [ con ([] :: [Int])
+    , con True
+    , con False
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "not" not
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "elem" (elem :: Int -> [Int] -> Bool)
     ]

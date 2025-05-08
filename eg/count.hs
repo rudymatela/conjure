@@ -30,27 +30,27 @@ main = do
   -- count x xs  =  length (filter (== x) xs)
   --                1       2       3  4  5
   conjure "count" count'
-    [ prim "length" (length :: [A] -> Int)
-    , prim "filter" (filter :: (A -> Bool) -> [A] -> [A])
-    , prim "==" ((==) :: A -> A -> Bool)
+    [ fun "length" (length :: [A] -> Int)
+    , fun "filter" (filter :: (A -> Bool) -> [A] -> [A])
+    , fun "==" ((==) :: A -> A -> Bool)
     ]
 
   -- count x []  =  0
   -- count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
   conjure "count" count'
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "==" ((==) :: A -> A -> Bool)
-    , prif (undefined :: Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "==" ((==) :: A -> A -> Bool)
+    , iif (undefined :: Int)
     ]
 
   -- a little bit larger, guards are only allowed at the root
   -- so there is a need to repeat the recursive call twice
   conjure "count" count'
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "==" ((==) :: A -> A -> Bool)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "==" ((==) :: A -> A -> Bool)
     , guard
     ]

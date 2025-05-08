@@ -7,7 +7,7 @@ import Conjure.Engine
 import Conjure.Defn
 import Data.Express.Fixtures
 
-printCandidates :: Conjurable f => Int -> Int -> String -> f -> [Prim] -> IO ()
+printCandidates :: Conjurable f => Int -> Int -> String -> f -> [Ingredient] -> IO ()
 printCandidates m n nm f ps  =  do
   putStrLn $ "Candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
   putStrLn $ "  pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
@@ -40,46 +40,46 @@ printCandidates m n nm f ps  =  do
 main :: IO ()
 main  =  do
   printCandidates 9 6 "foo" (undefined :: Int -> Int)
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   printCandidates 9 5 "?" (undefined :: Int -> Int -> Int)
-    [ pr (0 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    [ con (0 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "dec" (subtract 1 :: Int -> Int)
     ]
 
   printCandidates 9 6 "goo" (undefined :: [Int] -> [Int])
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printCandidates 9 6 "??" (undefined :: [Int] -> [Int] -> [Int])
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printCandidates 9 6 "ton" (undefined :: Bool -> Bool)
-    [ pr False
-    , pr True
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "not" not
+    [ con False
+    , con True
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "not" not
     ]
 
   printCandidates 9 6 "&|" (undefined :: Bool -> Bool -> Bool)
-    [ pr False
-    , pr True
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "not" not
+    [ con False
+    , con True
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "not" not
     ]
 
   -- Degenerate case:
@@ -88,6 +88,6 @@ main  =  do
   -- nevertheless useful for observing candidate filtering
   -- through other means
   printCandidates 9 6 "gcd" (undefined :: Int -> Int -> Int)
-    [ pr (0::Int)
-    , prim "`mod`" (mod :: Int -> Int -> Int)
+    [ con (0::Int)
+    , fun "`mod`" (mod :: Int -> Int -> Int)
     ]

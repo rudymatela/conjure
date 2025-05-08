@@ -19,8 +19,8 @@ gcd' 12 18  =  6
 
 main :: IO ()
 main = conjure "gcd a b" gcd'
-  [ pr (0::Int)
-  , prim "`mod`" (mod :: Int -> Int -> Int)
+  [ con (0::Int)
+  , fun "`mod`" (mod :: Int -> Int -> Int)
   ]
   -- desired function:
   -- gcd x 0  =  x

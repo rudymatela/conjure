@@ -23,8 +23,8 @@ import Test.LeanCheck.Tiers (discardT, discardLaterT)
 -- * maximum candidate size (5 = few seconds, 7 = few minutes);
 -- * function name (for pretty-printing purposes);
 -- * proxy value to indicate the type of functions to generate;
--- * list of primitives, in Conjure-compatible form.
-printUniqueCandidates :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
+-- * list of ingredients, in Conjure-compatible form.
+printUniqueCandidates :: Conjurable f => Int -> String -> f -> [Ingredient] -> IO ()
 printUniqueCandidates n nm f ps  =  do
   putStrLn $ "Unique candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
   putStrLn $ "  pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
@@ -64,44 +64,44 @@ main  =  do
   let n = 5
 
   printUniqueCandidates (n+2) "foo" (undefined :: Int -> Int)
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   printUniqueCandidates n "?" (undefined :: Int -> Int -> Int)
-    [ pr (0 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
+    [ con (0 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "dec" (subtract 1 :: Int -> Int)
     ]
 
   printUniqueCandidates (n+2) "goo" (undefined :: [Int] -> [Int])
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printUniqueCandidates n "??" (undefined :: [Int] -> [Int] -> [Int])
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printUniqueCandidates (n+2) "ton" (undefined :: Bool -> Bool)
-    [ pr False
-    , pr True
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "not" not
+    [ con False
+    , con True
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "not" not
     ]
 
   printUniqueCandidates n "&|" (undefined :: Bool -> Bool -> Bool)
-    [ pr False
-    , pr True
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "not" not
+    [ con False
+    , con True
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "not" not
     ]

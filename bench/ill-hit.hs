@@ -26,21 +26,21 @@ main :: IO ()
 main  =  do
   -- the following conjures from an "empty" spec
   -- we should get a proper error message
-  conjure "sum" (undefined :: [Int] -> Int) primitives
+  conjure "sum" (undefined :: [Int] -> Int) ingredients
 
   -- the following does not hit all 6 defined prims, only 4
-  conjure "sum" (sum' :: [Int] -> Int) primitives
+  conjure "sum" (sum' :: [Int] -> Int) ingredients
 
   -- the following conjures from a spec
-  conjureFromSpec "sum" sumSpec primitives
+  conjureFromSpec "sum" sumSpec ingredients
 
-primitives :: [Prim]
-primitives =
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "*" ((*) :: Int -> Int -> Int)
-  , prim "null" (null :: [Int] -> Bool)
-  , prim "head" (head :: [Int] -> Int)
-  , prim "tail" (tail :: [Int] -> [Int])
+ingredients :: [Ingredient]
+ingredients =
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "*" ((*) :: Int -> Int -> Int)
+  , fun "null" (null :: [Int] -> Bool)
+  , fun "head" (head :: [Int] -> Int)
+  , fun "tail" (tail :: [Int] -> [Int])
   ]

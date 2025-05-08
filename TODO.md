@@ -14,31 +14,11 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Rethink Conjurable typeclass?
 
-* Rename primitives to ingredients?
-
-	ingredients :: [Ingredient]
-	ingredients  =
-	  [ constant (0 :: Int)
-	  , function "+" ((+) :: Int -> Int -> Int)
-
-	  , con (1 :: Int)
-	  , fun "*" ((*) :: Int -> Int -> Int)
-
-	  , igc (0 :: Int)
-	  , igf "+" ((+) :: Int -> Int -> Int)
-	  ]
-
-	I am beginning to few inclined to use Ingredient / constant / function.
-	I'll think for a bit...
-
-	Other options: vocabulary, direction, order, term?
-
-
 * Remove `require0` setting
 
 * Allow chains of guards (see below).
 
-* Move `Args` into `[Prim]`?
+* Move `Args` into `[Ingredient]`?
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.

@@ -57,22 +57,22 @@ here is a partial implementation of a function that computes the factorial of a 
 	factorial 3  =  6
 	factorial 4  =  24
 
-Next, declare a list of primitives that seem like interesting pieces
+Next, declare a list of ingredients that seem like interesting pieces
 in the final fully-defined implementation.
 For example,
-here is a list of primitives including
+here is a list of ingredients including
 addition, multiplication, subtraction and their neutral elements:
 
-	primitives :: [Prim]
-	primitives  =  [ pr (0::Int)
-	               , pr (1::Int)
-	               , prim "+" ((+) :: Int -> Int -> Int)
-	               , prim "*" ((*) :: Int -> Int -> Int)
-	               , prim "-" ((-) :: Int -> Int -> Int)
-	               ]
+	ingredients :: [Ingredient]
+	ingredients  =  [ fun (0::Int)
+	                , fun (1::Int)
+	                , fun "+" ((+) :: Int -> Int -> Int)
+	                , fun "*" ((*) :: Int -> Int -> Int)
+	                , fun "-" ((-) :: Int -> Int -> Int)
+	                ]
 
 Finally, call the [`conjure`] function,
-passing the function name, the partial definition and the list of primitives:
+passing the function name, the partial definition and the list of ingredients:
 
 	factorial :: Int -> Int
 	-- 0.1s, testing 4 combinations of argument values
@@ -121,11 +121,11 @@ Conjure is able to find an appropriate implementation
 given list constructors, zero, one and subtraction:
 
 	> conjure "take" (take' :: Int -> [A] -> [A])
-	>   [ pr (0 :: Int)
-	>   , pr (1 :: Int)
-	>   , pr ([] :: [A])
-	>   , prim ":" ((:) :: A -> [A] -> [A])
-	>   , prim "-" ((-) :: Int -> Int -> Int)
+	>   [ fun (0 :: Int)
+	>   , fun (1 :: Int)
+	>   , fun ([] :: [A])
+	>   , fun ":" ((:) :: A -> [A] -> [A])
+	>   , fun "-" ((-) :: Int -> Int -> Int)
 	>   ]
 	take :: Int -> [A] -> [A]
 	-- 0.2s, testing 153 combinations of argument values
@@ -138,9 +138,9 @@ given list constructors, zero, one and subtraction:
 	take x (y:xs)  =  y:take (x - 1) xs
 
 The above example also takes less than a second to run in a modern laptop.
-The selection of functions in the list of primitives was minimized
+The selection of functions in the list of ingredients was minimized
 to what was absolutely needed here.
-With a larger collection as primitives YMMV.
+With a larger collection as ingredients YMMV.
 
 
 Synthesizing from specifications (for advanced users)
@@ -161,16 +161,16 @@ that should return the duplicate elements in a list without repetitions.
 We will first try to use a partial definition to arrive at an appropriate result.
 Then we'll see how to use [`conjureFromSpec`].
 
-Let's start with the primitives:
+Let's start with the ingredients:
 
-	primitives :: [Prim]
-	primitives  =  [ pr ([] :: [Int])
-	               , prim "not" not
-	               , prim "&&" (&&)
-	               , prim ":" ((:) :: Int -> [Int] -> [Int])
-	               , prim "elem" (elem :: Int -> [Int] -> Bool)
-	               , prif (undefined :: [Int])
-	               ]
+	ingredients :: [Ingredient]
+	ingredients  =  [ fun ([] :: [Int])
+	                , fun "not" not
+	                , fun "&&" (&&)
+	                , fun ":" ((:) :: Int -> [Int] -> [Int])
+	                , fun "elem" (elem :: Int -> [Int] -> Bool)
+	                , iif (undefined :: [Int])
+	                ]
 
 Now here's a first attempt at a partial definition:
 
@@ -183,7 +183,7 @@ Now here's a first attempt at a partial definition:
 
 Here is what [`conjure`] prints:
 
-	> conjure "duplicates" duplicates primitives
+	> conjure "duplicates" duplicates ingredients
 	duplicates :: [Int] -> [Int]
 	-- testing 1 combinations of argument values
 	-- pruning with 21/26 rules
@@ -206,7 +206,7 @@ Here is a second attempt:
 
 Here is what [`conjure`] now prints:
 
-	> conjure "duplicates" duplicates primitives
+	> conjure "duplicates" duplicates ingredients
 	duplicates :: [Int] -> [Int]
 	-- testing 3 combinations of argument values
 	-- pruning with 21/26 rules
@@ -246,7 +246,7 @@ Here is a fourth and final refinement:
 
 Now Conjure prints a correct implementation:
 
-	> conjure "duplicates" duplicates primitives
+	> conjure "duplicates" duplicates ingredients
 	duplicates :: [Int] -> [Int]
 	-- 0.2s, testing 6 combinations of argument values
 	-- 0.3s, pruning with 21/26 rules
@@ -283,7 +283,7 @@ The second property states that duplicates themselves must not repeat.
 Now, we can use the function [`conjureFromSpecWith`] to generate the same duplicates function
 passing our `duplicatesSpec` as argument:
 
-	> conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec primitives
+	> conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec ingredients
 	duplicates :: [Int] -> [Int]
 	duplicates []  =  []
 	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs

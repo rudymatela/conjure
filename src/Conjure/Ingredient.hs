@@ -1,20 +1,20 @@
 -- |
--- Module      : Conjure.Prim
+-- Module      : Conjure.Ingredient
 -- Copyright   : (c) 2021-2025 Rudy Matela
 -- License     : 3-Clause BSD  (see the file LICENSE)
 -- Maintainer  : Rudy Matela <rudy@matela.com.br>
 --
 -- This module is part of "Conjure".
 --
--- The 'Prim' type and utilities involving it.
+-- The 'Ingredient' type and utilities involving it.
 --
 -- You are probably better off importing "Conjure".
-module Conjure.Prim
-  ( Prim
-  , prim
-  , pr
-  , prif
-  , primOrdCaseFor
+module Conjure.Ingredient
+  ( Ingredient
+  , con
+  , fun
+  , iif
+  , ordcase
   , guard
   , cjHoles
   , cjTiersFor
@@ -29,49 +29,76 @@ import Test.LeanCheck.Error (errorToFalse)
 import Test.LeanCheck.Utils
 
 
--- | A primitive expression (paired with instance reification).
---   Create 'Prim's with 'pr' and 'prim'.
-type Prim  =  (Expr, Reification)
-
-
--- | Provides a primitive value to Conjure.
---   To be used on 'Show' instances.
---   (cf. 'prim')
+-- | A single functional ingredient in conjuring.
+-- Specify conjure ingredients with 'con' and 'fun':
 --
--- > conjure "fun" fun [ pr False
--- >                   , pr True
--- >                   , pr (0 :: Int)
--- >                   , pr (1 :: Int)
+-- > conjure "foo" foo [ con False
+-- >                   , con True
+-- >                   , con (0 :: Int)
+-- >                   , con (1 :: Int)
+-- >                   , ...
+-- >                   , fun "&&" (&&)
+-- >                   , fun "||" (||)
+-- >                   , fun "+" ((+) :: Int -> Int -> Int)
+-- >                   , fun "*" ((*) :: Int -> Int -> Int)
+-- >                   , fun "-" ((-) :: Int -> Int -> Int)
+-- >                   , ...
+-- >                   ]
+--
+-- Ingredients may include arbitrary
+-- constants ('con'),
+-- constructors ('con')
+-- or functions ('fun').
+-- These may be built-in or user defined.
+-- Use 'con' on 'Show' instances
+-- and 'fun' otherwise.
+--
+-- This is internally
+-- an arbitrary atomic 'Expr'ession
+-- paired with
+-- a 'Reification' of type information.
+type Ingredient  =  (Expr, Reification)
+
+
+-- | Provides a constant or constructor as an ingredient to Conjure.
+--   To be used on 'Show' instances.
+--   (cf. 'fun')
+--
+-- > conjure "foo" foo [ con False
+-- >                   , con True
+-- >                   , con (0 :: Int)
+-- >                   , con (1 :: Int)
 -- >                   , ...
 -- >                   ]
 --
 -- Argument types have to be monomorphized,
 -- so use type bindings when applicable.
-pr :: (Conjurable a, Show a) => a -> Prim
-pr x  =  (val x, conjureType x)
+con :: (Conjurable a, Show a) => a -> Ingredient
+con x  =  (val x, conjureType x)
 
 
--- | Provides a primitive value to Conjure.
+-- | Provides a functional value as an ingredient to Conjure.
 --   To be used on values that are not 'Show' instances
 --   such as functions.
---   (cf. 'pr')
+--   (cf. 'con')
 --
--- > conjure "fun" fun [ ...
--- >                   , prim "&&" (&&)
--- >                   , prim "||" (||)
--- >                   , prim "+" ((+) :: Int -> Int -> Int)
--- >                   , prim "*" ((*) :: Int -> Int -> Int)
--- >                   , prim "-" ((-) :: Int -> Int -> Int)
+-- > conjure "foo" foo [ ...
+-- >                   , fun "&&" (&&)
+-- >                   , fun "||" (||)
+-- >                   , fun "+" ((+) :: Int -> Int -> Int)
+-- >                   , fun "*" ((*) :: Int -> Int -> Int)
+-- >                   , fun "-" ((-) :: Int -> Int -> Int)
 -- >                   , ...
 -- >                   ]
 --
 -- Argument types have to be monomorphized,
 -- so use type bindings when applicable.
-prim :: Conjurable a => String -> a -> Prim
-prim s x  =  (value s x, conjureType x)
+fun :: Conjurable a => String -> a -> Ingredient
+fun s x  =  (value s x, conjureType x)
 
 
--- | Provides an if condition bound to the given return type.
+-- | Provides an if condition bound to the given return type
+--   as a Conjure ingredient.
 --
 -- This should be used when one wants Conjure to consider
 -- if-expressions at all:
@@ -81,11 +108,11 @@ prim s x  =  (value s x, conjureType x)
 -- > last' [x,y]  =  y
 -- > last' [x,y,z]  =  z
 --
--- > > conjure "last" last' [ pr ([] :: [Int])
--- > >                      , prim ":" ((:) :: Int -> [Int] -> [Int])
--- > >                      , prim "null" (null :: [Int] -> Bool)
--- > >                      , prif (undefined :: Int)
--- > >                      , prim "undefined" (undefined :: Int)
+-- > > conjure "last" last' [ con ([] :: [Int])
+-- > >                      , fun ":" ((:) :: Int -> [Int] -> [Int])
+-- > >                      , fun "null" (null :: [Int] -> Bool)
+-- > >                      , iif (undefined :: Int)
+-- > >                      , fun "undefined" (undefined :: Int)
 -- > >                      ]
 -- > last :: [Int] -> Int
 -- > -- 0.0s, testing 360 combinations of argument values
@@ -97,11 +124,11 @@ prim s x  =  (value s x, conjureType x)
 -- > last (x:xs)  =  if null xs
 -- >                 then x
 -- >                 else last xs
-prif :: Conjurable a => a -> Prim
-prif x  =  (ifFor x, conjureType x)
+iif :: Conjurable a => a -> Ingredient
+iif x  =  (ifFor x, conjureType x)
 
 
--- | Provides an if condition bound to the conjured function's return type.
+-- | Provides a guard bound to the conjured function's return type.
 --
 -- Guards are only alllowed at the root fo the RHS.
 --
@@ -111,11 +138,11 @@ prif x  =  (ifFor x, conjureType x)
 -- > last' [x,y,z]  =  z
 --
 -- > > conjure "last" last'
--- > >   [ pr ([] :: [Int])
--- > >   , prim ":" ((:) :: Int -> [Int] -> [Int])
--- > >   , prim "null" (null :: [Int] -> Bool)
+-- > >   [ con ([] :: [Int])
+-- > >   , fun ":" ((:) :: Int -> [Int] -> [Int])
+-- > >   , fun "null" (null :: [Int] -> Bool)
 -- > >   , guard
--- > >   , prim "undefined" (undefined :: Int)
+-- > >   , fun "undefined" (undefined :: Int)
 -- > >   ]
 -- > last :: [Int] -> Int
 -- > -- 0.0s, testing 360 combinations of argument values
@@ -132,7 +159,7 @@ prif x  =  (ifFor x, conjureType x)
 -- > last (x:xs)
 -- >   | null xs  =  x
 -- >   | otherwise  =  last xs
-guard :: Prim
+guard :: Ingredient
 guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
 -- internally we always return a guard of the Bool return type,
 -- this is replaced by Conjure when enumerating candidates
@@ -143,10 +170,10 @@ guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
 -- This should be used when one wants Conjure to consider ord-case expressions:
 --
 -- > > conjure "mem" mem
--- > >   [ pr False
--- > >   , pr True
--- > >   , prim "`compare`" (compare :: Int -> Int -> Ordering)
--- > >   , primOrdCaseFor (undefined :: Bool)
+-- > >   [ con False
+-- > >   , con True
+-- > >   , fun "`compare`" (compare :: Int -> Int -> Ordering)
+-- > >   , ordcase (undefined :: Bool)
 -- > >   ]
 -- > mem :: Int -> Tree -> Bool
 -- > -- ...   ...   ...   ...   ...
@@ -157,37 +184,37 @@ guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
 -- >                          LT -> mem x t1
 -- >                          EQ -> True
 -- >                          GT -> mem x t2
-primOrdCaseFor :: Conjurable a => a -> Prim
-primOrdCaseFor x  =  (caseForOrd x, conjureType x)
+ordcase :: Conjurable a => a -> Ingredient
+ordcase x  =  (caseForOrd x, conjureType x)
 
 
 -- the following functions mirror their "conjure" counterparts from
--- Conjure.Conjurable but need a list of Prims instead of a Conjurable
+-- Conjure.Conjurable but need a list of Ingredients instead of a Conjurable
 -- representative.
 
--- | Computes a list of 'Reification1's from a list of 'Prim's.
+-- | Computes a list of 'Reification1's from a list of 'Ingredient's.
 --
 -- This function mirrors functionality of 'conjureReification'.
-cjReification :: [Prim] -> [Reification1]
+cjReification :: [Ingredient] -> [Reification1]
 cjReification ps  =  nubOn (\(eh,_,_,_,_,_) -> eh)
                   $  foldr (.) id (map snd ps) [conjureReification1 bool]
 
--- | Computes a list of holes encoded as 'Expr's from a list of 'Prim's.
+-- | Computes a list of holes encoded as 'Expr's from a list of 'Ingredient's.
 --
 -- This function mirrors functionality from 'conjureHoles'.
-cjHoles :: [Prim] -> [Expr]
+cjHoles :: [Ingredient] -> [Expr]
 cjHoles ps  =  [eh | (eh,_,Just _,_,_,_) <- cjReification ps]
 
--- | Computes a function that equates two 'Expr's from a list of 'Prim's.
+-- | Computes a function that equates two 'Expr's from a list of 'Ingredient's.
 --
 -- This function mirrors functionality from 'conjureMkEquation'.
-cjMkEquation :: [Prim] -> Expr -> Expr -> Expr
+cjMkEquation :: [Ingredient] -> Expr -> Expr -> Expr
 cjMkEquation ps  =  mkEquation [eq | (_,Just eq,_,_,_,_) <- cjReification ps]
 
--- | Given a list of 'Prim's,
+-- | Given a list of 'Ingredient's,
 --   computes a function that checks whether two 'Expr's are equal
 --   up to a given number of tests.
-cjAreEqual :: [Prim] -> Int -> Expr -> Expr -> Bool
+cjAreEqual :: [Ingredient] -> Int -> Expr -> Expr -> Bool
 cjAreEqual ps maxTests  =  (===)
   where
   (-==-)  =  cjMkEquation ps
@@ -195,18 +222,18 @@ cjAreEqual ps maxTests  =  (===)
   isTrue  =  all (errorToFalse . eval False) . gs
   gs  =  take maxTests . cjGrounds ps
 
--- | Given a list of 'Prim's,
+-- | Given a list of 'Ingredient's,
 --   computes a grounds function that lists
 --   ground expressions of an 'Expr'.
-cjGrounds :: [Prim] -> Expr -> [Expr]
+cjGrounds :: [Ingredient] -> Expr -> [Expr]
 cjGrounds  =  grounds . cjTiersFor
 
--- | Given a list of 'Prim's,
+-- | Given a list of 'Ingredient's,
 --   returns a function that given an 'Expr'
 --   will return tiers of test 'Expr' values.
 --
 -- This is used in 'cjAreEqual'.
-cjTiersFor :: [Prim] -> Expr -> [[Expr]]
+cjTiersFor :: [Ingredient] -> Expr -> [[Expr]]
 cjTiersFor ps e  =  tf allTiers
   where
   allTiers :: [ [[Expr]] ]

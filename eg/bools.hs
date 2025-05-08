@@ -16,23 +16,23 @@ or' [p,q,r]  =  p || q || r
 
 main :: IO ()
 main = do
-  conjure "and" (and' :: [Bool] -> Bool) primitives
-  conjure "or"  (or'  :: [Bool] -> Bool) primitives
+  conjure "and" (and' :: [Bool] -> Bool) ingredients
+  conjure "or"  (or'  :: [Bool] -> Bool) ingredients
 
   -- conjure can use fold as well
-  conjure "and" (and' :: [Bool] -> Bool) primitivesWithFold
-  conjure "or"  (or'  :: [Bool] -> Bool) primitivesWithFold
+  conjure "and" (and' :: [Bool] -> Bool) ingredientsWithFold
+  conjure "or"  (or'  :: [Bool] -> Bool) ingredientsWithFold
 
-primitives :: [Prim]
-primitives =
-  [ pr False
-  , pr True
-  , prim "not" not
-  , prim "||" (||)
-  , prim "&&" (&&)
+ingredients :: [Ingredient]
+ingredients =
+  [ con False
+  , con True
+  , fun "not" not
+  , fun "||" (||)
+  , fun "&&" (&&)
   ]
 
-primitivesWithFold :: [Prim]
-primitivesWithFold  =
-    prim "foldr" (foldr :: (Bool -> Bool -> Bool) -> Bool -> [Bool] -> Bool)
-  : primitives
+ingredientsWithFold :: [Ingredient]
+ingredientsWithFold  =
+    fun "foldr" (foldr :: (Bool -> Bool -> Bool) -> Bool -> [Bool] -> Bool)
+  : ingredients

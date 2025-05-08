@@ -37,17 +37,17 @@ filterSpec filter  =  filter (<0) [0,1,-1,2,-2] == [-1,-2]
 
 main :: IO ()
 main = do
-  conjureFromSpec "$"      appSpec     primitives
-  conjureFromSpec "."      composeSpec primitives
-  conjureFromSpec "flip"   flipSpec    primitives
-  conjureFromSpec "map"    mapSpec     primitives
-  conjureFromSpec "fold"   foldSpec    primitives
-  conjureFromSpec "filter" filterSpec  primitives
+  conjureFromSpec "$"      appSpec     ingredients
+  conjureFromSpec "."      composeSpec ingredients
+  conjureFromSpec "flip"   flipSpec    ingredients
+  conjureFromSpec "map"    mapSpec     ingredients
+  conjureFromSpec "fold"   foldSpec    ingredients
+  conjureFromSpec "filter" filterSpec  ingredients
 
 
-primitives :: [Prim]
-primitives  =
-  [ pr ([] :: [Int])
-  , prim ":" ((:) :: Int -> [Int] -> [Int])
+ingredients :: [Ingredient]
+ingredients  =
+  [ con ([] :: [Int])
+  , fun ":" ((:) :: Int -> [Int] -> [Int])
   , guard
   ]

@@ -16,10 +16,10 @@ main  =  do
   -- pow x 0  =  1
   -- pow x y  =  x * pow x (y - 1)
   conjureWithMaxSize 8 "pow" pow
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (0::Int)
+    , con (1::Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   -- pow b 0  =  1
@@ -27,10 +27,10 @@ main  =  do
   --             2   3  4     5  6 7   8  9    10 11 12 13 14     15     16
   -- out of reach performance wise, OOM at size 9
   conjureWithMaxSize 6 "pow" pow
-    [ pr (0::Int)
-    , pr (1::Int)
---  , prim "sq" ((\x -> x*x) :: Int -> Int) -- cheat! OOM still
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "halve" ((`div` 2) :: Int -> Int)
-    , prif (undefined :: Int)
+    [ con (0::Int)
+    , con (1::Int)
+--  , fun "sq" ((\x -> x*x) :: Int -> Int) -- cheat! OOM still
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "halve" ((`div` 2) :: Int -> Int)
+    , iif (undefined :: Int)
     ]

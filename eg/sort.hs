@@ -47,26 +47,26 @@ main = do
   -- sort []  =  []
   -- sort (x:xs)  =  insert x (sort xs)
   conjure "sort" sort'
-    [ pr ([] :: [Int])
-    , prim "insert" (insert :: Int -> [Int] -> [Int])
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
+    [ con ([] :: [Int])
+    , fun "insert" (insert :: Int -> [Int] -> [Int])
+    , fun "head" (head :: [Int] -> Int)
+    , fun "tail" (tail :: [Int] -> [Int])
+    , fun "null" (null :: [Int] -> Bool)
     ]
 
   -- now through fold
   -- sort xs  =  foldr insert [] xs
   conjure "sort" sort'
-    [ pr ([] :: [Int])
-    , prim "insert" (insert :: Int -> [Int] -> [Int])
-    , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun "insert" (insert :: Int -> [Int] -> [Int])
+    , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
   -- an insert function
   conjureWith args{target=50400} "insert" insert'
-    [ prim "[]" ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    [ fun "[]" ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
     , guard
     ]
 
@@ -77,23 +77,23 @@ main = do
   -- but is not generated because of the deconstruction restriction.
   -- The following does generate a correct but inneficient version of qsort.
   conjure "qsort" sort'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
-    , prim ">"  ((>)  :: Int -> Int -> Bool)
-    , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
+    , fun ">"  ((>)  :: Int -> Int -> Bool)
+    , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     ]
 
   -- if we disable the descent requirement, we get the efficient qsort
   -- though with a larger search space
   conjureWith args{requireDescent=False} "qsort" sort'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
-    , prim ">"  ((>)  :: Int -> Int -> Bool)
-    , prim "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
+    , fun ">"  ((>)  :: Int -> Int -> Bool)
+    , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     ]
 
   -- found!  candidate #1703311 @ size 22
@@ -104,15 +104,15 @@ main = do
   --   | otherwise  =  merge (y:x:xs) ys
   -- set target to 2 000 000 to reach it
   conjureWith args{target=10080, maxTests=1080} "merge" merge'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
     , guard
     ]
 
   -- unreachable: needs about 26, but can only reach 16
   conjureWith args{target=1080} "merge" merge'
-    [ prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "compare" (compare :: Int -> Int -> Ordering)
-    , primOrdCaseFor (undefined :: [Int])
+    [ fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "compare" (compare :: Int -> Int -> Ordering)
+    , ordcase (undefined :: [Int])
     ]

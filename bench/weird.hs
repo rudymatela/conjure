@@ -21,24 +21,24 @@ _ ^^^ _  =  0
 
 main :: IO ()
 main  =  do
-  conjure "^^^" (^^^) primitives
-  conjureWith args{usePatterns = False} "^^^" (^^^) primitives
+  conjure "^^^" (^^^) ingredients
+  conjureWith args{usePatterns = False} "^^^" (^^^) ingredients
 
   -- This example is quite the degenerate case,
-  -- it takes a while to conjure even with just 2 primitives.
+  -- it takes a while to conjure even with just 2 ingredients.
   -- I am leaving it commented-out for now...
-  -- conjure "thirty" thirty [pr (0::Int), prim "+" ((+) :: Int -> Int -> Int)]
+  -- conjure "thirty" thirty [pr (0::Int), fun "+" ((+) :: Int -> Int -> Int)]
 
-primitives :: [Prim]
-primitives  =
-  [ pr (0::Int)
-  , pr (1::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "*" ((*) :: Int -> Int -> Int)
-  , prim "==" ((==) :: Int -> Int -> Bool)
-  , prim "&&" (&&)
-  , prim "||" (||)
-  , prif (undefined :: Int)
+ingredients :: [Ingredient]
+ingredients  =
+  [ con (0::Int)
+  , con (1::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "*" ((*) :: Int -> Int -> Int)
+  , fun "==" ((==) :: Int -> Int -> Bool)
+  , fun "&&" (&&)
+  , fun "||" (||)
+  , iif (undefined :: Int)
   -- guard does not play well with usePatterns = False yet
   ]
 

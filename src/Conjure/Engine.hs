@@ -49,7 +49,7 @@ import Test.LeanCheck.Error (errorToFalse)
 
 import Conjure.Expr
 import Conjure.Conjurable
-import Conjure.Prim
+import Conjure.Ingredient
 import Conjure.Defn
 import Conjure.Defn.Redundancy
 import Conjure.Defn.Test
@@ -72,18 +72,18 @@ import System.CPUTime (getCPUTime)
 -- > factorial 3  =  6
 -- > factorial 4  =  24
 -- >
--- > primitives :: [Prim]
--- > primitives =
--- >   [ pr (0::Int)
--- >   , pr (1::Int)
--- >   , prim "+" ((+) :: Int -> Int -> Int)
--- >   , prim "*" ((*) :: Int -> Int -> Int)
--- >   , prim "-" ((-) :: Int -> Int -> Int)
+-- > ingredients :: [Ingredient]
+-- > ingredients  =
+-- >   [ con (0::Int)
+-- >   , con (1::Int)
+-- >   , fun "+" ((+) :: Int -> Int -> Int)
+-- >   , fun "*" ((*) :: Int -> Int -> Int)
+-- >   , fun "-" ((-) :: Int -> Int -> Int)
 -- >   ]
 --
--- The conjure function does the following:
+-- The 'conjure' function does the following:
 --
--- > > conjure "factorial" factorial primitives
+-- > > conjure "factorial" factorial ingredients
 -- > factorial :: Int -> Int
 -- > -- 0.1s, testing 4 combinations of argument values
 -- > -- 0.8s, pruning with 27/65 rules
@@ -94,8 +94,8 @@ import System.CPUTime (getCPUTime)
 -- > factorial 0  =  1
 -- > factorial x  =  x * factorial (x - 1)
 --
--- The primitives list is defined with 'pr' and 'prim'.
-conjure :: Conjurable f => String -> f -> [Prim] -> IO ()
+-- The ingredients list is defined with 'con' and 'fun'.
+conjure :: Conjurable f => String -> f -> [Ingredient] -> IO ()
 conjure  =  conjureWith args
 
 
@@ -113,7 +113,7 @@ conjure  =  conjureWith args
 --
 -- Then:
 --
--- > > conjureFromSpec "square" squareSpec [prim "*" ((*) :: Int -> Int -> Int)]
+-- > > conjureFromSpec "square" squareSpec [fun "*" ((*) :: Int -> Int -> Int)]
 -- > square :: Int -> Int
 -- > -- 0.1s, pruning with 2/6 rules
 -- > -- 0.1s, 1 candidates of size 1
@@ -133,7 +133,7 @@ conjure  =  conjureWith args
 -- >   , holds n $ \x -> square x >= 0
 -- >   , exists n $ \x -> square x > x
 -- >   ]  where  n = 60
-conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Ingredient] -> IO ()
 conjureFromSpec  =  conjureFromSpecWith args
 
 
@@ -141,7 +141,7 @@ conjureFromSpec  =  conjureFromSpecWith args
 --   function specification.
 --
 --   This works like the functions 'conjure' and 'conjureFromSpec' combined.
-conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Ingredient] -> IO ()
 conjure0  =  conjure0With args
 
 
@@ -152,7 +152,7 @@ conjure0  =  conjure0With args
 --
 -- This function is a candidate for going away.
 -- Please set maxSize in Args instead.
-conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Prim] -> IO ()
+conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Ingredient] -> IO ()
 conjureWithMaxSize sz  =  conjureWith args
                        {  maxSize = sz
                        ,  maxEquationSize = min sz (maxEquationSize args)
@@ -248,17 +248,17 @@ args = Args
 -- | Like 'conjure' but allows setting options through 'Args'/'args'.
 --
 -- > conjureWith args{maxSize = 18} "function" function [...]
-conjureWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
+conjureWith :: Conjurable f => Args -> String -> f -> [Ingredient] -> IO ()
 conjureWith args nm f  =  conjure0With args nm f (const True)
 
 -- | Like 'conjureFromSpec' but allows setting options through 'Args'/'args'.
 --
 -- > conjureFromSpecWith args{maxSize = 18} "function" spec [...]
-conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> IO ()
+conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Ingredient] -> IO ()
 conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
 
 -- | Like 'conjure0' but allows setting options through 'Args'/'args'.
-conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> IO ()
+conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Ingredient] -> IO ()
 conjure0With args nm f p es  =  do
   -- the code section below became quite ugly with time and patches.
   -- it is still maintainable and readable as it is, but perhaps
@@ -349,23 +349,23 @@ data Results = Results
 --
 -- The most important part of the result are the tiers of implementations
 -- however results also include candidates, tests and the underlying theory.
-conjpure :: Conjurable f => String -> f -> [Prim] -> Results
+conjpure :: Conjurable f => String -> f -> [Ingredient] -> Results
 conjpure =  conjpureWith args
 
 -- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Prim] -> Results
+conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Ingredient] -> Results
 conjpureFromSpec  =  conjpureFromSpecWith args
 
 -- | Like 'conjure0' but in the pure world.  (cf. 'conjpure')
-conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Prim] -> Results
+conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Ingredient] -> Results
 conjpure0 =  conjpure0With args
 
 -- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Prim] -> Results
+conjpureWith :: Conjurable f => Args -> String -> f -> [Ingredient] -> Results
 conjpureWith args nm f  =  conjpure0With args nm f (const True)
 
 -- | Like 'conjureFromSpecWith' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Prim] -> Results
+conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Ingredient] -> Results
 conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 
 -- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
@@ -374,7 +374,7 @@ conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
 -- 'conjpure', 'conjpureWith', 'conjpureFromSpec', 'conjpureFromSpecWith',
 -- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
 -- 'conjure0' all refer to this.
-conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Prim] -> Results
+conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Ingredient] -> Results
 conjpure0With args@(Args{..}) nm f p es  =  Results
   { implementationss  =  implementationsT
   , candidatess  =  candidatesT
@@ -402,12 +402,12 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
 
 -- | Just prints the underlying theory found by "Test.Speculate"
 --   without actually synthesizing a function.
-conjureTheory :: Conjurable f => String -> f -> [Prim] -> IO ()
+conjureTheory :: Conjurable f => String -> f -> [Ingredient] -> IO ()
 conjureTheory  =  conjureTheoryWith args
 
 
 -- | Like 'conjureTheory' but allows setting options through 'Args'/'args'.
-conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Prim] -> IO ()
+conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Ingredient] -> IO ()
 conjureTheoryWith args nm f es  =  do
   putStrLn $ "theory with " ++ (show . length $ rules thy) ++ " rules and "
                             ++ (show . length $ equations thy) ++ " equations"
@@ -423,7 +423,7 @@ conjureTheoryWith args nm f es  =  do
 -- 1. tiers of candidate definitions
 -- 2. an equational theory
 -- 3. a list of allowed deconstructions
-candidateDefns :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefns :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefns args  =  candidateDefns' args
   where
   candidateDefns'  =  if usePatterns args
@@ -433,7 +433,7 @@ candidateDefns args  =  candidateDefns' args
 
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
-candidateDefns1 :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefns1 :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefns1 args nm f ps  =  first4 (mapT toDefn) $ candidateExprs args nm f ps
   where
   efxs  =  conjureVarApplication nm f
@@ -442,7 +442,7 @@ candidateDefns1 args nm f ps  =  first4 (mapT toDefn) $ candidateExprs args nm f
 
 
 -- | Return apparently unique candidate bodies.
-candidateExprs :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Expr]], Thy, [[Defn]], [Expr])
+candidateExprs :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Expr]], Thy, [[Defn]], [Expr])
 candidateExprs Args{..} nm f ps  =
   ( as \/ concatMapT (`enumerateFillings` recs) ts
   , thy
@@ -490,13 +490,13 @@ candidateExprs Args{..} nm f ps  =
         $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
   thy  =  doubleCheck (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
-  (===)  =  cjAreEqual (prim nm f:ps) maxTests
+       $  cjHoles (fun nm f:ps) ++ [val False, val True] ++ es
+  (===)  =  cjAreEqual (fun nm f:ps) maxTests
 
 
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
-candidateDefnsC :: Conjurable f => Args -> String -> f -> [Prim] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefnsC :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefnsC Args{..} nm f ps  =
   ( discardT hasRedundant $ concatMapT fillingsFor fss
   , thy
@@ -647,8 +647,8 @@ candidateDefnsC Args{..} nm f ps  =
 
   thy  =  doubleCheck (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  cjHoles (prim nm f:ps) ++ [val False, val True] ++ es
-  (===)  =  cjAreEqual (prim nm f:ps) maxTests
+       $  cjHoles (fun nm f:ps) ++ [val False, val True] ++ es
+  (===)  =  cjAreEqual (fun nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
 
 

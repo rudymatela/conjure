@@ -1,4 +1,4 @@
--- oddeven.hs: conjuring even and odd from two sets of primitives
+-- oddeven.hs: conjuring even and odd from two sets of ingredients
 --
 -- Copyright (C) 2025 Rudy Matela
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
@@ -23,30 +23,30 @@ even 5  =  False
 
 main :: IO ()
 main = do
-  conjure "odd"  odd  primitives1
-  conjure "even" even primitives1
-  conjure "odd"  odd  primitives2
-  conjure "even" even primitives2
+  conjure "odd"  odd  ingredients1
+  conjure "even" even ingredients1
+  conjure "odd"  odd  ingredients2
+  conjure "even" even ingredients2
 
-primitives1 :: [Prim]
-primitives1 =
-  [ pr (0::Int)
-  , pr (1::Int)
-  , pr (2::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
+ingredients1 :: [Ingredient]
+ingredients1 =
+  [ con (0::Int)
+  , con (1::Int)
+  , con (2::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
 
-  , prim "-" ((-) :: Int -> Int -> Int)
-  , pr False
-  , pr True
+  , fun "-" ((-) :: Int -> Int -> Int)
+  , con False
+  , con True
   ]
 
-primitives2 :: [Prim]
-primitives2 =
-  [ pr (0::Int)
-  , pr (1::Int)
-  , pr (2::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
+ingredients2 :: [Ingredient]
+ingredients2 =
+  [ con (0::Int)
+  , con (1::Int)
+  , con (2::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
 
-  , prim "`mod`" (mod :: Int -> Int -> Int)
-  , prim "==" ((==) :: Int -> Int -> Bool)
+  , fun "`mod`" (mod :: Int -> Int -> Int)
+  , fun "==" ((==) :: Int -> Int -> Bool)
   ]

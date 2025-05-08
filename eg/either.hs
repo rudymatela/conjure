@@ -47,21 +47,21 @@ lefts' [Left 0, Left 1]  =  [0,1]
 
 main :: IO ()
 main = do
-  conjure "isLeft" isLeft' primitives
-  conjure "isRight" isRight' primitives
-  conjure "fromLeft" fromLeft' primitives
-  conjure "fromLeft" fromRight' primitives
-  conjureFromSpec "either" eitherSpec primitives
-  conjure "lefts" lefts' primitives
+  conjure "isLeft" isLeft' ingredients
+  conjure "isRight" isRight' ingredients
+  conjure "fromLeft" fromLeft' ingredients
+  conjure "fromLeft" fromRight' ingredients
+  conjureFromSpec "either" eitherSpec ingredients
+  conjure "lefts" lefts' ingredients
 
-primitives :: [Prim]
-primitives  =
-  [ prim "Left"  (Left :: A -> Either A A)
-  , prim "Right" (Right :: A -> Either A A)
+ingredients :: [Ingredient]
+ingredients  =
+  [ fun "Left"  (Left :: A -> Either A A)
+  , fun "Right" (Right :: A -> Either A A)
 
-  , pr False
-  , pr True
+  , con False
+  , con True
 
-  , pr ([] :: [A])
-  , prim ":" ((:) :: A -> [A] -> [A])
+  , con ([] :: [A])
+  , fun ":" ((:) :: A -> [A] -> [A])
   ]

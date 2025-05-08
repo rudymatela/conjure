@@ -10,8 +10,8 @@ bench/candidates.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -27,8 +27,8 @@ bench/carry-on.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -44,8 +44,8 @@ bench/erroneous.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -61,8 +61,8 @@ bench/gps2.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -78,8 +78,8 @@ bench/gps.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -95,8 +95,8 @@ bench/ill-hit.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -112,8 +112,8 @@ bench/longshot.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -129,8 +129,8 @@ bench/lowtests.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -146,8 +146,8 @@ bench/p12.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -163,8 +163,8 @@ bench/p30.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -180,8 +180,8 @@ bench/redundants.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -197,8 +197,8 @@ bench/self.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -214,8 +214,8 @@ bench/strategies.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -231,8 +231,8 @@ bench/terpret.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -248,8 +248,8 @@ bench/unique.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -265,8 +265,8 @@ bench/weird.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -282,8 +282,8 @@ eg/arith.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -299,8 +299,8 @@ eg/bits.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -316,8 +316,8 @@ eg/bools.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -333,8 +333,8 @@ eg/bst.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -350,8 +350,8 @@ eg/colin/IntFuns.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -367,8 +367,8 @@ eg/colin/ListFuns.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -384,8 +384,8 @@ eg/count.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -401,8 +401,8 @@ eg/dupos.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -418,8 +418,8 @@ eg/either.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -435,8 +435,8 @@ eg/factorial.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -452,8 +452,8 @@ eg/fib01.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -469,8 +469,8 @@ eg/fibonacci.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -486,8 +486,8 @@ eg/gcd.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -503,8 +503,8 @@ eg/higher.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -520,8 +520,8 @@ eg/id.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -537,8 +537,8 @@ eg/ints.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -554,8 +554,8 @@ eg/list.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -571,8 +571,8 @@ eg/maybe.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -588,8 +588,8 @@ eg/oddeven.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -605,8 +605,8 @@ eg/peano.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -622,8 +622,8 @@ eg/pow.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -639,8 +639,8 @@ eg/replicate.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -656,8 +656,8 @@ eg/setelem.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -673,8 +673,8 @@ eg/sort.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -690,8 +690,8 @@ eg/spec.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -707,8 +707,8 @@ eg/subset.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -724,8 +724,8 @@ eg/take-drop.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -741,8 +741,8 @@ eg/tapps.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -758,8 +758,8 @@ eg/these.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -775,8 +775,8 @@ eg/tree.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -792,8 +792,8 @@ eg/tri.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -809,8 +809,8 @@ eg/tuple.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -823,8 +823,8 @@ mk/All.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -839,8 +839,8 @@ mk/Toplibs.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -886,7 +886,7 @@ src/Conjure/Engine.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -896,12 +896,18 @@ src/Conjure/Engine.o: \
 src/Conjure/Expr.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Expr.hs
+src/Conjure/Ingredient.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs
 src/Conjure.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -909,12 +915,6 @@ src/Conjure.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs
-src/Conjure/Prim.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/Prim.hs \
-  src/Conjure/Expr.hs \
-  src/Conjure/Defn.hs \
-  src/Conjure/Conjurable.hs
 src/Conjure/Reason.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Reason.hs \
@@ -934,8 +934,8 @@ test/conjurable.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -955,8 +955,8 @@ test/defn.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -976,8 +976,8 @@ test/derive.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -997,8 +997,8 @@ test/expr.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -1016,8 +1016,8 @@ test/factorial.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -1035,8 +1035,8 @@ test/red.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -1057,8 +1057,8 @@ test/Test.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \
@@ -1077,8 +1077,8 @@ test/utils.o: \
   src/Conjure/Utils.hs \
   src/Conjure/Red.hs \
   src/Conjure/Reason.hs \
-  src/Conjure/Prim.hs \
   src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
   src/Conjure/Expr.hs \
   src/Conjure/Engine.hs \
   src/Conjure/Defn/Test.hs \

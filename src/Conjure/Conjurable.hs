@@ -269,7 +269,7 @@ mkExprTiers a  =  mapT val (tiers -: [[a]])
 -- | Computes a list of holes encoded as 'Expr's
 --   from a 'Conjurable' functional value.
 --
--- (cf. 'Conjure.Prim.cjHoles')
+-- (cf. 'Conjure.Ingredient.cjHoles')
 conjureHoles :: Conjurable f => f -> [Expr]
 conjureHoles f  =  [eh | (eh,_,Just _,_,_,_) <- conjureReification f]
 

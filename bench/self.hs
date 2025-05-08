@@ -6,19 +6,19 @@ import Conjure
 
 main :: IO ()
 main = do
-  cj "?" ((+) :: Int -> Int -> Int)   primitives
-  cj "?" ((*) :: Int -> Int -> Int)   primitives
-  cj "i" ((+1) :: Int -> Int)         primitives
-  cj "d" ((subtract 1) :: Int -> Int) primitives
+  cj "?" ((+) :: Int -> Int -> Int)   ingredients
+  cj "?" ((*) :: Int -> Int -> Int)   ingredients
+  cj "i" ((+1) :: Int -> Int)         ingredients
+  cj "d" ((subtract 1) :: Int -> Int) ingredients
   where
   -- the monomorphism restriction strikes again
-  cj :: Conjurable f => String -> f -> [Prim] -> IO ()
+  cj :: Conjurable f => String -> f -> [Ingredient] -> IO ()
   cj  =  conjureWith args{maxSize=3,maxEquationSize=0}
 
-primitives :: [Prim]
-primitives =
-  [ pr (0::Int)
-  , pr (1::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "*" ((*) :: Int -> Int -> Int)
+ingredients :: [Ingredient]
+ingredients =
+  [ con (0::Int)
+  , con (1::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "*" ((*) :: Int -> Int -> Int)
   ]

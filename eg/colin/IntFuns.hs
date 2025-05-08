@@ -12,12 +12,12 @@ tri 5 = 15
 -- hoping for something like
 -- tri x = if x==1 then 1 else x + tri (dec x)
 
-triPrimitives :: [Prim]
-triPrimitives =
-  [ prim "==" ((==) :: Int -> Int -> Bool)
-  , pr (1::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "dec" ((\x -> x-1) :: Int -> Int)
+triIngredients :: [Ingredient]
+triIngredients =
+  [ fun "==" ((==) :: Int -> Int -> Bool)
+  , con (1::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "dec" ((\x -> x-1) :: Int -> Int)
   ]
 
 -- looking through 3039 candidates, 25% match, 1/4 assignments
@@ -34,13 +34,13 @@ fib 7 = 21
 -- hoping for something like
 -- fib x = if x <= 1 then 1 else fib (dec (dec x)) + fib (dec x)
 --         1  2 3  4      5      6    7    8   9   10 11  12  13
-fibPrimitives :: [Prim]
-fibPrimitives =
-  [ prim "<=" ((<=) :: Int -> Int -> Bool)
-  , pr (0::Int)
-  , pr (1::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "dec" ((\x -> x-1) :: Int -> Int)
+fibIngredients :: [Ingredient]
+fibIngredients =
+  [ fun "<=" ((<=) :: Int -> Int -> Bool)
+  , con (0::Int)
+  , con (1::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "dec" ((\x -> x-1) :: Int -> Int)
   ]
 
 -- looking through 23418 candidates
@@ -54,10 +54,10 @@ exp 5 = 3125
 
 -- hoping for
 -- exp x = product (replicate x x)
-expPrimitives :: [Prim]
-expPrimitives =
-  [ prim "replicate" (replicate :: Int -> Int -> [Int])
-  , prim "product" (product :: [Int] -> Int)
+expIngredients :: [Ingredient]
+expIngredients =
+  [ fun "replicate" (replicate :: Int -> Int -> [Int])
+  , fun "product" (product :: [Int] -> Int)
   ]
 
 -- looking through 18 candidates
@@ -74,12 +74,12 @@ pri 7 = True
 
 -- hoping for something like
 -- pri p = factors p == list2 1 p
-priPrimitives :: [Prim]
-priPrimitives =
-  [ prim "==" ((==) :: [Int] -> [Int] -> Bool)
-  , prim "factors" ((\n -> filter (\k -> n `mod` k == 0) [1..n]) :: Int -> [Int])
-  , prim "list2" ((\i j -> [i,j]) :: Int -> Int -> [Int])
-  , pr (1 :: Int)
+priIngredients :: [Ingredient]
+priIngredients =
+  [ fun "==" ((==) :: [Int] -> [Int] -> Bool)
+  , fun "factors" ((\n -> filter (\k -> n `mod` k == 0) [1..n]) :: Int -> [Int])
+  , fun "list2" ((\i j -> [i,j]) :: Int -> Int -> [Int])
+  , con (1 :: Int)
   ]
 
 -- looking through 38 candidates, 100% match, 7/7 assignments
@@ -88,8 +88,8 @@ priPrimitives =
 
 main :: IO ()
 main = do
-  conjureWithMaxSize 10 "tri" tri triPrimitives
-  conjureWith args{maxSize=13} "fib" fib fibPrimitives
-  conjure "exp" exp expPrimitives
-  conjure "pri" pri priPrimitives
+  conjureWithMaxSize 10 "tri" tri triIngredients
+  conjureWith args{maxSize=13} "fib" fib fibIngredients
+  conjure "exp" exp expIngredients
+  conjure "pri" pri priIngredients
 

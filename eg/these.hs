@@ -74,43 +74,43 @@ cathese' [These 0 1, That 2]  =  [0,1,2]
 main :: IO ()
 main  =  do
   conjure "fromThese" fromThese'
-    [ prim "," ((,) :: A -> B -> (A,B))
+    [ fun "," ((,) :: A -> B -> (A,B))
     ]
 
   conjure "listhese" listhese'
-    [ pr ([] :: [A])
-    , prim ":" ((:) :: A -> [A] -> [A])
+    [ con ([] :: [A])
+    , fun ":" ((:) :: A -> [A] -> [A])
     ]
 
   conjure "cathis" cathis'
-    [ pr ([] :: [A])
-    , prim ":" ((:) :: A -> [A] -> [A])
-    , prim "isThis" (isThis :: These A B -> Bool)
-    , prim "fromThis" (fromThis :: These A B -> A)
+    [ con ([] :: [A])
+    , fun ":" ((:) :: A -> [A] -> [A])
+    , fun "isThis" (isThis :: These A B -> Bool)
+    , fun "fromThis" (fromThis :: These A B -> A)
     , guard
     ]
 
   conjure "cathat" cathat'
-    [ pr ([] :: [B])
-    , prim ":" ((:) :: B -> [B] -> [B])
-    , prim "isThat" (isThat :: These A B -> Bool)
-    , prim "fromThat" (fromThat :: These A B -> B)
+    [ con ([] :: [B])
+    , fun ":" ((:) :: B -> [B] -> [B])
+    , fun "isThat" (isThat :: These A B -> Bool)
+    , fun "fromThat" (fromThat :: These A B -> B)
     , guard
     ]
 
   conjureWith args{maxPatternDepth = 2} "cathis" cathis'
-    [ pr ([] :: [A])
-    , prim ":" ((:) :: A -> [A] -> [A])
+    [ con ([] :: [A])
+    , fun ":" ((:) :: A -> [A] -> [A])
     ]
 
   conjureWith args{maxPatternDepth = 2} "cathat" cathat'
-    [ pr ([] :: [B])
-    , prim ":" ((:) :: B -> [B] -> [B])
+    [ con ([] :: [B])
+    , fun ":" ((:) :: B -> [B] -> [B])
     ]
 
   conjureWith args{maxPatternDepth = 2} "cathese" cathese'
-    [ pr ([] :: [A])
-    , prim ":" ((:) :: A -> [A] -> [A])
+    [ con ([] :: [A])
+    , fun ":" ((:) :: A -> [A] -> [A])
     ]
   -- cathese []  =  []
   -- cathese (Neither : ts)  =  cathese ts

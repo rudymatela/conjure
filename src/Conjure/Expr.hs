@@ -352,14 +352,15 @@ possibleHoles  =  nubSort . ph . nubSort . map holeAsTypeOf
 
 -- -- Expression enumeration -- --
 
--- | Enumerate applications between values of the given list of primitives
---   and of the given expressions's type.
+-- | Enumerate applications between values of
+--   the given list of atomic expressions
+--   and of the given resulting expressions's type.
 --
 -- __Arguments:__
 --
 -- 1. an 'Expr' whose type we are interested in
 -- 2. a filtering function, returning 'True' for the expressions to keep
--- 3. a list of primitives to be used in building expression.
+-- 3. a list of atomic expressions to be used in building expression.
 --
 -- __Result:__ a potentially infinite list of list of enumerated expressions
 --

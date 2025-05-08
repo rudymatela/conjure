@@ -21,45 +21,45 @@ product' [x,y,z]  =  x*y*z
 
 main :: IO ()
 main = do
-  conjure "third"   third    primitives
-  conjure "product" product' primitives
-  conjure "product" product' primitivesWithFold
+  conjure "third"   third    ingredients
+  conjure "product" product' ingredients
+  conjure "product" product' ingredientsWithFold
 
-primitives :: [Prim]
-primitives =
-  [ pr (0 :: Int)
-  , pr (1 :: Int)
+ingredients :: [Ingredient]
+ingredients =
+  [ con (0 :: Int)
+  , con (1 :: Int)
 #if __GLASGOW_HASKELL__ < 800
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "*" ((*) :: Int -> Int -> Int)
-  , prim "null" (null :: [Int] -> Bool)
-  , prim "head" (head :: [Int] -> Int)
-  , prim "tail" (tail :: [Int] -> [Int])
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "*" ((*) :: Int -> Int -> Int)
+  , fun "null" (null :: [Int] -> Bool)
+  , fun "head" (head :: [Int] -> Int)
+  , fun "tail" (tail :: [Int] -> [Int])
 #else
-  , prim "+" ((+) @Int)
-  , prim "*" ((*) @Int)
+  , fun "+" ((+) @Int)
+  , fun "*" ((*) @Int)
 -- the following #if was added just for dramatic effect (see notes below)
 #if __GLASGOW_HASKELL__ < 710
-  , prim "null" (null @Int)
+  , fun "null" (null @Int)
 #else
-  , prim "null" (null @[] @Int)
+  , fun "null" (null @[] @Int)
 #endif
-  , prim "head" (head @Int)
-  , prim "tail" (tail @Int)
+  , fun "head" (head @Int)
+  , fun "tail" (tail @Int)
 #endif
   ]
 
-primitivesWithFold :: [Prim]
+ingredientsWithFold :: [Ingredient]
 #if __GLASGOW_HASKELL__ < 800
-primitivesWithFold  =
-    prim "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
-  : primitives
+ingredientsWithFold  =
+    fun "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
+  : ingredients
 #else
 -- the following #if was added just for dramatic effect (see notes below)
 #if __GLASGOW_HASKELL__ < 710
-primitivesWithFold  =  prim "foldr" (foldr @Int @Int) : primitives
+ingredientsWithFold  =  fun "foldr" (foldr @Int @Int) : ingredients
 #else
-primitivesWithFold  =  prim "foldr" (foldr @[] @Int @Int) : primitives
+ingredientsWithFold  =  fun "foldr" (foldr @[] @Int @Int) : ingredients
 #endif
 #endif
 

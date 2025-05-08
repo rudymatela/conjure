@@ -56,62 +56,62 @@ last' [x,y,z]  =  z
 main :: IO ()
 main = do
   conjure "length" length'
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
     ]
 
   conjure "reverse" reverse'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjure "++" (+++)
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
     ]
 
   conjure "++" (+++)
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
   conjure "last" last'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "null" (null :: [Int] -> Bool)
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "null" (null :: [Int] -> Bool)
     , guard
-    , prim "undefined" (undefined :: Int)
+    , fun "undefined" (undefined :: Int)
     ]
 
   conjureWith args{maxPatternDepth=2} "last" last'
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "undefined" (undefined :: Int)
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "undefined" (undefined :: Int)
     ]
 
   conjure "zip" (zip')
-    [ pr ([] :: [(Int,Int)])
-    , prim ":" ((:) :: (Int,Int) -> [(Int,Int)] -> [(Int,Int)])
-    , prim "," ((,) :: Int -> Int -> (Int,Int))
+    [ con ([] :: [(Int,Int)])
+    , fun ":" ((:) :: (Int,Int) -> [(Int,Int)] -> [(Int,Int)])
+    , fun "," ((,) :: Int -> Int -> (Int,Int))
     ]
 
   conjure "\\/" (\/)
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
     ]
 
   conjure "ordered" ordered'
-    [ pr False
-    , pr True
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
-    , prim "null" (null :: [Int] -> Bool)
-    , prim "head" (head :: [Int] -> Int)
-    , prim "tail" (tail :: [Int] -> [Int])
+    [ con False
+    , con True
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
+    , fun "null" (null :: [Int] -> Bool)
+    , fun "head" (head :: [Int] -> Int)
+    , fun "tail" (tail :: [Int] -> [Int])
     ]
 
   -- for elem, please see eg/setelem.hs

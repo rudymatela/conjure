@@ -9,7 +9,7 @@ import Test.LeanCheck
 -- First, all functions from Data.Tuple
 -- Though their types have been simplified to (A, A),
 -- they might as well have had (A, B), (B, A), etc in types.
--- This makes it to use a single background primitives list for everything.
+-- This makes it to easier to use a list of ingredients for everything.
 
 fst' :: (A,A) -> A
 fst' (0,1)  =  0
@@ -71,35 +71,35 @@ main = do
   -- the following 5 are pretty easy to Conjure:
   conjure "fst"  fst'   []
   conjure "snd"  snd'   []
-  conjure "swap" swap'  primitives
-  conjureFromSpec "curry"     currySpec primitives
-  conjureFromSpec "uncurry" uncurrySpec primitives
+  conjure "swap" swap'  ingredients
+  conjureFromSpec "curry"     currySpec ingredients
+  conjureFromSpec "uncurry" uncurrySpec ingredients
 
   -- these are more interesting:
-  conjure "pairwise" pairwise primitives
-  conjure "catpairs" catpairs primitives
+  conjure "pairwise" pairwise ingredients
+  conjure "catpairs" catpairs ingredients
 
   -- by increasing the pattern depth, we find shorter versions:
-  conjureWith args{maxPatternDepth=2} "pairwise" pairwise primitives
-  conjureWith args{maxPatternDepth=2} "catpairs" catpairs primitives
+  conjureWith args{maxPatternDepth=2} "pairwise" pairwise ingredients
+  conjureWith args{maxPatternDepth=2} "catpairs" catpairs ingredients
 
-primitives :: [Prim]
-primitives  =
+ingredients :: [Ingredient]
+ingredients  =
   -- pairs
-  [ prim "," ((,) :: A -> A -> (A,A))
-  , prim "fst" (fst :: (A,A) -> A)
-  , prim "snd" (snd :: (A,A) -> A)
+  [ fun "," ((,) :: A -> A -> (A,A))
+  , fun "fst" (fst :: (A,A) -> A)
+  , fun "snd" (snd :: (A,A) -> A)
 
   -- lists
-  , prim "[]" ([] :: [A])
-  , prim ":" ((:) :: A -> [A] -> [A])
-  , prim "null" (null :: [A] -> Bool)
-  , prim "head" (head :: [A] -> A)
-  , prim "tail" (tail :: [A] -> [A])
+  , fun "[]" ([] :: [A])
+  , fun ":" ((:) :: A -> [A] -> [A])
+  , fun "null" (null :: [A] -> Bool)
+  , fun "head" (head :: [A] -> A)
+  , fun "tail" (tail :: [A] -> [A])
 
   -- lists of pairs
-  , prim "[]" ([] :: [(A,A)])
-  , prim ":" ((:) :: (A,A) -> [(A,A)] -> [(A,A)])
+  , fun "[]" ([] :: [(A,A)])
+  , fun ":" ((:) :: (A,A) -> [(A,A)] -> [(A,A)])
 
   -- allow guards
   , guard

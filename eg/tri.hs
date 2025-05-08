@@ -12,7 +12,7 @@ tri 5  =  15
 main :: IO ()
 main  =  do
   conjure "tri" tri
-    [ pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (1::Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]

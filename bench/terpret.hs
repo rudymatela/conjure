@@ -28,20 +28,20 @@ t1c :: IO ()
 t1c  =  do
   putStrLn "TerpreT benchmark #1: invert\n"
 
-  conjure "invert" t1p primitives123
+  conjure "invert" t1p ingredients123
 
--- the same primitives are used for TerpreT #1, #2 and #3
-primitives123 :: [Prim]
-primitives123  =
-  [ pr False
-  , pr True
-  , prim "not" not
-  , prim "&&" (&&)
-  , prim "||" (||)
-  , pr ([] :: [Bool])
-  , prim ":" ((:) :: Bool -> [Bool] -> [Bool])
---, prim "map" (map :: (Bool -> Bool) -> [Bool] -> [Bool])
-  , prif (undefined :: [Bool])
+-- the same ingredients are used for TerpreT #1, #2 and #3
+ingredients123 :: [Ingredient]
+ingredients123  =
+  [ con False
+  , con True
+  , fun "not" not
+  , fun "&&" (&&)
+  , fun "||" (||)
+  , con ([] :: [Bool])
+  , fun ":" ((:) :: Bool -> [Bool] -> [Bool])
+--, fun "map" (map :: (Bool -> Bool) -> [Bool] -> [Bool])
+  , iif (undefined :: [Bool])
   ]
 
 
@@ -58,7 +58,7 @@ t2c :: IO ()
 t2c  =  do
   putStrLn "TerpreT benchmark #2: prepend zero\n"
 
-  conjure "prependZero" t2p primitives123
+  conjure "prependZero" t2p ingredients123
 
 
 -- TerpreT #3 -- binary decrement --
@@ -83,7 +83,7 @@ t3c :: IO ()
 t3c  =  do
   putStrLn "TerpreT benchmark #3: binary decrement\n"
 
-  conjure "decrement" t3p primitives123
+  conjure "decrement" t3p ingredients123
 
 
 -- TerpreT #4 -- 2-bit controlled shift register --
@@ -108,14 +108,14 @@ t4c :: IO ()
 t4c  =  do
   putStrLn "TerpreT benchmark #4: controlled shift\n"
 
-  conjureWith args{target = 50400} "cshift" t4p1 $ primitives123 ++
-    [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
-    , prif (undefined :: (Bool,Bool,Bool))
+  conjureWith args{target = 50400} "cshift" t4p1 $ ingredients123 ++
+    [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
+    , iif (undefined :: (Bool,Bool,Bool))
     ]
 
-  conjure "cshift" t4p2 $ primitives123 ++
-    [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
-    , prif (undefined :: (Bool,Bool,Bool))
+  conjure "cshift" t4p2 $ ingredients123 ++
+    [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
+    , iif (undefined :: (Bool,Bool,Bool))
     ]
 
 
@@ -135,15 +135,15 @@ t5c :: IO ()
 t5c  =  do
   putStrLn "TerpreT benchmark #5: full adder\n"
 
-  -- using primitives123 below works, but increases the runtime to 18 seconds
+  -- using ingredients123 below works, but increases the runtime to 18 seconds
   -- let's leave it commented out so runtime is faster when running automated tests
-  -- BENCHMARK: uncomment primitives123
-  conjure "fadder" t5p $ -- primitives123 ++
-    [ prim "not" not
-    , prim "," ((,) :: Bool -> Bool -> (Bool,Bool))
-    , prim "==" ((==) :: Bool -> Bool -> Bool)
---  , prim "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
-    , prif (undefined :: (Bool,Bool))
+  -- BENCHMARK: uncomment ingredients123
+  conjure "fadder" t5p $ -- ingredients123 ++
+    [ fun "not" not
+    , fun "," ((,) :: Bool -> Bool -> (Bool,Bool))
+    , fun "==" ((==) :: Bool -> Bool -> Bool)
+--  , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
+    , iif (undefined :: (Bool,Bool))
     ]
 -- the printed function is weird, but correct
 -- fadder p q r  =  if p == q then (p,r) else (r,not r)
@@ -160,11 +160,11 @@ t6p (True ,True ) (True ,True )  =  (True ,True ,False)
 t6c :: IO ()
 t6c  =  do
   putStrLn "TerpreT benchmark #6: 2-bit adder\n"
-  conjureWith args{maxSize=6} "adder2" t6p $ primitives123 ++
-    [ prim ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
-    , prim "==" ((==) :: Bool -> Bool -> Bool)
-    , prim "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
-    , prif (undefined :: (Bool,Bool,Bool))
+  conjureWith args{maxSize=6} "adder2" t6p $ ingredients123 ++
+    [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
+    , fun "==" ((==) :: Bool -> Bool -> Bool)
+    , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
+    , iif (undefined :: (Bool,Bool,Bool))
     ]
 
 
@@ -186,16 +186,16 @@ t7c  =  do
   putStrLn "TerpreT benchmark #7: access\n"
   -- yes, one can implement index with index...
   conjure "`access`" t7p
-    [ prim "!!" ((!!) :: [A] -> Int -> A)
+    [ fun "!!" ((!!) :: [A] -> Int -> A)
     ]
 
   conjure "`access`" t7p
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , pr ([] :: [A])
-    , prim ":" ((:) :: A -> [A] -> [A])
-    , prim "-" ((-) :: Int -> Int -> Int)
-    , prim "undefined" (undefined :: A)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , con ([] :: [A])
+    , fun ":" ((:) :: A -> [A] -> [A])
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun "undefined" (undefined :: A)
     ]
 
 
@@ -210,22 +210,22 @@ t8c  =  do
   putStrLn "TerpreT benchmark #8: decrement elements\n"
 
   conjure "decrelements" t8p
-    [ pr (1 :: Int)
-    , pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "-" ((-) :: Int -> Int -> Int)
-    , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
+    [ con (1 :: Int)
+    , con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
     ]
   -- above, even though map is provided, Conjure cannot use it as it cannot
   -- introduce lambdas
 
   conjure "decrelements" t8p
-    [ pr (1 :: Int)
-    , pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "-" ((-) :: Int -> Int -> Int)
-    , prim "map" (map :: (Int -> Int) -> [Int] -> [Int])
-    , prim "subtract" (subtract :: Int -> Int -> Int)
+    [ con (1 :: Int)
+    , con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
+    , fun "subtract" (subtract :: Int -> Int -> Int)
     ]
   -- now above, the story changes because of subtract, map is used
 

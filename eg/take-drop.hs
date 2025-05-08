@@ -27,20 +27,20 @@ main = do
   -- drop x []  =  []                   -- 2
   -- drop x (y:xs)  =  drop (x - 1) xs  -- 7
   conjure "drop" (drop' :: Int -> [A] -> [A])
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , pr ([] :: [A])
-    , prim ":" ((:) :: A -> [A] -> [A])
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , con ([] :: [A])
+    , fun ":" ((:) :: A -> [A] -> [A])
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   -- take 0 xs  =  []                     -- 1
   -- take x []  =  []                     -- 2
   -- take x (y:xs)  =  y:take (x - 1) xs  -- 9
   conjure "take" (take' :: Int -> [A] -> [A])
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , pr ([] :: [A])
-    , prim "-" ((-) :: Int -> Int -> Int)
-    , prim ":" ((:) :: A -> [A] -> [A])
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , con ([] :: [A])
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun ":" ((:) :: A -> [A] -> [A])
     ]

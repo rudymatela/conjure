@@ -61,26 +61,26 @@ main :: IO ()
 main = do
   -- low number of tests, cannot conjure due to incorrect property
   conjureWith as{maxTests=60} "subset" (subset')
-    [ prim "sort" (sort :: [Int] -> [Int])
-    , prim "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
+    [ fun "sort" (sort :: [Int] -> [Int])
+    , fun "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
     ]
 
   -- subset xs ys  =  sort xs `isSubsequenceOf` sort ys
   conjureWith as{maxTests=360} "subset" (subset')
-    [ prim "sort" (sort :: [Int] -> [Int])
-    , prim "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
+    [ fun "sort" (sort :: [Int] -> [Int])
+    , fun "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
     ]
 
   -- low number of tests, cannot conjure due to incorrect property
   conjureWith as{maxTests=60} "replicates" replicates'
-    [ prim "replicate" (replicate :: Int -> String -> [String])
-    , prim "transpose" (transpose :: [[Char]] -> [[Char]])
-    , prim "concat"    (concat :: [String] -> String)
+    [ fun "replicate" (replicate :: Int -> String -> [String])
+    , fun "transpose" (transpose :: [[Char]] -> [[Char]])
+    , fun "concat"    (concat :: [String] -> String)
     ]
 
   -- emulates how MagicHaskeller generates "replicates"
   conjureWith as{maxTests=360} "replicates" replicates'
-    [ prim "replicate" (replicate :: Int -> String -> [String])
-    , prim "transpose" (transpose :: [[Char]] -> [[Char]])
-    , prim "concat"    (concat :: [String] -> String)
+    [ fun "replicate" (replicate :: Int -> String -> [String])
+    , fun "transpose" (transpose :: [[Char]] -> [[Char]])
+    , fun "concat"    (concat :: [String] -> String)
     ]

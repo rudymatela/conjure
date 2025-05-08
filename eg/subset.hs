@@ -44,16 +44,16 @@ main = do
   -- subset [] ys  =  True
   -- subset (x:xs) ys  =  elem x ys && subset xs ys
   conjure "subset" (subset')
-    [ pr ([] :: [Int])
-    , pr True
-    , pr False
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "elem" (elem :: Int -> [Int] -> Bool)
+    [ con ([] :: [Int])
+    , con True
+    , con False
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "elem" (elem :: Int -> [Int] -> Bool)
     ]
 
   -- subset xs ys  =  sort xs `isSubsequenceOf` sort ys
   conjure "subset" (subset')
-    [ prim "sort" (sort :: [Int] -> [Int])
-    , prim "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
+    [ fun "sort" (sort :: [Int] -> [Int])
+    , fun "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
     ]

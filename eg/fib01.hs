@@ -31,19 +31,19 @@ main  =  do
   -- Found!  It takes about 12 seconds to run with maxSize=8
   -- running with maxSize = 5 for faster runtime
   conjureWith args{maxSize=5, maxConstantSize=1} "fib01" fib01
-    [ pr (0::Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
+    [ con (0::Int)
+    , fun "dec" (subtract 1 :: Int -> Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
     ]
 
   -- It takes about 27 seconds to run with maxSize=12
   -- running with maxSize = 9 for faster runtime
   conjureWith args{usePatterns = False, maxSize = 1, maxConstantSize=1} "fib01" fib01
-    [ pr (0::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "dec" (subtract 1 :: Int -> Int)
-    , prim "<=" ((<=) :: Int -> Int -> Bool)
-    , prif (undefined :: Int)
+    [ con (0::Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "dec" (subtract 1 :: Int -> Int)
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
+    , iif (undefined :: Int)
     ]
   -- expected function:
   -- fib01 x y z  =  if z <= 0                     -- 4

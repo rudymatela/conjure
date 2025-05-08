@@ -97,72 +97,72 @@ instance Conjurable Tree where
 main :: IO ()
 main = do
   conjure "leftmost" leftmost
-    [ prim "undefined" (undefined :: Int)
-    , prif (undefined :: Int)
-    , prim "nil" nil
+    [ fun "undefined" (undefined :: Int)
+    , iif (undefined :: Int)
+    , fun "nil" nil
     ]
 
   conjure "rightmost" rightmost
-    [ prim "undefined" (undefined :: Int)
-    , prif (undefined :: Int)
-    , prim "nil" nil
+    [ fun "undefined" (undefined :: Int)
+    , iif (undefined :: Int)
+    , fun "nil" nil
     ]
 
   conjure "size" size
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "nil" nil
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "nil" nil
     ]
 
   conjure "height" height
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , pr (-1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "max" (max :: Int -> Int -> Int)
-    , prim "nil" nil
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , con (-1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "max" (max :: Int -> Int -> Int)
+    , fun "nil" nil
     ]
 
   conjure "mem" mem
-    [ pr False
-    , prim "||" (||)
-    , prim "==" ((==) :: Int -> Int -> Bool)
+    [ con False
+    , fun "||" (||)
+    , fun "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- unreachable: needs size 22 but OOMs at 19/20 (v0.5.16)
   conjureWithMaxSize 12 "ordered" ordered
-    [ pr True
-    , pr False
-    , prim "&&" (&&)
-    , prim "||" (||)
-    , prim "<" ((<) :: Int -> Int -> Bool)
-    , prim "rightmost" rightmost
-    , prim "leftmost" leftmost
-    , prim "nil" nil
+    [ con True
+    , con False
+    , fun "&&" (&&)
+    , fun "||" (||)
+    , fun "<" ((<) :: Int -> Int -> Bool)
+    , fun "rightmost" rightmost
+    , fun "leftmost" leftmost
+    , fun "nil" nil
     ]
 
   conjure "ordered" ordered
-    [ prim "strictlyOrdered" (strictlyOrdered :: [Int] -> Bool)
-    , prim "inorder" inorder
+    [ fun "strictlyOrdered" (strictlyOrdered :: [Int] -> Bool)
+    , fun "inorder" inorder
     ]
 
   conjureWithMaxSize 12 "preorder" preorder
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjureWithMaxSize 12 "inorder" inorder
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjureWithMaxSize 12 "posorder" posorder
-    [ pr ([] :: [Int])
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "++" ((++) :: [Int] -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
 

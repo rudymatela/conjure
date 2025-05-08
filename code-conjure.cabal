@@ -77,7 +77,7 @@ library
                  , Conjure.Conjurable.Derive
                  , Conjure.Engine
                  , Conjure.Expr
-                 , Conjure.Prim
+                 , Conjure.Ingredient
                  , Conjure.Utils
                  , Conjure.Defn
                  , Conjure.Defn.Redundancy

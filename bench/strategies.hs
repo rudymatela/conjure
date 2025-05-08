@@ -37,7 +37,7 @@ mkStrategy s  =  args
     "only typed"        -> [0,0,0,0]
     _                   -> error "unknown strategy"
 
-conjureStrategy :: Conjurable f => String -> String -> f -> [Prim] -> IO ()
+conjureStrategy :: Conjurable f => String -> String -> f -> [Ingredient] -> IO ()
 conjureStrategy name nm f prims  =  do
   putStrLn $ "-- strategy: " ++ name
   conjureWith (mkStrategy name) nm f prims
@@ -58,15 +58,15 @@ strategies  =
 main :: IO ()
 main  =  do
   sequence_
-    [ conjureStrategy s "factorial n" factorial primitives
+    [ conjureStrategy s "factorial n" factorial ingredients
     | s <- strategies
     ]
 
-primitives :: [Prim]
-primitives = 
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+ingredients :: [Ingredient]
+ingredients = 
+    [ con (0::Int)
+    , con (1::Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]

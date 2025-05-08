@@ -39,17 +39,17 @@ tnpo 2  =  7
 
 main :: IO ()
 main = do
-  conjure "double" double primitives
-  conjure "triple" triple primitives
-  conjure "add"    add    primitives
-  conjure "square" square primitives
-  conjure "cube"   cube   primitives
-  conjure "tnpo"   tnpo   primitives
+  conjure "double" double ingredients
+  conjure "triple" triple ingredients
+  conjure "add"    add    ingredients
+  conjure "square" square ingredients
+  conjure "cube"   cube   ingredients
+  conjure "tnpo"   tnpo   ingredients
 
-primitives :: [Prim]
-primitives =
-  [ pr (0::Int)
-  , pr (1::Int)
-  , prim "+" ((+) :: Int -> Int -> Int)
-  , prim "*" ((*) :: Int -> Int -> Int)
+ingredients :: [Ingredient]
+ingredients =
+  [ con (0::Int)
+  , con (1::Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "*" ((*) :: Int -> Int -> Int)
   ]

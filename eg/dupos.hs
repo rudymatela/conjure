@@ -53,32 +53,32 @@ main = do
   --                       else duplicates xs                              -- 17
   -- within reach performance wise.
   conjure "duplicates" duplicates'
-    [ pr ([] :: [Int])
-    , prim "not" not
-    , prim "&&" (&&)
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "elem" (elem :: Int -> [Int] -> Bool)
+    [ con ([] :: [Int])
+    , fun "not" not
+    , fun "&&" (&&)
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "elem" (elem :: Int -> [Int] -> Bool)
     , guard
     ]
 
   conjureFromSpec "duplicates" duplicatesSpec
-    [ pr ([] :: [Int])
-    , prim "not" not
-    , prim "&&" (&&)
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "elem" (elem :: Int -> [Int] -> Bool)
+    [ con ([] :: [Int])
+    , fun "not" not
+    , fun "&&" (&&)
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "elem" (elem :: Int -> [Int] -> Bool)
     , guard
     ]
 
   conjure "positionsFrom" positionsFrom'
-    [ pr ([] :: [Int])
-    , pr (1 :: Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim ":" ((:) :: Int -> [Int] -> [Int])
-    , prim "==" ((==) :: A -> A -> Bool)
+    [ con ([] :: [Int])
+    , con (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "==" ((==) :: A -> A -> Bool)
 
---  , prif (undefined :: [Int])
+--  , iif (undefined :: [Int])
     -- cheat codes:
-    , prim "id" (id :: [Int] -> [Int])
-    , prif (undefined :: [Int] -> [Int])
+    , fun "id" (id :: [Int] -> [Int])
+    , iif (undefined :: [Int] -> [Int])
     ]

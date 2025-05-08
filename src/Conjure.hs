@@ -17,18 +17,18 @@
 --
 -- Step 2: declare a list with the potential building blocks:
 --
--- > primitives :: [Prim]
--- > primitives =
--- >   [ pr (0::Int)
--- >   , pr (1::Int)
--- >   , prim "+" ((+) :: Int -> Int -> Int)
--- >   , prim "*" ((*) :: Int -> Int -> Int)
--- >   , prim "-" ((-) :: Int -> Int -> Int)
+-- > ingredients :: [Ingredient]
+-- > ingredients =
+-- >   [ con (0::Int)
+-- >   , con (1::Int)
+-- >   , fun "+" ((+) :: Int -> Int -> Int)
+-- >   , fun "*" ((*) :: Int -> Int -> Int)
+-- >   , fun "-" ((-) :: Int -> Int -> Int)
 -- >   ]
 --
 -- Step 3: call 'conjure' and see your generated function:
 --
--- > > conjure "factorial" factorial primitives
+-- > > conjure "factorial" factorial ingredients
 -- > factorial :: Int -> Int
 -- > -- 0.1s, testing 4 combinations of argument values
 -- > -- 0.8s, pruning with 27/65 rules
@@ -62,11 +62,11 @@
 -- > take' 3 [x,y]  =  [x,y]
 --
 -- > > conjure "take" (take' :: Int -> [A] -> [A])
--- > >   [ pr (0 :: Int)
--- > >   , pr (1 :: Int)
--- > >   , pr ([] :: [A])
--- > >   , prim ":" ((:) :: A -> [A] -> [A])
--- > >   , prim "-" ((-) :: Int -> Int -> Int)
+-- > >   [ con (0 :: Int)
+-- > >   , con (1 :: Int)
+-- > >   , con ([] :: [A])
+-- > >   , fun ":" ((:) :: A -> [A] -> [A])
+-- > >   , fun "-" ((-) :: Int -> Int -> Int)
 -- > >   ]
 -- > take :: Int -> [A] -> [A]
 -- > -- testing 153 combinations of argument values
@@ -80,9 +80,9 @@
 -- > take x (y:xs)  =  y:take (x - 1) xs
 --
 -- The above example also takes less than a second to run in a modern laptop.
--- The selection of functions in the list of primitives was minimized
+-- The selection of functions in the list of ingredients was minimized
 -- to what was absolutely needed here.
--- With a larger collection as primitives YMMV.
+-- With a larger collection as ingredients YMMV.
 --
 -- Conjure works for user-defined algebraic data types too,
 -- given that they are made instances of the 'Conjurable' typeclass.
@@ -94,12 +94,12 @@ module Conjure
   (
 -- * Basic use
     conjure
-  , Prim
-  , pr
-  , prim
+  , Ingredient
+  , con
+  , fun
   , guard
-  , prif
-  , primOrdCaseFor
+  , iif
+  , ordcase
 
 -- * Advanced use
   , conjureWithMaxSize
@@ -138,5 +138,5 @@ where
 
 import Conjure.Engine
 import Conjure.Conjurable
-import Conjure.Prim
+import Conjure.Ingredient
 import Conjure.Conjurable.Derive

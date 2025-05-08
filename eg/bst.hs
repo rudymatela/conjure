@@ -123,74 +123,74 @@ instance Conjurable Tree where
 main :: IO ()
 main = do
   conjure "mem" mem
-    [ pr False
-    , prim "||" (||)
-    , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "<" ((<) :: Int -> Int -> Bool)
+    [ con False
+    , fun "||" (||)
+    , fun "==" ((==) :: Int -> Int -> Bool)
+    , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
     ]
 
   conjure "mem" mem
-    [ pr False
-    , pr True
-    , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , primOrdCaseFor (undefined :: Bool)
+    [ con False
+    , con True
+    , fun "`compare`" (compare :: Int -> Int -> Ordering)
+    , ordcase (undefined :: Bool)
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 22)
   conjureWithMaxSize 12 "insert" insert
-    [ pr Leaf
-    , prim "Node" Node
-    , prim "unit" unit
-    , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , primOrdCaseFor (undefined :: Tree)
+    [ con Leaf
+    , fun "Node" Node
+    , fun "unit" unit
+    , fun "`compare`" (compare :: Int -> Int -> Ordering)
+    , ordcase (undefined :: Tree)
     ]
 
   -- reachable in 15s, candidate #32878 at size 14.
   -- increase target to 50400 to reach...
   conjureFromSpecWith args{target=5040} "before" beforeSpec
-    [ pr Leaf
-    , prim "Node" Node
-    , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "<" ((<) :: Int -> Int -> Bool)
+    [ con Leaf
+    , fun "Node" Node
+    , fun "==" ((==) :: Int -> Int -> Bool)
+    , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
     ]
 
   -- reachable in 14s, candidate #32747 at size 14.
   -- increase target to 50400 to reach...
   conjureFromSpecWith args{target=5040} "beyond" beyondSpec
-    [ pr Leaf
-    , prim "Node" Node
-    , prim "==" ((==) :: Int -> Int -> Bool)
-    , prim "<=" ((<) :: Int -> Int -> Bool)
+    [ con Leaf
+    , fun "Node" Node
+    , fun "==" ((==) :: Int -> Int -> Bool)
+    , fun "<=" ((<) :: Int -> Int -> Bool)
     , guard
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
   -- using maxEquationSize = 7 reduces runtime from 13s to 11s
   conjureFromSpecWith args{maxSize = 12, maxEquationSize = 7} "before" beforeSpec
-    [ pr Leaf
-    , prim "Node" Node
-    , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , primOrdCaseFor (undefined :: Tree)
+    [ con Leaf
+    , fun "Node" Node
+    , fun "`compare`" (compare :: Int -> Int -> Ordering)
+    , ordcase (undefined :: Tree)
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
   -- using maxEquationSize = 7 reduces runtime from 13s to 11s
   conjureFromSpecWith args{maxSize = 12, maxEquationSize = 7} "beyond" beyondSpec
-    [ pr Leaf
-    , prim "Node" Node
-    , prim "`compare`" (compare :: Int -> Int -> Ordering)
-    , primOrdCaseFor (undefined :: Tree)
+    [ con Leaf
+    , fun "Node" Node
+    , fun "`compare`" (compare :: Int -> Int -> Ordering)
+    , ordcase (undefined :: Tree)
     ]
 
   -- reachable in 55s, candidate #173109 at size 13.
   -- increase to 554400 to reach
   conjureWith args{target=5544} "union" union
-    [ pr Leaf
-    , prim "Node" Node
-    , prim "before" before
-    , prim "beyond" beyond
+    [ con Leaf
+    , fun "Node" Node
+    , fun "before" before
+    , fun "beyond" beyond
     ]
   -- maybe with invariant following test data there will be more pruning
   -- properties?

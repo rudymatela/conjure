@@ -26,33 +26,33 @@ replicates' [a,b,c] 3  =  [a,a,a,b,b,b,c,c,c]
 main :: IO ()
 main = do
   conjure "replicate" replicate'
-    [ pr (0 :: Int)
-    , pr (1 :: Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
-    , pr ""
-    , prim ":" ((:) :: Char -> String -> String)
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , con ""
+    , fun ":" ((:) :: Char -> String -> String)
     ]
 
   -- emulates how MagicHaskeller generates "replicates"
   conjure "replicates" replicates'
-    [ prim "replicate" (replicate :: Int -> String -> [String])
-    , prim "transpose" (transpose :: [[Char]] -> [[Char]])
-    , prim "concat"    (concat :: [String] -> String)
+    [ fun "replicate" (replicate :: Int -> String -> [String])
+    , fun "transpose" (transpose :: [[Char]] -> [[Char]])
+    , fun "concat"    (concat :: [String] -> String)
     ]
 
   -- emulates an alternative generation that works on MagicHaskeller
   conjure "replicates" replicates'
-    [ prim "replicate" (replicate :: Int -> Char -> String)
-    , prim "map"       (map :: (Char -> String) -> String -> [String])
-    , prim "concat"    (concat :: [String] -> String)
+    [ fun "replicate" (replicate :: Int -> Char -> String)
+    , fun "map"       (map :: (Char -> String) -> String -> [String])
+    , fun "concat"    (concat :: [String] -> String)
     ]
 
   -- alternative generation using recursion
   conjure "replicates" replicates'
-    [ pr ""
-    , prim ":" ((:) :: Char -> String -> String)
-    , prim "++" ((++) :: String -> String -> String)
-    , prim "replicate" (replicate :: Int -> Char -> String)
+    [ con ""
+    , fun ":" ((:) :: Char -> String -> String)
+    , fun "++" ((++) :: String -> String -> String)
+    , fun "replicate" (replicate :: Int -> Char -> String)
     ]
 
 replicates n []  =  []

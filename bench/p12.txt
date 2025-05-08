@@ -1,4 +1,4 @@
-running with 13 primitives
+running with 13 ingredients
 factorial :: Int -> Int
 -- testing 6 combinations of argument values
 -- pruning with 67/101 rules

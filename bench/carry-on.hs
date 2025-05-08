@@ -15,11 +15,11 @@ main :: IO ()
 main  =  do
   -- carry on Conjuring larger implementations
   conjureWith args{carryOn = True, maxSize = 11} "factorial n" factorial
-    [ pr (0::Int)
-    , pr (1::Int)
-    , prim "+" ((+) :: Int -> Int -> Int)
-    , prim "*" ((*) :: Int -> Int -> Int)
-    , prim "-" ((-) :: Int -> Int -> Int)
+    [ con (0::Int)
+    , con (1::Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
     ]
   -- should produce:
   -- factorial 0  =  1

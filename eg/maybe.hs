@@ -48,37 +48,37 @@ catMaybes' [Just x, Nothing, Just y]  =  [x,y]
 
 main :: IO ()
 main = do
-  conjure "isNothing"     isNothing'   primitives
-  conjure "isJust"        isJust'      primitives
-  conjure "fromMaybe"     fromMaybe'   primitives
-  conjureFromSpec "maybe" maybeSpec    primitives
-  conjure "listToMaybe"   listToMaybe' primitives
-  conjure "maybeToList"   maybeToList' primitives
+  conjure "isNothing"     isNothing'   ingredients
+  conjure "isJust"        isJust'      ingredients
+  conjure "fromMaybe"     fromMaybe'   ingredients
+  conjureFromSpec "maybe" maybeSpec    ingredients
+  conjure "listToMaybe"   listToMaybe' ingredients
+  conjure "maybeToList"   maybeToList' ingredients
 
-  -- only top-level break downs, so would need morePrimitives
-  conjureWith args{maxPatternDepth=2} "catMaybes"     catMaybes'   primitives
-  -- conjure "mapMaybe" mapMaybe' primitives  -- same
+  -- only top-level break downs, so would need moreIngredients
+  conjureWith args{maxPatternDepth=2} "catMaybes"     catMaybes'   ingredients
+  -- conjure "mapMaybe" mapMaybe' ingredients  -- same
 
-primitives :: [Prim]
-primitives  =
-  [ pr (Nothing :: Maybe A)
-  , prim "Just" (Just :: A -> Maybe A)
+ingredients :: [Ingredient]
+ingredients  =
+  [ con (Nothing :: Maybe A)
+  , fun "Just" (Just :: A -> Maybe A)
 
-  , pr False
-  , pr True
+  , con False
+  , con True
 
-  , pr ([] :: [A])
-  , prim ":" ((:) :: A -> [A] -> [A])
+  , con ([] :: [A])
+  , fun ":" ((:) :: A -> [A] -> [A])
   ]
 
 {-
-morePrimitives :: [Prim]
-morePrimitives  =  primitives ++
-  [ prim "isNothing" (isNothing :: Maybe A -> Bool)
-  , prim "isJust"    (isJust    :: Maybe A -> Bool)
-  , prim "fromJust"  (fromJust :: Maybe A -> A)
-  , prif (undefined :: A)
-  , prif (undefined :: Maybe A)
-  , prif (undefined :: [A])
+moreIngredients :: [Ingredient]
+moreIngredients  =  ingredients ++
+  [ fun "isNothing" (isNothing :: Maybe A -> Bool)
+  , fun "isJust"    (isJust    :: Maybe A -> Bool)
+  , fun "fromJust"  (fromJust :: Maybe A -> A)
+  , iif (undefined :: A)
+  , iif (undefined :: Maybe A)
+  , iif (undefined :: [A])
   ]
 -}
