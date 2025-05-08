@@ -40,7 +40,7 @@ printErroneousCandidates n nm f ps  =  do
   css            =  take n
                  .  discardT isRedundantByIntroduction -- additional pruning rule
                  $  css'
-  (css', thy, _, _) =  candidateDefnsC args nm f ps  -- Conjure uses this for listing candidates
+  (css', thy, _, _) =  candidateDefns nm f ps  -- Conjure uses this for listing candidates
   nRules         =  length (rules thy)
   nREs           =  length (equations thy) + nRules
   maxTests       =  60 -- a hardcoded value probably will not hurt in this simple benchmark

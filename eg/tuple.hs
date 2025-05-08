@@ -80,8 +80,8 @@ main = do
   conjure "catpairs" catpairs ingredients
 
   -- by increasing the pattern depth, we find shorter versions:
-  conjureWith args{maxPatternDepth=2} "pairwise" pairwise ingredients
-  conjureWith args{maxPatternDepth=2} "catpairs" catpairs ingredients
+  conjure "pairwise" pairwise (maxPatternDepth 2:ingredients)
+  conjure "catpairs" catpairs (maxPatternDepth 2:ingredients)
 
 ingredients :: [Ingredient]
 ingredients  =

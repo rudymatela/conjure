@@ -98,19 +98,22 @@ main  =  do
     , guard
     ]
 
-  conjureWith args{maxPatternDepth = 2} "cathis" cathis'
+  conjure "cathis" cathis'
     [ con ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
+    , maxPatternDepth 2
     ]
 
-  conjureWith args{maxPatternDepth = 2} "cathat" cathat'
+  conjure "cathat" cathat'
     [ con ([] :: [B])
     , fun ":" ((:) :: B -> [B] -> [B])
+    , maxPatternDepth 2
     ]
 
-  conjureWith args{maxPatternDepth = 2} "cathese" cathese'
+  conjure "cathese" cathese'
     [ con ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
+    , maxPatternDepth 2
     ]
   -- cathese []  =  []
   -- cathese (Neither : ts)  =  cathese ts

@@ -11,16 +11,13 @@ factorial 3  =  6
 factorial 4  =  24
 
 
-mkStrategy :: String -> Args
-mkStrategy s  =  args
-  { rewriting         =  r
-  , requireDescent    =  d
-  , adHocRedundancy   =  a
-  , copyBindings      =  a -- previously c
-  , uniqueCandidates  =  u
---, carryOn  =  True
---, maxSize  =  10
-  }
+-- TODO: simplify and refactor
+mkStrategy :: String -> [Ingredient]
+mkStrategy s  =  [ dontRewrite | not r ]
+              ++ [ dontRequireDescent | not d ]
+              ++ [ omitAssortedPruning | not a ]
+              ++ [ dontCopyBindings | not a ]
+              ++ [ uniqueCandidates | u]
   where
   itob 0  =  False
   itob _  =  True
@@ -38,9 +35,9 @@ mkStrategy s  =  args
     _                   -> error "unknown strategy"
 
 conjureStrategy :: Conjurable f => String -> String -> f -> [Ingredient] -> IO ()
-conjureStrategy name nm f prims  =  do
+conjureStrategy name nm f ingrs =  do
   putStrLn $ "-- strategy: " ++ name
-  conjureWith (mkStrategy name) nm f prims
+  conjure nm f $ ingrs ++ mkStrategy name
 
 strategies :: [String]
 strategies  =  

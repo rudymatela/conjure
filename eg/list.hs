@@ -86,10 +86,11 @@ main = do
     , fun "undefined" (undefined :: Int)
     ]
 
-  conjureWith args{maxPatternDepth=2} "last" last'
+  conjure "last" last'
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "undefined" (undefined :: Int)
+    , maxPatternDepth 2
     ]
 
   conjure "zip" (zip')

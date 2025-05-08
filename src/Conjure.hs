@@ -101,15 +101,13 @@ module Conjure
   , iif
   , ordcase
 
--- * Advanced use
-  , conjureWithMaxSize
-  , conjureWith
-  , Args(..)
-  , args
+-- * Basic configuration parameters
+  , maxTests
+  , target
+  , maxSize
 
 -- * Conjuring from a specification
   , conjureFromSpec
-  , conjureFromSpecWith
 
 -- * When using custom types
   , Conjurable (conjureExpress, conjureEquality, conjureTiers, conjureCases, conjureSubTypes, conjureSize)
@@ -129,10 +127,36 @@ module Conjure
 -- * Pure interfaces
   , Results (..)
   , conjpure
-  , conjpureWith
 
 -- * Helper test types
   , A, B, C, D, E, F
+
+-- * Advanced options
+  , maxRecursions
+  , maxEquationSize
+  , maxSearchTests
+  , maxDeconstructionSize
+  , maxConstantSize
+  , maxPatternSize
+  , maxPatternDepth
+
+-- * Debug options
+  , showCandidates
+  , showTheory
+  , singlePattern
+  , showTests
+  , showPatterns
+  , showDeconstructions
+  , carryOn
+
+-- * Advanced pruning options
+  , dontRewrite
+  , dontRequireDescent
+  , omitAssortedPruning
+  , omitEarlyTests
+  , dontCopyBindings
+  , nonAtomicNumbers
+  , uniqueCandidates
   )
 where
 
@@ -140,3 +164,4 @@ import Conjure.Engine
 import Conjure.Conjurable
 import Conjure.Ingredient
 import Conjure.Conjurable.Derive
+import Conjure.Settings

@@ -54,33 +54,42 @@ replicates' [a]     3  =  [a,a,a]
 replicates' [a,b]   3  =  [a,a,a,b,b,b]
 replicates' [a,b,c] 3  =  [a,a,a,b,b,b,c,c,c]
 
-as :: Args
-as  =  args{showTheory = True, maxSize = 18}
-
 main :: IO ()
 main = do
   -- low number of tests, cannot conjure due to incorrect property
-  conjureWith as{maxTests=60} "subset" (subset')
+  conjure "subset" subset'
     [ fun "sort" (sort :: [Int] -> [Int])
     , fun "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
+    , showTheory
+    , maxSize 18
+    , maxTests 60
     ]
 
   -- subset xs ys  =  sort xs `isSubsequenceOf` sort ys
-  conjureWith as{maxTests=360} "subset" (subset')
+  conjure "subset" (subset')
     [ fun "sort" (sort :: [Int] -> [Int])
     , fun "`isSubsequenceOf`" (isSubsequenceOf :: [Int] -> [Int] -> Bool)
+    , showTheory
+    , maxSize 18
+    , maxTests 360
     ]
 
   -- low number of tests, cannot conjure due to incorrect property
-  conjureWith as{maxTests=60} "replicates" replicates'
+  conjure "replicates" replicates'
     [ fun "replicate" (replicate :: Int -> String -> [String])
     , fun "transpose" (transpose :: [[Char]] -> [[Char]])
     , fun "concat"    (concat :: [String] -> String)
+    , showTheory
+    , maxSize 18
+    , maxTests 60
     ]
 
   -- emulates how MagicHaskeller generates "replicates"
-  conjureWith as{maxTests=360} "replicates" replicates'
+  conjure "replicates" replicates'
     [ fun "replicate" (replicate :: Int -> String -> [String])
     , fun "transpose" (transpose :: [[Char]] -> [[Char]])
     , fun "concat"    (concat :: [String] -> String)
+    , showTheory
+    , maxSize 18
+    , maxTests 360
     ]

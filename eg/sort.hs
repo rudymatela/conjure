@@ -63,11 +63,12 @@ main = do
     ]
 
   -- an insert function
-  conjureWith args{target=50400} "insert" insert'
+  conjure "insert" insert'
     [ fun "[]" ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
     , guard
+    , target 50400
     ]
 
   -- qsort []  =  []                           -- 1
@@ -87,13 +88,14 @@ main = do
 
   -- if we disable the descent requirement, we get the efficient qsort
   -- though with a larger search space
-  conjureWith args{requireDescent=False} "qsort" sort'
+  conjure "qsort" sort'
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
     , fun ">"  ((>)  :: Int -> Int -> Bool)
     , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    , dontRequireDescent
     ]
 
   -- found!  candidate #1703311 @ size 22
@@ -103,16 +105,19 @@ main = do
   --   | x <= y  =  x:merge xs (y:ys)
   --   | otherwise  =  merge (y:x:xs) ys
   -- set target to 2 000 000 to reach it
-  conjureWith args{target=10080, maxTests=1080} "merge" merge'
+  conjure "merge" merge'
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
     , guard
+    , maxTests 1080
+    , target 10080 -- set to 2 000 000 to reach solution
     ]
 
   -- unreachable: needs about 26, but can only reach 16
-  conjureWith args{target=1080} "merge" merge'
+  conjure "merge" merge'
     [ fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "compare" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: [Int])
+    , target 1080
     ]

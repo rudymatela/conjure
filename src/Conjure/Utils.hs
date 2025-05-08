@@ -28,6 +28,7 @@ module Conjure.Utils
   , mapHead
   , sets
   , headOr
+  , notNull
   , allEqual
   , allEqualOn
   , allEqual2
@@ -150,6 +151,13 @@ sets (x:xs)  =  map (x:) ss ++ ss
 headOr :: a -> [a] -> a
 headOr x []  =  x
 headOr _ (x:xs)  =  x
+
+-- | Is the given list not null?
+--
+-- Equivalent to @not . null@
+notNull :: [a] -> Bool
+notNull []  =  False
+notNull (_:_)  =  True
 
 -- | Lists choices of values.
 choices :: [a] -> [(a,[a])]

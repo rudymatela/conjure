@@ -56,7 +56,7 @@ main = do
   conjure "maybeToList"   maybeToList' ingredients
 
   -- only top-level break downs, so would need moreIngredients
-  conjureWith args{maxPatternDepth=2} "catMaybes"     catMaybes'   ingredients
+  conjure "catMaybes"     catMaybes'   (maxPatternDepth 2 : ingredients)
   -- conjure "mapMaybe" mapMaybe' ingredients  -- same
 
 ingredients :: [Ingredient]

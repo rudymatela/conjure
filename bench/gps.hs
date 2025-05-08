@@ -94,7 +94,7 @@ gps2g n
   | otherwise  =  Nothing
 
 gps2c :: IO ()
-gps2c  =  conjureWith args{maxTests=5040, maxSize=30} "gps2" gps2p
+gps2c  =  conjure "gps2" gps2p
   [ con "small"
   , con "large"
   , con (1000 :: Int)
@@ -104,6 +104,8 @@ gps2c  =  conjureWith args{maxTests=5040, maxSize=30} "gps2" gps2p
   , fun "<=" ((<=) :: Int -> Int -> Bool)
   , fun "<" ((<) :: Int -> Int -> Bool)
   , iif (undefined :: Maybe String)
+  , maxTests 5040
+  , maxSize 30
   ]
 
 
@@ -129,12 +131,13 @@ gps3c  =  do
     ]
 
   -- not possible, no recursive descent
-  conjureWith args{maxSize=8} "gps3" gps3p
+  conjure "gps3" gps3p
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "<" ((<) :: Int -> Int -> Bool)
     , iif (undefined :: [Int])
+    , maxSize 8
     ]
 
 
@@ -176,13 +179,14 @@ gps5g (c:cs)
   | otherwise   =  c:gps5g cs
 
 gps5c :: IO ()
-gps5c  =  conjureWith args{maxSize=6} "gps5" gps5p -- can't find
+gps5c  =  conjure "gps5" gps5p -- can't find
   [ con ""
   , fun ":" ((:) :: Char -> String -> String)
   , con '!'
   , fun "==" ((==) :: Char -> Char -> Bool)
   , fun "isLetter" (isLetter :: Char -> Bool)
   , iif (undefined :: String -> String)
+  , maxSize 6
   ]
 
 
@@ -213,7 +217,7 @@ gps6g  =  tnp1
 -- Removing three or setting maxEqSize to 4 makes it unhang.
 -- But a size of 15 or 17 is simplyl out of our reach.
 gps6c :: IO ()
-gps6c  =  conjureWith args{maxSize=6,maxEquationSize=3} "gps6" gps6p
+gps6c  =  conjure "gps6" gps6p
   [ con (1 :: Int)
   , con (2 :: Int)
   , con (3 :: Int)
@@ -222,6 +226,8 @@ gps6c  =  conjureWith args{maxSize=6,maxEquationSize=3} "gps6" gps6p
   , fun "`div`" (div :: Int -> Int -> Int)
   , fun "even" (even :: Int -> Bool)
   , iif (undefined :: Int)
+  , maxSize 6
+  , maxEquationSize 3
   ]
 
 
@@ -294,7 +300,7 @@ gps9g n  =  filter (n >) (filter even (map sq [1..n]))
   sq  =  (^2)
 
 gps9c :: IO ()
-gps9c  =  conjureWith args{maxTests=60} "gps9" gps9p
+gps9c  =  conjure "gps9" gps9p
   [ con (1 :: Int)
   , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
   , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
@@ -302,6 +308,7 @@ gps9c  =  conjureWith args{maxTests=60} "gps9" gps9p
   , fun ">" ((>) :: Int -> Int -> Bool)
   , fun "even" (even :: Int -> Bool)
   , fun "sq" ((^2) :: Int -> Int)  -- invented separately
+  , maxTests 60
   ]
 
 
@@ -424,7 +431,7 @@ gps12g xs  =  length xs - fromJust (findIndex (0==) (reverse xs)) - 1
 
 gps12c :: IO ()
 gps12c  =  do
-  conjureWith args{maxSize = 11} "gps12" gps12p
+  conjure "gps12" gps12p
     [ fun "length"    (length :: [Int] -> Int)
     , fun "reverse"   (reverse :: [Int] -> [Int])
     , fun "findIndex" (findIndex :: (Int -> Bool) -> [Int] -> Maybe Int)
@@ -433,6 +440,7 @@ gps12c  =  do
     , fun "=="        ((==) :: Int -> Int -> Bool)
     , con (0 :: Int)
     , con (1 :: Int)
+    , maxSize 11
     ]
 
 
@@ -690,12 +698,13 @@ gps20c  =  do
     , con False
     ]
 
-  conjureFromSpecWith args{target=50400} "pig1" pig1Spec
+  conjureFromSpec "pig1" pig1Spec
     [ con "ay"
     , iif (undefined :: String)
     , fun "isVowel" isVowel
     , fun "++" ((++) :: String -> String -> String)
     , fun ":" ((:) :: Char -> String -> String)
+    , target 50400
     ]
 
   conjureFromSpec "gps20c" gps20s
@@ -851,7 +860,7 @@ gps26g a b c d x
 
 -- out of reach performance-wise
 gps26c :: IO ()
-gps26c  =  conjureWith args{maxSize=2} "gps26" gps26p
+gps26c  =  conjure "gps26" gps26p
   [ con 'A'
   , con 'B'
   , con 'C'
@@ -859,6 +868,7 @@ gps26c  =  conjureWith args{maxSize=2} "gps26" gps26p
   , con 'F'
   , iif (undefined :: Char)
   , fun ">=" ((>=) :: Int -> Int -> Bool)
+  , maxSize 2
   ]
 
 

@@ -14,12 +14,14 @@ factorial 4  =  24
 main :: IO ()
 main  =  do
   -- carry on Conjuring larger implementations
-  conjureWith args{carryOn = True, maxSize = 11} "factorial n" factorial
+  conjure "factorial n" factorial
     [ con (0::Int)
     , con (1::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
+    , carryOn
+    , maxSize 11
     ]
   -- should produce:
   -- factorial 0  =  1

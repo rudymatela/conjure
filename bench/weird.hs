@@ -21,8 +21,8 @@ _ ^^^ _  =  0
 
 main :: IO ()
 main  =  do
-  conjure "^^^" (^^^) ingredients
-  conjureWith args{usePatterns = False} "^^^" (^^^) ingredients
+  conjure "^^^" (^^^)   ingredients
+  conjure "^^^" (^^^) $ ingredients ++ [singlePattern]
 
   -- This example is quite the degenerate case,
   -- it takes a while to conjure even with just 2 ingredients.

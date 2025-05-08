@@ -11,27 +11,48 @@
 {-# LANGUAGE CPP, RecordWildCards, TupleSections #-}
 module Conjure.Engine
   ( conjure
-  , conjureWithMaxSize
-  , Args(..)
-  , args
-  , conjureWith
   , conjureFromSpec
-  , conjureFromSpecWith
   , conjure0
-  , conjure0With
   , Results(..)
   , conjpure
-  , conjpureWith
   , conjpureFromSpec
-  , conjpureFromSpecWith
   , conjpure0
-  , conjpure0With
   , candidateExprs
   , candidateDefns
-  , candidateDefns1
-  , candidateDefnsC
-  , conjureTheory
-  , conjureTheoryWith
+
+  -- * settings
+  , maxTests
+  , maxSize
+  , target
+
+  -- * Advanced settings
+  , maxRecursions
+  , maxEquationSize
+  , maxSearchTests
+  , maxDeconstructionSize
+  , maxConstantSize
+  , maxPatternSize
+  , maxPatternDepth
+
+  -- * Debug options
+  , showCandidates
+  , showTheory
+  , singlePattern
+  , showTests
+  , showPatterns
+  , showDeconstructions
+  , carryOn
+
+  -- * Pruning options
+  , dontRewrite
+  , dontRequireDescent
+  , omitAssortedPruning
+  , omitEarlyTests
+  , dontCopyBindings
+  , nonAtomicNumbers
+  , uniqueCandidates
+
+  -- * other modules
   , module Data.Express
   , module Data.Express.Fixtures
   , module Conjure.Reason
@@ -97,7 +118,7 @@ import System.CPUTime (getCPUTime)
 --
 -- The ingredients list is defined with 'con' and 'fun'.
 conjure :: Conjurable f => String -> f -> [Ingredient] -> IO ()
-conjure  =  conjureWith args
+conjure nm f  =  conjure0 nm f (const True)
 
 
 -- | Conjures an implementation from a function specification.
@@ -135,7 +156,7 @@ conjure  =  conjureWith args
 -- >   , exists n $ \x -> square x > x
 -- >   ]  where  n = 60
 conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Ingredient] -> IO ()
-conjureFromSpec  =  conjureFromSpecWith args
+conjureFromSpec nm p  =  conjure0 nm undefined p
 
 
 -- | Synthesizes an implementation from both a partial definition and a
@@ -143,48 +164,15 @@ conjureFromSpec  =  conjureFromSpecWith args
 --
 --   This works like the functions 'conjure' and 'conjureFromSpec' combined.
 conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Ingredient] -> IO ()
-conjure0  =  conjure0With args
-
-
--- | Like 'conjure' but allows setting the maximum size of considered expressions
---   instead of the default value of 24.
---
--- > conjureWithMaxSize 12 "function" function [...]
---
--- This function is a candidate for going away.
--- Please set maxSize in Args instead.
-conjureWithMaxSize :: Conjurable f => Int -> String -> f -> [Ingredient] -> IO ()
-conjureWithMaxSize sz  =  conjureWith args
-                       {  maxSize = sz
-                       ,  maxEquationSize = min sz (maxEquationSize args)
-                       }
-
-
--- | Like 'conjure' but allows setting options through 'Args'/'args'.
---
--- > conjureWith args{maxSize = 18} "function" function [...]
-conjureWith :: Conjurable f => Args -> String -> f -> [Ingredient] -> IO ()
-conjureWith args nm f  =  conjure0With args nm f (const True)
-
--- | Like 'conjureFromSpec' but allows setting options through 'Args'/'args'.
---
--- > conjureFromSpecWith args{maxSize = 18} "function" spec [...]
-conjureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Ingredient] -> IO ()
-conjureFromSpecWith args nm p  =  conjure0With args nm undefined p
-
--- | Like 'conjure0' but allows setting options through 'Args'/'args'.
-conjure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Ingredient] -> IO ()
-conjure0With args nm f p es  =  do
+conjure0 nm f p es  =  do
   -- the code section below became quite ugly with time and patches.
   -- it is still maintainable and readable as it is, but perhaps
   -- needs to be cleaned up and simplified
-  t0 <- if showRuntime args
-        then getCPUTime
-        else return (-1)
+  t0 <- getCPUTime
   print (var (head $ words nm) f)
   when (length ts > 0) $ do
     putWithTimeSince t0 $ "testing " ++ show (length ts) ++ " combinations of argument values"
-    when (showTests args) $ do
+    when showTests $ do
       putStrLn $ "{-"
       putStr $ showDefn ts
       putStrLn $ "-}"
@@ -192,7 +180,7 @@ conjure0With args nm f p es  =  do
   then putStrLn $ nm ++ "  =  error \"could not reify specification, suggestion: conjureFromSpec\"\n"
   else do
     putWithTimeSince t0 $ "pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
-    when (showTheory args) $ do
+    when showTheory $ do
       putStrLn $ "{-"
       printThy thy
       putStrLn $ "-}"
@@ -200,17 +188,17 @@ conjure0With args nm f p es  =  do
       putStrLn $ "-- reasoning produced "
               ++ show (length (invalid thy)) ++ " incorrect properties,"
               ++ " please re-run with more tests for faster results"
-      when (showTheory args) $ do
+      when showTheory $ do
         putStrLn $ "{-"
         putStrLn $ "invalid:"
         putStr   $ unlines $ map showEq $ invalid thy
         putStrLn $ "-}"
-    when (showPatterns args) $ do
+    when showPatterns $ do
       putStr $ unlines
              $ zipWith (\i -> (("-- allowed patterns of size " ++ show i ++ "\n{-\n") ++) . (++ "-}") . unlines) [1..]
              $ mapT showDefn
              $ patternss results
-    when (showDeconstructions args) $ do
+    when showDeconstructions $ do
       putStrLn $ "{- List of allowed deconstructions:"
       putStr   $ unlines $ map show $ deconstructions results
       putStrLn $ "-}"
@@ -223,12 +211,12 @@ conjure0With args nm f p es  =  do
   pr t0 n t ((is,cs):rs)  =  do
     let nc  =  length cs
     putWithTimeSince t0 $ show nc ++ " candidates of size " ++ show n
-    when (showCandidates args) $
+    when showCandidates $
       putStr $ unlines $ ["{-"] ++ map showDefn cs ++ ["-}"]
     case is of
       []     ->  pr t0 (n+1) (t+nc) rs
       (_:_)  ->  do pr1 t is cs
-                    when (carryOn args) $ pr t0 (n+1) (t+nc) rs
+                    when carryOn $ pr t0 (n+1) (t+nc) rs
     where
     pr1 t [] cs  =  return ()
     pr1 t (i:is) cs  =  do
@@ -236,15 +224,23 @@ conjure0With args nm f p es  =  do
       let t' = t + length cs' + 1
       putWithTimeSince t0 $ "tested " ++ show t' ++ " candidates"
       putStrLn $ showDefn i
-      when (carryOn args) $ pr1 t' is (drop 1 cs'')
+      when carryOn $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
-  results  =  conjpure0With args nm f p es
+  results  =  conjpure0 nm f p es
   iss  =  implementationss results
   css  =  candidatess results
   ts   =  bindings results
   thy  =  theory results
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
+  -- we could avoid the following as most are called once
+  -- but is nice to have a summary of which settings are used
+  carryOn              =  carryOnI es
+  showTests            =  showTestsI es
+  showTheory           =  showTheoryI es
+  showPatterns         =  showPatternsI es
+  showCandidates       =  showCandidatesI es
+  showDeconstructions  =  showDeconstructionsI es
 
 
 -- | Results to the 'conjpure' family of functions.
@@ -265,32 +261,18 @@ data Results = Results
 -- The most important part of the result are the tiers of implementations
 -- however results also include candidates, tests and the underlying theory.
 conjpure :: Conjurable f => String -> f -> [Ingredient] -> Results
-conjpure =  conjpureWith args
+conjpure nm f  =  conjpure0 nm f (const True)
 
 -- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
 conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Ingredient] -> Results
-conjpureFromSpec  =  conjpureFromSpecWith args
+conjpureFromSpec nm p  =  conjpure0 nm undefined p
 
--- | Like 'conjure0' but in the pure world.  (cf. 'conjpure')
+-- | This is where the actual implementation resides.
+-- The functions
+-- 'conjpure', 'conjpureFromSpec', 'conjure' and 'conjureFromSpec'
+-- all refer to this.
 conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Ingredient] -> Results
-conjpure0 =  conjpure0With args
-
--- | Like 'conjpure' but allows setting options through 'Args' and 'args'.
-conjpureWith :: Conjurable f => Args -> String -> f -> [Ingredient] -> Results
-conjpureWith args nm f  =  conjpure0With args nm f (const True)
-
--- | Like 'conjureFromSpecWith' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpecWith :: Conjurable f => Args -> String -> (f -> Bool) -> [Ingredient] -> Results
-conjpureFromSpecWith args nm p  =  conjpure0With args nm undefined p
-
--- | Like 'conjpure0' but allows setting options through 'Args' and 'args'.
---
--- This is where the actual implementation resides.  The functions
--- 'conjpure', 'conjpureWith', 'conjpureFromSpec', 'conjpureFromSpecWith',
--- 'conjure', 'conjureWith', 'conjureFromSpec', 'conjureFromSpecWith' and
--- 'conjure0' all refer to this.
-conjpure0With :: Conjurable f => Args -> String -> f -> (f -> Bool) -> [Ingredient] -> Results
-conjpure0With args@(Args{..}) nm f p es  =  Results
+conjpure0 nm f p es  =  Results
   { implementationss  =  implementationsT
   , candidatess  =  candidatesT
   , bindings  =  tests
@@ -302,33 +284,23 @@ conjpure0With args@(Args{..}) nm f p es  =  Results
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && test fx
-                 && errorToFalse (p (cevl maxEvalRecursions fx))
-  candidatesT  =  (if uniqueCandidates then nubCandidates args nm f else id)
+                 && errorToFalse (p (cevl maxRecursions fx))
+  candidatesT  =  (if uniqueCandidates then nubCandidates maxTests maxRecursions nm f else id)
                $  (if target > 0 then targetiers target else id)
                $  (if maxSize > 0 then take maxSize else id)
                $  candidatesTT
-  (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns args nm f es
+  (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns nm f es
 
-  test dfn  =  all (errorToFalse . deval (conjureExpress f) maxEvalRecursions dfn False)
+  test dfn  =  all (errorToFalse . deval (conjureExpress f) maxRecursions dfn False)
             $  [funToVar lhs -==- rhs | (lhs, rhs) <- tests]
   tests  =  conjureTestDefn maxTests maxSearchTests nm f
   (-==-)  =  conjureMkEquation f
-
-
--- | Just prints the underlying theory found by "Test.Speculate"
---   without actually synthesizing a function.
-conjureTheory :: Conjurable f => String -> f -> [Ingredient] -> IO ()
-conjureTheory  =  conjureTheoryWith args
-
-
--- | Like 'conjureTheory' but allows setting options through 'Args'/'args'.
-conjureTheoryWith :: Conjurable f => Args -> String -> f -> [Ingredient] -> IO ()
-conjureTheoryWith args nm f es  =  do
-  putStrLn $ "theory with " ++ (show . length $ rules thy) ++ " rules and "
-                            ++ (show . length $ equations thy) ++ " equations"
-  printThy thy
-  where
-  Results {theory = thy}  =  conjpureWith args nm f es
+  maxTests  =  maxTestsI es
+  maxSize  =  maxSizeI es
+  target  =  targetI es
+  maxRecursions  =  maxRecursionsI es
+  maxSearchTests  =  maxSearchTestsI es
+  uniqueCandidates  =  uniqueCandidatesI es
 
 
 -- | Return apparently unique candidate definitions.
@@ -338,18 +310,18 @@ conjureTheoryWith args nm f es  =  do
 -- 1. tiers of candidate definitions
 -- 2. an equational theory
 -- 3. a list of allowed deconstructions
-candidateDefns :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
-candidateDefns args  =  candidateDefns' args
+candidateDefns :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefns nm f is  =  candidateDefns' nm f is
   where
-  candidateDefns'  =  if usePatterns args
-                      then candidateDefnsC
-                      else candidateDefns1
+  candidateDefns'  =  if singlePatternI is
+                      then candidateDefns1
+                      else candidateDefnsC
 
 
 -- | Return apparently unique candidate definitions
 --   where there is a single body.
-candidateDefns1 :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
-candidateDefns1 args nm f ps  =  first4 (mapT toDefn) $ candidateExprs args nm f ps
+candidateDefns1 :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefns1 nm f ps  =  first4 (mapT toDefn) $ candidateExprs nm f ps
   where
   efxs  =  conjureVarApplication nm f
   toDefn e  =  [(efxs, e)]
@@ -357,14 +329,15 @@ candidateDefns1 args nm f ps  =  first4 (mapT toDefn) $ candidateExprs args nm f
 
 
 -- | Return apparently unique candidate bodies.
-candidateExprs :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Expr]], Thy, [[Defn]], [Expr])
-candidateExprs Args{..} nm f ps  =
+candidateExprs :: Conjurable f => String -> f -> [Ingredient] -> ([[Expr]], Thy, [[Defn]], [Expr])
+candidateExprs nm f is  =
   ( as \/ concatMapT (`enumerateFillings` recs) ts
   , thy
   , [[ [(efxs, eh)] ]]
   , deconstructions
   )
   where
+  ps  =  actual is  -- extract actual primitives
   es  =  map fst ps
   ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
                            \/ foldAppProducts orE  [cs, rs]
@@ -381,7 +354,7 @@ candidateExprs Args{..} nm f ps  =
   eh  =  holeAsTypeOf efxs
   efxs  =  conjureVarApplication nm f
   (ef:exs)  =  unfoldApp efxs
-  keep | rewriting  =  isRootNormalC thy . fastMostGeneralVariation
+  keep | rewrite    =  isRootNormalC thy . fastMostGeneralVariation
        | otherwise  =  const True
   keepR | requireDescent  =  descends isDecOf efxs
         | otherwise       =  const True
@@ -407,12 +380,17 @@ candidateExprs Args{..} nm f ps  =
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
        $  cjHoles (fun nm f:ps) ++ [val False, val True] ++ es
   (===)  =  cjAreEqual (fun nm f:ps) maxTests
+  maxTests               =  maxTestsI is
+  maxEquationSize        =  maxEquationSizeI is
+  maxDeconstructionSize  =  maxDeconstructionSizeI is
+  requireDescent         =  requireDescentI is
+  rewrite                =  rewriteI is
 
 
 -- | Return apparently unique candidate definitions
 --   using pattern matching.
-candidateDefnsC :: Conjurable f => Args -> String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
-candidateDefnsC Args{..} nm f ps  =
+candidateDefnsC :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
+candidateDefnsC nm f is =
   ( discardT hasRedundant $ concatMapT fillingsFor fss
   , thy
   , mapT (map (,eh)) pats
@@ -423,6 +401,7 @@ candidateDefnsC Args{..} nm f ps  =
        | otherwise           =                        conjurePats maxPatternDepth es nm f
   fss  =  concatMapT ps2fss pats
   -- replaces the any guard symbol with a guard of the correct type
+  ps  =  actual is  -- extract actual ingredients/primitives from the list
   es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ps]
 
   eh  =  holeAsTypeOf efxs
@@ -495,7 +474,6 @@ candidateDefnsC Args{..} nm f ps  =
       -- numeric arguments additionally require 0 to be present as a case
       -- for recursion
       should aes ae  =  length (nub aes) > 1 && hasVar ae && (isApp ae || isUnbreakable ae)
-                     && (not requireZero || not (isNumeric ae) || any isZero aes)
       aes   =                  (tail . unfoldApp . rehole) pat
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
@@ -566,6 +544,20 @@ candidateDefnsC Args{..} nm f ps  =
   (===)  =  cjAreEqual (fun nm f:ps) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
 
+  maxTests               =  maxTestsI is
+  maxSearchTests         =  maxSearchTestsI is
+  maxEquationSize        =  maxEquationSizeI is
+  maxConstantSize        =  maxConstantSizeI is
+  maxDeconstructionSize  =  maxDeconstructionSizeI is
+  maxPatternDepth        =  maxPatternDepthI is
+  maxPatternSize         =  maxPatternSizeI is
+  requireDescent         =  requireDescentI is
+  earlyTests             =  earlyTestsI is
+  copyBindings           =  copyBindingsI is
+  adHocRedundancy        =  assortedPruningI is -- TODO: rename
+  atomicNumbers          =  atomicNumbersI is
+  rewriting              =  rewriteI is
+
 
 -- | Checks if the given pattern is a ground pattern.
 --
@@ -624,9 +616,9 @@ keepIf _  =  error "Conjure.Engine.keepIf: not an if"
 
 -- equality between candidates
 
-nubCandidates :: Conjurable f => Args -> String -> f -> [[Defn]] -> [[Defn]]
-nubCandidates Args{..} nm f  =
-  discardLaterT $ equalModuloTesting maxTests maxEvalRecursions nm f
+nubCandidates :: Conjurable f => Int -> Int -> String -> f -> [[Defn]] -> [[Defn]]
+nubCandidates maxTests maxRecursions nm f  =
+  discardLaterT $ equalModuloTesting maxTests maxRecursions nm f
 
 
 --- tiers utils ---

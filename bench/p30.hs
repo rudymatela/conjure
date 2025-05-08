@@ -5,9 +5,6 @@
 import Conjure
 import System.Environment
 
-conjureT :: Conjurable f => String -> f -> [Ingredient] -> IO ()
-conjureT  =  conjureWith args{maxSize=1}
-
 factorial :: Int -> Int
 factorial 0  =  1
 factorial 1  =  1
@@ -36,16 +33,16 @@ main  =  do
   putStrLn $ "running with " ++ show (length ingredients) ++ " ingredients"
   as <- getArgs
   case as of
-    ["factorial"]     -> conjure  "factorial n" factorial ingredients
-    ["factorial","t"] -> conjureT "factorial n" factorial ingredients
-    ["sum"]           -> conjure  "sum"     (sum     :: [Int] -> Int) ingredients
-    ["sum","t"]       -> conjureT "sum"     (sum     :: [Int] -> Int) ingredients
-    ["product"]       -> conjure  "product" (product :: [Int] -> Int) ingredients
-    ["product","t"]   -> conjureT "product" (product :: [Int] -> Int) ingredients
-    ["length"]        -> conjure  "length"  (length  :: [Int] -> Int) ingredients
-    ["length","t"]    -> conjureT "length"  (length  :: [Int] -> Int) ingredients
-    ["count"]         -> conjure  "count"   count' $ ingredients ++ primsLength
-    ["count","t"]     -> conjureT "count"   count' $ ingredients ++ primsLength
+    ["factorial"]     -> conjure "factorial n" factorial   ingredients
+    ["factorial","t"] -> conjure "factorial n" factorial $ ingredients ++ [maxSize 1]
+    ["sum"]           -> conjure "sum"     (sum     :: [Int] -> Int)   ingredients
+    ["sum","t"]       -> conjure "sum"     (sum     :: [Int] -> Int) $ ingredients ++ [maxSize 1]
+    ["product"]       -> conjure "product" (product :: [Int] -> Int)   ingredients
+    ["product","t"]   -> conjure "product" (product :: [Int] -> Int) $ ingredients ++ [maxSize 1]
+    ["length"]        -> conjure "length"  (length  :: [Int] -> Int)   ingredients
+    ["length","t"]    -> conjure "length"  (length  :: [Int] -> Int) $ ingredients ++ [maxSize 1]
+    ["count"]         -> conjure "count"   count' $ ingredients ++ primsLength
+    ["count","t"]     -> conjure "count"   count' $ ingredients ++ primsLength ++ [maxSize 1]
     _                 -> putStrLn "usage: p30 <factorial|sum|product|length|count> [t]"
 
 ingredients :: [Ingredient]

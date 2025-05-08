@@ -131,7 +131,7 @@ main = do
     ]
 
   -- unreachable: needs size 22 but OOMs at 19/20 (v0.5.16)
-  conjureWithMaxSize 12 "ordered" ordered
+  conjure "ordered" ordered
     [ con True
     , con False
     , fun "&&" (&&)
@@ -140,6 +140,7 @@ main = do
     , fun "rightmost" rightmost
     , fun "leftmost" leftmost
     , fun "nil" nil
+    , maxSize 12
     ]
 
   conjure "ordered" ordered
@@ -147,19 +148,19 @@ main = do
     , fun "inorder" inorder
     ]
 
-  conjureWithMaxSize 12 "preorder" preorder
+  conjure "preorder" preorder
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
-  conjureWithMaxSize 12 "inorder" inorder
+  conjure "inorder" inorder
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
-  conjureWithMaxSize 12 "posorder" posorder
+  conjure "posorder" posorder
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])

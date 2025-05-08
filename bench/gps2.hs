@@ -65,13 +65,15 @@ gps1c  =  do
     , fun "tail" (tail :: [[Int]] -> [[Int]])
     ]
 
-  conjureWithMaxSize 4 "gps1" gps1p2
+  conjure "gps1" gps1p2
     [ con (0 :: Int)
     , con (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "<" ((<) :: Int -> Int -> Bool)
     , iif (undefined :: Int)
     , fun "undefined" (undefined :: Int)
+    , maxSize 4
+    , maxEquationSize 4
     ]
 
 
@@ -90,13 +92,14 @@ gps2g h0 h1 n  =  h0 + h1 + gps2g h1 (h1 * (h1 / h0)) (n - 1)
 
 gps2c :: IO ()
 gps2c  =  do
-  conjureWithMaxSize 6 "gps2" gps2p
+  conjure "gps2" gps2p
     [ con (0 :: Int)
     , con (1 :: Int)
     , fun "*" ((*) :: Double -> Double -> Double)
     , fun "/" ((/) :: Double -> Double -> Double)
     , fun "+" ((+) :: Double -> Double -> Double)
     , fun "-" ((-) :: Double -> Double -> Double)
+    , maxSize 6
     ]
 
 
@@ -133,7 +136,7 @@ gps4g (c:cs)  =  if c == '-'                                   --  5
 
 gps4c :: IO ()
 gps4c  =  do
-  conjureFromSpecWith args{maxSize=6} "gps4" gps4s
+  conjureFromSpec "gps4" gps4s
     [ con '-'
     , con ("" :: String)
     , fun ":" ((:) :: Char -> String -> String)
@@ -143,6 +146,7 @@ gps4c  =  do
     , iif (undefined :: Char)
     , iif (undefined :: String)
     , fun "toUpper" (toUpper :: Char -> Char)
+    , maxSize 6
     ]
 
 
@@ -203,7 +207,7 @@ gps5c  =  do
     , fun "tell" tell
     ]
 
-  conjureWith args{target=50400} "gps5" gps5p
+  conjure "gps5" gps5p
     [ con (1 :: Int)
     , con (5 :: Int)
     , con (10 :: Int)
@@ -211,6 +215,7 @@ gps5c  =  do
     , con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "tell" tell
+    , target 50400
     ]
 
 
@@ -249,7 +254,7 @@ gps7g peter colin  =  sum (map (min colin) [0 .. (peter-1)]) % (colin*peter)
 -- out of reach performance-wise
 gps7c :: IO ()
 gps7c  =  do
-  conjureWith args{maxSize=6} "gps7" gps7p $ take 0
+  conjure "gps7" gps7p $ take 0
     [ con (0 :: Integer)
     , con (1 :: Integer)
     , fun "%" ((%) :: Integer -> Integer -> Rational)
@@ -260,6 +265,7 @@ gps7c  =  do
     , fun ".." (enumFromTo :: Integer -> Integer -> [Integer])
     , fun "map" (map :: (Integer -> Integer) -> [Integer] -> [Integer])
     , fun "sum" (sum :: [Integer] -> Integer)
+    , maxSize 6
     ]
 
 
@@ -319,7 +325,7 @@ gps10g (x:xs)  =  (x `div` 3 - 2) + gps10g xs
 
 -- unreachable due to lambda
 gps10c :: IO ()
-gps10c  =  conjureWith args{target=50400} "gps10" gps10p
+gps10c  =  conjure "gps10" gps10p
   [ con (0 :: Int)
   , con (1 :: Int)
   , con (2 :: Int)
@@ -327,6 +333,7 @@ gps10c  =  conjureWith args{target=50400} "gps10" gps10p
   , fun "`div`" (div :: Int -> Int -> Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "-" ((-) :: Int -> Int -> Int)
+  , target 50400
   ]
 
 
@@ -493,7 +500,7 @@ gps17g xs  =  pds xs
 -- setting limit of 5 for faster automated tests
 -- BENCHMARK: increase maxSize from 5 to 18
 gps17c :: IO ()
-gps17c  =  conjureWith args{maxSize=5} "gps17_pds" gps17p
+gps17c  =  conjure "gps17_pds" gps17p
   [ con (0 :: Int)
   , iif (undefined :: Int)
   , fun "not" not
@@ -502,6 +509,7 @@ gps17c  =  conjureWith args{maxSize=5} "gps17_pds" gps17p
   , fun "head" (head :: [Int] -> Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "&&" (&&)
+  , maxSize 5
   ]
 
 
@@ -516,7 +524,7 @@ gps18g prices discounts  =  foldr (+) 0 (zipWith (*) prices (map (1-) discounts)
 
 -- this was OOM'd
 gps18c :: IO ()
-gps18c  =  conjureWithMaxSize 6 "gps18_price" gps18p
+gps18c  =  conjure "gps18_price" gps18p
   [ con (0 :: Double)
   , con (1 :: Double)
   , fun "+" ((+) :: Double -> Double -> Double)
@@ -525,6 +533,7 @@ gps18c  =  conjureWithMaxSize 6 "gps18_price" gps18p
 --  , fun "foldr" (foldr :: (Double -> Double -> Double) -> Double -> [Double] -> Double)
 --   , fun "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
 --  , fun "map" (map :: (Double -> Double) -> [Double] -> [Double])
+  , maxSize 6
   ]
 
 
@@ -543,12 +552,13 @@ gps19g n total melt fall  =  gps19p (n-1) (max 0 (total-melt+fall)) melt fall
 -- size 14, out of reach performance wise.
 
 gps19c :: IO ()
-gps19c  =  conjureWithMaxSize 6 "gps19_snowday" gps19p
+gps19c  =  conjure "gps19_snowday" gps19p
   [ con (0 :: Int)
   , con (1 :: Int)
   , fun "max" (max :: Double -> Double -> Double)
   , fun "+" ((+) :: Double -> Double -> Double)
   , fun "-" ((-) :: Double -> Double -> Double)
+  , maxSize 6
   ]
 
 
@@ -624,13 +634,14 @@ gps22p  =  undefined
 gps22c :: IO ()
 gps22c  =  do
   -- cannot conjure at size 13, maybe beyond?
-  conjureWith args{target=10080} "digits" digits'
+  conjure "digits" digits'
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     , fun "div10" ((`div` 10) :: Int -> Int)
     , con (10 :: Int)
+    , target 10080
     ]
 
   conjure "gps22" gps22p
@@ -684,7 +695,7 @@ gps24s_twitter twitter  =  twitter "" == Empty
 
 gps24c :: IO ()
 gps24c  =  do
-  conjureFromSpecWith args{maxTests=360} "gps24" gps24s_twitter
+  conjureFromSpec "gps24" gps24s_twitter
     [ con Empty
     , con TooMany
     , fun "Tweet" Tweet
@@ -711,7 +722,7 @@ gps25g v1 v2  =  sqrt (foldr (+) 0 (map (^2) (zipWith (-) v1 v2)))
 
 -- out of reach performance-wise
 gps25c :: IO ()
-gps25c  =  conjureWith args{maxSize=6} "gps25" gps25p
+gps25c  =  conjure "gps25" gps25p
   [ con (0 :: Double)
   , con (2 :: Double)
   , fun "+" ((+) :: Double -> Double -> Double)
@@ -720,6 +731,7 @@ gps25c  =  conjureWith args{maxSize=6} "gps25" gps25p
   , fun "zipWith" (zipWith :: (Double -> Double -> Double) -> [Double] -> [Double] -> [Double])
   , fun "map" (map :: (Double -> Double) -> [Double] -> [Double])
   , fun "sqrt" (sqrt :: Double -> Double)
+  , maxSize 6
   ]
 
 

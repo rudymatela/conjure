@@ -138,59 +138,66 @@ main = do
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 22)
-  conjureWithMaxSize 12 "insert" insert
+  conjure "insert" insert
     [ con Leaf
     , fun "Node" Node
     , fun "unit" unit
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
+    , maxSize 12
     ]
 
   -- reachable in 15s, candidate #32878 at size 14.
   -- increase target to 50400 to reach...
-  conjureFromSpecWith args{target=5040} "before" beforeSpec
+  conjureFromSpec "before" beforeSpec
     [ con Leaf
     , fun "Node" Node
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
+    , target 5040
     ]
 
   -- reachable in 14s, candidate #32747 at size 14.
   -- increase target to 50400 to reach...
-  conjureFromSpecWith args{target=5040} "beyond" beyondSpec
+  conjureFromSpec "beyond" beyondSpec
     [ con Leaf
     , fun "Node" Node
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "<=" ((<) :: Int -> Int -> Bool)
     , guard
+    , target 5040
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
   -- using maxEquationSize = 7 reduces runtime from 13s to 11s
-  conjureFromSpecWith args{maxSize = 12, maxEquationSize = 7} "before" beforeSpec
+  conjureFromSpec "before" beforeSpec
     [ con Leaf
     , fun "Node" Node
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
+    , maxSize 12
+    , maxEquationSize 7
     ]
 
   -- with 15, this reaches the solution, using 12 for shorter runtime
   -- using maxEquationSize = 7 reduces runtime from 13s to 11s
-  conjureFromSpecWith args{maxSize = 12, maxEquationSize = 7} "beyond" beyondSpec
+  conjureFromSpec "beyond" beyondSpec
     [ con Leaf
     , fun "Node" Node
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
+    , maxSize 12
+    , maxEquationSize 7
     ]
 
   -- reachable in 55s, candidate #173109 at size 13.
-  -- increase to 554400 to reach
-  conjureWith args{target=5544} "union" union
+  conjure "union" union
     [ con Leaf
     , fun "Node" Node
     , fun "before" before
     , fun "beyond" beyond
+    , target 5544 -- increase to 554400 to reach
     ]
   -- maybe with invariant following test data there will be more pruning
   -- properties?

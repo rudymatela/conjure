@@ -108,9 +108,10 @@ t4c :: IO ()
 t4c  =  do
   putStrLn "TerpreT benchmark #4: controlled shift\n"
 
-  conjureWith args{target = 50400} "cshift" t4p1 $ ingredients123 ++
+  conjure "cshift" t4p1 $ ingredients123 ++
     [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
     , iif (undefined :: (Bool,Bool,Bool))
+    , target 50400
     ]
 
   conjure "cshift" t4p2 $ ingredients123 ++
@@ -160,11 +161,12 @@ t6p (True ,True ) (True ,True )  =  (True ,True ,False)
 t6c :: IO ()
 t6c  =  do
   putStrLn "TerpreT benchmark #6: 2-bit adder\n"
-  conjureWith args{maxSize=6} "adder2" t6p $ ingredients123 ++
+  conjure "adder2" t6p $ ingredients123 ++
     [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
     , fun "==" ((==) :: Bool -> Bool -> Bool)
     , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
     , iif (undefined :: (Bool,Bool,Bool))
+    , maxSize 6
     ]
 
 
