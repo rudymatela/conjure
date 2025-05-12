@@ -87,8 +87,8 @@ test: test-makefile $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
 ghci: src/Conjure.ghci
 
-tags: src test/Test.hs
-	hasktags $^
+tags: src
+	ctags -R src
 
 # Disclaimer: This bench target is not intended to generate paper-grade runtime
 #             datapoints as it runs each benchmark just once.  This target is
