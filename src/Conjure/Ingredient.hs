@@ -20,6 +20,9 @@ module Conjure.Ingredient
   , cjTiersFor
   , cjAreEqual
   , cjMkEquation
+  , Prim
+  , pr
+  , prim
   )
 where
 
@@ -242,3 +245,21 @@ cjTiersFor ps e  =  tf allTiers
   tf (etiers:etc)  =  case etiers of
                       ((e':_):_) | typ e' == typ e -> etiers
                       _                            -> tf etc
+
+
+
+
+-- | __DEPRACATED__.  Please use 'Ingredient' instead
+type Prim  =  Ingredient
+{-# DEPRECATED Prim "'Prim' is deprecated, please use 'Ingredient' instead" #-}
+
+
+-- | __DEPRECATED__.  Please use 'con' instead.
+pr :: (Conjurable a, Show a) => a -> Ingredient
+pr  =  con
+{-# DEPRECATED pr "'pr' is deprecated, please use 'con' instead" #-}
+
+-- | __DEPRECATED__.  Please use 'fun' instead.
+prim :: Conjurable a => String -> a -> Ingredient
+prim  =  fun
+{-# DEPRECATED prim "'prim' is deprecated, please use 'fun' instead" #-}

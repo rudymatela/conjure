@@ -157,6 +157,11 @@ module Conjure
   , dontCopyBindings
   , nonAtomicNumbers
   , uniqueCandidates
+
+-- * Deprecated functions
+  , Prim
+  , pr
+  , prim
   )
 where
 
