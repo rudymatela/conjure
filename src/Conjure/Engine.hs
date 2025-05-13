@@ -296,8 +296,7 @@ conjpure0 nm f p es  =  Results
   tests  =  conjureTestDefn maxTests maxSearchTests nm f
   (-==-)  =  conjureMkEquation f
   maxTests  =  maxTestsI es
-  maxSize  =  maxSizeI es
-  target  =  targetI es
+  (target, maxSize)  =  targetAndMaxSizeI es
   maxRecursions  =  maxRecursionsI es
   maxSearchTests  =  maxSearchTestsI es
   uniqueCandidates  =  uniqueCandidatesI es

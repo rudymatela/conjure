@@ -50,8 +50,7 @@ module Conjure.Settings
 
   -- * Read basic settings
   , maxTestsI
-  , maxSizeI
-  , targetI
+  , targetAndMaxSizeI
 
   -- * Read advanced settings
   , maxRecursionsI
@@ -156,14 +155,15 @@ maxTestsI is  =  headOr 360 [m | MaxTests m <- map extract is]
   -- the use of magic numbers goes well with the theme of Conjure.
 
 -- | By default,
--- 'Conjure.conjure' limits candidates to 24 symbols.
+-- 'Conjure.conjure' imposes no limit on the size of candidates.
+--
 -- This configures a different maximum
 -- when provided in the list of ingredients.
+--
+-- If only one of 'maxSize' and 'target' is defined,
+-- it is used.  If none, target is used.
 maxSize :: Int -> Ingredient
 maxSize =  setting . MaxSize
-
-maxSizeI :: [Ingredient] -> Int
-maxSizeI is  =  headOr 24 [m | MaxSize m <- map extract is]
 
 -- | By default, 'Conjure.conjure' targets testing 10080 candidates.
 -- This configures a different target when
@@ -175,8 +175,20 @@ maxSizeI is  =  headOr 24 [m | MaxSize m <- map extract is]
 target :: Int -> Ingredient
 target =  setting . Target
 
-targetI :: [Ingredient] -> Int
-targetI is  =  headOr 10080 [m | Target m <- map extract is]
+-- | Computes the target and maxSize.
+--
+-- When none is provided, we default to a target of 10080.
+targetAndMaxSizeI :: [Ingredient] -> (Int, Int)
+targetAndMaxSizeI is  =
+  case (t, m) of
+  (0, 0) -> (10080, 0)
+  (t, m) -> (t, m)
+  where
+  t  =  headOr 0 [m | Target m  <- map extract is]
+  m  =  headOr 0 [m | MaxSize m <- map extract is]
+-- above is a perfect use for the These datatype,
+-- one of my favourite non-standard,
+-- but I don't want to impose a dependency on my users...
 
 -- | By default,
 -- 'Conjure.conjure' evaluates candidates for up to 60 recursive calls.
