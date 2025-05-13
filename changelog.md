@@ -13,6 +13,10 @@ upcoming
 * `Prim`, `pr`, `prim`, `prif`, `primOrdCaseFor` are deprecated;
 * `Args` and `args` were replaced by ingredient settings:
   `maxTests`, `target`, `maxSize`, etc.
+* display `search exhausted` when a suitable candidate is not found
+  (instead of `cannot conjure`)
+* display warning when the specification cannot be reified
+* lightly improve internal testing of `conjure`;
 
 
 v0.6.10 (February 2025)

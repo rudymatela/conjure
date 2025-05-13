@@ -5,7 +5,7 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.
-  This change will need to be one in LeanCheck itself.
+  This change will need to be done in LeanCheck itself.
 
 * Detail two new proposed pruning rules from Colin.
   (email from Feb 24 and follow-up in meeting)
@@ -14,11 +14,7 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Rethink Conjurable typeclass?
 
-* Remove `require0` setting
-
 * Allow chains of guards (see below).
-
-* Move `Args` into `[Ingredient]`?
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
