@@ -15,7 +15,7 @@ mem :: Int -> Tree -> Bool
 -- 96 candidates of size 12
 -- tested 362 candidates
 mem x Leaf  =  False
-mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
+mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values

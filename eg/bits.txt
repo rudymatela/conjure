@@ -10,7 +10,7 @@ bitsum :: Int -> Int
 -- 182 candidates of size 7
 -- tested 145 candidates
 bitsum 0  =  0
-bitsum x  =  bitsum (halve x) + parity x
+bitsum x  =  parity x + bitsum (halve x)
 
 bitsum :: Int -> Int
 -- testing 8 combinations of argument values
@@ -26,5 +26,5 @@ bitsum :: Int -> Int
 -- 89215 candidates of size 9
 -- tested 10191 candidates
 bitsum 0  =  0
-bitsum x  =  bitsum (x `div` 2) + x `mod` 2
+bitsum x  =  x `mod` 2 + bitsum (x `div` 2)
 

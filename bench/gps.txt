@@ -309,7 +309,7 @@ gps17 :: Int -> Int
 -- 1048 candidates of size 9
 -- tested 466 candidates
 gps17 0  =  0
-gps17 x  =  gps17 (x - 1) + x * x
+gps17 x  =  x * x + gps17 (x - 1)
 
 gps18 :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
@@ -439,7 +439,7 @@ gps22 :: [Char] -> Int
 -- 3 candidates of size 6
 -- tested 4 candidates
 gps22 ""  =  0
-gps22 (c:cs)  =  gps22 cs + scrabble1 c
+gps22 (c:cs)  =  scrabble1 c + gps22 cs
 
 gps23 :: [Char] -> ([(Int,Int)],Int,Double)
 gps23  =  error "could not reify specification, suggestion: conjureFromSpec"
@@ -531,5 +531,5 @@ gps29 :: [Char] -> Int
 -- 24 candidates of size 9
 -- tested 36 candidates
 gps29 ""  =  0
-gps29 (c:cs)  =  gps29 cs + (if isVowel c then 1 else 0)
+gps29 (c:cs)  =  (if isVowel c then 1 else 0) + gps29 cs
 

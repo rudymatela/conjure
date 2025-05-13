@@ -8,7 +8,7 @@ length :: [Int] -> Int
 -- 2 candidates of size 5
 -- tested 4 candidates
 length []  =  0
-length (x:xs)  =  length xs + 1
+length (x:xs)  =  1 + length xs
 
 reverse :: [Int] -> [Int]
 -- testing 360 combinations of argument values
@@ -123,5 +123,5 @@ ordered :: [Int] -> Bool
 -- 115 candidates of size 11
 -- tested 172 candidates
 ordered []  =  True
-ordered (x:xs)  =  ordered xs && (null xs || x <= head xs)
+ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
 

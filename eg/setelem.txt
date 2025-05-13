@@ -11,7 +11,7 @@ elem :: Int -> [Int] -> Bool
 -- 16 candidates of size 8
 -- tested 19 candidates
 elem x []  =  False
-elem x (y:xs)  =  elem x xs || x == y
+elem x (y:xs)  =  x == y || elem x xs
 
 set :: [Int] -> Bool
 -- testing 360 combinations of argument values
@@ -26,5 +26,5 @@ set :: [Int] -> Bool
 -- 4 candidates of size 8
 -- tested 6 candidates
 set []  =  True
-set (x:xs)  =  set xs && not (elem x xs)
+set (x:xs)  =  not (elem x xs) && set xs
 

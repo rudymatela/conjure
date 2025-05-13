@@ -25,7 +25,7 @@ count :: A -> [A] -> Int
 -- 44 candidates of size 11
 -- tested 65 candidates
 count x []  =  0
-count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
+count x (y:xs)  =  (if x == y then 1 else 0) + count x xs
 
 count :: A -> [A] -> Int
 -- testing 13 combinations of argument values
@@ -46,6 +46,6 @@ count :: A -> [A] -> Int
 -- tested 127 candidates
 count x []  =  0
 count x (y:xs)
-  | x == y  =  count x xs + 1
+  | x == y  =  1 + count x xs
   | otherwise  =  count x xs
 

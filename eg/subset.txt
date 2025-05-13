@@ -11,7 +11,7 @@ subset :: [Int] -> [Int] -> Bool
 -- 176 candidates of size 8
 -- tested 176 candidates
 subset [] xs  =  True
-subset (x:xs) ys  =  subset xs ys && elem x ys
+subset (x:xs) ys  =  elem x ys && subset xs ys
 
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values

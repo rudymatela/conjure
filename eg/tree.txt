@@ -43,7 +43,7 @@ size :: Tree -> Int
 -- 16 candidates of size 8
 -- tested 32 candidates
 size Leaf  =  0
-size (Node t1 x t2)  =  size t1 + (size t2 + 1)
+size (Node t1 x t2)  =  size t1 + (1 + size t2)
 
 height :: Tree -> Int
 -- testing 360 combinations of argument values
@@ -77,7 +77,7 @@ mem :: Int -> Tree -> Bool
 -- 36 candidates of size 12
 -- tested 42 candidates
 mem x Leaf  =  False
-mem x (Node t1 y t2)  =  mem x t1 || (mem x t2 || x == y)
+mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values

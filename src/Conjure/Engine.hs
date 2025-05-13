@@ -223,7 +223,7 @@ conjure0 nm f p es  =  do
       let (cs',cs'') = break (i==) cs
       let t' = t + length cs' + 1
       putWithTimeSince t0 $ "tested " ++ show t' ++ " candidates"
-      putStrLn $ showDefn i
+      putStrLn $ showDefn $ normalizeDefn thy i
       when carryOn $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
   results  =  conjpure0 nm f p es
@@ -660,6 +660,26 @@ targetiers n xss
   | n <= 0     =  []
   | otherwise  =  case xss of [] -> []
                               (xs:xss) -> xs : targetiers (n - length xs) xss
+
+normalizeDefn :: Thy -> Defn -> Defn
+normalizeDefn  =  map . normalizeBndn
+
+-- This function is quite expensive to run with bad complexity,
+-- but is fine on Conjure: candidates are at most a few dozen symbols long
+-- and this function just runs once.
+normalizeBndn :: Thy -> Bndn -> Bndn
+normalizeBndn thy (lhs, rhs)
+  | ef `elem` vars rhs  =  (lhs, mapInnerFirstOuterLast commutsort rhs)
+  | otherwise           =  (lhs, rhs)
+  where
+  ef:_  =  unfoldApp lhs
+  -- recursive calls come later in this ordering
+  commutsort (eo :$ ex :$ ey)
+    | isCommutative thy eo  =  if (ef `elem` vars ex, ex)
+                               <= (ef `elem` vars ey, ey)
+                               then eo :$ ex :$ ey
+                               else eo :$ ey :$ ex
+  commutsort e  =  e
 
 boolTy :: TypeRep
 boolTy  =  typ b_

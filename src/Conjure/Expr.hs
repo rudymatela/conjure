@@ -39,6 +39,7 @@ module Conjure.Expr
   , isGuardSymbol
   , isGuard
   , hasGuard
+  , mapInnerFirstOuterLast
 
   , enumerateAppsFor
   , enumerateFillings
@@ -629,6 +630,16 @@ rvars e  =  [ex | ex <- nubVars e, typ ex == typ e]
 isStrictSubexprOf :: Expr -> Expr -> Bool
 isStrictSubexprOf e1 e2  =  e1 /= e2
                          && e1 `isSubexprOf` e2
+
+-- TODO: move mapInner to Express?
+--       of course with a shorter name.
+--
+-- The long name here is intentional to prevent a future clash.  :-)
+mapInnerFirstOuterLast :: (Expr -> Expr) -> Expr -> Expr
+mapInnerFirstOuterLast f  =  m
+  where
+  m (ef :$ ex)  =  f (m ef :$ m ex)
+  m e  =  f e
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val

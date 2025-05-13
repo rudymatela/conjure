@@ -157,7 +157,7 @@ gps10 :: [Int] -> Int
 -- 30712 candidates of size 9
 -- tested 7064 candidates
 gps10 []  =  0
-gps10 (x:xs)  =  gps10 xs + (x `div` 3 - 2)
+gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
 gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
