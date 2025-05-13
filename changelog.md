@@ -5,11 +5,14 @@ Changelog for (Code) Conjure
 upcoming
 --------
 
-* Breaking API changes:
-	- `Primitive` is now `Ingredient`;
-	- `pr` and `prim` are now `con` and `fun`;
-	- `prif` is now `iif`;
-	- `primOrdCaseFor` is now `ordcase`.
+* Several breaking API changes;
+* `Prim` is now `Ingredient`;
+* `pr` and `prim` are now `con` and `fun`;
+* `prif` is now `iif`;
+* `primOrdCaseFor` is now `ordcase`;
+* `Prim`, `pr`, `prim`, `prif`, `primOrdCaseFor` are deprecated;
+* `Args` and `args` were replaced by ingredient settings:
+  `maxTests`, `target`, `maxSize`, etc.
 
 
 v0.6.10 (February 2025)
