@@ -23,6 +23,8 @@ module Conjure.Ingredient
   , Prim
   , pr
   , prim
+  , prif
+  , primOrdCaseFor
   )
 where
 
@@ -263,3 +265,11 @@ pr  =  con
 prim :: Conjurable a => String -> a -> Ingredient
 prim  =  fun
 {-# DEPRECATED prim "'prim' is deprecated, please use 'fun' instead" #-}
+
+prif :: Conjurable a => a -> Ingredient
+prif  =  iif
+{-# DEPRECATED prif "'prif' is deprecated, please use 'iif' instead" #-}
+
+primOrdCaseFor :: Conjurable a => a -> Ingredient
+primOrdCaseFor  =  ordcase
+{-# DEPRECATED primOrdCaseFor "'primOrdCaseFor' is deprecated, please use 'ordcase' instead" #-}
