@@ -12,11 +12,13 @@ upcoming
 * `primOrdCaseFor` is now `ordcase`;
 * `Prim`, `pr`, `prim`, `prif`, `primOrdCaseFor` are deprecated;
 * `Args` and `args` were replaced by ingredient settings:
-  `maxTests`, `target`, `maxSize`, etc.
+  `maxTests`, `target`, `maxSize`, etc;
 * display `search exhausted` when a suitable candidate is not found
-  (instead of `cannot conjure`)
-* display warning when the specification cannot be reified
+  (instead of `cannot conjure`);
+* display warning when the specification cannot be reified;
 * lightly improve internal testing of `conjure`;
+* try to place recursive calls last in commutative operators
+  before showing a resulting function.
 
 
 v0.6.10 (February 2025)
