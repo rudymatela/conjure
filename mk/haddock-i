@@ -2,35 +2,46 @@
 #
 # haddock-i: list haddock's -i parameters.
 #
-# Copyright (c) 2015-2024 Rudy Matela.
+# Copyright (c) 2015-2025 Rudy Matela.
 # Distributed under the 3-Clause BSD licence.
 #
-# $ haddock-i <package1> <package2> ... <packageN>
+# $ haddock-i
 #
 # will print -i parameters necessary for haddock to link to Haddock
 # documentation installed on your system, so you can:
 #
-# $ haddock-i base template-haskell | xargs haddock <files>
-err() {
-	echo "$@" > /dev/stderr
+# $ haddock-i | xargs haddock <files>
+
+# This is a grep/sed/bash hack.
+# It works for all my packages,
+# but it isn't foolproof,
+# use with care.
+list-deps() {
+	cat *.cabal |
+	sed -e 's/  */\n/g' |
+	grep -A 999 build-depends: |
+	tail -n +2 |
+	grep -v '^$' |
+	while read tok
+	do
+		echo $tok | grep -q :$ && break
+		# TODO: make this slightly more efficient
+		echo $tok | grep -q '^[a-zA-Z-]*$' || continue
+		[ "$tok" == "if" ] && continue
+		echo "$tok"
+	done
 }
 
-errxit() {
-	err "$@"
-	exit 1
+find-find-args() {
+	echo '-name this-should-not-match-anything.haddock'
+	list-deps |
+	sed -e 's/^/-o -name /;s/$/.haddock/'
 }
 
-iface-for() {
-	ghc-pkg field $1 haddock-interfaces | sort -rV | head -1 | sed "s/.*: //"
-}
+realghc=$(basename $(readlink -f /usr/bin/ghc))
 
-html-for() {
-	ghc-pkg field $1 haddock-html       | sort -rV | head -1 | sed "s/.*: //"
-}
-
-for pkg in "$@"
-do
-	iface=$(iface-for $pkg)
-	html=$(html-for $pkg)
-	[ -d "$html" -a -f "$iface" ] && echo "-i$html,$iface" || err "haddock-i: warning: could not find interface file for $pkg"
-done
+find \
+	/usr/share/doc/ghc/html/libraries \
+	~/.cabal/store/$realghc \
+	$(find-find-args) |
+sed -e 's/^/-i /'

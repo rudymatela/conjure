@@ -117,7 +117,7 @@ upload-haddock:
 	@echo "(on Arch Linux, use: cabal haddock --for-hackage --haddock-options=--optghc=-dynamic)"
 
 doc/index.html: $(LIB_HSS)
-	./mk/haddock-i $(LIB_DEPS) | xargs \
+	./mk/haddock-i | xargs \
 	$(HADDOCK) --html -odoc $(LIB_HSS) \
 	  --title=$(PKGNAME) \
 	  $(shell $(HADDOCK_HAS) --package-name          && echo "--package-name=$(PKGNAME)" ) \
