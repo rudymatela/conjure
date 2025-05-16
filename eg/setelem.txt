@@ -24,7 +24,7 @@ set :: [Int] -> Bool
 -- 0 candidates of size 6
 -- 4 candidates of size 7
 -- 8 candidates of size 8
--- tested 9 candidates
+-- tested 10 candidates
 set []  =  True
 set (x:xs)  =  not (elem x xs) && set xs
 

@@ -19,23 +19,23 @@ set' [1,2,3]  =  True
 main :: IO ()
 main = do
   conjure "elem" (elem')
-    [ con ([] :: [Int])
-    , con True
+    [ con True
     , con False
     , fun "||" (||)
     , fun "&&" (&&)
     , fun "not" not
+    , con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "==" ((==) :: Int -> Int -> Bool)
     ]
 
   conjure "set" (set')
-    [ con ([] :: [Int])
-    , con True
+    [ con True
     , con False
-    , fun "&&" (&&)
     , fun "||" (||)
+    , fun "&&" (&&)
     , fun "not" not
+    , con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "elem" (elem :: Int -> [Int] -> Bool)
     ]
