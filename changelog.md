@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.7.0 (May 2025)
+-----------------
 
 * Several breaking API changes;
 * `Prim` is now `Ingredient`;
