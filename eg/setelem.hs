@@ -5,15 +5,16 @@
 import Conjure
 
 elem' :: Int -> [Int] -> Bool
-elem' x [y]  =  x == y
-elem' x [y,z]  =  x == y || x == z
-elem' x [y,z,w]  =  x == y || x == z || x == w
+elem' 0 [1]  =  False
+elem' 1 [1,2]  =  True
+elem' 0 [1,2]  =  False
+elem' 2 [0,1,2]  =  True
 
 set' :: [Int] -> Bool
-set' []  =  True
-set' [x]  =  True
-set' [x,y]  =  not (x == y)
-set' [x,y,z]  =  not (x == y || y == z || x == z)
+set' [1,1]  =  False
+set' [1,2]  =  True
+set' [1,0,0]  =  False
+set' [1,2,3]  =  True
 
 main :: IO ()
 main = do

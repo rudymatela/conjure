@@ -1,5 +1,5 @@
 elem :: Int -> [Int] -> Bool
--- testing 360 combinations of argument values
+-- testing 4 combinations of argument values
 -- pruning with 40/53 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
@@ -14,17 +14,17 @@ elem x []  =  False
 elem x (y:xs)  =  x == y || elem x xs
 
 set :: [Int] -> Bool
--- testing 360 combinations of argument values
+-- testing 4 combinations of argument values
 -- pruning with 41/52 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
+-- 2 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 2 candidates of size 7
--- 4 candidates of size 8
--- tested 6 candidates
+-- 4 candidates of size 7
+-- 8 candidates of size 8
+-- tested 9 candidates
 set []  =  True
 set (x:xs)  =  not (elem x xs) && set xs
 
