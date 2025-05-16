@@ -12,6 +12,7 @@
 module Conjure.Ingredient
   ( Ingredient
   , con
+  , unfun
   , fun
   , iif
   , ordcase
@@ -82,10 +83,32 @@ con :: (Conjurable a, Show a) => a -> Ingredient
 con x  =  (val x, conjureType x)
 
 
+-- | Provided a 'Show'-able non-functional value to Conjure.
+--   (cf. 'fun')
+--
+-- > conjure "foo" foo [ unfun False
+-- >                   , unfun True
+-- >                   , unfun (0 :: Int)
+-- >                   , unfun (1 :: Int)
+-- >                   , ...
+-- >                   ]
+--
+-- Argument types have to be monomorphized,
+-- so use type bindings when applicable.
+--
+-- TODO:  Make 'unfun' the standard way to create encode 'Show' values.
+--
+-- This is a replacement to 'con'.
+-- In hindsight, 'con' is not such a great name:
+-- 'con'structors may be 'fun'ctional after all!
+unfun :: (Conjurable a, Show a) => a -> Ingredient
+unfun x  =  (val x, conjureType x)
+
+
 -- | Provides a functional value as an ingredient to Conjure.
 --   To be used on values that are not 'Show' instances
 --   such as functions.
---   (cf. 'con')
+--   (cf. 'unfun', 'con')
 --
 -- > conjure "foo" foo [ ...
 -- >                   , fun "&&" (&&)

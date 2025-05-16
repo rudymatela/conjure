@@ -96,6 +96,7 @@ module Conjure
     conjure
   , Ingredient
   , con
+  , unfun
   , fun
   , guard
   , iif

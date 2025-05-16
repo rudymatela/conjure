@@ -2,6 +2,12 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* Add `unfun` as a potential future replacement for `con`.
+
+
 v0.7.0 (May 2025)
 -----------------
 
