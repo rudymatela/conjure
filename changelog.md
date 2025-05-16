@@ -6,6 +6,7 @@ upcoming
 --------
 
 * Add `unfun` as a potential future replacement for `con`.
+* eta-reduce when applicable before displaying result
 
 
 v0.7.0 (May 2025)

@@ -212,6 +212,18 @@ tests n  =
     ++ "             LT -> False\n"
     ++ "             EQ -> True\n"
     ++ "             GT -> False\n"
+
+  , caneta (ff xx, zero) == False
+  , caneta (ff xx, gg xx) == True
+  , caneta (ff xx, one -+- two) == False
+  , caneta (ff xx, one -+- xx) == False -- we don't eta-reduce infix ops
+  , caneta (ff xx, xx -+- one) == False
+  , caneta (ff2 xx yy, xx -+- yy) == False -- we don't eta-reduce infix ops
+  , caneta (ff2 xx yy, one -+- yy) == False -- we don't eta-reduce infix ops
+  , caneta (ff2 xx yy, ff2 xx yy) == True
+  , caneta (ff2 xx yy, ff2 one yy) == True
+
+  , etaReduce [(ff xx, gg xx)] == [(ffE, ggE)]
   ]
 
 dvl :: Typeable a => Defn -> Expr -> a

@@ -30,7 +30,7 @@ and :: [Bool] -> Bool
 -- 0 candidates of size 3
 -- 4 candidates of size 4
 -- tested 6 candidates
-and ps  =  foldr (&&) True ps
+and  =  foldr (&&) True
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
@@ -40,5 +40,5 @@ or :: [Bool] -> Bool
 -- 0 candidates of size 3
 -- 4 candidates of size 4
 -- tested 5 candidates
-or ps  =  foldr (||) False ps
+or  =  foldr (||) False
 

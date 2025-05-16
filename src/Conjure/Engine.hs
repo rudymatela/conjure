@@ -223,7 +223,7 @@ conjure0 nm f p es  =  do
       let (cs',cs'') = break (i==) cs
       let t' = t + length cs' + 1
       putWithTimeSince t0 $ "tested " ++ show t' ++ " candidates"
-      putStrLn $ showDefn $ normalizeDefn thy i
+      putStrLn $ showDefn $ etaReduce $ normalizeDefn thy i
       when carryOn $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
   results  =  conjpure0 nm f p es

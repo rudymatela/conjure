@@ -28,5 +28,5 @@ product :: [Int] -> Int
 -- 1 candidates of size 3
 -- 5 candidates of size 4
 -- tested 8 candidates
-product xs  =  foldr (*) 1 xs
+product  =  foldr (*) 1
 

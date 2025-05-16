@@ -168,5 +168,5 @@ decrelements :: [Int] -> [Int]
 -- 2 candidates of size 3
 -- 2 candidates of size 4
 -- tested 6 candidates
-decrelements xs  =  map (subtract 1) xs
+decrelements  =  map (subtract 1)
 

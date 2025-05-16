@@ -32,6 +32,8 @@ module Conjure.Defn
   , isBaseCase
   , isRecursiveCase
   , isRecursiveDefn
+  , caneta
+  , etaReduce
   , module Conjure.Expr
   )
 where
@@ -39,6 +41,7 @@ where
 import Conjure.Utils
 import Conjure.Expr
 import Data.Express.Utils.Typeable (boolTy, orderingTy)
+import Data.Express.Utils.String (isInfix)
 import Data.Dynamic
 -- import Control.Applicative ((<$>)) -- for older GHCs
 
@@ -327,3 +330,26 @@ isRecursiveCase (lhs,rhs)  =  f `elem` values rhs
 -- | Returns whether a definition is recursive
 isRecursiveDefn :: Defn -> Bool
 isRecursiveDefn  =  any isRecursiveCase
+
+-- | Returns whether eta-reduction is possible in the given 'Bndn'
+--
+-- This says 'False' to some cases that are eta-reducible but would yield ugly results
+caneta :: Bndn -> Bool
+caneta (_, Value "if" _ :$ _ :$ _ :$ _)          =  False
+caneta (_, Value "|" _ :$ _ :$ _ :$ _)           =  False
+caneta (_, Value "case" _ :$ _ :$ _ :$ _ :$ _)   =  False
+caneta (Value (_:s) _ :$ _ :$ _, _) | isInfix s  =  False
+caneta (_, Value s _ :$ _ :$ _)     | isInfix s  =  False
+caneta (elf :$ elx, erf :$ erx)  =  elx == erx && erx `notElem` values erf
+caneta _  =  False
+
+
+-- | When possible, performs eta-reduction in the given definition
+etaReduce :: Defn -> Defn
+etaReduce  =  try
+  where
+  try d
+    | all caneta d  =  try $ map reduce d
+    | otherwise     =  d
+  reduce (lhs :$ _, rhs :$ _)  =  (lhs, rhs)
+  reduce _  =  error "Conjure.Defn.etaReduce: the impossible happened, this is a bug"

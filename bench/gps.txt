@@ -336,7 +336,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- tested 10 candidates
-gps18 xs ys  =  zipWith (+) xs ys
+gps18  =  zipWith (+)
 
 gps19 :: Int -> [Char] -> [Char]
 -- testing 3 combinations of argument values
