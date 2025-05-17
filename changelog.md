@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.7.2 (May 2025)
+-----------------
 
 * Add `unfun` as a potential future replacement for `con`.
 * eta-reduce when applicable before displaying result
