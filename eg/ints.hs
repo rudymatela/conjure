@@ -14,14 +14,14 @@ third [x,y,z]  =  z
 third [x,y,z,w]  =  z
 
 sum' :: [Int] -> Int
-sum' [x]      =  x
-sum' [x,y]    =  x+y
-sum' [x,y,z]  =  x+y+z
+sum' [1]      =  1
+sum' [1,2]    =  3
+sum' [1,2,3]  =  6
 
 product' :: [Int] -> Int
-product' [x]      =  x
-product' [x,y]    =  x*y
-product' [x,y,z]  =  x*y*z
+product' [2,3]    =  6
+product' [3,3]    =  9
+product' [2,3,4]  =  24
 
 main :: IO ()
 main = do
