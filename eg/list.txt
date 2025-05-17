@@ -25,7 +25,7 @@ reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ [x]
 
 (++) :: [Int] -> [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 3 combinations of argument values
 -- pruning with 0/0 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
@@ -38,7 +38,7 @@ reverse (x:xs)  =  reverse xs ++ [x]
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
 (++) :: [Int] -> [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 3 combinations of argument values
 -- pruning with 2/2 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
