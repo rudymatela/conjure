@@ -76,9 +76,6 @@ main = do
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "==" ((==) :: A -> A -> Bool)
-
---  , iif (undefined :: [Int])
-    -- cheat codes:
-    , fun "id" (id :: [Int] -> [Int])
-    , iif (undefined :: [Int] -> [Int])
+    , guard
+    , target 1080 -- 100800 -- can find after 44472 candidates in 25s
     ]

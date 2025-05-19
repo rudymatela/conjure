@@ -51,7 +51,7 @@ duplicates (x:xs)
 
 positionsFrom :: Int -> A -> [A] -> [Int]
 -- testing 360 combinations of argument values
--- pruning with 5/10 rules
+-- pruning with 6/11 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
@@ -61,12 +61,10 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- 34 candidates of size 7
 -- 0 candidates of size 8
 -- 133 candidates of size 9
--- 0 candidates of size 10
+-- 8 candidates of size 10
 -- 510 candidates of size 11
--- 16 candidates of size 12
--- 1947 candidates of size 13
--- 104 candidates of size 14
--- tested 2653 candidates
-positionsFrom x y []  =  []
-positionsFrom x y (z:xs)  =  (if y == z then (x :) else id) (positionsFrom (x + 1) y xs)
+-- 40 candidates of size 12
+-- 1943 candidates of size 13
+-- tested 2678 candidates
+positionsFrom  =  undefined  -- search exhausted
 
