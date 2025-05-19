@@ -15,7 +15,7 @@ elem x (y:xs)  =  x == y || elem x xs
 
 set :: [Int] -> Bool
 -- testing 4 combinations of argument values
--- pruning with 41/52 rules
+-- pruning with 39/49 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3

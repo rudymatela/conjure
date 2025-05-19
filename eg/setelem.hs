@@ -24,8 +24,6 @@ main = do
     , fun "||" (||)
     , fun "&&" (&&)
     , fun "not" not
-    , con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "==" ((==) :: Int -> Int -> Bool)
     ]
 
@@ -35,7 +33,5 @@ main = do
     , fun "||" (||)
     , fun "&&" (&&)
     , fun "not" not
-    , con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "elem" (elem :: Int -> [Int] -> Bool)
     ]
