@@ -30,7 +30,7 @@ sum []  =  0
 sum (x:xs)  =  x + sum xs
 
 product :: [Int] -> Int
--- testing 2 combinations of argument values
+-- testing 3 combinations of argument values
 -- pruning with 14/25 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
@@ -52,7 +52,7 @@ sum :: [Int] -> Int
 sum  =  foldr (+) 0
 
 product :: [Int] -> Int
--- testing 2 combinations of argument values
+-- testing 3 combinations of argument values
 -- pruning with 15/26 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
