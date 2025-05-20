@@ -58,44 +58,44 @@ main  =  do
   let n = 6
 
   printErroneousCandidates (n+1) "foo" (undefined :: Int -> Int)
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con (2 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun (2 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   printErroneousCandidates n "?" (undefined :: Int -> Int -> Int)
-    [ con (0 :: Int)
+    [ unfun (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "dec" (subtract 1 :: Int -> Int)
     ]
 
   printErroneousCandidates (n+1) "goo" (undefined :: [Int] -> [Int])
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printErroneousCandidates n "??" (undefined :: [Int] -> [Int] -> [Int])
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printErroneousCandidates n "ton" (undefined :: Bool -> Bool)
-    [ con False
-    , con True
+    [ unfun False
+    , unfun True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
     ]
 
   printErroneousCandidates n "&|" (undefined :: Bool -> Bool -> Bool)
-    [ con False
-    , con True
+    [ unfun False
+    , unfun True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not

@@ -44,10 +44,10 @@ gps1c  =  conjure "gps1" gps1p
 
 gps1c30p :: IO ()
 gps1c30p  =  conjure "gps1" gps1p
-  [ con (0 :: Float)
-  , con (1 :: Float)
-  , con (1/2 :: Float)
-  , con (-1 :: Float)
+  [ unfun (0 :: Float)
+  , unfun (1 :: Float)
+  , unfun (1/2 :: Float)
+  , unfun (-1 :: Float)
   , fun "+" ((+) :: Float -> Float -> Float)
   , fun "*" ((*) :: Float -> Float -> Float)
   , fun "-" ((-) :: Float -> Float -> Float)
@@ -56,9 +56,9 @@ gps1c30p  =  conjure "gps1" gps1p
   , fun "id" (id :: Float -> Float)
   , fun "fromIntegral" (fromIntegral :: Int -> Float)
 
-  , con (0 :: Int)
-  , con (1 :: Int)
-  , con (-1 :: Int)
+  , unfun (0 :: Int)
+  , unfun (1 :: Int)
+  , unfun (-1 :: Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
   , fun "-" ((-) :: Int -> Int -> Int)
@@ -71,8 +71,8 @@ gps1c30p  =  conjure "gps1" gps1p
   , fun "round" (round :: Float -> Int)
   , fun "truncate" (truncate :: Float -> Int)
 
-  , con False
-  , con True
+  , unfun False
+  , unfun True
   , fun "&&" (&&)
   , fun "||" (||)
   , fun "not" not
@@ -95,10 +95,10 @@ gps2g n
 
 gps2c :: IO ()
 gps2c  =  conjure "gps2" gps2p
-  [ con "small"
-  , con "large"
-  , con (1000 :: Int)
-  , con (2000 :: Int)
+  [ unfun "small"
+  , unfun "large"
+  , unfun (1000 :: Int)
+  , unfun (2000 :: Int)
   , fun "Just" (Just :: String -> Maybe String)
   , fun "Nothing" (Nothing :: Maybe String)
   , fun "<=" ((<=) :: Int -> Int -> Bool)
@@ -124,7 +124,7 @@ gps3g2 start end step  =  if start < end
 gps3c :: IO ()
 gps3c  =  do
   conjure "gps3" gps3p
-    [ con (1 :: Int)
+    [ unfun (1 :: Int)
     , fun "enumFromThenTo" ((\x y z -> take 720 $ enumFromThenTo x y z) :: Int -> Int -> Int -> [Int])
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
@@ -132,7 +132,7 @@ gps3c  =  do
 
   -- not possible, no recursive descent
   conjure "gps3" gps3p
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "<" ((<) :: Int -> Int -> Bool)
@@ -180,9 +180,9 @@ gps5g (c:cs)
 
 gps5c :: IO ()
 gps5c  =  conjure "gps5" gps5p -- can't find
-  [ con ""
+  [ unfun ""
   , fun ":" ((:) :: Char -> String -> String)
-  , con '!'
+  , unfun '!'
   , fun "==" ((==) :: Char -> Char -> Bool)
   , fun "isLetter" (isLetter :: Char -> Bool)
   , iif (undefined :: String -> String)
@@ -218,9 +218,9 @@ gps6g  =  tnp1
 -- But a size of 15 or 17 is simplyl out of our reach.
 gps6c :: IO ()
 gps6c  =  conjure "gps6" gps6p
-  [ con (1 :: Int)
-  , con (2 :: Int)
-  , con (3 :: Int)
+  [ unfun (1 :: Int)
+  , unfun (2 :: Int)
+  , unfun (3 :: Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
   , fun "`div`" (div :: Int -> Int -> Int)
@@ -301,7 +301,7 @@ gps9g n  =  filter (n >) (filter even (map sq [1..n]))
 
 gps9c :: IO ()
 gps9c  =  conjure "gps9" gps9p
-  [ con (1 :: Int)
+  [ unfun (1 :: Int)
   , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
   , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
   , fun ".." (enumFromTo :: Int -> Int -> [Int])
@@ -353,8 +353,8 @@ wallisNext q  =  if n < d
 gps10c :: IO ()
 gps10c  =  do
   conjure "wallisNext" wallisNextP
-    [ con (1 :: Integer)
-    , con (2 :: Integer)
+    [ unfun (1 :: Integer)
+    , unfun (2 :: Integer)
     , fun "+" ((+) :: Integer -> Integer -> Integer)
     , fun "*" ((*) :: Integer -> Integer -> Integer)
     , fun "%" ((%) :: Integer -> Integer -> Rational)
@@ -366,18 +366,18 @@ gps10c  =  do
 
   -- simplified background
   conjure "wallisNext" wallisNextP
-    [ con (0 :: Integer)
-    , con (1 :: Integer)
+    [ unfun (0 :: Integer)
+    , unfun (1 :: Integer)
     , fun "+" ((+) :: Integer -> Integer -> Integer)
     , fun "*" ((*) :: Integer -> Integer -> Integer)
     , fun "%" ((%) :: Integer -> Integer -> Rational)
     ]
 
   conjure "gps10" gps10p
-    [ con (2 :: Integer)
-    , con (3 :: Integer)
+    [ unfun (2 :: Integer)
+    , unfun (3 :: Integer)
     , fun "%" ((%) :: Integer -> Integer -> Rational)
---  , con (2/3 :: Rational)
+--  , unfun (2/3 :: Rational)
     , fun "product"    (product :: [Rational] -> Rational)
     , fun "take"       (take :: Int -> [Rational] -> [Rational])
     , fun "iterate"    ((\f -> take 720 . iterate f) :: (Rational -> Rational) -> Rational -> [Rational])
@@ -409,7 +409,7 @@ gps11c  =  do
     ]
 
   conjure "gps11" gps11p
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     , fun "length"  (length :: String -> Int)
@@ -438,8 +438,8 @@ gps12c  =  do
     , fun "fromJust"  (fromJust :: Maybe Int -> Int)
     , fun "-"         ((-) :: Int -> Int -> Int)
     , fun "=="        ((==) :: Int -> Int -> Bool)
-    , con (0 :: Int)
-    , con (1 :: Int)
+    , unfun (0 :: Int)
+    , unfun (1 :: Int)
     , maxSize 11
     ]
 
@@ -496,9 +496,9 @@ odd' 5  =  True
 gps14c :: IO ()
 gps14c  =  do
   conjure "odd" odd'
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con (2 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun (2 :: Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     , fun "/=" ((/=) :: Int -> Int -> Bool)
     ]
@@ -513,9 +513,9 @@ gps14c  =  do
   -- gps14 []  =  0
   -- gps14 (x:xs)  =  x `mod` 2 + gps14 xs
   conjure "gps14" gps14p
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con (2 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun (2 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     , fun "==" ((==) :: Int -> Int -> Bool)
@@ -577,8 +577,8 @@ gps17g n  =   n * n + gps17g (n - 1)
 
 gps17c :: IO ()
 gps17c  =  conjure "gps17" gps17p
-  [ con (0 :: Int)
-  , con (1 :: Int)
+  [ unfun (0 :: Int)
+  , unfun (1 :: Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
   , fun "-" ((-) :: Int -> Int -> Int)
@@ -602,7 +602,7 @@ gps18g' (x:xs) (y:ys)  =  x + y : gps18g' xs ys
 gps18c :: IO ()
 gps18c  =  do
   conjure "gps18" gps18p
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     ]
@@ -688,18 +688,18 @@ isVowel' 'g'  =  False
 gps20c :: IO ()
 gps20c  =  do
   conjure "isVowel" isVowel'
-    [ con 'a'
-    , con 'e'
-    , con 'i'
-    , con 'o'
-    , con 'u'
-    , con 'y'
-    , con True
-    , con False
+    [ unfun 'a'
+    , unfun 'e'
+    , unfun 'i'
+    , unfun 'o'
+    , unfun 'u'
+    , unfun 'y'
+    , unfun True
+    , unfun False
     ]
 
   conjureFromSpec "pig1" pig1Spec
-    [ con "ay"
+    [ unfun "ay"
     , iif (undefined :: String)
     , fun "isVowel" isVowel
     , fun "++" ((++) :: String -> String -> String)
@@ -730,8 +730,8 @@ gps21g (x:xs)  =  (if x < 0 then 0 else x) : gps21g xs
 
 gps21c :: IO ()
 gps21c  =  conjure "gps21" gps21p
-  [ con ([] :: [Int])
-  , con (0 :: Int)
+  [ unfun ([] :: [Int])
+  , unfun (0 :: Int)
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , fun "<" ((<) :: Int -> Int -> Bool)
   , iif (undefined :: Int)
@@ -773,7 +773,7 @@ scrabble1  _   =   1 -- aeilnorstu
 gps22c :: IO ()
 gps22c  =  do
   conjureFromSpec "gps22" gps22s
-    [ con (0 :: Int)
+    [ unfun (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
     , fun "scrabble1" scrabble1
@@ -802,8 +802,8 @@ gps24g s  =  chr (sum (map ord s) `mod` 64 + ord ' ')
 
 gps24c :: IO ()
 gps24c  =  conjure "gps24" gps24p
-  [ con ' '
-  , con (64 :: Int)
+  [ unfun ' '
+  , unfun (64 :: Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "`mod`" (mod :: Int -> Int -> Int)
   , fun "sum" (sum :: [Int] -> Int)
@@ -829,9 +829,9 @@ gps25g n  =  if abs n < 10                                --  8
 -- out of reach performance-wise
 gps25c :: IO ()
 gps25c  =  conjure "gps25" gps25p $ take 0
-  [ con (0 :: Int)
-  , con (10 :: Int)
-  , con ([] :: [Int])
+  [ unfun (0 :: Int)
+  , unfun (10 :: Int)
+  , unfun ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , iif (undefined :: [Int])
   , fun "abs" (abs :: Int -> Int)
@@ -861,11 +861,11 @@ gps26g a b c d x
 -- out of reach performance-wise
 gps26c :: IO ()
 gps26c  =  conjure "gps26" gps26p
-  [ con 'A'
-  , con 'B'
-  , con 'C'
-  , con 'D'
-  , con 'F'
+  [ unfun 'A'
+  , unfun 'B'
+  , unfun 'C'
+  , unfun 'D'
+  , unfun 'F'
   , iif (undefined :: Char)
   , fun ">=" ((>=) :: Int -> Int -> Bool)
   , maxSize 2
@@ -930,8 +930,8 @@ gps29g (c:cs)  =  if isVowel c
 
 gps29c :: IO ()
 gps29c  =  conjureFromSpec "gps29" gps29s
-  [ con (0 :: Int)
-  , con (1 :: Int)
+  [ unfun (0 :: Int)
+  , unfun (1 :: Int)
   , fun "+" ((+) :: Int->Int->Int)
   , iif (undefined :: Int)
   , fun "isVowel" isVowel

@@ -30,21 +30,21 @@ main = do
 
 ingredients1 :: [Ingredient]
 ingredients1 =
-  [ con (0::Int)
-  , con (1::Int)
-  , con (2::Int)
+  [ unfun (0::Int)
+  , unfun (1::Int)
+  , unfun (2::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
 
   , fun "-" ((-) :: Int -> Int -> Int)
-  , con False
-  , con True
+  , unfun False
+  , unfun True
   ]
 
 ingredients2 :: [Ingredient]
 ingredients2 =
-  [ con (0::Int)
-  , con (1::Int)
-  , con (2::Int)
+  [ unfun (0::Int)
+  , unfun (1::Int)
+  , unfun (2::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
 
   , fun "`mod`" (mod :: Int -> Int -> Int)

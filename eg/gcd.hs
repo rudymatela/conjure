@@ -19,7 +19,7 @@ gcd' 12 18  =  6
 
 main :: IO ()
 main = conjure "gcd a b" gcd'
-  [ con (0::Int)
+  [ unfun (0::Int)
   , fun "`mod`" (mod :: Int -> Int -> Int)
   ]
   -- desired function:

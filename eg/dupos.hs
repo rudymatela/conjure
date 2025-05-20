@@ -53,7 +53,7 @@ main = do
   --                       else duplicates xs                              -- 17
   -- within reach performance wise.
   conjure "duplicates" duplicates'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun "not" not
     , fun "&&" (&&)
     , fun ":" ((:) :: Int -> [Int] -> [Int])
@@ -62,7 +62,7 @@ main = do
     ]
 
   conjureFromSpec "duplicates" duplicatesSpec
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun "not" not
     , fun "&&" (&&)
     , fun ":" ((:) :: Int -> [Int] -> [Int])
@@ -71,8 +71,8 @@ main = do
     ]
 
   conjure "positionsFrom" positionsFrom'
-    [ con ([] :: [Int])
-    , con (1 :: Int)
+    [ unfun ([] :: [Int])
+    , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "==" ((==) :: A -> A -> Bool)

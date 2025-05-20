@@ -15,8 +15,8 @@ main :: IO ()
 main  =  do
   -- carry on Conjuring larger implementations
   conjure "factorial n" factorial
-    [ con (0::Int)
-    , con (1::Int)
+    [ unfun (0::Int)
+    , unfun (1::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)

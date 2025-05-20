@@ -56,30 +56,30 @@ last' [x,y,z]  =  z
 main :: IO ()
 main = do
   conjure "length" length'
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     ]
 
   conjure "reverse" reverse'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjure "++" (+++)
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     ]
 
   conjure "++" (+++)
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
   conjure "last" last'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "null" (null :: [Int] -> Bool)
     , guard
@@ -87,26 +87,26 @@ main = do
     ]
 
   conjure "last" last'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "undefined" (undefined :: Int)
     , maxPatternDepth 2
     ]
 
   conjure "zip" (zip')
-    [ con ([] :: [(Int,Int)])
+    [ unfun ([] :: [(Int,Int)])
     , fun ":" ((:) :: (Int,Int) -> [(Int,Int)] -> [(Int,Int)])
     , fun "," ((,) :: Int -> Int -> (Int,Int))
     ]
 
   conjure "\\/" (\/)
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     ]
 
   conjure "ordered" ordered'
-    [ con False
-    , con True
+    [ unfun False
+    , unfun True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "<=" ((<=) :: Int -> Int -> Bool)

@@ -47,14 +47,14 @@ main  =  do
 
 ingredients :: [Ingredient]
 ingredients  =
-  [ con False
-  , con True
+  [ unfun False
+  , unfun True
   , fun "&&" (&&)
   , fun "||" (||)
   , fun "not" not
 
-  , con (0::Int)
-  , con (1::Int)
+  , unfun (0::Int)
+  , unfun (1::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
   , fun "dec" (subtract 1 :: Int -> Int)
@@ -66,7 +66,7 @@ ingredients  =
 
   , fun "const" (const :: Int -> Int -> Int)
 
-  , con ([] :: [Int])
+  , unfun ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , fun "head" (head :: [Int] -> Int)
   , fun "tail" (tail :: [Int] -> [Int])

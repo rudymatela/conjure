@@ -78,12 +78,12 @@ main  =  do
     ]
 
   conjure "listhese" listhese'
-    [ con ([] :: [A])
+    [ unfun ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
     ]
 
   conjure "cathis" cathis'
-    [ con ([] :: [A])
+    [ unfun ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
     , fun "isThis" (isThis :: These A B -> Bool)
     , fun "fromThis" (fromThis :: These A B -> A)
@@ -91,7 +91,7 @@ main  =  do
     ]
 
   conjure "cathat" cathat'
-    [ con ([] :: [B])
+    [ unfun ([] :: [B])
     , fun ":" ((:) :: B -> [B] -> [B])
     , fun "isThat" (isThat :: These A B -> Bool)
     , fun "fromThat" (fromThat :: These A B -> B)
@@ -99,19 +99,19 @@ main  =  do
     ]
 
   conjure "cathis" cathis'
-    [ con ([] :: [A])
+    [ unfun ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
     , maxPatternDepth 2
     ]
 
   conjure "cathat" cathat'
-    [ con ([] :: [B])
+    [ unfun ([] :: [B])
     , fun ":" ((:) :: B -> [B] -> [B])
     , maxPatternDepth 2
     ]
 
   conjure "cathese" cathese'
-    [ con ([] :: [A])
+    [ unfun ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
     , maxPatternDepth 2
     ]

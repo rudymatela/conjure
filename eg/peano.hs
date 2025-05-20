@@ -27,13 +27,13 @@ plus (S Z) (S (S Z))  =  S (S (S Z))
 main :: IO ()
 main  =  do
   conjure "+" plus
-    [ con Z
+    [ unfun Z
     , fun "S" S
     ]
 
   -- use + to conjure *
   conjure "*" times
-    [ con Z
+    [ unfun Z
     , fun "S" S
     , fun "+" (let p + Z    =  p
                    p + S q  =  S p + q

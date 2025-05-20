@@ -31,7 +31,7 @@ main  =  do
   -- Found!  It takes about 12 seconds to run with maxSize=8
   -- running with maxSize = 5 for faster runtime
   conjure "fib01" fib01
-    [ con (0::Int)
+    [ unfun (0::Int)
     , fun "dec" (subtract 1 :: Int -> Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , maxSize 5
@@ -41,7 +41,7 @@ main  =  do
   -- It takes about 27 seconds to run with maxSize=12
   -- running with maxSize = 9 for faster runtime
   conjure "fib01" fib01
-    [ con (0::Int)
+    [ unfun (0::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "dec" (subtract 1 :: Int -> Int)
     , fun "<=" ((<=) :: Int -> Int -> Bool)

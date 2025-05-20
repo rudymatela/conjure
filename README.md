@@ -64,8 +64,8 @@ here is a list of ingredients including
 addition, multiplication, subtraction and their neutral elements:
 
 	ingredients :: [Ingredient]
-	ingredients  =  [ con (0::Int)
-	                , con (1::Int)
+	ingredients  =  [ unfun (0::Int)
+	                , unfun (1::Int)
 	                , fun "+" ((+) :: Int -> Int -> Int)
 	                , fun "*" ((*) :: Int -> Int -> Int)
 	                , fun "-" ((-) :: Int -> Int -> Int)
@@ -121,9 +121,9 @@ Conjure is able to find an appropriate implementation
 given list constructors, zero, one and subtraction:
 
 	> conjure "take" (take' :: Int -> [A] -> [A])
-	>   [ con (0 :: Int)
-	>   , con (1 :: Int)
-	>   , con ([] :: [A])
+	>   [ unfun (0 :: Int)
+	>   , unfun (1 :: Int)
+	>   , unfun ([] :: [A])
 	>   , fun ":" ((:) :: A -> [A] -> [A])
 	>   , fun "-" ((-) :: Int -> Int -> Int)
 	>   ]
@@ -164,7 +164,7 @@ Then we'll see how to use [`conjureFromSpec`].
 Let's start with the ingredients:
 
 	ingredients :: [Ingredient]
-	ingredients  =  [ con ([] :: [Int])
+	ingredients  =  [ unfun ([] :: [Int])
 	                , fun "not" not
 	                , fun "&&" (&&)
 	                , fun ":" ((:) :: Int -> [Int] -> [Int])

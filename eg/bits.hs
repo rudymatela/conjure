@@ -19,8 +19,8 @@ bitsum 7  =  3  -- 111
 main :: IO ()
 main  =  do
   conjure "bitsum" bitsum
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "halve" ((`div` 2) :: Int -> Int)
     , fun "parity" ((`mod` 2) :: Int -> Int)
     , fun "+" ((+) :: Int -> Int -> Int)
@@ -29,9 +29,9 @@ main  =  do
   -- bitsum n  =  parity n + bitsum (halve n)
 
   conjure "bitsum" bitsum
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con (2 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun (2 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)

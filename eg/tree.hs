@@ -109,31 +109,31 @@ main = do
     ]
 
   conjure "size" size
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "nil" nil
     ]
 
   conjure "height" height
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con (-1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun (-1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "max" (max :: Int -> Int -> Int)
     , fun "nil" nil
     ]
 
   conjure "mem" mem
-    [ con False
+    [ unfun False
     , fun "||" (||)
     , fun "==" ((==) :: Int -> Int -> Bool)
     ]
 
   -- unreachable: needs size 22 but OOMs at 19/20 (v0.5.16)
   conjure "ordered" ordered
-    [ con True
-    , con False
+    [ unfun True
+    , unfun False
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "<" ((<) :: Int -> Int -> Bool)
@@ -149,19 +149,19 @@ main = do
     ]
 
   conjure "preorder" preorder
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjure "inorder" inorder
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   conjure "posorder" posorder
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]

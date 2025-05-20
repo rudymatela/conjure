@@ -44,9 +44,9 @@ main = do
   -- subset [] ys  =  True
   -- subset (x:xs) ys  =  elem x ys && subset xs ys
   conjure "subset" (subset')
-    [ con ([] :: [Int])
-    , con True
-    , con False
+    [ unfun ([] :: [Int])
+    , unfun True
+    , unfun False
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "elem" (elem :: Int -> [Int] -> Bool)

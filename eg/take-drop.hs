@@ -27,9 +27,9 @@ main = do
   -- drop x []  =  []                   -- 2
   -- drop x (y:xs)  =  drop (x - 1) xs  -- 7
   conjure "drop" (drop' :: Int -> [A] -> [A])
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con ([] :: [A])
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
     , fun "-" ((-) :: Int -> Int -> Int)
     ]
@@ -38,9 +38,9 @@ main = do
   -- take x []  =  []                     -- 2
   -- take x (y:xs)  =  y:take (x - 1) xs  -- 9
   conjure "take" (take' :: Int -> [A] -> [A])
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con ([] :: [A])
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
+    , unfun ([] :: [A])
     , fun "-" ((-) :: Int -> Int -> Int)
     , fun ":" ((:) :: A -> [A] -> [A])
     ]

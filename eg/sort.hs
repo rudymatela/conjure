@@ -47,7 +47,7 @@ main = do
   -- sort []  =  []
   -- sort (x:xs)  =  insert x (sort xs)
   conjure "sort" sort'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun "insert" (insert :: Int -> [Int] -> [Int])
     , fun "head" (head :: [Int] -> Int)
     , fun "tail" (tail :: [Int] -> [Int])
@@ -57,7 +57,7 @@ main = do
   -- now through fold
   -- sort xs  =  foldr insert [] xs
   conjure "sort" sort'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun "insert" (insert :: Int -> [Int] -> [Int])
     , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
@@ -78,7 +78,7 @@ main = do
   -- but is not generated because of the deconstruction restriction.
   -- The following does generate a correct but inneficient version of qsort.
   conjure "qsort" sort'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
@@ -89,7 +89,7 @@ main = do
   -- if we disable the descent requirement, we get the efficient qsort
   -- though with a larger search space
   conjure "qsort" sort'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
@@ -106,7 +106,7 @@ main = do
   --   | otherwise  =  merge (y:x:xs) ys
   -- set target to 2 000 000 to reach it
   conjure "merge" merge'
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
     , guard

@@ -26,10 +26,10 @@ replicates' [a,b,c] 3  =  [a,a,a,b,b,b,c,c,c]
 main :: IO ()
 main = do
   conjure "replicate" replicate'
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "-" ((-) :: Int -> Int -> Int)
-    , con ""
+    , unfun ""
     , fun ":" ((:) :: Char -> String -> String)
     ]
 
@@ -49,7 +49,7 @@ main = do
 
   -- alternative generation using recursion
   conjure "replicates" replicates'
-    [ con ""
+    [ unfun ""
     , fun ":" ((:) :: Char -> String -> String)
     , fun "++" ((++) :: String -> String -> String)
     , fun "replicate" (replicate :: Int -> Char -> String)

@@ -19,8 +19,8 @@ set' [1,2,3]  =  True
 main :: IO ()
 main = do
   conjure "elem" (elem')
-    [ con True
-    , con False
+    [ unfun True
+    , unfun False
     , fun "||" (||)
     , fun "&&" (&&)
     , fun "not" not
@@ -28,8 +28,8 @@ main = do
     ]
 
   conjure "set" (set')
-    [ con True
-    , con False
+    [ unfun True
+    , unfun False
     , fun "||" (||)
     , fun "&&" (&&)
     , fun "not" not

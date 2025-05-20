@@ -38,8 +38,8 @@ main = do
   -- count x []  =  0
   -- count x (y:xs)  =  count x xs + (if x == y then 1 else 0)
   conjure "count" count'
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "==" ((==) :: A -> A -> Bool)
     , iif (undefined :: Int)
@@ -48,8 +48,8 @@ main = do
   -- a little bit larger, guards are only allowed at the root
   -- so there is a need to repeat the recursive call twice
   conjure "count" count'
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "==" ((==) :: A -> A -> Bool)
     , guard

@@ -47,7 +47,7 @@ main = do
 
 ingredients :: [Ingredient]
 ingredients  =
-  [ con ([] :: [Int])
+  [ unfun ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , guard
   ]

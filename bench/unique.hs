@@ -64,43 +64,43 @@ main  =  do
   let n = 5
 
   printUniqueCandidates (n+2) "foo" (undefined :: Int -> Int)
-    [ con (0 :: Int)
-    , con (1 :: Int)
+    [ unfun (0 :: Int)
+    , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   printUniqueCandidates n "?" (undefined :: Int -> Int -> Int)
-    [ con (0 :: Int)
+    [ unfun (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "dec" (subtract 1 :: Int -> Int)
     ]
 
   printUniqueCandidates (n+2) "goo" (undefined :: [Int] -> [Int])
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printUniqueCandidates n "??" (undefined :: [Int] -> [Int] -> [Int])
-    [ con ([] :: [Int])
+    [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printUniqueCandidates (n+2) "ton" (undefined :: Bool -> Bool)
-    [ con False
-    , con True
+    [ unfun False
+    , unfun True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
     ]
 
   printUniqueCandidates n "&|" (undefined :: Bool -> Bool -> Bool)
-    [ con False
-    , con True
+    [ unfun False
+    , unfun True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
