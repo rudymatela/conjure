@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.7.4 (May 2025)
+-----------------
 
 * For now, `unfun` replaces `con`.
 * Use list of properties in `conjureFromSpec`.
