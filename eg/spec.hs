@@ -6,10 +6,12 @@ import Test.LeanCheck (holds, exists)
 import Prelude hiding (sum)
 
 
-squareSpec :: (Int -> Int) -> Bool
-squareSpec square  =  square 0 == 0
-                   && square 1 == 1
-                   && square 2 == 4
+squareSpec :: (Int -> Int) -> [Property]
+squareSpec square  =
+  [ property $ square 0 == 0
+  , property $ square 1 == 1
+  , property $ square 2 == 4
+  ]
 
 squareIngredients :: [Ingredient]
 squareIngredients  =
@@ -19,18 +21,20 @@ squareIngredients  =
   , fun "*" ((*) :: Int -> Int -> Int)
   ]
 
-squarePropertySpec :: (Int -> Int) -> Bool
-squarePropertySpec square  =  and
-  [ holds n $ \x -> square x >= x
-  , holds n $ \x -> square x >= 0
-  , exists n $ \x -> square x > x
-  ]  where  n = 60
+squarePropertySpec :: (Int -> Int) -> [Property]
+squarePropertySpec square  =
+  [ property $ \x -> square x >= x
+  , property $ \x -> square x >= 0
+  , property $ square 2 == 4
+  ]
 
 
-sumSpec :: ([Int] -> Int) -> Bool
-sumSpec sum  =  sum []      == 0
-             && sum [1,2]   == 3
-             && sum [3,4,5] == 12
+sumSpec :: ([Int] -> Int) -> [Property]
+sumSpec sum  =
+  [ property $ sum []      == 0
+  , property $ sum [1,2]   == 3
+  , property $ sum [3,4,5] == 12
+  ]
 
 sumIngredients :: [Ingredient]
 sumIngredients  =
@@ -42,10 +46,12 @@ sumIngredients  =
   ]
 
 
-appSpec :: ([Int] -> [Int] -> [Int]) -> Bool
-appSpec (++)  =  []      ++ [0,1]   == [0,1]
-              && [2,3]   ++ []      == [2,3]
-              && [4,5,6] ++ [7,8,9] == [4,5,6,7,8,9]
+appSpec :: ([Int] -> [Int] -> [Int]) -> [Property]
+appSpec (++)  =
+  [ property $ []      ++ [0,1]   == [0,1]
+  , property $ [2,3]   ++ []      == [2,3]
+  , property $ [4,5,6] ++ [7,8,9] == [4,5,6,7,8,9]
+  ]
 
 appIngredients :: [Ingredient]
 appIngredients =

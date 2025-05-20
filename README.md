@@ -99,7 +99,7 @@ like the following:
 by including [`enumFromTo`] and [`foldr`] in the background.
 
 For more information, see the `eg/factorial.hs` example and
-the Haddock documentation for the [`conjure`] and [`conjureWith`] functions.
+the Haddock documentation for the [`conjure`] function.
 
 
 Synthesizing functions over algebraic data types
@@ -147,164 +147,68 @@ Synthesizing from specifications (for advanced users)
 -----------------------------------------------------
 
 Conjure also supports synthesizing from a functional specification
-with the functions [`conjureFromSpec`] and [`conjureFromSpecWith`]
-as, in some cases,
-a partial definition may not be appropriate
-for one of two reasons:
+with [`conjureFromSpec`].
 
-1. Conjure may fail to "hit" the appropriate data points;
-2. specifying argument-result bindings may not be easy.
+Consider a function `duplicates` that given a list of values
+should return all values that are repeated.
+The resulting list should itself not contain repetitions.
 
-Take for example a function `duplicates :: Eq a => [a] -> [a]`
-that should return the duplicate elements in a list without repetitions.
+Even an experienced programmer
+may take a few minutes to come up with a correct definition for `duplicates`
+even when told that a conditional definition
+is possible using only
+`[]`,
+`:`,
+`not`,
+`&&` and
+`elem`.
+(We invite the reader to try.)
 
-We will first try to use a partial definition to arrive at an appropriate result.
-Then we'll see how to use [`conjureFromSpec`].
+We can encode a specification of duplicates with test properties like so:
 
-Let's start with the ingredients:
-
-	ingredients :: [Ingredient]
-	ingredients  =  [ unfun ([] :: [Int])
-	                , fun "not" not
-	                , fun "&&" (&&)
-	                , fun ":" ((:) :: Int -> [Int] -> [Int])
-	                , fun "elem" (elem :: Int -> [Int] -> Bool)
-	                , iif (undefined :: [Int])
-	                ]
-
-Now here's a first attempt at a partial definition:
-
-	duplicates' :: [Int] -> [Int]
-	duplicates' []  =  []
-	duplicates' [1,2,3,4,5]  =  []
-	duplicates' [1,2,2,3,4]  =  [2]
-	duplicates' [1,2,3,3,3]  =  [3]
-	duplicates' [1,2,2,3,3]  =  [2,3]
-
-Here is what [`conjure`] prints:
-
-	> conjure "duplicates" duplicates ingredients
-	duplicates :: [Int] -> [Int]
-	-- testing 1 combinations of argument values
-	-- pruning with 21/26 rules
-	-- ...  ...  ...
-	duplicates xs  =  xs
-
-The generated function clearly does not follow our specification.
-But if we look at the reported number of tests,
-we see that only _one_ of the argument-result bindings
-of our partial definition was used.
-Conjure failed to hit any of the argument values with five elements.
-(Since Conjure uses enumeration to test functions these values have to be kept "small").
-
-Here is a second attempt:
-
-	duplicates :: [Int] -> [Int]
-	duplicates [0,0]  =  [0]
-	duplicates [0,1]  =  []
-	duplicates [1,0,1]  =  [1]
-
-Here is what [`conjure`] now prints:
-
-	> conjure "duplicates" duplicates ingredients
-	duplicates :: [Int] -> [Int]
-	-- testing 3 combinations of argument values
-	-- pruning with 21/26 rules
-	-- ...  ...  ...
-	duplicates []  =  []
-	duplicates (x:xs)  =  if elem x xs then [x] else []
-
-The `duplicates` function that Conjure generated is still not correct.
-Nevertheless, it does follow our partial definition.  We have to refine it.
-Here is a third attempt with more argument-result bindings:
-
-	duplicates :: [Int] -> [Int]
-	duplicates [0,0]  =  [0]
-	duplicates [0,1]  =  []
-	duplicates [1,0,1]  =  [1]
-	duplicates [0,1,0,1]  =  [0,1]
-
-Here is what Conjure prints:
-
-	duplicates []  =  []
-	duplicates (x:xs)  =  if elem x xs then x:duplicates xs else []
-
-This implementation follows our partial definition, but may return duplicate duplicates,
-see:
-
-	duplicates [1,0,1,0,1]  =  [1,0,1]
-
-Here is a fourth and final refinement:
-
-	duplicates :: [Int] -> [Int]
-	duplicates [0,0]  =  [0]
-	duplicates [0,1]  =  []
-	duplicates [1,0,1]  =  [1]
-	duplicates [0,1,0,1]  =  [0,1]
-	duplicates [1,0,1,0,1]  =  [0,1]
-	duplicates [0,1,2,1]  =  [1]
-
-Now Conjure prints a correct implementation:
-
-	> conjure "duplicates" duplicates ingredients
-	duplicates :: [Int] -> [Int]
-	-- 0.2s, testing 6 combinations of argument values
-	-- 0.3s, pruning with 21/26 rules
-	-- ...   ...   ...   ...   ...
-	-- 2.1s, 1723 candidates of size 17
-	-- 2.1s, tested 1705 candidates
-	duplicates []  =  []
-	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs))
-	                      then x:duplicates xs
-	                      else duplicates xs
-
-In this case,
-specifying the function with specific argument-result bindings
-is perhaps not the best approach.
-It took us four refinements of the partial definition to get a result.
-Specifying test properties perhaps better describes what we want.
-Again, we would like `duplicates` to return all duplicate elements
-without repetitions.
-This can be encoded in a function using [`holds`] from [LeanCheck]:
-
-	import Test.LeanCheck (holds)
-
-	duplicatesSpec :: ([Int] -> [Int]) -> Bool
+	duplicatesSpec :: ([Int] -> [Int]) -> [Property]
 	duplicatesSpec duplicates  =  and
-	  [ holds 360 $ \x xs -> (count (x ==) xs > 1) == elem x (duplicates xs)
-	  , holds 360 $ \x xs -> count (x ==) (duplicates xs) <= 1
+	  [ property $ \x xs -> (count (x ==) xs > 1) == elem x (duplicates xs)
+	  , property $ \x xs -> count (x ==) (duplicates xs) <= 1
 	  ]  where  count p  =  length . filter p
 
-This function takes as argument a candidate implementation of `duplicates`
-and returns whether it is valid.
-The first property states that all duplicates must be listed.
-The second property states that duplicates themselves must not repeat.
+Conjure finds a solution in 1 second
+with the following call:
 
-Now, we can use the function [`conjureFromSpecWith`] to generate the same duplicates function
-passing our `duplicatesSpec` as argument:
+	conjureFromSpec "duplicates" duplicatesSpec
+	  [ unfun ([] :: [Int])
+	  , fun "not" not
+	  , fun "&&" (&&)
+	  , fun ":" ((:) :: Int -> [Int] -> [Int])
+	  , fun "elem" (elem :: Int -> [Int] -> Bool)
+	  , guard  -- allows guards
+	  ]
 
-	> conjureFromSpecWith args{maxSize=18} "duplicates" duplicatesSpec ingredients
-	duplicates :: [Int] -> [Int]
+This is the definition produced by Conjure:
+
 	duplicates []  =  []
-	duplicates (x:xs)  =  if elem x xs && not (elem x (duplicates xs)) then x:duplicates xs else duplicates xs
-	(in 1.5s)
-
-For more information see the `eg/dupos.hs` example and
-the Haddock documentation for the [`conjureFromSpec`] and [`conjureFromSpecWith`] functions.
-
-The functions [`conjureFromSpec`] and [`conjureFromSpecWith`] also accept specifications
-that bind specific arguments to results.
-Just use `==` and `&&` accordingly:
-
-	duplicatesSpec :: ([Int] -> [Int]) -> Bool
-	duplicatesSpec duplicates  =  duplicates [0,0] == [0]
-	                           && duplicates [0,1]  ==  []
-	                           && duplicates [1,0,1]  ==  [1]
-	                           && duplicates [0,1,0,1]  ==  [0,1]
-	                           && duplicates [1,0,1,0,1]  ==  [0,1]
-	                           && duplicates [0,1,2,1]  ==  [1]
-
-With this, there is no way for Conjure to miss argument-result bindings.
+	-- 0.2s, pruning with 21/26 rules
+	-- 0.2s, 2 candidates of size 1
+	-- 0.3s, 1 candidates of size 2
+	-- 0.3s, 0 candidates of size 3
+	-- 0.3s, 2 candidates of size 4
+	-- 0.3s, 1 candidates of size 5
+	-- 0.3s, 2 candidates of size 6
+	-- 0.3s, 3 candidates of size 7
+	-- 0.3s, 8 candidates of size 8
+	-- 0.3s, 13 candidates of size 9
+	-- 0.3s, 18 candidates of size 10
+	-- 0.3s, 21 candidates of size 11
+	-- 0.3s, 28 candidates of size 12
+	-- 0.3s, 39 candidates of size 13
+	-- 0.4s, 54 candidates of size 14
+	-- 0.5s, 67 candidates of size 15
+	-- 0.7s, 80 candidates of size 16
+	-- 1.0s, 99 candidates of size 17
+	-- 1.0s, tested 340 candidates
+	duplicates (x:xs)
+	  | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs
+	  | otherwise  =  duplicates xs
 
 
 Related work
@@ -381,9 +285,7 @@ distribued under the 3-clause BSD license.
 
 [Conjure's Haddock documentation]: https://hackage.haskell.org/package/code-conjure/docs/Conjure.html
 [`conjure`]:             https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjure
-[`conjureWith`]:         https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjureWith
 [`conjureFromSpec`]:     https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjureFromSpec
-[`conjureFromSpecWith`]: https://hackage.haskell.org/package/code-conjure/docs/Conjure.html#v:conjureFromSpecWith
 
 [`foldr`]:               https://hackage.haskell.org/package/base/docs/Prelude.html#v:foldr
 [`enumFromTo`]:          https://hackage.haskell.org/package/base/docs/Prelude.html#v:enumFromTo

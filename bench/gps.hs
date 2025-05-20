@@ -641,9 +641,11 @@ gps19c  =  do
 
 
 -- GPS Benchmark #20 -- Pig Latin --
-gps20s :: (String -> String) -> Bool
-gps20s pig  =  pig "hello world" == "ellohay orldway"
-            && pig "a string"    == "aay tringsay"
+gps20s :: (String -> String) -> [Property]
+gps20s pig  =
+  [ property $ pig "hello world" == "ellohay orldway"
+  , property $ pig "a string"    == "aay tringsay"
+  ]
 
 gps20g :: String -> String
 gps20g  =  pig
@@ -656,11 +658,13 @@ pig1 (c:cs)  =  if isVowel c
                 then (c:cs) ++ "ay"
                 else cs ++ (c:"ay")
 
-pig1Spec :: (String -> String) -> Bool
-pig1Spec pig1  =  pig1 "hello" == "ellohay"
-               && pig1 "world"  == "orldway"
-               && pig1 "string" == "tringsay"
-               && pig1 "east"   == "eastay"
+pig1Spec :: (String -> String) -> [Property]
+pig1Spec pig1  =
+  [ property $ pig1 "hello" == "ellohay"
+  , property $ pig1 "world"  == "orldway"
+  , property $ pig1 "string" == "tringsay"
+  , property $ pig1 "east"   == "eastay"
+  ]
 
 isVowel :: Char -> Bool
 isVowel 'a'  =  True
@@ -739,11 +743,13 @@ gps21c  =  conjure "gps21" gps21p
 
 
 -- GPS Benchmark #22 -- Scrabble Score --
-gps22s :: (String -> Int) -> Bool
-gps22s scrabble  =  scrabble "a" == 1
-                 && scrabble "hello" == 8
-                 && scrabble "world" == 9
-                 && scrabble "scrabble" == 14
+gps22s :: (String -> Int) -> [Property]
+gps22s scrabble  =
+  [ property $ scrabble "a" == 1
+  , property $ scrabble "hello" == 8
+  , property $ scrabble "world" == 9
+  , property $ scrabble "scrabble" == 14
+  ]
 
 gps22g :: String -> Int
 gps22g  =  scrabble
@@ -914,13 +920,15 @@ gps28c  =  conjure "gps28" gps28p
 
 
 -- GPS Benchmark #29 -- Syllables --
-gps29s :: (String -> Int) -> Bool
-gps29s sys  =  sys "pub" == 1
-            && sys "hello" == 2
-            && sys "world" == 1
-            && sys "string" == 1
-            && sys "haskell" == 2
-            && sys "photography" == 4
+gps29s :: (String -> Int) -> [Property]
+gps29s sys  =
+  [ property $ sys "pub" == 1
+  , property $ sys "hello" == 2
+  , property $ sys "world" == 1
+  , property $ sys "string" == 1
+  , property $ sys "haskell" == 2
+  , property $ sys "photography" == 4
+  ]
 
 gps29g :: String -> Int
 gps29g ""  =  0

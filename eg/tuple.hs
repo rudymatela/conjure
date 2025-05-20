@@ -31,24 +31,20 @@ swap' (1,2)  =  (2,1)
 
 type Curry a b c  =  ((a,b) -> c) -> (a -> b -> c)
 
-currySpec :: Curry A A A -> Bool
-currySpec curry  =  and
-  [ holds n $ \x y -> curry fst x y == x
-  , holds n $ \x y -> curry snd x y == y
-  , holds n $ \x y -> curry (\(i,j) -> i + j) x y == x + y
+currySpec :: Curry A A A -> [Property]
+currySpec curry  =
+  [ property $ \x y -> curry fst x y == x
+  , property $ \x y -> curry snd x y == y
+  , property $ \x y -> curry (\(i,j) -> i + j) x y == x + y
   ]
-  where
-  n = 360
 
 type Uncurry a b c  =  (a -> b -> c) -> ((a,b) -> c)
 
-uncurrySpec :: Uncurry A A A -> Bool
-uncurrySpec uncurry  =  and
-  [ holds n $ \x y -> uncurry (+) (x,y) == x + y
-  , holds n $ \x y -> uncurry (*) (x,y) == x * y
+uncurrySpec :: Uncurry A A A -> [Property]
+uncurrySpec uncurry  =
+  [ property $ \x y -> uncurry (+) (x,y) == x + y
+  , property $ \x y -> uncurry (*) (x,y) == x * y
   ]
-  where
-  n = 360
 
 
 -- now two functions that are a bit more interesting:

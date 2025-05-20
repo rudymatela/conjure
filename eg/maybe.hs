@@ -20,12 +20,12 @@ fromMaybe' 1 Nothing  =  1
 fromMaybe' 0 (Just 1)  =  1
 fromMaybe' 1 (Just 2)  =  2
 
-maybeSpec :: (A -> (A -> A) -> Maybe A -> A) -> Bool
-maybeSpec maybe  =  and
-  [ maybe 0 undefined Nothing == 0
-  , maybe 1 undefined Nothing == 1
-  , maybe undefined (+1) (Just 1) == 2
-  , maybe undefined (*2) (Just 3) == 6
+maybeSpec :: (A -> (A -> A) -> Maybe A -> A) -> [Property]
+maybeSpec maybe  =
+  [ property $ maybe 0 undefined Nothing == 0
+  , property $ maybe 1 undefined Nothing == 1
+  , property $ maybe undefined (+1) (Just 1) == 2
+  , property $ maybe undefined (*2) (Just 3) == 6
   ]
 
 listToMaybe' :: [A] -> Maybe A

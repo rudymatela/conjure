@@ -119,10 +119,12 @@ gps3c  =  conjure "gps3" gps3p []
 -- considering we're getting input as kebab-case.
 -- Nevertheless, this one is out of reach performance-wise (and OOM-wise)
 
-gps4s :: (String -> String) -> Bool
-gps4s g  =  g "the-stealth-warrior" == "theStealthWarrior"
-         && g "camel-case" == "camelCase"
-         && g "Kebab-Case" == "KebabCase"
+gps4s :: (String -> String) -> [Property]
+gps4s g  =
+  [ property $ g "the-stealth-warrior" == "theStealthWarrior"
+  , property $ g "camel-case" == "camelCase"
+  , property $ g "Kebab-Case" == "KebabCase"
+  ]
 
 gps4g :: String -> String
 gps4g ""  =  ""
@@ -170,13 +172,15 @@ gps5p  30  =  [1, 0, 1, 0]
 gps5p  20  =  [0, 2, 0, 0]
 gps5p   3  =  [0, 0, 0, 3]
 
-gps5s :: ([Int] -> Int -> [Int]) -> Bool
-gps5s t  =  t [25, 10, 5, 1] 100 == [4, 0, 0, 0]
-         && t [25, 10, 5, 1]  50 == [2, 0, 0, 0]
-         && t [25, 10, 5, 1]  25 == [1, 0, 0, 0]
-         && t [25, 10, 5, 1]  30 == [1, 0, 1, 0]
-         && t [25, 10, 5, 1]  20 == [0, 2, 0, 0]
-         && t [25, 10, 5, 1]   3 == [0, 0, 0, 3]
+gps5s :: ([Int] -> Int -> [Int]) -> [Property]
+gps5s t  =
+  [ property $ t [25, 10, 5, 1] 100 == [4, 0, 0, 0]
+  , property $ t [25, 10, 5, 1]  50 == [2, 0, 0, 0]
+  , property $ t [25, 10, 5, 1]  25 == [1, 0, 0, 0]
+  , property $ t [25, 10, 5, 1]  30 == [1, 0, 1, 0]
+  , property $ t [25, 10, 5, 1]  20 == [0, 2, 0, 0]
+  , property $ t [25, 10, 5, 1]   3 == [0, 0, 0, 3]
+  ]
 
 coins :: [Int]
 coins  =  [25, 10, 5, 1]
@@ -571,20 +575,24 @@ gps20c  =  conjure "gps20" gps20p
   ]
 
 
-gps21s :: (String -> String) -> Bool
-gps21s s  =  s "word" == "word"
-          && s "words" == "sdrow"
-          && s "word words" == "word sdrow"
-          && s "words word" == "sdrow word"
+gps21s :: (String -> String) -> [Property]
+gps21s s  =
+  [ property $ s "word" == "word"
+  , property $ s "words" == "sdrow"
+  , property $ s "word words" == "word sdrow"
+  , property $ s "words word" == "sdrow word"
+  ]
 
-spinSpec :: (String -> String) -> Bool
-spinSpec spin  =  spin "abc" == "abc"
-               && spin "abcd" == "abcd"
-               && spin "word" == "word"
-               && spin "abcde" == "edcba"
-               && spin "words" == "sdrow"
-               && spin "hello" == "olleh"
-               && spin "world" == "dlrow"
+spinSpec :: (String -> String) -> [Property]
+spinSpec spin  =
+  [ property $ spin "abc" == "abc"
+  , property $ spin "abcd" == "abcd"
+  , property $ spin "word" == "word"
+  , property $ spin "abcde" == "edcba"
+  , property $ spin "words" == "sdrow"
+  , property $ spin "hello" == "olleh"
+  , property $ spin "world" == "dlrow"
+  ]
 
 spin :: String -> String
 spin w  =  if length w >= 5
@@ -649,11 +657,13 @@ gps22c  =  do
     ]
 
 
-gps23s :: (String -> String -> String -> String) -> Bool
-gps23s s  =  s "abcd" "abcd" "abcd" == "abcd"
-          && s "abcd" "dcba" "abcd" == "dcba"
-          && s "abcd" "1234" "abcd" == "1234"
-          && s "abcd" "1234" "bacd" == "2134"
+gps23s :: (String -> String -> String -> String) -> [Property]
+gps23s s  =
+  [ property $ s "abcd" "abcd" "abcd" == "abcd"
+  , property $ s "abcd" "dcba" "abcd" == "dcba"
+  , property $ s "abcd" "1234" "abcd" == "1234"
+  , property $ s "abcd" "1234" "bacd" == "2134"
+  ]
 
 gps23g :: String -> String -> String -> String
 -- gps23g f t s  =  map (\c -> fromJust $ c `lookup` zipWith (,) f t) s
@@ -687,11 +697,13 @@ gps24g_twitter s  =  if length s > 140
                      then TooMany
                      else Tweet (length s)
 
-gps24s_twitter :: (String -> Twitter) -> Bool
-gps24s_twitter twitter  =  twitter "" == Empty
-                        && twitter "abcd" == Tweet 4
-                        && twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij" == Tweet 140
-                        && twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX" == TooMany
+gps24s_twitter :: (String -> Twitter) -> [Property]
+gps24s_twitter twitter  =
+  [ property $ twitter "" == Empty
+  , property $ twitter "abcd" == Tweet 4
+  , property $ twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij" == Tweet 140
+  , property $ twitter "0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghij0123456789abcdefghijX" == TooMany
+  ]
 
 gps24c :: IO ()
 gps24c  =  do

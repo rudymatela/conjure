@@ -30,12 +30,12 @@ fromRight' 1 (Left 0)  =  1
 fromRight' 0 (Right 1)  =  1
 fromRight' 1 (Right 0)  =  0
 
-eitherSpec :: ((A -> A) -> (A -> A) -> Either A A -> A) -> Bool
-eitherSpec either  =  and
-  [ either (+1) (+2) (Left 0) == 1
-  , either (+1) (+2) (Right 0) == 2
-  , either (*10) (*100) (Left 1) == 10
-  , either (*10) (*100) (Right 2) == 200
+eitherSpec :: ((A -> A) -> (A -> A) -> Either A A -> A) -> [Property]
+eitherSpec either  =
+  [ property $ either (+1) (+2) (Left 0) == 1
+  , property $ either (+1) (+2) (Right 0) == 2
+  , property $ either (*10) (*100) (Left 1) == 10
+  , property $ either (*10) (*100) (Right 2) == 200
   ]
 
 lefts' :: [Either A A] -> [A]

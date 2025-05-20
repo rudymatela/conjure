@@ -52,6 +52,10 @@ module Conjure.Engine
   , nonAtomicNumbers
   , uniqueCandidates
 
+  -- * Properties
+  , Property
+  , property
+
   -- * other modules
   , module Data.Express
   , module Data.Express.Fixtures
@@ -119,20 +123,22 @@ import System.CPUTime (getCPUTime)
 --
 -- The ingredients list is defined with 'unfun' and 'fun'.
 conjure :: Conjurable f => String -> f -> [Ingredient] -> IO ()
-conjure nm f  =  conjure0 nm f (const True)
+conjure nm f  =  conjure0 nm f (const [])
 
 
 -- | Conjures an implementation from a function specification.
 --
 -- This function works like 'conjure' but instead of receiving a partial definition
--- it receives a boolean filter / property about the function.
+-- it receives a collection of test properties about the function.
 --
 -- For example, given:
 --
--- > squareSpec :: (Int -> Int) -> Bool
--- > squareSpec square  =  square 0 == 0
--- >                    && square 1 == 1
--- >                    && square 2 == 4
+-- > squarePropertySpec :: (Int -> Int) -> [Property]
+-- > squarePropertySpec square  =
+-- >   [ property $ \x -> square x >= x
+-- >   , property $ \x -> square x >= 0
+-- >   , property $ square 2 == 4
+-- >   ]
 --
 -- Then:
 --
@@ -144,19 +150,7 @@ conjure nm f  =  conjure0 nm f (const True)
 -- > -- 0.1s, 1 candidates of size 3
 -- > -- 0.1s, tested 2 candidates
 -- > square x  =  x * x
---
--- This allows users to specify QuickCheck-style properties,
--- here is an example using LeanCheck:
---
--- > import Test.LeanCheck (holds, exists)
--- >
--- > squarePropertySpec :: (Int -> Int) -> Bool
--- > squarePropertySpec square  =  and
--- >   [ holds n $ \x -> square x >= x
--- >   , holds n $ \x -> square x >= 0
--- >   , exists n $ \x -> square x > x
--- >   ]  where  n = 60
-conjureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Ingredient] -> IO ()
+conjureFromSpec :: Conjurable f => String -> (f -> [Property]) -> [Ingredient] -> IO ()
 conjureFromSpec nm p  =  conjure0 nm undefined p
 
 
@@ -164,7 +158,7 @@ conjureFromSpec nm p  =  conjure0 nm undefined p
 --   function specification.
 --
 --   This works like the functions 'conjure' and 'conjureFromSpec' combined.
-conjure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Ingredient] -> IO ()
+conjure0 :: Conjurable f => String -> f -> (f -> [Property]) -> [Ingredient] -> IO ()
 conjure0 nm f p es  =  do
   -- the code section below became quite ugly with time and patches.
   -- it is still maintainable and readable as it is, but perhaps
@@ -177,7 +171,7 @@ conjure0 nm f p es  =  do
       putStrLn $ "{-"
       putStr $ showDefn ts
       putStrLn $ "-}"
-  if length ts == 0 && errorToFalse (p undefined)
+  if length ts == 0 && p undefined == []
   then putStrLn $ nm ++ "  =  error \"could not reify specification, suggestion: conjureFromSpec\"\n"
   else do
     putWithTimeSince t0 $ "pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
@@ -262,17 +256,17 @@ data Results = Results
 -- The most important part of the result are the tiers of implementations
 -- however results also include candidates, tests and the underlying theory.
 conjpure :: Conjurable f => String -> f -> [Ingredient] -> Results
-conjpure nm f  =  conjpure0 nm f (const True)
+conjpure nm f  =  conjpure0 nm f (const [])
 
 -- | Like 'conjureFromSpec' but in the pure world.  (cf. 'conjpure')
-conjpureFromSpec :: Conjurable f => String -> (f -> Bool) -> [Ingredient] -> Results
+conjpureFromSpec :: Conjurable f => String -> (f -> [Property]) -> [Ingredient] -> Results
 conjpureFromSpec nm p  =  conjpure0 nm undefined p
 
 -- | This is where the actual implementation resides.
 -- The functions
 -- 'conjpure', 'conjpureFromSpec', 'conjure' and 'conjureFromSpec'
 -- all refer to this.
-conjpure0 :: Conjurable f => String -> f -> (f -> Bool) -> [Ingredient] -> Results
+conjpure0 :: Conjurable f => String -> f -> (f -> [Property]) -> [Ingredient] -> Results
 conjpure0 nm f p es  =  Results
   { implementationss  =  implementationsT
   , candidatess  =  candidatesT
@@ -285,7 +279,7 @@ conjpure0 nm f p es  =  Results
   implementationsT  =  filterT implements candidatesT
   implements fx  =  defnApparentlyTerminates fx
                  && test fx
-                 && errorToFalse (p (cevl maxRecursions fx))
+                 && errorToFalse (testSpec maxTests $ p (cevl maxRecursions fx))
   candidatesT  =  (if uniqueCandidates then nubCandidates maxTests maxRecursions nm f else id)
                $  (if target > 0 then targetiers target else id)
                $  (if maxSize > 0 then take maxSize else id)
@@ -684,3 +678,17 @@ normalizeBndn thy (lhs, rhs)
 
 boolTy :: TypeRep
 boolTy  =  typ b_
+
+-- TODO: move these property things to a module of their own?
+
+-- | A test property provided as part of a specification for 'conjureFromSpec'.
+--
+-- Construct with 'property'.
+type Property  =  [Bool]
+
+-- | Provides a single test property to 'conjureFromSpec'.
+property :: Testable a => a -> Property
+property  =  map snd . results
+
+testSpec :: Int -> [Property] -> Bool
+testSpec maxTests  =  and . map (and . take maxTests)
