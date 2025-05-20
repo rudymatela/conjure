@@ -978,7 +978,12 @@ src/Conjure/Red.o: \
   src/Conjure/Defn.hs \
   src/Conjure/Conjurable.hs
 src/Conjure/Settings.o: \
-  src/Conjure/Settings.hs
+  src/Conjure/Utils.hs \
+  src/Conjure/Settings.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs
 src/Conjure/Utils.o: \
   src/Conjure/Utils.hs
 test/conjurable.o: \

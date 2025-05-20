@@ -56,6 +56,7 @@ module Conjure.Engine
   , module Data.Express
   , module Data.Express.Fixtures
   , module Conjure.Reason
+  , module Conjure.Ingredient
   )
 where
 
