@@ -6,6 +6,7 @@ upcoming
 --------
 
 * For now, `unfun` replaces `con`.
+* Use list of properties in `conjureFromSpec`.
 
 
 v0.7.2 (May 2025)
