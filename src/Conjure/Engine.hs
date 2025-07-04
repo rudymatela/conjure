@@ -470,9 +470,10 @@ candidateDefnsC nm f is =
       -- 3. it should either:
       --    * be a breakdown such as _:_ or Tree _ _ _
       --    * or be of an unbreakable/atomic type such as (_ :: Int)
+      --      in the presence of deconstructions
       should aes ae  =  length (nub aes) > 1
                      && hasVar ae
-                     && (isApp ae || isUnbreakable ae)
+                     && (isApp ae || isUnbreakable ae && notNull deconstructions)
       aes   =                  (tail . unfoldApp . rehole) pat
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
