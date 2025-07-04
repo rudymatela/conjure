@@ -464,10 +464,15 @@ candidateDefnsC nm f is =
       matchArgs efxs efys  =  fold (map exprExpr (drop 1 (unfoldApp efxs)))
                       `match` fold               (drop 1 (unfoldApp efys))
 
-      -- computes whether we should include a recurse for this given argument
-      -- numeric arguments additionally require 0 to be present as a case
-      -- for recursion
-      should aes ae  =  length (nub aes) > 1 && hasVar ae && (isApp ae || isUnbreakable ae)
+      -- computes whether we should include a recurse for this given argument:
+      -- 1. more than one LHS pattern overall
+      -- 2. there should be at least a variable
+      -- 3. it should either:
+      --    * be a breakdown such as _:_ or Tree _ _ _
+      --    * or be of an unbreakable/atomic type such as (_ :: Int)
+      should aes ae  =  length (nub aes) > 1
+                     && hasVar ae
+                     && (isApp ae || isUnbreakable ae)
       aes   =                  (tail . unfoldApp . rehole) pat
       aess  =  transpose $ map (tail . unfoldApp . rehole) pats
 
