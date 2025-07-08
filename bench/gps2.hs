@@ -301,14 +301,37 @@ gps9p 17  =  "17"
 
 gps9g :: Int -> String
 gps9g x
-  | x `div` 3 == 0  =  "Fizz" -- 7
-  | x `div` 5 == 0  =  "Buzz" -- 14
-  | x `div` 3 == 0 && x `div` 5 == 0  =  "FizzBuzz" -- 27
+  | x `mod` 3 == 0  =  "Fizz" -- 7
+  | x `mod` 5 == 0  =  "Buzz" -- 14
+  | x `mod` 3 == 0 && x `mod` 5 == 0  =  "FizzBuzz" -- 27
   | otherwise       =  show x -- 29
 
--- probably unreachable performance-wise
+-- unreachable performance-wise:
+-- too many candidates to sift through
+-- even in two steps
 gps9c :: IO ()
-gps9c  =  conjure "gps9" gps9p []
+gps9c  =  conjure "gps9" gps9p
+  [ unfun "Fizz"
+  , unfun "Buzz"
+  , unfun "FizzBuzz"
+  , unfun (0 :: Int)
+  , unfun (3 :: Int)
+  , unfun (5 :: Int)
+  , unfun False
+  , unfun True
+  , fun "`divBy`" divBy
+--, fun "`mod`" (mod :: Int -> Int -> Int)
+  , fun "&&" (&&)
+--, fun "==" ((==) :: Int -> Int -> Bool)
+  , fun "show" (show :: Int -> String)
+  , iif (undefined :: String)
+  , target 1080 -- so this fails quickly...
+  ]
+  where
+  -- two-step try:
+  divBy :: Int -> Int -> Bool
+  x `divBy` 0  =  False
+  x `divBy` y  =  x `mod` y == 0
 
 
 gps10p :: [Int] -> Int
