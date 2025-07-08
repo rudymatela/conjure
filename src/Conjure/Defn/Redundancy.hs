@@ -145,11 +145,21 @@ hasRedundantRecursion d  =  not (null rs) && any matchesRHS bs
 -- are at the root: we have a redundant function.
 -- (Modulo error functions, which are undesired anyway.)
 --
+-- Here is an example:
+--
 -- > xs ? []  =  []
 -- > xs ? (x:ys)  =  xs ? ys
 --
 -- Above it does not really pays off to follow the recursive calls,
 -- at the end we always reach an empty list.
+--
+-- Here is a more complex example:
+--
+-- > [] ? xs  =  []
+-- > (x:xs) ? []  =  []
+-- > (x:xs) ? (y:ys)  =  xs ? ys
+--
+-- We are bound to reach [] when following the recursion.
 isRedundantByRootRecursions :: Defn -> Bool
 isRedundantByRootRecursions d  =  case partition isGround $ map snd d of
   ([b], rs@(_:_))  ->  all isHole rs
