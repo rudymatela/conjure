@@ -27,10 +27,10 @@ mkStrategy s  =  [ dontRewrite | not r ]
     "default"           -> [1,1,1,0]
     "without reasoning" -> [0,1,1,0]
     "without descent"   -> [1,0,1,0]
-    "without ad-hoc"    -> [1,1,0,0]
+    "without assorted"  -> [1,1,0,0]
     "only reasoning"    -> [1,0,0,0]
     "only descent"      -> [0,1,0,0]
-    "only ad-hoc"       -> [0,0,1,0]
+    "only assorted"     -> [0,0,1,0]
     "only typed"        -> [0,0,0,0]
     _                   -> error "unknown strategy"
 
@@ -45,10 +45,10 @@ strategies  =
   , "default"
   , "without reasoning"
   , "without descent"
-  , "without ad-hoc"
+  , "without assorted"
   , "only reasoning"
   , "only descent"
-  , "only ad-hoc"
+  , "only assorted"
   , "only typed"
   ]
 
