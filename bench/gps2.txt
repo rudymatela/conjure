@@ -138,9 +138,16 @@ gps8  =  undefined  -- search exhausted
 
 gps9 :: Int -> [Char]
 -- testing 7 combinations of argument values
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- tested 0 candidates
+-- pruning with 18/25 rules
+-- 3 candidates of size 1
+-- 10 candidates of size 2
+-- 24 candidates of size 3
+-- 21 candidates of size 4
+-- 31 candidates of size 5
+-- 80 candidates of size 6
+-- 354 candidates of size 7
+-- 969 candidates of size 8
+-- tested 1492 candidates
 gps9  =  undefined  -- search exhausted
 
 gps10 :: [Int] -> Int
