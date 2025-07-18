@@ -71,7 +71,7 @@ import Data.Express.Fixtures hiding ((-==-))
 
 import Test.LeanCheck
 import Test.LeanCheck.Tiers
-import Test.LeanCheck.Error (errorToFalse)
+import Test.LeanCheck.Error (errorToFalse, errorToLeft)
 
 import Conjure.Expr
 import Conjure.Conjurable
@@ -701,3 +701,10 @@ property  =  map snd . results
 
 testSpec :: Int -> [Property] -> Bool
 testSpec maxTests  =  and . map (and . take maxTests)
+
+-- like errorToFalse, but returns True upon finding a placeholder hole
+errholeToTrue :: Bool -> Bool
+errholeToTrue p  =  case errorToLeft p of
+                    Right q -> q
+                    Left "conjureResultHole: placeholder for recursive call?" -> True
+                    Left _ -> False
