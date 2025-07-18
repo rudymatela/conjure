@@ -128,7 +128,7 @@ class (Typeable a, Name a) => Conjurable a where
 
   -- | Returns a hole with the same type as the given functions final result.
   conjureResultHole :: a -> Expr
-  conjureResultHole x  =  var "" (err `asTypeOf` x)
+  conjureResultHole x  =  value "_" (err `asTypeOf` x)
     where
     err  =  error "conjureResultHole: placeholder for recursive call?"
 
