@@ -1,3 +1,20 @@
+isq :: Bool -> Int -> Int
+-- testing 360 combinations of argument values
+-- pruning with 56/91 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 6 candidates of size 4
+-- 11 candidates of size 5
+-- 48 candidates of size 6
+-- 66 candidates of size 7
+-- 313 candidates of size 8
+-- 751 candidates of size 9
+-- 2103 candidates of size 10
+-- 7720 candidates of size 11
+-- tested 11024 candidates
+isq  =  undefined  -- search exhausted
+
 (^^^) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 56/91 rules

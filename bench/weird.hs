@@ -19,8 +19,19 @@ import Conjure
 x ^^^ 0  =  x
 _ ^^^ _  =  0
 
+-- | inc or square based on boolean argument
+--   except for 0 where the answer is swapped
+isq :: Bool -> Int -> Int
+isq False 0  =  0
+isq True  0  =  1
+isq False x  =  x + 1
+isq True  x  =  x * x
+
 main :: IO ()
 main  =  do
+  -- TODO: Conjure should find isq, but doesn't due to overpruning
+  conjure "isq" isq ingredients
+
   conjure "^^^" (^^^)   ingredients
   conjure "^^^" (^^^) $ ingredients ++ [singlePattern]
 

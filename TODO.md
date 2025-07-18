@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* fix potential overpruning in `keepBase` in `candidateDefnsC` (see below)
+* fix overpruning in `keepBase` in `candidateDefnsC` (see below)
 
 * generalize `keepBase` into `keepBndn` for recursive cases too (see below)
 
@@ -31,9 +31,15 @@ A non-exhaustive list of things TO DO for Conjure.
 
 ## Overpruning in `Engine.candidateDefnsC.keepBase`
 
-The `keepBase` function in `candidateDefnsC` may be overpruning:
-the second skip condition (`all isVar`) may not be enough to guarantee that we
+The `keepBase` function in `candidateDefnsC` is overpruning:
+the second skip condition (`all isVar`) is not enough to guarantee that we
 are not missing a candidate.  (This applies to numeric values.)
+This is not Conjurable, see the following now from `bench/weird.hs`:
+
+  isq False 0  =  0
+  isq False x  =  x + 1
+  isq True 0  =  1
+  isq True x  =  x * x
 
 A way to rewrite this is to make sure that tests that match "this" pattern do
 not match any other earlier patterns.  I think this can be easily solved by
