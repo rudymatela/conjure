@@ -458,7 +458,7 @@ candidateDefnsC nm f is =
         | otherwise  =  \e -> hasHole e || reallyKeepBase e
       reallyKeepBase e  =  and
         [ errorToFalse $ eval False $ (e //- bs) -==- rhs
-        | (lhs,rhs) <- tests
+        | (lhs,rhs) <- take 12 tests -- TODO: remove magic number
         -- filter test bindings that match the current pattern:
         , Just bs <- [lhs `matchArgs` pat]
         , none (lhs `isInstanceOfArgs`) earlierPats

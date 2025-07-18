@@ -133,9 +133,9 @@ union :: Tree -> Tree -> Tree
 -- 0 candidates of size 5
 -- 68 candidates of size 6
 -- 240 candidates of size 7
--- 82 candidates of size 8
+-- 102 candidates of size 8
 -- 3018 candidates of size 9
--- 8098 candidates of size 10
--- tested 11531 candidates
+-- 8318 candidates of size 10
+-- tested 11771 candidates
 union  =  undefined  -- search exhausted
 

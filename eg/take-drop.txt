@@ -3,12 +3,12 @@ drop :: Int -> [A] -> [A]
 -- pruning with 4/7 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 1 candidates of size 3
 -- 0 candidates of size 4
--- 2 candidates of size 5
+-- 3 candidates of size 5
 -- 5 candidates of size 6
--- 5 candidates of size 7
--- tested 10 candidates
+-- 6 candidates of size 7
+-- tested 13 candidates
 drop 0 xs  =  xs
 drop x []  =  []
 drop x (y:xs)  =  drop (x - 1) xs
@@ -20,12 +20,12 @@ take :: Int -> [A] -> [A]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 0 candidates of size 5
+-- 1 candidates of size 5
 -- 3 candidates of size 6
 -- 2 candidates of size 7
 -- 6 candidates of size 8
--- 5 candidates of size 9
--- tested 14 candidates
+-- 6 candidates of size 9
+-- tested 16 candidates
 take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
