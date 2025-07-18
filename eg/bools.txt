@@ -1,44 +1,44 @@
 and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 37/47 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 2 candidates of size 4
 -- 4 candidates of size 5
--- tested 8 candidates
+-- tested 6 candidates
 and []  =  True
 and (p:ps)  =  p && and ps
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 37/47 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 2 candidates of size 4
 -- 4 candidates of size 5
--- tested 5 candidates
+-- tested 3 candidates
 or []  =  False
 or (p:ps)  =  p || or ps
 
 and :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 39/49 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 4 candidates of size 4
--- tested 6 candidates
+-- 3 candidates of size 4
+-- tested 3 candidates
 and  =  foldr (&&) True
 
 or :: [Bool] -> Bool
 -- testing 14 combinations of argument values
 -- pruning with 39/49 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 4 candidates of size 4
--- tested 5 candidates
+-- 3 candidates of size 4
+-- tested 3 candidates
 or  =  foldr (||) False
 

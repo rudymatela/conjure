@@ -3,13 +3,13 @@ TerpreT benchmark #1: invert
 invert :: [Bool] -> [Bool]
 -- testing 4 combinations of argument values
 -- pruning with 41/51 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
--- 4 candidates of size 3
+-- 0 candidates of size 3
 -- 0 candidates of size 4
--- 11 candidates of size 5
+-- 3 candidates of size 5
 -- 5 candidates of size 6
--- tested 18 candidates
+-- tested 4 candidates
 invert []  =  []
 invert (p:ps)  =  not p:invert ps
 
@@ -18,10 +18,10 @@ TerpreT benchmark #2: prepend zero
 prependZero :: [Bool] -> [Bool]
 -- testing 3 combinations of argument values
 -- pruning with 41/51 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
--- 4 candidates of size 3
--- tested 3 candidates
+-- 1 candidates of size 3
+-- tested 1 candidates
 prependZero ps  =  False:ps
 
 TerpreT benchmark #3: binary decrement
@@ -29,16 +29,16 @@ TerpreT benchmark #3: binary decrement
 decrement :: [Bool] -> [Bool]
 -- testing 3 combinations of argument values
 -- pruning with 41/51 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
--- 4 candidates of size 3
+-- 0 candidates of size 3
 -- 0 candidates of size 4
--- 11 candidates of size 5
+-- 3 candidates of size 5
 -- 5 candidates of size 6
--- 31 candidates of size 7
+-- 15 candidates of size 7
 -- 52 candidates of size 8
--- 128 candidates of size 9
--- tested 154 candidates
+-- 96 candidates of size 9
+-- tested 124 candidates
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
@@ -48,18 +48,18 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
 -- pruning with 41/51 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 10 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 40 candidates of size 7
+-- 0 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 360 candidates of size 10
+-- 0 candidates of size 10
 -- 4 candidates of size 11
--- tested 412 candidates
+-- tested 1 candidates
 cshift (p,q,r)  =  if p
                    then (p,r,q)
                    else (p,q,r)
@@ -71,12 +71,12 @@ cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 125 candidates of size 4
--- 225 candidates of size 5
--- 585 candidates of size 6
--- 1242 candidates of size 7
--- 3088 candidates of size 8
--- tested 5265 candidates
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 1 candidates of size 8
+-- tested 1 candidates
 cshift False p q  =  (False,p,q)
 cshift True p q  =  (True,q,p)
 
@@ -87,13 +87,13 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- pruning with 18/22 rules
 -- 0 candidates of size 1
 -- 0 candidates of size 2
--- 9 candidates of size 3
--- 18 candidates of size 4
--- 27 candidates of size 5
--- 36 candidates of size 6
--- 45 candidates of size 7
--- 271 candidates of size 8
--- tested 406 candidates
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 1 candidates of size 8
+-- tested 1 candidates
 fadder False False False  =  (False,False)
 fadder False False True  =  (False,True)
 fadder False True False  =  (False,True)
@@ -112,10 +112,10 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 8 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- tested 8 candidates
+-- tested 0 candidates
 adder2  =  undefined  -- search exhausted
 
 TerpreT benchmark #7: access
@@ -132,14 +132,14 @@ xs `access` x  =  xs !! x
 access :: [A] -> Int -> A
 -- testing 5 combinations of argument values
 -- pruning with 4/7 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 3 candidates of size 5
 -- 0 candidates of size 6
 -- 3 candidates of size 7
--- tested 5 candidates
+-- tested 4 candidates
 [] `access` x  =  undefined
 (x:xs) `access` 0  =  x
 (x:xs) `access` y  =  xs `access` (y - 1)
@@ -149,24 +149,24 @@ TerpreT benchmark #8: decrement elements
 decrelements :: [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 3/23 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
--- 2 candidates of size 3
--- 1 candidates of size 4
--- 6 candidates of size 5
--- 6 candidates of size 6
--- 19 candidates of size 7
--- tested 19 candidates
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 2 candidates of size 5
+-- 2 candidates of size 6
+-- 10 candidates of size 7
+-- tested 6 candidates
 decrelements []  =  []
 decrelements (x:xs)  =  x - 1:decrelements xs
 
 decrelements :: [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 5/26 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
--- 2 candidates of size 3
--- 2 candidates of size 4
--- tested 6 candidates
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- tested 1 candidates
 decrelements  =  map (subtract 1)
 

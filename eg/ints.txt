@@ -2,62 +2,62 @@ second :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- 0 candidates of size 1
--- 1 candidates of size 2
+-- 0 candidates of size 2
 -- 1 candidates of size 3
--- tested 2 candidates
+-- tested 1 candidates
 second xs  =  head (tail xs)
 
 third :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- 0 candidates of size 1
--- 1 candidates of size 2
--- 1 candidates of size 3
+-- 0 candidates of size 2
+-- 0 candidates of size 3
 -- 1 candidates of size 4
--- tested 3 candidates
+-- tested 1 candidates
 third xs  =  head (tail (tail xs))
 
 sum :: [Int] -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 6 candidates of size 5
--- tested 3 candidates
+-- tested 1 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
 product :: [Int] -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 6 candidates of size 5
--- tested 8 candidates
+-- tested 6 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
 
 sum :: [Int] -> Int
 -- testing 3 combinations of argument values
 -- pruning with 15/26 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 3 candidates of size 4
--- tested 3 candidates
+-- 1 candidates of size 4
+-- tested 1 candidates
 sum  =  foldr (+) 0
 
 product :: [Int] -> Int
 -- testing 3 combinations of argument values
 -- pruning with 15/26 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 3 candidates of size 4
--- tested 5 candidates
+-- 1 candidates of size 4
+-- tested 1 candidates
 product  =  foldr (*) 1
 

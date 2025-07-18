@@ -15,8 +15,8 @@ xs `isSubsequenceOf` sort xs == True
 -}
 -- 0 candidates of size 1
 -- 0 candidates of size 2
--- 2 candidates of size 3
--- 4 candidates of size 4
+-- 0 candidates of size 3
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 3 candidates of size 7
@@ -31,7 +31,7 @@ xs `isSubsequenceOf` sort xs == True
 -- 0 candidates of size 16
 -- 0 candidates of size 17
 -- 0 candidates of size 18
--- tested 27 candidates
+-- tested 21 candidates
 subset  =  undefined  -- search exhausted
 
 subset :: [Int] -> [Int] -> Bool
@@ -46,10 +46,10 @@ sort xs `isSubsequenceOf` xs == xs `isSubsequenceOf` sort xs
 -}
 -- 0 candidates of size 1
 -- 0 candidates of size 2
--- 2 candidates of size 3
--- 6 candidates of size 4
--- 2 candidates of size 5
--- tested 9 candidates
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 1 candidates of size 5
+-- tested 1 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 
 replicates :: [Char] -> Int -> [Char]
@@ -61,25 +61,25 @@ concat (transpose xss) == concat xss
 transpose (transpose (transpose xss)) == transpose xss
 
 -}
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 1 candidates of size 7
+-- 0 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 1 candidates of size 10
+-- 0 candidates of size 10
 -- 0 candidates of size 11
 -- 0 candidates of size 12
--- 1 candidates of size 13
+-- 0 candidates of size 13
 -- 0 candidates of size 14
 -- 0 candidates of size 15
--- 1 candidates of size 16
+-- 0 candidates of size 16
 -- 0 candidates of size 17
 -- 0 candidates of size 18
--- tested 6 candidates
+-- tested 0 candidates
 replicates  =  undefined  -- search exhausted
 
 replicates :: [Char] -> Int -> [Char]
@@ -91,11 +91,11 @@ transpose (transpose (transpose xss)) == transpose xss
 replicate x (concat (transpose xss)) == replicate x (concat xss)
 
 -}
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
+-- 0 candidates of size 4
 -- 1 candidates of size 5
--- tested 3 candidates
+-- tested 1 candidates
 replicates cs x  =  concat (transpose (replicate x cs))
 

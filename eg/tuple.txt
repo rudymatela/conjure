@@ -17,11 +17,11 @@ snd (x,y)  =  y
 swap :: (A,A) -> (A,A)
 -- testing 4 combinations of argument values
 -- pruning with 10/10 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
--- tested 2 candidates
+-- tested 1 candidates
 swap (x,y)  =  (y,x)
 
 curry :: ((A,A) -> A) -> A -> A -> A
@@ -45,47 +45,47 @@ uncurry f (x,y)  =  f x y
 pairwise :: [A] -> [(A,A)]
 -- testing 3 combinations of argument values
 -- pruning with 10/10 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 7 candidates of size 7
--- 19 candidates of size 8
--- 34 candidates of size 9
--- tested 36 candidates
+-- 3 candidates of size 7
+-- 11 candidates of size 8
+-- 22 candidates of size 9
+-- tested 23 candidates
 pairwise []  =  []
 pairwise (x:xs)  =  (x,head xs):pairwise (tail xs)
 
 catpairs :: [(A,A)] -> [A]
 -- testing 360 combinations of argument values
 -- pruning with 12/13 rules
--- 1 candidates of size 1
--- 1 candidates of size 2
--- 1 candidates of size 3
--- 3 candidates of size 4
--- 5 candidates of size 5
--- 11 candidates of size 6
--- 22 candidates of size 7
--- 46 candidates of size 8
--- 106 candidates of size 9
--- tested 124 candidates
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 2 candidates of size 5
+-- 7 candidates of size 6
+-- 16 candidates of size 7
+-- 33 candidates of size 8
+-- 85 candidates of size 9
+-- tested 93 candidates
 catpairs []  =  []
 catpairs (xy:xys)  =  fst xy:snd xy:catpairs xys
 
 pairwise :: [A] -> [(A,A)]
 -- testing 3 combinations of argument values
 -- pruning with 10/10 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 7 candidates of size 7
--- 26 candidates of size 8
--- tested 23 candidates
+-- 3 candidates of size 7
+-- 18 candidates of size 8
+-- tested 18 candidates
 pairwise []  =  []
 pairwise [x]  =  []
 pairwise (x:y:xs)  =  (x,y):pairwise xs
@@ -93,15 +93,15 @@ pairwise (x:y:xs)  =  (x,y):pairwise xs
 catpairs :: [(A,A)] -> [A]
 -- testing 360 combinations of argument values
 -- pruning with 12/13 rules
--- 1 candidates of size 1
--- 1 candidates of size 2
--- 1 candidates of size 3
--- 3 candidates of size 4
--- 6 candidates of size 5
--- 15 candidates of size 6
--- 31 candidates of size 7
--- 68 candidates of size 8
--- tested 97 candidates
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 3 candidates of size 5
+-- 11 candidates of size 6
+-- 25 candidates of size 7
+-- 55 candidates of size 8
+-- tested 79 candidates
 catpairs []  =  []
 catpairs ((x,y):xys)  =  x:y:catpairs xys
 

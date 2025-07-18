@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* refine and eventually remove the second guard of keepBase (see below)
-
 * generalize `keepBase` into `keepBndn` for recursive cases too (see below)
 
 * Make so that derived Listable instances `reset`
@@ -27,13 +25,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Add way to consider functions that don't increase size of arguments in recursive calls
 	(qsort example)
-
-
-## Refine `keepBase`
-
-The second gaurd of keepBase needs to be refined to
-`any (isVar &&& isNumeric)` or `all (isVar &&& isNumeric)`.
-First `all` then `any`?
 
 
 ## Remove second guard of `keepBase`

@@ -1,27 +1,27 @@
 isNothing :: Maybe A -> Bool
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 1 candidates of size 2
--- tested 3 candidates
+-- tested 1 candidates
 isNothing Nothing  =  True
 isNothing (Just x)  =  False
 
 isJust :: Maybe A -> Bool
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- 2 candidates of size 1
+-- 0 candidates of size 1
 -- 1 candidates of size 2
--- tested 3 candidates
+-- tested 1 candidates
 isJust Nothing  =  False
 isJust (Just x)  =  True
 
 fromMaybe :: A -> Maybe A -> A
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 1 candidates of size 2
--- tested 2 candidates
+-- tested 1 candidates
 fromMaybe x Nothing  =  x
 fromMaybe x (Just y)  =  y
 
@@ -37,35 +37,35 @@ maybe x f (Just y)  =  f y
 listToMaybe :: [A] -> Maybe A
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 1 candidates of size 3
--- tested 2 candidates
+-- tested 1 candidates
 listToMaybe []  =  Nothing
 listToMaybe (x:xs)  =  Just x
 
 maybeToList :: Maybe A -> [A]
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
--- tested 2 candidates
+-- tested 1 candidates
 maybeToList Nothing  =  []
 maybeToList (Just x)  =  [x]
 
 catMaybes :: [Maybe A] -> [A]
 -- testing 44 combinations of argument values
 -- pruning with 0/0 rules
--- 1 candidates of size 1
+-- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 1 candidates of size 6
 -- 2 candidates of size 7
--- tested 3 candidates
+-- tested 2 candidates
 catMaybes []  =  []
 catMaybes (Nothing:mxs)  =  catMaybes mxs
 catMaybes (Just x:mxs)  =  x:catMaybes mxs

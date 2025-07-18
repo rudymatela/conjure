@@ -4,12 +4,12 @@ sum  =  error "could not reify specification, suggestion: conjureFromSpec"
 sum :: [Int] -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
--- 2 candidates of size 1
--- 1 candidates of size 2
--- 1 candidates of size 3
--- 2 candidates of size 4
--- 7 candidates of size 5
--- tested 7 candidates
+-- 0 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 3 candidates of size 5
+-- tested 1 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
