@@ -81,9 +81,9 @@ gps5 :: [Char] -> [Char]
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 0 candidates of size 4
--- 4 candidates of size 5
+-- 3 candidates of size 5
 -- 0 candidates of size 6
--- tested 8 candidates
+-- tested 7 candidates
 gps5  =  undefined  -- search exhausted
 
 gps6 :: Int -> Int
@@ -201,10 +201,10 @@ gps11 :: [[Char]] -> [Int]
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
--- 2 candidates of size 6
+-- 1 candidates of size 6
 -- 0 candidates of size 7
 -- 1 candidates of size 8
--- tested 4 candidates
+-- tested 3 candidates
 gps11 []  =  []
 gps11 (cs:css)  =  gps11 css ++ [length cs]
 
@@ -217,12 +217,12 @@ gps12 :: [Int] -> Int
 -- 3 candidates of size 4
 -- 12 candidates of size 5
 -- 13 candidates of size 6
--- 65 candidates of size 7
--- 102 candidates of size 8
--- 416 candidates of size 9
--- 956 candidates of size 10
--- 3073 candidates of size 11
--- tested 4404 candidates
+-- 63 candidates of size 7
+-- 100 candidates of size 8
+-- 390 candidates of size 9
+-- 918 candidates of size 10
+-- 2809 candidates of size 11
+-- tested 4072 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -234,9 +234,9 @@ gps13 :: [Ratio Integer] -> Ratio Integer
 -- 2 candidates of size 4
 -- 9 candidates of size 5
 -- 12 candidates of size 6
--- 67 candidates of size 7
--- 97 candidates of size 8
--- tested 179 candidates
+-- 63 candidates of size 7
+-- 95 candidates of size 8
+-- tested 173 candidates
 gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 
 odd :: Int -> Bool
@@ -269,8 +269,8 @@ gps14 :: [Int] -> Int
 -- 0 candidates of size 4
 -- 30 candidates of size 5
 -- 6 candidates of size 6
--- 345 candidates of size 7
--- tested 83 candidates
+-- 330 candidates of size 7
+-- tested 78 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x + gps14 xs `mod` 2
 
@@ -319,11 +319,11 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- 25 candidates of size 5
--- 34 candidates of size 6
--- 138 candidates of size 7
--- 126 candidates of size 8
--- 743 candidates of size 9
--- tested 767 candidates
+-- 24 candidates of size 6
+-- 114 candidates of size 7
+-- 72 candidates of size 8
+-- 481 candidates of size 9
+-- tested 593 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -419,13 +419,13 @@ gps21 :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 0 candidates of size 4
--- 4 candidates of size 5
+-- 2 candidates of size 5
 -- 0 candidates of size 6
--- 8 candidates of size 7
+-- 2 candidates of size 7
 -- 0 candidates of size 8
--- 16 candidates of size 9
--- 4 candidates of size 10
--- tested 34 candidates
+-- 2 candidates of size 9
+-- 2 candidates of size 10
+-- tested 11 candidates
 gps21 []  =  []
 gps21 (x:xs)  =  (if x < 0 then 0 else x):gps21 xs
 

@@ -5,20 +5,20 @@ duplicates :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 1 candidates of size 5
+-- 0 candidates of size 5
 -- 0 candidates of size 6
--- 1 candidates of size 7
--- 6 candidates of size 8
--- 5 candidates of size 9
--- 16 candidates of size 10
--- 11 candidates of size 11
--- 26 candidates of size 12
--- 23 candidates of size 13
--- 52 candidates of size 14
--- 49 candidates of size 15
--- 78 candidates of size 16
--- 75 candidates of size 17
--- tested 271 candidates
+-- 0 candidates of size 7
+-- 2 candidates of size 8
+-- 4 candidates of size 9
+-- 8 candidates of size 10
+-- 8 candidates of size 11
+-- 14 candidates of size 12
+-- 18 candidates of size 13
+-- 34 candidates of size 14
+-- 36 candidates of size 15
+-- 52 candidates of size 16
+-- 53 candidates of size 17
+-- tested 179 candidates
 duplicates []  =  []
 duplicates (x:xs)
   | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs
@@ -58,13 +58,13 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- 0 candidates of size 4
 -- 7 candidates of size 5
 -- 0 candidates of size 6
--- 34 candidates of size 7
+-- 26 candidates of size 7
 -- 0 candidates of size 8
--- 133 candidates of size 9
--- 8 candidates of size 10
--- 510 candidates of size 11
--- 40 candidates of size 12
--- 1943 candidates of size 13
--- tested 2678 candidates
+-- 97 candidates of size 9
+-- 4 candidates of size 10
+-- 362 candidates of size 11
+-- 8 candidates of size 12
+-- 1363 candidates of size 13
+-- tested 1870 candidates
 positionsFrom  =  undefined  -- search exhausted
 

@@ -44,13 +44,13 @@ cathis :: [These A B] -> [A]
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
--- 1 candidates of size 6
--- 2 candidates of size 7
+-- 0 candidates of size 6
+-- 0 candidates of size 7
 -- 0 candidates of size 8
--- 1 candidates of size 9
--- 4 candidates of size 10
--- 2 candidates of size 11
--- tested 10 candidates
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 1 candidates of size 11
+-- tested 2 candidates
 cathis []  =  []
 cathis (t:ts)
   | isThis t  =  fromThis t:cathis ts
@@ -64,13 +64,13 @@ cathat :: [These A B] -> [B]
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
--- 1 candidates of size 6
--- 2 candidates of size 7
+-- 0 candidates of size 6
+-- 0 candidates of size 7
 -- 0 candidates of size 8
--- 1 candidates of size 9
--- 4 candidates of size 10
--- 2 candidates of size 11
--- tested 10 candidates
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 1 candidates of size 11
+-- tested 2 candidates
 cathat []  =  []
 cathat (t:ts)
   | isThat t  =  fromThat t:cathat ts
@@ -88,9 +88,9 @@ cathis :: [These A B] -> [A]
 -- 0 candidates of size 7
 -- 2 candidates of size 8
 -- 6 candidates of size 9
--- 7 candidates of size 10
--- 13 candidates of size 11
--- tested 18 candidates
+-- 5 candidates of size 10
+-- 9 candidates of size 11
+-- tested 15 candidates
 cathis []  =  []
 cathis (Neither:ts)  =  cathis ts
 cathis (This x:ts)  =  x:cathis ts
@@ -110,8 +110,8 @@ cathat :: [These A B] -> [B]
 -- 0 candidates of size 8
 -- 2 candidates of size 9
 -- 4 candidates of size 10
--- 3 candidates of size 11
--- tested 9 candidates
+-- 1 candidates of size 11
+-- tested 8 candidates
 cathat []  =  []
 cathat (Neither:ts)  =  cathat ts
 cathat (This x:ts)  =  cathat ts
@@ -129,14 +129,14 @@ cathese :: [These A A] -> [A]
 -- 0 candidates of size 6
 -- 0 candidates of size 7
 -- 0 candidates of size 8
--- 4 candidates of size 9
--- 8 candidates of size 10
--- 11 candidates of size 11
--- 38 candidates of size 12
--- 26 candidates of size 13
--- 140 candidates of size 14
--- 57 candidates of size 15
--- tested 269 candidates
+-- 3 candidates of size 9
+-- 7 candidates of size 10
+-- 4 candidates of size 11
+-- 27 candidates of size 12
+-- 3 candidates of size 13
+-- 78 candidates of size 14
+-- 1 candidates of size 15
+-- tested 124 candidates
 cathese []  =  []
 cathese (Neither:ts)  =  cathese ts
 cathese (That x:ts)  =  x:cathese ts

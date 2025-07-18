@@ -7,7 +7,8 @@ A non-exhaustive list of things TO DO for Conjure.
   replace `earlyTests` setting with `maxEarlyTests`;
   setting `0` would mean no early tests.
 
-* generalize `keepBase` into `keepBndn` for recursive cases too (see below)
+* rename `keepBase` to `keepBndn` or something of sorts,
+  the previous name is outdated
 
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.
@@ -29,23 +30,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Add way to consider functions that don't increase size of arguments in recursive calls
 	(qsort example)
-
-
-## Change `candidateDefnsC.keepBase` to `keepBndn`
-
-We can exploit lazyness and test RHS values that contain holes.  If the hole is
-reached we have an inconclusive result (potentially `True` tests, don't prune).
-If we actually reach a `False` value, then we can be sure to prune.
-
-Something like:
-
-	[ errorToFalse $ holeReachedErrorToTrue $ eval False $ (e //- bs) -==- rhs
-	| ...
-	]
-
-This has the potential of improving the runtime for, for example, the merge
-function in `eg/sort.hs`.  Spurious candidates such as `x:x:x:x:_` would have
-their RHS pruned early.
 
 
 ## Allow chains of guards

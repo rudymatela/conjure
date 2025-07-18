@@ -17,9 +17,9 @@ p + S q  =  S p + q
 -- 3 candidates of size 2
 -- 6 candidates of size 3
 -- 6 candidates of size 4
--- 35 candidates of size 5
--- 86 candidates of size 6
--- tested 71 candidates
+-- 25 candidates of size 5
+-- 63 candidates of size 6
+-- tested 55 candidates
 p * Z  =  Z
 p * S q  =  p + p * q
 

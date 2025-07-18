@@ -160,12 +160,12 @@ gps10 :: [Int] -> Int
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 80 candidates of size 5
+-- 72 candidates of size 5
 -- 8 candidates of size 6
--- 1428 candidates of size 7
--- 432 candidates of size 8
--- 30712 candidates of size 9
--- tested 7064 candidates
+-- 1064 candidates of size 7
+-- 400 candidates of size 8
+-- 19524 candidates of size 9
+-- tested 4629 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
@@ -200,15 +200,15 @@ gps13_leaders :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 1 candidates of size 5
+-- 0 candidates of size 5
 -- 0 candidates of size 6
--- 1 candidates of size 7
+-- 0 candidates of size 7
 -- 0 candidates of size 8
--- 7 candidates of size 9
+-- 2 candidates of size 9
 -- 4 candidates of size 10
--- 33 candidates of size 11
--- 18 candidates of size 12
--- tested 53 candidates
+-- 12 candidates of size 11
+-- 11 candidates of size 12
+-- tested 23 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs
                          then x:gps13_leaders xs
@@ -227,15 +227,15 @@ gps16_middle :: [Char] -> [Char]
 -- 2 candidates of size 2
 -- 2 candidates of size 3
 -- 3 candidates of size 4
--- 6 candidates of size 5
--- 11 candidates of size 6
--- 23 candidates of size 7
--- 62 candidates of size 8
--- 175 candidates of size 9
--- 489 candidates of size 10
--- 1346 candidates of size 11
--- 3709 candidates of size 12
--- tested 2390 candidates
+-- 5 candidates of size 5
+-- 8 candidates of size 6
+-- 17 candidates of size 7
+-- 50 candidates of size 8
+-- 145 candidates of size 9
+-- 391 candidates of size 10
+-- 993 candidates of size 11
+-- 2480 candidates of size 12
+-- tested 1821 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
                         then c:cs
@@ -315,14 +315,14 @@ digits :: Int -> [Int]
 -- 0 candidates of size 4
 -- 11 candidates of size 5
 -- 0 candidates of size 6
--- 91 candidates of size 7
+-- 85 candidates of size 7
 -- 0 candidates of size 8
--- 850 candidates of size 9
+-- 814 candidates of size 9
 -- 0 candidates of size 10
--- 8902 candidates of size 11
+-- 8605 candidates of size 11
 -- 0 candidates of size 12
--- 100164 candidates of size 13
--- tested 110021 candidates
+-- 97407 candidates of size 13
+-- tested 106925 candidates
 digits  =  undefined  -- search exhausted
 
 gps22 :: Int -> [Char]

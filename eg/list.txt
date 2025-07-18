@@ -17,10 +17,10 @@ reverse :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 1 candidates of size 3
 -- 0 candidates of size 4
--- 4 candidates of size 5
+-- 2 candidates of size 5
 -- 1 candidates of size 6
--- 10 candidates of size 7
--- tested 16 candidates
+-- 4 candidates of size 7
+-- tested 8 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ [x]
 
@@ -32,8 +32,8 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- 25 candidates of size 5
--- 34 candidates of size 6
--- tested 56 candidates
+-- 24 candidates of size 6
+-- tested 46 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -56,7 +56,7 @@ last :: [Int] -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 4 candidates of size 7
+-- 1 candidates of size 7
 -- tested 2 candidates
 last []  =  undefined
 last (x:xs)
@@ -87,9 +87,9 @@ zip :: [Int] -> [Int] -> [(Int,Int)]
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
--- 6 candidates of size 8
--- 23 candidates of size 9
--- tested 13 candidates
+-- 0 candidates of size 8
+-- 11 candidates of size 9
+-- tested 3 candidates
 zip [] xs  =  []
 zip (x:xs) []  =  []
 zip (x:xs) (y:ys)  =  (x,y):zip xs ys
@@ -102,8 +102,8 @@ zip (x:xs) (y:ys)  =  (x,y):zip xs ys
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- 25 candidates of size 5
--- 34 candidates of size 6
--- tested 58 candidates
+-- 24 candidates of size 6
+-- tested 48 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
@@ -119,9 +119,9 @@ ordered :: [Int] -> Bool
 -- 13 candidates of size 7
 -- 17 candidates of size 8
 -- 25 candidates of size 9
--- 65 candidates of size 10
--- 115 candidates of size 11
--- tested 172 candidates
+-- 55 candidates of size 10
+-- 103 candidates of size 11
+-- tested 156 candidates
 ordered []  =  True
 ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
 

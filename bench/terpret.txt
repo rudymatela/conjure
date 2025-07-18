@@ -7,9 +7,9 @@ invert :: [Bool] -> [Bool]
 -- 0 candidates of size 2
 -- 4 candidates of size 3
 -- 0 candidates of size 4
--- 11 candidates of size 5
--- 5 candidates of size 6
--- tested 18 candidates
+-- 8 candidates of size 5
+-- 1 candidates of size 6
+-- tested 15 candidates
 invert []  =  []
 invert (p:ps)  =  not p:invert ps
 
@@ -33,12 +33,12 @@ decrement :: [Bool] -> [Bool]
 -- 0 candidates of size 2
 -- 4 candidates of size 3
 -- 0 candidates of size 4
--- 11 candidates of size 5
--- 5 candidates of size 6
--- 31 candidates of size 7
--- 52 candidates of size 8
--- 128 candidates of size 9
--- tested 154 candidates
+-- 8 candidates of size 5
+-- 1 candidates of size 6
+-- 16 candidates of size 7
+-- 4 candidates of size 8
+-- 36 candidates of size 9
+-- tested 39 candidates
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
@@ -153,10 +153,10 @@ decrelements :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 1 candidates of size 4
--- 6 candidates of size 5
+-- 4 candidates of size 5
 -- 6 candidates of size 6
--- 19 candidates of size 7
--- tested 19 candidates
+-- 10 candidates of size 7
+-- tested 16 candidates
 decrelements []  =  []
 decrelements (x:xs)  =  x - 1:decrelements xs
 

@@ -30,17 +30,17 @@ insert :: Int -> [Int] -> [Int]
 -- 2 candidates of size 5
 -- 2 candidates of size 6
 -- 2 candidates of size 7
--- 4 candidates of size 8
+-- 0 candidates of size 8
 -- 2 candidates of size 9
--- 8 candidates of size 10
--- 18 candidates of size 11
--- 16 candidates of size 12
--- 70 candidates of size 13
--- 32 candidates of size 14
--- 226 candidates of size 15
--- 64 candidates of size 16
--- 602 candidates of size 17
--- tested 519 candidates
+-- 0 candidates of size 10
+-- 2 candidates of size 11
+-- 0 candidates of size 12
+-- 6 candidates of size 13
+-- 0 candidates of size 14
+-- 22 candidates of size 15
+-- 0 candidates of size 16
+-- 22 candidates of size 17
+-- tested 53 candidates
 insert x []  =  [x]
 insert x (y:xs)
   | x <= y  =  x:insert y xs
@@ -53,17 +53,17 @@ qsort :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 1 candidates of size 3
 -- 0 candidates of size 4
--- 4 candidates of size 5
+-- 2 candidates of size 5
 -- 3 candidates of size 6
--- 10 candidates of size 7
--- 21 candidates of size 8
--- 36 candidates of size 9
--- 105 candidates of size 10
--- 182 candidates of size 11
--- 471 candidates of size 12
--- 988 candidates of size 13
--- 2183 candidates of size 14
--- tested 2437 candidates
+-- 4 candidates of size 7
+-- 12 candidates of size 8
+-- 18 candidates of size 9
+-- 46 candidates of size 10
+-- 97 candidates of size 11
+-- 187 candidates of size 12
+-- 474 candidates of size 13
+-- 915 candidates of size 14
+-- tested 1225 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
@@ -74,17 +74,17 @@ qsort :: [Int] -> [Int]
 -- 0 candidates of size 2
 -- 1 candidates of size 3
 -- 0 candidates of size 4
--- 4 candidates of size 5
+-- 2 candidates of size 5
 -- 3 candidates of size 6
--- 16 candidates of size 7
--- 35 candidates of size 8
--- 80 candidates of size 9
--- 239 candidates of size 10
--- 478 candidates of size 11
--- 1325 candidates of size 12
--- 2980 candidates of size 13
--- 7159 candidates of size 14
--- tested 6564 candidates
+-- 6 candidates of size 7
+-- 22 candidates of size 8
+-- 38 candidates of size 9
+-- 122 candidates of size 10
+-- 267 candidates of size 11
+-- 625 candidates of size 12
+-- 1636 candidates of size 13
+-- 3505 candidates of size 14
+-- tested 3377 candidates
 qsort []  =  []
 qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
 
@@ -98,15 +98,16 @@ merge :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 5
 -- 16 candidates of size 6
 -- 13 candidates of size 7
--- 22 candidates of size 8
+-- 12 candidates of size 8
 -- 150 candidates of size 9
--- 36 candidates of size 10
--- 520 candidates of size 11
--- 760 candidates of size 12
--- 1514 candidates of size 13
--- 5044 candidates of size 14
--- 5522 candidates of size 15
--- tested 13610 candidates
+-- 20 candidates of size 10
+-- 459 candidates of size 11
+-- 630 candidates of size 12
+-- 1072 candidates of size 13
+-- 4068 candidates of size 14
+-- 3000 candidates of size 15
+-- 17590 candidates of size 16
+-- tested 27043 candidates
 merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
@@ -119,12 +120,12 @@ merge :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 5
 -- 10 candidates of size 6
 -- 7 candidates of size 7
--- 14 candidates of size 8
+-- 8 candidates of size 8
 -- 57 candidates of size 9
--- 106 candidates of size 10
--- 160 candidates of size 11
--- 620 candidates of size 12
--- 982 candidates of size 13
--- tested 1964 candidates
+-- 48 candidates of size 10
+-- 147 candidates of size 11
+-- 346 candidates of size 12
+-- 539 candidates of size 13
+-- tested 1170 candidates
 merge  =  undefined  -- search exhausted
 

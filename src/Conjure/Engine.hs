@@ -455,9 +455,9 @@ candidateDefnsC nm f is =
       keepBase
         | not earlyTests  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
-        | otherwise  =  \e -> hasHole e || reallyKeepBase e
+        | otherwise  =  \e -> reallyKeepBase e
       reallyKeepBase e  =  and
-        [ errorToFalse $ eval False $ (e //- bs) -==- rhs
+        [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
         | (lhs,rhs) <- take 12 tests -- TODO: remove magic number
         -- filter test bindings that match the current pattern:
         , Just bs <- [lhs `matchArgs` pat]

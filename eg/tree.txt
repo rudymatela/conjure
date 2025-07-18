@@ -7,7 +7,7 @@ leftmost :: Tree -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 16 candidates of size 7
+-- 4 candidates of size 7
 -- tested 2 candidates
 leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)  =  if nil t1
@@ -23,8 +23,8 @@ rightmost :: Tree -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 16 candidates of size 7
--- tested 11 candidates
+-- 4 candidates of size 7
+-- tested 5 candidates
 rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)  =  if nil t2
                              then x
@@ -90,11 +90,11 @@ ordered :: Tree -> Bool
 -- 12 candidates of size 6
 -- 0 candidates of size 7
 -- 36 candidates of size 8
--- 104 candidates of size 9
+-- 72 candidates of size 9
 -- 0 candidates of size 10
--- 418 candidates of size 11
--- 1064 candidates of size 12
--- tested 1639 candidates
+-- 290 candidates of size 11
+-- 712 candidates of size 12
+-- tested 1127 candidates
 ordered  =  undefined  -- search exhausted
 
 ordered :: Tree -> Bool
@@ -115,9 +115,9 @@ preorder :: Tree -> [Int]
 -- 0 candidates of size 4
 -- 2 candidates of size 5
 -- 4 candidates of size 6
--- 4 candidates of size 7
+-- 2 candidates of size 7
 -- 8 candidates of size 8
--- tested 13 candidates
+-- tested 11 candidates
 preorder Leaf  =  []
 preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
 
@@ -128,11 +128,11 @@ inorder :: Tree -> [Int]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 2 candidates of size 5
+-- 0 candidates of size 5
 -- 4 candidates of size 6
--- 4 candidates of size 7
--- 8 candidates of size 8
--- tested 17 candidates
+-- 2 candidates of size 7
+-- 4 candidates of size 8
+-- tested 9 candidates
 inorder Leaf  =  []
 inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
 
@@ -143,13 +143,13 @@ posorder :: Tree -> [Int]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 2 candidates of size 5
+-- 0 candidates of size 5
 -- 4 candidates of size 6
--- 4 candidates of size 7
--- 8 candidates of size 8
--- 14 candidates of size 9
--- 16 candidates of size 10
--- tested 47 candidates
+-- 2 candidates of size 7
+-- 4 candidates of size 8
+-- 10 candidates of size 9
+-- 8 candidates of size 10
+-- tested 27 candidates
 posorder Leaf  =  []
 posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])
 

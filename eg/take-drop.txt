@@ -21,11 +21,11 @@ take :: Int -> [A] -> [A]
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 1 candidates of size 5
--- 3 candidates of size 6
+-- 0 candidates of size 6
 -- 2 candidates of size 7
--- 6 candidates of size 8
--- 6 candidates of size 9
--- tested 16 candidates
+-- 0 candidates of size 8
+-- 4 candidates of size 9
+-- tested 7 candidates
 take 0 xs  =  []
 take x []  =  []
 take x (y:xs)  =  y:take (x - 1) xs
