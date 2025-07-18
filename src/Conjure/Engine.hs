@@ -451,8 +451,7 @@ candidateDefnsC nm f is =
                 .  drop 1 -- this excludes the function name itself
                 $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
-      earlierMatchingPats  =  filter (`isInstanceOf` pat)
-                           $  takeWhile (/= pat) pats
+      earlierPats  =  takeWhile (/= pat) pats
       keepBase
         | not earlyTests  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
@@ -462,8 +461,9 @@ candidateDefnsC nm f is =
         | (lhs,rhs) <- tests
         -- filter test bindings that match the current pattern:
         , Just bs <- [lhs `matchArgs` pat]
-        , none (lhs `isInstanceOf`) earlierMatchingPats
+        , none (lhs `isInstanceOfArgs`) earlierPats
         ]
+      isInstanceOfArgs efxs efys  =  isJust $ matchArgs efxs efys
       matchArgs efxs efys  =  fold (map exprExpr (drop 1 (unfoldApp efxs)))
                       `match` fold               (drop 1 (unfoldApp efys))
 
