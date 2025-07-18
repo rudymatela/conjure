@@ -3,7 +3,7 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* fix overpruning in `keepBase` in `candidateDefnsC` (see below)
+* refine and eventually remove the second guard of keepBase (see below)
 
 * generalize `keepBase` into `keepBndn` for recursive cases too (see below)
 
@@ -29,21 +29,19 @@ A non-exhaustive list of things TO DO for Conjure.
 	(qsort example)
 
 
-## Overpruning in `Engine.candidateDefnsC.keepBase`
+## Refine `keepBase`
 
-The `keepBase` function in `candidateDefnsC` is overpruning:
-the second skip condition (`all isVar`) is not enough to guarantee that we
-are not missing a candidate.  (This applies to numeric values.)
-This is not Conjurable, see the following now from `bench/weird.hs`:
+The second gaurd of keepBase needs to be refined to
+`any (isVar &&& isNumeric)` or `all (isVar &&& isNumeric)`.
+First `all` then `any`?
 
-  isq False 0  =  0
-  isq False x  =  x + 1
-  isq True 0  =  1
-  isq True x  =  x * x
 
-A way to rewrite this is to make sure that tests that match "this" pattern do
-not match any other earlier patterns.  I think this can be easily solved by
-adding a list comprehension guard in `reallyKeepBase`.
+## Remove second guard of `keepBase`
+
+The second guard can be removed.
+Then the settings to some benchmarks need to be changed:
+the number of candidates will lose a bit of meaning with this change
+as they drastically reduce.
 
 
 ## Change `candidateDefnsC.keepBase` to `keepBndn`
