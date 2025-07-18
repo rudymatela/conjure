@@ -1,15 +1,15 @@
 isq :: Bool -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 56/91 rules
--- 0 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 0 candidates of size 5
--- 0 candidates of size 6
--- 0 candidates of size 7
--- 1 candidates of size 8
--- tested 1 candidates
+-- 3 candidates of size 3
+-- 6 candidates of size 4
+-- 8 candidates of size 5
+-- 48 candidates of size 6
+-- 63 candidates of size 7
+-- 301 candidates of size 8
+-- tested 432 candidates
 isq False 0  =  0
 isq False x  =  x + 1
 isq True 0  =  1

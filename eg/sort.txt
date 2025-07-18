@@ -1,46 +1,46 @@
 sort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 6/7 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 1 candidates of size 4
--- 3 candidates of size 5
--- tested 3 candidates
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 2 candidates of size 3
+-- 7 candidates of size 4
+-- 14 candidates of size 5
+-- tested 15 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
 sort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
--- tested 1 candidates
+-- 2 candidates of size 4
+-- tested 4 candidates
 sort  =  foldr insert []
 
 insert :: Int -> [Int] -> [Int]
 -- testing 4 combinations of argument values
 -- pruning with 4/4 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 2 candidates of size 3
 -- 0 candidates of size 4
--- 0 candidates of size 5
+-- 2 candidates of size 5
 -- 2 candidates of size 6
--- 0 candidates of size 7
+-- 2 candidates of size 7
 -- 4 candidates of size 8
--- 0 candidates of size 9
+-- 2 candidates of size 9
 -- 8 candidates of size 10
--- 16 candidates of size 11
+-- 18 candidates of size 11
 -- 16 candidates of size 12
--- 68 candidates of size 13
+-- 70 candidates of size 13
 -- 32 candidates of size 14
--- 224 candidates of size 15
+-- 226 candidates of size 15
 -- 64 candidates of size 16
--- 600 candidates of size 17
--- tested 503 candidates
+-- 602 candidates of size 17
+-- tested 519 candidates
 insert x []  =  [x]
 insert x (y:xs)
   | x <= y  =  x:insert y xs
@@ -49,49 +49,49 @@ insert x (y:xs)
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 8/8 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 1 candidates of size 3
 -- 0 candidates of size 4
--- 3 candidates of size 5
+-- 4 candidates of size 5
 -- 3 candidates of size 6
--- 9 candidates of size 7
+-- 10 candidates of size 7
 -- 21 candidates of size 8
--- 35 candidates of size 9
+-- 36 candidates of size 9
 -- 105 candidates of size 10
--- 181 candidates of size 11
+-- 182 candidates of size 11
 -- 471 candidates of size 12
--- 987 candidates of size 13
+-- 988 candidates of size 13
 -- 2183 candidates of size 14
--- tested 2429 candidates
+-- tested 2437 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 8/8 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 1 candidates of size 3
 -- 0 candidates of size 4
--- 3 candidates of size 5
+-- 4 candidates of size 5
 -- 3 candidates of size 6
--- 15 candidates of size 7
+-- 16 candidates of size 7
 -- 35 candidates of size 8
--- 79 candidates of size 9
+-- 80 candidates of size 9
 -- 239 candidates of size 10
--- 477 candidates of size 11
+-- 478 candidates of size 11
 -- 1325 candidates of size 12
--- 2979 candidates of size 13
+-- 2980 candidates of size 13
 -- 7159 candidates of size 14
--- tested 6556 candidates
+-- tested 6564 candidates
 qsort []  =  []
 qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
 
 merge :: [Int] -> [Int] -> [Int]
 -- testing 1080 combinations of argument values
 -- pruning with 4/4 rules
--- 0 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 10 candidates of size 4
@@ -106,13 +106,13 @@ merge :: [Int] -> [Int] -> [Int]
 -- 1442 candidates of size 13
 -- 4204 candidates of size 14
 -- 5426 candidates of size 15
--- tested 12323 candidates
+-- tested 12326 candidates
 merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 1/2 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 6 candidates of size 4
@@ -125,6 +125,6 @@ merge :: [Int] -> [Int] -> [Int]
 -- 144 candidates of size 11
 -- 588 candidates of size 12
 -- 958 candidates of size 13
--- tested 1874 candidates
+-- tested 1876 candidates
 merge  =  undefined  -- search exhausted
 

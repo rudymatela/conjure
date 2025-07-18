@@ -1,63 +1,63 @@
 length :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 4/8 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 2 candidates of size 5
--- tested 2 candidates
+-- tested 4 candidates
 length []  =  0
 length (x:xs)  =  1 + length xs
 
 reverse :: [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 4/4 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 1 candidates of size 3
 -- 0 candidates of size 4
--- 3 candidates of size 5
+-- 4 candidates of size 5
 -- 1 candidates of size 6
--- 9 candidates of size 7
--- tested 12 candidates
+-- 10 candidates of size 7
+-- tested 16 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ [x]
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- 25 candidates of size 5
 -- 34 candidates of size 6
--- tested 53 candidates
+-- tested 56 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
 (++) :: [Int] -> [Int] -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 2/2 rules
--- 0 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 11 candidates of size 4
--- tested 11 candidates
+-- 14 candidates of size 4
+-- tested 16 candidates
 xs ++ ys  =  foldr (:) ys xs
 
 last :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 5/5 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 4 candidates of size 7
--- tested 1 candidates
+-- tested 2 candidates
 last []  =  undefined
 last (x:xs)
   | null xs  =  x
@@ -66,13 +66,13 @@ last (x:xs)
 last :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
 -- 2 candidates of size 5
 -- 2 candidates of size 6
--- tested 4 candidates
+-- tested 5 candidates
 last []  =  undefined
 last [x]  =  x
 last (x:y:xs)  =  last (y:xs)
@@ -80,7 +80,7 @@ last (x:y:xs)  =  last (y:xs)
 zip :: [Int] -> [Int] -> [(Int,Int)]
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
@@ -89,7 +89,7 @@ zip :: [Int] -> [Int] -> [(Int,Int)]
 -- 0 candidates of size 7
 -- 6 candidates of size 8
 -- 23 candidates of size 9
--- tested 12 candidates
+-- tested 13 candidates
 zip [] xs  =  []
 zip (x:xs) []  =  []
 zip (x:xs) (y:ys)  =  (x,y):zip xs ys
@@ -97,31 +97,31 @@ zip (x:xs) (y:ys)  =  (x,y):zip xs ys
 (\/) :: [Int] -> [Int] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- 25 candidates of size 5
 -- 34 candidates of size 6
--- tested 55 candidates
+-- tested 58 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
 ordered :: [Int] -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 29/39 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 0 candidates of size 5
--- 2 candidates of size 6
--- 8 candidates of size 7
--- 8 candidates of size 8
--- 12 candidates of size 9
--- 44 candidates of size 10
--- 74 candidates of size 11
--- tested 113 candidates
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 1 candidates of size 3
+-- 1 candidates of size 4
+-- 1 candidates of size 5
+-- 7 candidates of size 6
+-- 13 candidates of size 7
+-- 17 candidates of size 8
+-- 25 candidates of size 9
+-- 65 candidates of size 10
+-- 115 candidates of size 11
+-- tested 172 candidates
 ordered []  =  True
 ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
 

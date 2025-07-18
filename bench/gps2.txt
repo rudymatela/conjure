@@ -4,14 +4,14 @@ gps1 :: [Int] -> Maybe Int
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 0 candidates of size 4
+-- 1 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 0 candidates of size 7
+-- 1 candidates of size 7
 -- 0 candidates of size 8
--- 0 candidates of size 9
--- 1 candidates of size 10
--- tested 1 candidates
+-- 1 candidates of size 9
+-- 2 candidates of size 10
+-- tested 5 candidates
 gps1 xs  =  findIndex (0 >) (map (foldr (+) 0) (tail (inits xs)))
 
 gps1 :: [Int] -> Maybe Int
@@ -20,34 +20,34 @@ gps1 :: [Int] -> Maybe Int
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 0 candidates of size 4
--- 0 candidates of size 5
+-- 1 candidates of size 4
+-- 1 candidates of size 5
 -- 0 candidates of size 6
--- 0 candidates of size 7
--- 1 candidates of size 8
--- tested 1 candidates
+-- 1 candidates of size 7
+-- 4 candidates of size 8
+-- tested 6 candidates
 gps1 xs  =  findIndex (0 >) (map sum (tail (inits xs)))
 
 gps1 :: Int -> [Int] -> Int
 -- testing 6 combinations of argument values
 -- pruning with 8/9 rules
--- 0 candidates of size 1
+-- 4 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 3 candidates of size 3
 -- 5 candidates of size 4
--- tested 5 candidates
+-- tested 12 candidates
 gps1  =  undefined  -- search exhausted
 
 gps2 :: Double -> Double -> Int -> Double
 -- testing 5 combinations of argument values
 -- pruning with 2/6 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 16 candidates of size 3
 -- 0 candidates of size 4
--- 0 candidates of size 5
+-- 252 candidates of size 5
 -- 0 candidates of size 6
--- tested 0 candidates
+-- tested 270 candidates
 gps2  =  undefined  -- search exhausted
 
 gps3 :: [Char] -> Int
@@ -153,7 +153,7 @@ gps9  =  undefined  -- search exhausted
 gps10 :: [Int] -> Int
 -- testing 7 combinations of argument values
 -- pruning with 67/100 rules
--- 0 candidates of size 1
+-- 4 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
@@ -162,7 +162,7 @@ gps10 :: [Int] -> Int
 -- 1428 candidates of size 7
 -- 432 candidates of size 8
 -- 30712 candidates of size 9
--- tested 7060 candidates
+-- tested 7064 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
@@ -186,14 +186,14 @@ gps12 :: [Char] -> [Char] -> [Int]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 1 candidates of size 5
--- tested 1 candidates
+-- 4 candidates of size 5
+-- tested 3 candidates
 gps12 cs ds  =  findIndices (ds `isPrefixOf`) (tails cs)
 
 gps13_leaders :: [Int] -> [Int]
 -- testing 4 combinations of argument values
 -- pruning with 5/5 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
@@ -205,7 +205,7 @@ gps13_leaders :: [Int] -> [Int]
 -- 4 candidates of size 10
 -- 33 candidates of size 11
 -- 18 candidates of size 12
--- tested 51 candidates
+-- tested 53 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)  =  if all (x >) xs
                          then x:gps13_leaders xs
@@ -220,19 +220,19 @@ gps15_mastermind  =  error "could not reify specification, suggestion: conjureFr
 gps16_middle :: [Char] -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 10/11 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 1 candidates of size 4
--- 4 candidates of size 5
--- 9 candidates of size 6
--- 17 candidates of size 7
--- 30 candidates of size 8
--- 63 candidates of size 9
--- 191 candidates of size 10
--- 700 candidates of size 11
--- 2461 candidates of size 12
--- tested 1284 candidates
+-- 2 candidates of size 1
+-- 2 candidates of size 2
+-- 2 candidates of size 3
+-- 3 candidates of size 4
+-- 6 candidates of size 5
+-- 11 candidates of size 6
+-- 23 candidates of size 7
+-- 62 candidates of size 8
+-- 175 candidates of size 9
+-- 489 candidates of size 10
+-- 1346 candidates of size 11
+-- 3709 candidates of size 12
+-- tested 2390 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
                         then c:cs
@@ -241,36 +241,36 @@ gps16_middle (c:cs)  =  if length cs <= 1
 gps17_pds :: [Int] -> Int
 -- testing 5 combinations of argument values
 -- pruning with 29/40 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
+-- 1 candidates of size 1
+-- 1 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 1 candidates of size 5
--- tested 1 candidates
+-- 2 candidates of size 5
+-- tested 4 candidates
 gps17_pds  =  undefined  -- search exhausted
 
 gps18_price :: [Double] -> [Double] -> Double
 -- testing 4 combinations of argument values
 -- pruning with 26/35 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 2 candidates of size 3
 -- 0 candidates of size 4
--- 28 candidates of size 5
+-- 33 candidates of size 5
 -- 176 candidates of size 6
--- tested 204 candidates
+-- tested 213 candidates
 gps18_price  =  undefined  -- search exhausted
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
 -- pruning with 6/19 rules
--- 0 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 21 candidates of size 3
 -- 0 candidates of size 4
--- 0 candidates of size 5
+-- 309 candidates of size 5
 -- 0 candidates of size 6
--- tested 0 candidates
+-- tested 333 candidates
 gps19_snowday  =  undefined  -- search exhausted
 
 gps20 :: [Char] -> Bool
@@ -363,12 +363,12 @@ gps24 (c:cs)  =  if 140 > length cs
 gps25 :: [Double] -> [Double] -> Double
 -- testing 6 combinations of argument values
 -- pruning with 31/59 rules
--- 0 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 40 candidates of size 5
--- 303 candidates of size 6
--- tested 343 candidates
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 5 candidates of size 3
+-- 10 candidates of size 4
+-- 76 candidates of size 5
+-- 438 candidates of size 6
+-- tested 532 candidates
 gps25  =  undefined  -- search exhausted
 

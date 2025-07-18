@@ -1,7 +1,7 @@
 duplicates :: [Int] -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 21/26 rules
--- 0 candidates of size 1
+-- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
@@ -18,7 +18,7 @@ duplicates :: [Int] -> [Int]
 -- 49 candidates of size 15
 -- 78 candidates of size 16
 -- 75 candidates of size 17
--- tested 269 candidates
+-- tested 271 candidates
 duplicates []  =  []
 duplicates (x:xs)
   | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs
@@ -52,21 +52,19 @@ duplicates (x:xs)
 positionsFrom :: Int -> A -> [A] -> [Int]
 -- testing 360 combinations of argument values
 -- pruning with 6/11 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
--- 0 candidates of size 3
+-- 2 candidates of size 3
 -- 0 candidates of size 4
--- 0 candidates of size 5
+-- 7 candidates of size 5
 -- 0 candidates of size 6
--- 8 candidates of size 7
+-- 34 candidates of size 7
 -- 0 candidates of size 8
--- 36 candidates of size 9
+-- 133 candidates of size 9
 -- 8 candidates of size 10
--- 148 candidates of size 11
+-- 510 candidates of size 11
 -- 40 candidates of size 12
--- 592 candidates of size 13
--- 192 candidates of size 14
--- 2316 candidates of size 15
--- tested 3340 candidates
+-- 1943 candidates of size 13
+-- tested 2678 candidates
 positionsFrom  =  undefined  -- search exhausted
 
