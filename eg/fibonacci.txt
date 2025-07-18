@@ -2,18 +2,18 @@ fibonacci :: Int -> Int
 -- testing 7 combinations of argument values
 -- pruning with 21/44 rules
 -- 4 candidates of size 1
--- 3 candidates of size 2
--- 9 candidates of size 3
--- 9 candidates of size 4
--- 26 candidates of size 5
--- 27 candidates of size 6
--- 116 candidates of size 7
--- 120 candidates of size 8
--- 552 candidates of size 9
--- 538 candidates of size 10
--- 2661 candidates of size 11
--- 2661 candidates of size 12
--- tested 4133 candidates
+-- 0 candidates of size 2
+-- 7 candidates of size 3
+-- 0 candidates of size 4
+-- 18 candidates of size 5
+-- 0 candidates of size 6
+-- 94 candidates of size 7
+-- 20 candidates of size 8
+-- 466 candidates of size 9
+-- 92 candidates of size 10
+-- 2298 candidates of size 11
+-- 542 candidates of size 12
+-- tested 3067 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

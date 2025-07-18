@@ -13,18 +13,18 @@ gps2 :: Int -> Maybe [Char]
 -- pruning with 9/17 rules
 -- 1 candidates of size 1
 -- 2 candidates of size 2
--- 3 candidates of size 3
--- 2 candidates of size 4
--- 2 candidates of size 5
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 32 candidates of size 7
--- 32 candidates of size 8
--- 48 candidates of size 9
--- 32 candidates of size 10
--- 16 candidates of size 11
+-- 16 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 0 candidates of size 11
 -- 512 candidates of size 12
--- 1408 candidates of size 13
--- tested 1171 candidates
+-- 1280 candidates of size 13
+-- tested 1052 candidates
 gps2 x  =  if 2000 <= x
            then Just "large"
            else if x < 1000 then Just "small" else Nothing
@@ -39,7 +39,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- 0 candidates of size 5
 -- 1248 candidates of size 6
 -- 0 candidates of size 7
--- 17008 candidates of size 8
+-- 13680 candidates of size 8
 -- tested 12358 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
@@ -90,12 +90,12 @@ gps6 :: Int -> Int
 -- testing 9 combinations of argument values
 -- pruning with 16/18 rules
 -- 4 candidates of size 1
--- 2 candidates of size 2
--- 14 candidates of size 3
--- 14 candidates of size 4
--- 186 candidates of size 5
--- 165 candidates of size 6
--- tested 385 candidates
+-- 0 candidates of size 2
+-- 12 candidates of size 3
+-- 0 candidates of size 4
+-- 172 candidates of size 5
+-- 0 candidates of size 6
+-- tested 188 candidates
 gps6  =  undefined  -- search exhausted
 
 gps7 :: [Char] -> ([Char],Int)
@@ -135,10 +135,10 @@ gps9 :: Int -> [Int]
 -- 10 candidates of size 5
 -- 21 candidates of size 6
 -- 30 candidates of size 7
--- 77 candidates of size 8
--- 134 candidates of size 9
--- 245 candidates of size 10
--- tested 306 candidates
+-- 69 candidates of size 8
+-- 114 candidates of size 9
+-- 212 candidates of size 10
+-- tested 278 candidates
 gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
 wallisNext :: Ratio Integer -> Ratio Integer
@@ -245,9 +245,9 @@ odd :: Int -> Bool
 -- 0 candidates of size 1
 -- 0 candidates of size 2
 -- 3 candidates of size 3
--- 2 candidates of size 4
--- 37 candidates of size 5
--- tested 17 candidates
+-- 0 candidates of size 4
+-- 35 candidates of size 5
+-- tested 15 candidates
 odd x  =  0 /= x `mod` 2
 
 gps14 :: [Int] -> Int
@@ -299,15 +299,15 @@ gps17 :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 27/65 rules
 -- 3 candidates of size 1
--- 3 candidates of size 2
--- 7 candidates of size 3
--- 8 candidates of size 4
--- 28 candidates of size 5
--- 35 candidates of size 6
--- 167 candidates of size 7
--- 203 candidates of size 8
--- 1048 candidates of size 9
--- tested 466 candidates
+-- 0 candidates of size 2
+-- 6 candidates of size 3
+-- 0 candidates of size 4
+-- 23 candidates of size 5
+-- 0 candidates of size 6
+-- 147 candidates of size 7
+-- 8 candidates of size 8
+-- 941 candidates of size 9
+-- tested 199 candidates
 gps17 0  =  0
 gps17 x  =  x * x + gps17 (x - 1)
 

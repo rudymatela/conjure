@@ -2,12 +2,12 @@ gcd :: Int -> Int -> Int
 -- testing 11 combinations of argument values
 -- pruning with 0/0 rules
 -- 3 candidates of size 1
--- 6 candidates of size 2
--- 11 candidates of size 3
--- 50 candidates of size 4
--- 98 candidates of size 5
--- 330 candidates of size 6
--- tested 172 candidates
+-- 0 candidates of size 2
+-- 8 candidates of size 3
+-- 0 candidates of size 4
+-- 48 candidates of size 5
+-- 28 candidates of size 6
+-- tested 63 candidates
 gcd x 0  =  x
 gcd x y  =  gcd y (x `mod` y)
 

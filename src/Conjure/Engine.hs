@@ -456,7 +456,6 @@ candidateDefnsC nm f is =
       keepBase
         | not earlyTests  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
-        | all (\p -> isVar p && isNumeric p) (drop 1 $ unfoldApp pat)  =  const True -- TODO: remove
         | otherwise  =  \e -> hasHole e || reallyKeepBase e
       reallyKeepBase e  =  and
         [ errorToFalse $ eval False $ (e //- bs) -==- rhs

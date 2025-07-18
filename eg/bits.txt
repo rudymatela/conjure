@@ -2,13 +2,13 @@ bitsum :: Int -> Int
 -- testing 8 combinations of argument values
 -- pruning with 21/25 rules
 -- 3 candidates of size 1
--- 3 candidates of size 2
--- 5 candidates of size 3
--- 10 candidates of size 4
--- 26 candidates of size 5
--- 68 candidates of size 6
--- 182 candidates of size 7
--- tested 145 candidates
+-- 2 candidates of size 2
+-- 4 candidates of size 3
+-- 8 candidates of size 4
+-- 19 candidates of size 5
+-- 56 candidates of size 6
+-- 152 candidates of size 7
+-- tested 122 candidates
 bitsum 0  =  0
 bitsum x  =  parity x + bitsum (halve x)
 
@@ -16,15 +16,15 @@ bitsum :: Int -> Int
 -- testing 8 combinations of argument values
 -- pruning with 27/32 rules
 -- 4 candidates of size 1
--- 2 candidates of size 2
--- 17 candidates of size 3
--- 16 candidates of size 4
--- 246 candidates of size 5
--- 239 candidates of size 6
--- 4504 candidates of size 7
--- 4542 candidates of size 8
--- 89215 candidates of size 9
--- tested 10191 candidates
+-- 0 candidates of size 2
+-- 15 candidates of size 3
+-- 0 candidates of size 4
+-- 233 candidates of size 5
+-- 0 candidates of size 6
+-- 4297 candidates of size 7
+-- 72 candidates of size 8
+-- 85204 candidates of size 9
+-- tested 5242 candidates
 bitsum 0  =  0
 bitsum x  =  x `mod` 2 + bitsum (x `div` 2)
 

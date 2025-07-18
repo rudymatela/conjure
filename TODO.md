@@ -27,14 +27,6 @@ A non-exhaustive list of things TO DO for Conjure.
 	(qsort example)
 
 
-## Remove second guard of `keepBase`
-
-The second guard can be removed.
-Then the settings to some benchmarks need to be changed:
-the number of candidates will lose a bit of meaning with this change
-as they drastically reduce.
-
-
 ## Change `candidateDefnsC.keepBase` to `keepBndn`
 
 We can exploit lazyness and test RHS values that contain holes.  If the hole is

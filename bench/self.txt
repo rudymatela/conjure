@@ -2,35 +2,35 @@
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- 4 candidates of size 1
--- 6 candidates of size 2
--- 26 candidates of size 3
--- tested 12 candidates
+-- 0 candidates of size 2
+-- 24 candidates of size 3
+-- tested 6 candidates
 x ? y  =  x + y
 
 (?) :: Int -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- 4 candidates of size 1
--- 4 candidates of size 2
--- 31 candidates of size 3
--- tested 22 candidates
+-- 0 candidates of size 2
+-- 24 candidates of size 3
+-- tested 18 candidates
 x ? y  =  x * y
 
 i :: Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- 3 candidates of size 1
--- 2 candidates of size 2
--- 13 candidates of size 3
--- tested 8 candidates
+-- 0 candidates of size 2
+-- 10 candidates of size 3
+-- tested 6 candidates
 i x  =  x + 1
 
 d :: Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
 -- 3 candidates of size 1
--- 3 candidates of size 2
--- 12 candidates of size 3
--- tested 18 candidates
+-- 0 candidates of size 2
+-- 10 candidates of size 3
+-- tested 13 candidates
 d  =  undefined  -- search exhausted
 

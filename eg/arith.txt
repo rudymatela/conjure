@@ -2,61 +2,61 @@ double :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- 3 candidates of size 1
--- 1 candidates of size 2
--- 6 candidates of size 3
--- tested 5 candidates
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- tested 4 candidates
 double x  =  x + x
 
 triple :: Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- 3 candidates of size 1
--- 1 candidates of size 2
--- 6 candidates of size 3
--- 2 candidates of size 4
--- 11 candidates of size 5
--- tested 13 candidates
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 8 candidates of size 5
+-- tested 7 candidates
 triple x  =  x + (x + x)
 
 add :: Int -> Int -> Int
 -- testing 4 combinations of argument values
 -- pruning with 14/25 rules
 -- 4 candidates of size 1
--- 6 candidates of size 2
--- 10 candidates of size 3
--- tested 12 candidates
+-- 0 candidates of size 2
+-- 8 candidates of size 3
+-- tested 6 candidates
 add x y  =  x + y
 
 square :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
 -- 3 candidates of size 1
--- 1 candidates of size 2
--- 4 candidates of size 3
--- tested 7 candidates
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- tested 6 candidates
 square x  =  x * x
 
 cube :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
 -- 3 candidates of size 1
--- 1 candidates of size 2
--- 4 candidates of size 3
--- 1 candidates of size 4
--- 10 candidates of size 5
--- tested 17 candidates
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 8 candidates of size 5
+-- tested 14 candidates
 cube x  =  x * (x * x)
 
 tnpo :: Int -> Int
 -- testing 3 combinations of argument values
 -- pruning with 14/25 rules
 -- 3 candidates of size 1
--- 2 candidates of size 2
--- 6 candidates of size 3
--- 4 candidates of size 4
--- 11 candidates of size 5
--- 7 candidates of size 6
--- 35 candidates of size 7
--- tested 35 candidates
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 8 candidates of size 5
+-- 0 candidates of size 6
+-- 27 candidates of size 7
+-- tested 16 candidates
 tnpo x  =  x + (x + (x + 1))
 

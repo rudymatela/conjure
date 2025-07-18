@@ -2,14 +2,14 @@ pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- pruning with 14/30 rules
 -- 4 candidates of size 1
--- 11 candidates of size 2
--- 31 candidates of size 3
--- 92 candidates of size 4
--- 244 candidates of size 5
--- 730 candidates of size 6
--- 2221 candidates of size 7
--- 6950 candidates of size 8
--- tested 3356 candidates
+-- 0 candidates of size 2
+-- 11 candidates of size 3
+-- 0 candidates of size 4
+-- 78 candidates of size 5
+-- 9 candidates of size 6
+-- 809 candidates of size 7
+-- 557 candidates of size 8
+-- tested 934 candidates
 pow x 0  =  1
 pow x y  =  x * pow x (y - 1)
 
@@ -17,11 +17,11 @@ pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
 -- pruning with 15/19 rules
 -- 4 candidates of size 1
--- 13 candidates of size 2
--- 40 candidates of size 3
--- 103 candidates of size 4
--- 259 candidates of size 5
--- 750 candidates of size 6
--- tested 1169 candidates
+-- 2 candidates of size 2
+-- 5 candidates of size 3
+-- 9 candidates of size 4
+-- 31 candidates of size 5
+-- 178 candidates of size 6
+-- tested 229 candidates
 pow  =  undefined  -- search exhausted
 
