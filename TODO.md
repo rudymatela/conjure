@@ -3,6 +3,10 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* fix potential overpruning in `keepBase` in `candidateDefnsC` (see below)
+
+* generalize `keepBase` into `keepBndn` for recursive cases too (see below)
+
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.
   This change will need to be done in LeanCheck itself.
@@ -23,6 +27,34 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Add way to consider functions that don't increase size of arguments in recursive calls
 	(qsort example)
+
+
+## Overpruning in `Engine.candidateDefnsC.keepBase`
+
+The `keepBase` function in `candidateDefnsC` may be overpruning:
+the second skip condition (`all isVar`) may not be enough to guarantee that we
+are not missing a candidate.  (This applies to numeric values.)
+
+A way to rewrite this is to make sure that tests that match "this" pattern do
+not match any other earlier patterns.  I think this can be easily solved by
+adding a list comprehension guard in `reallyKeepBase`.
+
+
+## Change `candidateDefnsC.keepBase` to `keepBndn`
+
+We can exploit lazyness and test RHS values that contain holes.  If the hole is
+reached we have an inconclusive result (potentially `True` tests, don't prune).
+If we actually reach a `False` value, then we can be sure to prune.
+
+Something like:
+
+	[ errorToFalse $ holeReachedErrorToTrue $ eval False $ (e //- bs) -==- rhs
+	| ...
+	]
+
+This has the potential of improving the runtime for, for example, the merge
+function in `eg/sort.hs`.  Spurious candidates such as `x:x:x:x:_` would have
+their RHS pruned early.
 
 
 ## Allow chains of guards
