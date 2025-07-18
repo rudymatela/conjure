@@ -122,8 +122,15 @@ type Reification  =  [Reification1] -> [Reification1]
 --
 -- (cf. 'reifyTiers', 'reifyEquality', 'conjureType')
 class (Typeable a, Name a) => Conjurable a where
+  -- | Returns a list of holes matching arguments of the given function.
   conjureArgumentHoles :: a -> [Expr]
   conjureArgumentHoles _  =  []
+
+  -- | Returns a hole with the same type as the given functions final result.
+  conjureResultHole :: a -> Expr
+  conjureResultHole x  =  var "" (err `asTypeOf` x)
+    where
+    err  =  error "conjureResultHole: placeholder for recursive call?"
 
   -- | Returns 'Just' the '==' function encoded as an 'Expr' when available
   --   or 'Nothing' otherwise.
@@ -610,6 +617,7 @@ instance ( Conjurable a, Listable a, Show a, Express a
 
 instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
+  conjureResultHole f  =  conjureResultHole (f undefined)
   conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
   conjureIf f  =  conjureIf (f undefined)
   conjureArgumentCases f  =  conjureCases (argTy f) : conjureArgumentCases (f undefined)

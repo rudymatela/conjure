@@ -398,7 +398,7 @@ candidateDefnsC nm f is =
   ps  =  actual is  -- extract actual ingredients/primitives from the list
   es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ps]
 
-  eh  =  holeAsTypeOf efxs
+  eh  =  conjureResultHole f
   efxs  =  conjureVarApplication nm f
   (ef:_)  =  unfoldApp efxs
 
