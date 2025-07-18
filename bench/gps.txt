@@ -217,12 +217,12 @@ gps12 :: [Int] -> Int
 -- 3 candidates of size 4
 -- 12 candidates of size 5
 -- 13 candidates of size 6
--- 63 candidates of size 7
--- 100 candidates of size 8
--- 390 candidates of size 9
--- 918 candidates of size 10
--- 2809 candidates of size 11
--- tested 4072 candidates
+-- 65 candidates of size 7
+-- 102 candidates of size 8
+-- 416 candidates of size 9
+-- 956 candidates of size 10
+-- 3073 candidates of size 11
+-- tested 4404 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -269,8 +269,8 @@ gps14 :: [Int] -> Int
 -- 0 candidates of size 4
 -- 30 candidates of size 5
 -- 6 candidates of size 6
--- 330 candidates of size 7
--- tested 78 candidates
+-- 345 candidates of size 7
+-- tested 83 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x + gps14 xs `mod` 2
 

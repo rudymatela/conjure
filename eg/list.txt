@@ -56,7 +56,7 @@ last :: [Int] -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 1 candidates of size 7
+-- 4 candidates of size 7
 -- tested 2 candidates
 last []  =  undefined
 last (x:xs)

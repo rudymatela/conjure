@@ -455,7 +455,7 @@ candidateDefnsC nm f is =
       keepBase
         | not earlyTests  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
-        | otherwise  =  \e -> reallyKeepBase e
+        | otherwise  =  \e -> isNumeric eh && hasHole e || reallyKeepBase e
       reallyKeepBase e  =  and
         [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
         | (lhs,rhs) <- take 12 tests -- TODO: remove magic number

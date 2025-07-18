@@ -160,12 +160,12 @@ gps10 :: [Int] -> Int
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- 72 candidates of size 5
+-- 80 candidates of size 5
 -- 8 candidates of size 6
--- 1064 candidates of size 7
--- 400 candidates of size 8
--- 19524 candidates of size 9
--- tested 4629 candidates
+-- 1428 candidates of size 7
+-- 432 candidates of size 8
+-- 30712 candidates of size 9
+-- tested 7064 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 

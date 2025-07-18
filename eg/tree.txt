@@ -7,7 +7,7 @@ leftmost :: Tree -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 4 candidates of size 7
+-- 16 candidates of size 7
 -- tested 2 candidates
 leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)  =  if nil t1
@@ -23,8 +23,8 @@ rightmost :: Tree -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 4 candidates of size 7
--- tested 5 candidates
+-- 16 candidates of size 7
+-- tested 11 candidates
 rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)  =  if nil t2
                              then x
