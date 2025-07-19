@@ -26,7 +26,6 @@ module Conjure.Utils
 #endif
   , idIO
   , mapHead
-  , sets
   , headOr
   , notNull
   , allEqual
@@ -137,15 +136,6 @@ idIO action x  =  unsafePerformIO $ do
 mapHead :: (a -> a) -> [a] -> [a]
 mapHead f (x:xs)  =  f x : xs
 mapHead f []  =  error "Conjure.Utils.mapHead: empty list"
-
--- | Return sets of values based on the list.
---
--- The values in the list must me unique.
-sets :: [a] -> [[a]]
-sets []  =  [[]]
-sets (x:xs)  =  map (x:) ss ++ ss
-  where
-  ss  =  sets xs
 
 -- | Like 'head' but allows providing a default value.
 headOr :: a -> [a] -> a
