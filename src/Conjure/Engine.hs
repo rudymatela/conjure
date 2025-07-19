@@ -47,7 +47,7 @@ module Conjure.Engine
   , dontRewrite
   , dontRequireDescent
   , omitAssortedPruning
-  , omitEarlyTests
+  , maxEarlyTests
   , dontCopyBindings
   , nonAtomicNumbers
   , uniqueCandidates
@@ -462,12 +462,12 @@ candidateDefnsC nm f is =
                    $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
       keepB
-        | not earlyTests  =  const True
+        | maxEarlyTests <= 0  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
         | otherwise  =  \e -> isNumeric eh && hasHole e || reallyKeepB e
       reallyKeepB e  =  and
         [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
-        | (lhs,rhs) <- take 12 ts -- TODO: remove magic number
+        | (lhs,rhs) <- take maxEarlyTests ts
         , Just bs <- [lhs `match` pat]  -- always should match
         ]
 
@@ -559,7 +559,7 @@ candidateDefnsC nm f is =
   maxPatternDepth        =  maxPatternDepthI is
   maxPatternSize         =  maxPatternSizeI is
   requireDescent         =  requireDescentI is
-  earlyTests             =  earlyTestsI is
+  maxEarlyTests          =  maxEarlyTestsI is
   copyBindings           =  copyBindingsI is
   adHocRedundancy        =  assortedPruningI is -- TODO: rename
   atomicNumbers          =  atomicNumbersI is

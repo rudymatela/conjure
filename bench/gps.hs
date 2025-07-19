@@ -820,7 +820,7 @@ gps24c  =  conjure "gps24" gps24p
   -- The following flag is here so behaviour is consistent between different
   -- GHC versions (8.8 and later).  It makes no significant difference in
   -- runtime for this example.
-  , omitEarlyTests
+  , maxEarlyTests 0
   ]
 
 

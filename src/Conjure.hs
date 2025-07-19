@@ -155,7 +155,7 @@ module Conjure
   , dontRewrite
   , dontRequireDescent
   , omitAssortedPruning
-  , omitEarlyTests
+  , maxEarlyTests
   , dontCopyBindings
   , nonAtomicNumbers
   , uniqueCandidates

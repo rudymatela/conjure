@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* remove magic number (take 12) in keepBndn/keepBase:
-  replace `earlyTests` setting with `maxEarlyTests`;
-  setting `0` would mean no early tests.
-
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.
   This change will need to be done in LeanCheck itself.

@@ -40,7 +40,7 @@ module Conjure.Settings
   , dontRewrite
   , dontRequireDescent
   , omitAssortedPruning
-  , omitEarlyTests
+  , maxEarlyTests
   , dontCopyBindings
   , nonAtomicNumbers
   , uniqueCandidates
@@ -74,7 +74,7 @@ module Conjure.Settings
   , rewriteI
   , requireDescentI
   , assortedPruningI
-  , earlyTestsI
+  , maxEarlyTestsI
   , copyBindingsI
   , atomicNumbersI
   , uniqueCandidatesI
@@ -117,7 +117,7 @@ data Setting
   | DontRewrite          -- ^ turns off unique-modulo-rewriting candidates
   | DontRequireDescent   -- ^ require recursive calls to deconstruct arguments
   | OmitAssortedPruning  -- ^ omit other assorted pruning rules
-  | OmitEarlyTests       -- ^ don't perform tests early-and-independently on each binding
+  | MaxEarlyTests Int    -- ^ don't perform tests early-and-independently on each binding
   | DontCopyBindings     -- ^ don't copy partial definition bindings in candidates
   | AtomicNumbers        -- ^ restrict constant/ground numeric expressions to atoms
   | NonAtomicNumbers     -- ^ lift constant/ground numetic expression restrictions
@@ -379,14 +379,17 @@ omitAssortedPruning  =  setting OmitAssortedPruning
 assortedPruningI :: [Ingredient] -> Bool
 assortedPruningI is  =  null [False | OmitAssortedPruning <- map extract is]
 
--- | Omits early tests
+-- | Sets the maximum number of early tests
+--   performed independently bindings/equations
 --   when provided in the ingredient list
 --   of 'Conjure.conjure' or 'Conjure.conjureFromSpec'.
-omitEarlyTests :: Ingredient
-omitEarlyTests  =  setting OmitEarlyTests
+--
+--   When not set, this defaults to a modest 12.
+maxEarlyTests :: Int -> Ingredient
+maxEarlyTests  =  setting . MaxEarlyTests
 
-earlyTestsI :: [Ingredient] -> Bool
-earlyTestsI is  =  null [False | OmitEarlyTests <- map extract is]
+maxEarlyTestsI :: [Ingredient] -> Int
+maxEarlyTestsI is  =  headOr 12 [m | MaxEarlyTests m <- map extract is]
 
 -- | Disables the copy-bindings rule
 --   when provided in the ingredient list
