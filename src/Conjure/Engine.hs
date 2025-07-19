@@ -385,7 +385,7 @@ candidateExprs nm f is  =
 --   using pattern matching.
 candidateDefnsC :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefnsC nm f is =
-  ( discardT hasRedundant $ concatMapT fillingsFor fss
+  ( discardT hasRedundant $ concatMapT fillingsFor partialDefns
   , thy
   , mapT (map (,eh)) pats
   , deconstructions
@@ -393,7 +393,7 @@ candidateDefnsC nm f is =
   where
   pats | maxPatternSize > 0  =  take maxPatternSize $ conjurePats maxPatternDepth es nm f
        | otherwise           =                        conjurePats maxPatternDepth es nm f
-  fss  =  concatMapT ps2fss pats
+  partialDefns  =  concatMapT partialDefnsFromPats pats
   -- replaces the any guard symbol with a guard of the correct type
   ps  =  actual is  -- extract actual ingredients/primitives from the list
   es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ps]
@@ -441,12 +441,12 @@ candidateDefnsC nm f is =
     where
     (ys, ns)  =  partition (\(lhs,_) -> lhs `isInstanceOf` pat) ts
 
-  ps2fss :: [Expr] -> [[Defn]]
-  ps2fss pats  =  discardT isRedundant
-               .  products  -- alt: use delayedProducts
-               .  map (uncurry p2eess)
-               .  distritests etests
-               $  pats
+  partialDefnsFromPats :: [Expr] -> [[Defn]]
+  partialDefnsFromPats pats  =  discardT isRedundant
+                             .  products  -- alt: use delayedProducts
+                             .  map (uncurry p2eess)
+                             .  distritests etests
+                             $  pats
     -- delayedProducts makes the number of patterns counts as the size+1.
     where
     p2eess :: [(Expr,Expr)] -> Expr -> [[Bndn]]
