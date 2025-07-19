@@ -98,20 +98,20 @@ main = do
     , dontRequireDescent
     ]
 
-  -- found!  candidate #1703311 @ size 22
+  -- found!  candidate #353593 @ size 22 after ~30s
   -- merge [] xs  =  xs
   -- merge (x:xs) []  =  x:xs
   -- merge (x:xs) (y:ys)
   --   | x <= y  =  x:merge xs (y:ys)
   --   | otherwise  =  merge (y:x:xs) ys
-  -- set target to 2 000 000 to reach it
+  -- set target to 360 000 to reach it
   conjure "merge" merge'
     [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "<=" ((<=) :: Int -> Int -> Bool)
     , guard
     , maxTests 1080
-    , target 10080 -- set to 2 000 000 to reach solution
+    , target 3600  -- set to 360 000 to reach solution
     ]
 
   -- unreachable: needs about 26, but can only reach 16

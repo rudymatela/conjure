@@ -107,9 +107,7 @@ merge :: [Int] -> [Int] -> [Int]
 -- 434 candidates of size 14
 -- 461 candidates of size 15
 -- 2992 candidates of size 16
--- 2661 candidates of size 17
--- 13536 candidates of size 18
--- tested 20624 candidates
+-- tested 4427 candidates
 merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
