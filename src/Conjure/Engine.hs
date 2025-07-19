@@ -460,12 +460,10 @@ candidateDefnsC nm f is =
         [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
         | (lhs,rhs) <- take 12 tests -- TODO: remove magic number
         -- filter test bindings that match the current pattern:
-        , Just bs <- [lhs `matchArgs` pat]
-        , none (lhs `isInstanceOfArgs`) earlierPats
+        , let elhs = mappArgs exprExpr lhs
+        , Just bs <- [elhs `match` pat]
+        , none (elhs `isInstanceOf`) earlierPats
         ]
-      isInstanceOfArgs efxs efys  =  isJust $ matchArgs efxs efys
-      matchArgs efxs efys  =  fold (map exprExpr (drop 1 (unfoldApp efxs)))
-                      `match` fold               (drop 1 (unfoldApp efys))
 
       -- computes whether we should include a recurse for this given argument:
       -- 1. more than one LHS pattern overall

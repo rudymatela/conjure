@@ -3,6 +3,9 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* on `ps2fss`, classify tests earlier for use in keepBase:
+  distribute them to each pattern in order
+
 * remove magic number (take 12) in keepBndn/keepBase:
   replace `earlyTests` setting with `maxEarlyTests`;
   setting `0` would mean no early tests.
