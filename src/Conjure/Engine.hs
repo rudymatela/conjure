@@ -444,16 +444,16 @@ candidateDefnsC nm f is =
   partialDefnsFromPats :: [Expr] -> [[Defn]]
   partialDefnsFromPats pats  =  discardT isRedundant
                              .  products  -- alt: use delayedProducts
-                             .  map (uncurry p2eess)
+                             .  map (uncurry bindingsForPattern)
                              .  distritests etests
                              $  pats
     -- delayedProducts makes the number of patterns counts as the size+1.
     where
-    p2eess :: [(Expr,Expr)] -> Expr -> [[Bndn]]
+    bindingsForPattern :: [(Expr,Expr)] -> Expr -> [[Bndn]]
     -- the following guarded line is an optional optimization
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
-    p2eess ts pat
+    bindingsForPattern ts pat
       | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
       | otherwise  =  mapT (pat,)
                    .  filterT keepBase
