@@ -40,6 +40,8 @@ module Conjure.Expr
   , isGuard
   , hasGuard
   , mapInnerFirstOuterLast
+  , mappArgs
+  , mappFun
 
   , enumerateAppsFor
   , enumerateFillings
@@ -640,6 +642,20 @@ mapInnerFirstOuterLast f  =  m
   where
   m (ef :$ ex)  =  f (m ef :$ m ex)
   m e  =  f e
+
+-- TODO: move mappArgs to Express?
+mappArgs :: (Expr -> Expr) -> Expr -> Expr
+mappArgs f  =  m
+  where
+  m (ef :$ ex)  =  m ef :$ f ex
+  m e  =  e
+
+-- TODO: move mappFun to Express?
+mappFun :: (Expr -> Expr) -> Expr -> Expr
+mappFun f  =  m
+  where
+  m (ef :$ ex)  =  m ef :$ ex
+  m ef  =  f ef
 
 instance Express A where  expr  =  val
 instance Express B where  expr  =  val
