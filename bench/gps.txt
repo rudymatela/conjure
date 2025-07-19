@@ -448,16 +448,16 @@ gps24 :: [Char] -> Char
 -- testing 4 combinations of argument values
 -- pruning with 15/19 rules
 -- 1 candidates of size 1
--- 1 candidates of size 2
--- 0 candidates of size 3
+-- 2 candidates of size 2
+-- 3 candidates of size 3
 -- 2 candidates of size 4
--- 2 candidates of size 5
--- 2 candidates of size 6
--- 14 candidates of size 7
--- 25 candidates of size 8
--- 71 candidates of size 9
--- 176 candidates of size 10
--- tested 245 candidates
+-- 8 candidates of size 5
+-- 13 candidates of size 6
+-- 30 candidates of size 7
+-- 75 candidates of size 8
+-- 193 candidates of size 9
+-- 469 candidates of size 10
+-- tested 454 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]

@@ -816,6 +816,11 @@ gps24c  =  conjure "gps24" gps24p
   , fun "ord" ord
   , fun "chr" chr
   , fun "map" (map :: (Char -> Int) -> String -> [Int])
+
+  -- The following flag is here so behaviour is consistent between different
+  -- GHC versions (8.8 and later).  It makes no significant difference in
+  -- runtime for this example.
+  , omitEarlyTests
   ]
 
 
