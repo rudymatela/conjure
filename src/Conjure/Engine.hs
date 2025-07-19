@@ -468,8 +468,7 @@ candidateDefnsC nm f is =
       reallyKeepB e  =  and
         [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
         | (lhs,rhs) <- take 12 ts -- TODO: remove magic number
-        -- filter test bindings that match the current pattern:
-        , Just bs <- [lhs `match` pat]
+        , Just bs <- [lhs `match` pat]  -- always should match
         ]
 
       -- computes whether we should include a recurse for this given argument:
