@@ -2,6 +2,16 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* Improve pruning through early tests.
+* Replace `omitEarlyTests` by `maxEarlyTests`.
+* Limit the number of early tests to 12 by default (`maxEarlyTests`).
+* Fix overpruning in early tests.
+* Fefactor parts of `Engine.candidateDefnsC`.
+
+
 v0.7.4 (May 2025)
 -----------------
 
