@@ -4,12 +4,12 @@ subset :: [Int] -> [Int] -> Bool
 -- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 1 candidates of size 4
--- 14 candidates of size 5
+-- 0 candidates of size 4
+-- 13 candidates of size 5
 -- 0 candidates of size 6
--- 12 candidates of size 7
--- 177 candidates of size 8
--- tested 184 candidates
+-- 6 candidates of size 7
+-- 176 candidates of size 8
+-- tested 176 candidates
 subset [] xs  =  True
 subset (x:xs) ys  =  elem x ys && subset xs ys
 

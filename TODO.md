@@ -3,15 +3,14 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* on `ps2fss`, classify tests earlier for use in keepBase:
-  distribute them to each pattern in order
-
 * remove magic number (take 12) in keepBndn/keepBase:
   replace `earlyTests` setting with `maxEarlyTests`;
   setting `0` would mean no early tests.
 
 * rename `keepBase` to `keepBndn` or something of sorts,
   the previous name is outdated
+
+* refactor, simplify and  rename `ps2fss`, `p2eess` and `keepBase`.
 
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.

@@ -431,38 +431,44 @@ candidateDefnsC nm f is =
   isNumeric  =  conjureIsNumeric f
 
   (-==-)  =  conjureMkEquation f
+  etests  =  map (first (mappArgs exprExpr)) tests
   tests  =  conjureTestDefn maxTests maxSearchTests nm f
   exprExpr  =  conjureExpress f
+
+  distritests :: [(Expr,Expr)] -> [Expr] -> [([(Expr,Expr)],Expr)]
+  distritests _ []  =  []
+  distritests ts (pat:pats)  =  (ys, pat) : distritests ns pats
+    where
+    (ys, ns)  =  partition (\(lhs,_) -> lhs `isInstanceOf` pat) ts
 
   ps2fss :: [Expr] -> [[Defn]]
   ps2fss pats  =  discardT isRedundant
                .  products  -- alt: use delayedProducts
-               $  map p2eess pats
+               .  map (uncurry p2eess)
+               .  distritests etests
+               $  pats
     -- delayedProducts makes the number of patterns counts as the size+1.
     where
-    p2eess :: Expr -> [[Bndn]]
+    p2eess :: [(Expr,Expr)] -> Expr -> [[Bndn]]
     -- the following guarded line is an optional optimization
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
-    p2eess pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
-    p2eess pat  =  mapT (pat,)
-                .  filterT keepBase
-                .  appsWith pat
-                .  drop 1 -- this excludes the function name itself
-                $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
+    p2eess ts pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
+    p2eess ts pat  =  mapT (pat,)
+                   .  filterT keepBase
+                   .  appsWith pat
+                   .  drop 1 -- this excludes the function name itself
+                   $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
-      earlierPats  =  takeWhile (/= pat) pats
       keepBase
         | not earlyTests  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
         | otherwise  =  \e -> isNumeric eh && hasHole e || reallyKeepBase e
       reallyKeepBase e  =  and
         [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
-        | (lhs,rhs) <- take 12 tests -- TODO: remove magic number
+        | (lhs,rhs) <- take 12 ts -- TODO: remove magic number
         -- filter test bindings that match the current pattern:
-        , let elhs = mappArgs exprExpr lhs
-        , Just bs <- [elhs `match` pat]
-        , none (elhs `isInstanceOf`) earlierPats
+        , Just bs <- [lhs `match` pat]
         ]
 
       -- computes whether we should include a recurse for this given argument:

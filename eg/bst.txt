@@ -9,11 +9,11 @@ mem :: Int -> Tree -> Bool
 -- 0 candidates of size 6
 -- 0 candidates of size 7
 -- 24 candidates of size 8
--- 52 candidates of size 9
+-- 48 candidates of size 9
 -- 0 candidates of size 10
--- 192 candidates of size 11
+-- 180 candidates of size 11
 -- 80 candidates of size 12
--- tested 294 candidates
+-- tested 278 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 
@@ -29,10 +29,10 @@ mem :: Int -> Tree -> Bool
 -- 6 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 40 candidates of size 10
+-- 32 candidates of size 10
 -- 0 candidates of size 11
--- 192 candidates of size 12
--- tested 130 candidates
+-- 160 candidates of size 12
+-- tested 106 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  case x `compare` y of
                          LT -> mem x t1
@@ -133,9 +133,9 @@ union :: Tree -> Tree -> Tree
 -- 0 candidates of size 5
 -- 68 candidates of size 6
 -- 152 candidates of size 7
--- 102 candidates of size 8
+-- 82 candidates of size 8
 -- 2438 candidates of size 9
--- 4310 candidates of size 10
--- tested 7095 candidates
+-- 3970 candidates of size 10
+-- tested 6735 candidates
 union  =  undefined  -- search exhausted
 

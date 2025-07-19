@@ -96,18 +96,20 @@ merge :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 3
 -- 10 candidates of size 4
 -- 0 candidates of size 5
--- 16 candidates of size 6
+-- 6 candidates of size 6
 -- 13 candidates of size 7
--- 12 candidates of size 8
--- 150 candidates of size 9
--- 20 candidates of size 10
--- 459 candidates of size 11
--- 630 candidates of size 12
--- 1072 candidates of size 13
--- 4068 candidates of size 14
--- 3000 candidates of size 15
--- 17590 candidates of size 16
--- tested 27043 candidates
+-- 6 candidates of size 8
+-- 50 candidates of size 9
+-- 14 candidates of size 10
+-- 125 candidates of size 11
+-- 68 candidates of size 12
+-- 245 candidates of size 13
+-- 434 candidates of size 14
+-- 461 candidates of size 15
+-- 2992 candidates of size 16
+-- 2661 candidates of size 17
+-- 13536 candidates of size 18
+-- tested 20624 candidates
 merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
@@ -118,14 +120,15 @@ merge :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 3
 -- 6 candidates of size 4
 -- 0 candidates of size 5
--- 10 candidates of size 6
+-- 4 candidates of size 6
 -- 7 candidates of size 7
--- 8 candidates of size 8
--- 57 candidates of size 9
--- 48 candidates of size 10
--- 147 candidates of size 11
--- 346 candidates of size 12
--- 539 candidates of size 13
--- tested 1170 candidates
+-- 4 candidates of size 8
+-- 19 candidates of size 9
+-- 44 candidates of size 10
+-- 37 candidates of size 11
+-- 218 candidates of size 12
+-- 227 candidates of size 13
+-- 616 candidates of size 14
+-- tested 1184 candidates
 merge  =  undefined  -- search exhausted
 
