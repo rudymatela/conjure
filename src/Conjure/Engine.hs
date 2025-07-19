@@ -456,16 +456,16 @@ candidateDefnsC nm f is =
     bindingsForPattern ts pat
       | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
       | otherwise  =  mapT (pat,)
-                   .  filterT keepBase
+                   .  filterT keepB
                    .  appsWith pat
                    .  drop 1 -- this excludes the function name itself
                    $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
       where
-      keepBase
+      keepB
         | not earlyTests  =  const True
         | length pats < 2  =  const True  -- just one pat, test later
-        | otherwise  =  \e -> isNumeric eh && hasHole e || reallyKeepBase e
-      reallyKeepBase e  =  and
+        | otherwise  =  \e -> isNumeric eh && hasHole e || reallyKeepB e
+      reallyKeepB e  =  and
         [ errholeToTrue $ eval False $ (e //- bs) -==- rhs
         | (lhs,rhs) <- take 12 ts -- TODO: remove magic number
         -- filter test bindings that match the current pattern:
