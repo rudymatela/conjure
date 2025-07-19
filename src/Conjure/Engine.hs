@@ -453,8 +453,9 @@ candidateDefnsC nm f is =
     -- the following guarded line is an optional optimization
     -- if the function is defined for the given pattern,
     -- simply use its return value as the only possible result
-    p2eess ts pat | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
-    p2eess ts pat  =  mapT (pat,)
+    p2eess ts pat
+      | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
+      | otherwise  =  mapT (pat,)
                    .  filterT keepBase
                    .  appsWith pat
                    .  drop 1 -- this excludes the function name itself
