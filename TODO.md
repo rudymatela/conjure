@@ -16,6 +16,10 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Allow chains of guards (see below).
 
+* Prefer smaller recursive calls (see below).
+
+* Find most efficient of a given size (see below).
+
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
   This needs to be implemented on LeanCheck itself.
 
@@ -57,6 +61,42 @@ requiring a change in `enumerateAppsFor` relaxing `ufor hx`
 depending on what we have on the left...
 
 
+## Find the most efficient of a given size
+
+While evaluating candidates, we can count the number of matches in order to
+select the most efficient.  When actually conjuring, we always wait until the
+end of the current size to select the candidate with least evaluations.
+
+
+## Prefer candidates with smaller recursive calls
+
+For now, this is the solution found for `merge`:
+
+	merge [] xs  =  xs
+	merge (x:xs) []  =  x:xs
+	merge (x:xs) (y:ys)
+	  | x <= y  =  x:merge xs (y:ys)
+	  | otherwise  =  merge (y:x:xs) ys
+
+This is still of the `O(n)` complexity class, but there's a needless comparison
+in the otherwise clause.  When of the same overall size, Conjure should prefer
+candidates with smaller recursive calls like so:
+
+	| otherwise  =  y:merge (x:xs) ys
+
+In the enumeration itself, we should add a function `catconMapT` that would
+make the recursion fillings of `otherwise = _` appear later than the recursion
+fillings of `otherwise = y:_` when of the same size.  We perhaps need something
+like:
+
+	partialCands ++ forN partialCands
+
+The above is so we don't "delay" fully-defined non-recursive candidates.
+
+While I am at this, maybe partial candidates should be included in the final
+list of candidates, with its tests being skipped.
+
+
 ## Forbid recursion into negatives
 
 Instead of reporting:
@@ -78,6 +118,19 @@ Tentative steps:
    This may require changing the format definitions themselves...
 2. use this on `showDefn` somehow
 3. use this on `toDynamicWithDefn` somehow
+
+Alternative: include the guard as part of the pattern "internally".  As if we
+had a n+k pattern.  Like so:
+
+	tri 1  =  1
+	tri x@(_ + 2)  =  x + tri (x - 1)
+
+When displaying of course, we remove the n+k pattern.
+
+This can be done as early as enumerating the possible patterns and should make
+things easier in `keepB`.  The matching engine would have to be customized
+somehow.  Maybe an `@`-named operator can adopt a special meaning in `Express`?
+
 
 
 This file is part of Conjure,
