@@ -778,6 +778,14 @@ scrabble1  _   =   1 -- aeilnorstu
 
 gps22c :: IO ()
 gps22c  =  do
+  conjure "scrabble1" scrabble1 $
+    [ unfun (1 :: Int)
+    -- comment-out the following to find function
+    -- at size 137 after 1025 candidates in 6.0s
+    -- limited here for faster runtimes
+    , maxSize 13
+    ] ++ map unfun "dgbcmpfhvwykjxqz"
+
   conjureFromSpec "gps22" gps22s
     [ unfun (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)

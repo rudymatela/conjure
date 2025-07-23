@@ -429,6 +429,25 @@ gps21 :: [Int] -> [Int]
 gps21 []  =  []
 gps21 (x:xs)  =  (if x < 0 then 0 else x):gps21 xs
 
+scrabble1 :: Char -> Int
+-- testing 97 combinations of argument values
+-- pruning with 0/0 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 0 candidates of size 11
+-- 0 candidates of size 12
+-- 0 candidates of size 13
+-- tested 1 candidates
+scrabble1  =  undefined  -- search exhausted
+
 gps22 :: [Char] -> Int
 -- pruning with 5/9 rules
 -- 1 candidates of size 1
