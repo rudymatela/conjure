@@ -87,16 +87,16 @@ TerpreT benchmark #5: full adder
 
 fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- testing 8 combinations of argument values
--- pruning with 18/22 rules
+-- pruning with 72/90 rules
 -- 0 candidates of size 1
 -- 0 candidates of size 2
--- 9 candidates of size 3
--- 18 candidates of size 4
--- 27 candidates of size 5
--- 36 candidates of size 6
--- 45 candidates of size 7
--- 271 candidates of size 8
--- tested 406 candidates
+-- 25 candidates of size 3
+-- 60 candidates of size 4
+-- 126 candidates of size 5
+-- 348 candidates of size 6
+-- 999 candidates of size 7
+-- 7009 candidates of size 8
+-- tested 8567 candidates
 fadder False False False  =  (False,False)
 fadder False False True  =  (False,True)
 fadder False True False  =  (False,True)

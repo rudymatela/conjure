@@ -136,10 +136,7 @@ t5c :: IO ()
 t5c  =  do
   putStrLn "TerpreT benchmark #5: full adder\n"
 
-  -- using ingredients123 below works, but increases the runtime to 18 seconds
-  -- let's leave it commented out so runtime is faster when running automated tests
-  -- BENCHMARK: uncomment ingredients123
-  conjure "fadder" t5p $ -- ingredients123 ++
+  conjure "fadder" t5p $ ingredients123 ++
     [ fun "not" not
     , fun "," ((,) :: Bool -> Bool -> (Bool,Bool))
     , fun "==" ((==) :: Bool -> Bool -> Bool)
