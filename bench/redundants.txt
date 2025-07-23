@@ -600,6 +600,50 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
+    [] ?? xs  =  xs
+    (x:xs) ?? []  =  xs
+    (x:xs) ?? (y:ys)  =  xs ++ ys
+
+    [] ?? xs  =  xs
+    (x:xs) ?? []  =  xs
+    (x:xs) ?? (y:ys)  =  ys ++ xs
+
+
+class of 2 equivalent candidates:
+
+    [] ?? xs  =  xs
+    (x:xs) ?? []  =  []
+    (x:xs) ?? (y:ys)  =  xs ++ ys
+
+    [] ?? xs  =  xs
+    (x:xs) ?? []  =  []
+    (x:xs) ?? (y:ys)  =  ys ++ xs
+
+
+class of 2 equivalent candidates:
+
+    [] ?? xs  =  []
+    (x:xs) ?? []  =  xs
+    (x:xs) ?? (y:ys)  =  xs ++ ys
+
+    [] ?? xs  =  []
+    (x:xs) ?? []  =  xs
+    (x:xs) ?? (y:ys)  =  ys ++ xs
+
+
+class of 2 equivalent candidates:
+
+    [] ?? xs  =  []
+    (x:xs) ?? []  =  []
+    (x:xs) ?? (y:ys)  =  xs ++ ys
+
+    [] ?? xs  =  []
+    (x:xs) ?? []  =  []
+    (x:xs) ?? (y:ys)  =  ys ++ xs
+
+
+class of 2 equivalent candidates:
+
     [] ?? xs  =  []
     (x:xs) ?? []  =  xs
     (x:xs) ?? (y:ys)  =  xs ?? ys
@@ -629,50 +673,6 @@ class of 2 equivalent candidates:
     [] ?? []  =  []
     [] ?? (x:xs)  =  xs ?? []
     (x:xs) ?? ys  =  xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs ++ ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  xs ++ ys
-
-    [] ?? xs  =  xs
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  xs ++ ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  xs
-    (x:xs) ?? (y:ys)  =  ys ++ xs
-
-
-class of 2 equivalent candidates:
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  xs ++ ys
-
-    [] ?? xs  =  []
-    (x:xs) ?? []  =  []
-    (x:xs) ?? (y:ys)  =  ys ++ xs
 
 
 

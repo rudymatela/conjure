@@ -65,7 +65,7 @@ catMaybes :: [Maybe A] -> [A]
 -- 0 candidates of size 5
 -- 1 candidates of size 6
 -- 2 candidates of size 7
--- tested 3 candidates
+-- tested 4 candidates
 catMaybes []  =  []
 catMaybes (Nothing:mxs)  =  catMaybes mxs
 catMaybes (Just x:mxs)  =  x:catMaybes mxs

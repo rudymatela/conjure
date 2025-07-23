@@ -83,7 +83,7 @@ tell :: [Int] -> Int -> [Int]
 -- 328 candidates of size 8
 -- 134 candidates of size 9
 -- 3229 candidates of size 10
--- tested 783 candidates
+-- tested 3444 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -165,7 +165,7 @@ gps10 :: [Int] -> Int
 -- 1428 candidates of size 7
 -- 432 candidates of size 8
 -- 30712 candidates of size 9
--- tested 7064 candidates
+-- tested 7028 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
@@ -235,7 +235,7 @@ gps16_middle :: [Char] -> [Char]
 -- 391 candidates of size 10
 -- 993 candidates of size 11
 -- 2480 candidates of size 12
--- tested 1821 candidates
+-- tested 3577 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
                         then c:cs
@@ -359,7 +359,7 @@ gps24 :: [Char] -> Twitter
 -- 216 candidates of size 10
 -- 308 candidates of size 11
 -- 466 candidates of size 12
--- tested 881 candidates
+-- tested 763 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)  =  if 140 > length cs
                  then Tweet (length (c:cs))

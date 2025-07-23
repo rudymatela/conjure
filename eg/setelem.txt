@@ -9,7 +9,7 @@ elem :: Int -> [Int] -> Bool
 -- 0 candidates of size 6
 -- 0 candidates of size 7
 -- 16 candidates of size 8
--- tested 19 candidates
+-- tested 11 candidates
 elem x []  =  False
 elem x (y:xs)  =  x == y || elem x xs
 

@@ -21,7 +21,7 @@ sum :: [Int] -> Int
 -- 2 candidates of size 3
 -- 3 candidates of size 4
 -- 5 candidates of size 5
--- tested 9 candidates
+-- tested 13 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -33,7 +33,7 @@ sum (x:xs)  =  x + sum xs
 -- 31 candidates of size 4
 -- 94 candidates of size 5
 -- 225 candidates of size 6
--- tested 212 candidates
+-- tested 283 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

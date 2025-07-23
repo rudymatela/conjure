@@ -222,7 +222,7 @@ gps12 :: [Int] -> Int
 -- 416 candidates of size 9
 -- 956 candidates of size 10
 -- 3073 candidates of size 11
--- tested 4404 candidates
+-- tested 1596 candidates
 gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
 
 gps13 :: [Ratio Integer] -> Ratio Integer
@@ -236,7 +236,7 @@ gps13 :: [Ratio Integer] -> Ratio Integer
 -- 12 candidates of size 6
 -- 63 candidates of size 7
 -- 95 candidates of size 8
--- tested 173 candidates
+-- tested 114 candidates
 gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 
 odd :: Int -> Bool
@@ -307,7 +307,7 @@ gps17 :: Int -> Int
 -- 147 candidates of size 7
 -- 8 candidates of size 8
 -- 941 candidates of size 9
--- tested 199 candidates
+-- tested 1034 candidates
 gps17 0  =  0
 gps17 x  =  x * x + gps17 (x - 1)
 
@@ -323,7 +323,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- 114 candidates of size 7
 -- 72 candidates of size 8
 -- 481 candidates of size 9
--- tested 593 candidates
+-- tested 250 candidates
 gps18 [] xs  =  xs
 gps18 (x:xs) []  =  xs
 gps18 (x:xs) (y:ys)  =  x + y:gps18 xs ys
@@ -335,7 +335,7 @@ gps18 :: [Int] -> [Int] -> [Int]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 10 candidates of size 4
--- tested 10 candidates
+-- tested 4 candidates
 gps18  =  zipWith (+)
 
 gps19 :: Int -> [Char] -> [Char]
@@ -396,7 +396,7 @@ pig1 :: [Char] -> [Char]
 -- 3459 candidates of size 12
 -- 6361 candidates of size 13
 -- 20207 candidates of size 14
--- tested 27628 candidates
+-- tested 22834 candidates
 pig1 ""  =  "ay"
 pig1 (c:cs)  =  if isVowel c
                 then (c:cs) ++ "ay"
@@ -476,7 +476,7 @@ gps24 :: [Char] -> Char
 -- 75 candidates of size 8
 -- 193 candidates of size 9
 -- 469 candidates of size 10
--- tested 454 candidates
+-- tested 383 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]
@@ -548,7 +548,7 @@ gps29 :: [Char] -> Int
 -- 10 candidates of size 7
 -- 8 candidates of size 8
 -- 24 candidates of size 9
--- tested 36 candidates
+-- tested 34 candidates
 gps29 ""  =  0
 gps29 (c:cs)  =  (if isVowel c then 1 else 0) + gps29 cs
 

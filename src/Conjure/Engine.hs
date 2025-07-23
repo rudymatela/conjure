@@ -385,7 +385,8 @@ candidateExprs nm f is  =
 --   using pattern matching.
 candidateDefnsC :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
 candidateDefnsC nm f is =
-  ( discardT hasRedundant $ concatMapT fillingsFor partialDefns
+  ( discardT hasRedundant $ catconMapT fillingsFor partialDefns
+  -- above we catconMapT to prefer smaller recursive calls
   , thy
   , mapT (map (,eh)) pats
   , deconstructions
@@ -712,3 +713,9 @@ errholeToTrue p  =  case errorToLeft p of
                     Right q -> q
                     Left "conjureResultHole: placeholder for recursive call?" -> True
                     Left _ -> False
+
+
+catconMapT :: (a -> [[b]]) -> [[a]] -> [[b]]
+catconMapT f  =  foldr (\+:/) [] . map (foldr (\/) []) . mapT f
+  where
+  xss \+:/ yss  =  ([]:yss) \/ xss

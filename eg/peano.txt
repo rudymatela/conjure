@@ -6,9 +6,9 @@
 -- 3 candidates of size 3
 -- 13 candidates of size 4
 -- 19 candidates of size 5
--- tested 23 candidates
+-- tested 26 candidates
 p + Z  =  p
-p + S q  =  S p + q
+p + S q  =  S (p + q)
 
 (*) :: Peano -> Peano -> Peano
 -- testing 7 combinations of argument values
@@ -19,7 +19,7 @@ p + S q  =  S p + q
 -- 6 candidates of size 4
 -- 25 candidates of size 5
 -- 63 candidates of size 6
--- tested 55 candidates
+-- tested 56 candidates
 p * Z  =  Z
 p * S q  =  p + p * q
 

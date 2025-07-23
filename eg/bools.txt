@@ -29,7 +29,7 @@ and :: [Bool] -> Bool
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
--- tested 6 candidates
+-- tested 4 candidates
 and  =  foldr (&&) True
 
 or :: [Bool] -> Bool
@@ -39,6 +39,6 @@ or :: [Bool] -> Bool
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
--- tested 5 candidates
+-- tested 3 candidates
 or  =  foldr (||) False
 

@@ -9,7 +9,7 @@ sum :: [Int] -> Int
 -- 1 candidates of size 3
 -- 2 candidates of size 4
 -- 7 candidates of size 5
--- tested 7 candidates
+-- tested 11 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 
@@ -20,7 +20,7 @@ sum :: [Int] -> Int
 -- 3 candidates of size 3
 -- 10 candidates of size 4
 -- 18 candidates of size 5
--- tested 21 candidates
+-- tested 33 candidates
 sum []  =  0
 sum (x:xs)  =  x + sum xs
 

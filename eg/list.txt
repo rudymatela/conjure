@@ -20,7 +20,7 @@ reverse :: [Int] -> [Int]
 -- 2 candidates of size 5
 -- 1 candidates of size 6
 -- 4 candidates of size 7
--- tested 8 candidates
+-- tested 9 candidates
 reverse []  =  []
 reverse (x:xs)  =  reverse xs ++ [x]
 
@@ -33,7 +33,7 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- 10 candidates of size 4
 -- 25 candidates of size 5
 -- 24 candidates of size 6
--- tested 46 candidates
+-- tested 40 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 
@@ -44,7 +44,7 @@ reverse (x:xs)  =  reverse xs ++ [x]
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 14 candidates of size 4
--- tested 16 candidates
+-- tested 6 candidates
 xs ++ ys  =  foldr (:) ys xs
 
 last :: [Int] -> Int
@@ -72,7 +72,7 @@ last :: [Int] -> Int
 -- 1 candidates of size 4
 -- 2 candidates of size 5
 -- 2 candidates of size 6
--- tested 5 candidates
+-- tested 6 candidates
 last []  =  undefined
 last [x]  =  x
 last (x:y:xs)  =  last (y:xs)
@@ -103,7 +103,7 @@ zip (x:xs) (y:ys)  =  (x,y):zip xs ys
 -- 10 candidates of size 4
 -- 25 candidates of size 5
 -- 24 candidates of size 6
--- tested 48 candidates
+-- tested 42 candidates
 [] \/ xs  =  xs
 (x:xs) \/ ys  =  x:ys \/ xs
 
@@ -121,7 +121,7 @@ ordered :: [Int] -> Bool
 -- 25 candidates of size 9
 -- 55 candidates of size 10
 -- 103 candidates of size 11
--- tested 156 candidates
+-- tested 169 candidates
 ordered []  =  True
 ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
 

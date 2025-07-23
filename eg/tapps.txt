@@ -16,7 +16,7 @@ product :: [Int] -> Int
 -- 1 candidates of size 3
 -- 2 candidates of size 4
 -- 10 candidates of size 5
--- tested 12 candidates
+-- tested 16 candidates
 product []  =  1
 product (x:xs)  =  x * product xs
 

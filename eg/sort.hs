@@ -86,8 +86,10 @@ main = do
     , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     ]
 
-  -- if we disable the descent requirement, we get the efficient qsort
-  -- though with a larger search space
+  -- if we disable the descent requirement and carry on,
+  -- we eventually get the efficient qsort
+  -- with a larger search space
+  {-
   conjure "qsort" sort'
     [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
@@ -96,7 +98,9 @@ main = do
     , fun ">"  ((>)  :: Int -> Int -> Bool)
     , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
     , dontRequireDescent
+    , carryOn
     ]
+  -}
 
   -- found!  candidate #353593 @ size 22 after ~30s
   -- merge [] xs  =  xs

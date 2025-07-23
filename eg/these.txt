@@ -90,7 +90,7 @@ cathis :: [These A B] -> [A]
 -- 6 candidates of size 9
 -- 5 candidates of size 10
 -- 9 candidates of size 11
--- tested 15 candidates
+-- tested 23 candidates
 cathis []  =  []
 cathis (Neither:ts)  =  cathis ts
 cathis (This x:ts)  =  x:cathis ts

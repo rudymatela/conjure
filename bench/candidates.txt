@@ -998,48 +998,6 @@ x ? y  =  0
 x ? 0  =  0
 x ? y  =  x
 
-x ? 0  =  x
-x ? y  =  x ? dec y
-
-x ? 0  =  x
-x ? y  =  y ? dec x
-
-x ? 0  =  x
-x ? y  =  y ? dec y
-
-x ? 0  =  x
-x ? y  =  0 ? dec y
-
-x ? 0  =  x
-x ? y  =  dec x ? x
-
-x ? 0  =  x
-x ? y  =  dec x ? y
-
-x ? 0  =  x
-x ? y  =  dec y ? x
-
-0 ? x  =  x
-x ? y  =  x ? dec y
-
-0 ? x  =  x
-x ? y  =  y ? dec x
-
-0 ? x  =  x
-x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? y  =  dec x ? x
-
-0 ? x  =  x
-x ? y  =  dec x ? y
-
-0 ? x  =  x
-x ? y  =  dec x ? 0
-
-0 ? x  =  x
-x ? y  =  dec y ? x
-
 x ? y  =  dec (dec (x * x))
 
 x ? y  =  dec (dec (x * y))
@@ -1610,6 +1568,48 @@ x ? y  =  x
 0 ? x  =  dec x
 x ? y  =  dec x
 
+x ? 0  =  x
+x ? y  =  x ? dec y
+
+x ? 0  =  x
+x ? y  =  y ? dec x
+
+x ? 0  =  x
+x ? y  =  y ? dec y
+
+x ? 0  =  x
+x ? y  =  0 ? dec y
+
+x ? 0  =  x
+x ? y  =  dec x ? x
+
+x ? 0  =  x
+x ? y  =  dec x ? y
+
+x ? 0  =  x
+x ? y  =  dec y ? x
+
+0 ? x  =  x
+x ? y  =  x ? dec y
+
+0 ? x  =  x
+x ? y  =  y ? dec x
+
+0 ? x  =  x
+x ? y  =  y ? dec y
+
+0 ? x  =  x
+x ? y  =  dec x ? x
+
+0 ? x  =  x
+x ? y  =  dec x ? y
+
+0 ? x  =  x
+x ? y  =  dec x ? 0
+
+0 ? x  =  x
+x ? y  =  dec y ? x
+
 
 
 allowed patterns:
@@ -1689,6 +1689,8 @@ goo (x:xs)  =  [x]
 goo []  =  []
 goo (x:xs)  =  xs ++ xs
 
+goo xs  =  xs ++ (xs ++ xs)
+
 goo []  =  []
 goo (x:xs)  =  x:goo xs
 
@@ -1697,11 +1699,6 @@ goo (x:xs)  =  xs ++ goo xs
 
 goo []  =  []
 goo (x:xs)  =  goo xs ++ xs
-
-goo xs  =  xs ++ (xs ++ xs)
-
-goo []  =  []
-goo (x:xs)  =  goo xs ++ goo xs
 
 goo []  =  []
 goo (x:xs)  =  x:x:xs
@@ -1720,6 +1717,9 @@ goo (x:xs)  =  xs ++ [x]
 
 goo []  =  []
 goo (x:xs)  =  xs ++ (xs ++ xs)
+
+goo []  =  []
+goo (x:xs)  =  goo xs ++ goo xs
 
 
 
@@ -1866,36 +1866,6 @@ xs ?? ys  =  ys ++ ys
 (x:xs) ?? ys  =  []
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? xs
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  [] ?? xs
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  [] ?? ys
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? ys
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? []
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ?? []
-
-xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs
 
 xs ?? []  =  xs
@@ -2001,6 +1971,364 @@ xs ?? (x:ys)  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  []
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? ys
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? xs
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [] ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? ys  =  ys ?? []
+
+xs ?? ys  =  xs ++ (xs ++ xs)
+
+xs ?? ys  =  xs ++ (xs ++ ys)
+
+xs ?? ys  =  xs ++ (ys ++ xs)
+
+xs ?? ys  =  xs ++ (ys ++ ys)
+
+xs ?? ys  =  ys ++ (xs ++ xs)
+
+xs ?? ys  =  ys ++ (xs ++ ys)
+
+xs ?? ys  =  ys ++ (ys ++ xs)
+
+xs ?? ys  =  ys ++ (ys ++ ys)
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs ++ xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  x:xs
+(x:xs) ?? ys  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  [x]
+(x:xs) ?? ys  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? ys  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? ys  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ++ xs
+(x:xs) ?? ys  =  []
 
 [] ?? xs  =  xs
 (x:xs) ?? []  =  xs
@@ -2166,375 +2494,421 @@ xs ?? (x:ys)  =  []
 [] ?? (x:xs)  =  [] ?? xs
 (x:xs) ?? ys  =  ys
 
-xs ?? ys  =  xs ++ (xs ++ xs)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:x:xs
 
-xs ?? ys  =  xs ++ (xs ++ ys)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:x:ys
 
-xs ?? ys  =  xs ++ (ys ++ xs)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  [x,x]
 
-xs ?? ys  =  xs ++ (ys ++ ys)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:(xs ++ xs)
 
-xs ?? ys  =  ys ++ (xs ++ xs)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:(xs ++ ys)
 
-xs ?? ys  =  ys ++ (xs ++ ys)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:(ys ++ xs)
 
-xs ?? ys  =  ys ++ (ys ++ xs)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  x:(ys ++ ys)
 
-xs ?? ys  =  ys ++ (ys ++ ys)
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ (x:xs)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ (x:ys)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ [x]
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ (xs ++ xs)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ (xs ++ ys)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ (ys ++ xs)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  xs ++ (ys ++ ys)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ (x:xs)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ (x:ys)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ [x]
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ (xs ++ xs)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ (xs ++ ys)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ (ys ++ xs)
+
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ++ (ys ++ ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:x:xs
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:x:ys
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  [x,x]
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:(xs ++ xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:(xs ++ ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:(ys ++ xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  x:(ys ++ ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ (x:xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ (x:ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ [x]
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ (xs ++ xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ (xs ++ ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ (ys ++ xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  xs ++ (ys ++ ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ (x:xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ (x:ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ [x]
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ (xs ++ xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ (xs ++ ys)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ (ys ++ xs)
+
+xs ?? []  =  []
+xs ?? (x:ys)  =  ys ++ (ys ++ ys)
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  x:xs
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  x:ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  [x]
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  xs ++ ys
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  ys ++ xs
+
+xs ?? []  =  xs ++ xs
+xs ?? (x:ys)  =  ys ++ ys
+
+xs ?? []  =  xs ++ (xs ++ xs)
+xs ?? (x:ys)  =  xs
+
+xs ?? []  =  xs ++ (xs ++ xs)
+xs ?? (x:ys)  =  ys
+
+xs ?? []  =  xs ++ (xs ++ xs)
+xs ?? (x:ys)  =  []
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:xs
+(x:xs) ?? ys  =  x:x:xs
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:ys
+(x:xs) ?? ys  =  x:x:ys
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [x]
+(x:xs) ?? ys  =  [x,x]
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:xs
+(x:xs) ?? ys  =  x:(xs ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:ys
+(x:xs) ?? ys  =  x:(xs ++ ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [y]
+(x:xs) ?? ys  =  x:(ys ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ xs
+(x:xs) ?? ys  =  x:(ys ++ ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ ys
+(x:xs) ?? ys  =  xs ++ (x:xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ xs
+(x:xs) ?? ys  =  xs ++ (x:ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ ys
+(x:xs) ?? ys  =  xs ++ [x]
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:xs
+(x:xs) ?? ys  =  xs ++ (xs ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:ys
+(x:xs) ?? ys  =  xs ++ (xs ++ ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [x]
+(x:xs) ?? ys  =  xs ++ (ys ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:xs
+(x:xs) ?? ys  =  xs ++ (ys ++ ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:ys
+(x:xs) ?? ys  =  ys ++ (x:xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [y]
+(x:xs) ?? ys  =  ys ++ (x:ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ xs
+(x:xs) ?? ys  =  ys ++ [x]
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ ys
+(x:xs) ?? ys  =  ys ++ (xs ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ xs
+(x:xs) ?? ys  =  ys ++ (xs ++ ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ ys
+(x:xs) ?? ys  =  ys ++ (ys ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  ys ++ (ys ++ ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:xs
+(x:xs) ?? ys  =  x:x:xs
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:ys
+(x:xs) ?? ys  =  x:x:ys
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [x]
+(x:xs) ?? ys  =  [x,x]
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:xs
+(x:xs) ?? ys  =  x:(xs ++ xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:ys
+(x:xs) ?? ys  =  x:(xs ++ ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [y]
+(x:xs) ?? ys  =  x:(ys ++ xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ xs
+(x:xs) ?? ys  =  x:(ys ++ ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ ys
+(x:xs) ?? ys  =  xs ++ (x:xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ xs
+(x:xs) ?? ys  =  xs ++ (x:ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ ys
+(x:xs) ?? ys  =  xs ++ [x]
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:xs
+(x:xs) ?? ys  =  xs ++ (xs ++ xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  x:ys
+(x:xs) ?? ys  =  xs ++ (xs ++ ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [x]
+(x:xs) ?? ys  =  xs ++ (ys ++ xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:xs
+(x:xs) ?? ys  =  xs ++ (ys ++ ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  y:ys
+(x:xs) ?? ys  =  ys ++ (x:xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  [y]
+(x:xs) ?? ys  =  ys ++ (x:ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ xs
+(x:xs) ?? ys  =  ys ++ [x]
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ++ ys
+(x:xs) ?? ys  =  ys ++ (xs ++ xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ xs
+(x:xs) ?? ys  =  ys ++ (xs ++ ys)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ++ ys
+(x:xs) ?? ys  =  ys ++ (ys ++ xs)
 
 [] ?? xs  =  []
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  ys ++ (ys ++ ys)
 
 [] ?? xs  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
 (x:xs) ?? ys  =  x:xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  x:ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  [x]
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  xs ++ xs
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  xs ++ ys
 
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
+[] ?? xs  =  xs ++ xs
 (x:xs) ?? ys  =  ys ++ xs
 
+[] ?? xs  =  xs ++ (xs ++ xs)
+(x:xs) ?? ys  =  xs
+
+[] ?? xs  =  xs ++ (xs ++ xs)
+(x:xs) ?? ys  =  ys
+
+[] ?? xs  =  xs ++ (xs ++ xs)
+(x:xs) ?? ys  =  []
+
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
-(x:xs) ?? ys  =  ys ++ ys
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  x:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [x]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  y:ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  [y]
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ++ ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  x:xs
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  [x]
+(x:xs) ?? (y:ys)  =  []
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? []  =  xs ++ xs
+(x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  x:xs
-(x:xs) ?? ys  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  x:xs
-(x:xs) ?? ys  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? ys  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [x]
-(x:xs) ?? ys  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  [x]
-(x:xs) ?? ys  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? ys  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? ys  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys
 
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? ys  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? ys  =  []
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (x:xs) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (x:ys) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  [x] ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (xs ++ xs) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (xs ++ ys) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (ys ++ xs) ?? ys
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  (ys ++ ys) ?? ys
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? (x:xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? (x:ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? [x]
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? (xs ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? (xs ++ ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? (ys ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ?? (ys ++ ys)
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  []
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs ?? ys
@@ -2967,420 +3341,46 @@ xs ?? (x:ys)  =  [] ?? ys
 (x:xs) ?? (y:ys)  =  []
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:x:xs
+xs ?? (x:ys)  =  (x:xs) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:x:ys
+xs ?? (x:ys)  =  (x:ys) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  [x,x]
+xs ?? (x:ys)  =  [x] ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:(xs ++ xs)
+xs ?? (x:ys)  =  (xs ++ xs) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:(xs ++ ys)
+xs ?? (x:ys)  =  (xs ++ ys) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:(ys ++ xs)
+xs ?? (x:ys)  =  (ys ++ xs) ?? ys
 
 xs ?? []  =  xs
-xs ?? (x:ys)  =  x:(ys ++ ys)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ (x:xs)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ (x:ys)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ [x]
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ (xs ++ xs)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ (xs ++ ys)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ (ys ++ xs)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  xs ++ (ys ++ ys)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ (x:xs)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ (x:ys)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ [x]
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ (xs ++ xs)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ (xs ++ ys)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ (ys ++ xs)
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ++ (ys ++ ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:x:xs
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:x:ys
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  [x,x]
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:(xs ++ xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:(xs ++ ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:(ys ++ xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  x:(ys ++ ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ (x:xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ (x:ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ [x]
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ (xs ++ xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ (xs ++ ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ (ys ++ xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  xs ++ (ys ++ ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ (x:xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ (x:ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ [x]
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ (xs ++ xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ (xs ++ ys)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ (ys ++ xs)
-
-xs ?? []  =  []
-xs ?? (x:ys)  =  ys ++ (ys ++ ys)
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  x:xs
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  x:ys
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  [x]
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  xs ++ ys
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  ys ++ xs
-
-xs ?? []  =  xs ++ xs
-xs ?? (x:ys)  =  ys ++ ys
-
-xs ?? []  =  xs ++ (xs ++ xs)
-xs ?? (x:ys)  =  xs
-
-xs ?? []  =  xs ++ (xs ++ xs)
-xs ?? (x:ys)  =  ys
-
-xs ?? []  =  xs ++ (xs ++ xs)
-xs ?? (x:ys)  =  []
+xs ?? (x:ys)  =  (ys ++ ys) ?? ys
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  x:x:xs
+(x:xs) ?? ys  =  xs ?? (x:xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  x:x:ys
+(x:xs) ?? ys  =  xs ?? (x:ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  [x,x]
+(x:xs) ?? ys  =  xs ?? [x]
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  x:(xs ++ xs)
+(x:xs) ?? ys  =  xs ?? (xs ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  x:(xs ++ ys)
+(x:xs) ?? ys  =  xs ?? (xs ++ ys)
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  x:(ys ++ xs)
+(x:xs) ?? ys  =  xs ?? (ys ++ xs)
 
 [] ?? xs  =  xs
-(x:xs) ?? ys  =  x:(ys ++ ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ (x:xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ (x:ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ [x]
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ (xs ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ (xs ++ ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ (ys ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  xs ++ (ys ++ ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ (x:xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ (x:ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ [x]
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ (xs ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ (xs ++ ys)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ (ys ++ xs)
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ++ (ys ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  x:x:xs
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  x:x:ys
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  [x,x]
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  x:(xs ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  x:(xs ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  x:(ys ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  x:(ys ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ (x:xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ (x:ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ [x]
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ (xs ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ (xs ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ (ys ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  xs ++ (ys ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ (x:xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ (x:ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ [x]
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ (xs ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ (xs ++ ys)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ (ys ++ xs)
-
-[] ?? xs  =  []
-(x:xs) ?? ys  =  ys ++ (ys ++ ys)
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  x:xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  x:ys
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  [x]
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  xs ++ xs
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  xs ++ ys
-
-[] ?? xs  =  xs ++ xs
-(x:xs) ?? ys  =  ys ++ xs
-
-[] ?? xs  =  xs ++ (xs ++ xs)
-(x:xs) ?? ys  =  xs
-
-[] ?? xs  =  xs ++ (xs ++ xs)
-(x:xs) ?? ys  =  ys
-
-[] ?? xs  =  xs ++ (xs ++ xs)
-(x:xs) ?? ys  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  x:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [x]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  y:ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  [y]
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ++ ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  x:xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  [x]
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? []  =  xs ++ xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  x:xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  [x]
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ++ xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  []
+(x:xs) ?? ys  =  xs ?? (ys ++ ys)
 
 
 
@@ -4521,6 +4521,912 @@ gcd x 0  =  0
 gcd x y  =  x
 
 gcd x 0  =  x
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x 0  =  x
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd x 0  =  x
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd x 0  =  0
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x 0  =  x `mod` x
+gcd x y  =  x `mod` y
+
+gcd x 0  =  x `mod` x
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y `mod` x
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y `mod` y
+
+gcd x 0  =  x `mod` x
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  x `mod` x
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  x `mod` x
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  x `mod` x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y `mod` x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y `mod` y
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  0 `mod` x
+
+gcd x 0  =  x `mod` 0
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x `mod` x
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x `mod` y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  x `mod` 0
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  y `mod` y
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  y `mod` 0
+
+gcd x 0  =  0 `mod` x
+gcd x y  =  0 `mod` y
+
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  x
+
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  y
+
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  0
+
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd x 0  =  x `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  x `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  x `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd x 0  =  0 `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd x 0  =  0 `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd x 0  =  0 `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd 0 x  =  x
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd 0 x  =  x
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (x `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (x `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (y `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (0 `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  x `mod` (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (x `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (x `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (y `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (0 `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  y `mod` (0 `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (x `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (x `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (x `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (y `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (y `mod` y)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (y `mod` 0)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (0 `mod` x)
+
+gcd 0 x  =  0
+gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  x `mod` x
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  x `mod` y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  x `mod` 0
+gcd x y  =  0 `mod` y
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  x `mod` x
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  x `mod` 0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y `mod` x
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y `mod` y
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  y `mod` 0
+
+gcd 0 x  =  0 `mod` x
+gcd x y  =  0 `mod` x
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd 0 x  =  x `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  x `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  x `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (x `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (x `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (x `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (x `mod` 0)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (x `mod` 0)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (x `mod` 0)
+gcd x y  =  0
+
+gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  x
+
+gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  y
+
+gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd x 0  =  x
 gcd x y  =  gcd x (x `mod` y)
 
 gcd x 0  =  x
@@ -4603,912 +5509,6 @@ gcd x y  =  gcd (y `mod` x) 0
 
 gcd 0 x  =  x
 gcd x y  =  gcd (y `mod` y) x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (x `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (x `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (x `mod` 0)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (y `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (y `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (y `mod` 0)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (0 `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  x `mod` (0 `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (x `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (x `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (x `mod` 0)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (y `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (y `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (y `mod` 0)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (0 `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  y `mod` (0 `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (x `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (x `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (x `mod` 0)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (y `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (y `mod` y)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (y `mod` 0)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (0 `mod` x)
-
-gcd x 0  =  x
-gcd x y  =  0 `mod` (0 `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd x 0  =  0
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd x 0  =  0
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (x `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (x `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (x `mod` 0)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (y `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (y `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (y `mod` 0)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (0 `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  x `mod` (0 `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (x `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (x `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (x `mod` 0)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (y `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (y `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (y `mod` 0)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (0 `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  y `mod` (0 `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (x `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (x `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (x `mod` 0)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (y `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (y `mod` y)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (y `mod` 0)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (0 `mod` x)
-
-gcd x 0  =  0
-gcd x y  =  0 `mod` (0 `mod` y)
-
-gcd x 0  =  x `mod` x
-gcd x y  =  x `mod` y
-
-gcd x 0  =  x `mod` x
-gcd x y  =  x `mod` 0
-
-gcd x 0  =  x `mod` x
-gcd x y  =  y `mod` x
-
-gcd x 0  =  x `mod` x
-gcd x y  =  y `mod` y
-
-gcd x 0  =  x `mod` x
-gcd x y  =  y `mod` 0
-
-gcd x 0  =  x `mod` x
-gcd x y  =  0 `mod` x
-
-gcd x 0  =  x `mod` x
-gcd x y  =  0 `mod` y
-
-gcd x 0  =  x `mod` 0
-gcd x y  =  x `mod` x
-
-gcd x 0  =  x `mod` 0
-gcd x y  =  y `mod` x
-
-gcd x 0  =  x `mod` 0
-gcd x y  =  y `mod` y
-
-gcd x 0  =  x `mod` 0
-gcd x y  =  y `mod` 0
-
-gcd x 0  =  x `mod` 0
-gcd x y  =  0 `mod` x
-
-gcd x 0  =  x `mod` 0
-gcd x y  =  0 `mod` y
-
-gcd x 0  =  0 `mod` x
-gcd x y  =  x `mod` x
-
-gcd x 0  =  0 `mod` x
-gcd x y  =  x `mod` y
-
-gcd x 0  =  0 `mod` x
-gcd x y  =  x `mod` 0
-
-gcd x 0  =  0 `mod` x
-gcd x y  =  y `mod` y
-
-gcd x 0  =  0 `mod` x
-gcd x y  =  y `mod` 0
-
-gcd x 0  =  0 `mod` x
-gcd x y  =  0 `mod` y
-
-gcd x 0  =  (x `mod` x) `mod` x
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` x) `mod` x
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` x) `mod` x
-gcd x y  =  0
-
-gcd x 0  =  (x `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` x) `mod` 0
-gcd x y  =  0
-
-gcd x 0  =  (x `mod` 0) `mod` x
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` 0) `mod` x
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` 0) `mod` x
-gcd x y  =  0
-
-gcd x 0  =  (x `mod` 0) `mod` 0
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` 0) `mod` 0
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` 0) `mod` 0
-gcd x y  =  0
-
-gcd x 0  =  (0 `mod` x) `mod` x
-gcd x y  =  x
-
-gcd x 0  =  (0 `mod` x) `mod` x
-gcd x y  =  y
-
-gcd x 0  =  (0 `mod` x) `mod` x
-gcd x y  =  0
-
-gcd x 0  =  (0 `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd x 0  =  (0 `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd x 0  =  (0 `mod` x) `mod` 0
-gcd x y  =  0
-
-gcd x 0  =  x `mod` (x `mod` x)
-gcd x y  =  x
-
-gcd x 0  =  x `mod` (x `mod` x)
-gcd x y  =  y
-
-gcd x 0  =  x `mod` (x `mod` x)
-gcd x y  =  0
-
-gcd x 0  =  x `mod` (x `mod` 0)
-gcd x y  =  x
-
-gcd x 0  =  x `mod` (x `mod` 0)
-gcd x y  =  y
-
-gcd x 0  =  x `mod` (x `mod` 0)
-gcd x y  =  0
-
-gcd x 0  =  x `mod` (0 `mod` x)
-gcd x y  =  x
-
-gcd x 0  =  x `mod` (0 `mod` x)
-gcd x y  =  y
-
-gcd x 0  =  x `mod` (0 `mod` x)
-gcd x y  =  0
-
-gcd x 0  =  0 `mod` (x `mod` x)
-gcd x y  =  x
-
-gcd x 0  =  0 `mod` (x `mod` x)
-gcd x y  =  y
-
-gcd x 0  =  0 `mod` (x `mod` x)
-gcd x y  =  0
-
-gcd x 0  =  0 `mod` (x `mod` 0)
-gcd x y  =  x
-
-gcd x 0  =  0 `mod` (x `mod` 0)
-gcd x y  =  y
-
-gcd x 0  =  0 `mod` (x `mod` 0)
-gcd x y  =  0
-
-gcd x 0  =  0 `mod` (0 `mod` x)
-gcd x y  =  x
-
-gcd x 0  =  0 `mod` (0 `mod` x)
-gcd x y  =  y
-
-gcd x 0  =  0 `mod` (0 `mod` x)
-gcd x y  =  0
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (x `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (x `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (x `mod` 0)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (y `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (y `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (y `mod` 0)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (0 `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  x `mod` (0 `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (x `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (x `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (x `mod` 0)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (y `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (y `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (y `mod` 0)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (0 `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  y `mod` (0 `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (x `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (x `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (x `mod` 0)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (y `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (y `mod` y)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (y `mod` 0)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (0 `mod` x)
-
-gcd 0 x  =  x
-gcd x y  =  0 `mod` (0 `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd 0 x  =  0
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd 0 x  =  0
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (x `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (x `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (x `mod` 0)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (y `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (y `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (y `mod` 0)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (0 `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  x `mod` (0 `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (x `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (x `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (x `mod` 0)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (y `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (y `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (y `mod` 0)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (0 `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  y `mod` (0 `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (x `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (x `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (x `mod` 0)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (y `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (y `mod` y)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (y `mod` 0)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (0 `mod` x)
-
-gcd 0 x  =  0
-gcd x y  =  0 `mod` (0 `mod` y)
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  x `mod` x
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  x `mod` y
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  x `mod` 0
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  y `mod` x
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  y `mod` 0
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  0 `mod` x
-
-gcd 0 x  =  x `mod` x
-gcd x y  =  0 `mod` y
-
-gcd 0 x  =  x `mod` 0
-gcd x y  =  x `mod` x
-
-gcd 0 x  =  x `mod` 0
-gcd x y  =  x `mod` y
-
-gcd 0 x  =  x `mod` 0
-gcd x y  =  x `mod` 0
-
-gcd 0 x  =  x `mod` 0
-gcd x y  =  y `mod` y
-
-gcd 0 x  =  x `mod` 0
-gcd x y  =  0 `mod` x
-
-gcd 0 x  =  x `mod` 0
-gcd x y  =  0 `mod` y
-
-gcd 0 x  =  0 `mod` x
-gcd x y  =  x `mod` x
-
-gcd 0 x  =  0 `mod` x
-gcd x y  =  x `mod` 0
-
-gcd 0 x  =  0 `mod` x
-gcd x y  =  y `mod` x
-
-gcd 0 x  =  0 `mod` x
-gcd x y  =  y `mod` y
-
-gcd 0 x  =  0 `mod` x
-gcd x y  =  y `mod` 0
-
-gcd 0 x  =  0 `mod` x
-gcd x y  =  0 `mod` x
-
-gcd 0 x  =  (x `mod` x) `mod` x
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` x) `mod` x
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` x) `mod` x
-gcd x y  =  0
-
-gcd 0 x  =  (x `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` x) `mod` 0
-gcd x y  =  0
-
-gcd 0 x  =  (x `mod` 0) `mod` x
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` 0) `mod` x
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` 0) `mod` x
-gcd x y  =  0
-
-gcd 0 x  =  (x `mod` 0) `mod` 0
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` 0) `mod` 0
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` 0) `mod` 0
-gcd x y  =  0
-
-gcd 0 x  =  (0 `mod` x) `mod` x
-gcd x y  =  x
-
-gcd 0 x  =  (0 `mod` x) `mod` x
-gcd x y  =  y
-
-gcd 0 x  =  (0 `mod` x) `mod` x
-gcd x y  =  0
-
-gcd 0 x  =  (0 `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd 0 x  =  (0 `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd 0 x  =  (0 `mod` x) `mod` 0
-gcd x y  =  0
-
-gcd 0 x  =  x `mod` (x `mod` x)
-gcd x y  =  x
-
-gcd 0 x  =  x `mod` (x `mod` x)
-gcd x y  =  y
-
-gcd 0 x  =  x `mod` (x `mod` x)
-gcd x y  =  0
-
-gcd 0 x  =  x `mod` (x `mod` 0)
-gcd x y  =  x
-
-gcd 0 x  =  x `mod` (x `mod` 0)
-gcd x y  =  y
-
-gcd 0 x  =  x `mod` (x `mod` 0)
-gcd x y  =  0
-
-gcd 0 x  =  x `mod` (0 `mod` x)
-gcd x y  =  x
-
-gcd 0 x  =  x `mod` (0 `mod` x)
-gcd x y  =  y
-
-gcd 0 x  =  x `mod` (0 `mod` x)
-gcd x y  =  0
-
-gcd 0 x  =  0 `mod` (x `mod` x)
-gcd x y  =  x
-
-gcd 0 x  =  0 `mod` (x `mod` x)
-gcd x y  =  y
-
-gcd 0 x  =  0 `mod` (x `mod` x)
-gcd x y  =  0
-
-gcd 0 x  =  0 `mod` (x `mod` 0)
-gcd x y  =  x
-
-gcd 0 x  =  0 `mod` (x `mod` 0)
-gcd x y  =  y
-
-gcd 0 x  =  0 `mod` (x `mod` 0)
-gcd x y  =  0
-
-gcd 0 x  =  0 `mod` (0 `mod` x)
-gcd x y  =  x
-
-gcd 0 x  =  0 `mod` (0 `mod` x)
-gcd x y  =  y
-
-gcd 0 x  =  0 `mod` (0 `mod` x)
-gcd x y  =  0
 
 
 

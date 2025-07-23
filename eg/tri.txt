@@ -8,7 +8,7 @@ tri :: Int -> Int
 -- 10 candidates of size 5
 -- 0 candidates of size 6
 -- 41 candidates of size 7
--- tested 18 candidates
+-- tested 53 candidates
 tri 1  =  1
 tri x  =  x + tri (x - 1)
 

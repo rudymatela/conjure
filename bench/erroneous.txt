@@ -138,6 +138,30 @@ x ? y  =  x ? dec y
 -- 1 ? 0  =  bottom  -- and 16 other errors
 
 x ? 0  =  x
+x ? y  =  dec (dec x ? y)
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  0
+x ? y  =  dec (dec x ? y)
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+x ? 0  =  dec x
+x ? y  =  dec x ? y
+-- 0 ? 1  =  bottom  -- and 16 other errors
+
+0 ? x  =  x
+x ? y  =  dec (x ? dec y)
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  0
+x ? y  =  dec (x ? dec y)
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+0 ? x  =  dec x
+x ? y  =  x ? dec y
+-- 1 ? 0  =  bottom  -- and 16 other errors
+
+x ? 0  =  x
 x ? y  =  x ? dec (dec y)
 -- 0 ? 1  =  bottom  -- and 9 other errors
 
@@ -208,30 +232,6 @@ x ? y  =  dec (dec x) ? 0
 0 ? x  =  x
 x ? y  =  dec (dec y) ? x
 -- 1 ? 0  =  bottom  -- and 6 other errors
-
-x ? 0  =  x
-x ? y  =  dec (dec x ? y)
--- 0 ? 1  =  bottom  -- and 16 other errors
-
-x ? 0  =  0
-x ? y  =  dec (dec x ? y)
--- 0 ? 1  =  bottom  -- and 16 other errors
-
-x ? 0  =  dec x
-x ? y  =  dec x ? y
--- 0 ? 1  =  bottom  -- and 16 other errors
-
-0 ? x  =  x
-x ? y  =  dec (x ? dec y)
--- 1 ? 0  =  bottom  -- and 16 other errors
-
-0 ? x  =  0
-x ? y  =  dec (x ? dec y)
--- 1 ? 0  =  bottom  -- and 16 other errors
-
-0 ? x  =  dec x
-x ? y  =  x ? dec y
--- 1 ? 0  =  bottom  -- and 16 other errors
 
 
 Erroneous candidates for: goo :: [Int] -> [Int]

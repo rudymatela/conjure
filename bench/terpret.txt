@@ -38,7 +38,7 @@ decrement :: [Bool] -> [Bool]
 -- 16 candidates of size 7
 -- 4 candidates of size 8
 -- 36 candidates of size 9
--- tested 39 candidates
+-- tested 69 candidates
 decrement []  =  []
 decrement (p:ps)  =  not p:(if p then ps else decrement ps)
 
@@ -156,7 +156,7 @@ decrelements :: [Int] -> [Int]
 -- 4 candidates of size 5
 -- 6 candidates of size 6
 -- 10 candidates of size 7
--- tested 16 candidates
+-- tested 25 candidates
 decrelements []  =  []
 decrelements (x:xs)  =  x - 1:decrelements xs
 

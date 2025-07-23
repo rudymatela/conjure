@@ -8,7 +8,7 @@ bitsum :: Int -> Int
 -- 19 candidates of size 5
 -- 56 candidates of size 6
 -- 152 candidates of size 7
--- tested 122 candidates
+-- tested 216 candidates
 bitsum 0  =  0
 bitsum x  =  parity x + bitsum (halve x)
 
@@ -24,7 +24,7 @@ bitsum :: Int -> Int
 -- 4297 candidates of size 7
 -- 72 candidates of size 8
 -- 85204 candidates of size 9
--- tested 5242 candidates
+-- tested 88942 candidates
 bitsum 0  =  0
 bitsum x  =  x `mod` 2 + bitsum (x `div` 2)
 

@@ -13,7 +13,7 @@ fibonacci :: Int -> Int
 -- 92 candidates of size 10
 -- 2298 candidates of size 11
 -- 542 candidates of size 12
--- tested 3067 candidates
+-- tested 3531 candidates
 fibonacci 0  =  1
 fibonacci 1  =  1
 fibonacci x  =  fibonacci (x - 1) + fibonacci (x - 2)

@@ -13,7 +13,7 @@ mem :: Int -> Tree -> Bool
 -- 0 candidates of size 10
 -- 180 candidates of size 11
 -- 80 candidates of size 12
--- tested 278 candidates
+-- tested 274 candidates
 mem x Leaf  =  False
 mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
 

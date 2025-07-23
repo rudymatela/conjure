@@ -317,51 +317,6 @@ foo 0  =  1
 foo 1  =  1
 foo x  =  0 - x
 
-foo 0  =  0
-foo x  =  x + foo (x - 1)
-
-foo 0  =  0
-foo x  =  foo (x - 1) + 1
-
-foo 0  =  0
-foo x  =  x * foo (x - 1)
-
-foo 0  =  0
-foo x  =  x - foo (x - 1)
-
-foo 0  =  0
-foo x  =  foo (x - 1) - x
-
-foo 0  =  0
-foo x  =  foo (x - 1) - 1
-
-foo 0  =  0
-foo x  =  1 - foo (x - 1)
-
-foo 0  =  1
-foo x  =  x + foo (x - 1)
-
-foo 0  =  1
-foo x  =  foo (x - 1) + 1
-
-foo 0  =  1
-foo x  =  x * foo (x - 1)
-
-foo 0  =  1
-foo x  =  x - foo (x - 1)
-
-foo 0  =  1
-foo x  =  foo (x - 1) - x
-
-foo 0  =  1
-foo x  =  foo (x - 1) - 1
-
-foo 0  =  1
-foo x  =  0 - foo (x - 1)
-
-foo 0  =  1
-foo x  =  1 - foo (x - 1)
-
 foo x  =  x * (x + x) - 1
 
 foo x  =  x * (x * x) - 1
@@ -550,6 +505,51 @@ foo x  =  1 - (x + x)
 
 foo 1  =  1
 foo x  =  1 - x * x
+
+foo 0  =  0
+foo x  =  x + foo (x - 1)
+
+foo 0  =  0
+foo x  =  foo (x - 1) + 1
+
+foo 0  =  0
+foo x  =  x * foo (x - 1)
+
+foo 0  =  0
+foo x  =  x - foo (x - 1)
+
+foo 0  =  0
+foo x  =  foo (x - 1) - x
+
+foo 0  =  0
+foo x  =  foo (x - 1) - 1
+
+foo 0  =  0
+foo x  =  1 - foo (x - 1)
+
+foo 0  =  1
+foo x  =  x + foo (x - 1)
+
+foo 0  =  1
+foo x  =  foo (x - 1) + 1
+
+foo 0  =  1
+foo x  =  x * foo (x - 1)
+
+foo 0  =  1
+foo x  =  x - foo (x - 1)
+
+foo 0  =  1
+foo x  =  foo (x - 1) - x
+
+foo 0  =  1
+foo x  =  foo (x - 1) - 1
+
+foo 0  =  1
+foo x  =  0 - foo (x - 1)
+
+foo 0  =  1
+foo x  =  1 - foo (x - 1)
 
 
 Unique candidates for: ? :: Int -> Int -> Int
@@ -905,36 +905,6 @@ x ? y  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x
-
-x ? 0  =  x
-x ? y  =  y ? dec x
-
-x ? 0  =  x
-x ? y  =  y ? dec y
-
-x ? 0  =  x
-x ? y  =  dec x ? x
-
-x ? 0  =  x
-x ? y  =  dec x ? y
-
-x ? 0  =  x
-x ? y  =  dec y ? x
-
-0 ? x  =  x
-x ? y  =  x ? dec y
-
-0 ? x  =  x
-x ? y  =  y ? dec x
-
-0 ? x  =  x
-x ? y  =  y ? dec y
-
-0 ? x  =  x
-x ? y  =  dec x ? x
-
-0 ? x  =  x
-x ? y  =  dec y ? x
 
 x ? y  =  dec (dec (x * x))
 
@@ -1476,6 +1446,36 @@ x ? y  =  x
 0 ? x  =  dec x
 x ? y  =  dec x
 
+x ? 0  =  x
+x ? y  =  y ? dec x
+
+x ? 0  =  x
+x ? y  =  y ? dec y
+
+x ? 0  =  x
+x ? y  =  dec x ? x
+
+x ? 0  =  x
+x ? y  =  dec x ? y
+
+x ? 0  =  x
+x ? y  =  dec y ? x
+
+0 ? x  =  x
+x ? y  =  x ? dec y
+
+0 ? x  =  x
+x ? y  =  y ? dec x
+
+0 ? x  =  x
+x ? y  =  y ? dec y
+
+0 ? x  =  x
+x ? y  =  dec x ? x
+
+0 ? x  =  x
+x ? y  =  dec y ? x
+
 
 Unique candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
@@ -1505,13 +1505,13 @@ goo (x:xs)  =  [x]
 goo []  =  []
 goo (x:xs)  =  xs ++ xs
 
+goo xs  =  xs ++ (xs ++ xs)
+
 goo []  =  []
 goo (x:xs)  =  xs ++ goo xs
 
 goo []  =  []
 goo (x:xs)  =  goo xs ++ xs
-
-goo xs  =  xs ++ (xs ++ xs)
 
 goo []  =  []
 goo (x:xs)  =  x:x:xs
@@ -1530,6 +1530,8 @@ goo (x:xs)  =  xs ++ [x]
 
 goo []  =  []
 goo (x:xs)  =  xs ++ (xs ++ xs)
+
+goo xs  =  xs ++ (xs ++ (xs ++ xs))
 
 goo []  =  []
 goo (x:xs)  =  x:x:goo xs
@@ -1557,8 +1559,6 @@ goo (x:xs)  =  goo xs ++ [x]
 
 goo []  =  []
 goo (x:xs)  =  goo xs ++ (xs ++ xs)
-
-goo xs  =  xs ++ (xs ++ (xs ++ xs))
 
 
 Unique candidates for: ?? :: [Int] -> [Int] -> [Int]
@@ -1655,12 +1655,6 @@ xs ?? ys  =  ys ++ ys
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs
 (x:xs) ?? ys  =  []
-
-xs ?? []  =  xs
-xs ?? (x:ys)  =  ys ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? ys  =  ys ?? xs
 
 xs ?? []  =  xs
 xs ?? (x:ys)  =  x:xs
@@ -1763,61 +1757,11 @@ xs ?? (x:ys)  =  []
 (x:xs) ?? []  =  xs
 (x:xs) ?? (y:ys)  =  []
 
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? []
+xs ?? []  =  xs
+xs ?? (x:ys)  =  ys ?? xs
 
 [] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? []
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? xs  =  xs
-(x:xs) ?? []  =  []
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  xs ?? ys
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs
-(x:xs) ?? (y:ys)  =  ys ?? xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  xs
-
-[] ?? xs  =  []
-(x:xs) ?? []  =  xs ?? xs
-(x:xs) ?? (y:ys)  =  ys
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
 (x:xs) ?? ys  =  ys ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs
-(x:xs) ?? ys  =  [] ?? xs
-
-[] ?? []  =  []
-[] ?? (x:xs)  =  xs ?? xs
-(x:xs) ?? ys  =  xs
 
 xs ?? ys  =  xs ++ (xs ++ xs)
 
@@ -2102,6 +2046,62 @@ xs ?? ys  =  ys ++ (ys ++ ys)
 [] ?? []  =  []
 [] ?? (x:xs)  =  xs ++ xs
 (x:xs) ?? ys  =  []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? []
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  xs
+(x:xs) ?? []  =  []
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  xs ?? ys
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs
+(x:xs) ?? (y:ys)  =  ys ?? xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  xs
+
+[] ?? xs  =  []
+(x:xs) ?? []  =  xs ?? xs
+(x:xs) ?? (y:ys)  =  ys
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  ys ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs
+(x:xs) ?? ys  =  [] ?? xs
+
+[] ?? []  =  []
+[] ?? (x:xs)  =  xs ?? xs
+(x:xs) ?? ys  =  xs
 
 
 Unique candidates for: ton :: Bool -> Bool

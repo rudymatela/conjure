@@ -6,7 +6,7 @@ sort :: [Int] -> [Int]
 -- 2 candidates of size 3
 -- 7 candidates of size 4
 -- 14 candidates of size 5
--- tested 15 candidates
+-- tested 25 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
@@ -40,11 +40,11 @@ insert :: Int -> [Int] -> [Int]
 -- 22 candidates of size 15
 -- 0 candidates of size 16
 -- 22 candidates of size 17
--- tested 53 candidates
+-- tested 45 candidates
 insert x []  =  [x]
 insert x (y:xs)
-  | x <= y  =  x:insert y xs
-  | otherwise  =  y:insert x xs
+  | y <= x  =  y:insert x xs
+  | otherwise  =  x:y:xs
 
 qsort :: [Int] -> [Int]
 -- testing 360 combinations of argument values
@@ -63,30 +63,9 @@ qsort :: [Int] -> [Int]
 -- 187 candidates of size 12
 -- 474 candidates of size 13
 -- 915 candidates of size 14
--- tested 1225 candidates
+-- tested 1619 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
-
-qsort :: [Int] -> [Int]
--- testing 360 combinations of argument values
--- pruning with 8/8 rules
--- 2 candidates of size 1
--- 0 candidates of size 2
--- 1 candidates of size 3
--- 0 candidates of size 4
--- 2 candidates of size 5
--- 3 candidates of size 6
--- 6 candidates of size 7
--- 22 candidates of size 8
--- 38 candidates of size 9
--- 122 candidates of size 10
--- 267 candidates of size 11
--- 625 candidates of size 12
--- 1636 candidates of size 13
--- 3505 candidates of size 14
--- tested 3377 candidates
-qsort []  =  []
-qsort (x:xs)  =  qsort (filter (x >) xs) ++ (x:qsort (filter (x <=) xs))
 
 merge :: [Int] -> [Int] -> [Int]
 -- testing 1080 combinations of argument values

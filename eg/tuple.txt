@@ -54,7 +54,7 @@ pairwise :: [A] -> [(A,A)]
 -- 5 candidates of size 7
 -- 11 candidates of size 8
 -- 17 candidates of size 9
--- tested 21 candidates
+-- tested 32 candidates
 pairwise []  =  []
 pairwise (x:xs)  =  (x,head xs):pairwise (tail xs)
 
@@ -70,7 +70,7 @@ catpairs :: [(A,A)] -> [A]
 -- 17 candidates of size 7
 -- 35 candidates of size 8
 -- 72 candidates of size 9
--- tested 94 candidates
+-- tested 103 candidates
 catpairs []  =  []
 catpairs (xy:xys)  =  fst xy:snd xy:catpairs xys
 
@@ -85,7 +85,7 @@ pairwise :: [A] -> [(A,A)]
 -- 0 candidates of size 6
 -- 5 candidates of size 7
 -- 14 candidates of size 8
--- tested 11 candidates
+-- tested 18 candidates
 pairwise []  =  []
 pairwise [x]  =  []
 pairwise (x:y:xs)  =  (x,y):pairwise xs
@@ -101,7 +101,7 @@ catpairs :: [(A,A)] -> [A]
 -- 12 candidates of size 6
 -- 23 candidates of size 7
 -- 48 candidates of size 8
--- tested 73 candidates
+-- tested 82 candidates
 catpairs []  =  []
 catpairs ((x,y):xys)  =  x:y:catpairs xys
 

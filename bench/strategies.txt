@@ -9,7 +9,7 @@ factorial :: Int -> Int
 -- 18 candidates of size 5
 -- 0 candidates of size 6
 -- 67 candidates of size 7
--- tested 37 candidates
+-- tested 88 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -24,7 +24,7 @@ factorial :: Int -> Int
 -- 23 candidates of size 5
 -- 0 candidates of size 6
 -- 147 candidates of size 7
--- tested 43 candidates
+-- tested 173 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -39,7 +39,7 @@ factorial :: Int -> Int
 -- 270 candidates of size 5
 -- 0 candidates of size 6
 -- 5572 candidates of size 7
--- tested 313 candidates
+-- tested 5848 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -54,7 +54,7 @@ factorial :: Int -> Int
 -- 23 candidates of size 5
 -- 0 candidates of size 6
 -- 232 candidates of size 7
--- tested 96 candidates
+-- tested 226 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -69,7 +69,7 @@ factorial :: Int -> Int
 -- 25 candidates of size 5
 -- 1 candidates of size 6
 -- 148 candidates of size 7
--- tested 46 candidates
+-- tested 176 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -84,7 +84,7 @@ factorial :: Int -> Int
 -- 35 candidates of size 5
 -- 6 candidates of size 6
 -- 284 candidates of size 7
--- tested 160 candidates
+-- tested 244 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -99,7 +99,7 @@ factorial :: Int -> Int
 -- 272 candidates of size 5
 -- 1 candidates of size 6
 -- 5573 candidates of size 7
--- tested 316 candidates
+-- tested 5851 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -114,7 +114,7 @@ factorial :: Int -> Int
 -- 270 candidates of size 5
 -- 0 candidates of size 6
 -- 6090 candidates of size 7
--- tested 661 candidates
+-- tested 6196 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
@@ -129,7 +129,7 @@ factorial :: Int -> Int
 -- 300 candidates of size 5
 -- 15 candidates of size 6
 -- 6645 candidates of size 7
--- tested 1246 candidates
+-- tested 6241 candidates
 factorial 0  =  1
 factorial x  =  x * factorial (x - 1)
 
