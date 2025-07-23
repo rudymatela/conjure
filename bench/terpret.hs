@@ -41,7 +41,7 @@ ingredients123  =
   , unfun ([] :: [Bool])
   , fun ":" ((:) :: Bool -> [Bool] -> [Bool])
 --, fun "map" (map :: (Bool -> Bool) -> [Bool] -> [Bool])
-  , iif (undefined :: [Bool])
+  , guard
   ]
 
 
@@ -110,13 +110,13 @@ t4c  =  do
 
   conjure "cshift" t4p1 $ ingredients123 ++
     [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
-    , iif (undefined :: (Bool,Bool,Bool))
+    , guard
     , target 50400
     ]
 
   conjure "cshift" t4p2 $ ingredients123 ++
     [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
-    , iif (undefined :: (Bool,Bool,Bool))
+    , guard
     ]
 
 
@@ -144,7 +144,7 @@ t5c  =  do
     , fun "," ((,) :: Bool -> Bool -> (Bool,Bool))
     , fun "==" ((==) :: Bool -> Bool -> Bool)
 --  , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
-    , iif (undefined :: (Bool,Bool))
+    , guard
     ]
 -- the printed function is weird, but correct
 -- fadder p q r  =  if p == q then (p,r) else (r,not r)
@@ -165,7 +165,7 @@ t6c  =  do
     [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
     , fun "==" ((==) :: Bool -> Bool -> Bool)
     , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
-    , iif (undefined :: (Bool,Bool,Bool))
+    , guard
     , maxSize 6
     ]
 

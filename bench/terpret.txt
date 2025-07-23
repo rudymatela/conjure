@@ -37,36 +37,39 @@ decrement :: [Bool] -> [Bool]
 -- 1 candidates of size 6
 -- 16 candidates of size 7
 -- 4 candidates of size 8
--- 36 candidates of size 9
--- tested 69 candidates
+-- 35 candidates of size 9
+-- 13 candidates of size 10
+-- tested 73 candidates
 decrement []  =  []
-decrement (p:ps)  =  not p:(if p then ps else decrement ps)
+decrement (p:ps)
+  | p  =  False:ps
+  | otherwise  =  True:decrement ps
 
 TerpreT benchmark #4: controlled shift
 
 cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
--- pruning with 41/51 rules
+-- pruning with 37/47 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 10 candidates of size 4
+-- 12 candidates of size 4
 -- 125 candidates of size 5
 -- 225 candidates of size 6
--- 625 candidates of size 7
+-- 649 candidates of size 7
 -- 1242 candidates of size 8
 -- 3087 candidates of size 9
--- 8937 candidates of size 10
--- 102200 candidates of size 11
--- tested 39710 candidates
-cshift (p,q,r)  =  if p
-                   then (p,r,q)
-                   else (p,q,r)
+-- 8833 candidates of size 10
+-- 180325 candidates of size 11
+-- tested 39632 candidates
+cshift (p,q,r)
+  | p  =  (p,r,q)
+  | otherwise  =  (p,q,r)
 
 cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
--- pruning with 41/51 rules
+-- pruning with 37/47 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- 0 candidates of size 1
 -- 0 candidates of size 2
@@ -107,7 +110,7 @@ TerpreT benchmark #6: 2-bit adder
 
 adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 5 combinations of argument values
--- pruning with 74/92 rules
+-- pruning with 70/88 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- 0 candidates of size 1
 -- 0 candidates of size 2
