@@ -389,18 +389,18 @@ pig1 :: [Char] -> [Char]
 -- 13 candidates of size 5
 -- 28 candidates of size 6
 -- 46 candidates of size 7
--- 125 candidates of size 8
--- 200 candidates of size 9
--- 625 candidates of size 10
--- 1066 candidates of size 11
--- 3459 candidates of size 12
--- 6361 candidates of size 13
--- 20207 candidates of size 14
--- tested 22834 candidates
+-- 115 candidates of size 8
+-- 176 candidates of size 9
+-- 437 candidates of size 10
+-- 698 candidates of size 11
+-- 1679 candidates of size 12
+-- 2787 candidates of size 13
+-- 6383 candidates of size 14
+-- tested 8436 candidates
 pig1 ""  =  "ay"
-pig1 (c:cs)  =  if isVowel c
-                then (c:cs) ++ "ay"
-                else cs ++ (c:"ay")
+pig1 (c:cs)
+  | isVowel c  =  (c:cs) ++ "ay"
+  | otherwise  =  cs ++ (c:"ay")
 
 gps20c :: [Char] -> [Char]
 -- pruning with 1/1 rules
@@ -546,9 +546,12 @@ gps29 :: [Char] -> Int
 -- 2 candidates of size 5
 -- 6 candidates of size 6
 -- 10 candidates of size 7
--- 8 candidates of size 8
--- 24 candidates of size 9
--- tested 34 candidates
+-- 4 candidates of size 8
+-- 12 candidates of size 9
+-- 18 candidates of size 10
+-- tested 41 candidates
 gps29 ""  =  0
-gps29 (c:cs)  =  (if isVowel c then 1 else 0) + gps29 cs
+gps29 (c:cs)
+  | isVowel c  =  1 + gps29 cs
+  | otherwise  =  gps29 cs
 

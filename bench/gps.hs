@@ -361,7 +361,7 @@ gps10c  =  do
     , fun "<" ((<) :: Integer -> Integer -> Bool)
 --  , fun "numerator" (numerator :: Rational -> Integer)
 --  , fun "denominator" (denominator :: Rational -> Integer)
-    , iif (undefined :: Rational)
+    , guard
     ]
 
   -- simplified background
@@ -519,7 +519,7 @@ gps14c  =  do
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     , fun "==" ((==) :: Int -> Int -> Bool)
-    , iif (undefined :: Int)
+    , guard
     ]
 
 
@@ -704,7 +704,7 @@ gps20c  =  do
 
   conjureFromSpec "pig1" pig1Spec
     [ unfun "ay"
-    , iif (undefined :: String)
+    , guard
     , fun "isVowel" isVowel
     , fun "++" ((++) :: String -> String -> String)
     , fun ":" ((:) :: Char -> String -> String)
@@ -954,7 +954,7 @@ gps29c  =  conjureFromSpec "gps29" gps29s
   [ unfun (0 :: Int)
   , unfun (1 :: Int)
   , fun "+" ((+) :: Int->Int->Int)
-  , iif (undefined :: Int)
+  , guard
   , fun "isVowel" isVowel
   ]
 
