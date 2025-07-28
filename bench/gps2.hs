@@ -551,21 +551,30 @@ gps17g xs  =  pds xs
 
 -- can generate at size 15 in 6
 -- setting limit of 5 for faster automated tests
--- BENCHMARK: increase maxSize from 5 to 18
+-- BENCHMARK: increase maxSize from 6 to 18
 gps17c :: IO ()
-gps17c  =  conjure "gps17_pds" gps17p
-  [ unfun (0 :: Int)
-  , guard
-  , fun "not" not
-  , fun "null" (null :: [Int] -> Bool)
-  , fun "==" ((==) :: Int -> Int -> Bool)
-  , fun "head" (head :: [Int] -> Int)
-  , fun "+" ((+) :: Int -> Int -> Int)
-  , fun "&&" (&&)
-  , maxSize 5
-  ]
+gps17c  =  do
+  conjure "gps17_pds" gps17p
+    [ unfun (0 :: Int)
+    , guard
+    , fun "not" not
+    , fun "null" (null :: [Int] -> Bool)
+    , fun "==" ((==) :: Int -> Int -> Bool)
+    , fun "head" (head :: [Int] -> Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "&&" (&&)
+    , maxSize 6 -- 18
+    ]
 
-  -- TODO: alt with maxPatternDepth
+  -- OOM after size 16, unreachable by increasing pattern depth
+  conjure "gps17_pds" gps17p
+    [ unfun (0 :: Int)
+    , guard
+    , fun "==" ((==) :: Int -> Int -> Bool)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , maxPatternDepth 2
+    , maxSize 6 -- 18
+    ]
 
 
 gps18p :: [Double] -> [Double] -> Double

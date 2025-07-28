@@ -249,7 +249,20 @@ gps17_pds :: [Int] -> Int
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 2 candidates of size 5
--- tested 4 candidates
+-- 4 candidates of size 6
+-- tested 8 candidates
+gps17_pds  =  undefined  -- search exhausted
+
+gps17_pds :: [Int] -> Int
+-- testing 9 combinations of argument values
+-- pruning with 13/19 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 1 candidates of size 4
+-- 4 candidates of size 5
+-- 8 candidates of size 6
+-- tested 14 candidates
 gps17_pds  =  undefined  -- search exhausted
 
 gps18_price :: [Double] -> [Double] -> Double
