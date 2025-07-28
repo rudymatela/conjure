@@ -15,6 +15,10 @@ import Test.LeanCheck                             -- for #24
 import Data.Express                               -- for #24
 
 
+-- PSB2 #1 -- Basement (AoC) ---
+-- Given a vector of integers, return the first index such that the sum of all
+-- integers from the start of the vector to the index (inclusive) is negative
+
 gps1p :: [Int] -> Maybe Int
 gps1p [0,-1,2]   =  Just 1
 gps1p [-1,0,1]   =  Just 0
@@ -76,6 +80,8 @@ gps1c  =  do
     , maxEquationSize 4
     ]
 
+
+-- PSB2 #2 -- Bouncing Balls (CW) --
 
 gps2p :: Double -> Double -> Int -> Double
 gps2p 2 1 1  =  2 + 1
@@ -510,6 +516,11 @@ gps16c  =  conjure "gps16_middle" gps16p
   -- update: it is enumerated, but somehow does not passes the tests, why?
   ]
 
+
+-- PSB2 #17 -- Paired Digits (AoC) --
+-- Given a string of digits,
+-- return the sum of the digits
+-- whose following digit are the same.
 
 -- TODO: document and re-do
 gps17p :: [Int] -> Int
