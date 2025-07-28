@@ -242,7 +242,7 @@ gps16_middle (c:cs)  =  if length cs <= 1
                         else gps16_middle (init cs)
 
 gps17_pds :: [Int] -> Int
--- testing 5 combinations of argument values
+-- testing 9 combinations of argument values
 -- pruning with 29/40 rules
 -- 1 candidates of size 1
 -- 1 candidates of size 2

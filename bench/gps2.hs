@@ -521,14 +521,21 @@ gps16c  =  conjure "gps16_middle" gps16p
 -- Given a string of digits,
 -- return the sum of the digits
 -- whose following digit are the same.
+-- Originally called "Inverse Captcha":
+-- https://adventofcode.com/2017/day/1
 
 -- TODO: document and re-do
 gps17p :: [Int] -> Int
 gps17p [0,1,0]  =  0
 gps17p [1,1]  =  1
+gps17p [0,0,1,1]  =  1
 gps17p [1,1,0]  =  1
 gps17p [0,1,1]  =  1
 gps17p [1,1,1]  =  2
+gps17p [0,1,2]  =  0
+gps17p [1,1,2,2]  =  3
+gps17p [1,1,1,1]  =  3  -- variation from advent
+gps17p [1,2,3,4]  =  0
 
 gps17g :: [Int] -> Int
 gps17g xs  =  pds xs
