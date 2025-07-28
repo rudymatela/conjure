@@ -506,6 +506,7 @@ gps16c  =  conjure "gps16_middle" gps16p
   ]
 
 
+-- TODO: document and re-do
 gps17p :: [Int] -> Int
 gps17p [0,1,0]  =  0
 gps17p [1,1]  =  1
