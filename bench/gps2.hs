@@ -70,7 +70,7 @@ gps1c  =  do
     , unfun (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "<" ((<) :: Int -> Int -> Bool)
-    , iif (undefined :: Int)
+    , guard
     , fun "undefined" (undefined :: Int)
     , maxSize 4
     , maxEquationSize 4
@@ -427,8 +427,10 @@ gps13c  =  conjure "gps13_leaders" gps13p
   [ unfun ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , fun ">" ((>) :: Int -> Int -> Bool)
+  , fun "<" ((<) :: Int -> Int -> Bool)
   , fun "all" (all :: (Int -> Bool) -> [Int] -> Bool)
-  , iif (undefined :: [Int])
+  , fun "any" (any :: (Int -> Bool) -> [Int] -> Bool)
+  , guard
   ]
 
 
@@ -500,7 +502,7 @@ gps16c  =  conjure "gps16_middle" gps16p
   , fun ":" ((:) :: Char -> String -> String)
   , fun "length" (length :: String -> Int)
   , fun "init" (init :: String -> String)
-  , iif (undefined :: String)
+  , iif (undefined :: String) -- TODO: can't replace by guard, why? (July 2025)
   ]
 
 
@@ -523,13 +525,13 @@ gps17g xs  =  pds xs
 -- gps17_pds (x:xs)  =  (if not (null xs) && head xs == x then x else 0) + gps17_pds xs
 
 
--- can generate at size 15 in 18 seconds
+-- can generate at size 15 in 6
 -- setting limit of 5 for faster automated tests
 -- BENCHMARK: increase maxSize from 5 to 18
 gps17c :: IO ()
 gps17c  =  conjure "gps17_pds" gps17p
   [ unfun (0 :: Int)
-  , iif (undefined :: Int)
+  , guard
   , fun "not" not
   , fun "null" (null :: [Int] -> Bool)
   , fun "==" ((==) :: Int -> Int -> Bool)
@@ -538,6 +540,8 @@ gps17c  =  conjure "gps17_pds" gps17p
   , fun "&&" (&&)
   , maxSize 5
   ]
+
+  -- TODO: alt with maxPatternDepth
 
 
 gps18p :: [Double] -> [Double] -> Double
@@ -630,7 +634,7 @@ gps21c  =  do
   conjureFromSpec "spin" spinSpec
     [ fun "length"  (length :: String -> Int)
     , fun "reverse" (reverse :: String -> String)
-    , iif (undefined :: String)
+    , guard
     , fun ">="      ((>=) :: Int -> Int -> Bool)
     , unfun (5 :: Int)
     ]
@@ -642,15 +646,15 @@ gps21c  =  do
     , fun "map"     (map :: (String -> String) -> [String] -> [String])
     , fun "length"  (length :: String -> Int)
     , fun "reverse" (reverse :: String -> String)
-    , iif (undefined :: String)
+    , guard
     , fun ">="      ((>=) :: Int -> Int -> Bool)
     , unfun (5 :: Int)
     ]
 
 
 digits :: Int -> [Int]
-digits 0  =  []
-digits n  =  n `mod` 10 : digits (n `div` 10)
+digits 0  =  []  -- 1
+digits n  =  n `mod` 10 : digits (n `div` 10) -- 9
 
 digits' :: Int -> [Int]
 digits' 1  =  [1]
@@ -664,7 +668,9 @@ gps22p  =  undefined
 
 gps22c :: IO ()
 gps22c  =  do
-  -- cannot conjure at size 13, maybe beyond?
+  -- TODO: should appear at size 9 or 10,
+  --       but does not appear up to size 15...
+  --       (July 2025)
   conjure "digits" digits'
     [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
@@ -734,7 +740,7 @@ gps24c  =  do
     [ unfun Empty
     , unfun TooMany
     , fun "Tweet" Tweet
-    , iif (undefined :: Twitter)
+    , guard
     , unfun ""
     , fun ":" ((:) :: Char -> String -> String)
     , fun "length" (length :: String -> Int)
