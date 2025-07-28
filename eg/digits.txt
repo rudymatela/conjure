@@ -1,0 +1,64 @@
+revdigits :: Int -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 9/9 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 24 candidates of size 5
+-- 0 candidates of size 6
+-- 287 candidates of size 7
+-- 0 candidates of size 8
+-- 4180 candidates of size 9
+-- tested 4481 candidates
+revdigits 0  =  []
+revdigits x  =  x `mod` 10:revdigits (x `div` 10)
+
+digits :: Int -> [Int]
+-- testing 4 combinations of argument values
+-- pruning with 13/13 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 24 candidates of size 5
+-- 0 candidates of size 6
+-- 287 candidates of size 7
+-- 0 candidates of size 8
+-- 4186 candidates of size 9
+-- 18 candidates of size 10
+-- 67104 candidates of size 11
+-- tested 71486 candidates
+digits 0  =  []
+digits x  =  digits (x `div` 10) ++ [x `mod` 10]
+
+digitSum :: Int -> Int
+-- testing 5 combinations of argument values
+-- pruning with 18/22 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 12 candidates of size 3
+-- 0 candidates of size 4
+-- 165 candidates of size 5
+-- 0 candidates of size 6
+-- 2680 candidates of size 7
+-- 84 candidates of size 8
+-- 46993 candidates of size 9
+-- tested 49479 candidates
+digitSum 0  =  0
+digitSum x  =  x `mod` 10 + digitSum (x `div` 10)
+
+digitCount :: Int -> Int -> Int
+-- testing 3 combinations of argument values
+-- pruning with 20/26 rules
+-- reasoning produced 15 incorrect properties, please re-run with more tests for faster results
+-- 4 candidates of size 1
+-- 0 candidates of size 2
+-- 29 candidates of size 3
+-- 0 candidates of size 4
+-- 545 candidates of size 5
+-- 156 candidates of size 6
+-- 12715 candidates of size 7
+-- tested 13449 candidates
+digitCount  =  undefined  -- search exhausted
+

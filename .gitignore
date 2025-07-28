@@ -60,6 +60,7 @@ eg/spec
 eg/colin/*Funs
 eg/tri
 eg/bits
+eg/digits
 eg/peano
 eg/these
 eg/tuple

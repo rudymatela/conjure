@@ -417,6 +417,24 @@ eg/count.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/count.hs
+eg/digits: \
+  eg/digits.hs \
+  mk/toplibs
+eg/digits.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Settings.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/digits.hs
 eg/dupos: \
   eg/dupos.hs \
   mk/toplibs

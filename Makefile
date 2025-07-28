@@ -43,6 +43,7 @@ EG = \
   eg/bst \
   eg/tri \
   eg/bits \
+  eg/digits \
   eg/peano \
   eg/these \
   eg/tuple \
