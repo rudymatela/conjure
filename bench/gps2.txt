@@ -319,22 +319,6 @@ gps21_spinwords :: [Char] -> [Char]
 -- tested 12 candidates
 gps21_spinwords cs  =  unwords (map spin (words cs))
 
-digits :: Int -> [Int]
--- testing 9 combinations of argument values
--- pruning with 9/9 rules
--- 1 candidates of size 1
--- 0 candidates of size 2
--- 3 candidates of size 3
--- 0 candidates of size 4
--- 24 candidates of size 5
--- 0 candidates of size 6
--- 287 candidates of size 7
--- 0 candidates of size 8
--- 4180 candidates of size 9
--- tested 4481 candidates
-digits 0  =  []
-digits x  =  x `mod` 10:digits (x `div` 10)
-
 gps22 :: Int -> [Char]
 -- testing 7 combinations of argument values
 -- pruning with 13/17 rules
