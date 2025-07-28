@@ -308,22 +308,19 @@ gps21_spinwords cs  =  unwords (map spin (words cs))
 
 digits :: Int -> [Int]
 -- testing 5 combinations of argument values
--- pruning with 7/7 rules
+-- pruning with 9/9 rules
 -- 1 candidates of size 1
 -- 0 candidates of size 2
--- 2 candidates of size 3
+-- 3 candidates of size 3
 -- 0 candidates of size 4
--- 11 candidates of size 5
+-- 24 candidates of size 5
 -- 0 candidates of size 6
--- 85 candidates of size 7
+-- 287 candidates of size 7
 -- 0 candidates of size 8
--- 814 candidates of size 9
--- 0 candidates of size 10
--- 8605 candidates of size 11
--- 0 candidates of size 12
--- 97407 candidates of size 13
--- tested 106925 candidates
-digits  =  undefined  -- search exhausted
+-- 4180 candidates of size 9
+-- tested 4481 candidates
+digits 0  =  []
+digits x  =  x `mod` 10:digits (x `div` 10)
 
 gps22 :: Int -> [Char]
 gps22  =  error "could not reify specification, suggestion: conjureFromSpec"

@@ -669,19 +669,16 @@ gps22p  =  undefined
 
 gps22c :: IO ()
 gps22c  =  do
-  -- TODO: should appear at size 9 or 10,
-  --       but does not appear up to size 15...
-  --       (July 2025)
   conjure "digits" digits'
     [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
-    , fun "div10" ((`div` 10) :: Int -> Int)
+    , unfun (0 :: Int)
     , unfun (10 :: Int)
-    , target 10080
     ]
 
+  -- TODO: try PSB2 #22 again...
   conjure "gps22" gps22p
     [
     ]
