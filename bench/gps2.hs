@@ -685,6 +685,65 @@ gps21c  =  do
     ]
 
 
+-- PSB2 #22 -- Square Digits (CW) --
+-- Given a positive integer, square each digit and
+-- concatenate the squares into a returned string.
+
+gps22p :: Int -> String
+gps22p 1  =  "1"
+gps22p 12  =  "14"
+gps22p 21  =  "41"
+gps22p 123  =  "149"
+gps22p 321  =  "941"
+gps22p 1234  =  "14916"
+gps22p 4321  =  "16941"
+
+gps22g :: Int -> String
+gps22g  =  concatMap show . reverse . map (^2) . digits
+
+gps22c :: IO ()
+gps22c  =  do
+  -- not actually needed:
+  conjure "digits" digits'
+    [ unfun ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "`div`" (div :: Int -> Int -> Int)
+    , fun "`mod`" (mod :: Int -> Int -> Int)
+    , unfun (0 :: Int)
+    , unfun (10 :: Int)
+    ]
+
+  conjure "gps22" gps22p
+    [ unfun (0 :: Int)
+
+    -- BENCHMARK: uncomment the following three for the real runtime: 15s, size 11
+    -- , unfun (10 :: Int)
+    -- , fun "`div`" (div :: Int -> Int -> Int)
+    -- , fun "`mod`" (mod :: Int -> Int -> Int)
+    -- , fun "square" ((^2) :: Int -> Int)
+    , fun "div10" ((`div` 10) :: Int -> Int)
+    , fun "mod10" ((`mod` 10) :: Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+
+    , fun "show" (show :: Int -> String)
+    , unfun ""
+    , fun "++" ((++) :: String -> String -> String)
+    ]
+
+  -- This gets OOM'd at size 9
+  {-
+  conjure "gps22" gps22p
+    [ fun "show" (show :: Int -> String)
+    , fun "reverse" (reverse :: [Int] -> [Int])
+    , fun "digits" (digits :: Int -> [Int])
+    , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
+    , fun "concatMap" (concatMap :: (Int -> String) -> [Int] -> String)
+    , fun "^" ((^) :: Int -> Int -> Int)
+    , unfun (2 :: Int)
+    , maxEquationSize 0
+    ]
+  -}
+
 digits :: Int -> [Int]
 digits 0  =  []  -- 1
 digits n  =  n `mod` 10 : digits (n `div` 10) -- 9
@@ -695,25 +754,10 @@ digits' 12  =  [2,1]
 digits' 21  =  [1,2]
 digits' 123  =  [3,2,1]
 digits' 321  =  [1,2,3]
-
-gps22p :: Int -> String
-gps22p  =  undefined
-
-gps22c :: IO ()
-gps22c  =  do
-  conjure "digits" digits'
-    [ unfun ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "`div`" (div :: Int -> Int -> Int)
-    , fun "`mod`" (mod :: Int -> Int -> Int)
-    , unfun (0 :: Int)
-    , unfun (10 :: Int)
-    ]
-
-  -- TODO: try PSB2 #22 again...
-  conjure "gps22" gps22p
-    [
-    ]
+digits' 1337  =  [7,3,3,1]
+digits' 1234  =  [4,3,2,1]
+digits' 4321  =  [1,2,3,4]
+digits' 31337  =  [7,3,3,1,3]
 
 
 gps23s :: (String -> String -> String -> String) -> [Property]
