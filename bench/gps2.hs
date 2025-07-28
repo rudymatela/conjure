@@ -710,7 +710,7 @@ gps22c  =  do
   conjure "gps22" gps22p
     [ unfun (0 :: Int)
 
-    -- BENCHMARK: uncomment the following four for the real runtime: 15s, size 11
+    -- uncomment the following four for the a runtime of 15s @ size 11
     -- , unfun (10 :: Int)
     -- , fun "`div`" (div :: Int -> Int -> Int)
     -- , fun "`mod`" (mod :: Int -> Int -> Int)
