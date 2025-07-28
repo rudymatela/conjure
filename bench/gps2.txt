@@ -221,7 +221,7 @@ gps15_mastermind :: () -> ()
 gps15_mastermind  =  error "could not reify specification, suggestion: conjureFromSpec"
 
 gps16_middle :: [Char] -> [Char]
--- testing 7 combinations of argument values
+-- testing 11 combinations of argument values
 -- pruning with 10/11 rules
 -- 2 candidates of size 1
 -- 2 candidates of size 2

@@ -480,6 +480,10 @@ gps16p "a a"    =  " "
 gps16p " a "    =  "a"
 gps16p "a a "   =  " a"
 gps16p " a a "  =  " "
+gps16p "aba"    =  "b"
+gps16p "bab"    =  "a"
+gps16p "abba"   =  "bb"
+gps16p "aaaaa"  =  "a"
 
 gps16g1 :: String -> String
 gps16g1 s  =  if odd len
@@ -503,6 +507,7 @@ gps16c  =  conjure "gps16_middle" gps16p
   , fun "length" (length :: String -> Int)
   , fun "init" (init :: String -> String)
   , iif (undefined :: String) -- TODO: can't replace by guard, why? (July 2025)
+  -- update: it is enumerated, but somehow does not passes the tests, why?
   ]
 
 
