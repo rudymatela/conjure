@@ -64,6 +64,7 @@ eg/digits
 eg/peano
 eg/these
 eg/tuple
+eg/conditionals
 bench/carry-on
 bench/strategies
 bench/self

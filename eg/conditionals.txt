@@ -1,0 +1,60 @@
+negate :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 64/99 rules
+-- 4 candidates of size 1
+-- 0 candidates of size 2
+-- 5 candidates of size 3
+-- tested 8 candidates
+negate x  =  0 - x
+
+abs :: Int -> Int
+-- testing 4 combinations of argument values
+-- pruning with 64/99 rules
+-- 4 candidates of size 1
+-- 0 candidates of size 2
+-- 5 candidates of size 3
+-- 0 candidates of size 4
+-- 19 candidates of size 5
+-- 48 candidates of size 6
+-- 109 candidates of size 7
+-- 253 candidates of size 8
+-- tested 282 candidates
+abs x
+  | x < 0  =  0 - x
+  | otherwise  =  x
+
+signum :: Int -> Int
+-- testing 7 combinations of argument values
+-- pruning with 64/99 rules
+-- 4 candidates of size 1
+-- 0 candidates of size 2
+-- 5 candidates of size 3
+-- 0 candidates of size 4
+-- 19 candidates of size 5
+-- 48 candidates of size 6
+-- 97 candidates of size 7
+-- tested 163 candidates
+signum 0  =  0
+signum x
+  | x < 0  =  -1
+  | otherwise  =  1
+
+compare :: Int -> Int -> Ordering
+-- testing 9 combinations of argument values
+-- pruning with 5/6 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 18 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 324 candidates of size 11
+-- tested 193 candidates
+compare x y  =  if x == y
+                then EQ
+                else if x < y then LT else GT
+

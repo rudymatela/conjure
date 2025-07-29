@@ -399,6 +399,24 @@ eg/colin/ListFuns.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   eg/colin/ListFuns.hs
+eg/conditionals: \
+  eg/conditionals.hs \
+  mk/toplibs
+eg/conditionals.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Settings.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  eg/conditionals.hs
 eg/count: \
   eg/count.hs \
   mk/toplibs

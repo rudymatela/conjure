@@ -47,6 +47,7 @@ EG = \
   eg/peano \
   eg/these \
   eg/tuple \
+  eg/conditionals \
   bench/candidates \
   bench/redundants \
   bench/erroneous \
