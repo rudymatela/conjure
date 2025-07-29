@@ -6,6 +6,8 @@ A non-exhaustive list of things TO DO for Conjure.
 * Rename `bench/gps2` to `bench/psb2`?
   Rename `p12` and `p30` to `i12` and `i30`.
 
+* cleanup `sort` example, add full mergesort.
+
 * Make so that derived Listable instances `reset`
   constructors that are not recursive.
   This change will need to be done in LeanCheck itself.
