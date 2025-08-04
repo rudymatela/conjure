@@ -69,8 +69,10 @@ main = do
 
   conjure "min" min' mmmIngredients
   conjure "max" max' mmmIngredients
-  -- median is unreachable performance-wise
+  -- median is unreachable performance-wise with ifs
   -- conjure "median" median' mmmIngredients
+  -- it is reachale with max and min on the background though...
+  -- (cf. bench/gps, #27 Median)
 
 ingredients :: [Ingredient]
 ingredients  =
