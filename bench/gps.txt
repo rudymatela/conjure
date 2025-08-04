@@ -518,7 +518,16 @@ gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- pruning with 4/4 rules
 -- 5 candidates of size 1
 -- 0 candidates of size 2
--- tested 5 candidates
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 400 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 40000 candidates of size 11
+-- tested 40405 candidates
 gps26  =  undefined  -- search exhausted
 
 gps27_median :: Int -> Int -> Int -> Int

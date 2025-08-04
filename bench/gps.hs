@@ -884,13 +884,17 @@ gps26p 4 3 2 1 0 = 'F'
 
 gps26g :: Int -> Int -> Int -> Int -> Int -> Char
 gps26g a b c d x
-  | x >= a     =  'A'
-  | x >= b     =  'B'
-  | x >= c     =  'C'
-  | x >= d     =  'D'
-  | otherwise  =  'F'
+  | x >= a     =  'A'  -- 5
+  | x >= b     =  'B'  -- 10
+  | x >= c     =  'C'  -- 15
+  | x >= d     =  'D'  -- 20
+  | otherwise  =  'F'  -- 21
 
--- out of reach performance-wise
+-- out of reach performance-wise, OOM at size 21, see:
+-- -- 20.6s, 4000000 candidates of size 16
+-- -- 38.2s, 0 candidates of size 20
+-- gps: out of memory
+
 gps26c :: IO ()
 gps26c  =  conjure "gps26" gps26p
   [ unfun 'A'
@@ -898,9 +902,8 @@ gps26c  =  conjure "gps26" gps26p
   , unfun 'C'
   , unfun 'D'
   , unfun 'F'
-  , iif (undefined :: Char)
+  , guard
   , fun ">=" ((>=) :: Int -> Int -> Bool)
-  , maxSize 2
   ]
 
 
