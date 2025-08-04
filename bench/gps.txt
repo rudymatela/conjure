@@ -75,15 +75,21 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
--- testing 5 combinations of argument values
--- pruning with 2/3 rules
+-- testing 7 combinations of argument values
+-- pruning with 5/6 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 0 candidates of size 4
 -- 3 candidates of size 5
 -- 0 candidates of size 6
--- tested 7 candidates
+-- 3 candidates of size 7
+-- 0 candidates of size 8
+-- 3 candidates of size 9
+-- 2 candidates of size 10
+-- 6 candidates of size 11
+-- 5 candidates of size 12
+-- tested 26 candidates
 gps5  =  undefined  -- search exhausted
 
 gps6 :: Int -> Int

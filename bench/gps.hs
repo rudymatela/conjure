@@ -170,24 +170,36 @@ gps5p "b"  =  "bb"
 gps5p " "  =  " "
 gps5p "!"  =  "!!!"
 gps5p "aa"  =  "aaaa"
+gps5p " a"  =  " aa"
+gps5p "!a"  =  "!!!aa"
 
 gps5g :: String -> String
-gps5g []  =  []
+gps5g ""  =  ""
 gps5g (c:cs)
   | isLetter c  =  c:c:gps5g cs
   | c == '!'    =  c:c:c:gps5g cs
   | otherwise   =  c:gps5g cs
 
 gps5c :: IO ()
-gps5c  =  conjure "gps5" gps5p -- can't find
+gps5c  =  conjure "gps5" gps5p
   [ unfun ""
   , fun ":" ((:) :: Char -> String -> String)
   , unfun '!'
   , fun "==" ((==) :: Char -> Char -> Bool)
   , fun "isLetter" (isLetter :: Char -> Bool)
-  , iif (undefined :: String -> String)
-  , maxSize 6
+  , guard
+  -- BENCHMARK: increase to 26 to find
+  , maxSize 12 -- 26
   ]
+  -- found (lapmatrud unplugged):
+  -- -- 65.5s, 10856 candidates of size 26
+  -- -- 65.5s, tested 20317 candidates
+  -- gps5 ""  =  ""
+  -- gps5 (c:cs)
+  --   | isLetter c  =  c:c:gps5 cs
+  --   | c == '!'  =  c:c:c:gps5 cs
+  --   | otherwise  =  c:gps5 cs
+
 
 
 -- GPS Benchmark #6 -- Collatz/Hailstone numbers --
