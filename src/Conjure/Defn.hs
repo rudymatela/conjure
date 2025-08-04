@@ -74,17 +74,17 @@ showDefn  =  unlines . map show1
   where
   show1 (lhs,rhs)  =
     case rhs of
-    (Value "|" _ :$ c :$ t :$ e) -> showExpr lhs
-                         ++ "\n  | " ++ showExpr c ++ "  =  " ++ showExpr t
-                         ++ "\n  | otherwise  =  " ++ showExpr e
-    (Value "if" _ :$ c :$ t :$ e) -> lhseqs ++ "if " ++ showExpr c
-                          ++ "\n" ++ spaces ++ "then " ++ showExpr t
-                          ++ "\n" ++ spaces ++ "else " ++ showExpr e
-    (Value "case" _ :$ ep :$ ex :$ ey)
+    Value "|" _ :$ c :$ t :$ e -> showExpr lhs
+                       ++ "\n  | " ++ showExpr c ++ "  =  " ++ showExpr t
+                       ++ "\n  | otherwise  =  " ++ showExpr e
+    Value "if" _ :$ c :$ t :$ e -> lhseqs ++ "if " ++ showExpr c
+                        ++ "\n" ++ spaces ++ "then " ++ showExpr t
+                        ++ "\n" ++ spaces ++ "else " ++ showExpr e
+    Value "case" _ :$ ep :$ ex :$ ey
       | typ ep == boolTy -> lhseqs ++ "case " ++ showExpr ep ++ " of"
                  ++ "\n" ++ spaces ++ "False -> " ++ showExpr ex
                  ++ "\n" ++ spaces ++ "True  -> " ++ showExpr ey
-    (Value "case" _ :$ eo :$ ex :$ ey :$ ez)
+    Value "case" _ :$ eo :$ ex :$ ey :$ ez
       | typ eo == orderingTy -> lhseqs ++ "case " ++ showExpr eo ++ " of"
                      ++ "\n" ++ spaces ++ "LT -> " ++ showExpr ex
                      ++ "\n" ++ spaces ++ "EQ -> " ++ showExpr ey
