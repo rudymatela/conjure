@@ -39,7 +39,7 @@ x ^^^ y  =  0
 -- 996 candidates of size 8
 -- 1266 candidates of size 9
 -- 11700 candidates of size 10
--- tested 6683 candidates
+-- tested 11507 candidates
 x ^^^ y  =  if 0 == x * y
             then x + y
             else 0

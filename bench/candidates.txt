@@ -95,8 +95,6 @@ foo x  =  0 - 1
 
 foo x  =  1 - x
 
-foo x  =  x * x - 1
-
 foo x  =  x + (x + x)
 
 foo x  =  x + (x + 1)
@@ -154,6 +152,8 @@ foo x  =  1 - (x + 1)
 foo x  =  1 - (1 + 1)
 
 foo x  =  1 - x * x
+
+foo x  =  x * x - 1
 
 
 pattern candidates:
@@ -227,8 +227,6 @@ foo 0  =  1
 foo 1  =  1
 foo x  =  0
 
-foo x  =  x * x - 1
-
 foo x  =  x + (x + x)
 
 foo x  =  x + (x + 1)
@@ -272,6 +270,8 @@ foo x  =  1 - (x + x)
 foo x  =  1 - (x + 1)
 
 foo x  =  1 - x * x
+
+foo x  =  x * x - 1
 
 foo 1  =  0
 foo x  =  x + x
@@ -301,9 +301,6 @@ foo 1  =  1
 foo x  =  1 - x
 
 foo 0  =  0
-foo x  =  x * x - 1
-
-foo 0  =  0
 foo x  =  x + (x + 1)
 
 foo 0  =  0
@@ -336,7 +333,7 @@ foo x  =  1 - (x + x)
 foo 0  =  0
 foo x  =  1 - x * x
 
-foo 0  =  1
+foo 0  =  0
 foo x  =  x * x - 1
 
 foo 0  =  1
@@ -386,6 +383,9 @@ foo x  =  0 - (x + 1)
 
 foo 0  =  1
 foo x  =  1 - (x + 1)
+
+foo 0  =  1
+foo x  =  x * x - 1
 
 foo 0  =  0
 foo 1  =  0
@@ -509,6 +509,12 @@ x ? y  =  dec y
 
 x ? y  =  dec 0
 
+x ? y  =  dec (dec x)
+
+x ? y  =  dec (dec y)
+
+x ? y  =  dec (dec 0)
+
 x ? y  =  x + x
 
 x ? y  =  x + y
@@ -521,23 +527,17 @@ x ? y  =  x * y
 
 x ? y  =  y * y
 
-x ? y  =  dec (dec x)
+x ? y  =  dec (dec (dec x))
 
-x ? y  =  dec (dec y)
+x ? y  =  dec (dec (dec y))
 
-x ? y  =  dec (dec 0)
+x ? y  =  dec (dec (dec 0))
 
 x ? y  =  dec (x * x)
 
 x ? y  =  dec (x * y)
 
 x ? y  =  dec (y * y)
-
-x ? y  =  dec (dec (dec x))
-
-x ? y  =  dec (dec (dec y))
-
-x ? y  =  dec (dec (dec 0))
 
 x ? y  =  x + dec x
 
@@ -563,17 +563,17 @@ x ? y  =  y * dec y
 
 x ? y  =  y * dec 0
 
-x ? y  =  dec (dec (x * x))
-
-x ? y  =  dec (dec (x * y))
-
-x ? y  =  dec (dec (y * y))
-
 x ? y  =  dec (dec (dec (dec x)))
 
 x ? y  =  dec (dec (dec (dec y)))
 
 x ? y  =  dec (dec (dec (dec 0)))
+
+x ? y  =  dec (dec (x * x))
+
+x ? y  =  dec (dec (x * y))
+
+x ? y  =  dec (dec (y * y))
 
 x ? y  =  dec (x * dec x)
 
@@ -587,6 +587,12 @@ x ? y  =  dec (y * dec y)
 
 x ? y  =  dec (y * dec 0)
 
+x ? y  =  x + dec (dec x)
+
+x ? y  =  x + dec (dec y)
+
+x ? y  =  x + dec (dec 0)
+
 x ? y  =  x + (x + x)
 
 x ? y  =  x + (x + y)
@@ -599,11 +605,11 @@ x ? y  =  x + x * y
 
 x ? y  =  x + y * y
 
-x ? y  =  x + dec (dec x)
+x ? y  =  y + dec (dec x)
 
-x ? y  =  x + dec (dec y)
+x ? y  =  y + dec (dec y)
 
-x ? y  =  x + dec (dec 0)
+x ? y  =  y + dec (dec 0)
 
 x ? y  =  y + (x + x)
 
@@ -617,11 +623,11 @@ x ? y  =  y + x * y
 
 x ? y  =  y + y * y
 
-x ? y  =  y + dec (dec x)
+x ? y  =  x * dec (dec x)
 
-x ? y  =  y + dec (dec y)
+x ? y  =  x * dec (dec y)
 
-x ? y  =  y + dec (dec 0)
+x ? y  =  x * dec (dec 0)
 
 x ? y  =  x * (x + x)
 
@@ -635,11 +641,11 @@ x ? y  =  x * (x * y)
 
 x ? y  =  x * (y * y)
 
-x ? y  =  x * dec (dec x)
+x ? y  =  y * dec (dec x)
 
-x ? y  =  x * dec (dec y)
+x ? y  =  y * dec (dec y)
 
-x ? y  =  x * dec (dec 0)
+x ? y  =  y * dec (dec 0)
 
 x ? y  =  y * (x + x)
 
@@ -652,12 +658,6 @@ x ? y  =  y * (x * x)
 x ? y  =  y * (x * y)
 
 x ? y  =  y * (y * y)
-
-x ? y  =  y * dec (dec x)
-
-x ? y  =  y * dec (dec y)
-
-x ? y  =  y * dec (dec 0)
 
 x ? y  =  dec x + dec x
 
@@ -714,6 +714,10 @@ x ? y  =  0
 0 ? x  =  0
 x ? y  =  y
 
+x ? y  =  dec (dec x)
+
+x ? y  =  dec (dec y)
+
 x ? y  =  x + x
 
 x ? y  =  x + y
@@ -726,10 +730,6 @@ x ? y  =  x * y
 
 x ? y  =  y * y
 
-x ? y  =  dec (dec x)
-
-x ? y  =  dec (dec y)
-
 x ? 0  =  x
 x ? y  =  dec x
 
@@ -783,16 +783,16 @@ x ? y  =  x
 0 ? x  =  0
 x ? 0  =  x
 x ? y  =  y
+
+x ? y  =  dec (dec (dec x))
+
+x ? y  =  dec (dec (dec y))
 
 x ? y  =  dec (x * x)
 
 x ? y  =  dec (x * y)
 
 x ? y  =  dec (y * y)
-
-x ? y  =  dec (dec (dec x))
-
-x ? y  =  dec (dec (dec y))
 
 x ? y  =  x + dec x
 
@@ -811,6 +811,12 @@ x ? y  =  y * dec x
 x ? y  =  y * dec y
 
 x ? 0  =  x
+x ? y  =  dec (dec x)
+
+x ? 0  =  x
+x ? y  =  dec (dec y)
+
+x ? 0  =  x
 x ? y  =  x + x
 
 x ? 0  =  x
@@ -825,10 +831,10 @@ x ? y  =  x * y
 x ? 0  =  x
 x ? y  =  y * y
 
-x ? 0  =  x
+x ? 0  =  0
 x ? y  =  dec (dec x)
 
-x ? 0  =  x
+x ? 0  =  0
 x ? y  =  dec (dec y)
 
 x ? 0  =  0
@@ -840,15 +846,18 @@ x ? y  =  x + y
 x ? 0  =  0
 x ? y  =  x * x
 
-x ? 0  =  0
-x ? y  =  dec (dec x)
-
-x ? 0  =  0
-x ? y  =  dec (dec y)
-
 x ? 0  =  dec x
 x ? y  =  dec y
 
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+x ? 0  =  dec (dec x)
+x ? y  =  y
+
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
 x ? 0  =  x + x
 x ? y  =  x
 
@@ -867,14 +876,11 @@ x ? y  =  y
 x ? 0  =  x * x
 x ? y  =  0
 
-x ? 0  =  dec (dec x)
-x ? y  =  x
+0 ? x  =  x
+x ? y  =  dec (dec x)
 
-x ? 0  =  dec (dec x)
-x ? y  =  y
-
-x ? 0  =  dec (dec x)
-x ? y  =  0
+0 ? x  =  x
+x ? y  =  dec (dec y)
 
 0 ? x  =  x
 x ? y  =  x + x
@@ -891,10 +897,10 @@ x ? y  =  x * y
 0 ? x  =  x
 x ? y  =  y * y
 
-0 ? x  =  x
+0 ? x  =  0
 x ? y  =  dec (dec x)
 
-0 ? x  =  x
+0 ? x  =  0
 x ? y  =  dec (dec y)
 
 0 ? x  =  0
@@ -906,15 +912,18 @@ x ? y  =  y + y
 0 ? x  =  0
 x ? y  =  y * y
 
-0 ? x  =  0
-x ? y  =  dec (dec x)
-
-0 ? x  =  0
-x ? y  =  dec (dec y)
-
 0 ? x  =  dec x
 x ? y  =  dec x
 
+0 ? x  =  dec (dec x)
+x ? y  =  x
+
+0 ? x  =  dec (dec x)
+x ? y  =  y
+
+0 ? x  =  dec (dec x)
+x ? y  =  0
+
 0 ? x  =  x + x
 x ? y  =  x
 
@@ -931,15 +940,6 @@ x ? y  =  x
 x ? y  =  y
 
 0 ? x  =  x * x
-x ? y  =  0
-
-0 ? x  =  dec (dec x)
-x ? y  =  x
-
-0 ? x  =  dec (dec x)
-x ? y  =  y
-
-0 ? x  =  dec (dec x)
 x ? y  =  0
 
 0 ? x  =  x
@@ -997,16 +997,16 @@ x ? y  =  0
 0 ? x  =  dec x
 x ? 0  =  0
 x ? y  =  x
+
+x ? y  =  dec (dec (dec (dec x)))
+
+x ? y  =  dec (dec (dec (dec y)))
 
 x ? y  =  dec (dec (x * x))
 
 x ? y  =  dec (dec (x * y))
 
 x ? y  =  dec (dec (y * y))
-
-x ? y  =  dec (dec (dec (dec x)))
-
-x ? y  =  dec (dec (dec (dec y)))
 
 x ? y  =  dec (x * dec x)
 
@@ -1015,6 +1015,10 @@ x ? y  =  dec (x * dec y)
 x ? y  =  dec (y * dec x)
 
 x ? y  =  dec (y * dec y)
+
+x ? y  =  x + dec (dec x)
+
+x ? y  =  x + dec (dec y)
 
 x ? y  =  x + (x + x)
 
@@ -1028,9 +1032,9 @@ x ? y  =  x + x * y
 
 x ? y  =  x + y * y
 
-x ? y  =  x + dec (dec x)
+x ? y  =  y + dec (dec x)
 
-x ? y  =  x + dec (dec y)
+x ? y  =  y + dec (dec y)
 
 x ? y  =  y + (x + x)
 
@@ -1044,9 +1048,9 @@ x ? y  =  y + x * y
 
 x ? y  =  y + y * y
 
-x ? y  =  y + dec (dec x)
+x ? y  =  x * dec (dec x)
 
-x ? y  =  y + dec (dec y)
+x ? y  =  x * dec (dec y)
 
 x ? y  =  x * (x + x)
 
@@ -1060,9 +1064,9 @@ x ? y  =  x * (x * y)
 
 x ? y  =  x * (y * y)
 
-x ? y  =  x * dec (dec x)
+x ? y  =  y * dec (dec x)
 
-x ? y  =  x * dec (dec y)
+x ? y  =  y * dec (dec y)
 
 x ? y  =  y * (x + x)
 
@@ -1075,10 +1079,6 @@ x ? y  =  y * (x * x)
 x ? y  =  y * (x * y)
 
 x ? y  =  y * (y * y)
-
-x ? y  =  y * dec (dec x)
-
-x ? y  =  y * dec (dec y)
 
 x ? y  =  dec x + dec x
 
@@ -1093,6 +1093,12 @@ x ? y  =  dec x * dec y
 x ? y  =  dec y * dec y
 
 x ? 0  =  x
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  x
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  x
 x ? y  =  dec (x * x)
 
 x ? 0  =  x
@@ -1100,12 +1106,6 @@ x ? y  =  dec (x * y)
 
 x ? 0  =  x
 x ? y  =  dec (y * y)
-
-x ? 0  =  x
-x ? y  =  dec (dec (dec x))
-
-x ? 0  =  x
-x ? y  =  dec (dec (dec y))
 
 x ? 0  =  x
 x ? y  =  x + dec x
@@ -1132,6 +1132,12 @@ x ? 0  =  x
 x ? y  =  y * dec y
 
 x ? 0  =  0
+x ? y  =  dec (dec (dec x))
+
+x ? 0  =  0
+x ? y  =  dec (dec (dec y))
+
+x ? 0  =  0
 x ? y  =  dec (x * x)
 
 x ? 0  =  0
@@ -1139,12 +1145,6 @@ x ? y  =  dec (x * y)
 
 x ? 0  =  0
 x ? y  =  dec (y * y)
-
-x ? 0  =  0
-x ? y  =  dec (dec (dec x))
-
-x ? 0  =  0
-x ? y  =  dec (dec (dec y))
 
 x ? 0  =  0
 x ? y  =  x + dec x
@@ -1165,6 +1165,12 @@ x ? 0  =  0
 x ? y  =  x * dec y
 
 x ? 0  =  dec x
+x ? y  =  dec (dec x)
+
+x ? 0  =  dec x
+x ? y  =  dec (dec y)
+
+x ? 0  =  dec x
 x ? y  =  x + x
 
 x ? 0  =  dec x
@@ -1182,11 +1188,11 @@ x ? y  =  x * y
 x ? 0  =  dec x
 x ? y  =  y * y
 
-x ? 0  =  dec x
-x ? y  =  dec (dec x)
+x ? 0  =  dec (dec x)
+x ? y  =  dec x
 
-x ? 0  =  dec x
-x ? y  =  dec (dec y)
+x ? 0  =  dec (dec x)
+x ? y  =  dec y
 
 x ? 0  =  x + x
 x ? y  =  dec x
@@ -1200,28 +1206,22 @@ x ? y  =  dec x
 x ? 0  =  x * x
 x ? y  =  dec y
 
-x ? 0  =  dec (dec x)
-x ? y  =  dec x
-
-x ? 0  =  dec (dec x)
-x ? y  =  dec y
-
-x ? 0  =  dec (x * x)
+x ? 0  =  dec (dec (dec x))
 x ? y  =  x
 
-x ? 0  =  dec (x * x)
+x ? 0  =  dec (dec (dec x))
 x ? y  =  y
 
-x ? 0  =  dec (x * x)
+x ? 0  =  dec (dec (dec x))
 x ? y  =  0
 
-x ? 0  =  dec (dec (dec x))
+x ? 0  =  dec (x * x)
 x ? y  =  x
 
-x ? 0  =  dec (dec (dec x))
+x ? 0  =  dec (x * x)
 x ? y  =  y
 
-x ? 0  =  dec (dec (dec x))
+x ? 0  =  dec (x * x)
 x ? y  =  0
 
 x ? 0  =  x + dec x
@@ -1241,6 +1241,12 @@ x ? y  =  y
 
 x ? 0  =  x * dec x
 x ? y  =  0
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  x
+x ? y  =  dec (dec (dec y))
 
 0 ? x  =  x
 x ? y  =  dec (x * x)
@@ -1250,12 +1256,6 @@ x ? y  =  dec (x * y)
 
 0 ? x  =  x
 x ? y  =  dec (y * y)
-
-0 ? x  =  x
-x ? y  =  dec (dec (dec x))
-
-0 ? x  =  x
-x ? y  =  dec (dec (dec y))
 
 0 ? x  =  x
 x ? y  =  x + dec x
@@ -1282,6 +1282,12 @@ x ? y  =  y * dec x
 x ? y  =  y * dec y
 
 0 ? x  =  0
+x ? y  =  dec (dec (dec x))
+
+0 ? x  =  0
+x ? y  =  dec (dec (dec y))
+
+0 ? x  =  0
 x ? y  =  dec (x * x)
 
 0 ? x  =  0
@@ -1289,12 +1295,6 @@ x ? y  =  dec (x * y)
 
 0 ? x  =  0
 x ? y  =  dec (y * y)
-
-0 ? x  =  0
-x ? y  =  dec (dec (dec x))
-
-0 ? x  =  0
-x ? y  =  dec (dec (dec y))
 
 0 ? x  =  0
 x ? y  =  x + dec x
@@ -1315,6 +1315,12 @@ x ? y  =  y * dec x
 x ? y  =  y * dec y
 
 0 ? x  =  dec x
+x ? y  =  dec (dec x)
+
+0 ? x  =  dec x
+x ? y  =  dec (dec y)
+
+0 ? x  =  dec x
 x ? y  =  x + x
 
 0 ? x  =  dec x
@@ -1332,65 +1338,67 @@ x ? y  =  x * y
 0 ? x  =  dec x
 x ? y  =  y * y
 
-0 ? x  =  dec x
+0 ? x  =  dec (dec x)
+x ? y  =  dec x
+
+0 ? x  =  dec (dec x)
+x ? y  =  dec y
+
+0 ? x  =  x + x
+x ? y  =  dec x
+
+0 ? x  =  x + x
+x ? y  =  dec y
+
+0 ? x  =  x * x
+x ? y  =  dec x
+
+0 ? x  =  x * x
+x ? y  =  dec y
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  x
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  y
+
+0 ? x  =  dec (dec (dec x))
+x ? y  =  0
+
+0 ? x  =  dec (x * x)
+x ? y  =  x
+
+0 ? x  =  dec (x * x)
+x ? y  =  y
+
+0 ? x  =  dec (x * x)
+x ? y  =  0
+
+0 ? x  =  x + dec x
+x ? y  =  x
+
+0 ? x  =  x + dec x
+x ? y  =  y
+
+0 ? x  =  x + dec x
+x ? y  =  0
+
+0 ? x  =  x * dec x
+x ? y  =  x
+
+0 ? x  =  x * dec x
+x ? y  =  y
+
+0 ? x  =  x * dec x
+x ? y  =  0
+
+0 ? x  =  x
+x ? 0  =  x
 x ? y  =  dec (dec x)
 
-0 ? x  =  dec x
+0 ? x  =  x
+x ? 0  =  x
 x ? y  =  dec (dec y)
-
-0 ? x  =  x + x
-x ? y  =  dec x
-
-0 ? x  =  x + x
-x ? y  =  dec y
-
-0 ? x  =  x * x
-x ? y  =  dec x
-
-0 ? x  =  x * x
-x ? y  =  dec y
-
-0 ? x  =  dec (dec x)
-x ? y  =  dec x
-
-0 ? x  =  dec (dec x)
-x ? y  =  dec y
-
-0 ? x  =  dec (x * x)
-x ? y  =  x
-
-0 ? x  =  dec (x * x)
-x ? y  =  y
-
-0 ? x  =  dec (x * x)
-x ? y  =  0
-
-0 ? x  =  dec (dec (dec x))
-x ? y  =  x
-
-0 ? x  =  dec (dec (dec x))
-x ? y  =  y
-
-0 ? x  =  dec (dec (dec x))
-x ? y  =  0
-
-0 ? x  =  x + dec x
-x ? y  =  x
-
-0 ? x  =  x + dec x
-x ? y  =  y
-
-0 ? x  =  x + dec x
-x ? y  =  0
-
-0 ? x  =  x * dec x
-x ? y  =  x
-
-0 ? x  =  x * dec x
-x ? y  =  y
-
-0 ? x  =  x * dec x
-x ? y  =  0
 
 0 ? x  =  x
 x ? 0  =  x
@@ -1413,11 +1421,11 @@ x ? 0  =  x
 x ? y  =  y * y
 
 0 ? x  =  x
-x ? 0  =  x
+x ? 0  =  0
 x ? y  =  dec (dec x)
 
 0 ? x  =  x
-x ? 0  =  x
+x ? 0  =  0
 x ? y  =  dec (dec y)
 
 0 ? x  =  x
@@ -1429,18 +1437,18 @@ x ? 0  =  0
 x ? y  =  x * x
 
 0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec (dec x)
-
-0 ? x  =  x
-x ? 0  =  0
-x ? y  =  dec (dec y)
-
-0 ? x  =  x
 x ? 0  =  dec x
 x ? y  =  dec y
 
 0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  x
+
+0 ? x  =  x
+x ? 0  =  dec (dec x)
+x ? y  =  0
+
+0 ? x  =  x
 x ? 0  =  x + x
 x ? y  =  x
 
@@ -1456,13 +1464,13 @@ x ? y  =  x
 x ? 0  =  x * x
 x ? y  =  0
 
-0 ? x  =  x
-x ? 0  =  dec (dec x)
-x ? y  =  x
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec x)
 
-0 ? x  =  x
-x ? 0  =  dec (dec x)
-x ? y  =  0
+0 ? x  =  0
+x ? 0  =  x
+x ? y  =  dec (dec y)
 
 0 ? x  =  0
 x ? 0  =  x
@@ -1473,11 +1481,11 @@ x ? 0  =  x
 x ? y  =  y * y
 
 0 ? x  =  0
-x ? 0  =  x
+x ? 0  =  0
 x ? y  =  dec (dec x)
 
 0 ? x  =  0
-x ? 0  =  x
+x ? 0  =  0
 x ? y  =  dec (dec y)
 
 0 ? x  =  0
@@ -1485,16 +1493,12 @@ x ? 0  =  0
 x ? y  =  x + y
 
 0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec (dec x)
-
-0 ? x  =  0
-x ? 0  =  0
-x ? y  =  dec (dec y)
-
-0 ? x  =  0
 x ? 0  =  dec x
 x ? y  =  dec y
+
+0 ? x  =  0
+x ? 0  =  dec (dec x)
+x ? y  =  y
 
 0 ? x  =  0
 x ? 0  =  x + x
@@ -1504,10 +1508,6 @@ x ? y  =  y
 x ? 0  =  x * x
 x ? y  =  y
 
-0 ? x  =  0
-x ? 0  =  dec (dec x)
-x ? y  =  y
-
 0 ? x  =  dec x
 x ? 0  =  x
 x ? y  =  dec x
@@ -1528,6 +1528,18 @@ x ? y  =  y
 x ? 0  =  dec x
 x ? y  =  0
 
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  y
+
+0 ? x  =  dec (dec x)
+x ? 0  =  x
+x ? y  =  0
+
+0 ? x  =  dec (dec x)
+x ? 0  =  0
+x ? y  =  x
+
 0 ? x  =  x + x
 x ? 0  =  x
 x ? y  =  y
@@ -1549,18 +1561,6 @@ x ? 0  =  x
 x ? y  =  0
 
 0 ? x  =  x * x
-x ? 0  =  0
-x ? y  =  x
-
-0 ? x  =  dec (dec x)
-x ? 0  =  x
-x ? y  =  y
-
-0 ? x  =  dec (dec x)
-x ? 0  =  x
-x ? y  =  0
-
-0 ? x  =  dec (dec x)
 x ? 0  =  0
 x ? y  =  x
 
@@ -3911,60 +3911,6 @@ gcd x y  =  0 `mod` y
 
 gcd x y  =  0 `mod` 0
 
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd x y  =  (0 `mod` 0) `mod` x
-
-gcd x y  =  (0 `mod` 0) `mod` y
-
-gcd x y  =  (0 `mod` 0) `mod` 0
-
 gcd x y  =  x `mod` (x `mod` x)
 
 gcd x y  =  x `mod` (x `mod` y)
@@ -4018,6 +3964,60 @@ gcd x y  =  0 `mod` (0 `mod` x)
 gcd x y  =  0 `mod` (0 `mod` y)
 
 gcd x y  =  0 `mod` (0 `mod` 0)
+
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x y  =  (0 `mod` y) `mod` 0
+
+gcd x y  =  (0 `mod` 0) `mod` x
+
+gcd x y  =  (0 `mod` 0) `mod` y
+
+gcd x y  =  (0 `mod` 0) `mod` 0
 
 
 pattern candidates:
@@ -4224,54 +4224,6 @@ gcd x y  =  y
 gcd 0 x  =  0 `mod` x
 gcd x y  =  0
 
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd x y  =  (0 `mod` y) `mod` 0
-
 gcd x y  =  x `mod` (x `mod` x)
 
 gcd x y  =  x `mod` (x `mod` y)
@@ -4319,6 +4271,54 @@ gcd x y  =  0 `mod` (y `mod` 0)
 gcd x y  =  0 `mod` (0 `mod` x)
 
 gcd x y  =  0 `mod` (0 `mod` y)
+
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x y  =  (0 `mod` y) `mod` 0
 
 gcd 0 x  =  x
 gcd x 0  =  x
@@ -4521,78 +4521,6 @@ gcd x 0  =  0
 gcd x y  =  x
 
 gcd x 0  =  x
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd x 0  =  x
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd x 0  =  x
 gcd x y  =  x `mod` (x `mod` x)
 
 gcd x 0  =  x
@@ -4664,76 +4592,76 @@ gcd x y  =  0 `mod` (0 `mod` x)
 gcd x 0  =  x
 gcd x y  =  0 `mod` (0 `mod` y)
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` x) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` x) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` x) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` y) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` y) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` y) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` 0) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` 0) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (x `mod` 0) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` x) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` x) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` x) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` y) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` y) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` y) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` 0) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` 0) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (y `mod` 0) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (0 `mod` x) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (0 `mod` x) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (0 `mod` x) `mod` 0
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (0 `mod` y) `mod` x
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (0 `mod` y) `mod` y
 
-gcd x 0  =  0
+gcd x 0  =  x
 gcd x y  =  (0 `mod` y) `mod` 0
 
 gcd x 0  =  0
@@ -4808,6 +4736,78 @@ gcd x y  =  0 `mod` (0 `mod` x)
 gcd x 0  =  0
 gcd x y  =  0 `mod` (0 `mod` y)
 
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd x 0  =  0
+gcd x y  =  (0 `mod` y) `mod` 0
+
 gcd x 0  =  x `mod` x
 gcd x y  =  x `mod` y
 
@@ -4864,60 +4864,6 @@ gcd x y  =  y `mod` 0
 
 gcd x 0  =  0 `mod` x
 gcd x y  =  0 `mod` y
-
-gcd x 0  =  (x `mod` x) `mod` x
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` x) `mod` x
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` x) `mod` x
-gcd x y  =  0
-
-gcd x 0  =  (x `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` x) `mod` 0
-gcd x y  =  0
-
-gcd x 0  =  (x `mod` 0) `mod` x
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` 0) `mod` x
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` 0) `mod` x
-gcd x y  =  0
-
-gcd x 0  =  (x `mod` 0) `mod` 0
-gcd x y  =  x
-
-gcd x 0  =  (x `mod` 0) `mod` 0
-gcd x y  =  y
-
-gcd x 0  =  (x `mod` 0) `mod` 0
-gcd x y  =  0
-
-gcd x 0  =  (0 `mod` x) `mod` x
-gcd x y  =  x
-
-gcd x 0  =  (0 `mod` x) `mod` x
-gcd x y  =  y
-
-gcd x 0  =  (0 `mod` x) `mod` x
-gcd x y  =  0
-
-gcd x 0  =  (0 `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd x 0  =  (0 `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd x 0  =  (0 `mod` x) `mod` 0
-gcd x y  =  0
 
 gcd x 0  =  x `mod` (x `mod` x)
 gcd x y  =  x
@@ -4973,77 +4919,59 @@ gcd x y  =  y
 gcd x 0  =  0 `mod` (0 `mod` x)
 gcd x y  =  0
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` x) `mod` x
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  x
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` x) `mod` y
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  y
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` x) `mod` 0
+gcd x 0  =  (x `mod` x) `mod` x
+gcd x y  =  0
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` y) `mod` x
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  x
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` y) `mod` y
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  y
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` y) `mod` 0
+gcd x 0  =  (x `mod` x) `mod` 0
+gcd x y  =  0
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` 0) `mod` x
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  x
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` 0) `mod` y
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  y
 
-gcd 0 x  =  x
-gcd x y  =  (x `mod` 0) `mod` 0
+gcd x 0  =  (x `mod` 0) `mod` x
+gcd x y  =  0
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` x) `mod` x
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  x
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` x) `mod` y
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  y
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` x) `mod` 0
+gcd x 0  =  (x `mod` 0) `mod` 0
+gcd x y  =  0
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` y) `mod` x
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  x
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` y) `mod` y
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  y
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` y) `mod` 0
+gcd x 0  =  (0 `mod` x) `mod` x
+gcd x y  =  0
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` 0) `mod` x
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  x
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` 0) `mod` y
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  y
 
-gcd 0 x  =  x
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd 0 x  =  x
-gcd x y  =  (0 `mod` y) `mod` 0
+gcd x 0  =  (0 `mod` x) `mod` 0
+gcd x y  =  0
 
 gcd 0 x  =  x
 gcd x y  =  x `mod` (x `mod` x)
@@ -5117,76 +5045,76 @@ gcd x y  =  0 `mod` (0 `mod` x)
 gcd 0 x  =  x
 gcd x y  =  0 `mod` (0 `mod` y)
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` x) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` x) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` x) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` y) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` y) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` y) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` 0) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` 0) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (x `mod` 0) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` x) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` x) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` x) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` y) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` y) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` y) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` 0) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` 0) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (y `mod` 0) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (0 `mod` x) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (0 `mod` x) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (0 `mod` x) `mod` 0
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (0 `mod` y) `mod` x
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (0 `mod` y) `mod` y
 
-gcd 0 x  =  0
+gcd 0 x  =  x
 gcd x y  =  (0 `mod` y) `mod` 0
 
 gcd 0 x  =  0
@@ -5261,6 +5189,78 @@ gcd x y  =  0 `mod` (0 `mod` x)
 gcd 0 x  =  0
 gcd x y  =  0 `mod` (0 `mod` y)
 
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (x `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` y) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (y `mod` 0) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` x) `mod` 0
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` x
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` y
+
+gcd 0 x  =  0
+gcd x y  =  (0 `mod` y) `mod` 0
+
 gcd 0 x  =  x `mod` x
 gcd x y  =  x `mod` x
 
@@ -5318,60 +5318,6 @@ gcd x y  =  y `mod` 0
 gcd 0 x  =  0 `mod` x
 gcd x y  =  0 `mod` x
 
-gcd 0 x  =  (x `mod` x) `mod` x
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` x) `mod` x
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` x) `mod` x
-gcd x y  =  0
-
-gcd 0 x  =  (x `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` x) `mod` 0
-gcd x y  =  0
-
-gcd 0 x  =  (x `mod` 0) `mod` x
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` 0) `mod` x
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` 0) `mod` x
-gcd x y  =  0
-
-gcd 0 x  =  (x `mod` 0) `mod` 0
-gcd x y  =  x
-
-gcd 0 x  =  (x `mod` 0) `mod` 0
-gcd x y  =  y
-
-gcd 0 x  =  (x `mod` 0) `mod` 0
-gcd x y  =  0
-
-gcd 0 x  =  (0 `mod` x) `mod` x
-gcd x y  =  x
-
-gcd 0 x  =  (0 `mod` x) `mod` x
-gcd x y  =  y
-
-gcd 0 x  =  (0 `mod` x) `mod` x
-gcd x y  =  0
-
-gcd 0 x  =  (0 `mod` x) `mod` 0
-gcd x y  =  x
-
-gcd 0 x  =  (0 `mod` x) `mod` 0
-gcd x y  =  y
-
-gcd 0 x  =  (0 `mod` x) `mod` 0
-gcd x y  =  0
-
 gcd 0 x  =  x `mod` (x `mod` x)
 gcd x y  =  x
 
@@ -5424,6 +5370,60 @@ gcd 0 x  =  0 `mod` (0 `mod` x)
 gcd x y  =  y
 
 gcd 0 x  =  0 `mod` (0 `mod` x)
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` x) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` x) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` 0) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (x `mod` 0) `mod` 0
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` x) `mod` x
+gcd x y  =  0
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  x
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
+gcd x y  =  y
+
+gcd 0 x  =  (0 `mod` x) `mod` 0
 gcd x y  =  0
 
 gcd x 0  =  x

@@ -228,20 +228,6 @@ class of 2 equivalent candidates:
 
 class of 2 equivalent candidates:
 
-    x ? y  =  x + (x + y)
-
-    x ? y  =  y + (x + x)
-
-
-class of 2 equivalent candidates:
-
-    x ? y  =  x + (y + y)
-
-    x ? y  =  y + (x + y)
-
-
-class of 2 equivalent candidates:
-
     x ? y  =  x + dec (dec x)
 
     x ? y  =  dec x + dec x
@@ -254,6 +240,20 @@ class of 3 equivalent candidates:
     x ? y  =  y + dec (dec x)
 
     x ? y  =  dec x + dec y
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x + (x + y)
+
+    x ? y  =  y + (x + x)
+
+
+class of 2 equivalent candidates:
+
+    x ? y  =  x + (y + y)
+
+    x ? y  =  y + (x + y)
 
 
 class of 2 equivalent candidates:

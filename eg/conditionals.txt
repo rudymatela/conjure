@@ -18,10 +18,10 @@ abs :: Int -> Int
 -- 48 candidates of size 6
 -- 109 candidates of size 7
 -- 253 candidates of size 8
--- tested 282 candidates
+-- tested 249 candidates
 abs x
-  | x < 0  =  0 - x
-  | otherwise  =  x
+  | 0 < x  =  x
+  | otherwise  =  0 - x
 
 signum :: Int -> Int
 -- testing 7 combinations of argument values
@@ -53,7 +53,7 @@ compare :: Int -> Int -> Ordering
 -- 0 candidates of size 9
 -- 0 candidates of size 10
 -- 324 candidates of size 11
--- tested 193 candidates
+-- tested 31 candidates
 compare x y  =  if x == y
                 then EQ
                 else if x < y then LT else GT

@@ -121,7 +121,7 @@ ordered :: [Int] -> Bool
 -- 25 candidates of size 9
 -- 55 candidates of size 10
 -- 103 candidates of size 11
--- tested 169 candidates
+-- tested 168 candidates
 ordered []  =  True
 ordered (x:xs)  =  (null xs || x <= head xs) && ordered xs
 

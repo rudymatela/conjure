@@ -24,7 +24,7 @@ bitsum :: Int -> Int
 -- 4297 candidates of size 7
 -- 72 candidates of size 8
 -- 85204 candidates of size 9
--- tested 88942 candidates
+-- tested 88434 candidates
 bitsum 0  =  0
 bitsum x  =  x `mod` 2 + bitsum (x `div` 2)
 

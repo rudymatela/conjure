@@ -72,7 +72,7 @@ import Data.Express.Fixtures hiding ((-==-))
 import Data.Dynamic
 -- import Control.Applicative ((<$>)) -- for GHC <= 7.8
 
-import Test.LeanCheck (mapT, filterT, (\/), delay, productWith)
+import Test.LeanCheck (mapT, filterT, (\/), delay, productWith, concatMapT)
 import Test.LeanCheck.Tiers (products)
 import Test.LeanCheck.Utils.Types (A, B, C, D, E, F)
 
@@ -377,11 +377,12 @@ enumerateAppsFor h keep es  =  for h
   for h  =  filter (\e -> typ h == typ e) es : apps
     where
     apps  =  foldr (\/) []
-          [  filterT keep $ fliproductWith (:$) (ufor hf) (ufor hx)
+          [  filterT keep $ concatMapT afor (ufor hf)
           |  hf <- hs
           ,  hx <- hs
           ,  Just hfx <- [hf $$ hx]
           ,  typ h == typ hfx
+          , let afor ef  =  mapT (ef :$) $ ufor hx
           ]
   -- unguarded for
   ufor | any isGuardSymbol es  =  filterT (not . isGuard) . for

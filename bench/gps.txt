@@ -6,7 +6,7 @@ gps1 :: Int -> Float -> Float
 -- 1 candidates of size 3
 -- 2 candidates of size 4
 -- tested 4 candidates
-gps1 x y  =  fromIntegral x + y
+gps1 x y  =  y + fromIntegral x
 
 gps2 :: Int -> Maybe [Char]
 -- testing 6 combinations of argument values
@@ -24,10 +24,10 @@ gps2 :: Int -> Maybe [Char]
 -- 0 candidates of size 11
 -- 512 candidates of size 12
 -- 1280 candidates of size 13
--- tested 1052 candidates
+-- tested 920 candidates
 gps2 x  =  if 2000 <= x
            then Just "large"
-           else if x < 1000 then Just "small" else Nothing
+           else if 1000 <= x then Nothing else Just "small"
 
 gps3 :: Int -> Int -> Int -> [Int]
 -- testing 2 combinations of argument values
@@ -40,7 +40,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- 1248 candidates of size 6
 -- 0 candidates of size 7
 -- 13680 candidates of size 8
--- tested 12358 candidates
+-- tested 3238 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
 gps3 :: Int -> Int -> Int -> [Int]
@@ -112,7 +112,7 @@ gps7 :: [Char] -> ([Char],Int)
 -- 88 candidates of size 9
 -- 201 candidates of size 10
 -- 442 candidates of size 11
--- tested 546 candidates
+-- tested 553 candidates
 gps7 cs  =  (init (unlines (words cs)),length (filter (not . isSpace) cs))
 
 gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
@@ -152,7 +152,7 @@ wallisNext :: Ratio Integer -> Ratio Integer
 -- 86 candidates of size 6
 -- 5 candidates of size 7
 -- 513 candidates of size 8
--- tested 564 candidates
+-- tested 368 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 wallisNext :: Ratio Integer -> Ratio Integer
@@ -166,7 +166,7 @@ wallisNext :: Ratio Integer -> Ratio Integer
 -- 71 candidates of size 6
 -- 5 candidates of size 7
 -- 393 candidates of size 8
--- tested 451 candidates
+-- tested 295 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 gps10 :: Int -> Ratio Integer
@@ -222,8 +222,8 @@ gps12 :: [Int] -> Int
 -- 416 candidates of size 9
 -- 956 candidates of size 10
 -- 3073 candidates of size 11
--- tested 1596 candidates
-gps12 xs  =  (length xs - fromJust (findIndex (0 ==) (reverse xs))) - 1
+-- tested 1713 candidates
+gps12 xs  =  (length xs - 1) - fromJust (findIndex (0 ==) (reverse xs))
 
 gps13 :: [Ratio Integer] -> Ratio Integer
 -- testing 3 combinations of argument values
@@ -236,7 +236,7 @@ gps13 :: [Ratio Integer] -> Ratio Integer
 -- 12 candidates of size 6
 -- 63 candidates of size 7
 -- 95 candidates of size 8
--- tested 114 candidates
+-- tested 106 candidates
 gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 
 odd :: Int -> Bool
@@ -270,7 +270,7 @@ gps14 :: [Int] -> Int
 -- 30 candidates of size 5
 -- 6 candidates of size 6
 -- 345 candidates of size 7
--- tested 83 candidates
+-- tested 46 candidates
 gps14 []  =  0
 gps14 (x:xs)  =  x + gps14 xs `mod` 2
 
@@ -307,7 +307,7 @@ gps17 :: Int -> Int
 -- 147 candidates of size 7
 -- 8 candidates of size 8
 -- 941 candidates of size 9
--- tested 1034 candidates
+-- tested 1032 candidates
 gps17 0  =  0
 gps17 x  =  x * x + gps17 (x - 1)
 
@@ -396,7 +396,7 @@ pig1 :: [Char] -> [Char]
 -- 1679 candidates of size 12
 -- 2787 candidates of size 13
 -- 6383 candidates of size 14
--- tested 8436 candidates
+-- tested 8343 candidates
 pig1 ""  =  "ay"
 pig1 (c:cs)
   | isVowel c  =  (c:cs) ++ "ay"
@@ -476,7 +476,7 @@ gps24 :: [Char] -> Char
 -- 75 candidates of size 8
 -- 193 candidates of size 9
 -- 469 candidates of size 10
--- tested 383 candidates
+-- tested 376 candidates
 gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]
@@ -508,10 +508,10 @@ gps27 :: Int -> Int -> Int -> Int
 -- 0 candidates of size 9
 -- 90 candidates of size 10
 -- 2592 candidates of size 11
--- tested 1489 candidates
-gps27 x y z  =  if x < y
-                then if y < z then y else z
-                else x
+-- tested 367 candidates
+gps27 x y z  =  if y < x
+                then x
+                else if y < z then y else z
 
 gps27b :: Int -> Int -> Int -> Int
 -- testing 3 combinations of argument values
@@ -549,7 +549,7 @@ gps29 :: [Char] -> Int
 -- 4 candidates of size 8
 -- 12 candidates of size 9
 -- 18 candidates of size 10
--- tested 41 candidates
+-- tested 47 candidates
 gps29 ""  =  0
 gps29 (c:cs)
   | isVowel c  =  1 + gps29 cs

@@ -28,7 +28,7 @@ digits :: Int -> [Int]
 -- 4186 candidates of size 9
 -- 18 candidates of size 10
 -- 67104 candidates of size 11
--- tested 71486 candidates
+-- tested 71513 candidates
 digits 0  =  []
 digits x  =  digits (x `div` 10) ++ [x `mod` 10]
 
@@ -44,7 +44,7 @@ digitSum :: Int -> Int
 -- 2680 candidates of size 7
 -- 84 candidates of size 8
 -- 46993 candidates of size 9
--- tested 49479 candidates
+-- tested 49164 candidates
 digitSum 0  =  0
 digitSum x  =  x `mod` 10 + digitSum (x `div` 10)
 

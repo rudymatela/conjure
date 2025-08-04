@@ -30,15 +30,15 @@ factorial x  =  x * factorial (x - 1)
 
 -- 49 candidates of size 10
 -- 6490 candidates of size 11
--- tested 7263 candidates
+-- tested 7239 candidates
 factorial 0  =  1
 factorial x  =  x + x * (factorial (x - 1) - 1)
 
--- tested 7443 candidates
+-- tested 7421 candidates
 factorial 0  =  1
 factorial x  =  x - x * (1 - factorial (x - 1))
 
--- tested 7566 candidates
+-- tested 7544 candidates
 factorial 0  =  1
 factorial x  =  (0 - x) * (0 - factorial (x - 1))
 

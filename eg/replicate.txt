@@ -46,7 +46,7 @@ replicates :: [Char] -> Int -> [Char]
 -- 2 candidates of size 6
 -- 1 candidates of size 7
 -- 8 candidates of size 8
--- tested 8 candidates
+-- tested 14 candidates
 replicates "" x  =  ""
 replicates (c:cs) x  =  replicate x c ++ replicates cs x
 

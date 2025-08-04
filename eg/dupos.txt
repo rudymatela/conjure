@@ -18,7 +18,7 @@ duplicates :: [Int] -> [Int]
 -- 36 candidates of size 15
 -- 52 candidates of size 16
 -- 53 candidates of size 17
--- tested 229 candidates
+-- tested 230 candidates
 duplicates []  =  []
 duplicates (x:xs)
   | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs
@@ -43,7 +43,7 @@ duplicates :: [Int] -> [Int]
 -- 67 candidates of size 15
 -- 80 candidates of size 16
 -- 99 candidates of size 17
--- tested 435 candidates
+-- tested 437 candidates
 duplicates []  =  []
 duplicates (x:xs)
   | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs

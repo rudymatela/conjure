@@ -70,7 +70,7 @@ catpairs :: [(A,A)] -> [A]
 -- 17 candidates of size 7
 -- 35 candidates of size 8
 -- 72 candidates of size 9
--- tested 103 candidates
+-- tested 101 candidates
 catpairs []  =  []
 catpairs (xy:xys)  =  fst xy:snd xy:catpairs xys
 

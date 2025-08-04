@@ -11,7 +11,7 @@ gps1 :: [Int] -> Maybe Int
 -- 0 candidates of size 8
 -- 1 candidates of size 9
 -- 2 candidates of size 10
--- tested 5 candidates
+-- tested 4 candidates
 gps1 xs  =  findIndex (0 >) (map (foldr (+) 0) (tail (inits xs)))
 
 gps1 :: [Int] -> Maybe Int
@@ -25,7 +25,7 @@ gps1 :: [Int] -> Maybe Int
 -- 0 candidates of size 6
 -- 1 candidates of size 7
 -- 4 candidates of size 8
--- tested 6 candidates
+-- tested 4 candidates
 gps1 xs  =  findIndex (0 >) (map sum (tail (inits xs)))
 
 gps1 :: Int -> [Int] -> Int
@@ -83,7 +83,7 @@ tell :: [Int] -> Int -> [Int]
 -- 328 candidates of size 8
 -- 134 candidates of size 9
 -- 3229 candidates of size 10
--- tested 3444 candidates
+-- tested 3476 candidates
 tell [] x  =  []
 tell (x:xs) y  =  y `div` x:tell xs (y `mod` x)
 
@@ -165,7 +165,7 @@ gps10 :: [Int] -> Int
 -- 1428 candidates of size 7
 -- 432 candidates of size 8
 -- 30712 candidates of size 9
--- tested 7028 candidates
+-- tested 4552 candidates
 gps10 []  =  0
 gps10 (x:xs)  =  (x `div` 3 - 2) + gps10 xs
 
@@ -208,7 +208,7 @@ gps13_leaders :: [Int] -> [Int]
 -- 16 candidates of size 10
 -- 53 candidates of size 11
 -- 48 candidates of size 12
--- tested 95 candidates
+-- tested 101 candidates
 gps13_leaders []  =  []
 gps13_leaders (x:xs)
   | all (x >) xs  =  x:gps13_leaders xs
@@ -235,7 +235,7 @@ gps16_middle :: [Char] -> [Char]
 -- 391 candidates of size 10
 -- 993 candidates of size 11
 -- 2480 candidates of size 12
--- tested 3577 candidates
+-- tested 3719 candidates
 gps16_middle ""  =  ""
 gps16_middle (c:cs)  =  if length cs <= 1
                         then c:cs
@@ -303,7 +303,7 @@ spin :: [Char] -> [Char]
 -- 0 candidates of size 6
 -- 0 candidates of size 7
 -- 4 candidates of size 8
--- tested 3 candidates
+-- tested 6 candidates
 spin cs
   | length cs >= 5  =  reverse cs
   | otherwise  =  cs
@@ -368,7 +368,7 @@ gps24 :: [Char] -> Twitter
 -- 216 candidates of size 10
 -- 308 candidates of size 11
 -- 466 candidates of size 12
--- tested 763 candidates
+-- tested 803 candidates
 gps24 ""  =  Empty
 gps24 (c:cs)
   | 140 > length cs  =  Tweet (length (c:cs))

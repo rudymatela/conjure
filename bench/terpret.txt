@@ -39,7 +39,7 @@ decrement :: [Bool] -> [Bool]
 -- 4 candidates of size 8
 -- 35 candidates of size 9
 -- 13 candidates of size 10
--- tested 73 candidates
+-- tested 71 candidates
 decrement []  =  []
 decrement (p:ps)
   | p  =  False:ps

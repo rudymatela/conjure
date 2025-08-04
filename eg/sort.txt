@@ -6,7 +6,7 @@ sort :: [Int] -> [Int]
 -- 2 candidates of size 3
 -- 7 candidates of size 4
 -- 14 candidates of size 5
--- tested 25 candidates
+-- tested 26 candidates
 sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
@@ -63,7 +63,7 @@ qsort :: [Int] -> [Int]
 -- 187 candidates of size 12
 -- 474 candidates of size 13
 -- 915 candidates of size 14
--- tested 1619 candidates
+-- tested 1578 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
