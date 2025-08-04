@@ -52,6 +52,14 @@ max' 1 0 2  =  2
 max' 4 3 1  =  4
 max' 4 1 3  =  4
 
+median' :: Int -> Int -> Int -> Int
+median' 0 1 2  =  1
+median' 0 2 1  =  1
+median' 2 3 1  =  2
+median' 1 0 2  =  1
+median' 4 3 1  =  3
+median' 4 1 3  =  3
+
 main :: IO ()
 main = do
   conjure "negate"  negate' ingredients
@@ -61,6 +69,8 @@ main = do
 
   conjure "min" min' mmmIngredients
   conjure "max" max' mmmIngredients
+  -- median is unreachable performance-wise
+  -- conjure "median" median' mmmIngredients
 
 ingredients :: [Ingredient]
 ingredients  =
