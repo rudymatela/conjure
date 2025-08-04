@@ -22,12 +22,13 @@ gps2 :: Int -> Maybe [Char]
 -- 0 candidates of size 9
 -- 0 candidates of size 10
 -- 0 candidates of size 11
--- 512 candidates of size 12
--- 1280 candidates of size 13
--- tested 920 candidates
-gps2 x  =  if 2000 <= x
-           then Just "large"
-           else if 1000 <= x then Nothing else Just "small"
+-- 256 candidates of size 12
+-- 640 candidates of size 13
+-- tested 664 candidates
+gps2 x
+  | 2000 <= x  =  Just "large"
+  | 1000 <= x  =  Nothing
+  | otherwise  =  Just "small"
 
 gps3 :: Int -> Int -> Int -> [Int]
 -- testing 2 combinations of argument values
@@ -43,7 +44,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- tested 3238 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
-gps3 :: Int -> Int -> Int -> [Int]
+gps3_alt :: Int -> Int -> Int -> [Int]
 -- testing 2 combinations of argument values
 -- pruning with 6/18 rules
 -- 1 candidates of size 1
@@ -54,8 +55,13 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- 0 candidates of size 6
 -- 81 candidates of size 7
 -- 36 candidates of size 8
--- tested 136 candidates
-gps3  =  undefined  -- search exhausted
+-- 441 candidates of size 9
+-- 432 candidates of size 10
+-- 2403 candidates of size 11
+-- 3636 candidates of size 12
+-- 13311 candidates of size 13
+-- tested 20359 candidates
+gps3_alt  =  undefined  -- search exhausted
 
 gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- testing 9 combinations of argument values

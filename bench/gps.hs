@@ -103,9 +103,8 @@ gps2c  =  conjure "gps2" gps2p
   , fun "Nothing" (Nothing :: Maybe String)
   , fun "<=" ((<=) :: Int -> Int -> Bool)
   , fun "<" ((<) :: Int -> Int -> Bool)
-  , iif (undefined :: Maybe String)
+  , guard
   , maxTests 5040
-  , maxSize 30
   ]
 
 
@@ -117,9 +116,9 @@ gps3g1 :: Int -> Int -> Int -> [Int]
 gps3g1 start end step  =  enumFromThenTo start (step+start) (end-1)
 
 gps3g2 :: Int -> Int -> Int -> [Int]
-gps3g2 start end step  =  if start < end
-                          then start : gps3g2 (start+step) end step
-                          else []
+gps3g2 start end step
+  | start < end  =  start : gps3g2 (start+step) end step -- 11
+  | otherwise    =  [] -- 12
 
 gps3c :: IO ()
 gps3c  =  do
@@ -131,13 +130,14 @@ gps3c  =  do
     ]
 
   -- not possible, no recursive descent
-  conjure "gps3" gps3p
+  conjure "gps3_alt" gps3p
     [ unfun ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "<" ((<) :: Int -> Int -> Bool)
-    , iif (undefined :: [Int])
-    , maxSize 8
+    , guard
+    , dontRequireDescent
+    -- TODO: shouldn't a solution appear here?
     ]
 
 
