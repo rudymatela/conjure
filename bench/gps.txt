@@ -498,9 +498,19 @@ gps24 cs  =  chr (ord ' ' + sum (map ord cs) `mod` 64)
 
 gps25 :: Int -> [Int]
 -- testing 4 combinations of argument values
--- pruning with 0/0 rules
--- 0 candidates of size 1
--- tested 0 candidates
+-- pruning with 32/37 rules
+-- reasoning produced 1 incorrect properties, please re-run with more tests for faster results
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 1 candidates of size 4
+-- 21 candidates of size 5
+-- 30 candidates of size 6
+-- 259 candidates of size 7
+-- 695 candidates of size 8
+-- 4225 candidates of size 9
+-- 15042 candidates of size 10
+-- tested 20277 candidates
 gps25  =  undefined  -- search exhausted
 
 gps26 :: Int -> Int -> Int -> Int -> Int -> Char

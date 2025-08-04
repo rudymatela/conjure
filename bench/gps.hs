@@ -860,12 +860,12 @@ gps25g n  =  if abs n < 10                                --  8
 
 -- out of reach performance-wise
 gps25c :: IO ()
-gps25c  =  conjure "gps25" gps25p $ take 0
+gps25c  =  conjure "gps25" gps25p
   [ unfun (0 :: Int)
   , unfun (10 :: Int)
   , unfun ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
-  , iif (undefined :: [Int])
+  , guard
   , fun "abs" (abs :: Int -> Int)
   , fun "<" ((<) :: Int -> Int -> Bool)
   , fun "rem" (rem :: Int -> Int -> Int)
