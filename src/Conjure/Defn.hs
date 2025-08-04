@@ -74,9 +74,7 @@ showDefn  =  unlines . map show1
   where
   show1 (lhs,rhs)  =
     case rhs of
-    Value "|" _ :$ c :$ t :$ e -> showExpr lhs
-                       ++ "\n  | " ++ showExpr c ++ "  =  " ++ showExpr t
-                       ++ "\n  | otherwise  =  " ++ showExpr e
+    Value "|" _ :$ _ :$ _ :$ _ -> showExpr lhs ++ showCases rhs
     Value "if" _ :$ c :$ t :$ e -> lhseqs ++ "if " ++ showExpr c
                         ++ "\n" ++ spaces ++ "then " ++ showExpr t
                         ++ "\n" ++ spaces ++ "else " ++ showExpr e
@@ -93,6 +91,11 @@ showDefn  =  unlines . map show1
     where
     lhseqs  =  showExpr lhs ++ "  =  "
     spaces  =  map (const ' ') lhseqs
+  showCases (Value "|" _ :$ c :$ e :$ etc)  =
+    "\n  | " ++ showExpr c ++ "  =  " ++ showExpr e ++ showCases etc
+  showCases e  =
+    "\n  | otherwise  =  " ++ showExpr e
+
 
 -- | Pretty-prints a 'Defn' to the screen.
 --

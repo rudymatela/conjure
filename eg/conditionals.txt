@@ -52,9 +52,10 @@ compare :: Int -> Int -> Ordering
 -- 0 candidates of size 8
 -- 0 candidates of size 9
 -- 0 candidates of size 10
--- 324 candidates of size 11
+-- 162 candidates of size 11
 -- tested 31 candidates
-compare x y  =  if x == y
-                then EQ
-                else if x < y then LT else GT
+compare x y
+  | x == y  =  EQ
+  | x < y  =  LT
+  | otherwise  =  GT
 

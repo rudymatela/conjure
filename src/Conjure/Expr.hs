@@ -382,7 +382,10 @@ enumerateAppsFor h keep es  =  for h
           ,  hx <- hs
           ,  Just hfx <- [hf $$ hx]
           ,  typ h == typ hfx
-          , let afor ef  =  mapT (ef :$) $ ufor hx
+          -- the following allows chains of guards:
+          , let afor ef  =  mapT (ef :$) $ if isGuard (ef :$ hx)
+                                           then for hx
+                                           else ufor hx
           ]
   -- unguarded for
   ufor | any isGuardSymbol es  =  filterT (not . isGuard) . for

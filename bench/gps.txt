@@ -391,12 +391,12 @@ pig1 :: [Char] -> [Char]
 -- 46 candidates of size 7
 -- 115 candidates of size 8
 -- 176 candidates of size 9
--- 437 candidates of size 10
--- 698 candidates of size 11
--- 1679 candidates of size 12
--- 2787 candidates of size 13
--- 6383 candidates of size 14
--- tested 8343 candidates
+-- 441 candidates of size 10
+-- 708 candidates of size 11
+-- 1747 candidates of size 12
+-- 2919 candidates of size 13
+-- 6925 candidates of size 14
+-- tested 8943 candidates
 pig1 ""  =  "ay"
 pig1 (c:cs)
   | isVowel c  =  (c:cs) ++ "ay"
@@ -548,8 +548,8 @@ gps29 :: [Char] -> Int
 -- 10 candidates of size 7
 -- 4 candidates of size 8
 -- 12 candidates of size 9
--- 18 candidates of size 10
--- tested 47 candidates
+-- 26 candidates of size 10
+-- tested 55 candidates
 gps29 ""  =  0
 gps29 (c:cs)
   | isVowel c  =  1 + gps29 cs

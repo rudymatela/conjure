@@ -21,8 +21,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Rethink Conjurable typeclass?
 
-* Allow chains of guards (see below).
-
 * Find most efficient of a given size (see below).
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
@@ -32,38 +30,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Add way to consider functions that don't increase size of arguments in recursive calls
 	(qsort example)
-
-
-## Allow chains of guards
-
-With the use of `guard` right now,
-Conjure can generate functions such as the following:
-
-	function x y z
-	  | x < 123    =  ...
-	  | otherwise  =  ...
-
-We should probably allow chains of guards such as the following:
-
-	function x y z
-	  | x < 123    =  ...
-	  | x == 321   =  ...
-	  | y == 12    =  ...
-	  | otherwise  =  ...
-
-Internally, these are just chains of if-then-else applications:
-
-	function x y z  =  if x < 123
-	                   then ...
-					   else if x == 321
-					   then ...
-					   else if y == 12
-					   then ...
-					   else ...
-
-This change shouldn't be so complicated to introduce
-requiring a change in `enumerateAppsFor` relaxing `ufor hx`
-depending on what we have on the left...
 
 
 ## Find the most efficient of a given size

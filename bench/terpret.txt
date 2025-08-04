@@ -38,7 +38,7 @@ decrement :: [Bool] -> [Bool]
 -- 16 candidates of size 7
 -- 4 candidates of size 8
 -- 35 candidates of size 9
--- 13 candidates of size 10
+-- 15 candidates of size 10
 -- tested 71 candidates
 decrement []  =  []
 decrement (p:ps)
@@ -57,12 +57,12 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- 12 candidates of size 4
 -- 125 candidates of size 5
 -- 225 candidates of size 6
--- 649 candidates of size 7
+-- 665 candidates of size 7
 -- 1242 candidates of size 8
 -- 3087 candidates of size 9
--- 8833 candidates of size 10
+-- 9281 candidates of size 10
 -- 180325 candidates of size 11
--- tested 39632 candidates
+-- tested 40096 candidates
 cshift (p,q,r)
   | p  =  (p,r,q)
   | otherwise  =  (p,q,r)

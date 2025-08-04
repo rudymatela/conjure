@@ -63,5 +63,5 @@ compareIngredients  =
   , fun "==" ((==) :: Int -> Int -> Bool)
   , fun "<"  ((<)  :: Int -> Int -> Bool)
 --, fun "<=" ((<=) :: Int -> Int -> Bool)
-  , iif (undefined :: Ordering)
+  , guard
   ]

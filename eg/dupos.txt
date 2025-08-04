@@ -13,12 +13,12 @@ duplicates :: [Int] -> [Int]
 -- 8 candidates of size 10
 -- 8 candidates of size 11
 -- 14 candidates of size 12
--- 18 candidates of size 13
--- 34 candidates of size 14
--- 36 candidates of size 15
--- 52 candidates of size 16
--- 53 candidates of size 17
--- tested 230 candidates
+-- 22 candidates of size 13
+-- 52 candidates of size 14
+-- 74 candidates of size 15
+-- 120 candidates of size 16
+-- 156 candidates of size 17
+-- tested 461 candidates
 duplicates []  =  []
 duplicates (x:xs)
   | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs
@@ -37,13 +37,13 @@ duplicates :: [Int] -> [Int]
 -- 13 candidates of size 9
 -- 18 candidates of size 10
 -- 21 candidates of size 11
--- 28 candidates of size 12
--- 39 candidates of size 13
--- 54 candidates of size 14
--- 67 candidates of size 15
--- 80 candidates of size 16
--- 99 candidates of size 17
--- tested 437 candidates
+-- 32 candidates of size 12
+-- 57 candidates of size 13
+-- 102 candidates of size 14
+-- 159 candidates of size 15
+-- 228 candidates of size 16
+-- 331 candidates of size 17
+-- tested 979 candidates
 duplicates []  =  []
 duplicates (x:xs)
   | elem x xs && not (elem x (duplicates xs))  =  x:duplicates xs
