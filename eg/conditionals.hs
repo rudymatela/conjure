@@ -36,12 +36,31 @@ compare' 2 1  =  GT
 compare' (-1) 0  =  LT
 compare' 0 (-1)  =  GT
 
+min' :: Int -> Int -> Int -> Int
+min' 0 1 2  =  0
+min' 0 2 1  =  0
+min' 2 3 1  =  1
+min' 1 0 2  =  0
+min' 4 3 1  =  1
+min' 4 1 3  =  1
+
+max' :: Int -> Int -> Int -> Int
+max' 0 1 2  =  2
+max' 0 2 1  =  2
+max' 2 3 1  =  3
+max' 1 0 2  =  2
+max' 4 3 1  =  4
+max' 4 1 3  =  4
+
 main :: IO ()
 main = do
   conjure "negate"  negate' ingredients
   conjure "abs"     abs'    ingredients
   conjure "signum"  signum' ingredients
   conjure "compare" compare' compareIngredients
+
+  conjure "min" min' mmmIngredients
+  conjure "max" max' mmmIngredients
 
 ingredients :: [Ingredient]
 ingredients  =
@@ -64,4 +83,11 @@ compareIngredients  =
   , fun "<"  ((<)  :: Int -> Int -> Bool)
 --, fun "<=" ((<=) :: Int -> Int -> Bool)
   , guard
+  ]
+
+mmmIngredients :: [Ingredient]
+mmmIngredients  =
+  [ fun "<=" ((<=) :: Int -> Int -> Bool)
+  , iif (undefined :: Int)
+  , target 50400
   ]

@@ -59,3 +59,51 @@ compare x y
   | x < y  =  LT
   | otherwise  =  GT
 
+min :: Int -> Int -> Int -> Int
+-- testing 6 combinations of argument values
+-- pruning with 4/4 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 36 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 2592 candidates of size 11
+-- 0 candidates of size 12
+-- 0 candidates of size 13
+-- 0 candidates of size 14
+-- 0 candidates of size 15
+-- 248400 candidates of size 16
+-- tested 49553 candidates
+min x y z  =  if x <= y
+              then if x <= z then x else z
+              else if y <= z then y else z
+
+max :: Int -> Int -> Int -> Int
+-- testing 6 combinations of argument values
+-- pruning with 4/4 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 0 candidates of size 5
+-- 36 candidates of size 6
+-- 0 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 0 candidates of size 10
+-- 2592 candidates of size 11
+-- 0 candidates of size 12
+-- 0 candidates of size 13
+-- 0 candidates of size 14
+-- 0 candidates of size 15
+-- 248400 candidates of size 16
+-- tested 50103 candidates
+max x y z  =  if x <= y
+              then if y <= z then z else y
+              else if x <= z then z else x
+
