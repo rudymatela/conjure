@@ -904,27 +904,33 @@ gps26c  =  conjure "gps26" gps26p
 
 
 -- GPS Benchmark #27 -- Median --
+-- Given three integers, print their median.
 gps27p :: Int -> Int -> Int -> Int
 gps27p 0 1 2  =  1
+gps27p 0 2 1  =  1
+gps27p 2 3 1  =  2
 gps27p 1 0 2  =  1
-gps27p (-1) 1 0  =  0
+gps27p 4 3 1  =  3
+gps27p 4 1 3  =  3
 
 gps27g :: Int -> Int -> Int -> Int
 gps27g x y z
-  | y < x && x < z  =  x  -- 8
-  | x < y && y < z  =  y  -- 16
-  | otherwise       =  z  -- 17
--- Conjure found a smaller implementation!
+  | y <= x && x <= z || z <= x && x <= y  =  x  -- 16
+  | x <= y && y <= z || z <= y && y <= x  =  y  -- 32
+  | otherwise                             =  z  -- 33
 
 gps27c :: IO ()
 gps27c  =  do
-  conjure "gps27" gps27p
-    [ fun "<" ((<) :: Int -> Int -> Bool)
+  -- simply unreachable performance-wise
+  -- it gets OOM at size 25 after >83s.
+  conjure "gps27_median" gps27p
+    [ fun "<=" ((<=) :: Int -> Int -> Bool)
     , fun "&&" (&&)
-    , iif (undefined :: Int)
+    , fun "||" (||)
+    , guard
     ]
 
-  conjure "gps27b" gps27p
+  conjure "gps27b_median" gps27p
     [ fun "min" (min :: Int -> Int -> Int)
     , fun "max" (max :: Int -> Int -> Int)
     ]

@@ -500,9 +500,9 @@ gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- tested 5 candidates
 gps26  =  undefined  -- search exhausted
 
-gps27 :: Int -> Int -> Int -> Int
--- testing 3 combinations of argument values
--- pruning with 14/18 rules
+gps27_median :: Int -> Int -> Int -> Int
+-- testing 6 combinations of argument values
+-- pruning with 32/42 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
@@ -512,23 +512,30 @@ gps27 :: Int -> Int -> Int -> Int
 -- 0 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 90 candidates of size 10
--- 2592 candidates of size 11
--- tested 367 candidates
-gps27 x y z  =  if y < x
-                then x
-                else if y < z then y else z
+-- 180 candidates of size 10
+-- 648 candidates of size 11
+-- 0 candidates of size 12
+-- 0 candidates of size 13
+-- 1440 candidates of size 14
+-- 6480 candidates of size 15
+-- 11664 candidates of size 16
+-- tested 20451 candidates
+gps27_median  =  undefined  -- search exhausted
 
-gps27b :: Int -> Int -> Int -> Int
--- testing 3 combinations of argument values
+gps27b_median :: Int -> Int -> Int -> Int
+-- testing 6 combinations of argument values
 -- pruning with 20/30 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 6 candidates of size 3
 -- 0 candidates of size 4
 -- 12 candidates of size 5
--- tested 15 candidates
-gps27b x y z  =  min z (max x y)
+-- 0 candidates of size 6
+-- 63 candidates of size 7
+-- 0 candidates of size 8
+-- 342 candidates of size 9
+-- tested 376 candidates
+gps27b_median x y z  =  min (max x y) (max z (min x y))
 
 gps28 :: Int -> Int -> Int -> Int -> Int
 -- testing 5 combinations of argument values
