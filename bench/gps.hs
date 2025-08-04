@@ -739,6 +739,7 @@ gps21p [1]  =  [1]
 gps21p [-1]  =  [0]
 gps21p [1,-1]  =  [1,0]
 gps21p [-1,1]  =  [0,1]
+gps21p [-1,-1]  =  [0,0]
 
 gps21g :: [Int] -> [Int]
 gps21g []  =  []
@@ -750,7 +751,7 @@ gps21c  =  conjure "gps21" gps21p
   , unfun (0 :: Int)
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , fun "<" ((<) :: Int -> Int -> Bool)
-  , iif (undefined :: Int)
+  , guard
   ]
 
 
