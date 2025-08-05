@@ -5,12 +5,14 @@ Changelog for (Code) Conjure
 upcoming
 --------
 
-* `con` replaces `unfun` (again).
+* Flip-flop: `con` replaces `unfun`.
+* Allow chains of guards, or multiple guards.
+* Replace `omitEarlyTests` by `maxEarlyTests`, defaulting to 12.
 * Improve pruning through early tests.
-* Replace `omitEarlyTests` by `maxEarlyTests`.
-* Limit the number of early tests to 12 by default (`maxEarlyTests`).
+* Fix `requireDescent` switch
 * Fix overpruning in early tests.
-* Fefactor parts of `Engine.candidateDefnsC`.
+* Refactor parts of `Engine.candidateDefnsC`.
+* Cleanup built-in examples.
 
 
 v0.7.4 (May 2025)
