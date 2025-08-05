@@ -59,37 +59,6 @@ main = do
     , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
-  -- qsort []  =  []                           -- 1
-  -- qsort (x:xs)  =  qsort (filter (x >) xs)  -- 6
-  --            ++ (x:qsort (filter (x <=) xs) -- 14
-  -- this one is not out of reach performance wise,
-  -- but is not generated because of the deconstruction restriction.
-  -- The following does generate a correct but inneficient version of qsort.
-  conjure "qsort" sort'
-    [ con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
-    , fun "<=" ((<=) :: Int -> Int -> Bool)
-    , fun ">"  ((>)  :: Int -> Int -> Bool)
-    , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
-    ]
-
-  -- if we disable the descent requirement and carry on,
-  -- we eventually get the efficient qsort
-  -- with a larger search space
-  {-
-  conjure "qsort" sort'
-    [ con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
-    , fun "<=" ((<=) :: Int -> Int -> Bool)
-    , fun ">"  ((>)  :: Int -> Int -> Bool)
-    , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
-    , dontRequireDescent
-    , carryOn
-    ]
-  -}
-
   -- found!  candidate #353593 @ size 22 after ~30s
   -- merge [] xs  =  xs
   -- merge (x:xs) []  =  x:xs
@@ -112,4 +81,19 @@ main = do
     , fun "compare" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: [Int])
     , target 1080
+    ]
+
+  -- Produces a inefficient degenerate version of qsort
+  -- where filter is applied _after_ sorting.
+  conjure "qsort" sort'
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
+    , fun ">"  ((>)  :: Int -> Int -> Bool)
+    , fun "filter" (filter :: (Int -> Bool) -> [Int] -> [Int])
+    -- if we disable the descent requirement and carry on,
+    -- we eventually get the efficient qsort
+    -- , dontRequireDescent
+    -- , carryOn
     ]

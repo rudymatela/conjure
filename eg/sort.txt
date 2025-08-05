@@ -46,27 +46,6 @@ sort :: [Int] -> [Int]
 -- tested 4 candidates
 sort  =  foldr insert []
 
-qsort :: [Int] -> [Int]
--- testing 9 combinations of argument values
--- pruning with 8/8 rules
--- 2 candidates of size 1
--- 0 candidates of size 2
--- 1 candidates of size 3
--- 0 candidates of size 4
--- 2 candidates of size 5
--- 3 candidates of size 6
--- 4 candidates of size 7
--- 10 candidates of size 8
--- 18 candidates of size 9
--- 39 candidates of size 10
--- 87 candidates of size 11
--- 165 candidates of size 12
--- 409 candidates of size 13
--- 809 candidates of size 14
--- tested 1377 candidates
-qsort []  =  []
-qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
-
 merge :: [Int] -> [Int] -> [Int]
 -- testing 12 combinations of argument values
 -- pruning with 4/4 rules
@@ -108,4 +87,25 @@ merge :: [Int] -> [Int] -> [Int]
 -- 616 candidates of size 14
 -- tested 1184 candidates
 merge  =  undefined  -- search exhausted
+
+qsort :: [Int] -> [Int]
+-- testing 9 combinations of argument values
+-- pruning with 8/8 rules
+-- 2 candidates of size 1
+-- 0 candidates of size 2
+-- 1 candidates of size 3
+-- 0 candidates of size 4
+-- 2 candidates of size 5
+-- 3 candidates of size 6
+-- 4 candidates of size 7
+-- 10 candidates of size 8
+-- 18 candidates of size 9
+-- 39 candidates of size 10
+-- 87 candidates of size 11
+-- 165 candidates of size 12
+-- 409 candidates of size 13
+-- 809 candidates of size 14
+-- tested 1377 candidates
+qsort []  =  []
+qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
