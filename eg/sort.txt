@@ -25,7 +25,7 @@ insert x (y:xs)
   | otherwise  =  x:y:xs
 
 sort :: [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 9 combinations of argument values
 -- pruning with 0/0 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
@@ -37,7 +37,7 @@ sort []  =  []
 sort (x:xs)  =  insert x (sort xs)
 
 sort :: [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 9 combinations of argument values
 -- pruning with 1/2 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
@@ -47,7 +47,7 @@ sort :: [Int] -> [Int]
 sort  =  foldr insert []
 
 qsort :: [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 9 combinations of argument values
 -- pruning with 8/8 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
@@ -56,14 +56,14 @@ qsort :: [Int] -> [Int]
 -- 2 candidates of size 5
 -- 3 candidates of size 6
 -- 4 candidates of size 7
--- 12 candidates of size 8
+-- 10 candidates of size 8
 -- 18 candidates of size 9
--- 46 candidates of size 10
--- 97 candidates of size 11
--- 187 candidates of size 12
--- 474 candidates of size 13
--- 915 candidates of size 14
--- tested 1578 candidates
+-- 39 candidates of size 10
+-- 87 candidates of size 11
+-- 165 candidates of size 12
+-- 409 candidates of size 13
+-- 809 candidates of size 14
+-- tested 1377 candidates
 qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
