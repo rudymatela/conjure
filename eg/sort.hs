@@ -24,16 +24,17 @@ insert' 2 [0,1]  =  [0,1,2]
 
 merge' :: [Int] -> [Int] -> [Int]
 merge' [] []  =  []
-merge' xs []  =  xs
-merge' [] ys  =  ys
-merge' [x] [y] | x <= y     =  [x,y]
-               | otherwise  =  [y,x]
+merge' [0] []  =  [0]
+merge' [] [0]  =  [0]
+merge' [0] [1]  =  [0,1]
+merge' [1] [0]  =  [0,1]
+merge' [1] [0,2]  =  [0,1,2]
+merge' [0,2] [1]  =  [0,1,2]
 merge' [0,1] [0,1]  =  [0,0,1,1]
 merge' [0,1] [2,3]  =  [0,1,2,3]
 merge' [0,2] [1,3]  =  [0,1,2,3]
 merge' [0,1] [1,2]  =  [0,1,1,2]
 merge' [1,2] [0,1]  =  [0,1,1,2]
-merge' [0,2] [1,1]  =  [0,1,1,2]
 
 main :: IO ()
 main = do

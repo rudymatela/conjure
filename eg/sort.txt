@@ -68,7 +68,7 @@ qsort []  =  []
 qsort (x:xs)  =  filter (x >) (qsort xs) ++ (x:filter (x <=) (qsort xs))
 
 merge :: [Int] -> [Int] -> [Int]
--- testing 1080 combinations of argument values
+-- testing 12 combinations of argument values
 -- pruning with 4/4 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
@@ -76,21 +76,21 @@ merge :: [Int] -> [Int] -> [Int]
 -- 10 candidates of size 4
 -- 0 candidates of size 5
 -- 6 candidates of size 6
--- 13 candidates of size 7
+-- 26 candidates of size 7
 -- 6 candidates of size 8
--- 50 candidates of size 9
--- 14 candidates of size 10
--- 125 candidates of size 11
--- 68 candidates of size 12
--- 245 candidates of size 13
--- 434 candidates of size 14
--- 461 candidates of size 15
--- 2992 candidates of size 16
--- tested 4427 candidates
+-- 67 candidates of size 9
+-- 38 candidates of size 10
+-- 152 candidates of size 11
+-- 158 candidates of size 12
+-- 296 candidates of size 13
+-- 718 candidates of size 14
+-- 560 candidates of size 15
+-- 3728 candidates of size 16
+-- tested 5768 candidates
 merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
--- testing 360 combinations of argument values
+-- testing 12 combinations of argument values
 -- pruning with 1/2 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
