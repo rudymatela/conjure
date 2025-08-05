@@ -120,8 +120,8 @@ gps3c  =  conjure "gps3" gps3p []
 
 
 
--- GPS #4: https://www.codewars.com/kata/517abf86da9663f1d2000003
--- Here we're using the problem description as in the GPS2 paper
+-- PSB2 #4: https://www.codewars.com/kata/517abf86da9663f1d2000003
+-- Here we're using the problem description as in the PSB2 paper
 -- considering we're getting input as kebab-case.
 -- Nevertheless, this one is out of reach performance-wise (and OOM-wise)
 
@@ -158,7 +158,7 @@ gps4c  =  do
     ]
 
 
--- GPS #5: Coin Sums
+-- PSB2 #5: Coin Sums
 -- https://projecteuler.net/problem=31
 --
 -- The problem description is inconsistent with the one given in the paper.
@@ -229,7 +229,7 @@ gps5c  =  do
     ]
 
 
--- GPS2#6: Cut Vector
+-- PSB2 #6: Cut Vector
 gps6g :: [Int] -> Int
 gps6g xs  =  snd
           $  minimum
@@ -246,7 +246,7 @@ gps6c  =
   conjure "gps6" gps6g []
 
 
--- GPS2#7: Dice Game
+-- PSB2 #7: Dice Game
 -- https://projecteuler.net/problem=31
 -- https://github.com/thelmuth/Clojush/blob/psb2-v1.0/src/clojush/problems/psb2/dice_game.clj
 -- again, paper and problem are inconsistent, going with paper
@@ -295,7 +295,7 @@ gps8c :: IO ()
 gps8c  =  conjure "gps8" gps8p []
 
 
--- GPSB#9: Fizz Buzz (CW)
+-- PSB2 #9: Fizz Buzz (CW)
 gps9p :: Int -> String
 gps9p 3  =  "Fizz"
 gps9p 4  =  "4"

@@ -57,24 +57,6 @@ bench/erroneous.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/erroneous.hs
-bench/gps2: \
-  bench/gps2.hs \
-  mk/toplibs
-bench/gps2.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/Settings.hs \
-  src/Conjure/Red.hs \
-  src/Conjure/Reason.hs \
-  src/Conjure.hs \
-  src/Conjure/Ingredient.hs \
-  src/Conjure/Expr.hs \
-  src/Conjure/Engine.hs \
-  src/Conjure/Defn/Test.hs \
-  src/Conjure/Defn/Redundancy.hs \
-  src/Conjure/Defn.hs \
-  src/Conjure/Conjurable.hs \
-  src/Conjure/Conjurable/Derive.hs \
-  bench/gps2.hs
 bench/gps: \
   bench/gps.hs \
   mk/toplibs
@@ -183,6 +165,24 @@ bench/lowtests.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/lowtests.hs
+bench/psb2: \
+  bench/psb2.hs \
+  mk/toplibs
+bench/psb2.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Settings.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/psb2.hs
 bench/redundants: \
   bench/redundants.hs \
   mk/toplibs

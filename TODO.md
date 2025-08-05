@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Rename `bench/gps2` to `bench/psb2`?
-
 * cleanup `sort` example, add full mergesort.
 
 * Make so that derived Listable instances `reset`

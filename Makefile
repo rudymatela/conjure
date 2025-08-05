@@ -60,7 +60,7 @@ EG = \
   bench/i12 \
   bench/i30 \
   bench/gps \
-  bench/gps2 \
+  bench/psb2 \
   bench/terpret \
   bench/unique \
   bench/weird \

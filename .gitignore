@@ -76,7 +76,7 @@ bench/candidates
 bench/redundants
 bench/erroneous
 bench/gps
-bench/gps2
+bench/psb2
 bench/lowtests
 bench/terpret
 bench/weird
