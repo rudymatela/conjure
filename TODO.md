@@ -9,8 +9,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Allow timeout setting?
 
-* Rethink Conjurable typeclass?
-
 * Find most efficient of a given size (see below).
 
 * Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
