@@ -76,15 +76,6 @@ main = do
     , target 3600  -- set to 360 000 to reach solution
     ]
 
-  -- unreachable: needs about 26, but can only reach 16
-  conjure "merge" merge'
-    [ con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "compare" (compare :: Int -> Int -> Ordering)
-    , ordcase (undefined :: [Int])
-    , target 1080
-    ]
-
   -- Produces a inefficient degenerate version of qsort
   -- where filter is applied _after_ sorting.
   conjure "qsort" sort'
