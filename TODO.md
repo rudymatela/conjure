@@ -7,9 +7,6 @@ A non-exhaustive list of things TO DO for Conjure.
   constructors that are not recursive.
   This change will need to be done in LeanCheck itself.
 
-* Detail two new proposed pruning rules from Colin.
-  (email from Feb 24 and follow-up in meeting)
-
 * Allow timeout setting?
 
 * Rethink Conjurable typeclass?
