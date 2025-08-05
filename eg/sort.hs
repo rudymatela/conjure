@@ -43,6 +43,14 @@ merge' [0,2] [1,1]  =  [0,1,1,2]
 
 main :: IO ()
 main = do
+  -- an insert function
+  conjure "insert" insert'
+    [ fun "[]" ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
+    , fun "<=" ((<=) :: Int -> Int -> Bool)
+    , guard
+    ]
+
   -- recursive insertion sort
   conjure "sort" sort'
     [ con ([] :: [Int])
@@ -54,14 +62,6 @@ main = do
     [ con ([] :: [Int])
     , fun "insert" (insert :: Int -> [Int] -> [Int])
     , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
-    ]
-
-  -- an insert function
-  conjure "insert" insert'
-    [ fun "[]" ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "<=" ((<=) :: Int -> Int -> Bool)
-    , guard
     ]
 
   -- qsort []  =  []                           -- 1
