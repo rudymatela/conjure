@@ -77,7 +77,8 @@ main = do
 
   -- unreachable: needs about 26, but can only reach 16
   conjure "merge" merge'
-    [ fun ":" ((:) :: Int -> [Int] -> [Int])
+    [ con ([] :: [Int])
+    , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "compare" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: [Int])
     , target 1080

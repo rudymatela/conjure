@@ -71,21 +71,19 @@ merge  =  undefined  -- search exhausted
 merge :: [Int] -> [Int] -> [Int]
 -- testing 12 combinations of argument values
 -- pruning with 1/2 rules
--- 2 candidates of size 1
+-- 3 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 6 candidates of size 4
+-- 10 candidates of size 4
 -- 0 candidates of size 5
--- 4 candidates of size 6
--- 7 candidates of size 7
--- 4 candidates of size 8
--- 19 candidates of size 9
--- 44 candidates of size 10
--- 37 candidates of size 11
--- 218 candidates of size 12
--- 227 candidates of size 13
--- 616 candidates of size 14
--- tested 1184 candidates
+-- 6 candidates of size 6
+-- 26 candidates of size 7
+-- 6 candidates of size 8
+-- 67 candidates of size 9
+-- 176 candidates of size 10
+-- 152 candidates of size 11
+-- 902 candidates of size 12
+-- tested 1348 candidates
 merge  =  undefined  -- search exhausted
 
 qsort :: [Int] -> [Int]
