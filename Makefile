@@ -57,8 +57,8 @@ EG = \
   bench/strategies \
   bench/self \
   bench/carry-on \
-  bench/p12 \
-  bench/p30 \
+  bench/i12 \
+  bench/i30 \
   bench/gps \
   bench/gps2 \
   bench/terpret \

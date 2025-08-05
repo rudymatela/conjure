@@ -70,8 +70,8 @@ bench/strategies
 bench/self
 bench/longshot
 bench/ill-hit
-bench/p12
-bench/p30
+bench/i12
+bench/i30
 bench/candidates
 bench/redundants
 bench/erroneous

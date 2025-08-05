@@ -93,6 +93,42 @@ bench/gps.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/gps.hs
+bench/i12: \
+  bench/i12.hs \
+  mk/toplibs
+bench/i12.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Settings.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/i12.hs
+bench/i30: \
+  bench/i30.hs \
+  mk/toplibs
+bench/i30.o: \
+  src/Conjure/Utils.hs \
+  src/Conjure/Settings.hs \
+  src/Conjure/Red.hs \
+  src/Conjure/Reason.hs \
+  src/Conjure.hs \
+  src/Conjure/Ingredient.hs \
+  src/Conjure/Expr.hs \
+  src/Conjure/Engine.hs \
+  src/Conjure/Defn/Test.hs \
+  src/Conjure/Defn/Redundancy.hs \
+  src/Conjure/Defn.hs \
+  src/Conjure/Conjurable.hs \
+  src/Conjure/Conjurable/Derive.hs \
+  bench/i30.hs
 bench/ill-hit: \
   bench/ill-hit.hs \
   mk/toplibs
@@ -147,42 +183,6 @@ bench/lowtests.o: \
   src/Conjure/Conjurable.hs \
   src/Conjure/Conjurable/Derive.hs \
   bench/lowtests.hs
-bench/p12: \
-  bench/p12.hs \
-  mk/toplibs
-bench/p12.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/Settings.hs \
-  src/Conjure/Red.hs \
-  src/Conjure/Reason.hs \
-  src/Conjure.hs \
-  src/Conjure/Ingredient.hs \
-  src/Conjure/Expr.hs \
-  src/Conjure/Engine.hs \
-  src/Conjure/Defn/Test.hs \
-  src/Conjure/Defn/Redundancy.hs \
-  src/Conjure/Defn.hs \
-  src/Conjure/Conjurable.hs \
-  src/Conjure/Conjurable/Derive.hs \
-  bench/p12.hs
-bench/p30: \
-  bench/p30.hs \
-  mk/toplibs
-bench/p30.o: \
-  src/Conjure/Utils.hs \
-  src/Conjure/Settings.hs \
-  src/Conjure/Red.hs \
-  src/Conjure/Reason.hs \
-  src/Conjure.hs \
-  src/Conjure/Ingredient.hs \
-  src/Conjure/Expr.hs \
-  src/Conjure/Engine.hs \
-  src/Conjure/Defn/Test.hs \
-  src/Conjure/Defn/Redundancy.hs \
-  src/Conjure/Defn.hs \
-  src/Conjure/Conjurable.hs \
-  src/Conjure/Conjurable/Derive.hs \
-  bench/p30.hs
 bench/redundants: \
   bench/redundants.hs \
   mk/toplibs
