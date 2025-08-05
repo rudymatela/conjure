@@ -47,7 +47,7 @@ sort :: [Int] -> [Int]
 sort  =  foldr insert []
 
 merge :: [Int] -> [Int] -> [Int]
--- testing 12 combinations of argument values
+-- testing 13 combinations of argument values
 -- pruning with 4/4 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2
@@ -69,7 +69,7 @@ merge :: [Int] -> [Int] -> [Int]
 merge  =  undefined  -- search exhausted
 
 merge :: [Int] -> [Int] -> [Int]
--- testing 12 combinations of argument values
+-- testing 13 combinations of argument values
 -- pruning with 1/2 rules
 -- 3 candidates of size 1
 -- 0 candidates of size 2

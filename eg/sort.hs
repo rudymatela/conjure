@@ -30,6 +30,7 @@ merge' [0] [1]  =  [0,1]
 merge' [1] [0]  =  [0,1]
 merge' [1] [0,2]  =  [0,1,2]
 merge' [0,2] [1]  =  [0,1,2]
+merge' [2] [0,1]  =  [0,1,2]
 merge' [0,1] [0,1]  =  [0,0,1,1]
 merge' [0,1] [2,3]  =  [0,1,2,3]
 merge' [0,2] [1,3]  =  [0,1,2,3]
@@ -59,12 +60,12 @@ main = do
     , fun "foldr" (foldr :: (Int -> [Int] -> [Int]) -> [Int] -> [Int] -> [Int])
     ]
 
-  -- found!  candidate #353593 @ size 22 after ~30s
+  -- found!  candidate #309279 @ size 22 after ~11s
   -- merge [] xs  =  xs
   -- merge (x:xs) []  =  x:xs
   -- merge (x:xs) (y:ys)
   --   | x <= y  =  x:merge xs (y:ys)
-  --   | otherwise  =  merge (y:x:xs) ys
+  --   | otherwise  =  y:merge ys (x:xs)
   -- set target to 360 000 to reach it
   conjure "merge" merge'
     [ con ([] :: [Int])
