@@ -203,6 +203,10 @@ gps5c  =  conjure "gps5" gps5p
 
 
 -- GPS Benchmark #6 -- Collatz/Hailstone numbers --
+-- Given an integer, find the number of terms in the Collatz (hailstone)
+-- sequence starting from that integer.
+-- NOTE: The sequence is actually always infinite,
+-- so I assume it is the count until reaching 1.
 
 gps6p :: Int -> Int
 gps6p 1  =  1
@@ -224,26 +228,71 @@ gps6g  =  tnp1
                         then n `div` 2  -- 10
                         else 3*n + 1)   -- 15
 
--- This one is out of reach performance wise:
--- Speculate hangs with this background.
--- Removing three or setting maxEqSize to 4 makes it unhang.
--- But a size of 15 or 17 is simplyl out of our reach.
+nextCollatz' :: Int -> Int
+nextCollatz' 1  =  4
+nextCollatz' 2  =  1
+nextCollatz' 3  =  10
+nextCollatz' 4  =  2
+nextCollatz' 5  =  16
+nextCollatz' 6  =  3
+
+nextCollatz :: Int -> Int
+nextCollatz n
+  | even n     =  n `div` 2
+  | otherwise  =  3*n + 1
+
 gps6c :: IO ()
-gps6c  =  conjure "gps6" gps6p
-  [ unfun (1 :: Int)
-  , unfun (2 :: Int)
-  , unfun (3 :: Int)
-  , fun "+" ((+) :: Int -> Int -> Int)
-  , fun "*" ((*) :: Int -> Int -> Int)
-  , fun "`div`" (div :: Int -> Int -> Int)
-  , fun "even" (even :: Int -> Bool)
-  , iif (undefined :: Int)
-  , maxSize 6
-  , maxEquationSize 3
-  ]
+gps6c  =  do
+  -- This one is out of reach performance wise:
+  -- Speculate hangs with this background.
+  -- Removing three or setting maxEqSize to 4 makes it unhang.
+  -- But a size of 15 or 17 is simplyl out of our reach.
+  conjure "gps6direct" gps6p
+    [ unfun (1 :: Int)
+    , unfun (2 :: Int)
+    , unfun (3 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "`div`" (div :: Int -> Int -> Int)
+    , fun "even" (even :: Int -> Bool)
+    , iif (undefined :: Int)
+    , maxSize 6
+    , maxEquationSize 3  -- degenerate case in Speculate
+    ]
+
+  conjure "gps6step" gps6p
+    [ unfun (1 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "nextCollatz" nextCollatz
+    , dontRequireDescent
+    ]
+
+  conjure "nextCollatz" nextCollatz
+    [ unfun (1 :: Int)
+    , unfun (2 :: Int)
+    , unfun (3 :: Int)
+    , fun "+" ((+) :: Int -> Int -> Int)
+    , fun "*" ((*) :: Int -> Int -> Int)
+    , fun "`div`" (div :: Int -> Int -> Int)
+    , fun "even" (even :: Int -> Bool)
+    , guard
+    , target 720720
+    , maxEquationSize 3  -- degenerate case in Speculate
+    -- BENCHMARK: set maxSize 11
+    , maxSize 6 -- 11
+    ]
+  -- -- on lapmatrud (2025-08), found after
+  -- -- 18.5s, 754952 candidates of size 11
+  -- -- 19.4s, tested 568616 candidates
+  -- nextCollatz x
+  --   | even x  =  x `div` 2
+  --   | otherwise  =  1 + x * 3
 
 
 -- GPS Benchmark #7 -- Replace Space with Newline (P 4.3)
+-- Given a string input, print the string, replacing spaces with newlines.
+-- Also, return the integer count of the non-whitespace characters.
+-- The input string will not have tabs or newlines.
 
 gps7p :: String -> (String, Int)
 gps7p "a"  =  ("a", 1)

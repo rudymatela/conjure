@@ -98,7 +98,7 @@ gps5 :: [Char] -> [Char]
 -- tested 26 candidates
 gps5  =  undefined  -- search exhausted
 
-gps6 :: Int -> Int
+gps6direct :: Int -> Int
 -- testing 9 combinations of argument values
 -- pruning with 16/18 rules
 -- 4 candidates of size 1
@@ -108,7 +108,32 @@ gps6 :: Int -> Int
 -- 172 candidates of size 5
 -- 0 candidates of size 6
 -- tested 188 candidates
-gps6  =  undefined  -- search exhausted
+gps6direct  =  undefined  -- search exhausted
+
+gps6step :: Int -> Int
+-- testing 9 combinations of argument values
+-- pruning with 4/8 rules
+-- 2 candidates of size 1
+-- 1 candidates of size 2
+-- 3 candidates of size 3
+-- 4 candidates of size 4
+-- 12 candidates of size 5
+-- 27 candidates of size 6
+-- tested 46 candidates
+gps6step 1  =  1
+gps6step x  =  1 + gps6step (nextCollatz x)
+
+nextCollatz :: Int -> Int
+-- testing 360 combinations of argument values
+-- pruning with 16/18 rules
+-- 4 candidates of size 1
+-- 0 candidates of size 2
+-- 12 candidates of size 3
+-- 0 candidates of size 4
+-- 172 candidates of size 5
+-- 0 candidates of size 6
+-- tested 188 candidates
+nextCollatz  =  undefined  -- search exhausted
 
 gps7 :: [Char] -> ([Char],Int)
 -- testing 4 combinations of argument values
