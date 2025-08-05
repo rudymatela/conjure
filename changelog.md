@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.7.6 (August 2025)
+--------------------
 
 * Flip-flop: `con` replaces `unfun`.
 * Allow chains of guards, or multiple guards.
