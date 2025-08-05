@@ -25,8 +25,8 @@ main = do
 
 ingredients :: [Ingredient]
 ingredients =
-  [ unfun False
-  , unfun True
+  [ con False
+  , con True
   , fun "not" not
   , fun "||" (||)
   , fun "&&" (&&)

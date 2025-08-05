@@ -15,8 +15,8 @@ squareSpec square  =
 
 squareIngredients :: [Ingredient]
 squareIngredients  =
-  [ unfun (0::Int)
-  , unfun (1::Int)
+  [ con (0::Int)
+  , con (1::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
   ]
@@ -39,7 +39,7 @@ sumSpec sum  =
 sumIngredients :: [Ingredient]
 sumIngredients  =
   [ fun "null" (null :: [Int] -> Bool)
-  , unfun (0::Int)
+  , con (0::Int)
   , fun "+"    ((+) :: Int -> Int -> Int)
   , fun "head" (head :: [Int] -> Int)
   , fun "tail" (tail :: [Int] -> [Int])

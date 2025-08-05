@@ -123,7 +123,7 @@ instance Conjurable Tree where
 main :: IO ()
 main = do
   conjure "mem" mem
-    [ unfun False
+    [ con False
     , fun "||" (||)
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "<" ((<) :: Int -> Int -> Bool)
@@ -131,15 +131,15 @@ main = do
     ]
 
   conjure "mem" mem
-    [ unfun False
-    , unfun True
+    [ con False
+    , con True
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Bool)
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 22)
   conjure "insert" insert
-    [ unfun Leaf
+    [ con Leaf
     , fun "Node" Node
     , fun "unit" unit
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
@@ -150,7 +150,7 @@ main = do
   -- reachable in 15s, candidate #32878 at size 14.
   -- increase target to 50400 to reach...
   conjureFromSpec "before" beforeSpec
-    [ unfun Leaf
+    [ con Leaf
     , fun "Node" Node
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "<" ((<) :: Int -> Int -> Bool)
@@ -161,7 +161,7 @@ main = do
   -- reachable in 14s, candidate #32747 at size 14.
   -- increase target to 50400 to reach...
   conjureFromSpec "beyond" beyondSpec
-    [ unfun Leaf
+    [ con Leaf
     , fun "Node" Node
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "<=" ((<) :: Int -> Int -> Bool)
@@ -172,7 +172,7 @@ main = do
   -- with 15, this reaches the solution, using 12 for shorter runtime
   -- using maxEquationSize = 7 reduces runtime from 13s to 11s
   conjureFromSpec "before" beforeSpec
-    [ unfun Leaf
+    [ con Leaf
     , fun "Node" Node
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
@@ -183,7 +183,7 @@ main = do
   -- with 15, this reaches the solution, using 12 for shorter runtime
   -- using maxEquationSize = 7 reduces runtime from 13s to 11s
   conjureFromSpec "beyond" beyondSpec
-    [ unfun Leaf
+    [ con Leaf
     , fun "Node" Node
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
@@ -193,7 +193,7 @@ main = do
 
   -- reachable in 55s, candidate #173109 at size 13.
   conjure "union" union
-    [ unfun Leaf
+    [ con Leaf
     , fun "Node" Node
     , fun "before" before
     , fun "beyond" beyond

@@ -19,8 +19,8 @@
 --
 -- > ingredients :: [Ingredient]
 -- > ingredients =
--- >   [ unfun (0::Int)
--- >   , unfun (1::Int)
+-- >   [ con (0::Int)
+-- >   , con (1::Int)
 -- >   , fun "+" ((+) :: Int -> Int -> Int)
 -- >   , fun "*" ((*) :: Int -> Int -> Int)
 -- >   , fun "-" ((-) :: Int -> Int -> Int)
@@ -62,9 +62,9 @@
 -- > take' 3 [x,y]  =  [x,y]
 --
 -- > > conjure "take" (take' :: Int -> [A] -> [A])
--- > >   [ unfun (0 :: Int)
--- > >   , unfun (1 :: Int)
--- > >   , unfun ([] :: [A])
+-- > >   [ con (0 :: Int)
+-- > >   , con (1 :: Int)
+-- > >   , con ([] :: [A])
 -- > >   , fun ":" ((:) :: A -> [A] -> [A])
 -- > >   , fun "-" ((-) :: Int -> Int -> Int)
 -- > >   ]
@@ -96,7 +96,7 @@ module Conjure
     conjure
   , Ingredient
   , fun
-  , unfun
+  , con
   , guard
   , iif
   , ordcase
@@ -164,7 +164,7 @@ module Conjure
   , Prim
   , pr
   , prim
-  , con
+  , unfun
   )
 where
 

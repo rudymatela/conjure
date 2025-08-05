@@ -46,7 +46,7 @@ gps1g2 t (x:xs)  =  if t + x < 0 -- 7
 gps1c :: IO ()
 gps1c  =  do
   conjure "gps1" gps1p
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun ">" ((>) :: Int -> Int -> Bool)
     , fun "foldr" (foldr :: (Int -> Int -> Int) -> Int -> [Int] -> Int)
@@ -58,7 +58,7 @@ gps1c  =  do
     ]
 
   conjure "gps1" gps1p
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun ">" ((>) :: Int -> Int -> Bool)
     , fun "sum" (sum :: [Int] -> Int)
@@ -70,8 +70,8 @@ gps1c  =  do
     ]
 
   conjure "gps1" gps1p2
-    [ unfun (0 :: Int)
-    , unfun (1 :: Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
@@ -99,8 +99,8 @@ gps2g h0 h1 n  =  h0 + h1 + gps2g h1 (h1 * (h1 / h0)) (n - 1)
 gps2c :: IO ()
 gps2c  =  do
   conjure "gps2" gps2p
-    [ unfun (0 :: Int)
-    , unfun (1 :: Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
     , fun "*" ((*) :: Double -> Double -> Double)
     , fun "/" ((/) :: Double -> Double -> Double)
     , fun "+" ((+) :: Double -> Double -> Double)
@@ -145,8 +145,8 @@ gps4g (c:cs)  =  if c == '-'                                   --  5
 gps4c :: IO ()
 gps4c  =  do
   conjureFromSpec "gps4" gps4s
-    [ unfun '-'
-    , unfun ("" :: String)
+    [ con '-'
+    , con ("" :: String)
     , fun ":" ((:) :: Char -> String -> String)
     , fun "==" ((==) :: Char -> Char -> Bool)
     , fun "head" (head :: String -> Char)
@@ -206,23 +206,23 @@ gps5c  =  do
     ]
 
   conjureFromSpec "tell" gps5s
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     ]
 
   conjure "gps5" gps5p
-    [ unfun coins
+    [ con coins
     , fun "tell" tell
     ]
 
   conjure "gps5" gps5p
-    [ unfun (1 :: Int)
-    , unfun (5 :: Int)
-    , unfun (10 :: Int)
-    , unfun (25 :: Int)
-    , unfun ([] :: [Int])
+    [ con (1 :: Int)
+    , con (5 :: Int)
+    , con (10 :: Int)
+    , con (25 :: Int)
+    , con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "tell" tell
     , target 50400
@@ -265,8 +265,8 @@ gps7g peter colin  =  sum (map (min colin) [0 .. (peter-1)]) % (colin*peter)
 gps7c :: IO ()
 gps7c  =  do
   conjure "gps7" gps7p $ take 0
-    [ unfun (0 :: Integer)
-    , unfun (1 :: Integer)
+    [ con (0 :: Integer)
+    , con (1 :: Integer)
     , fun "%" ((%) :: Integer -> Integer -> Rational)
     , fun "+" ((+) :: Integer -> Integer -> Integer)
     , fun "-" ((-) :: Integer -> Integer -> Integer)
@@ -317,14 +317,14 @@ gps9g x
 -- even in two steps
 gps9c :: IO ()
 gps9c  =  conjure "gps9" gps9p
-  [ unfun "Fizz"
-  , unfun "Buzz"
-  , unfun "FizzBuzz"
-  , unfun (0 :: Int)
-  , unfun (3 :: Int)
-  , unfun (5 :: Int)
-  , unfun False
-  , unfun True
+  [ con "Fizz"
+  , con "Buzz"
+  , con "FizzBuzz"
+  , con (0 :: Int)
+  , con (3 :: Int)
+  , con (5 :: Int)
+  , con False
+  , con True
   , fun "`divBy`" divBy
 --, fun "`mod`" (mod :: Int -> Int -> Int)
   , fun "&&" (&&)
@@ -359,10 +359,10 @@ gps10g (x:xs)  =  (x `div` 3 - 2) + gps10g xs
 -- unreachable due to lambda
 gps10c :: IO ()
 gps10c  =  conjure "gps10" gps10p
-  [ unfun (0 :: Int)
-  , unfun (1 :: Int)
-  , unfun (2 :: Int)
-  , unfun (3 :: Int)
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con (2 :: Int)
+  , con (3 :: Int)
   , fun "`div`" (div :: Int -> Int -> Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "-" ((-) :: Int -> Int -> Int)
@@ -388,7 +388,7 @@ gps11p  =  gcd'
 
 gps11c :: IO ()
 gps11c  =  conjure "gcd a b" gps11p
-  [ unfun (0::Int)
+  [ con (0::Int)
   , fun "`mod`" (mod :: Int -> Int -> Int)
   ]
   -- generated function:
@@ -430,7 +430,7 @@ gps13g  =  leaders
 
 gps13c :: IO ()
 gps13c  =  conjure "gps13_leaders" gps13p
-  [ unfun ([] :: [Int])
+  [ con ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , fun ">" ((>) :: Int -> Int -> Bool)
   , fun "<" ((<) :: Int -> Int -> Bool)
@@ -506,8 +506,8 @@ gps16g2 (c:cs)  =  if length cs <= 1
 
 gps16c :: IO ()
 gps16c  =  conjure "gps16_middle" gps16p
-  [ unfun ""
-  , unfun (1 :: Int)
+  [ con ""
+  , con (1 :: Int)
   , fun "<=" ((<=) :: Int -> Int -> Bool)
   , fun ":" ((:) :: Char -> String -> String)
   , fun "length" (length :: String -> Int)
@@ -554,7 +554,7 @@ gps17g xs  =  pds xs
 gps17c :: IO ()
 gps17c  =  do
   conjure "gps17_pds" gps17p
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
     , guard
     , fun "not" not
     , fun "null" (null :: [Int] -> Bool)
@@ -567,7 +567,7 @@ gps17c  =  do
 
   -- OOM after size 16, unreachable by increasing pattern depth
   conjure "gps17_pds" gps17p
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
     , guard
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "+" ((+) :: Int -> Int -> Int)
@@ -588,8 +588,8 @@ gps18g prices discounts  =  foldr (+) 0 (zipWith (*) prices (map (1-) discounts)
 -- this was OOM'd
 gps18c :: IO ()
 gps18c  =  conjure "gps18_price" gps18p
-  [ unfun (0 :: Double)
-  , unfun (1 :: Double)
+  [ con (0 :: Double)
+  , con (1 :: Double)
   , fun "+" ((+) :: Double -> Double -> Double)
   , fun "*" ((*) :: Double -> Double -> Double)
   , fun "-" ((-) :: Double -> Double -> Double)
@@ -616,8 +616,8 @@ gps19g n total melt fall  =  gps19p (n-1) (max 0 (total-melt+fall)) melt fall
 
 gps19c :: IO ()
 gps19c  =  conjure "gps19_snowday" gps19p
-  [ unfun (0 :: Int)
-  , unfun (1 :: Int)
+  [ con (0 :: Int)
+  , con (1 :: Int)
   , fun "max" (max :: Double -> Double -> Double)
   , fun "+" ((+) :: Double -> Double -> Double)
   , fun "-" ((-) :: Double -> Double -> Double)
@@ -668,7 +668,7 @@ gps21c  =  do
     , fun "reverse" (reverse :: String -> String)
     , guard
     , fun ">="      ((>=) :: Int -> Int -> Bool)
-    , unfun (5 :: Int)
+    , con (5 :: Int)
     ]
 
   conjureFromSpec "gps21_spinwords" gps21s
@@ -680,7 +680,7 @@ gps21c  =  do
     , fun "reverse" (reverse :: String -> String)
     , guard
     , fun ">="      ((>=) :: Int -> Int -> Bool)
-    , unfun (5 :: Int)
+    , con (5 :: Int)
     ]
 
 
@@ -707,10 +707,10 @@ gps22g x  =  gps22g (x `div` 10) ++ show (x `mod` 10 * x `mod` 10)  -- 14
 gps22c :: IO ()
 gps22c  =  do
   conjure "gps22" gps22p
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
 
     -- uncomment the following four for the a runtime of 15s @ size 11
-    -- , unfun (10 :: Int)
+    -- , con (10 :: Int)
     -- , fun "`div`" (div :: Int -> Int -> Int)
     -- , fun "`mod`" (mod :: Int -> Int -> Int)
     -- , fun "square" ((^2) :: Int -> Int)
@@ -719,7 +719,7 @@ gps22c  =  do
     , fun "*" ((*) :: Int -> Int -> Int)
 
     , fun "show" (show :: Int -> String)
-    , unfun ""
+    , con ""
     , fun "++" ((++) :: String -> String -> String)
     ]
 
@@ -775,14 +775,14 @@ gps24s_twitter twitter  =
 gps24c :: IO ()
 gps24c  =  do
   conjureFromSpec "gps24" gps24s_twitter
-    [ unfun Empty
-    , unfun TooMany
+    [ con Empty
+    , con TooMany
     , fun "Tweet" Tweet
     , guard
-    , unfun ""
+    , con ""
     , fun ":" ((:) :: Char -> String -> String)
     , fun "length" (length :: String -> Int)
-    , unfun (140 :: Int)
+    , con (140 :: Int)
     , fun ">" ((>) :: Int -> Int -> Bool)
     ]
 
@@ -802,8 +802,8 @@ gps25g v1 v2  =  sqrt (foldr (+) 0 (map (^2) (zipWith (-) v1 v2)))
 -- out of reach performance-wise
 gps25c :: IO ()
 gps25c  =  conjure "gps25" gps25p
-  [ unfun (0 :: Double)
-  , unfun (2 :: Double)
+  [ con (0 :: Double)
+  , con (2 :: Double)
   , fun "+" ((+) :: Double -> Double -> Double)
   , fun "-" ((-) :: Double -> Double -> Double)
   , fun "**" ((**) :: Double -> Double -> Double)

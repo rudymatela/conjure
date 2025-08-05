@@ -12,7 +12,7 @@
 module Conjure.Ingredient
   ( Ingredient
   , fun
-  , unfun
+  , con
   , iif
   , ordcase
   , guard
@@ -25,7 +25,7 @@ module Conjure.Ingredient
   , prim
   , prif
   , primOrdCaseFor
-  , con
+  , unfun
   )
 where
 
@@ -36,12 +36,12 @@ import Test.LeanCheck.Utils
 
 
 -- | A single functional ingredient in conjuring.
--- Specify conjure ingredients with 'unfun' and 'fun':
+-- Specify conjure ingredients with 'con' and 'fun':
 --
--- > conjure "foo" foo [ unfun False
--- >                   , unfun True
--- >                   , unfun (0 :: Int)
--- >                   , unfun (1 :: Int)
+-- > conjure "foo" foo [ con False
+-- >                   , con True
+-- >                   , con (0 :: Int)
+-- >                   , con (1 :: Int)
 -- >                   , ...
 -- >                   , fun "&&" (&&)
 -- >                   , fun "||" (||)
@@ -53,9 +53,9 @@ import Test.LeanCheck.Utils
 --
 -- Ingredients may include arbitrary
 -- functional values ('fun')
--- and non-functional values ('unfun').
+-- and non-functional (constant) values ('con').
 -- These may be built-in or user defined.
--- Use 'unfun' on 'Show' instances
+-- Use 'con' on 'Show' instances
 -- and 'fun' otherwise.
 --
 -- This is internally
@@ -65,26 +65,26 @@ import Test.LeanCheck.Utils
 type Ingredient  =  (Expr, Reification)
 
 
--- | Provided a 'Show'-able non-functional value to Conjure.
+-- | Provides a 'Show'-able non-functional constant value to Conjure.
 --   (cf. 'fun')
 --
--- > conjure "foo" foo [ unfun False
--- >                   , unfun True
--- >                   , unfun (0 :: Int)
--- >                   , unfun (1 :: Int)
+-- > conjure "foo" foo [ con False
+-- >                   , con True
+-- >                   , con (0 :: Int)
+-- >                   , con (1 :: Int)
 -- >                   , ...
 -- >                   ]
 --
 -- Argument types have to be monomorphized,
 -- so use type bindings when applicable.
-unfun :: (Conjurable a, Show a) => a -> Ingredient
-unfun x  =  (val x, conjureType x)
+con :: (Conjurable a, Show a) => a -> Ingredient
+con x  =  (val x, conjureType x)
 
 
 -- | Provides a functional value as an ingredient to Conjure.
 --   To be used on values that are not 'Show' instances
 --   such as functions.
---   (cf. 'unfun')
+--   (cf. 'con')
 --
 -- > conjure "foo" foo [ ...
 -- >                   , fun "&&" (&&)
@@ -112,7 +112,7 @@ fun s x  =  (value s x, conjureType x)
 -- > last' [x,y]  =  y
 -- > last' [x,y,z]  =  z
 --
--- > > conjure "last" last' [ unfun ([] :: [Int])
+-- > > conjure "last" last' [ con ([] :: [Int])
 -- > >                      , fun ":" ((:) :: Int -> [Int] -> [Int])
 -- > >                      , fun "null" (null :: [Int] -> Bool)
 -- > >                      , iif (undefined :: Int)
@@ -142,7 +142,7 @@ iif x  =  (ifFor x, conjureType x)
 -- > last' [x,y,z]  =  z
 --
 -- > > conjure "last" last'
--- > >   [ unfun ([] :: [Int])
+-- > >   [ con ([] :: [Int])
 -- > >   , fun ":" ((:) :: Int -> [Int] -> [Int])
 -- > >   , fun "null" (null :: [Int] -> Bool)
 -- > >   , guard
@@ -174,8 +174,8 @@ guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
 -- This should be used when one wants Conjure to consider ord-case expressions:
 --
 -- > > conjure "mem" mem
--- > >   [ unfun False
--- > >   , unfun True
+-- > >   [ con False
+-- > >   , con True
 -- > >   , fun "`compare`" (compare :: Int -> Int -> Ordering)
 -- > >   , ordcase (undefined :: Bool)
 -- > >   ]
@@ -273,7 +273,7 @@ primOrdCaseFor :: Conjurable a => a -> Ingredient
 primOrdCaseFor  =  ordcase
 {-# DEPRECATED primOrdCaseFor "'primOrdCaseFor' is deprecated, please use 'ordcase' instead" #-}
 
--- | __DEPRECATED__. Please use 'unfun' instead.
-con :: (Conjurable a, Show a) => a -> Ingredient
-con  =  unfun
-{-# DEPRECATED con "'con' is deprecated, please use 'unfun' instead" #-}
+-- | __DEPRECATED__. Please use 'con' instead.
+unfun :: (Conjurable a, Show a) => a -> Ingredient
+unfun  =  con
+{-# DEPRECATED unfun "'unfun' is deprecated, please use 'con' instead" #-}

@@ -42,8 +42,8 @@ main  =  do
 
 ingredients :: [Ingredient]
 ingredients  =
-  [ unfun (0::Int)
-  , unfun (1::Int)
+  [ con (0::Int)
+  , con (1::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
   , fun "==" ((==) :: Int -> Int -> Bool)

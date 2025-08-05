@@ -101,8 +101,8 @@ import System.CPUTime (getCPUTime)
 -- >
 -- > ingredients :: [Ingredient]
 -- > ingredients  =
--- >   [ unfun (0::Int)
--- >   , unfun (1::Int)
+-- >   [ con (0::Int)
+-- >   , con (1::Int)
 -- >   , fun "+" ((+) :: Int -> Int -> Int)
 -- >   , fun "*" ((*) :: Int -> Int -> Int)
 -- >   , fun "-" ((-) :: Int -> Int -> Int)
@@ -121,7 +121,7 @@ import System.CPUTime (getCPUTime)
 -- > factorial 0  =  1
 -- > factorial x  =  x * factorial (x - 1)
 --
--- The ingredients list is defined with 'unfun' and 'fun'.
+-- The ingredients list is defined with 'con' and 'fun'.
 conjure :: Conjurable f => String -> f -> [Ingredient] -> IO ()
 conjure nm f  =  conjure0 nm f (const [])
 

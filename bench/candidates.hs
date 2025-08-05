@@ -40,43 +40,43 @@ printCandidates m n nm f ps  =  do
 main :: IO ()
 main  =  do
   printCandidates 9 6 "foo" (undefined :: Int -> Int)
-    [ unfun (0 :: Int)
-    , unfun (1 :: Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   printCandidates 9 5 "?" (undefined :: Int -> Int -> Int)
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "dec" (subtract 1 :: Int -> Int)
     ]
 
   printCandidates 9 6 "goo" (undefined :: [Int] -> [Int])
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printCandidates 9 6 "??" (undefined :: [Int] -> [Int] -> [Int])
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printCandidates 9 6 "ton" (undefined :: Bool -> Bool)
-    [ unfun False
-    , unfun True
+    [ con False
+    , con True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
     ]
 
   printCandidates 9 6 "&|" (undefined :: Bool -> Bool -> Bool)
-    [ unfun False
-    , unfun True
+    [ con False
+    , con True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
@@ -88,6 +88,6 @@ main  =  do
   -- nevertheless useful for observing candidate filtering
   -- through other means
   printCandidates 9 6 "gcd" (undefined :: Int -> Int -> Int)
-    [ unfun (0::Int)
+    [ con (0::Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     ]

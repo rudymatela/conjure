@@ -29,27 +29,27 @@ digits 31337  =  [3,1,3,3,7]
 main :: IO ()
 main  =  do
   conjure "revdigits" (reverse . digits)
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
-    , unfun (0 :: Int)
-    , unfun (10 :: Int)
+    , con (0 :: Int)
+    , con (10 :: Int)
     ]
 
   conjure "digits" digits
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
-    , unfun (0 :: Int)
-    , unfun (10 :: Int)
+    , con (0 :: Int)
+    , con (10 :: Int)
     ]
 
   conjure "digitSum" digitSum
-    [ unfun (0 :: Int)
-    , unfun (10 :: Int)
+    [ con (0 :: Int)
+    , con (10 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
@@ -57,8 +57,8 @@ main  =  do
 
   -- out-of-reach performance-wise
   conjure "digitCount" digitCount
-    [ unfun (0 :: Int)
-    , unfun (10 :: Int)
+    [ con (0 :: Int)
+    , con (10 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "`div`" (div :: Int -> Int -> Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)

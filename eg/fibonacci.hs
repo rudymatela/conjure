@@ -16,9 +16,9 @@ fibonacci 6  =  13
 main :: IO ()
 main  =  do
   conjure "fibonacci n" fibonacci
-    [ unfun (0::Int)
-    , unfun (1::Int)
-    , unfun (2::Int)
+    [ con (0::Int)
+    , con (1::Int)
+    , con (2::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
     ]

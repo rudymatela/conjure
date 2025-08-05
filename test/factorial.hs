@@ -13,8 +13,8 @@ factorial 4  =  24
 main :: IO ()
 main  =  do
   conjure "factorial n" factorial
-    [ unfun (0::Int)
-    , unfun (1::Int)
+    [ con (0::Int)
+    , con (1::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)

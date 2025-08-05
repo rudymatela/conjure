@@ -13,7 +13,7 @@ sum [1,0,1]  =  2
 
 sumBackground :: [Ingredient]
 sumBackground =
-  [ unfun (0::Int)
+  [ con (0::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   ]
 
@@ -44,7 +44,7 @@ mem 0 [1,1,1]  =  False
 
 memBackground :: [Ingredient]
 memBackground =
-  [ unfun False
+  [ con False
   , fun "==" ((==) :: Int -> Int -> Bool)
   , fun "&&" ((&&) :: Bool -> Bool -> Bool)
   , fun "||" ((||) :: Bool -> Bool -> Bool)
@@ -69,8 +69,8 @@ sub [2,0]   [0,1]  =  False
 
 subBackground :: [Ingredient]
 subBackground  =
-  [ unfun True
-  , unfun False
+  [ con True
+  , con False
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , fun "==" ((==) :: Int -> Int -> Bool)
   , iif (undefined :: Bool)
@@ -112,9 +112,9 @@ take 3 [x,y]  =  [x,y]
 
 takeBackground :: [Ingredient]
 takeBackground  =
-  [ unfun (0 :: Int)
-  , unfun (1 :: Int)
-  , unfun ([] :: [A])
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con ([] :: [A])
   , fun "-" ((-) :: Int -> Int -> Int)
   , fun ":" ((:) :: A -> [A] -> [A])
   ]
@@ -134,9 +134,9 @@ drop 3 [x,y]  =  []
 
 dropBackground :: [Ingredient]
 dropBackground  =
-  [ unfun (0 :: Int)
-  , unfun (1 :: Int)
-  , unfun ([] :: [A])
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con ([] :: [A])
   , fun "-" ((-) :: Int -> Int -> Int)
   ]
 
@@ -155,7 +155,7 @@ ord [0,1,1]  =  True
 
 ordBackground :: [Ingredient]
 ordBackground  =
-  [ unfun True
+  [ con True
   , fun "null" (null :: [Int] -> Bool)
   , fun "head" (head :: [Int] -> Int)
   , fun "<=" ((<=) :: Int -> Int -> Bool)
@@ -179,7 +179,7 @@ merge (x:xs) (y:ys)  =  if x <= y
 mergeBackground :: [Ingredient]
 mergeBackground  =
   [ fun "<=" ((<=) :: Int -> Int -> Bool)
-  , unfun ([] :: [Int])
+  , con ([] :: [Int])
   , fun ":" ((:) :: Int -> [Int] -> [Int])
   , iif (undefined :: [Int])
   ]
@@ -197,7 +197,7 @@ zip [v,w] [x,y]  =  [(v,x),(w,y)]
 
 zipBackground :: [Ingredient]
 zipBackground  =
-  [ unfun ([] :: [(A,B)])
+  [ con ([] :: [(A,B)])
   , fun "(,)" ((,) :: A -> B -> (A,B))
   , fun ":" ((:) :: (A,B) -> [(A,B)] -> [(A,B)])
   ]
@@ -214,7 +214,7 @@ assocs 2 [(2,x),(2,y)]  =  [x,y]
 
 assocsBackground :: [Ingredient]
 assocsBackground  =
-  [ unfun ([] :: [A])
+  [ con ([] :: [A])
   , fun "==" ((==) :: Int -> Int -> Bool)
   , fun ":" ((:) :: A -> [A] -> [A])
   , fun "fst" (fst :: (Int,A) -> Int)

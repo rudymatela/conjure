@@ -15,7 +15,7 @@ tri 5 = 15
 triIngredients :: [Ingredient]
 triIngredients =
   [ fun "==" ((==) :: Int -> Int -> Bool)
-  , unfun (1::Int)
+  , con (1::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "dec" ((\x -> x-1) :: Int -> Int)
   ]
@@ -37,8 +37,8 @@ fib 7 = 21
 fibIngredients :: [Ingredient]
 fibIngredients =
   [ fun "<=" ((<=) :: Int -> Int -> Bool)
-  , unfun (0::Int)
-  , unfun (1::Int)
+  , con (0::Int)
+  , con (1::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "dec" ((\x -> x-1) :: Int -> Int)
   ]
@@ -79,7 +79,7 @@ priIngredients =
   [ fun "==" ((==) :: [Int] -> [Int] -> Bool)
   , fun "factors" ((\n -> filter (\k -> n `mod` k == 0) [1..n]) :: Int -> [Int])
   , fun "list2" ((\i j -> [i,j]) :: Int -> Int -> [Int])
-  , unfun (1 :: Int)
+  , con (1 :: Int)
   ]
 
 -- looking through 38 candidates, 100% match, 7/7 assignments

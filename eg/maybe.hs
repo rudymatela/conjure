@@ -61,13 +61,13 @@ main = do
 
 ingredients :: [Ingredient]
 ingredients  =
-  [ unfun (Nothing :: Maybe A)
+  [ con (Nothing :: Maybe A)
   , fun "Just" (Just :: A -> Maybe A)
 
-  , unfun False
-  , unfun True
+  , con False
+  , con True
 
-  , unfun ([] :: [A])
+  , con ([] :: [A])
   , fun ":" ((:) :: A -> [A] -> [A])
   ]
 

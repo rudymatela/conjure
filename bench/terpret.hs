@@ -33,12 +33,12 @@ t1c  =  do
 -- the same ingredients are used for TerpreT #1, #2 and #3
 ingredients123 :: [Ingredient]
 ingredients123  =
-  [ unfun False
-  , unfun True
+  [ con False
+  , con True
   , fun "not" not
   , fun "&&" (&&)
   , fun "||" (||)
-  , unfun ([] :: [Bool])
+  , con ([] :: [Bool])
   , fun ":" ((:) :: Bool -> [Bool] -> [Bool])
 --, fun "map" (map :: (Bool -> Bool) -> [Bool] -> [Bool])
   , guard
@@ -189,9 +189,9 @@ t7c  =  do
     ]
 
   conjure "`access`" t7p
-    [ unfun (0 :: Int)
-    , unfun (1 :: Int)
-    , unfun ([] :: [A])
+    [ con (0 :: Int)
+    , con (1 :: Int)
+    , con ([] :: [A])
     , fun ":" ((:) :: A -> [A] -> [A])
     , fun "-" ((-) :: Int -> Int -> Int)
     , fun "undefined" (undefined :: A)
@@ -209,8 +209,8 @@ t8c  =  do
   putStrLn "TerpreT benchmark #8: decrement elements\n"
 
   conjure "decrelements" t8p
-    [ unfun (1 :: Int)
-    , unfun ([] :: [Int])
+    [ con (1 :: Int)
+    , con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "-" ((-) :: Int -> Int -> Int)
     , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])
@@ -219,8 +219,8 @@ t8c  =  do
   -- introduce lambdas
 
   conjure "decrelements" t8p
-    [ unfun (1 :: Int)
-    , unfun ([] :: [Int])
+    [ con (1 :: Int)
+    , con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "-" ((-) :: Int -> Int -> Int)
     , fun "map" (map :: (Int -> Int) -> [Int] -> [Int])

@@ -5,6 +5,7 @@ Changelog for (Code) Conjure
 upcoming
 --------
 
+* `con` replaces `unfun` (again).
 * Improve pruning through early tests.
 * Replace `omitEarlyTests` by `maxEarlyTests`.
 * Limit the number of early tests to 12 by default (`maxEarlyTests`).

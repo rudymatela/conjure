@@ -76,9 +76,9 @@ main = do
 
 ingredients :: [Ingredient]
 ingredients  =
-  [ unfun (0::Int)
-  , unfun (1::Int)
-  , unfun (-1::Int)
+  [ con (0::Int)
+  , con (1::Int)
+  , con (-1::Int)
   , fun "+" ((+) :: Int -> Int -> Int)
   , fun "-" ((-) :: Int -> Int -> Int)
   , fun "*" ((*) :: Int -> Int -> Int)
@@ -88,9 +88,9 @@ ingredients  =
 
 compareIngredients :: [Ingredient]
 compareIngredients  =
-  [ unfun EQ
-  , unfun LT
-  , unfun GT
+  [ con EQ
+  , con LT
+  , con GT
   , fun "==" ((==) :: Int -> Int -> Bool)
   , fun "<"  ((<)  :: Int -> Int -> Bool)
 --, fun "<=" ((<=) :: Int -> Int -> Bool)

@@ -66,43 +66,43 @@ main  =  do
   -- We can also customize the n per-function below:
 
   printRedundantCandidates (n+1) "foo" (undefined :: Int -> Int)
-    [ unfun (0 :: Int)
-    , unfun (1 :: Int)
+    [ con (0 :: Int)
+    , con (1 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
     ]
 
   printRedundantCandidates n "?" (undefined :: Int -> Int -> Int)
-    [ unfun (0 :: Int)
+    [ con (0 :: Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "dec" (subtract 1 :: Int -> Int)
     ]
 
   printRedundantCandidates (n+1) "goo" (undefined :: [Int] -> [Int])
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printRedundantCandidates n "??" (undefined :: [Int] -> [Int] -> [Int])
-    [ unfun ([] :: [Int])
+    [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "++" ((++) :: [Int] -> [Int] -> [Int])
     ]
 
   printRedundantCandidates (n+1) "ton" (undefined :: Bool -> Bool)
-    [ unfun False
-    , unfun True
+    [ con False
+    , con True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
     ]
 
   printRedundantCandidates n "&|" (undefined :: Bool -> Bool -> Bool)
-    [ unfun False
-    , unfun True
+    [ con False
+    , con True
     , fun "&&" (&&)
     , fun "||" (||)
     , fun "not" not
@@ -115,7 +115,7 @@ main  =  do
   -- through other means
   {-
   printRedundantCandidates n "gcd" (undefined :: Int -> Int -> Int)
-    [ unfun (0::Int)
+    [ con (0::Int)
     , fun "`mod`" (mod :: Int -> Int -> Int)
     ]
   -}

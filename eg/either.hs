@@ -59,9 +59,9 @@ ingredients  =
   [ fun "Left"  (Left :: A -> Either A A)
   , fun "Right" (Right :: A -> Either A A)
 
-  , unfun False
-  , unfun True
+  , con False
+  , con True
 
-  , unfun ([] :: [A])
+  , con ([] :: [A])
   , fun ":" ((:) :: A -> [A] -> [A])
   ]

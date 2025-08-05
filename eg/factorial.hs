@@ -15,8 +15,8 @@ main :: IO ()
 main  =  do
   -- explicit recursion
   conjure "factorial n" factorial
-    [ unfun (0::Int)
-    , unfun (1::Int)
+    [ con (0::Int)
+    , con (1::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
@@ -27,8 +27,8 @@ main  =  do
 
   -- using foldr and enumFromTo
   conjure "factorial n" factorial
-    [ unfun (0::Int)
-    , unfun (1::Int)
+    [ con (0::Int)
+    , con (1::Int)
     , fun "+" ((+) :: Int -> Int -> Int)
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "-" ((-) :: Int -> Int -> Int)
