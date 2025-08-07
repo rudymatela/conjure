@@ -59,9 +59,9 @@ insert :: Int -> Tree -> Tree
 -- 22 candidates of size 8
 -- 22 candidates of size 9
 -- 39 candidates of size 10
--- 84 candidates of size 11
--- 182 candidates of size 12
--- tested 361 candidates
+-- 148 candidates of size 11
+-- 310 candidates of size 12
+-- tested 553 candidates
 insert  =  undefined  -- search exhausted
 
 insert :: Int -> Tree -> Tree
@@ -77,9 +77,9 @@ insert :: Int -> Tree -> Tree
 -- 25 candidates of size 8
 -- 25 candidates of size 9
 -- 42 candidates of size 10
--- 134 candidates of size 11
--- 252 candidates of size 12
--- tested 490 candidates
+-- 198 candidates of size 11
+-- 380 candidates of size 12
+-- tested 682 candidates
 insert  =  undefined  -- search exhausted
 
 before :: Int -> Tree -> Tree
@@ -115,38 +115,52 @@ beyond :: Int -> Tree -> Tree
 beyond  =  undefined  -- search exhausted
 
 before :: Int -> Tree -> Tree
--- pruning with 2/4 rules
+-- pruning with 3/5 rules
 -- 2 candidates of size 1
 -- 2 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
 -- 21 candidates of size 5
 -- 0 candidates of size 6
--- 68 candidates of size 7
--- 287 candidates of size 8
+-- 60 candidates of size 7
+-- 176 candidates of size 8
 -- 32 candidates of size 9
--- 1216 candidates of size 10
--- 5103 candidates of size 11
--- 1472 candidates of size 12
--- tested 8207 candidates
+-- 716 candidates of size 10
+-- 2373 candidates of size 11
+-- 896 candidates of size 12
+-- tested 4282 candidates
 before  =  undefined  -- search exhausted
 
 beyond :: Int -> Tree -> Tree
--- pruning with 2/4 rules
+-- pruning with 3/5 rules
 -- 2 candidates of size 1
 -- 2 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
 -- 21 candidates of size 5
 -- 0 candidates of size 6
--- 68 candidates of size 7
--- 287 candidates of size 8
+-- 60 candidates of size 7
+-- 176 candidates of size 8
 -- 32 candidates of size 9
--- 1216 candidates of size 10
--- 5103 candidates of size 11
--- 1472 candidates of size 12
--- tested 8207 candidates
+-- 716 candidates of size 10
+-- 2373 candidates of size 11
+-- 896 candidates of size 12
+-- tested 4282 candidates
 beyond  =  undefined  -- search exhausted
+
+insert :: Int -> Tree -> Tree
+-- testing 360 combinations of argument values
+-- pruning with 3/6 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 2 candidates of size 3
+-- 1 candidates of size 4
+-- 1 candidates of size 5
+-- 6 candidates of size 6
+-- 2 candidates of size 7
+-- 15 candidates of size 8
+-- tested 25 candidates
+insert x t1  =  Node (before x t1) x (beyond x t1)
 
 union :: Tree -> Tree -> Tree
 -- testing 360 combinations of argument values
@@ -160,7 +174,7 @@ union :: Tree -> Tree -> Tree
 -- 152 candidates of size 7
 -- 82 candidates of size 8
 -- 2438 candidates of size 9
--- 3970 candidates of size 10
--- tested 6735 candidates
+-- 4322 candidates of size 10
+-- tested 7087 candidates
 union  =  undefined  -- search exhausted
 

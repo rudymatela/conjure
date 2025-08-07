@@ -6,13 +6,18 @@
 
 import Conjure
 import Test.LeanCheck
+import Data.Function (on)
 import Data.Express hiding (height,size)
 
 data Tree  =  Leaf
            |  Node Tree Int Tree
-  deriving (Eq, Ord, Show, Read)
+  deriving (Show, Read)
 
-deriveExpress ''Tree
+instance Eq Tree where
+  (==)  =  (==) `on` inorder
+
+instance Ord Tree where
+  compare  =  compare `on` inorder
 
 unit :: Int -> Tree
 unit x  =  Node Leaf x Leaf
@@ -102,6 +107,9 @@ beyond y (Node l x r)  =  case x `compare` y of
 union :: Tree -> Tree -> Tree
 union t Leaf  =  t
 union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
+
+
+deriveExpress ''Tree
 
 
 instance Listable Tree where
@@ -203,6 +211,12 @@ main = do
     , ordcase (undefined :: Tree)
     , maxSize 12
     , maxEquationSize 7
+    ]
+
+  conjure "insert" insert
+    [ fun "Node" Node
+    , fun "before" before
+    , fun "beyond" beyond
     ]
 
   -- reachable in 55s, candidate #173109 at size 13.
