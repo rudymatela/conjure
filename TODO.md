@@ -3,10 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Make so that derived Listable instances `reset`
-  constructors that are not recursive.
-  This change will need to be done in LeanCheck itself.
-
 * Allow timeout setting?
 
 * Find most efficient of a given size (see below).
