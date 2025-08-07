@@ -2,7 +2,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 
 import Conjure
-import Test.LeanCheck
 
 
 -- This was inspired by the These datatype from the cathis package.

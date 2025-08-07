@@ -120,11 +120,27 @@ module Conjure
   , reifyEquality
   , reifyTiers
   , conjureType
-  , Name (..)
-  , Express (..)
   , deriveConjurable
   , deriveConjurableIfNeeded
   , deriveConjurableCascading
+  , Name (..)
+  , Express (..)
+  , Listable (..)
+  , cons0
+  , cons1
+  , cons2
+  , cons3
+  , cons4
+  , cons5
+  , cons6
+  , (\/)
+  , reset
+  , cons7
+  , cons8
+  , cons9
+  , cons10
+  , cons11
+  , cons12
 
 -- * Pure interfaces
   , Results (..)

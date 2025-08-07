@@ -11,9 +11,6 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * Find most efficient of a given size (see below).
 
-* Better error reporting when `Listable` is out-of-scope when using `deriveConjurable`.
-  This needs to be implemented on LeanCheck itself.
-
 * forbid recursion into negatives (see below)
 
 * Add way to consider functions that don't increase size of arguments in recursive calls

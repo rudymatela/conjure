@@ -7,7 +7,6 @@
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 {-# LANGUAGE TemplateHaskell #-}
 import Conjure
-import Test.LeanCheck
 
 data Peano  =  Z | S Peano
   deriving (Show, Eq)
