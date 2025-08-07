@@ -1,46 +1,5 @@
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
--- pruning with 20/30 rules
--- 1 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 0 candidates of size 5
--- 0 candidates of size 6
--- 0 candidates of size 7
--- 24 candidates of size 8
--- 48 candidates of size 9
--- 0 candidates of size 10
--- 180 candidates of size 11
--- 80 candidates of size 12
--- tested 274 candidates
-mem x Leaf  =  False
-mem x (Node t1 y t2)  =  mem x t1 || (x == y || mem x t2)
-
-mem :: Int -> Tree -> Bool
--- testing 360 combinations of argument values
--- pruning with 1/2 rules
--- 2 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 0 candidates of size 5
--- 0 candidates of size 6
--- 6 candidates of size 7
--- 0 candidates of size 8
--- 0 candidates of size 9
--- 32 candidates of size 10
--- 0 candidates of size 11
--- 160 candidates of size 12
--- tested 106 candidates
-mem x Leaf  =  False
-mem x (Node t1 y t2)  =  case x `compare` y of
-                         LT -> mem x t1
-                         EQ -> True
-                         GT -> mem x t2
-
-mem :: Int -> Tree -> Bool
--- testing 360 combinations of argument values
 -- pruning with 9/17 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
@@ -65,23 +24,27 @@ mem x (Node t1 y t2)
   | y < x  =  mem x t2
   | otherwise  =  True
 
-insert :: Int -> Tree -> Tree
+mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
--- pruning with 2/3 rules
+-- pruning with 1/2 rules
 -- 2 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
--- 4 candidates of size 4
+-- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 26 candidates of size 7
+-- 6 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 176 candidates of size 10
+-- 32 candidates of size 10
 -- 0 candidates of size 11
--- 32 candidates of size 12
--- tested 240 candidates
-insert  =  undefined  -- search exhausted
+-- 160 candidates of size 12
+-- tested 106 candidates
+mem x Leaf  =  False
+mem x (Node t1 y t2)  =  case x `compare` y of
+                         LT -> mem x t1
+                         EQ -> True
+                         GT -> mem x t2
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
@@ -99,6 +62,24 @@ insert :: Int -> Tree -> Tree
 -- 0 candidates of size 11
 -- 32 candidates of size 12
 -- tested 162 candidates
+insert  =  undefined  -- search exhausted
+
+insert :: Int -> Tree -> Tree
+-- testing 360 combinations of argument values
+-- pruning with 2/3 rules
+-- 2 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 26 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 176 candidates of size 10
+-- 0 candidates of size 11
+-- 32 candidates of size 12
+-- tested 240 candidates
 insert  =  undefined  -- search exhausted
 
 before :: Int -> Tree -> Tree

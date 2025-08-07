@@ -131,8 +131,7 @@ main :: IO ()
 main = do
   conjure "mem" mem
     [ con False
-    , fun "||" (||)
-    , fun "==" ((==) :: Int -> Int -> Bool)
+    , con True
     , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
     ]
@@ -144,11 +143,14 @@ main = do
     , ordcase (undefined :: Bool)
     ]
 
-  conjure "mem" mem
-    [ con False
-    , con True
-    , fun "<" ((<) :: Int -> Int -> Bool)
+  -- out of reach performance-wise as well (reaching 19 but needs size 25)
+  conjure "insert" insert
+    [ con Leaf
+    , fun "Node" Node
+    , fun "unit" unit
     , guard
+    , fun "<" ((<) :: Int -> Int -> Bool)
+    , maxSize 12
     ]
 
   -- simply out of reach performance-wise (reaching 16 but need size 22)
@@ -158,16 +160,6 @@ main = do
     , fun "unit" unit
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
-    , maxSize 12
-    ]
-
-  -- out of reach performance-wise as well (reaching 19 but needs size 25)
-  conjure "insert" insert
-    [ con Leaf
-    , fun "Node" Node
-    , fun "unit" unit
-    , guard
-    , fun "<" ((<) :: Int -> Int -> Bool)
     , maxSize 12
     ]
 
