@@ -140,7 +140,7 @@ given list constructors, zero, one and subtraction:
 The above example also takes less than a second to run in a modern laptop.
 The selection of functions in the list of ingredients was minimized
 to what was absolutely needed here.
-With a larger collection as ingredients YMMV.
+With a larger collection of ingredients YMMV.
 
 
 Synthesizing from specifications (for advanced users)
