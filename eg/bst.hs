@@ -137,6 +137,13 @@ main = do
     , ordcase (undefined :: Bool)
     ]
 
+  conjure "mem" mem
+    [ con False
+    , con True
+    , fun "<" ((<) :: Int -> Int -> Bool)
+    , guard
+    ]
+
   -- simply out of reach performance-wise (reaching 16 but need size 22)
   conjure "insert" insert
     [ con Leaf
