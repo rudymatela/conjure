@@ -145,8 +145,7 @@ main = do
 
   -- out of reach performance-wise as well (reaching 19 but needs size 25)
   conjure "insert" insert
-    [ con Leaf
-    , fun "Node" Node
+    [ fun "Node" Node
     , fun "unit" unit
     , guard
     , fun "<" ((<) :: Int -> Int -> Bool)
@@ -155,8 +154,7 @@ main = do
 
   -- simply out of reach performance-wise (reaching 16 but need size 22)
   conjure "insert" insert
-    [ con Leaf
-    , fun "Node" Node
+    [ fun "Node" Node
     , fun "unit" unit
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)

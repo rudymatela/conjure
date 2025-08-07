@@ -48,38 +48,38 @@ mem x (Node t1 y t2)  =  case x `compare` y of
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
--- pruning with 5/5 rules
--- 2 candidates of size 1
--- 0 candidates of size 2
+-- pruning with 4/4 rules
+-- 1 candidates of size 1
+-- 1 candidates of size 2
 -- 0 candidates of size 3
--- 4 candidates of size 4
--- 0 candidates of size 5
--- 0 candidates of size 6
--- 20 candidates of size 7
--- 0 candidates of size 8
--- 0 candidates of size 9
--- 104 candidates of size 10
--- 0 candidates of size 11
--- 32 candidates of size 12
--- tested 162 candidates
+-- 1 candidates of size 4
+-- 6 candidates of size 5
+-- 1 candidates of size 6
+-- 2 candidates of size 7
+-- 22 candidates of size 8
+-- 22 candidates of size 9
+-- 39 candidates of size 10
+-- 84 candidates of size 11
+-- 182 candidates of size 12
+-- tested 361 candidates
 insert  =  undefined  -- search exhausted
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
--- pruning with 2/3 rules
--- 2 candidates of size 1
--- 0 candidates of size 2
+-- pruning with 1/2 rules
+-- 1 candidates of size 1
+-- 1 candidates of size 2
 -- 0 candidates of size 3
--- 4 candidates of size 4
--- 0 candidates of size 5
--- 0 candidates of size 6
--- 26 candidates of size 7
--- 0 candidates of size 8
--- 0 candidates of size 9
--- 176 candidates of size 10
--- 0 candidates of size 11
--- 32 candidates of size 12
--- tested 240 candidates
+-- 1 candidates of size 4
+-- 6 candidates of size 5
+-- 1 candidates of size 6
+-- 2 candidates of size 7
+-- 25 candidates of size 8
+-- 25 candidates of size 9
+-- 42 candidates of size 10
+-- 134 candidates of size 11
+-- 252 candidates of size 12
+-- tested 490 candidates
 insert  =  undefined  -- search exhausted
 
 before :: Int -> Tree -> Tree
