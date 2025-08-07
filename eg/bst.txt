@@ -83,6 +83,24 @@ insert :: Int -> Tree -> Tree
 -- tested 240 candidates
 insert  =  undefined  -- search exhausted
 
+insert :: Int -> Tree -> Tree
+-- testing 360 combinations of argument values
+-- pruning with 5/5 rules
+-- 2 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 4 candidates of size 4
+-- 0 candidates of size 5
+-- 0 candidates of size 6
+-- 20 candidates of size 7
+-- 0 candidates of size 8
+-- 0 candidates of size 9
+-- 104 candidates of size 10
+-- 0 candidates of size 11
+-- 32 candidates of size 12
+-- tested 162 candidates
+insert  =  undefined  -- search exhausted
+
 before :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
 -- 2 candidates of size 1

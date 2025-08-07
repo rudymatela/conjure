@@ -78,6 +78,13 @@ insert x (Node l y r)  =
   EQ -> Node l y r                -- 16
   GT -> Node l y (insert x r)     -- 22
 
+insertAlt :: Int -> Tree -> Tree
+insertAlt x Leaf          =  unit x  -- 2
+insertAlt x (Node l y r)
+  | x < y  =  Node (insert x l) y r  -- 12
+  | y < x  =  Node l y (insert x r)  -- 22
+  | otherwise  =  Node l y r         -- 25
+
 before :: Int -> Tree -> Tree
 before _ Leaf  =  Leaf
 before y (Node l x r)  =  case y `compare` x of
@@ -151,6 +158,16 @@ main = do
     , fun "unit" unit
     , fun "`compare`" (compare :: Int -> Int -> Ordering)
     , ordcase (undefined :: Tree)
+    , maxSize 12
+    ]
+
+  -- out of reach performance-wise as well (reaching 19 but needs size 25)
+  conjure "insert" insert
+    [ con Leaf
+    , fun "Node" Node
+    , fun "unit" unit
+    , guard
+    , fun "<" ((<) :: Int -> Int -> Bool)
     , maxSize 12
     ]
 
