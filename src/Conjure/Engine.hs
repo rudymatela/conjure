@@ -267,7 +267,7 @@ conjpureFromSpec nm p  =  conjpure0 nm undefined p
 -- 'conjpure', 'conjpureFromSpec', 'conjure' and 'conjureFromSpec'
 -- all refer to this.
 conjpure0 :: Conjurable f => String -> f -> (f -> [Property]) -> [Ingredient] -> Results
-conjpure0 nm f p es  =  Results
+conjpure0 nm f p is  =  Results
   { implementationss  =  implementationsT
   , candidatess  =  candidatesT
   , bindings  =  tests
@@ -284,17 +284,17 @@ conjpure0 nm f p es  =  Results
                $  (if target > 0 then targetiers target else id)
                $  (if maxSize > 0 then take maxSize else id)
                $  candidatesTT
-  (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns nm f es
+  (candidatesTT, thy, patternss, deconstructions)  =  candidateDefns nm f is
 
   test dfn  =  all (errorToFalse . deval (conjureExpress f) maxRecursions dfn False)
             $  [funToVar lhs -==- rhs | (lhs, rhs) <- tests]
   tests  =  conjureTestDefn maxTests maxSearchTests nm f
   (-==-)  =  conjureMkEquation f
-  maxTests  =  maxTestsI es
-  (target, maxSize)  =  targetAndMaxSizeI es
-  maxRecursions  =  maxRecursionsI es
-  maxSearchTests  =  maxSearchTestsI es
-  uniqueCandidates  =  uniqueCandidatesI es
+  maxTests  =  maxTestsI is
+  (target, maxSize)  =  targetAndMaxSizeI is
+  maxRecursions  =  maxRecursionsI is
+  maxSearchTests  =  maxSearchTestsI is
+  uniqueCandidates  =  uniqueCandidatesI is
 
 
 -- | Return apparently unique candidate definitions.
@@ -396,8 +396,8 @@ candidateDefnsC nm f is =
        | otherwise           =                        conjurePats maxPatternDepth es nm f
   partialDefns  =  concatMapT partialDefnsFromPats pats
   -- replaces the any guard symbol with a guard of the correct type
-  ps  =  actual is  -- extract actual ingredients/primitives from the list
-  es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ps]
+  ais  =  actual is
+  es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ais]
 
   eh  =  conjureResultHole f
   efxs  =  conjureVarApplication nm f
@@ -549,8 +549,8 @@ candidateDefnsC nm f is =
 
   thy  =  doubleCheck (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  cjHoles (fun nm f:ps) ++ [val False, val True] ++ es
-  (===)  =  cjAreEqual (fun nm f:ps) maxTests
+       $  cjHoles (fun nm f:ais) ++ [val False, val True] ++ es
+  (===)  =  cjAreEqual (fun nm f:ais) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
 
   maxTests               =  maxTestsI is
