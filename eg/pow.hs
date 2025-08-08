@@ -23,16 +23,19 @@ main  =  do
     ]
 
   -- pow b 0  =  1
-  -- pow b e  =  pow b (halve e) * pow b (halve e) * if odd e then b else 1
-  --             2   3  4     5  6 7   8  9    10 11 12 13 14     15     16
-  -- out of reach performance wise, OOM at size 9
+  -- pow b e
+  --   | odd e  =  b * pow b (e - 1)             -- 11
+  --   | otherwise  =  square (pow b (halve e))  -- 16
   conjure "pow" pow
     [ con (0::Int)
     , con (1::Int)
---  , fun "sq" ((\x -> x*x) :: Int -> Int) -- cheat! OOM still
+    , fun "square" ((\x -> x*x) :: Int -> Int) -- cheat
     , fun "*" ((*) :: Int -> Int -> Int)
-    , fun "halve" ((`div` 2) :: Int -> Int)
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun "halve" ((`div` 2) :: Int -> Int) -- cheat
     , fun "odd" (odd :: Int -> Bool)
-    , iif (undefined :: Int)
-    , maxSize 6 -- OOM at size 9
+    , guard
+    , maxSize 6 -- remove to find the first version...
+    -- simply out of reach:
+    -- , maxSize 16, carryOn
     ]
