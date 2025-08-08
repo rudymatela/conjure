@@ -26,7 +26,6 @@ module Conjure.Settings
   , maxConstantSize
   , maxPatternSize
   , maxPatternDepth
-  , undefinedIngredient
 
   -- * Debug options
   , showCandidates
@@ -61,7 +60,6 @@ module Conjure.Settings
   , maxConstantSizeI
   , maxPatternSizeI
   , maxPatternDepthI
-  , undefinedIngredientI
 
   -- * Read debug options
   , showCandidatesI
@@ -105,9 +103,6 @@ data Setting
   | MaxConstantSize       Int  -- ^ maximum size of constants (0 for no limit)
   | MaxPatternSize        Int  -- ^ maximum size of patterns (0 for no limit)
   | MaxPatternDepth       Int  -- ^ maximum depth of patterns
-
-  -- special ingredients --
-  | UndefinedIngredient        -- ^ allows undefined as the value for an equation
 
   -- advanced & debug options --
   | CarryOn              -- ^ carry on after finding a suitable candidate
@@ -430,9 +425,3 @@ uniqueCandidates =  setting UniqueCandidates
 
 uniqueCandidatesI :: [Ingredient] -> Bool
 uniqueCandidatesI is  =  notNull [True | UniqueCandidates <- map extract is]
-
-undefinedIngredient :: Ingredient
-undefinedIngredient  =  setting UndefinedIngredient
-
-undefinedIngredientI :: [Ingredient] -> Bool
-undefinedIngredientI is  =  notNull [True | UndefinedIngredient <- map extract is]
