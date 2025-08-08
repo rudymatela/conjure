@@ -165,8 +165,12 @@ iif x  =  (ifFor x, conjureType x)
 -- >   | otherwise  =  last xs
 guard :: Ingredient
 guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
--- internally we always return a guard of the Bool return type,
--- this is replaced by Conjure when enumerating candidates
+-- Internally we always return a guard of the Bool return type,
+-- this is replaced by Conjure when enumerating candidates.
+-- The choice of Bool here is not incidental:
+-- when reifying types based on this,
+-- only Bool type information would be included.
+-- With other types as the element type, we would have a spurious inclusion.
 
 
 -- | Provides a case condition bound to the given return type.
