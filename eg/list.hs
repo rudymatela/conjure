@@ -99,7 +99,7 @@ main = do
     , fun "," ((,) :: Int -> Int -> (Int,Int))
     ]
 
-  conjure "\\/" (\/)
+  conjure "\\/" (Main.\/)
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     ]
