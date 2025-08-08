@@ -159,7 +159,7 @@ conjureFromSpec nm p  =  conjure0 nm undefined p
 --
 --   This works like the functions 'conjure' and 'conjureFromSpec' combined.
 conjure0 :: Conjurable f => String -> f -> (f -> [Property]) -> [Ingredient] -> IO ()
-conjure0 nm f p es  =  do
+conjure0 nm f p ingredients  =  do
   -- the code section below became quite ugly with time and patches.
   -- it is still maintainable and readable as it is, but perhaps
   -- needs to be cleaned up and simplified
@@ -221,7 +221,7 @@ conjure0 nm f p es  =  do
       putStrLn $ showDefn $ etaReduce $ normalizeDefn thy i
       when carryOn $ pr1 t' is (drop 1 cs'')
   rs  =  zip iss css
-  results  =  conjpure0 nm f p es
+  results  =  conjpure0 nm f p ingredients
   iss  =  implementationss results
   css  =  candidatess results
   ts   =  bindings results
@@ -230,12 +230,12 @@ conjure0 nm f p es  =  do
   nREs  =  length (equations thy) + nRules
   -- we could avoid the following as most are called once
   -- but is nice to have a summary of which settings are used
-  carryOn              =  carryOnI es
-  showTests            =  showTestsI es
-  showTheory           =  showTheoryI es
-  showPatterns         =  showPatternsI es
-  showCandidates       =  showCandidatesI es
-  showDeconstructions  =  showDeconstructionsI es
+  carryOn              =  carryOnI ingredients
+  showTests            =  showTestsI ingredients
+  showTheory           =  showTheoryI ingredients
+  showPatterns         =  showPatternsI ingredients
+  showCandidates       =  showCandidatesI ingredients
+  showDeconstructions  =  showDeconstructionsI ingredients
 
 
 -- | Results to the 'conjpure' family of functions.
