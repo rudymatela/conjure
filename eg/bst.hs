@@ -114,7 +114,8 @@ deriveExpress ''Tree
 
 instance Listable Tree where
   tiers  =  cons0 Leaf
-        \/  cons3 Node `suchThat` ordered
+         \/ cons3 Node `suchThat` (\(Node l x r) -> (nil l || rightmost l < x)
+                                                 && (nil r || x < leftmost r))
 
 instance Name Tree where
   name _  =  "t1"
