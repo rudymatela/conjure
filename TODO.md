@@ -38,7 +38,8 @@ Internally, we can represent it as `=undefined`.  Steps:
 4. amend `Expr.enumerateAppsFor` to only allow `=undefined` at root
 5. add `iundefined` with a `()` internal type
 6. replace `iundefined` marker with real `conjureRootUndefined` in `candidateExprsC`
-7. the end?
+7. pretty-print
+8. the end?
 
 ## Find the most efficient of a given size
 
