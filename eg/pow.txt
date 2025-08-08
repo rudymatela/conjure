@@ -24,4 +24,7 @@ pow :: Int -> Int -> Int
 -- 178 candidates of size 6
 -- tested 229 candidates
 pow  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 1, (*), halve, and if-expressions
+-- consider increasing target/maxSize or refining the ingredients
 

@@ -67,6 +67,9 @@ merge :: [Int] -> [Int] -> [Int]
 -- 3728 candidates of size 16
 -- tested 5768 candidates
 merge  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- [], (:), (<=), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 qsort :: [Int] -> [Int]
 -- testing 9 combinations of argument values

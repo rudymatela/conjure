@@ -61,4 +61,7 @@ digitCount :: Int -> Int -> Int
 -- 12715 candidates of size 7
 -- tested 13449 candidates
 digitCount  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 10, (+), div, mod, (==), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 

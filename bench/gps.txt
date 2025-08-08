@@ -62,6 +62,9 @@ gps3_alt :: Int -> Int -> Int -> [Int]
 -- 13311 candidates of size 13
 -- tested 20359 candidates
 gps3_alt  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- [], (:), (+), (<), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- testing 9 combinations of argument values
@@ -97,6 +100,9 @@ gps5 :: [Char] -> [Char]
 -- 5 candidates of size 12
 -- tested 26 candidates
 gps5  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- "", (:), '!', (==), isLetter, and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 gps6direct :: Int -> Int
 -- testing 9 combinations of argument values
@@ -109,6 +115,9 @@ gps6direct :: Int -> Int
 -- 0 candidates of size 6
 -- tested 188 candidates
 gps6direct  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 1, 2, 3, (+), (*), div, even, and if-expressions
+-- consider increasing target/maxSize or refining the ingredients
 
 gps6step :: Int -> Int
 -- testing 9 combinations of argument values
@@ -134,6 +143,9 @@ nextCollatz :: Int -> Int
 -- 0 candidates of size 6
 -- tested 188 candidates
 nextCollatz  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 1, 2, 3, (+), (*), div, even, and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 gps7 :: [Char] -> ([Char],Int)
 -- testing 4 combinations of argument values
@@ -161,6 +173,9 @@ gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
 -- 0 candidates of size 4
 -- tested 0 candidates
 gps8  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 gps9 :: Int -> [Int]
 -- testing 3 combinations of argument values
@@ -382,6 +397,9 @@ gps19 :: Int -> [Char] -> [Char]
 -- 0 candidates of size 2
 -- tested 1 candidates
 gps19  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 isVowel :: Char -> Bool
 -- testing 12 combinations of argument values
@@ -489,6 +507,9 @@ scrabble1 :: Char -> Int
 -- 0 candidates of size 13
 -- tested 1 candidates
 scrabble1  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 1, 'd', 'g', 'b', 'c', 'm', 'p', 'f', 'h', 'v', 'w', 'y', 'k', 'j', 'x', 'q', and 'z'
+-- consider increasing target/maxSize or refining the ingredients
 
 gps22 :: [Char] -> Int
 -- pruning with 5/9 rules
@@ -537,6 +558,9 @@ gps25 :: Int -> [Int]
 -- 15042 candidates of size 10
 -- tested 20277 candidates
 gps25  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 10, [], (:), guarded equations, abs, (<), rem, and quot
+-- consider increasing target/maxSize or refining the ingredients
 
 gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- testing 5 combinations of argument values
@@ -554,6 +578,9 @@ gps26 :: Int -> Int -> Int -> Int -> Int -> Char
 -- 40000 candidates of size 11
 -- tested 40405 candidates
 gps26  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 'A', 'B', 'C', 'D', 'F', guarded equations, and (>=)
+-- consider increasing target/maxSize or refining the ingredients
 
 gps27_median :: Int -> Int -> Int -> Int
 -- testing 6 combinations of argument values
@@ -576,6 +603,9 @@ gps27_median :: Int -> Int -> Int -> Int
 -- 11664 candidates of size 16
 -- tested 20451 candidates
 gps27_median  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- (<=), (&&), (||), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 gps27b_median :: Int -> Int -> Int -> Int
 -- testing 6 combinations of argument values

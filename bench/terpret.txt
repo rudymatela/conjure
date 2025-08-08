@@ -120,6 +120,9 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- 408 candidates of size 6
 -- tested 544 candidates
 adder2  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- False, True, not, (&&), (||), [], (:), guarded equations, (,,), (==), (^^), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 TerpreT benchmark #7: access
 

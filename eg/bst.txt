@@ -63,6 +63,9 @@ insert :: Int -> Tree -> Tree
 -- 310 candidates of size 12
 -- tested 553 candidates
 insert  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Node, unit, guarded equations, and (<)
+-- consider increasing target/maxSize or refining the ingredients
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
@@ -81,6 +84,9 @@ insert :: Int -> Tree -> Tree
 -- 380 candidates of size 12
 -- tested 682 candidates
 insert  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Node, unit, compare, and case
+-- consider increasing target/maxSize or refining the ingredients
 
 before :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
@@ -97,6 +103,9 @@ before :: Int -> Tree -> Tree
 -- 3543 candidates of size 11
 -- tested 5343 candidates
 before  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Leaf, Node, (==), (<), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
@@ -113,6 +122,9 @@ beyond :: Int -> Tree -> Tree
 -- 3543 candidates of size 11
 -- tested 5343 candidates
 beyond  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Leaf, Node, (==), (<=), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
 before :: Int -> Tree -> Tree
 -- pruning with 3/5 rules
@@ -130,6 +142,9 @@ before :: Int -> Tree -> Tree
 -- 896 candidates of size 12
 -- tested 4282 candidates
 before  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Leaf, Node, compare, and case
+-- consider increasing target/maxSize or refining the ingredients
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 3/5 rules
@@ -147,6 +162,9 @@ beyond :: Int -> Tree -> Tree
 -- 896 candidates of size 12
 -- tested 4282 candidates
 beyond  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Leaf, Node, compare, and case
+-- consider increasing target/maxSize or refining the ingredients
 
 insert :: Int -> Tree -> Tree
 -- testing 360 combinations of argument values
@@ -177,4 +195,7 @@ union :: Tree -> Tree -> Tree
 -- 4322 candidates of size 10
 -- tested 7087 candidates
 union  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Leaf, Node, before, and beyond
+-- consider increasing target/maxSize or refining the ingredients
 

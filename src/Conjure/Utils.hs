@@ -47,6 +47,7 @@ module Conjure.Utils
   , (+++)
   , isSubsetOf
   , prods
+  , command
   )
 where
 
@@ -224,3 +225,18 @@ infixr 5 +++
 prods :: [[a]] -> [[a]]
 prods []  =  [[]]
 prods (xs:xss)  =  [y:ys | y <- xs, ys <- prods xss]
+
+-- | Separate a list of strings using comma-and-and.
+--
+-- This function includes the Oxford comma.
+--
+-- > > command ["this", "that"]
+-- > "this and that"
+--
+-- > > command ["this", "that", "these"]
+-- > "this, that, and these"
+command :: [String] -> String
+command []  =  "nothing"
+command [x]  =  x
+command [x,y]  =  x ++ " and " ++ y
+command xs  =  intercalate ", " (init xs) ++ ", and " ++ (last xs)

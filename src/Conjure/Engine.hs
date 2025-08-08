@@ -201,8 +201,14 @@ conjure0 nm f p ingredients  =  do
   where
   showEq eq  =  showExpr (fst eq) ++ " == " ++ showExpr (snd eq)
   pr :: Integer -> Int -> Int -> [([Defn], [Defn])] -> IO ()
-  pr t0 n t []  =  do putWithTimeSince t0 $ "tested " ++ show t ++ " candidates"
-                      putStrLn $ nm ++ "  =  undefined  -- search exhausted\n"
+  pr t0 n t []  =  do
+    putWithTimeSince t0 $ "tested " ++ show t ++ " candidates"
+    putStrLn $ nm ++ "  =  undefined  -- search exhausted"
+    when (not carryOn) $
+      putStrLn $ "-- could not find implementation using only\n-- "
+              ++ command [showSymbol e | (e,_) <- actual ingredients]
+              ++ "\n-- consider increasing target/maxSize or refining the ingredients"
+    putStrLn ""
   pr t0 n t ((is,cs):rs)  =  do
     let nc  =  length cs
     putWithTimeSince t0 $ show nc ++ " candidates of size " ++ show n
@@ -228,6 +234,10 @@ conjure0 nm f p ingredients  =  do
   thy  =  theory results
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
+  showSymbol e
+    | isGuardSymbol e  =  "guarded equations"
+    | isIfSymbol e  =  "if-expressions"
+    | otherwise  =  showExpr e
   -- we could avoid the following as most are called once
   -- but is nice to have a summary of which settings are used
   carryOn              =  carryOnI ingredients

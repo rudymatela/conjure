@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* Report "could not find implementation using only ..., ..., ..."
-
 * Allow timeout setting?
 
 * Find most efficient of a given size (see below).

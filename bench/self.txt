@@ -33,4 +33,7 @@ d :: Int -> Int
 -- 10 candidates of size 3
 -- tested 13 candidates
 d  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 1, (+), and (*)
+-- consider increasing target/maxSize or refining the ingredients
 

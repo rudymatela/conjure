@@ -37,6 +37,9 @@ gps1 :: Int -> [Int] -> Int
 -- 5 candidates of size 4
 -- tested 12 candidates
 gps1  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 1, (+), (<), guarded equations, and undefined
+-- consider increasing target/maxSize or refining the ingredients
 
 gps2 :: Double -> Double -> Int -> Double
 -- testing 5 combinations of argument values
@@ -49,6 +52,9 @@ gps2 :: Double -> Double -> Int -> Double
 -- 0 candidates of size 6
 -- tested 270 candidates
 gps2  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 1, (*), (/), (+), and (-)
+-- consider increasing target/maxSize or refining the ingredients
 
 gps3 :: [Char] -> Int
 gps3  =  error "could not reify specification, suggestion: conjureFromSpec"
@@ -63,6 +69,9 @@ gps4 :: [Char] -> [Char]
 -- 119 candidates of size 6
 -- tested 203 candidates
 gps4  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- '-', "", (:), (==), head, tail, if-expressions, if-expressions, and toUpper
+-- consider increasing target/maxSize or refining the ingredients
 
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
@@ -70,6 +79,9 @@ gps5 :: Int -> [Int]
 -- 0 candidates of size 1
 -- tested 0 candidates
 gps5  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 tell :: [Int] -> Int -> [Int]
 -- pruning with 0/0 rules
@@ -120,6 +132,9 @@ gps6 :: [Int] -> Int
 -- 0 candidates of size 2
 -- tested 0 candidates
 gps6  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 gps7 :: Integer -> Integer -> Ratio Integer
 -- testing 6 combinations of argument values
@@ -127,6 +142,9 @@ gps7 :: Integer -> Integer -> Ratio Integer
 -- 0 candidates of size 1
 -- tested 0 candidates
 gps7  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 gps8 :: Int -> [Int] -> (Int,Int)
 -- testing 3 combinations of argument values
@@ -135,6 +153,9 @@ gps8 :: Int -> [Int] -> (Int,Int)
 -- 0 candidates of size 2
 -- tested 0 candidates
 gps8  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 gps9 :: Int -> [Char]
 -- testing 7 combinations of argument values
@@ -152,6 +173,9 @@ gps9 :: Int -> [Char]
 -- 2976 candidates of size 11
 -- tested 3487 candidates
 gps9  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- "Fizz", "Buzz", "FizzBuzz", 0, 3, 5, False, True, divBy, (&&), show, and if-expressions
+-- consider increasing target/maxSize or refining the ingredients
 
 gps10 :: [Int] -> Int
 -- testing 7 combinations of argument values
@@ -252,6 +276,9 @@ gps17_pds :: [Int] -> Int
 -- 4 candidates of size 6
 -- tested 8 candidates
 gps17_pds  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, guarded equations, not, null, (==), head, (+), and (&&)
+-- consider increasing target/maxSize or refining the ingredients
 
 gps17_pds :: [Int] -> Int
 -- testing 9 combinations of argument values
@@ -264,6 +291,9 @@ gps17_pds :: [Int] -> Int
 -- 8 candidates of size 6
 -- tested 14 candidates
 gps17_pds  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, guarded equations, (==), and (+)
+-- consider increasing target/maxSize or refining the ingredients
 
 gps18_price :: [Double] -> [Double] -> Double
 -- testing 4 combinations of argument values
@@ -276,6 +306,9 @@ gps18_price :: [Double] -> [Double] -> Double
 -- 176 candidates of size 6
 -- tested 213 candidates
 gps18_price  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0.0, 1.0, (+), (*), and (-)
+-- consider increasing target/maxSize or refining the ingredients
 
 gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- testing 7 combinations of argument values
@@ -288,6 +321,9 @@ gps19_snowday :: Int -> Double -> Double -> Double -> Double
 -- 0 candidates of size 6
 -- tested 333 candidates
 gps19_snowday  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0, 1, max, (+), and (-)
+-- consider increasing target/maxSize or refining the ingredients
 
 gps20 :: [Char] -> Bool
 gps20  =  error "could not reify specification, suggestion: conjureFromSpec"
@@ -352,6 +388,9 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- 5292 candidates of size 11
 -- tested 10955 candidates
 gps23  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 gps24 :: [Char] -> Twitter
 -- pruning with 4/8 rules
@@ -385,4 +424,7 @@ gps25 :: [Double] -> [Double] -> Double
 -- 438 candidates of size 6
 -- tested 532 candidates
 gps25  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- 0.0, 2.0, (+), (-), (**), zipWith, map, and sqrt
+-- consider increasing target/maxSize or refining the ingredients
 

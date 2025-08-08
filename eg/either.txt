@@ -51,4 +51,7 @@ lefts :: [Either A A] -> [A]
 -- 0 candidates of size 2
 -- tested 1 candidates
 lefts  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- Left, Right, False, True, [], and (:)
+-- consider increasing target/maxSize or refining the ingredients
 

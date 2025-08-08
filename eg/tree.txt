@@ -96,6 +96,9 @@ ordered :: Tree -> Bool
 -- 712 candidates of size 12
 -- tested 1127 candidates
 ordered  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- True, False, (&&), (||), (<), rightmost, leftmost, and nil
+-- consider increasing target/maxSize or refining the ingredients
 
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values

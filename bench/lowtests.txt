@@ -33,6 +33,9 @@ xs `isSubsequenceOf` sort xs == True
 -- 0 candidates of size 18
 -- tested 27 candidates
 subset  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- sort and isSubsequenceOf
+-- consider increasing target/maxSize or refining the ingredients
 
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
@@ -81,6 +84,9 @@ transpose (transpose (transpose xss)) == transpose xss
 -- 0 candidates of size 18
 -- tested 6 candidates
 replicates  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- replicate, transpose, and concat
+-- consider increasing target/maxSize or refining the ingredients
 
 replicates :: [Char] -> Int -> [Char]
 -- testing 360 combinations of argument values

@@ -6,6 +6,9 @@ bottom :: Int
 -- 0 candidates of size 1
 -- tested 0 candidates
 bottom  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- nothing
+-- consider increasing target/maxSize or refining the ingredients
 
 bottom :: Int
 -- pruning with 0/0 rules

@@ -39,6 +39,7 @@ module Conjure.Expr
   , isGuardSymbol
   , isGuard
   , hasGuard
+  , isIfSymbol
   , mapInnerFirstOuterLast
   , mappArgs
   , mappFun
@@ -599,6 +600,10 @@ isNegative _  =  False
 isGuardSymbol :: Expr -> Bool
 isGuardSymbol (Value "|" _)  =  True
 isGuardSymbol _  =  False
+
+isIfSymbol :: Expr -> Bool
+isIfSymbol (Value "if" _)  =  True
+isIfSymbol _  =  False
 
 -- | Is the expression a guard application?
 isGuard :: Expr -> Bool

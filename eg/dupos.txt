@@ -67,4 +67,7 @@ positionsFrom :: Int -> A -> [A] -> [Int]
 -- 1363 candidates of size 13
 -- tested 1858 candidates
 positionsFrom  =  undefined  -- search exhausted
+-- could not find implementation using only
+-- [], 1, (+), (:), (==), and guarded equations
+-- consider increasing target/maxSize or refining the ingredients
 
