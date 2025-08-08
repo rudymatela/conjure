@@ -1,3 +1,18 @@
+bottom :: Int
+bottom  =  error "could not reify specification, suggestion: conjureFromSpec"
+
+bottom :: Int
+-- pruning with 0/0 rules
+-- 0 candidates of size 1
+-- tested 0 candidates
+bottom  =  undefined  -- search exhausted
+
+bottom :: Int
+-- pruning with 0/0 rules
+-- 1 candidates of size 1
+-- tested 1 candidates
+bottom  =  undefined
+
 isq :: Bool -> Int -> Int
 -- testing 360 combinations of argument values
 -- pruning with 56/91 rules

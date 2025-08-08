@@ -10,6 +10,18 @@
 -- we do not use partial definitions here.
 -- We use fully defined functions to conjure themselves.
 import Conjure
+import Test.LeanCheck.Error (errorToNothing)
+import Data.Maybe (isNothing)
+
+-- | An undefined function.
+bottom :: Int
+bottom  =  undefined
+
+-- | A specification for the above undefined function.
+bottomSpec :: Int -> [Property]
+bottomSpec bottom  =  [property $ isError bottom]
+  where
+  isError  =  isNothing . errorToNothing  -- TODO: add to LeanCheck.Error?
 
 -- | xor for integers
 --
@@ -29,6 +41,20 @@ isq True  x  =  x * x
 
 main :: IO ()
 main  =  do
+  -- For this first, we try to ask Conjure to generate undefined
+  -- Conjure complains about not being able to reify specification.
+  -- Fair enough: there's no way to distinguish an undefined function
+  -- from an empty specification.
+  conjure         "bottom" bottom     []
+
+  -- For this second, Conjure exhausts the search
+  -- though it reports the correct specification
+  conjureFromSpec "bottom" bottomSpec []
+
+  -- For this third, Conjure finds the "implementation"
+  conjureFromSpec "bottom" bottomSpec
+    [ fun "undefined" (undefined :: Int) ]
+
   conjure "isq" isq ingredients
 
   conjure "^^^" (^^^)   ingredients
