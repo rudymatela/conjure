@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* Add `iundefined` that allows `undefined` only at the RHS root (see below).
+
 * Allow timeout setting?
 
 * Find most efficient of a given size (see below).
@@ -12,6 +14,31 @@ A non-exhaustive list of things TO DO for Conjure.
 * Add way to consider functions that don't increase size of arguments in recursive calls
 	(qsort example)
 
+
+## iundefined
+
+By providing `iundefined`, the following is allowed:
+
+	foo 0 y  =  undefined
+	foo x y
+	  | x < y  =  x + y
+	  | otherwise  =  undefined
+
+To be pretty printed as:
+
+	foo 0 y  =  undefined  -- can't eliminate
+	foo x y
+	  | x < y  =  x + y
+
+Internally, we can represent it as `=undefined`.  Steps:
+
+1. add `conjureUndefined` in `Conjurable`
+2. add `conjureRootUndefined` in `Conjurable`
+3. add `isRoot` in `Expr` (should match `isGuard`)
+4. amend `Expr.enumerateAppsFor` to only allow `=undefined` at root
+5. add `iundefined` with a `()` internal type
+6. replace `iundefined` marker with real `conjureRootUndefined` in `candidateExprsC`
+7. the end?
 
 ## Find the most efficient of a given size
 
