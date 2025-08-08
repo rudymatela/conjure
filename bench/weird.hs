@@ -29,7 +29,6 @@ isq True  x  =  x * x
 
 main :: IO ()
 main  =  do
-  -- TODO: Conjure should find isq, but doesn't due to overpruning
   conjure "isq" isq ingredients
 
   conjure "^^^" (^^^)   ingredients
