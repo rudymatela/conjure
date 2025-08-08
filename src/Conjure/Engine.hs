@@ -467,6 +467,7 @@ candidateDefnsC nm f is =
       | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
       | otherwise  =  mapT (pat,)
                    .  filterT keepB
+                   .  (if undefinedIngredient then (\/ [[conjureUndefined f]]) else id)
                    .  appsWith pat
                    .  drop 1 -- this excludes the function name itself
                    $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
@@ -577,6 +578,7 @@ candidateDefnsC nm f is =
   copyBindings           =  copyBindingsI is
   assortedPruning        =  assortedPruningI is -- TODO: rename
   atomicNumbers          =  atomicNumbersI is
+  undefinedIngredient    =  undefinedIngredientI is
   rewriting              =  rewriteI is
 
 

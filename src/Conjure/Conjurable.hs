@@ -165,6 +165,9 @@ class (Typeable a, Name a) => Conjurable a where
   conjureSubTypes :: a -> Reification
   conjureSubTypes _  =  id
 
+  conjureUndefined :: a -> Expr
+  conjureUndefined x  =  value "undefined" (undefined `asTypeOf` x)
+
   -- | Returns an if-function encoded as an 'Expr'.
   conjureIf :: a -> Expr
   conjureIf   =  ifFor
@@ -635,6 +638,7 @@ instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureResultHole f  =  conjureResultHole (f undefined)
   conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
+  conjureUndefined f  =  conjureUndefined (f undefined)
   conjureIf f  =  conjureIf (f undefined)
   conjureArgumentCases f  =  conjureCases (argTy f) : conjureArgumentCases (f undefined)
   conjureExpress f e
