@@ -10,9 +10,9 @@ leftmost :: Tree -> Int
 -- 16 candidates of size 7
 -- tested 2 candidates
 leftmost Leaf  =  undefined
-leftmost (Node t1 x t2)  =  if nil t1
-                            then x
-                            else leftmost t1
+leftmost (Node t1 x t2)
+  | nil t1  =  x
+  | otherwise  =  leftmost t1
 
 rightmost :: Tree -> Int
 -- testing 360 combinations of argument values
@@ -26,9 +26,9 @@ rightmost :: Tree -> Int
 -- 16 candidates of size 7
 -- tested 11 candidates
 rightmost Leaf  =  undefined
-rightmost (Node t1 x t2)  =  if nil t2
-                             then x
-                             else rightmost t2
+rightmost (Node t1 x t2)
+  | nil t2  =  x
+  | otherwise  =  rightmost t2
 
 size :: Tree -> Int
 -- testing 360 combinations of argument values
