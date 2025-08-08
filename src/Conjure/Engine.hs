@@ -422,10 +422,10 @@ candidateDefnsC nm f is =
     keepConstant | maxConstantSize > 0  =  \e -> isFun e || isConst e || not (isGround e) || size e <= maxConstantSize
                  | otherwise            =  const True
 
-  isRedundant | adHocRedundancy  =  \e -> isRedundantDefn e || isRedundantModuloRewriting (normalize thy) e
+  isRedundant | assortedPruning  =  \e -> isRedundantDefn e || isRedundantModuloRewriting (normalize thy) e
               | otherwise        =  const False
 
-  hasRedundant | adHocRedundancy  =  hasRedundantRecursion
+  hasRedundant | assortedPruning  =  hasRedundantRecursion
                | otherwise        =  const False
 
   isNumeric  =  conjureIsNumeric f
@@ -565,7 +565,7 @@ candidateDefnsC nm f is =
   requireDescent         =  requireDescentI is
   maxEarlyTests          =  maxEarlyTestsI is
   copyBindings           =  copyBindingsI is
-  adHocRedundancy        =  assortedPruningI is -- TODO: rename
+  assortedPruning        =  assortedPruningI is -- TODO: rename
   atomicNumbers          =  atomicNumbersI is
   rewriting              =  rewriteI is
 
