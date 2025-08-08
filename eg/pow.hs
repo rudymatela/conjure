@@ -32,6 +32,7 @@ main  =  do
 --  , fun "sq" ((\x -> x*x) :: Int -> Int) -- cheat! OOM still
     , fun "*" ((*) :: Int -> Int -> Int)
     , fun "halve" ((`div` 2) :: Int -> Int)
+    , fun "odd" (odd :: Int -> Bool)
     , iif (undefined :: Int)
     , maxSize 6 -- OOM at size 9
     ]

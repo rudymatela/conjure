@@ -15,16 +15,16 @@ pow x y  =  x * pow x (y - 1)
 
 pow :: Int -> Int -> Int
 -- testing 5 combinations of argument values
--- pruning with 15/19 rules
+-- pruning with 20/24 rules
 -- 4 candidates of size 1
 -- 2 candidates of size 2
 -- 5 candidates of size 3
 -- 9 candidates of size 4
--- 31 candidates of size 5
--- 178 candidates of size 6
--- tested 229 candidates
+-- 55 candidates of size 5
+-- 238 candidates of size 6
+-- tested 313 candidates
 pow  =  undefined  -- search exhausted
 -- could not find implementation using only
--- 0, 1, (*), halve, and if-expressions
+-- 0, 1, (*), halve, odd, and if-expressions
 -- consider increasing target/maxSize or refining the ingredients
 
