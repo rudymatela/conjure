@@ -3,6 +3,8 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
+* When showing definitions, omit equations with `undefined` RHSs when possible
+
 * Allow timeout setting?
 
 * Find most efficient of a given size (see below).
