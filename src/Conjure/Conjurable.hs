@@ -36,7 +36,6 @@ module Conjure.Conjurable
   , conjureDynamicEq
   , conjureIsNumeric
   , conjureGuard
-  , conjureUndefinedRoot
   , cevaluate
   , ceval
   , cevl
@@ -165,10 +164,6 @@ class (Typeable a, Name a) => Conjurable a where
 
   conjureSubTypes :: a -> Reification
   conjureSubTypes _  =  id
-
-  -- TODO: document me
-  conjureUndefined :: a -> Expr
-  conjureUndefined x  =  value "undefined" (undefined `asTypeOf` x)
 
   -- | Returns an if-function encoded as an 'Expr'.
   conjureIf :: a -> Expr
@@ -476,10 +471,6 @@ conjureIsUnbreakable f  =  null . conjureCasesFor f
 conjureGuard :: Conjurable f => f -> Expr
 conjureGuard  =  ifToGuard . conjureIf
 
--- TODO: document me
-conjureUndefinedRoot :: Conjurable f => f -> Expr
-conjureUndefinedRoot  =  rootExpr . conjureUndefined
-
 instance Conjurable () where
   conjureExpress   =  reifyExpress
   conjureEquality  =  reifyEquality
@@ -644,7 +635,6 @@ instance (Conjurable a, Conjurable b) => Conjurable (a -> b) where
   conjureArgumentHoles f  =  hole (argTy f) : conjureArgumentHoles (f undefined)
   conjureResultHole f  =  conjureResultHole (f undefined)
   conjureSubTypes f  =  conjureType (argTy f) . conjureType (resTy f)
-  conjureUndefined f  =  conjureUndefined (f undefined)
   conjureIf f  =  conjureIf (f undefined)
   conjureArgumentCases f  =  conjureCases (argTy f) : conjureArgumentCases (f undefined)
   conjureExpress f e

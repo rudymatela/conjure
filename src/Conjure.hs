@@ -100,7 +100,6 @@ module Conjure
   , guard
   , iif
   , ordcase
-  , iundefined
 
 -- * Basic configuration parameters
   , maxTests

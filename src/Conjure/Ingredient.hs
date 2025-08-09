@@ -16,7 +16,6 @@ module Conjure.Ingredient
   , iif
   , ordcase
   , guard
-  , iundefined
   , cjHoles
   , cjTiersFor
   , cjAreEqual
@@ -172,11 +171,6 @@ guard  =  (guardFor (undefined :: Bool), conjureType (undefined :: Bool))
 -- when reifying types based on this,
 -- only Bool type information would be included.
 -- With other types as the element type, we would have a spurious inclusion.
-
-
--- TODO: document me
-iundefined :: Ingredient
-iundefined  =  (undefinedAtRoot, id)
 
 
 -- | Provides a case condition bound to the given return type.

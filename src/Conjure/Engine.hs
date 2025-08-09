@@ -406,11 +406,8 @@ candidateDefnsC nm f is =
        | otherwise           =                        conjurePats maxPatternDepth es nm f
   partialDefns  =  concatMapT partialDefnsFromPats pats
   -- replaces the any guard symbol with a guard of the correct type
-  es  =  [ if isGuardSymbol e then conjureGuard f
-           else if e == undefinedAtRoot then conjureUndefinedRoot f
-           else e
-         | (e,_) <- actual is
-         ]
+  ais  =  actual is
+  es  =  [if isGuardSymbol e then conjureGuard f else e | (e,_) <- ais]
 
   eh  =  conjureResultHole f
   efxs  =  conjureVarApplication nm f
@@ -562,9 +559,8 @@ candidateDefnsC nm f is =
 
   thy  =  doubleCheck (===)
        .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  cjHoles us ++ [val False, val True] ++ es
-  (===)  =  cjAreEqual us maxTests
-  us  =  fun nm f : actual is
+       $  cjHoles (fun nm f:ais) ++ [val False, val True] ++ es
+  (===)  =  cjAreEqual (fun nm f:ais) maxTests
   isUnbreakable  =  conjureIsUnbreakable f
 
   maxTests               =  maxTestsI is

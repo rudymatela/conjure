@@ -97,10 +97,9 @@ instance Conjurable Tree where
 main :: IO ()
 main = do
   conjure "leftmost" leftmost
-    [ iundefined
+    [ fun "undefined" (undefined :: Int)
     , guard
     , fun "nil" nil
-    , maxEarlyTests 0
     ]
 
   conjure "rightmost" rightmost

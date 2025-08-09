@@ -87,7 +87,7 @@ showDefn  =  unlines . map show1
                      ++ "\n" ++ spaces ++ "LT -> " ++ showExpr ex
                      ++ "\n" ++ spaces ++ "EQ -> " ++ showExpr ey
                      ++ "\n" ++ spaces ++ "GT -> " ++ showExpr ez
-    _ -> lhseqs ++ showExpr (unrootExpr rhs)
+    _ -> lhseqs ++ showExpr rhs
     where
     lhseqs  =  showExpr lhs ++ "  =  "
     spaces  =  map (const ' ') lhseqs

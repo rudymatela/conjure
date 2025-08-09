@@ -17,8 +17,6 @@ module Conjure.Expr
   , apparentlyTerminates
   , mayNotEvaluateArgument
   , compareSimplicity
-  , undefinedFor
-  , undefinedAtRoot
   , ifFor
   , caseForOrd
   , guardFor
@@ -33,8 +31,6 @@ module Conjure.Expr
   , reval
   , useMatches
   , deholings
-  , rootExpr
-  , unrootExpr
   , varToConst
   , hasAppInstanceOf
   , isZero
@@ -43,7 +39,6 @@ module Conjure.Expr
   , isGuardSymbol
   , isGuard
   , hasGuard
-  , isRoot
   , isIfSymbol
   , mapInnerFirstOuterLast
   , mappArgs
@@ -126,14 +121,6 @@ compareSimplicity  =  (compare `on` length . values)
 funToVar :: Expr -> Expr
 funToVar (ef :$ ex)  =  funToVar ef :$ ex
 funToVar ef@(Value nm _)  =  nm `varAsTypeOf` ef
-
--- TODO: document me
-rootExpr :: Expr -> Expr
-rootExpr (Value nm d)  =  Value ('=':nm) d
-
-unrootExpr :: Expr -> Expr
-unrootExpr (Value ('=':nm) d)  =  Value nm d
-unrootExpr e  =  e
 
 -- | Given a variable, returns a constant with the same name
 varToConst :: Expr -> Expr
@@ -229,13 +216,6 @@ mayNotEvaluateArgument (Value "|"  ce :$ _ :$ _)  =  True
 mayNotEvaluateArgument (Value "&&" ce :$ _)       =  True
 mayNotEvaluateArgument (Value "||" ce :$ _)       =  True
 mayNotEvaluateArgument _                          =  False
-
--- TODO: document me
-undefinedFor :: Typeable a => a -> Expr
-undefinedFor a  =  value "undefined" (undefined `asTypeOf` a)
-
-undefinedAtRoot :: Expr
-undefinedAtRoot  =  rootExpr $ undefinedFor ()
 
 -- | Creates an if 'Expr' of the type of the given proxy.
 --
@@ -409,8 +389,8 @@ enumerateAppsFor h keep es  =  for h
                                            else ufor hx
           ]
   -- unguarded for
-  ufor | any isGuardSymbol es || any isRoot es  =  filterT (not . isRoot) . for
-       | otherwise  =  for
+  ufor | any isGuardSymbol es  =  filterT (not . isGuard) . for
+       | otherwise             =  for
 
 -- | Given an expression whose holes are /all of the same type/
 --   and an enumeration of 'Expr's of this same type,
@@ -638,11 +618,6 @@ isGuard _  =  False
 -- Guards at the root are still allowed.
 hasGuard :: Expr -> Bool
 hasGuard (ef :$ ex)  =  isGuard ef || isGuard ex
-
--- TODO: document me
-isRoot :: Expr -> Bool
-isRoot (Value ('=':c:_) _)  =  'a' <= c && c <= 'z' -- isLowercaseLetter :-)
-isRoot e  =  isGuard e
 
 -- | Lists all variables in an expression
 --   that are of the same type of the expression itself.
