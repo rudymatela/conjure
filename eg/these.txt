@@ -1,7 +1,7 @@
 fromThese :: A -> B -> These A B -> (A,B)
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 1 candidates of size 3
 -- 0 candidates of size 4
@@ -11,7 +11,7 @@ fromThese :: A -> B -> These A B -> (A,B)
 -- 0 candidates of size 8
 -- 0 candidates of size 9
 -- 1 candidates of size 10
--- tested 2 candidates
+-- tested 3 candidates
 fromThese x y Neither  =  (x,y)
 fromThese x y (This z)  =  (z,y)
 fromThese x y (That z)  =  (x,z)

@@ -468,6 +468,7 @@ candidateDefnsC nm f is =
       | copyBindings && isGroundPat f pat  =  [[(pat, toValPat f pat)]]
       | otherwise  =  mapT (pat,)
                    .  filterT keepB
+                   .  insemptier (conjureUndefined f)
                    .  appsWith pat
                    .  drop 1 -- this excludes the function name itself
                    $  vars pat ++ [eh | any (uncurry should) (zip aess aes)]
@@ -730,3 +731,9 @@ catconMapT :: (a -> [[b]]) -> [[a]] -> [[b]]
 catconMapT f  =  foldr (\+:/) [] . map (foldr (\/) []) . mapT f
   where
   xss \+:/ yss  =  ([]:yss) \/ xss
+
+-- | If the first tier is empty,
+--   populate it with the given value.
+insemptier :: a -> [[a]] -> [[a]]
+insemptier x ([]:xss)  =  [x]:xss
+insemptier _ xss  =  xss

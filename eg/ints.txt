@@ -1,20 +1,20 @@
 second :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 1 candidates of size 2
--- 1 candidates of size 3
--- tested 2 candidates
+-- 2 candidates of size 3
+-- tested 3 candidates
 second xs  =  head (tail xs)
 
 third :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 1 candidates of size 2
 -- 1 candidates of size 3
--- 1 candidates of size 4
--- tested 3 candidates
+-- 2 candidates of size 4
+-- tested 4 candidates
 third xs  =  head (tail (tail xs))
 
 sum :: [Int] -> Int

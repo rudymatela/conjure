@@ -83,13 +83,11 @@ main = do
     , fun ":" ((:) :: Int -> [Int] -> [Int])
     , fun "null" (null :: [Int] -> Bool)
     , guard
-    , fun "undefined" (undefined :: Int)
     ]
 
   conjure "last" last'
     [ con ([] :: [Int])
     , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "undefined" (undefined :: Int)
     , maxPatternDepth 2
     ]
 

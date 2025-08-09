@@ -1,7 +1,7 @@
 gps1 :: [Int] -> Maybe Int
 -- testing 4 combinations of argument values
 -- pruning with 11/21 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
@@ -10,14 +10,14 @@ gps1 :: [Int] -> Maybe Int
 -- 1 candidates of size 7
 -- 0 candidates of size 8
 -- 1 candidates of size 9
--- 2 candidates of size 10
--- tested 4 candidates
+-- 3 candidates of size 10
+-- tested 5 candidates
 gps1 xs  =  findIndex (0 >) (map (foldr (+) 0) (tail (inits xs)))
 
 gps1 :: [Int] -> Maybe Int
 -- testing 4 combinations of argument values
 -- pruning with 11/21 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
@@ -25,7 +25,7 @@ gps1 :: [Int] -> Maybe Int
 -- 0 candidates of size 6
 -- 1 candidates of size 7
 -- 4 candidates of size 8
--- tested 4 candidates
+-- tested 5 candidates
 gps1 xs  =  findIndex (0 >) (map sum (tail (inits xs)))
 
 gps1 :: Int -> [Int] -> Int
@@ -76,8 +76,8 @@ gps4  =  undefined  -- search exhausted
 gps5 :: Int -> [Int]
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
--- tested 0 candidates
+-- 1 candidates of size 1
+-- tested 1 candidates
 gps5  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- nothing
@@ -128,9 +128,9 @@ gps5  =  tell [25,10,5,1]
 gps6 :: [Int] -> Int
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
--- tested 0 candidates
+-- tested 1 candidates
 gps6  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- nothing
@@ -139,8 +139,8 @@ gps6  =  undefined  -- search exhausted
 gps7 :: Integer -> Integer -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
--- tested 0 candidates
+-- 1 candidates of size 1
+-- tested 1 candidates
 gps7  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- nothing
@@ -149,9 +149,9 @@ gps7  =  undefined  -- search exhausted
 gps8 :: Int -> [Int] -> (Int,Int)
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
--- tested 0 candidates
+-- tested 1 candidates
 gps8  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- nothing
@@ -209,12 +209,12 @@ gcd x y  =  gcd y (x `mod` y)
 gps12 :: [Char] -> [Char] -> [Int]
 -- testing 5 combinations of argument values
 -- pruning with 1/2 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
 -- 4 candidates of size 5
--- tested 3 candidates
+-- tested 4 candidates
 gps12 cs ds  =  findIndices (ds `isPrefixOf`) (tails cs)
 
 gps13_leaders :: [Int] -> [Int]
@@ -332,14 +332,14 @@ spin :: [Char] -> [Char]
 -- pruning with 6/6 rules
 -- reasoning produced 1 incorrect properties, please re-run with more tests for faster results
 -- 1 candidates of size 1
--- 1 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
+-- 2 candidates of size 2
+-- 1 candidates of size 3
+-- 1 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 0 candidates of size 7
 -- 4 candidates of size 8
--- tested 6 candidates
+-- tested 9 candidates
 spin cs
   | length cs >= 5  =  reverse cs
   | otherwise  =  cs
@@ -348,11 +348,11 @@ gps21_spinwords :: [Char] -> [Char]
 -- pruning with 16/16 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- 1 candidates of size 1
--- 2 candidates of size 2
--- 2 candidates of size 3
--- 3 candidates of size 4
--- 5 candidates of size 5
--- tested 12 candidates
+-- 3 candidates of size 2
+-- 4 candidates of size 3
+-- 7 candidates of size 4
+-- 10 candidates of size 5
+-- tested 19 candidates
 gps21_spinwords cs  =  unwords (map spin (words cs))
 
 gps22 :: Int -> [Char]
@@ -378,15 +378,15 @@ gps23 :: [Char] -> [Char] -> [Char] -> [Char]
 -- 3 candidates of size 1
 -- 12 candidates of size 2
 -- 33 candidates of size 3
--- 36 candidates of size 4
--- 127 candidates of size 5
--- 507 candidates of size 6
--- 839 candidates of size 7
--- 784 candidates of size 8
--- 600 candidates of size 9
--- 2722 candidates of size 10
--- 5292 candidates of size 11
--- tested 10955 candidates
+-- 42 candidates of size 4
+-- 140 candidates of size 5
+-- 523 candidates of size 6
+-- 897 candidates of size 7
+-- 1127 candidates of size 8
+-- 1144 candidates of size 9
+-- 2959 candidates of size 10
+-- 6272 candidates of size 11
+-- tested 13152 candidates
 gps23  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- nothing

@@ -29,11 +29,11 @@ sum (x:xs)  =  x + sum xs
 -- pruning with 3/3 rules
 -- 2 candidates of size 1
 -- 4 candidates of size 2
--- 11 candidates of size 3
--- 31 candidates of size 4
--- 94 candidates of size 5
--- 225 candidates of size 6
--- tested 286 candidates
+-- 13 candidates of size 3
+-- 35 candidates of size 4
+-- 113 candidates of size 5
+-- 288 candidates of size 6
+-- tested 347 candidates
 [] ++ xs  =  xs
 (x:xs) ++ ys  =  x:(xs ++ ys)
 

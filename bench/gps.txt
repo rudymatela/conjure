@@ -33,7 +33,7 @@ gps2 x
 gps3 :: Int -> Int -> Int -> [Int]
 -- testing 2 combinations of argument values
 -- pruning with 11/33 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 64 candidates of size 4
@@ -41,7 +41,7 @@ gps3 :: Int -> Int -> Int -> [Int]
 -- 1248 candidates of size 6
 -- 0 candidates of size 7
 -- 13680 candidates of size 8
--- tested 3238 candidates
+-- tested 3239 candidates
 gps3 x y z  =  enumFromThenTo x (x + z) (y - 1)
 
 gps3_alt :: Int -> Int -> Int -> [Int]
@@ -69,7 +69,7 @@ gps3_alt  =  undefined  -- search exhausted
 gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- testing 9 combinations of argument values
 -- pruning with 11/15 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
@@ -78,9 +78,9 @@ gps4 :: [Char] -> [Char] -> [Char] -> Bool
 -- 0 candidates of size 7
 -- 0 candidates of size 8
 -- 51 candidates of size 9
--- 0 candidates of size 10
--- 15 candidates of size 11
--- tested 60 candidates
+-- 353 candidates of size 10
+-- 118 candidates of size 11
+-- tested 414 candidates
 gps4 cs ds es  =  length cs < length ds && length ds < length es
 
 gps5 :: [Char] -> [Char]
@@ -150,7 +150,7 @@ nextCollatz  =  undefined  -- search exhausted
 gps7 :: [Char] -> ([Char],Int)
 -- testing 4 combinations of argument values
 -- pruning with 5/10 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
@@ -161,17 +161,17 @@ gps7 :: [Char] -> ([Char],Int)
 -- 88 candidates of size 9
 -- 201 candidates of size 10
 -- 442 candidates of size 11
--- tested 553 candidates
+-- tested 554 candidates
 gps7 cs  =  (init (unlines (words cs)),length (filter (not . isSpace) cs))
 
 gps8 :: [Char] -> [Char] -> [(Int,Char,Char)]
 -- testing 3 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 0 candidates of size 4
--- tested 0 candidates
+-- tested 1 candidates
 gps8  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- nothing
@@ -180,7 +180,7 @@ gps8  =  undefined  -- search exhausted
 gps9 :: Int -> [Int]
 -- testing 3 combinations of argument values
 -- pruning with 13/14 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 4 candidates of size 3
 -- 4 candidates of size 4
@@ -190,41 +190,41 @@ gps9 :: Int -> [Int]
 -- 69 candidates of size 8
 -- 114 candidates of size 9
 -- 212 candidates of size 10
--- tested 278 candidates
+-- tested 279 candidates
 gps9 x  =  filter even (filter (x >) (map sq [1..x]))
 
 wallisNext :: Ratio Integer -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 37/64 rules
 -- 1 candidates of size 1
--- 0 candidates of size 2
+-- 1 candidates of size 2
 -- 3 candidates of size 3
 -- 15 candidates of size 4
 -- 4 candidates of size 5
 -- 86 candidates of size 6
 -- 5 candidates of size 7
 -- 513 candidates of size 8
--- tested 368 candidates
+-- tested 369 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 wallisNext :: Ratio Integer -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 15/26 rules
 -- 1 candidates of size 1
--- 0 candidates of size 2
+-- 1 candidates of size 2
 -- 4 candidates of size 3
 -- 16 candidates of size 4
 -- 3 candidates of size 5
 -- 71 candidates of size 6
 -- 5 candidates of size 7
 -- 393 candidates of size 8
--- tested 295 candidates
+-- tested 296 candidates
 wallisNext (x % y)  =  (y + 1) % (x + 1)
 
 gps10 :: Int -> Ratio Integer
 -- testing 6 combinations of argument values
 -- pruning with 3/4 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 3 candidates of size 3
 -- 3 candidates of size 4
@@ -232,17 +232,17 @@ gps10 :: Int -> Ratio Integer
 -- 5 candidates of size 6
 -- 8 candidates of size 7
 -- 13 candidates of size 8
--- tested 33 candidates
+-- tested 34 candidates
 gps10 x  =  product (take x (iterate wallisNext (2 % 3)))
 
 gps11 :: [[Char]] -> [Int]
 -- testing 4 combinations of argument values
 -- pruning with 1/1 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 1 candidates of size 3
--- 1 candidates of size 4
--- tested 2 candidates
+-- 2 candidates of size 4
+-- tested 3 candidates
 gps11 css  =  reverse (map length css)
 
 gps11 :: [[Char]] -> [Int]
@@ -294,22 +294,22 @@ gps13 qs  =  foldr (+) 0 qs / fromIntegral (length qs)
 odd :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 12/13 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 3 candidates of size 3
 -- 0 candidates of size 4
 -- 35 candidates of size 5
--- tested 15 candidates
+-- tested 16 candidates
 odd x  =  0 /= x `mod` 2
 
 gps14 :: [Int] -> Int
 -- testing 3 combinations of argument values
 -- pruning with 1/1 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 1 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
--- tested 2 candidates
+-- tested 3 candidates
 gps14 xs  =  length (filter odd xs)
 
 gps14 :: [Int] -> Int
@@ -329,22 +329,22 @@ gps14 (x:xs)  =  x + gps14 xs `mod` 2
 gps15 :: [Int] -> [Int] -> Bool
 -- testing 5 combinations of argument values
 -- pruning with 3/7 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 1 candidates of size 3
 -- 4 candidates of size 4
--- tested 3 candidates
+-- tested 4 candidates
 gps15 xs ys  =  xs == reverse ys
 
 gps16 :: [Char] -> [Char] -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 3/3 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 6 candidates of size 4
 -- 2 candidates of size 5
--- tested 9 candidates
+-- tested 10 candidates
 gps16 cs ds  =  sort cs `isSubsequenceOf` sort ds
 
 gps17 :: Int -> Int
@@ -460,11 +460,11 @@ pig1 (c:cs)
 gps20c :: [Char] -> [Char]
 -- pruning with 1/1 rules
 -- 1 candidates of size 1
--- 1 candidates of size 2
--- 2 candidates of size 3
--- 3 candidates of size 4
--- 5 candidates of size 5
--- tested 12 candidates
+-- 2 candidates of size 2
+-- 3 candidates of size 3
+-- 6 candidates of size 4
+-- 10 candidates of size 5
+-- tested 17 candidates
 gps20c cs  =  unwords (map pig1 (words cs))
 
 gps21 :: [Int] -> [Int]

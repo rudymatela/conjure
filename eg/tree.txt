@@ -7,7 +7,7 @@ leftmost :: Tree -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 16 candidates of size 7
+-- 8 candidates of size 7
 -- tested 2 candidates
 leftmost Leaf  =  undefined
 leftmost (Node t1 x t2)
@@ -23,8 +23,8 @@ rightmost :: Tree -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 16 candidates of size 7
--- tested 11 candidates
+-- 8 candidates of size 7
+-- tested 7 candidates
 rightmost Leaf  =  undefined
 rightmost (Node t1 x t2)
   | nil t2  =  x
@@ -103,10 +103,10 @@ ordered  =  undefined  -- search exhausted
 ordered :: Tree -> Bool
 -- testing 360 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 1 candidates of size 3
--- tested 1 candidates
+-- tested 2 candidates
 ordered t1  =  strictlyOrdered (inorder t1)
 
 preorder :: Tree -> [Int]

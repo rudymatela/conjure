@@ -16,11 +16,11 @@ subset (x:xs) ys  =  elem x ys && subset xs ys
 subset :: [Int] -> [Int] -> Bool
 -- testing 44 combinations of argument values
 -- pruning with 3/3 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 6 candidates of size 4
 -- 2 candidates of size 5
--- tested 9 candidates
+-- tested 10 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 

@@ -56,7 +56,7 @@ last :: [Int] -> Int
 -- 0 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 4 candidates of size 7
+-- 2 candidates of size 7
 -- tested 2 candidates
 last []  =  undefined
 last (x:xs)
@@ -70,9 +70,9 @@ last :: [Int] -> Int
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 1 candidates of size 4
--- 2 candidates of size 5
--- 2 candidates of size 6
--- tested 6 candidates
+-- 0 candidates of size 5
+-- 1 candidates of size 6
+-- tested 3 candidates
 last []  =  undefined
 last [x]  =  x
 last (x:y:xs)  =  last (y:xs)

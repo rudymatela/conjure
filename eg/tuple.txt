@@ -1,27 +1,27 @@
 fst :: (A,A) -> A
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 2 candidates of size 2
--- tested 1 candidates
+-- tested 2 candidates
 fst (x,y)  =  x
 
 snd :: (A,A) -> A
 -- testing 4 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 2 candidates of size 2
--- tested 2 candidates
+-- tested 3 candidates
 snd (x,y)  =  y
 
 swap :: (A,A) -> (A,A)
 -- testing 4 combinations of argument values
 -- pruning with 10/10 rules
 -- 1 candidates of size 1
--- 0 candidates of size 2
+-- 1 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
--- tested 4 candidates
+-- tested 5 candidates
 swap (x,y)  =  (y,x)
 
 curry :: ((A,A) -> A) -> A -> A -> A
@@ -35,11 +35,11 @@ curry f x y  =  f (x,y)
 
 uncurry :: (A -> A -> A) -> (A,A) -> A
 -- pruning with 10/10 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 4 candidates of size 2
 -- 0 candidates of size 3
 -- 4 candidates of size 4
--- tested 6 candidates
+-- tested 7 candidates
 uncurry f (x,y)  =  f x y
 
 pairwise :: [A] -> [(A,A)]

@@ -13,25 +13,25 @@ sort xs `isSubsequenceOf` ys == xs `isSubsequenceOf` sort ys
 invalid:
 xs `isSubsequenceOf` sort xs == True
 -}
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 4 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
 -- 3 candidates of size 7
--- 2 candidates of size 8
--- 0 candidates of size 9
+-- 5 candidates of size 8
+-- 2 candidates of size 9
 -- 4 candidates of size 10
--- 8 candidates of size 11
--- 4 candidates of size 12
--- 0 candidates of size 13
+-- 12 candidates of size 11
+-- 12 candidates of size 12
+-- 4 candidates of size 13
 -- 0 candidates of size 14
 -- 0 candidates of size 15
 -- 0 candidates of size 16
 -- 0 candidates of size 17
 -- 0 candidates of size 18
--- tested 27 candidates
+-- tested 49 candidates
 subset  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- sort and isSubsequenceOf
@@ -47,12 +47,12 @@ sort (sort xs) == sort xs
 sort xs `isSubsequenceOf` xs == xs `isSubsequenceOf` sort xs
 
 -}
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 2 candidates of size 3
 -- 6 candidates of size 4
 -- 2 candidates of size 5
--- tested 9 candidates
+-- tested 10 candidates
 subset xs ys  =  sort xs `isSubsequenceOf` sort ys
 
 replicates :: [Char] -> Int -> [Char]
@@ -70,19 +70,19 @@ transpose (transpose (transpose xss)) == transpose xss
 -- 1 candidates of size 4
 -- 0 candidates of size 5
 -- 0 candidates of size 6
--- 1 candidates of size 7
+-- 2 candidates of size 7
 -- 0 candidates of size 8
 -- 0 candidates of size 9
--- 1 candidates of size 10
+-- 2 candidates of size 10
 -- 0 candidates of size 11
 -- 0 candidates of size 12
--- 1 candidates of size 13
+-- 2 candidates of size 13
 -- 0 candidates of size 14
 -- 0 candidates of size 15
--- 1 candidates of size 16
+-- 2 candidates of size 16
 -- 0 candidates of size 17
 -- 0 candidates of size 18
--- tested 6 candidates
+-- tested 10 candidates
 replicates  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- replicate, transpose, and concat

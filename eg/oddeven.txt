@@ -31,22 +31,22 @@ even x  =  even (x - 2)
 odd :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 36/55 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 3 candidates of size 3
 -- 0 candidates of size 4
 -- 44 candidates of size 5
--- tested 30 candidates
+-- tested 31 candidates
 odd x  =  1 == x `mod` 2
 
 even :: Int -> Bool
 -- testing 6 combinations of argument values
 -- pruning with 36/55 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 3 candidates of size 3
 -- 0 candidates of size 4
 -- 44 candidates of size 5
--- tested 20 candidates
+-- tested 21 candidates
 even x  =  0 == x `mod` 2
 

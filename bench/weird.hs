@@ -41,19 +41,14 @@ isq True  x  =  x * x
 
 main :: IO ()
 main  =  do
-  -- For this first, we try to ask Conjure to generate undefined
+  -- We try to ask Conjure to generate undefined
   -- Conjure complains about not being able to reify specification.
   -- Fair enough: there's no way to distinguish an undefined function
   -- from an empty specification.
-  conjure         "bottom" bottom     []
+  conjure "bottom" bottom []
 
-  -- For this second, Conjure exhausts the search
-  -- though it reports the correct specification
+  -- With a spec, Conjure finds the "implementation"
   conjureFromSpec "bottom" bottomSpec []
-
-  -- For this third, Conjure finds the "implementation"
-  conjureFromSpec "bottom" bottomSpec
-    [ fun "undefined" (undefined :: Int) ]
 
   conjure "isq" isq ingredients
 

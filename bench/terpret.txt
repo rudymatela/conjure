@@ -52,7 +52,7 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- pruning with 37/47 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
 -- 1 candidates of size 1
--- 0 candidates of size 2
+-- 1 candidates of size 2
 -- 0 candidates of size 3
 -- 12 candidates of size 4
 -- 125 candidates of size 5
@@ -62,7 +62,7 @@ cshift :: (Bool,Bool,Bool) -> (Bool,Bool,Bool)
 -- 3087 candidates of size 9
 -- 9281 candidates of size 10
 -- 180325 candidates of size 11
--- tested 40096 candidates
+-- tested 40097 candidates
 cshift (p,q,r)
   | p  =  (p,r,q)
   | otherwise  =  (p,q,r)
@@ -71,15 +71,15 @@ cshift :: Bool -> Bool -> Bool -> (Bool,Bool,Bool)
 -- testing 4 combinations of argument values
 -- pruning with 37/47 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 0 candidates of size 3
 -- 125 candidates of size 4
 -- 225 candidates of size 5
 -- 585 candidates of size 6
 -- 1242 candidates of size 7
--- 3088 candidates of size 8
--- tested 5265 candidates
+-- 3090 candidates of size 8
+-- tested 5266 candidates
 cshift False p q  =  (False,p,q)
 cshift True p q  =  (True,q,p)
 
@@ -88,7 +88,7 @@ TerpreT benchmark #5: full adder
 fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- testing 8 combinations of argument values
 -- pruning with 72/90 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 25 candidates of size 3
 -- 60 candidates of size 4
@@ -96,7 +96,7 @@ fadder :: Bool -> Bool -> Bool -> (Bool,Bool)
 -- 348 candidates of size 6
 -- 999 candidates of size 7
 -- 7009 candidates of size 8
--- tested 8567 candidates
+-- tested 8568 candidates
 fadder False False False  =  (False,False)
 fadder False False True  =  (False,True)
 fadder False True False  =  (False,True)
@@ -112,13 +112,13 @@ adder2 :: (Bool,Bool) -> (Bool,Bool) -> (Bool,Bool,Bool)
 -- testing 5 combinations of argument values
 -- pruning with 70/88 rules
 -- reasoning produced 2 incorrect properties, please re-run with more tests for faster results
--- 0 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
+-- 1 candidates of size 1
+-- 2 candidates of size 2
+-- 1 candidates of size 3
 -- 8 candidates of size 4
 -- 128 candidates of size 5
 -- 408 candidates of size 6
--- tested 544 candidates
+-- tested 548 candidates
 adder2  =  undefined  -- search exhausted
 -- could not find implementation using only
 -- False, True, not, (&&), (||), [], (:), guarded equations, (,,), (==), (^^), and guarded equations
@@ -129,10 +129,10 @@ TerpreT benchmark #7: access
 access :: [A] -> Int -> A
 -- testing 5 combinations of argument values
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 0 candidates of size 2
 -- 1 candidates of size 3
--- tested 1 candidates
+-- tested 2 candidates
 xs `access` x  =  xs !! x
 
 access :: [A] -> Int -> A

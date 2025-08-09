@@ -36,11 +36,11 @@ fromLeft x (Right y)  =  y
 
 either :: (A -> A) -> (A -> A) -> Either A A -> A
 -- pruning with 0/0 rules
--- 0 candidates of size 1
+-- 1 candidates of size 1
 -- 1 candidates of size 2
 -- 4 candidates of size 3
 -- 12 candidates of size 4
--- tested 11 candidates
+-- tested 12 candidates
 either f g (Left x)  =  f x
 either f g (Right x)  =  g x
 
