@@ -3,8 +3,6 @@ TODO for Conjure
 
 A non-exhaustive list of things TO DO for Conjure.
 
-* When showing definitions, omit equations with `undefined` RHSs when possible
-
 * Allow timeout setting?
 
 * Find most efficient of a given size (see below).
@@ -44,7 +42,7 @@ Tentative steps:
 2. use this on `showDefn` somehow
 3. use this on `toDynamicWithDefn` somehow
 
-Alternative: include the guard as part of the pattern "internally".  As if we
+Alternative: include the guard as part of the pattern internally.  As if we
 had a n+k pattern.  Like so:
 
 	tri 1  =  1

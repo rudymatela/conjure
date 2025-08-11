@@ -40,6 +40,7 @@ module Conjure.Utils
   , classifyBy -- from LeanCheck.Stats
   , classifyOn -- from LeanCheck.Stats
   , none
+  , nor
   , updateAt
   , first
   , second
@@ -176,6 +177,9 @@ indentBy n  =  unlines . map (replicate n ' ' ++) . lines
 
 none :: (a -> Bool) -> [a] -> Bool
 none p  =  not . any p
+
+nor :: [Bool] -> Bool
+nor  =  not . or
 
 -- | Updates the value in a list at a given position.
 --

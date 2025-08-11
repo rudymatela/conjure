@@ -70,7 +70,7 @@ type Bndn  =  (Expr,Expr)
 -- > sum []  =  0
 -- > sum (x:xs)  =  x + sum xs
 showDefn :: Defn -> String
-showDefn  =  unlines . map show1
+showDefn  =  unlines . map show1 . removeUndefinedBindings
   where
   show1 (lhs,rhs)  =
     case rhs of
@@ -356,3 +356,15 @@ etaReduce  =  try
     | otherwise     =  d
   reduce (lhs :$ _, rhs :$ _)  =  (lhs, rhs)
   reduce _  =  error "Conjure.Defn.etaReduce: the impossible happened, this is a bug"
+
+
+removeUndefinedBindings :: Defn -> Defn
+removeUndefinedBindings defn  =
+  case u defn of
+  []  ->  defn
+  bs  ->  bs
+  where
+  u []  =  []
+  u ((lhs,Value "undefined" _):bs)
+    | nor [lhs `isInstanceOf` l | (l,_) <- bs]  =  removeUndefinedBindings bs
+  u (b:bs)  =  b:removeUndefinedBindings bs

@@ -58,7 +58,6 @@ last :: [Int] -> Int
 -- 0 candidates of size 6
 -- 2 candidates of size 7
 -- tested 2 candidates
-last []  =  undefined
 last (x:xs)
   | null xs  =  x
   | otherwise  =  last xs
@@ -73,7 +72,6 @@ last :: [Int] -> Int
 -- 0 candidates of size 5
 -- 1 candidates of size 6
 -- tested 3 candidates
-last []  =  undefined
 last [x]  =  x
 last (x:y:xs)  =  last (y:xs)
 
