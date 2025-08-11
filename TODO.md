@@ -9,6 +9,8 @@ A non-exhaustive list of things TO DO for Conjure.
 
 * forbid recursion into negatives (see below)
 
+* fix inefficiency in `enumerateAppsFor` in the presence of guards (see below).
+
 * Add way to consider functions that don't increase size of arguments in recursive calls
 	(qsort example)
 
@@ -53,6 +55,23 @@ When displaying of course, we remove the n+k pattern.
 This can be done as early as enumerating the possible patterns and should make
 things easier in `keepB`.  The matching engine would have to be customized
 somehow.  Maybe an `@`-named operator can adopt a special meaning in `Express`?
+
+
+## Fix inefficiency of `enumerateAppsFor` with guards
+
+When guards are present, `enumerateAppsFor` sometimes produces an empty trail of tiers.
+You can reproduce the bug with:
+
+1. comment-out `. insemptier (conjureUndefined f)` in `Conjure.Engine`;
+2. run `leftmost` from `eg/tree.hs`;
+3. you get an empty trail of tiers whenever the guard is present.
+
+To fix this `enumerateAppsFor` has to be re-implemented without using `filterT`:
+perhaps with an actual implementation for `ufor`.
+
+Conjecture: this won't improve runtime significantly, we only see the impact of
+the empty trail of tiers later in the enumeration.  I'll fix when I have the
+time.
 
 
 
