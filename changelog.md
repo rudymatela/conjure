@@ -2,8 +2,8 @@ Changelog for (Code) Conjure
 ============================
 
 
-upcoming
---------
+v0.7.8 (August 2025)
+--------------------
 
 * automatically use `undefined` as RHS when no suitable symbols are found;
 * longer message upon search exhausted;
