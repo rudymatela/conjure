@@ -96,31 +96,10 @@ instance Conjurable Tree where
 
 main :: IO ()
 main = do
-  conjure "leftmost" leftmost
-    [ fun "nil" nil
-    , guard
-    ]
-
-  conjure "rightmost" rightmost
-    [ fun "nil" nil
-    , guard
-    ]
-
-  conjure "size" size
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , fun "+" ((+) :: Int -> Int -> Int)
-    , fun "nil" nil
-    ]
-
-  conjure "height" height
-    [ con (0 :: Int)
-    , con (1 :: Int)
-    , con (-1 :: Int)
-    , fun "+" ((+) :: Int -> Int -> Int)
-    , fun "max" (max :: Int -> Int -> Int)
-    , fun "nil" nil
-    ]
+  conjure "leftmost" leftmost ingredients
+  conjure "rightmost" rightmost ingredients
+  conjure "size" size ingredients
+  conjure "height" height ingredients
 
   conjure "mem" mem
     [ con False
@@ -146,23 +125,28 @@ main = do
     , fun "inorder" inorder
     ]
 
-  conjure "preorder" preorder
-    [ con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
-    ]
+  conjure "preorder" preorder ingredients
+  conjure "inorder" inorder ingredients
+  conjure "posorder" posorder ingredients
 
-  conjure "inorder" inorder
-    [ con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
-    ]
 
-  conjure "posorder" posorder
-    [ con ([] :: [Int])
-    , fun ":" ((:) :: Int -> [Int] -> [Int])
-    , fun "++" ((++) :: [Int] -> [Int] -> [Int])
-    ]
+ingredients :: [Ingredient]
+ingredients  =
+  [ con (0 :: Int)
+  , con (1 :: Int)
+  , con (-1 :: Int)
+  , fun "+" ((+) :: Int -> Int -> Int)
+  , fun "max" (max :: Int -> Int -> Int)
+
+  , fun "nil" nil
+  , guard
+
+  , con ([] :: [Int])
+  , fun ":" ((:) :: Int -> [Int] -> [Int])
+  , fun "++" ((++) :: [Int] -> [Int] -> [Int])
+
+  , maxTests 1080
+  ]
 
 
 strictlyOrdered :: [Int] -> Bool
