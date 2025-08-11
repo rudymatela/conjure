@@ -2,6 +2,15 @@ Changelog for (Code) Conjure
 ============================
 
 
+upcoming
+--------
+
+* automatically use `undefined` as RHS when no suitable symbols are found;
+* longer message upon search exhausted;
+* fix `Conjurable` derivation when `Listable` is not in scope;
+* improve a few examples and internal tests.
+
+
 v0.7.6 (August 2025)
 --------------------
 
