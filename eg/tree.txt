@@ -1,3 +1,80 @@
+size :: Tree -> Int
+-- testing 1080 combinations of argument values
+-- pruning with 56/72 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 20 candidates of size 5
+-- 6 candidates of size 6
+-- 130 candidates of size 7
+-- 90 candidates of size 8
+-- tested 171 candidates
+size Leaf  =  0
+size (Node t1 x t2)  =  size t1 + (1 + size t2)
+
+height :: Tree -> Int
+-- testing 1080 combinations of argument values
+-- pruning with 56/72 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 0 candidates of size 4
+-- 20 candidates of size 5
+-- 6 candidates of size 6
+-- 130 candidates of size 7
+-- 90 candidates of size 8
+-- tested 198 candidates
+height Leaf  =  -1
+height (Node t1 x t2)  =  1 + max (height t1) (height t2)
+
+preorder :: Tree -> [Int]
+-- testing 1080 combinations of argument values
+-- pruning with 56/72 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 13 candidates of size 5
+-- 4 candidates of size 6
+-- 57 candidates of size 7
+-- 24 candidates of size 8
+-- tested 80 candidates
+preorder Leaf  =  []
+preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
+
+inorder :: Tree -> [Int]
+-- testing 1080 combinations of argument values
+-- pruning with 56/72 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 11 candidates of size 5
+-- 4 candidates of size 6
+-- 55 candidates of size 7
+-- 20 candidates of size 8
+-- tested 76 candidates
+inorder Leaf  =  []
+inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
+
+posorder :: Tree -> [Int]
+-- testing 1080 combinations of argument values
+-- pruning with 56/72 rules
+-- 1 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 11 candidates of size 5
+-- 4 candidates of size 6
+-- 55 candidates of size 7
+-- 20 candidates of size 8
+-- 244 candidates of size 9
+-- 116 candidates of size 10
+-- tested 404 candidates
+posorder Leaf  =  []
+posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])
+
 leftmost :: Tree -> Int
 -- testing 1080 combinations of argument values
 -- pruning with 56/72 rules
@@ -29,36 +106,6 @@ rightmost Leaf  =  0
 rightmost (Node t1 x t2)
   | nil t2  =  x
   | otherwise  =  rightmost t2
-
-size :: Tree -> Int
--- testing 1080 combinations of argument values
--- pruning with 56/72 rules
--- 3 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 20 candidates of size 5
--- 6 candidates of size 6
--- 130 candidates of size 7
--- 90 candidates of size 8
--- tested 171 candidates
-size Leaf  =  0
-size (Node t1 x t2)  =  size t1 + (1 + size t2)
-
-height :: Tree -> Int
--- testing 1080 combinations of argument values
--- pruning with 56/72 rules
--- 3 candidates of size 1
--- 0 candidates of size 2
--- 0 candidates of size 3
--- 0 candidates of size 4
--- 20 candidates of size 5
--- 6 candidates of size 6
--- 130 candidates of size 7
--- 90 candidates of size 8
--- tested 198 candidates
-height Leaf  =  -1
-height (Node t1 x t2)  =  1 + max (height t1) (height t2)
 
 mem :: Int -> Tree -> Bool
 -- testing 360 combinations of argument values
@@ -108,51 +155,4 @@ ordered :: Tree -> Bool
 -- 1 candidates of size 3
 -- tested 2 candidates
 ordered t1  =  strictlyOrdered (inorder t1)
-
-preorder :: Tree -> [Int]
--- testing 1080 combinations of argument values
--- pruning with 56/72 rules
--- 1 candidates of size 1
--- 0 candidates of size 2
--- 3 candidates of size 3
--- 0 candidates of size 4
--- 13 candidates of size 5
--- 4 candidates of size 6
--- 57 candidates of size 7
--- 24 candidates of size 8
--- tested 80 candidates
-preorder Leaf  =  []
-preorder (Node t1 x t2)  =  x:(preorder t1 ++ preorder t2)
-
-inorder :: Tree -> [Int]
--- testing 1080 combinations of argument values
--- pruning with 56/72 rules
--- 1 candidates of size 1
--- 0 candidates of size 2
--- 3 candidates of size 3
--- 0 candidates of size 4
--- 11 candidates of size 5
--- 4 candidates of size 6
--- 55 candidates of size 7
--- 20 candidates of size 8
--- tested 76 candidates
-inorder Leaf  =  []
-inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
-
-posorder :: Tree -> [Int]
--- testing 1080 combinations of argument values
--- pruning with 56/72 rules
--- 1 candidates of size 1
--- 0 candidates of size 2
--- 3 candidates of size 3
--- 0 candidates of size 4
--- 11 candidates of size 5
--- 4 candidates of size 6
--- 55 candidates of size 7
--- 20 candidates of size 8
--- 244 candidates of size 9
--- 116 candidates of size 10
--- tested 404 candidates
-posorder Leaf  =  []
-posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])
 

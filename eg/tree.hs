@@ -96,10 +96,13 @@ instance Conjurable Tree where
 
 main :: IO ()
 main = do
-  conjure "leftmost" leftmost ingredients
-  conjure "rightmost" rightmost ingredients
   conjure "size" size ingredients
   conjure "height" height ingredients
+  conjure "preorder" preorder ingredients
+  conjure "inorder" inorder ingredients
+  conjure "posorder" posorder ingredients
+  conjure "leftmost" leftmost ingredients
+  conjure "rightmost" rightmost ingredients
 
   conjure "mem" mem
     [ con False
@@ -124,10 +127,6 @@ main = do
     [ fun "strictlyOrdered" (strictlyOrdered :: [Int] -> Bool)
     , fun "inorder" inorder
     ]
-
-  conjure "preorder" preorder ingredients
-  conjure "inorder" inorder ingredients
-  conjure "posorder" posorder ingredients
 
 
 ingredients :: [Ingredient]
