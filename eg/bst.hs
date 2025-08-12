@@ -215,12 +215,12 @@ main = do
 
 beforeSpec :: (Int -> Tree -> Tree) -> [Property]
 beforeSpec before  =
-  [ property $ \x t -> ordered t ==> inorder (before x t) == takeWhile (< x) (inorder t)
+  [ property $ \x t -> inorder (before x t) == takeWhile (< x) (inorder t)
   ]
 
 beyondSpec :: (Int -> Tree -> Tree) -> [Property]
 beyondSpec beyond  =
-  [ property $ \x t -> ordered t ==> inorder (beyond x t) == dropWhile (<= x) (inorder t)
+  [ property $ \x t -> inorder (beyond x t) == dropWhile (<= x) (inorder t)
   ]
 
 -- unionSpec :: (Int -> Tree -> Tree) -> Bool
