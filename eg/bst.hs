@@ -111,21 +111,12 @@ main = do
     , ordcase (undefined :: Bool)
     ]
 
-  -- out of reach performance-wise as well (reaching 19 but needs size 25)
+  -- out of reach performance-wise (reaching 19 but needs size 25)
   conjure "insert" insert
     [ fun "Node" Node
     , fun "unit" unit
     , guard
     , fun "<" ((<) :: Int -> Int -> Bool)
-    , maxSize 12
-    ]
-
-  -- simply out of reach performance-wise (reaching 16 but need size 22)
-  conjure "insert" insert
-    [ fun "Node" Node
-    , fun "unit" unit
-    , fun "`compare`" (compare :: Int -> Int -> Ordering)
-    , ordcase (undefined :: Tree)
     , maxSize 12
     ]
 
@@ -151,28 +142,6 @@ main = do
     , target 5040
     ]
 
-  -- with 15, this reaches the solution, using 12 for shorter runtime
-  -- using maxEquationSize = 7 reduces runtime from 13s to 11s
-  conjureFromSpec "before" beforeSpec
-    [ con Leaf
-    , fun "Node" Node
-    , fun "`compare`" (compare :: Int -> Int -> Ordering)
-    , ordcase (undefined :: Tree)
-    , maxSize 12
-    , maxEquationSize 7
-    ]
-
-  -- with 15, this reaches the solution, using 12 for shorter runtime
-  -- using maxEquationSize = 7 reduces runtime from 13s to 11s
-  conjureFromSpec "beyond" beyondSpec
-    [ con Leaf
-    , fun "Node" Node
-    , fun "`compare`" (compare :: Int -> Int -> Ordering)
-    , ordcase (undefined :: Tree)
-    , maxSize 12
-    , maxEquationSize 7
-    ]
-
   conjure "insert" insert
     [ fun "Node" Node
     , fun "before" before
@@ -187,8 +156,6 @@ main = do
     , fun "beyond" beyond
     , target 5544 -- increase to 554400 to reach
     ]
-  -- maybe with invariant following test data there will be more pruning
-  -- properties?
 
 beforeSpec :: (Int -> Tree -> Tree) -> [Property]
 beforeSpec before  =
