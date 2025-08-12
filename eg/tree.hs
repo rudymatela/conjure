@@ -16,50 +16,50 @@ nil :: Tree -> Bool
 nil Leaf  =  True
 nil _     =  False
 
-size :: Tree -> Int
-size Leaf  =  0
-size (Node Leaf _ Leaf)  =  1
-size (Node (Node Leaf _ Leaf) _ Leaf)  =  2
-size (Node Leaf _ (Node Leaf _ Leaf))  =  2
-size (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  3
+size' :: Tree -> Int
+size' Leaf  =  0
+size' (Node Leaf _ Leaf)  =  1
+size' (Node (Node Leaf _ Leaf) _ Leaf)  =  2
+size' (Node Leaf _ (Node Leaf _ Leaf))  =  2
+size' (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  3
 
-height :: Tree -> Int
-height (Node Leaf _ Leaf)  =  0
-height (Node (Node Leaf _ Leaf) _ Leaf)  =  1
-height (Node Leaf _ (Node Leaf _ Leaf))  =  1
-height (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  1
-height (Node (Node Leaf _ (Node Leaf _ Leaf)) _ (Node Leaf _ Leaf))  =  2
+height' :: Tree -> Int
+height' (Node Leaf _ Leaf)  =  0
+height' (Node (Node Leaf _ Leaf) _ Leaf)  =  1
+height' (Node Leaf _ (Node Leaf _ Leaf))  =  1
+height' (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  1
+height' (Node (Node Leaf _ (Node Leaf _ Leaf)) _ (Node Leaf _ Leaf))  =  2
 
-preorder :: Tree -> [Int]
-preorder Leaf =  []
-preorder (Node l x r)  =  [x] ++ preorder l ++ preorder r
+preorder' :: Tree -> [Int]
+preorder' Leaf =  []
+preorder' (Node (Node Leaf 0 Leaf) 1 Leaf)  =  [1,0]
+preorder' (Node Leaf 0 (Node Leaf 1 Leaf))  =  [0,1]
+preorder' (Node (Node Leaf 0 Leaf) 1 (Node Leaf 2 Leaf))  =  [1,0,2]
 
-inorder :: Tree -> [Int]
-inorder Leaf  =  []
-inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
+inorder' :: Tree -> [Int]
+inorder' Leaf =  []
+inorder' (Node (Node Leaf 0 Leaf) 1 Leaf)  =  [0,1]
+inorder' (Node Leaf 0 (Node Leaf 1 Leaf))  =  [0,1]
+inorder' (Node (Node Leaf 0 Leaf) 1 (Node Leaf 2 Leaf))  =  [0,1,2]
 
-postorder :: Tree -> [Int]
-postorder Leaf =  []
-postorder (Node l x r)  =  postorder l ++ postorder r ++ [x]
+postorder' :: Tree -> [Int]
+postorder' Leaf =  []
+postorder' (Node (Node Leaf 0 Leaf) 1 Leaf)  =  [0,1]
+postorder' (Node Leaf 0 (Node Leaf 1 Leaf))  =  [1,0]
+postorder' (Node (Node Leaf 0 Leaf) 1 (Node Leaf 2 Leaf))  =  [0,2,1]
 
-leftmost :: Tree -> Int
-leftmost (Node l x _)  =  if nil l then x else leftmost l
+leftmost' :: Tree -> Int
+leftmost' (Node Leaf x Leaf)  =  x
+leftmost' (Node (Node Leaf 0 Leaf) 1 Leaf)  =  0
+leftmost' (Node Leaf 1 (Node Leaf 0 Leaf))  =  1
+leftmost' (Node (Node Leaf 2 Leaf) 1 (Node Leaf 0 Leaf))  =  2
 
-rightmost :: Tree -> Int
-rightmost (Node _ x r)  =  if nil r then x else rightmost r
+rightmost' :: Tree -> Int
+rightmost' (Node Leaf x Leaf)  =  x
+rightmost' (Node (Node Leaf 1 Leaf) 0 Leaf)  =  0
+rightmost' (Node Leaf 0 (Node Leaf 1 Leaf))  =  1
+rightmost' (Node (Node Leaf 0 Leaf) 1 (Node Leaf 2 Leaf))  =  2
 
-ordered :: Tree -> Bool
-ordered Leaf  =  True
-ordered (Node l x r)  =  (nil l || rightmost l < x)
-                      && (nil r || x < leftmost r)
-                      && ordered l
-                      && ordered r
-
-
--- this mem searches both sides of the tree
-mem :: Int -> Tree -> Bool
-mem _ Leaf  =  False
-mem y (Node l x r)  =  y == x || mem y l || mem y r
 
 
 -- the following instances could have been derived with:
@@ -89,13 +89,13 @@ instance Conjurable Tree where
 
 main :: IO ()
 main = do
-  conjure "size" size ingredients
-  conjure "height" height ingredients
-  conjure "preorder" preorder ingredients
-  conjure "inorder" inorder ingredients
-  conjure "postorder" postorder ingredients
-  conjure "leftmost" leftmost ingredients
-  conjure "rightmost" rightmost ingredients
+  conjure "size"      size'      ingredients
+  conjure "height"    height'    ingredients
+  conjure "preorder"  preorder'  ingredients
+  conjure "inorder"   inorder'   ingredients
+  conjure "postorder" postorder' ingredients
+  conjure "leftmost"  leftmost'  ingredients
+  conjure "rightmost" rightmost' ingredients
 
   conjure "mem" mem
     [ con False
@@ -144,3 +144,29 @@ ingredients  =
 strictlyOrdered :: [Int] -> Bool
 strictlyOrdered []  =  True
 strictlyOrdered (x:xs)  =  (null xs || x < head xs) && strictlyOrdered xs
+
+size :: Tree -> Int
+size Leaf  =  0
+size (Node l _ r)  =  size l + 1 + size r
+
+inorder :: Tree -> [Int]
+inorder Leaf  =  []
+inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
+
+leftmost :: Tree -> Int
+leftmost (Node l x _)  =  if nil l then x else leftmost l
+
+rightmost :: Tree -> Int
+rightmost (Node _ x r)  =  if nil r then x else rightmost r
+
+ordered :: Tree -> Bool
+ordered Leaf  =  True
+ordered (Node l x r)  =  (nil l || rightmost l < x)
+                      && (nil r || x < leftmost r)
+                      && ordered l
+                      && ordered r
+
+-- this mem searches both sides of the tree
+mem :: Int -> Tree -> Bool
+mem _ Leaf  =  False
+mem y (Node l x r)  =  y == x || mem y l || mem y r
