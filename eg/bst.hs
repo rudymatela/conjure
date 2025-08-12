@@ -7,7 +7,6 @@
 import Conjure
 import Test.LeanCheck
 import Data.Function (on)
-import Data.Express hiding (height,size)
 import Data.List (nub,sort)
 
 data Tree  =  Leaf
@@ -37,48 +36,37 @@ rightmost (Node _ x r)
   | isLeaf r  =  x
   | otherwise  =  rightmost r
 
-size :: Tree -> Int
-size Leaf  =  0
-size (Node l _ r)  =  size l + 1 + size r
-
 inorder :: Tree -> [Int]
 inorder Leaf  =  []
 inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
 
-
--- the following assume a binary search tree
+-- membership on a binary search tree
 mem :: Int -> Tree -> Bool
 mem _ Leaf  =  False
-mem y (Node l x r)  =  y == x || (if y < x then mem y l else mem y r)
+mem x (Node l y r)
+  | x < y  =  mem x l
+  | y < x  =  mem x r
+  | otherwise  =  True
 
+-- this inserts at the leaf
 insert :: Int -> Tree -> Tree
 insert x Leaf          =  unit x  -- 2
-insert x (Node l y r)  =
-  case compare x y of             -- 6
-  LT -> Node (insert x l) y r     -- 12
-  EQ -> Node l y r                -- 16
-  GT -> Node l y (insert x r)     -- 22
-
-insertAlt :: Int -> Tree -> Tree
-insertAlt x Leaf          =  unit x  -- 2
-insertAlt x (Node l y r)
+insert x (Node l y r)
   | x < y  =  Node (insert x l) y r  -- 12
   | y < x  =  Node l y (insert x r)  -- 22
   | otherwise  =  Node l y r         -- 25
 
 before :: Int -> Tree -> Tree
-before _ Leaf  =  Leaf
-before y (Node l x r)  =  case y `compare` x of
-                          LT -> before y l
-                          EQ -> l
-                          GT -> Node l x (before y r)
+before x Leaf  =  Leaf
+before x (Node t1 y t2)
+  | y < x  =  Node t1 y (before x t2)
+  | otherwise  =  before x t1
 
 beyond :: Int -> Tree -> Tree
-beyond _ Leaf  =  Leaf
-beyond y (Node l x r)  =  case x `compare` y of
-                          LT -> beyond y r
-                          EQ -> r
-                          GT -> Node (beyond y l) x r
+beyond x Leaf  =  Leaf
+beyond x (Node t1 y t2)
+  | x < y  =  Node (beyond x t1) y t2
+  | otherwise  =  beyond x t2
 
 union :: Tree -> Tree -> Tree
 union t Leaf  =  t
@@ -179,12 +167,3 @@ unionSpec union  =
   ]
   where
   xs +++ ys  =  nub . sort $ xs ++ ys  -- nubMerge
-
--- same as insert, but using an if instead of a case:
-insertIf :: Int -> Tree -> Tree
-insertIf x Leaf  =  unit x                                   -- 2
-insertIf x (Node l y r)  =  if x == y                        -- 6
-                            then Node l y r                  -- 10
-                            else if x < y                    -- 14
-                                 then Node (insert x l) y r  -- 20
-                                 else Node l y (insert x r)  -- 26
