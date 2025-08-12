@@ -27,14 +27,14 @@ isLeaf Leaf  =  True
 isLeaf _     =  False
 
 leftmost :: Tree -> Int
-leftmost (Node l x _)  =  if isLeaf l then x else leftmost l
+leftmost (Node l x _)
+  | isLeaf l  =  x
+  | otherwise  =  leftmost l
 
 rightmost :: Tree -> Int
-rightmost (Node _ x r)  =  if isLeaf r then x else rightmost r
-
-height :: Tree -> Int
-height Leaf  =  -1
-height (Node l _ r)  =  1 + max (height l) (height r)
+rightmost (Node _ x r)
+  | isLeaf r  =  x
+  | otherwise  =  rightmost r
 
 size :: Tree -> Int
 size Leaf  =  0
@@ -47,17 +47,9 @@ ordered (Node l x r)  =  (isLeaf l || rightmost l < x)
                       && ordered l
                       && ordered r
 
-preorder :: Tree -> [Int]
-preorder Leaf =  []
-preorder (Node l x r)  =  [x] ++ preorder l ++ preorder r
-
 inorder :: Tree -> [Int]
 inorder Leaf  =  []
 inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
-
-posorder :: Tree -> [Int]
-posorder Leaf =  []
-posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
 
 
 -- the following assume a binary search tree
@@ -177,7 +169,7 @@ main = do
     [ con Leaf
     , fun "Node" Node
     , fun "==" ((==) :: Int -> Int -> Bool)
-    , fun "<=" ((<) :: Int -> Int -> Bool)
+    , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
     , target 5040
     ]

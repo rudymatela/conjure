@@ -123,7 +123,7 @@ beyond :: Int -> Tree -> Tree
 -- tested 5343 candidates
 beyond  =  undefined  -- search exhausted
 -- could not find implementation using only
--- Leaf, Node, (==), (<=), and guarded equations
+-- Leaf, Node, (==), (<), and guarded equations
 -- consider increasing target/maxSize or refining the ingredients
 
 before :: Int -> Tree -> Tree
