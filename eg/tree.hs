@@ -16,19 +16,25 @@ nil :: Tree -> Bool
 nil Leaf  =  True
 nil _     =  False
 
+size :: Tree -> Int
+size Leaf  =  0
+size (Node Leaf _ Leaf)  =  1
+size (Node (Node Leaf _ Leaf) _ Leaf)  =  2
+size (Node Leaf _ (Node Leaf _ Leaf))  =  2
+size (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  3
+
+height :: Tree -> Int
+height (Node Leaf _ Leaf)  =  0
+height (Node (Node Leaf _ Leaf) _ Leaf)  =  1
+height (Node Leaf _ (Node Leaf _ Leaf))  =  1
+height (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  1
+height (Node (Node Leaf _ (Node Leaf _ Leaf)) _ (Node Leaf _ Leaf))  =  2
+
 leftmost :: Tree -> Int
 leftmost (Node l x _)  =  if nil l then x else leftmost l
 
 rightmost :: Tree -> Int
 rightmost (Node _ x r)  =  if nil r then x else rightmost r
-
-height :: Tree -> Int
-height Leaf  =  -1
-height (Node l _ r)  =  1 + max (height l) (height r)
-
-size :: Tree -> Int
-size Leaf  =  0
-size (Node l _ r)  =  size l + 1 + size r
 
 ordered :: Tree -> Bool
 ordered Leaf  =  True
