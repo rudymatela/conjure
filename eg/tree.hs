@@ -30,6 +30,18 @@ height (Node Leaf _ (Node Leaf _ Leaf))  =  1
 height (Node (Node Leaf _ Leaf) _ (Node Leaf _ Leaf))  =  1
 height (Node (Node Leaf _ (Node Leaf _ Leaf)) _ (Node Leaf _ Leaf))  =  2
 
+preorder :: Tree -> [Int]
+preorder Leaf =  []
+preorder (Node l x r)  =  [x] ++ preorder l ++ preorder r
+
+inorder :: Tree -> [Int]
+inorder Leaf  =  []
+inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
+
+posorder :: Tree -> [Int]
+posorder Leaf =  []
+posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
+
 leftmost :: Tree -> Int
 leftmost (Node l x _)  =  if nil l then x else leftmost l
 
@@ -42,18 +54,6 @@ ordered (Node l x r)  =  (nil l || rightmost l < x)
                       && (nil r || x < leftmost r)
                       && ordered l
                       && ordered r
-
-preorder :: Tree -> [Int]
-preorder Leaf =  []
-preorder (Node l x r)  =  [x] ++ preorder l ++ preorder r
-
-inorder :: Tree -> [Int]
-inorder Leaf  =  []
-inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
-
-posorder :: Tree -> [Int]
-posorder Leaf =  []
-posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
 
 
 -- this mem searches both sides of the tree
