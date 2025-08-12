@@ -84,9 +84,6 @@ union t Leaf  =  t
 union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
 
 
-deriveExpress ''Tree
-
-
 instance Listable Tree where
   tiers  =  cons0 Leaf
          \/ cons3 Node `suchThat` (\(Node l x r) -> (isLeaf l || rightmost l < x)
@@ -95,20 +92,7 @@ instance Listable Tree where
 instance Name Tree where
   name _  =  "t1"
 
--- the following instance could have been derived with:
--- deriveConjurable ''Tree
-
-instance Conjurable Tree where
-  conjureExpress   =  reifyExpress
-  conjureEquality  =  reifyEquality
-  conjureTiers     =  reifyTiers
-  conjureSubTypes x  =  conjureType (undefined :: Int)
-  conjureSize     =  size
-  conjureCases t  =  [ val (Leaf -: t)
-                     , value "Node" (Node ->>>: t) :$ hole l :$ hole x :$ hole r
-                     ]
-    where
-    Node l x r  =  Node undefined undefined undefined -: t
+deriveConjurable ''Tree
 
 
 main :: IO ()
