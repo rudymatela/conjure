@@ -40,13 +40,6 @@ size :: Tree -> Int
 size Leaf  =  0
 size (Node l _ r)  =  size l + 1 + size r
 
-ordered :: Tree -> Bool
-ordered Leaf  =  True
-ordered (Node l x r)  =  (isLeaf l || rightmost l < x)
-                      && (isLeaf r || x < leftmost r)
-                      && ordered l
-                      && ordered r
-
 inorder :: Tree -> [Int]
 inorder Leaf  =  []
 inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
