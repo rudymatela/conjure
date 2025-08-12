@@ -8,6 +8,7 @@ import Conjure
 import Test.LeanCheck
 import Data.Function (on)
 import Data.Express hiding (height,size)
+import Data.List (nub,sort)
 
 data Tree  =  Leaf
            |  Node Tree Int Tree
@@ -151,6 +152,8 @@ main = do
   -- -- 21.3s, tested 233221 candidates
   -- union t1 Leaf  =  t1
   -- union t1 (Node t2 x t3)  =  Node (union (before x t1) t2) x (union (beyond x t1) t3)
+  --
+  -- This needs actual union as spec though... ... test more later
   conjure "union" union
     [ con Leaf
     , fun "Node" Node
@@ -170,10 +173,12 @@ beyondSpec beyond  =
   [ property $ \x t -> inorder (beyond x t) == dropWhile (<= x) (inorder t)
   ]
 
--- unionSpec :: (Int -> Tree -> Tree) -> Bool
--- unionSpec union  =  and
---   [ holds n $ \t1 t2 -> ordered t ==> inorder (union t1 t2) == merge (inorder t1) (inorder t2)
---   ] where n = 360
+unionSpec :: (Tree -> Tree -> Tree) -> [Property]
+unionSpec union  =
+  [ property $ \t1 t2 -> inorder (union t1 t2) == inorder t1 +++ inorder t2
+  ]
+  where
+  xs +++ ys  =  nub . sort $ xs ++ ys  -- nubMerge
 
 -- same as insert, but using an if instead of a case:
 insertIf :: Int -> Tree -> Tree
