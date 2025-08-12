@@ -120,15 +120,14 @@ main = do
     , maxSize 12
     ]
 
-  -- reachable in 15s, candidate #32878 at size 14.
-  -- increase target to 50400 to reach...
+  -- reachable in 7s, candidate #92490 at size 14.
   conjureFromSpec "before" beforeSpec
     [ con Leaf
     , fun "Node" Node
     , fun "==" ((==) :: Int -> Int -> Bool)
     , fun "<" ((<) :: Int -> Int -> Bool)
     , guard
-    , target 5040
+    , target 50400
     ]
 
   -- reachable in 14s, candidate #32747 at size 14.

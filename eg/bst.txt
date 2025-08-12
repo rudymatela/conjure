@@ -80,11 +80,14 @@ before :: Int -> Tree -> Tree
 -- 104 candidates of size 9
 -- 1342 candidates of size 10
 -- 3543 candidates of size 11
--- tested 5343 candidates
-before  =  undefined  -- search exhausted
--- could not find implementation using only
--- Leaf, Node, (==), (<), and guarded equations
--- consider increasing target/maxSize or refining the ingredients
+-- 2714 candidates of size 12
+-- 23874 candidates of size 13
+-- 61374 candidates of size 14
+-- tested 92490 candidates
+before x Leaf  =  Leaf
+before x (Node t1 y t2)
+  | y < x  =  Node t1 y (before x t2)
+  | otherwise  =  before x t1
 
 beyond :: Int -> Tree -> Tree
 -- pruning with 5/6 rules
