@@ -147,13 +147,17 @@ main = do
     , fun "beyond" beyond
     ]
 
-  -- reachable in 55s, candidate #173109 at size 13.
+  -- reachable in 22s, candidate #233221 at size 13.
+  -- -- 21.3s, tested 233221 candidates
+  -- union t1 Leaf  =  t1
+  -- union t1 (Node t2 x t3)  =  Node (union (before x t1) t2) x (union (beyond x t1) t3)
   conjure "union" union
     [ con Leaf
     , fun "Node" Node
     , fun "before" before
     , fun "beyond" beyond
     , target 5544 -- increase to 554400 to reach
+    -- , carryOn -- needed for efficient version
     ]
 
 beforeSpec :: (Int -> Tree -> Tree) -> [Property]
