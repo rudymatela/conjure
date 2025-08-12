@@ -22,25 +22,15 @@ instance Ord Tree where
 unit :: Int -> Tree
 unit x  =  Node Leaf x Leaf
 
-nil :: Tree -> Bool
-nil Leaf  =  True
-nil _     =  False
-
-left :: Tree -> Tree
-left (Node l _ _)  =  l
-
-right :: Tree -> Tree
-right (Node _ _ r)  =  r
-
-valu :: Tree -> Int
-valu (Node _ x _)  =  x
-
+isLeaf :: Tree -> Bool
+isLeaf Leaf  =  True
+isLeaf _     =  False
 
 leftmost :: Tree -> Int
-leftmost (Node l x _)  =  if nil l then x else leftmost l
+leftmost (Node l x _)  =  if isLeaf l then x else leftmost l
 
 rightmost :: Tree -> Int
-rightmost (Node _ x r)  =  if nil r then x else rightmost r
+rightmost (Node _ x r)  =  if isLeaf r then x else rightmost r
 
 height :: Tree -> Int
 height Leaf  =  -1
@@ -52,8 +42,8 @@ size (Node l _ r)  =  size l + 1 + size r
 
 ordered :: Tree -> Bool
 ordered Leaf  =  True
-ordered (Node l x r)  =  (nil l || rightmost l < x)
-                      && (nil r || x < leftmost r)
+ordered (Node l x r)  =  (isLeaf l || rightmost l < x)
+                      && (isLeaf r || x < leftmost r)
                       && ordered l
                       && ordered r
 
@@ -114,8 +104,8 @@ deriveExpress ''Tree
 
 instance Listable Tree where
   tiers  =  cons0 Leaf
-         \/ cons3 Node `suchThat` (\(Node l x r) -> (nil l || rightmost l < x)
-                                                 && (nil r || x < leftmost r))
+         \/ cons3 Node `suchThat` (\(Node l x r) -> (isLeaf l || rightmost l < x)
+                                                 && (isLeaf r || x < leftmost r))
 
 instance Name Tree where
   name _  =  "t1"
