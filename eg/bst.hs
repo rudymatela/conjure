@@ -75,8 +75,10 @@ union t (Node l x r)  =  Node (union (before x t) l) x (union (beyond x t) r)
 
 instance Listable Tree where
   tiers  =  cons0 Leaf
-         \/ cons3 Node `suchThat` (\(Node l x r) -> (isLeaf l || rightmost l < x)
-                                                 && (isLeaf r || x < leftmost r))
+         \/ cons3 Node `suchThat` okNode
+    where
+    okNode (Node l x r)  =  (isLeaf l || rightmost l < x)
+                         && (isLeaf r || x < leftmost r)
 
 instance Name Tree where
   name _  =  "t1"
