@@ -130,7 +130,7 @@ main = do
     , target 50400
     ]
 
-  -- reachable in 14s, candidate #32747 at size 14.
+  -- reachable in 7s, candidate #92359 at size 14.
   -- increase target to 50400 to reach...
   conjureFromSpec "beyond" beyondSpec
     [ con Leaf
