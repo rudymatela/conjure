@@ -12,24 +12,9 @@ data Tree  =  Leaf
            |  Node Tree Int Tree
   deriving (Eq, Ord, Show, Read)
 
-deriveExpress ''Tree
-
-unit :: Int -> Tree
-unit x  =  Node Leaf x Leaf
-
 nil :: Tree -> Bool
 nil Leaf  =  True
 nil _     =  False
-
-left :: Tree -> Tree
-left (Node l _ _)  =  l
-
-right :: Tree -> Tree
-right (Node _ _ r)  =  r
-
-valu :: Tree -> Int
-valu (Node _ x _)  =  x
-
 
 leftmost :: Tree -> Int
 leftmost (Node l x _)  =  if nil l then x else leftmost l
@@ -71,15 +56,17 @@ mem _ Leaf  =  False
 mem y (Node l x r)  =  y == x || mem y l || mem y r
 
 
+-- the following instances could have been derived with:
+-- deriveConjurable ''Tree
+
+deriveExpress ''Tree
+
 instance Listable Tree where
   tiers  =  cons0 Leaf
         \/  cons3 Node
 
 instance Name Tree where
   name _  =  "t1"
-
--- the following instance could have been derived with:
--- deriveConjurable ''Tree
 
 instance Conjurable Tree where
   conjureExpress   =  reifyExpress
