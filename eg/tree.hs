@@ -38,9 +38,9 @@ inorder :: Tree -> [Int]
 inorder Leaf  =  []
 inorder (Node l x r)  =  inorder l ++ [x] ++ inorder r
 
-posorder :: Tree -> [Int]
-posorder Leaf =  []
-posorder (Node l x r)  =  posorder l ++ posorder r ++ [x]
+postorder :: Tree -> [Int]
+postorder Leaf =  []
+postorder (Node l x r)  =  postorder l ++ postorder r ++ [x]
 
 leftmost :: Tree -> Int
 leftmost (Node l x _)  =  if nil l then x else leftmost l
@@ -93,7 +93,7 @@ main = do
   conjure "height" height ingredients
   conjure "preorder" preorder ingredients
   conjure "inorder" inorder ingredients
-  conjure "posorder" posorder ingredients
+  conjure "postorder" postorder ingredients
   conjure "leftmost" leftmost ingredients
   conjure "rightmost" rightmost ingredients
 

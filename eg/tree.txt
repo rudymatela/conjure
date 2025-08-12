@@ -58,7 +58,7 @@ inorder :: Tree -> [Int]
 inorder Leaf  =  []
 inorder (Node t1 x t2)  =  inorder t1 ++ (x:inorder t2)
 
-posorder :: Tree -> [Int]
+postorder :: Tree -> [Int]
 -- testing 1080 combinations of argument values
 -- pruning with 56/72 rules
 -- 1 candidates of size 1
@@ -72,8 +72,8 @@ posorder :: Tree -> [Int]
 -- 244 candidates of size 9
 -- 116 candidates of size 10
 -- tested 404 candidates
-posorder Leaf  =  []
-posorder (Node t1 x t2)  =  posorder t1 ++ (posorder t2 ++ [x])
+postorder Leaf  =  []
+postorder (Node t1 x t2)  =  postorder t1 ++ (postorder t2 ++ [x])
 
 leftmost :: Tree -> Int
 -- testing 1080 combinations of argument values
