@@ -136,7 +136,7 @@ fastxtestbench:
 	$(LONG) make txt -j$(NJOBS) && $(LONG) make test -j$(NJOBS) && $(LONG) make bench
 
 clean: clean-hi-o clean-haddock
-	rm -f $(EG) $(TESTS) mk/toplibs
+	rm -f $(EG) $(TESTS) mk/toplibs */.*.txt
 
 full-clean: clean clean-cabal clean-stack
 	rm -f tags TAGS mk/toplibs
