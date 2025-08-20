@@ -4,54 +4,54 @@
 -- Distributed under the 3-Clause BSD licence (see the file LICENSE).
 import Conjure
 
-fib01 :: Int -> Int -> Int -> Int
--- fib01 x y 0  =  x  -- even with this, out of reach
-fib01 0 1 0  =  1
-fib01 0 1 1  =  1
-fib01 0 1 2  =  2
-fib01 0 1 3  =  3
-fib01 0 1 4  =  5
-fib01 0 1 5  =  8
-fib01 0 1 6  =  13
-fib01 0 1 7  =  21
 
-fibonacci :: Int -> Int
-fibonacci  =  f 0 1
-  where
-  f x y 0  =  y
-  f x y n  =  f y (x + y) (n - 1)
+-- using a single type , we hang after size 7, we need 9
+-- so we split the types here to nudge Conjure in the right direction
+fib01' :: Integer -> Integer -> Int -> Integer
+fib01' 0 1 1  =  1
+fib01' 0 1 2  =  1
+fib01' 0 1 3  =  2
+fib01' 0 1 4  =  3
+fib01' 0 1 5  =  5
+fib01' 0 1 6  =  8
+fib01' 0 1 7  =  13
+
+fibonacci' :: Int -> Int
+fibonacci' 0  =  0
+fibonacci' 1  =  1
+fibonacci' 2  =  1
+fibonacci' 3  =  2
+fibonacci' 4  =  3
+fibonacci' 5  =  5
+fibonacci' 6  =  8
+
 
 main :: IO ()
 main  =  do
-  -- These two examples show that currently
-  -- functions with "many" argument (>=3)
-  -- are particularly hard for conjure to synthesize.
-  -- I've added an item in TODO.md to address this in 2025-02.
-
-  -- Found!  It takes about 12 seconds to run with maxSize=8
-  -- running with maxSize = 5 for faster runtime
-  conjure "fib01" fib01
+  conjure "fib01" fib01'
     [ con (0::Int)
-    , fun "dec" (subtract 1 :: Int -> Int)
-    , fun "+" ((+) :: Int -> Int -> Int)
-    , maxSize 5
-    , maxConstantSize 1
+    , con (1::Int)
+    , fun "+" ((+) :: Int -> Int -> Int) -- uneeded
+    , fun "-" ((-) :: Int -> Int -> Int)
+    , fun "+" ((+) :: Integer -> Integer -> Integer)
     ]
 
-  -- It takes about 27 seconds to run with maxSize=12
-  -- running with maxSize = 9 for faster runtime
-  conjure "fib01" fib01
+  conjure "fibonacci" fibonacci'
     [ con (0::Int)
-    , fun "+" ((+) :: Int -> Int -> Int)
-    , fun "dec" (subtract 1 :: Int -> Int)
-    , fun "<=" ((<=) :: Int -> Int -> Bool)
-    , iif (undefined :: Int)
-
-    , singlePattern
-    , maxSize 1
-    , maxConstantSize 1
+    , con (1::Int)
+    , fun "fib01" fib01
     ]
-  -- expected function:
-  -- fib01 x y z  =  if z <= 0                     -- 4
-  --                 then y                        -- 5
-  --                 else fib01 y (x + y) (dec z)  -- 12
+
+
+-- our goals:
+
+fibonacci :: Int -> Int
+fibonacci =  f 0 1
+  where
+  f x y 0  =  x
+  f x y n  =  f y (x + y) (n - 1)
+
+fib01 :: Int -> Int -> Int -> Int
+fib01 x y n | n < 0  =  error "undefined for negatives"
+fib01 x y 0  =  x
+fib01 x y n  =  fib01 y (x + y) (n - 1)

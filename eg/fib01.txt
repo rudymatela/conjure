@@ -1,24 +1,26 @@
-fib01 :: Int -> Int -> Int -> Int
--- testing 8 combinations of argument values
--- pruning with 6/10 rules
--- 4 candidates of size 1
--- 3 candidates of size 2
--- 9 candidates of size 3
--- 9 candidates of size 4
--- 27 candidates of size 5
--- tested 52 candidates
-fib01  =  undefined  -- search exhausted
--- could not find implementation using only
--- 0, dec, and (+)
--- consider increasing target/maxSize or refining the ingredients
+fib01 :: Integer -> Integer -> Int -> Integer
+-- testing 7 combinations of argument values
+-- pruning with 15/39 rules
+-- 2 candidates of size 1
+-- 0 candidates of size 2
+-- 3 candidates of size 3
+-- 0 candidates of size 4
+-- 6 candidates of size 5
+-- 0 candidates of size 6
+-- 20 candidates of size 7
+-- 4 candidates of size 8
+-- 84 candidates of size 9
+-- tested 100 candidates
+fib01 x y 0  =  x
+fib01 x y z  =  fib01 y (x + y) (z - 1)
 
-fib01 :: Int -> Int -> Int -> Int
--- testing 8 combinations of argument values
--- pruning with 21/41 rules
--- 4 candidates of size 1
--- tested 4 candidates
-fib01  =  undefined  -- search exhausted
--- could not find implementation using only
--- 0, (+), dec, (<=), and if-expressions
--- consider increasing target/maxSize or refining the ingredients
+fibonacci :: Int -> Int
+-- testing 7 combinations of argument values
+-- pruning with 2/2 rules
+-- 3 candidates of size 1
+-- 0 candidates of size 2
+-- 0 candidates of size 3
+-- 9 candidates of size 4
+-- tested 9 candidates
+fibonacci  =  fib01 0 1
 
