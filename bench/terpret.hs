@@ -11,6 +11,10 @@
 -- Here, we prefer the simplified definitions found in 1.
 import Conjure
 import System.Environment (getArgs)
+import Prelude hiding ((^^))
+
+(^^) :: Bool -> Bool -> Bool
+(^^)  =  (/=)  -- XOR is different!
 
 
 -- TerpreT #1 -- invert --
@@ -136,15 +140,25 @@ t5c :: IO ()
 t5c  =  do
   putStrLn "TerpreT benchmark #5: full adder\n"
 
-  conjure "fadder" t5p $ ingredients123 ++
-    [ fun "not" not
-    , fun "," ((,) :: Bool -> Bool -> (Bool,Bool))
-    , fun "==" ((==) :: Bool -> Bool -> Bool)
---  , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
-    , guard
+  -- fulladder is reachable through copybindings or with xors
+
+  conjure "fulladder" t5p $ ingredients123
+
+  -- takes 9.1s with maxSize 15
+  conjure "fulladder" t5p $
+    [ fun "," ((,) :: Bool -> Bool -> (Bool,Bool))
+    , fun "^^" (^^)
+    , fun "&&" (&&)
+    -- , fun "||" (||) -- runs in 167s on zero
+    , maxPatternDepth 0
+    -- fulladder p q r  =  (p ^^ (p ^^ q && p ^^ r),p ^^ (q ^^ r))
     ]
--- the printed function is weird, but correct
--- fadder p q r  =  if p == q then (p,r) else (r,not r)
+
+t5g :: Bool -> Bool -> Bool -> (Bool,Bool)
+t5g a b c  =
+  ( a && b || c && (a ^^ b)  -- 9
+  , a ^^ b ^^ c              -- 15
+  )
 
 
 -- TerpreT #6 -- 2-bit adder --
@@ -161,8 +175,7 @@ t6c  =  do
   conjure "adder2" t6p $ ingredients123 ++
     [ fun ",," ((,,) :: Bool -> Bool -> Bool -> (Bool,Bool,Bool))
     , fun "==" ((==) :: Bool -> Bool -> Bool)
-    , fun "^^" ((/=) :: Bool -> Bool -> Bool) -- poor man's xor
-    , guard
+    , fun "^^" (^^)
     , maxSize 6
     ]
 
