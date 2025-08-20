@@ -811,9 +811,7 @@ conjureCasesFor f eh  =
 --       It can be used in building a replacement for conjureArgumentPats
 
 
--- | Towards a replacement for conjurePats that allows non-top-level breakdowns...
---
--- This function is currently experimental and unused in Conjure.
+-- | Used in the implementation of 'conjurePats' and 'conjureArgumentPats'.
 --
 -- > > conjurePatternsFor (undefined :: [Int] -> ()) (is_)
 -- > [ [ [ _ ] ]
@@ -833,7 +831,7 @@ conjureCasesFor f eh  =
 -- > , ...
 -- > ]
 --
--- Ints are /crudely/ supported
+-- Ints are /crudely/ supported.
 --
 -- > ghci> putLL 4 $ conjurePatternsDebug [zero] (undefined :: [Int])
 -- > [_ :: [Int]]
