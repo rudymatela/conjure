@@ -840,6 +840,15 @@ conjureCasesFor f eh  =
 -- >
 -- > [[] :: [Int],[_] :: [Int],_:_:_ :: [Int]]
 -- > [[] :: [Int],_:_ :: [Int],0:_ :: [Int]]
+--
+-- > ghci> putLL 4 $ conjurePatternsDebug [zero,one] (undefined :: Int)
+-- > [_ :: Int]
+-- >
+-- > [0 :: Int,_ :: Int]
+-- >
+-- > [1 :: Int,_ :: Int]
+-- >
+-- > [0 :: Int,1 :: Int,_ :: Int]
 conjurePatternsFor :: Conjurable f => Int -> [Expr] -> f -> Expr -> [[ [Expr] ]]
 conjurePatternsFor d es f  =  cpf d . holeAsTypeOf
   where
