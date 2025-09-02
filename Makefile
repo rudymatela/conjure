@@ -85,7 +85,8 @@ test: test-makefile $(TESTS) $(patsubst %,%.run,$(TESTS)) diff-test test-sdist
 
 ghci: src/Conjure.ghci
 
-tags: src
+.PHONY: tags
+tags:
 	ctags -R src
 
 # Disclaimer: This bench target is not intended to generate paper-grade runtime
