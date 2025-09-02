@@ -17,7 +17,6 @@ module Conjure.Engine
   , conjpure
   , conjpureFromSpec
   , conjpure0
-  , candidateExprs
   , candidateDefns
 
   -- * settings
@@ -37,7 +36,6 @@ module Conjure.Engine
   -- * Debug options
   , showCandidates
   , showTheory
-  , singlePattern
   , showTests
   , showPatterns
   , showDeconstructions
@@ -315,80 +313,7 @@ conjpure0 nm f p is  =  Results
 -- 2. an equational theory
 -- 3. a list of allowed deconstructions
 candidateDefns :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
-candidateDefns nm f is  =  candidateDefns' nm f is
-  where
-  candidateDefns'  =  if singlePatternI is
-                      then candidateDefns1
-                      else candidateDefnsC
-
-
--- | Return apparently unique candidate definitions
---   where there is a single body.
-candidateDefns1 :: Conjurable f => String -> f -> [Ingredient] -> ([[Defn]], Thy, [[Defn]], [Expr])
-candidateDefns1 nm f ps  =  first4 (mapT toDefn) $ candidateExprs nm f ps
-  where
-  efxs  =  conjureVarApplication nm f
-  toDefn e  =  [(efxs, e)]
-  first4 f (x,y,z,w)  =  (f x, y, z, w)
-
-
--- | Return apparently unique candidate bodies.
-candidateExprs :: Conjurable f => String -> f -> [Ingredient] -> ([[Expr]], Thy, [[Defn]], [Expr])
-candidateExprs nm f is  =
-  ( as \/ concatMapT (`enumerateFillings` recs) ts
-  , thy
-  , [[ [(efxs, eh)] ]]
-  , deconstructions
-  )
-  where
-  ps  =  actual is  -- extract actual primitives
-  es  =  map fst ps
-  ts | typ efxs == boolTy  =  foldAppProducts andE [cs, rs]
-                           \/ foldAppProducts orE  [cs, rs]
-     | otherwise           =  filterT keepIf
-                           $  foldAppProducts (conjureIf f) [cs, as, rs]
-                           \/ foldAppProducts (conjureIf f) [cs, rs, as]
-  cs  =  filterT (`notElem` [val False, val True])
-      $  forN (hole (undefined :: Bool))
-  as  =  forN efxs
-  rs  =  forR efxs
-  forN h  =  enumerateAppsFor h keep $ exs ++ es
-  forR h  =  filterT (\e -> (eh `elem`) (holes e))
-          $  enumerateAppsFor h keep $ exs ++ es ++ [eh]
-  eh  =  holeAsTypeOf efxs
-  efxs  =  conjureVarApplication nm f
-  (ef:exs)  =  unfoldApp efxs
-  keep | rewrite    =  isRootNormalC thy . fastMostGeneralVariation
-       | otherwise  =  const True
-  keepR | requireDescent  =  descends isDecOf efxs
-        | otherwise       =  const True
-    where
-    e `isDecOf` e'  =  not $ null
-                    [  ()
-                    |  d <- deconstructions
-                    ,  m <- maybeToList (e `match` d)
-                    ,  filter (uncurry (/=)) m == [(holeAsTypeOf e', e')]
-                    ]
-
-  deconstructions :: [Expr]
-  deconstructions  =  filter (conjureIsDeconstruction f maxTests)
-                   $  concatMap candidateDeconstructionsFrom
-                   $  concat . take maxDeconstructionSize
-                   $  concatMapT forN [hs]
-    where
-    hs  =  nub $ conjureArgumentHoles f
-
-  recs  =  filterT keepR
-        $  foldAppProducts ef [forN h | h <- conjureArgumentHoles f]
-  thy  =  doubleCheck (===)
-       .  theoryFromAtoms (===) maxEquationSize . (:[]) . nub
-       $  cjHoles (fun nm f:ps) ++ [val False, val True] ++ es
-  (===)  =  cjAreEqual (fun nm f:ps) maxTests
-  maxTests               =  maxTestsI is
-  maxEquationSize        =  maxEquationSizeI is
-  maxDeconstructionSize  =  maxDeconstructionSizeI is
-  requireDescent         =  requireDescentI is
-  rewrite                =  rewriteI is
+candidateDefns  =  candidateDefnsC
 
 
 -- | Return apparently unique candidate definitions

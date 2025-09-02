@@ -53,7 +53,6 @@ main  =  do
   conjure "isq" isq ingredients
 
   conjure "^^^" (^^^)   ingredients
-  conjure "^^^" (^^^) $ ingredients ++ [singlePattern]
 
   -- This example is quite the degenerate case,
   -- it takes a while to conjure even with just 2 ingredients.

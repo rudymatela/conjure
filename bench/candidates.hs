@@ -11,12 +11,9 @@ printCandidates :: Conjurable f => Int -> Int -> String -> f -> [Ingredient] -> 
 printCandidates m n nm f ps  =  do
   putStrLn $ "Candidates for: " ++ nm ++ " :: " ++ show (typeOf f)
   putStrLn $ "  pruning with " ++ show nRules ++ "/" ++ show nREs ++ " rules"
-  putStrLn $ "  " ++ show (map length css1) ++ " direct candidates, " ++ show nd1 ++ " duplicates"
   putStrLn $ "  " ++ show (map length cssC) ++ " pattern candidates, " ++ show ndC ++ " duplicates"
   putStrLn ""
   printThy thy
-  putStrLn $ "direct candidates:\n"
-  putStrLn $ unlines $ map showDefn $ concat $ take n $ css1
   putStrLn $ "pattern candidates:\n"
   putStrLn $ unlines $ map showDefn $ concat $ take n $ cssC
   putStrLn ""
@@ -26,14 +23,10 @@ printCandidates m n nm f ps  =  do
   putStrLn $ "allowed deconstructions:\n"
   putStrLn $ unlines $ map show ds
   where
-  nd1  =  length cs1 - length (nubSort cs1)
   ndC  =  length csC - length (nubSort csC)
-  cs1  =  concat css1
   csC  =  concat cssC
-  css1  =  take m css1'
   cssC  =  take m cssC'
-  (css1', thy, _, _)  =  candidateDefns nm f (singlePattern : ps)
-  (cssC', _, pss, ds)  =  candidateDefns nm f ps
+  (cssC', thy, pss, ds)  =  candidateDefns nm f ps
   nRules  =  length (rules thy)
   nREs  =  length (equations thy) + nRules
 

@@ -30,7 +30,6 @@ module Conjure.Settings
   -- * Debug options
   , showCandidates
   , showTheory
-  , singlePattern
   , showTests
   , showPatterns
   , showDeconstructions
@@ -64,7 +63,6 @@ module Conjure.Settings
   -- * Read debug options
   , showCandidatesI
   , showTheoryI
-  , singlePatternI
   , showTestsI
   , showPatternsI
   , showDeconstructionsI
@@ -107,7 +105,6 @@ data Setting
   -- advanced & debug options --
   | CarryOn              -- ^ carry on after finding a suitable candidate
   | ShowTheory           -- ^ show theory discovered by Speculate used in pruning
-  | SinglePattern        -- ^ restrict candidates to a single pattern
   | ShowCandidates       -- ^ (debug) show candidates -- warning: wall of text
   | ShowTests            -- ^ (debug) show tests
   | ShowPatterns         -- ^ (debug) show possible LHS patterns
@@ -297,16 +294,6 @@ showTheory =  setting ShowTheory
 
 showTheoryI :: [Ingredient] -> Bool
 showTheoryI is  =  notNull [True | ShowTheory <- map extract is]
-
--- | (Debug option)
---   When provided in the ingredient list,
---   this reverts to a legacy enumeration that
---   contains candidates with a single LHS matching everything.
-singlePattern :: Ingredient
-singlePattern =  setting SinglePattern
-
-singlePatternI :: [Ingredient] -> Bool
-singlePatternI is  =  notNull [True | SinglePattern <- map extract is]
 
 -- | (Debug option)
 -- When provided in the ingredients list,

@@ -1,6 +1,5 @@
 Candidates for: foo :: Int -> Int
   pruning with 27/65 rules
-  [3,0,8,0,30,0,177,0,1203] direct candidates, 0 duplicates
   [3,3,9,10,32,39,185,233,1169] pattern candidates, 0 duplicates
 
 rules:
@@ -70,91 +69,6 @@ x * (0 - 1) == 0 - x
 (0 - 1) * x == 0 - x
 (0 - 1) * y == x - (x + y)
 (0 - 1) * y == x - (y + x)
-
-direct candidates:
-
-foo x  =  x
-
-foo x  =  0
-
-foo x  =  1
-
-foo x  =  x + x
-
-foo x  =  x + 1
-
-foo x  =  1 + 1
-
-foo x  =  x * x
-
-foo x  =  x - 1
-
-foo x  =  0 - x
-
-foo x  =  0 - 1
-
-foo x  =  1 - x
-
-foo x  =  x + (x + x)
-
-foo x  =  x + (x + 1)
-
-foo x  =  x + (1 + 1)
-
-foo x  =  x + x * x
-
-foo x  =  x + (x - 1)
-
-foo x  =  x + (0 - 1)
-
-foo x  =  1 + (x + x)
-
-foo x  =  1 + (x + 1)
-
-foo x  =  1 + (1 + 1)
-
-foo x  =  1 + x * x
-
-foo x  =  1 + (0 - x)
-
-foo x  =  1 + (1 - x)
-
-foo x  =  x * (x + x)
-
-foo x  =  x * (x * x)
-
-foo x  =  x * (x - 1)
-
-foo x  =  x * (0 - x)
-
-foo x  =  x * (0 - 1)
-
-foo x  =  x * (1 - x)
-
-foo x  =  x - (x + x)
-
-foo x  =  x - (x + 1)
-
-foo x  =  x - (1 + 1)
-
-foo x  =  x - x * x
-
-foo x  =  0 - (x + x)
-
-foo x  =  0 - (x + 1)
-
-foo x  =  0 - (1 + 1)
-
-foo x  =  1 - (x + x)
-
-foo x  =  1 - (x + 1)
-
-foo x  =  1 - (1 + 1)
-
-foo x  =  1 - x * x
-
-foo x  =  x * x - 1
-
 
 pattern candidates:
 
@@ -455,7 +369,6 @@ _ - 1 :: Int
 
 Candidates for: ? :: Int -> Int -> Int
   pruning with 13/34 rules
-  [3,3,9,18,60,162,489,1475,4619] direct candidates, 0 duplicates
   [3,8,25,71,205,632,1957,5906,18303] pattern candidates, 0 duplicates
 
 rules:
@@ -494,195 +407,6 @@ dec (dec x) + y == x + dec (dec y)
 dec (dec y) + x == dec (dec x) + y
 x + dec (dec 0) == dec (dec x)
 dec (dec 0) + x == dec (dec x)
-
-direct candidates:
-
-x ? y  =  x
-
-x ? y  =  y
-
-x ? y  =  0
-
-x ? y  =  dec x
-
-x ? y  =  dec y
-
-x ? y  =  dec 0
-
-x ? y  =  dec (dec x)
-
-x ? y  =  dec (dec y)
-
-x ? y  =  dec (dec 0)
-
-x ? y  =  x + x
-
-x ? y  =  x + y
-
-x ? y  =  y + y
-
-x ? y  =  x * x
-
-x ? y  =  x * y
-
-x ? y  =  y * y
-
-x ? y  =  dec (dec (dec x))
-
-x ? y  =  dec (dec (dec y))
-
-x ? y  =  dec (dec (dec 0))
-
-x ? y  =  dec (x * x)
-
-x ? y  =  dec (x * y)
-
-x ? y  =  dec (y * y)
-
-x ? y  =  x + dec x
-
-x ? y  =  x + dec y
-
-x ? y  =  x + dec 0
-
-x ? y  =  y + dec x
-
-x ? y  =  y + dec y
-
-x ? y  =  y + dec 0
-
-x ? y  =  x * dec x
-
-x ? y  =  x * dec y
-
-x ? y  =  x * dec 0
-
-x ? y  =  y * dec x
-
-x ? y  =  y * dec y
-
-x ? y  =  y * dec 0
-
-x ? y  =  dec (dec (dec (dec x)))
-
-x ? y  =  dec (dec (dec (dec y)))
-
-x ? y  =  dec (dec (dec (dec 0)))
-
-x ? y  =  dec (dec (x * x))
-
-x ? y  =  dec (dec (x * y))
-
-x ? y  =  dec (dec (y * y))
-
-x ? y  =  dec (x * dec x)
-
-x ? y  =  dec (x * dec y)
-
-x ? y  =  dec (x * dec 0)
-
-x ? y  =  dec (y * dec x)
-
-x ? y  =  dec (y * dec y)
-
-x ? y  =  dec (y * dec 0)
-
-x ? y  =  x + dec (dec x)
-
-x ? y  =  x + dec (dec y)
-
-x ? y  =  x + dec (dec 0)
-
-x ? y  =  x + (x + x)
-
-x ? y  =  x + (x + y)
-
-x ? y  =  x + (y + y)
-
-x ? y  =  x + x * x
-
-x ? y  =  x + x * y
-
-x ? y  =  x + y * y
-
-x ? y  =  y + dec (dec x)
-
-x ? y  =  y + dec (dec y)
-
-x ? y  =  y + dec (dec 0)
-
-x ? y  =  y + (x + x)
-
-x ? y  =  y + (x + y)
-
-x ? y  =  y + (y + y)
-
-x ? y  =  y + x * x
-
-x ? y  =  y + x * y
-
-x ? y  =  y + y * y
-
-x ? y  =  x * dec (dec x)
-
-x ? y  =  x * dec (dec y)
-
-x ? y  =  x * dec (dec 0)
-
-x ? y  =  x * (x + x)
-
-x ? y  =  x * (x + y)
-
-x ? y  =  x * (y + y)
-
-x ? y  =  x * (x * x)
-
-x ? y  =  x * (x * y)
-
-x ? y  =  x * (y * y)
-
-x ? y  =  y * dec (dec x)
-
-x ? y  =  y * dec (dec y)
-
-x ? y  =  y * dec (dec 0)
-
-x ? y  =  y * (x + x)
-
-x ? y  =  y * (x + y)
-
-x ? y  =  y * (y + y)
-
-x ? y  =  y * (x * x)
-
-x ? y  =  y * (x * y)
-
-x ? y  =  y * (y * y)
-
-x ? y  =  dec x + dec x
-
-x ? y  =  dec x + dec y
-
-x ? y  =  dec x + dec 0
-
-x ? y  =  dec y + dec y
-
-x ? y  =  dec y + dec 0
-
-x ? y  =  dec 0 + dec 0
-
-x ? y  =  dec x * dec x
-
-x ? y  =  dec x * dec y
-
-x ? y  =  dec x * dec 0
-
-x ? y  =  dec y * dec y
-
-x ? y  =  dec y * dec 0
-
-x ? y  =  dec 0 * dec 0
-
 
 pattern candidates:
 
@@ -1649,7 +1373,6 @@ dec (dec (dec _)) :: Int
 
 Candidates for: goo :: [Int] -> [Int]
   pruning with 4/4 rules
-  [2,0,1,0,1,0,1,0,1] direct candidates, 0 duplicates
   [2,1,1,3,4,7,10,17,26] pattern candidates, 0 duplicates
 
 rules:
@@ -1657,17 +1380,6 @@ xs ++ [] == xs
 [] ++ xs == xs
 (xs ++ ys) ++ zs == xs ++ (ys ++ zs)
 (x:xs) ++ ys == x:(xs ++ ys)
-
-direct candidates:
-
-goo xs  =  xs
-
-goo xs  =  []
-
-goo xs  =  xs ++ xs
-
-goo xs  =  xs ++ (xs ++ xs)
-
 
 pattern candidates:
 
@@ -1739,7 +1451,6 @@ allowed deconstructions:
 
 Candidates for: ?? :: [Int] -> [Int] -> [Int]
   pruning with 4/4 rules
-  [3,0,4,0,8,0,16,0,32] direct candidates, 0 duplicates
   [3,8,15,45,127,268,845,1565,5692] pattern candidates, 0 duplicates
 
 rules:
@@ -1747,39 +1458,6 @@ xs ++ [] == xs
 [] ++ xs == xs
 (xs ++ ys) ++ zs == xs ++ (ys ++ zs)
 (x:xs) ++ ys == x:(xs ++ ys)
-
-direct candidates:
-
-xs ?? ys  =  xs
-
-xs ?? ys  =  ys
-
-xs ?? ys  =  []
-
-xs ?? ys  =  xs ++ xs
-
-xs ?? ys  =  xs ++ ys
-
-xs ?? ys  =  ys ++ xs
-
-xs ?? ys  =  ys ++ ys
-
-xs ?? ys  =  xs ++ (xs ++ xs)
-
-xs ?? ys  =  xs ++ (xs ++ ys)
-
-xs ?? ys  =  xs ++ (ys ++ xs)
-
-xs ?? ys  =  xs ++ (ys ++ ys)
-
-xs ?? ys  =  ys ++ (xs ++ xs)
-
-xs ?? ys  =  ys ++ (xs ++ ys)
-
-xs ?? ys  =  ys ++ (ys ++ xs)
-
-xs ?? ys  =  ys ++ (ys ++ ys)
-
 
 pattern candidates:
 
@@ -3418,7 +3096,6 @@ allowed deconstructions:
 
 Candidates for: ton :: Bool -> Bool
   pruning with 39/49 rules
-  [3,1,0,0,0,0,0,0,0] direct candidates, 0 duplicates
   [3,3,0,0,0,0,0,0,0] pattern candidates, 0 duplicates
 
 rules:
@@ -3473,17 +3150,6 @@ r || (q || p) == p || (q || r)
 (r || q) && p == p && (q || r)
 r && q || p == p || q && r
 
-direct candidates:
-
-ton p  =  p
-
-ton p  =  False
-
-ton p  =  True
-
-ton p  =  not p
-
-
 pattern candidates:
 
 ton p  =  p
@@ -3518,7 +3184,6 @@ allowed deconstructions:
 
 Candidates for: &| :: Bool -> Bool -> Bool
   pruning with 39/49 rules
-  [4,2,2,4,2,16,17,56,110] direct candidates, 0 duplicates
   [4,14,26,10,2,16,17,56,110] pattern candidates, 0 duplicates
 
 rules:
@@ -3572,69 +3237,6 @@ r || (p || q) == p || (q || r)
 r || (q || p) == p || (q || r)
 (r || q) && p == p && (q || r)
 r && q || p == p || q && r
-
-direct candidates:
-
-p &| q  =  p
-
-p &| q  =  q
-
-p &| q  =  False
-
-p &| q  =  True
-
-p &| q  =  not p
-
-p &| q  =  not q
-
-p &| q  =  p && q
-
-p &| q  =  p || q
-
-p &| q  =  p && not q
-
-p &| q  =  q && not p
-
-p &| q  =  p || not q
-
-p &| q  =  q || not p
-
-p &| q  =  not p && not q
-
-p &| q  =  not p || not q
-
-p &| q  =  p && (q && not p)
-
-p &| q  =  p && (q || not p)
-
-p &| q  =  q && (p && not q)
-
-p &| q  =  q && (p || not q)
-
-p &| q  =  p || q && not p
-
-p &| q  =  p || (q || not p)
-
-p &| q  =  q || p && not q
-
-p &| q  =  q || (p || not q)
-
-p &| q  =  not p && (p && q)
-
-p &| q  =  not p && (p || q)
-
-p &| q  =  not q && (p && q)
-
-p &| q  =  not q && (p || q)
-
-p &| q  =  not p || p && q
-
-p &| q  =  not p || (p || q)
-
-p &| q  =  not q || p && q
-
-p &| q  =  not q || (p || q)
-
 
 pattern candidates:
 
@@ -3880,145 +3482,9 @@ allowed deconstructions:
 
 Candidates for: gcd :: Int -> Int -> Int
   pruning with 0/0 rules
-  [3,0,9,0,54,0,405,0,3402] direct candidates, 0 duplicates
   [3,6,11,50,98,330,774,2714,6660] pattern candidates, 0 duplicates
 
 no rules.
-
-direct candidates:
-
-gcd x y  =  x
-
-gcd x y  =  y
-
-gcd x y  =  0
-
-gcd x y  =  x `mod` x
-
-gcd x y  =  x `mod` y
-
-gcd x y  =  x `mod` 0
-
-gcd x y  =  y `mod` x
-
-gcd x y  =  y `mod` y
-
-gcd x y  =  y `mod` 0
-
-gcd x y  =  0 `mod` x
-
-gcd x y  =  0 `mod` y
-
-gcd x y  =  0 `mod` 0
-
-gcd x y  =  x `mod` (x `mod` x)
-
-gcd x y  =  x `mod` (x `mod` y)
-
-gcd x y  =  x `mod` (x `mod` 0)
-
-gcd x y  =  x `mod` (y `mod` x)
-
-gcd x y  =  x `mod` (y `mod` y)
-
-gcd x y  =  x `mod` (y `mod` 0)
-
-gcd x y  =  x `mod` (0 `mod` x)
-
-gcd x y  =  x `mod` (0 `mod` y)
-
-gcd x y  =  x `mod` (0 `mod` 0)
-
-gcd x y  =  y `mod` (x `mod` x)
-
-gcd x y  =  y `mod` (x `mod` y)
-
-gcd x y  =  y `mod` (x `mod` 0)
-
-gcd x y  =  y `mod` (y `mod` x)
-
-gcd x y  =  y `mod` (y `mod` y)
-
-gcd x y  =  y `mod` (y `mod` 0)
-
-gcd x y  =  y `mod` (0 `mod` x)
-
-gcd x y  =  y `mod` (0 `mod` y)
-
-gcd x y  =  y `mod` (0 `mod` 0)
-
-gcd x y  =  0 `mod` (x `mod` x)
-
-gcd x y  =  0 `mod` (x `mod` y)
-
-gcd x y  =  0 `mod` (x `mod` 0)
-
-gcd x y  =  0 `mod` (y `mod` x)
-
-gcd x y  =  0 `mod` (y `mod` y)
-
-gcd x y  =  0 `mod` (y `mod` 0)
-
-gcd x y  =  0 `mod` (0 `mod` x)
-
-gcd x y  =  0 `mod` (0 `mod` y)
-
-gcd x y  =  0 `mod` (0 `mod` 0)
-
-gcd x y  =  (x `mod` x) `mod` x
-
-gcd x y  =  (x `mod` x) `mod` y
-
-gcd x y  =  (x `mod` x) `mod` 0
-
-gcd x y  =  (x `mod` y) `mod` x
-
-gcd x y  =  (x `mod` y) `mod` y
-
-gcd x y  =  (x `mod` y) `mod` 0
-
-gcd x y  =  (x `mod` 0) `mod` x
-
-gcd x y  =  (x `mod` 0) `mod` y
-
-gcd x y  =  (x `mod` 0) `mod` 0
-
-gcd x y  =  (y `mod` x) `mod` x
-
-gcd x y  =  (y `mod` x) `mod` y
-
-gcd x y  =  (y `mod` x) `mod` 0
-
-gcd x y  =  (y `mod` y) `mod` x
-
-gcd x y  =  (y `mod` y) `mod` y
-
-gcd x y  =  (y `mod` y) `mod` 0
-
-gcd x y  =  (y `mod` 0) `mod` x
-
-gcd x y  =  (y `mod` 0) `mod` y
-
-gcd x y  =  (y `mod` 0) `mod` 0
-
-gcd x y  =  (0 `mod` x) `mod` x
-
-gcd x y  =  (0 `mod` x) `mod` y
-
-gcd x y  =  (0 `mod` x) `mod` 0
-
-gcd x y  =  (0 `mod` y) `mod` x
-
-gcd x y  =  (0 `mod` y) `mod` y
-
-gcd x y  =  (0 `mod` y) `mod` 0
-
-gcd x y  =  (0 `mod` 0) `mod` x
-
-gcd x y  =  (0 `mod` 0) `mod` y
-
-gcd x y  =  (0 `mod` 0) `mod` 0
-
 
 pattern candidates:
 

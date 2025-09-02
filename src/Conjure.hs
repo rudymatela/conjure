@@ -161,7 +161,6 @@ module Conjure
 -- * Debug options
   , showCandidates
   , showTheory
-  , singlePattern
   , showTests
   , showPatterns
   , showDeconstructions
